@@ -1,10 +1,9 @@
 cmake_minimum_required (VERSION 3.13)
-project(Moci LANGUAGES CXX)
+project(MociLibrary LANGUAGES CXX)
 
 
 # Only do these if this is the main project, and not if it is included through add_subdirectory
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-
     # Optionally set things like CMAKE_CXX_STANDARD, CMAKE_POSITION_INDEPENDENT_CODE her
     # Let's ensure -std=c++xx instead of -std=g++xx
     set(CMAKE_CXX_STANDARD 17)
@@ -71,7 +70,6 @@ configure_file(.clang-tidy .clang-tidy COPYONLY)
 
 # 3rd party libraries
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/freetype   EXCLUDE_FROM_ALL)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/fmt        EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glm        EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glfw       EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/GSL        EXCLUDE_FROM_ALL)
