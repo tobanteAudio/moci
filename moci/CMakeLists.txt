@@ -199,7 +199,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_test_src})
 add_executable(moci_tests ${moci_test_src})
 target_link_libraries(moci_tests 
     PRIVATE 
-        ${PROJECT_NAME} 
+        Moci::Moci 
         Moci::CodeCoverage
         Moci::CompilerOptions
         Moci::CompilerWarnings
