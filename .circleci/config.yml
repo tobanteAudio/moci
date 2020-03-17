@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       - image: "tobante/gcc-cmake-juce:8.3"
-    resource_class: medium+
+    resource_class: medium
     environment:
       DEBIAN_FRONTEND: noninteractive
     steps:
