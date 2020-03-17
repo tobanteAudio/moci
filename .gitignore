@@ -1,0 +1,22 @@
+# Editors
+.atom
+.idea
+.vs
+.vscode
+
+# Build
+build
+build-*
+build_*
+
+# macOS
+.DS_Store
+
+# imgui
+imgui.ini
+
+# Profile
+moci-sandbox.json
+
+# Log
+moci.log
