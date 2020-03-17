@@ -60,7 +60,9 @@ public:
     }
 
     /**
-     * @brief Returns the midpoint of the line. M = ((x1+x2)/2 , (y1+y2)/2)
+     * @brief Returns the midpoint of the line.
+     *
+     * @details Midpoint = \f$(x_1+x_2)/2\f$, \f$(y_1+y_2)/2\f$
      */
     [[nodiscard]] constexpr Point<Type> GetMidPoint() const noexcept
     {
