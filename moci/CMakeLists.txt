@@ -98,6 +98,8 @@ set(moci_sources
     moci/render/opengles2/vertex_array.hpp
     moci/render/opengles2/vertex_array.cpp
 
+    moci/ui/component_layer.hpp
+    moci/ui/component_layer.cpp
     moci/ui/component.hpp
     moci/ui/component.cpp
     moci/ui/style.hpp

@@ -38,6 +38,7 @@
 #include "moci/render/vertex_array.hpp"
 
 #include "moci/ui/component.hpp"
+#include "moci/ui/component_layer.hpp"
 #include "moci/ui/style.hpp"
 #include "moci/ui/widgets.hpp"
 
