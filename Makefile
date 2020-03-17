@@ -77,7 +77,7 @@ clean:
 
 .PHONY: stats
 stats:
-	@cloc --exclude-dir=3rd_party,build_Debug,build_Release,venv .
+	@cloc --exclude-dir=3rd_party,build_coverage,build_sanitize,build_Debug,build_Release,venv .
 
 .PHONY: format
 format:
