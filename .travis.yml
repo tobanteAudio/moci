@@ -7,7 +7,6 @@ language: cpp
 script-anchors:
   - &script-documentation
     - cd $TRAVIS_BUILD_DIR
-    - brew install doxygen
     - make docs
 
   - &script-macOS
@@ -20,9 +19,10 @@ matrix:
       osx_image: xcode11.3
       script: *script-macOS
 
-    - os: osx
+    - os: linux
+      dist: bionic
       addons:
-        homebrew:
+        apt:
           packages:
             - doxygen
       script: *script-documentation
