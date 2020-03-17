@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['datagramsocket_598',['DatagramSocket',['../classmoci_1_1_datagram_socket.html',1,'moci']]]
+  ['datagramsocket',['DatagramSocket',['../classmoci_1_1DatagramSocket.html',1,'moci']]]
 ];

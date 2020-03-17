@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['keyevent_612',['KeyEvent',['../classmoci_1_1_key_event.html',1,'moci']]],
-  ['keypressedevent_613',['KeyPressedEvent',['../classmoci_1_1_key_pressed_event.html',1,'moci']]],
-  ['keyreleasedevent_614',['KeyReleasedEvent',['../classmoci_1_1_key_released_event.html',1,'moci']]],
-  ['keytypedevent_615',['KeyTypedEvent',['../classmoci_1_1_key_typed_event.html',1,'moci']]]
+  ['keyevent',['KeyEvent',['../classmoci_1_1KeyEvent.html',1,'moci']]],
+  ['keypressedevent',['KeyPressedEvent',['../classmoci_1_1KeyPressedEvent.html',1,'moci']]],
+  ['keyreleasedevent',['KeyReleasedEvent',['../classmoci_1_1KeyReleasedEvent.html',1,'moci']]],
+  ['keytypedevent',['KeyTypedEvent',['../classmoci_1_1KeyTypedEvent.html',1,'moci']]]
 ];

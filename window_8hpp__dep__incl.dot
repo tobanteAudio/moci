@@ -1,0 +1,13 @@
+digraph "/home/travis/build/tobanteAudio/moci/moci/moci/app/window.hpp"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node9 [label="/home/travis/build\l/tobanteAudio/moci/moci\l/moci/app/window.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="/home/travis/build\l/tobanteAudio/moci/moci\l/moci/app/application.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$application_8hpp.html"];
+  Node10 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="/home/travis/build\l/tobanteAudio/moci/moci\l/moci/moci.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$moci_8hpp.html"];
+  Node9 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="/home/travis/build\l/tobanteAudio/moci/moci\l/moci/app/glfw/window.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$glfw_2window_8hpp.html"];
+  Node9 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}
