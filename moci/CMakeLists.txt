@@ -139,7 +139,7 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Threads
         Moci::ImGui
         Moci::StbImage
-        spdlog
+        spdlog::spdlog
         glfw 
         ${GLFW_LIBRARIES}
         glm::glm
