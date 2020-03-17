@@ -3,7 +3,7 @@
 #include "moci/core/logging.hpp"
 #include "moci/geometry/point.hpp"
 
-#include <cmath>
+// #include <cmath>
 
 #include <optional>
 
@@ -81,7 +81,10 @@ public:
     /**
      * @brief Returns the angle of the line in degrees.
      */
-    [[nodiscard]] Type GetAngleDegrees() const noexcept { return Type(GetAngleRadians() * (180.0 / M_PI)); }
+    [[nodiscard]] Type GetAngleDegrees() const noexcept
+    {
+        return Type(GetAngleRadians() * (180.0 / 3.14159265358979323846));
+    }
 
     /**
      * @brief Returns the length of the line.
