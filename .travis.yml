@@ -7,10 +7,11 @@ language: cpp
 script-anchors:
   - &script-documentation
     - cd $TRAVIS_BUILD_DIR
+    - brew install doxygen
     - make docs
 
   - &script-macOS
-    - brew install cmake ninja-build
+    - brew install cmake ninja
     - CONFIG=Debug make
 
 matrix:
