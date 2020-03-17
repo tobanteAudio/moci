@@ -1,0 +1,35 @@
+branches:
+  only:
+    - master
+
+language: cpp
+
+script-anchors:
+  - &script-documentation
+    - cd $TRAVIS_BUILD_DIR
+    - make docs
+
+  - &script-macOS
+    - brew install cmake ninja-build
+    - CONFIG=Debug make
+
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode11.3
+      script: *script-macOS
+
+    - os: osx
+      addons:
+        homebrew:
+          packages:
+            - doxygen
+      script: *script-documentation
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        local_dir: $TRAVIS_BUILD_DIR/docs/documentation/html
+        github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+        keep_history: true
+        on:
+          branch: master
