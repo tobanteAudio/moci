@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['resources_423',['Resources',['../md_resources.html',1,'']]],
+  ['readme_2emd_424',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
+  ['rectangle_425',['Rectangle',['../classmoci_1_1_rectangle.html',1,'moci::Rectangle&lt; Type &gt;'],['../classmoci_1_1_rectangle.html#adc10be1fe09d886f400a4a1092306e0b',1,'moci::Rectangle::Rectangle() noexcept'],['../classmoci_1_1_rectangle.html#a31305c95bcc00f2b7ff400deaf1a6ee3',1,'moci::Rectangle::Rectangle(Type x, Type y, Type width, Type height) noexcept'],['../classmoci_1_1_rectangle.html#a3afb12f1f5ea9e7e0d9895cd20346e97',1,'moci::Rectangle::Rectangle(Point&lt; Type &gt; position, Type width, Type height) noexcept'],['../classmoci_1_1_rectangle.html#a0ec99304765e2297538613dbef0c0096',1,'moci::Rectangle::Rectangle(Rectangle const &amp;)=default']]],
+  ['rectangle_2ehpp_426',['rectangle.hpp',['../rectangle_8hpp.html',1,'']]],
+  ['rectangle_3c_20int_20_3e_427',['Rectangle&lt; int &gt;',['../classmoci_1_1_rectangle.html',1,'moci']]],
+  ['red_428',['Red',['../classmoci_1_1_colors.html#a80697327ce989eaea700cc9272de2f0d',1,'moci::Colors']]],
+  ['reduced_429',['Reduced',['../classmoci_1_1_rectangle.html#a3152e77a224b45e410017f70d5f2396d',1,'moci::Rectangle::Reduced(Type deltaX, Type deltaY) const noexcept -&gt; Rectangle&lt; Type &gt;'],['../classmoci_1_1_rectangle.html#a402b286249c34ed9ed6c578e79502aa3',1,'moci::Rectangle::Reduced(Type delta) const noexcept -&gt; Rectangle&lt; Type &gt;']]],
+  ['removefrombottom_430',['RemoveFromBottom',['../classmoci_1_1_rectangle.html#a87ee45609a842f3b201ebc94c81d7094',1,'moci::Rectangle']]],
+  ['removefromleft_431',['RemoveFromLeft',['../classmoci_1_1_rectangle.html#a4e9a6f1bce9af720b0dfcdb0e17c2c2d',1,'moci::Rectangle']]],
+  ['removefromright_432',['RemoveFromRight',['../classmoci_1_1_rectangle.html#a19e52fd6d0e2b1c26e0c140f424dbb28',1,'moci::Rectangle']]],
+  ['removefromtop_433',['RemoveFromTop',['../classmoci_1_1_rectangle.html#a734ba6f7f8c445aa5484339ee2148cf9',1,'moci::Rectangle']]],
+  ['render_5fcommand_2ehpp_434',['render_command.hpp',['../render__command_8hpp.html',1,'']]],
+  ['render_5fqueue_2ehpp_435',['render_queue.hpp',['../render__queue_8hpp.html',1,'']]],
+  ['rendercommand_436',['RenderCommand',['../classmoci_1_1_render_command.html',1,'moci']]],
+  ['renderer_437',['Renderer',['../classmoci_1_1_renderer.html',1,'moci']]],
+  ['renderer_2ehpp_438',['renderer.hpp',['../renderer_8hpp.html',1,'']]],
+  ['renderer_5fapi_2ehpp_439',['renderer_api.hpp',['../opengles2_2renderer__api_8hpp.html',1,'(Global Namespace)'],['../renderer__api_8hpp.html',1,'(Global Namespace)']]],
+  ['rendererapi_440',['RendererAPI',['../classmoci_1_1_renderer_a_p_i.html',1,'moci']]],
+  ['renderqueue_441',['RenderQueue',['../classmoci_1_1_render_queue.html',1,'moci::RenderQueue'],['../classmoci_1_1_render_queue.html#af755a7505ae5fc0b80231830c1ef71ee',1,'moci::RenderQueue::RenderQueue()'],['../classmoci_1_1_render_queue.html#a5e069abc1c7efb0e581c90a328e74fb3',1,'moci::RenderQueue::RenderQueue(const RenderQueue &amp;)=delete']]],
+  ['resize_442',['Resize',['../classmoci_1_1_component.html#a6570667b82b524442d39f4b08797e84f',1,'moci::Component']]],
+  ['resources_2emd_443',['resources.md',['../resources_8md.html',1,'']]],
+  ['rgb_444',['RGB',['../classmoci_1_1_texture.html#a57db5936f0b54c47f796062e080bdde9a889574aebacda6bfd3e534e2b49b8028',1,'moci::Texture']]],
+  ['rgba_445',['RGBA',['../classmoci_1_1_texture.html#a57db5936f0b54c47f796062e080bdde9aea3495a278957dc58165e48a8945469f',1,'moci::Texture']]],
+  ['righttrim_446',['RightTrim',['../classmoci_1_1_strings.html#a8dc2163fcc5ff7c71c49e2bd939961fe',1,'moci::Strings']]],
+  ['righttrimcopy_447',['RightTrimCopy',['../classmoci_1_1_strings.html#a5b692900a4e00eba63fe110ed72c9e03',1,'moci::Strings']]]
+];
