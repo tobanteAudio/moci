@@ -21,6 +21,7 @@ public:
     {
         renderQueue_ = std::make_unique<RenderQueue>();
         rootComponent_->SetStyle(&defaultStyle_);
+        rootComponent_->SetSize(static_cast<int>(width_), static_cast<int>(height_));
     }
 
     void OnDetach() override {}
@@ -33,7 +34,6 @@ public:
 
         renderQueue_->StartFrame(width_, height_);
         rootComponent_->SetPosition(0, 0);
-        rootComponent_->SetSize(static_cast<int>(width_), static_cast<int>(height_));
         rootComponent_->Draw(*renderQueue_);
         renderQueue_->EndFrame();
     }
@@ -59,6 +59,7 @@ public:
     {
         width_  = static_cast<float>(e.GetWidth());
         height_ = static_cast<float>(e.GetHeight());
+        rootComponent_->SetSize(static_cast<int>(width_), static_cast<int>(height_));
         return false;
     }
 
