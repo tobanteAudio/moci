@@ -1,6 +1,8 @@
 #pragma once
 
 #include "moci/app/events/application_event.hpp"
+#include "moci/app/events/mouse_event.hpp"
+#include "moci/app/input.hpp"
 #include "moci/app/layer.hpp"
 #include "moci/render/render_queue.hpp"
 #include "moci/ui/component.hpp"
@@ -53,14 +55,29 @@ public:
     {
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<WindowResizeEvent>(MOCI_BIND_EVENT_FN(ComponentLayer::OnWindowResized));
+        dispatcher.Dispatch<MouseMovedEvent>(MOCI_BIND_EVENT_FN(ComponentLayer::OnMouseMoved));
+        dispatcher.Dispatch<MouseButtonPressedEvent>(MOCI_BIND_EVENT_FN(ComponentLayer::OnMousePressed));
     }
 
-    auto OnWindowResized(WindowResizeEvent& e) -> bool
+    bool OnWindowResized(WindowResizeEvent& e)
     {
         width_  = static_cast<float>(e.GetWidth());
         height_ = static_cast<float>(e.GetHeight());
         rootComponent_->SetSize(static_cast<int>(width_), static_cast<int>(height_));
         return false;
+    }
+
+    bool OnMouseMoved(MouseMovedEvent& e)
+    {
+        // MOCI_CORE_INFO("Mouse: {}, {}", e.GetX(), e.GetY());
+        return true;
+    }
+
+    bool OnMousePressed(MouseButtonPressedEvent& e)
+    {
+        MOCI_CORE_INFO("Mouse Click: {}", e.GetMouseButton());
+        MOCI_CORE_INFO("Mouse: {}, {}", Input::GetMouseX(), Input::GetMouseY());
+        return true;
     }
 
 private:
