@@ -97,3 +97,4 @@ add_subdirectory(3rd_party/imgui-cmake)
 # Project
 add_subdirectory(moci)
 add_subdirectory(sandbox)
+add_subdirectory(sandbox3D)
