@@ -1,5 +1,8 @@
 # tobanteAudio - moci
 
+- [GitHub Repository](https::/github.com/tobanteAudio/moci)
+- [API Reference](https://tobanteaudio.github.io/moci/classes.html)
+
 ## Status
 
 |                                                                 License                                                                 |                                                         macOS                                                         |                                                                 Windows                                                                 |                                                       Linux                                                       |                                                           Coverage                                                           |                                    Issues                                    |
