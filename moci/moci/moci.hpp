@@ -19,6 +19,10 @@
 #include "moci/app/timestep.hpp"
 #include "moci/app/window.hpp"
 
+#include "moci/app/events/application_event.hpp"
+#include "moci/app/events/key_event.hpp"
+#include "moci/app/events/mouse_event.hpp"
+
 #include "moci/geometry/line.hpp"
 #include "moci/geometry/point.hpp"
 #include "moci/geometry/rectangle.hpp"

@@ -11,48 +11,48 @@
 struct Vertex
 {
     glm::vec3 position {};
-    // glm::vec4 color {};
+    glm::vec4 color {};
 };
 
 // Our vertices. Three consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 // A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
-static float CubeVertices[] = {
-    -1.0f, -1.0f, -1.0f,  // triangle 1 : begin
-    -1.0f, -1.0f, 1.0f,   //
-    -1.0f, 1.0f,  1.0f,   // triangle 1 : end
-    1.0f,  1.0f,  -1.0f,  // triangle 2 : begin
-    -1.0f, -1.0f, -1.0f,  //
-    -1.0f, 1.0f,  -1.0f,  // triangle 2 : end
-    1.0f,  -1.0f, 1.0f,   //
-    -1.0f, -1.0f, -1.0f,  //
-    1.0f,  -1.0f, -1.0f,  //
-    1.0f,  1.0f,  -1.0f,  //
-    1.0f,  -1.0f, -1.0f,  //
-    -1.0f, -1.0f, -1.0f,  //
-    -1.0f, -1.0f, -1.0f,  //
-    -1.0f, 1.0f,  1.0f,   //
-    -1.0f, 1.0f,  -1.0f,  //
-    1.0f,  -1.0f, 1.0f,   //
-    -1.0f, -1.0f, 1.0f,   //
-    -1.0f, -1.0f, -1.0f,  //
-    -1.0f, 1.0f,  1.0f,   //
-    -1.0f, -1.0f, 1.0f,   //
-    1.0f,  -1.0f, 1.0f,   //
-    1.0f,  1.0f,  1.0f,   //
-    1.0f,  -1.0f, -1.0f,  //
-    1.0f,  1.0f,  -1.0f,  //
-    1.0f,  -1.0f, -1.0f,  //
-    1.0f,  1.0f,  1.0f,   //
-    1.0f,  -1.0f, 1.0f,   //
-    1.0f,  1.0f,  1.0f,   //
-    1.0f,  1.0f,  -1.0f,  //
-    -1.0f, 1.0f,  -1.0f,  //
-    1.0f,  1.0f,  1.0f,   //
-    -1.0f, 1.0f,  -1.0f,  //
-    -1.0f, 1.0f,  1.0f,   //
-    1.0f,  1.0f,  1.0f,   //
-    -1.0f, 1.0f,  1.0f,   //
-    1.0f,  -1.0f, 1.0f    //
+static Vertex CubeVertices[] = {
+    {{-1.0f, -1.0f, -1.0f}},  // triangle 1 : begin
+    {{-1.0f, -1.0f, 1.0f}},   //
+    {{-1.0f, 1.0f, 1.0f}},    // triangle 1 : end
+    {{1.0f, 1.0f, -1.0f}},    // triangle 2 : begin
+    {{-1.0f, -1.0f, -1.0f}},  //
+    {{-1.0f, 1.0f, -1.0f}},   // triangle 2 : end
+    {{1.0f, -1.0f, 1.0f}},    //
+    {{-1.0f, -1.0f, -1.0f}},  //
+    {{1.0f, -1.0f, -1.0f}},   //
+    {{1.0f, 1.0f, -1.0f}},    //
+    {{1.0f, -1.0f, -1.0f}},   //
+    {{-1.0f, -1.0f, -1.0f}},  //
+    {{-1.0f, -1.0f, -1.0f}},  //
+    {{-1.0f, 1.0f, 1.0f}},    //
+    {{-1.0f, 1.0f, -1.0f}},   //
+    {{1.0f, -1.0f, 1.0f}},    //
+    {{-1.0f, -1.0f, 1.0f}},   //
+    {{-1.0f, -1.0f, -1.0f}},  //
+    {{-1.0f, 1.0f, 1.0f}},    //
+    {{-1.0f, -1.0f, 1.0f}},   //
+    {{1.0f, -1.0f, 1.0f}},    //
+    {{1.0f, 1.0f, 1.0f}},     //
+    {{1.0f, -1.0f, -1.0f}},   //
+    {{1.0f, 1.0f, -1.0f}},    //
+    {{1.0f, -1.0f, -1.0f}},   //
+    {{1.0f, 1.0f, 1.0f}},     //
+    {{1.0f, -1.0f, 1.0f}},    //
+    {{1.0f, 1.0f, 1.0f}},     //
+    {{1.0f, 1.0f, -1.0f}},    //
+    {{-1.0f, 1.0f, -1.0f}},   //
+    {{1.0f, 1.0f, 1.0f}},     //
+    {{-1.0f, 1.0f, -1.0f}},   //
+    {{-1.0f, 1.0f, 1.0f}},    //
+    {{1.0f, 1.0f, 1.0f}},     //
+    {{-1.0f, 1.0f, 1.0f}},    //
+    {{1.0f, -1.0f, 1.0f}},    //
 };
 
 class DemoLayer : public moci::Layer
@@ -63,17 +63,22 @@ public:
 
     void OnAttach() override
     {
+        for (auto& vertex : CubeVertices)
+        {
+            vertex.color = {1.0f, 1.0f, 0.0f, 1.0f};
+        }
+
         shader_ = moci::Shader::Create("sandbox3D/shader3D.glsl");
         shader_->Bind();
 
         moci::BufferLayout layout = {
             {moci::ShaderDataType::Float3, "position"},  //
-            // {moci::ShaderDataType::Float4, "color"},               //
+            {moci::ShaderDataType::Float4, "color"},     //
             // {moci::ShaderDataType::Float2, "texture"},             //
             // {moci::ShaderDataType::Float, "textureIndex"},         //
             // {moci::ShaderDataType::Float, "textureIsMonochrome"},  //
         };
-        vbo_.reset(moci::VertexBuffer::Create(CubeVertices, sizeof(CubeVertices), false));
+        vbo_.reset(moci::VertexBuffer::Create(reinterpret_cast<float*>(CubeVertices), sizeof(CubeVertices), false));
         vbo_->SetLayout(layout);
         vbo_->Unbind();
         ibo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
@@ -89,21 +94,16 @@ public:
         moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         moci::RenderCommand::Clear();
 
-        // glm::mat4 proj = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, -1.0f, 1.0f);
-        glm::mat4 Projection = glm::perspective(glm::radians(45.0f), width_ / height_, 0.1f, 100.0f);
-
         // Camera matrix
-        glm::mat4 View = glm::lookAt(glm::vec3(4, 3, 3),  // Camera is at (4,3,3), in World Space
+        glm::mat4 Projection = glm::perspective(glm::radians(45.0f), width_ / height_, 0.1f, 100.0f);
+        glm::mat4 View       = glm::lookAt(cameraPos_,          // Camera is at (4,3,3), in World Space
                                      glm::vec3(0, 0, 0),  // and looks at the origin
                                      glm::vec3(0, 1, 0)   // Head is up (set to 0,-1,0 to look upside-down)
         );
 
         // Model matrix : an identity matrix (model will be at the origin)
         glm::mat4 Model = glm::mat4(1.0f);
-        // Our ModelViewProjection : multiplication of our 3 matrices
-        glm::mat4 proj = Projection * View * Model;  // Remember, matrix multiplication is the other way around
-        // glm::mat4 proj = glm::ortho(0.0f, width_, 0.0f, height_, -1.0f, 1.0f);
-        // glm::mat4 proj = glm::mat4(1.0f);
+        glm::mat4 proj  = Projection * View * Model;  // Remember, matrix multiplication is the other way around
         shader_->SetMat4("u_MVP", proj);
 
         vao_->Bind();
@@ -114,6 +114,7 @@ public:
     {
         moci::EventDispatcher dispatcher(e);
         dispatcher.Dispatch<moci::WindowResizeEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnWindowResized));
+        dispatcher.Dispatch<moci::KeyPressedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnKeyPressed));
     }
 
     bool OnWindowResized(moci::WindowResizeEvent& e)
@@ -121,6 +122,20 @@ public:
         width_  = static_cast<float>(e.GetWidth());
         height_ = static_cast<float>(e.GetHeight());
         return false;
+    }
+
+    bool OnKeyPressed(moci::KeyPressedEvent& e)
+    {
+        auto const moveAmount = 0.25f;
+        if (e.GetKeyCode() == MOCI_KEY_LEFT)
+        {
+            cameraPos_.x = cameraPos_.x - moveAmount;
+        }
+        if (e.GetKeyCode() == MOCI_KEY_RIGHT)
+        {
+            cameraPos_.x = cameraPos_.x + moveAmount;
+        }
+        return true;
     }
 
     void OnImGuiRender() override
@@ -133,6 +148,8 @@ public:
 public:
     float width_  = 1280.0f;
     float height_ = 1024.0f;
+
+    glm::vec3 cameraPos_ {4.0f, 3.0f, 3.0f};
 
     std::shared_ptr<moci::Shader> shader_;
     std::shared_ptr<moci::VertexBuffer> vbo_;
