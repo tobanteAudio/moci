@@ -1,10 +1,8 @@
 var searchData=
 [
   ['white',['White',['../classmoci_1_1Colors.html#a5b6b4d6780455cb2cc1af38dd9ab4f19',1,'moci::Colors']]],
-  ['widgets_2ehpp',['widgets.hpp',['../widgets_8hpp.html',1,'']]],
   ['width',['width',['../structmoci_1_1Typeface_1_1Character.html#a94785c762065ca07c33bd067797c93d0',1,'moci::Typeface::Character::width()'],['../structmoci_1_1WindowProps.html#a0ce6bf80b80c0c62cdab7333148655a6',1,'moci::WindowProps::Width()']]],
   ['window',['Window',['../classmoci_1_1Window.html',1,'moci']]],
-  ['window_2ehpp',['window.hpp',['../glfw_2window_8hpp.html',1,'(Global Namespace)'],['../window_8hpp.html',1,'(Global Namespace)']]],
   ['windowclose',['WindowClose',['../namespacemoci.html#a1ffc575f64d8c1ee66b01f44bbb10036ac984201d37197ab297a14d19efee4b07',1,'moci']]],
   ['windowcloseevent',['WindowCloseEvent',['../classmoci_1_1WindowCloseEvent.html',1,'moci::WindowCloseEvent'],['../classmoci_1_1WindowCloseEvent.html#abb82e7e4407d698d480b9c52f3dadc9b',1,'moci::WindowCloseEvent::WindowCloseEvent()']]],
   ['windowfocus',['WindowFocus',['../namespacemoci.html#a1ffc575f64d8c1ee66b01f44bbb10036a1c68d5453b28d52622bf5486a5fd95ca',1,'moci']]],

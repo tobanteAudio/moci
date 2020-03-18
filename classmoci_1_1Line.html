@@ -94,7 +94,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a111efb97d85519342aa37be850ca315f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the slope. If the line is empty 0 will be returned.  <a href="#a111efb97d85519342aa37be850ca315f">More...</a><br /></td></tr>
 <tr class="separator:a111efb97d85519342aa37be850ca315f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e3e3e4e8e3db2b2fd43ab1ea4b2012c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classmoci_1_1Point.html">Point</a>&lt; Type &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Line.html#a2e3e3e4e8e3db2b2fd43ab1ea4b2012c">GetMidPoint</a> () const noexcept</td></tr>
-<tr class="memdesc:a2e3e3e4e8e3db2b2fd43ab1ea4b2012c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the midpoint of the line. M = ((x1+x2)/2 , (y1+y2)/2)  <a href="#a2e3e3e4e8e3db2b2fd43ab1ea4b2012c">More...</a><br /></td></tr>
+<tr class="memdesc:a2e3e3e4e8e3db2b2fd43ab1ea4b2012c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the midpoint of the line.  <a href="#a2e3e3e4e8e3db2b2fd43ab1ea4b2012c">More...</a><br /></td></tr>
 <tr class="separator:a2e3e3e4e8e3db2b2fd43ab1ea4b2012c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3210df51ad6208c870a71996e315e25c"><td class="memItemLeft" align="right" valign="top">Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Line.html#a3210df51ad6208c870a71996e315e25c">GetAngleRadians</a> () const noexcept</td></tr>
 <tr class="memdesc:a3210df51ad6208c870a71996e315e25c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the angle of the line in radians.  <a href="#a3210df51ad6208c870a71996e315e25c">More...</a><br /></td></tr>
@@ -109,7 +109,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a7a8c74045e7846b571ee4396e61932bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the line in form of: ax + by = c.  <a href="#a7a8c74045e7846b571ee4396e61932bd">More...</a><br /></td></tr>
 <tr class="separator:a7a8c74045e7846b571ee4396e61932bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename Type&gt;<br />
+class moci::Line&lt; Type &gt;</h3>
+
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Write summary for class. </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3c755136029673aae9ca8e392c6aaa9a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c755136029673aae9ca8e392c6aaa9a">&#9670;&nbsp;</a></span>Line() <span class="overload">[1/2]</span></h2>
 
@@ -206,6 +211,13 @@ template&lt;typename Type&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the angle of the line in degrees. </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmoci_1_1Line_a52d49db6803c3f46b46ed879daca4369_cgraph.png" border="0" usemap="#classmoci_1_1Line_a52d49db6803c3f46b46ed879daca4369_cgraph" alt=""/></div>
+<map name="classmoci_1_1Line_a52d49db6803c3f46b46ed879daca4369_cgraph" id="classmoci_1_1Line_a52d49db6803c3f46b46ed879daca4369_cgraph">
+</map>
+</div>
 
 </div>
 </div>
@@ -293,7 +305,7 @@ template&lt;typename Type&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the length of the line. </p>
-<p>The distance between <img class="formulaInl" alt="$(x_1,y_1)$" src="form_0.png"/> and <img class="formulaInl" alt="$(x_2,y_2)$" src="form_1.png"/> is <img class="formulaInl" alt="$\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$" src="form_2.png"/>. </p>
+<p>The distance between <img class="formulaInl" alt="$(x_1,y_1)$" src="form_2.png"/> and <img class="formulaInl" alt="$(x_2,y_2)$" src="form_3.png"/> is <img class="formulaInl" alt="$\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$" src="form_4.png"/>. </p>
 
 </div>
 </div>
@@ -322,7 +334,8 @@ template&lt;typename Type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the midpoint of the line. M = ((x1+x2)/2 , (y1+y2)/2) </p>
+<p>Returns the midpoint of the line. </p>
+<p>Midpoint = <img class="formulaInl" alt="$(x_1+x_2)/2$" src="form_0.png"/>, <img class="formulaInl" alt="$(y_1+y_2)/2$" src="form_1.png"/> </p>
 
 </div>
 </div>
@@ -352,6 +365,13 @@ template&lt;typename Type&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the slope. If the line is empty 0 will be returned. </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmoci_1_1Line_a111efb97d85519342aa37be850ca315f_cgraph.png" border="0" usemap="#classmoci_1_1Line_a111efb97d85519342aa37be850ca315f_cgraph" alt=""/></div>
+<map name="classmoci_1_1Line_a111efb97d85519342aa37be850ca315f_cgraph" id="classmoci_1_1Line_a111efb97d85519342aa37be850ca315f_cgraph">
+</map>
+</div>
 
 </div>
 </div>
@@ -443,7 +463,7 @@ template&lt;typename Type&gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/travis/build/tobanteAudio/moci/moci/moci/geometry/<a class="el" href="line_8hpp_source.html">line.hpp</a></li>
+<li><a class="el" href="line_8hpp_source.html">line.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

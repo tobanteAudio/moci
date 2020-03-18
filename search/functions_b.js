@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['main',['main',['../application_8hpp.html#a808f40e2e9d6eb5463165c031dfa3eb1',1,'application.hpp']]],
   ['makescopeguard',['MakeScopeGuard',['../namespacemoci.html#ac9393ca79f3e24f9ca7e40b8b4800bd4',1,'moci']]],
   ['makescopeguardthatdoesnotrollbackifadquirethrows',['MakeScopeGuardThatDoesNOTRollbackIfAdquireThrows',['../namespacemoci.html#a7ccee1e564cdb80112c1a1097254ec5b',1,'moci']]],
   ['makescopeguardthatdoesrollbackifadquirethrows',['MakeScopeGuardThatDoesRollbackIfAdquireThrows',['../namespacemoci.html#abf33dd42553e28973afd088259fb567c',1,'moci']]],

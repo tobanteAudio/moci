@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['datagram_2ehpp',['datagram.hpp',['../datagram_8hpp.html',1,'(Global Namespace)'],['../unix_2datagram_8hpp.html',1,'(Global Namespace)'],['../windows_2datagram_8hpp.html',1,'(Global Namespace)']]],
   ['datagramsocket',['DatagramSocket',['../classmoci_1_1DatagramSocket.html',1,'moci::DatagramSocket'],['../classmoci_1_1DatagramSocket.html#a988e7fbe656ab61cbfa4d4886af65df6',1,'moci::DatagramSocket::DatagramSocket()']]],
   ['deleteproperty',['DeleteProperty',['../classmoci_1_1PropertyMap.html#a65695d3916fbdb0d03a92a8d6be409cc',1,'moci::PropertyMap']]],
-  ['dev_5fsetup_2emd',['dev_setup.md',['../dev__setup_8md.html',1,'']]],
   ['dispatch',['Dispatch',['../classmoci_1_1EventDispatcher.html#a5b88b4eaa39a5ed925da7e5229f802f6',1,'moci::EventDispatcher']]],
   ['draw',['Draw',['../classmoci_1_1Component.html#a70b769b11842ca824c38df17a76385be',1,'moci::Component']]],
   ['drawarrays',['DrawArrays',['../classmoci_1_1OpenGLESRendererAPI.html#ac76fd7349eb63d08f1b177634b3b3f8b',1,'moci::OpenGLESRendererAPI::DrawArrays()'],['../classmoci_1_1RenderCommand.html#aa248fae888da160ca19eba55b5c5fa5a',1,'moci::RenderCommand::DrawArrays()'],['../classmoci_1_1RendererAPI.html#a070a09b31c6f3810967329a1f1ba5a47',1,'moci::RendererAPI::DrawArrays()']]],

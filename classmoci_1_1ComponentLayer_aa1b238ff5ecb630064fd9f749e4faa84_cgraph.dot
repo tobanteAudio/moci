@@ -1,0 +1,12 @@
+digraph "moci::ComponentLayer::OnWindowResized"
+{
+ // INTERACTIVE_SVG=YES
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node24 [label="moci::ComponentLayer\l::OnWindowResized",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node24 -> Node25 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node25 [label="moci::WindowResizeEvent\l::GetWidth",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmoci_1_1WindowResizeEvent.html#abff71f098e20d28aaa9ca0ce39cd8629"];
+  Node24 -> Node26 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node26 [label="moci::WindowResizeEvent\l::GetHeight",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmoci_1_1WindowResizeEvent.html#a3e77edb957ee20c7a191e42b69cb098c"];
+}

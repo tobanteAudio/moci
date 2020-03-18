@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['parse',['Parse',['../classmoci_1_1OBJFile.html#adf663d0a0d63436d7b9a97a7b2313f26',1,'moci::OBJFile']]],
   ['point',['Point',['../classmoci_1_1Point.html#ad0be554f82688105d643a199f5061387',1,'moci::Point::Point() noexcept'],['../classmoci_1_1Point.html#a0bf6d9ec64878ac014d442610fa3012c',1,'moci::Point::Point(Type x, Type y) noexcept'],['../classmoci_1_1Point.html#aa45e296f649eb6e868d2d0a365472672',1,'moci::Point::Point(Point const &amp;)=default'],['../classmoci_1_1Point.html#af6dd48938df004faa8806b546c03480f',1,'moci::Point::Point(Point &amp;&amp;)=default']]],
   ['poplayer',['PopLayer',['../classmoci_1_1LayerStack.html#a2622480ebbf73d123e7147b50c1391f3',1,'moci::LayerStack']]],
   ['popoverlay',['PopOverlay',['../classmoci_1_1LayerStack.html#a18d673479f941d6069b7359bbba11230',1,'moci::LayerStack']]],
