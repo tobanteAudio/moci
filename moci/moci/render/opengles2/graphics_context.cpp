@@ -36,6 +36,7 @@ void OpenGLESContext::Init()
     // GLCall(glEnable(GL_LINE_SMOOTH));
     // GLCall(glEnable(GL_POLYGON_SMOOTH));
     // GLCall(glEnable(GL_POINT_SMOOTH));
+    // Enable depth test
 
     MOCI_CORE_INFO("OpenGL Info:");
     MOCI_CORE_INFO("  Vendor:     {0}", glGetString(GL_VENDOR));

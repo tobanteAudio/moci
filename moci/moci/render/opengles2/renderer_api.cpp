@@ -8,6 +8,10 @@ namespace moci
 void OpenGLESRendererAPI::Init()
 {
     glEnable(GL_BLEND);
+    GLCall(glEnable(GL_DEPTH_TEST));
+    // Accept fragment if it closer to the camera than the former one
+    GLCall(glDepthFunc(GL_LESS));
+
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 

@@ -63,9 +63,11 @@ public:
 
     void OnAttach() override
     {
+        auto col = 0.0f;
         for (auto& vertex : CubeVertices)
         {
-            vertex.color = {1.0f, 1.0f, 0.0f, 1.0f};
+            vertex.color = {col * 2.0f, col * 5.0f, 0.0f, 1.0f};
+            col += 0.01;
         }
 
         shader_ = moci::Shader::Create("sandbox3D/shader3D.glsl");
