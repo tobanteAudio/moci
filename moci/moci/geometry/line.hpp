@@ -10,6 +10,9 @@
 namespace moci
 {
 template<typename Type>
+/**
+ * @todo Write summary for class.
+ */
 class Line
 {
 public:

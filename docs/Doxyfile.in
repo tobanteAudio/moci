@@ -16,7 +16,19 @@ EXTRACT_STATIC         = YES    # document static members & functions
 
 # Generate html output
 GENERATE_HTML          = YES
+GENERATE_TREEVIEW      = NO
 GENERATE_LATEX         = NO
+PDF_HYPERLINKS         = YES
+USE_PDFLATEX           = YES
+
+SHOW_FILES             = NO
+SHOW_NAMESPACES        = YES
+FULL_PATH_NAMES        = NO
+BUILTIN_STL_SUPPORT    = YES
+SORT_MEMBERS_CTORS_1ST = YES
+FORMULA_FONTSIZE       = 14
+CALL_GRAPH             = YES
+INTERACTIVE_SVG        = YES
 
 # Set output directory
 OUTPUT_DIRECTORY       = documentation
