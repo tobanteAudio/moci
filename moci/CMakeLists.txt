@@ -221,3 +221,11 @@ execute_process(
         ${CMAKE_CURRENT_SOURCE_DIR}/test_data/OpenSans-Bold.ttf
         ${CMAKE_CURRENT_BINARY_DIR}/test_data/OpenSans-Bold.ttf
 )
+
+execute_process(
+    COMMAND 
+        ${CMAKE_COMMAND} -E 
+        copy_if_different 
+        ${CMAKE_CURRENT_SOURCE_DIR}/test_data/cube.obj
+        ${CMAKE_CURRENT_BINARY_DIR}/test_data/cube.obj
+)

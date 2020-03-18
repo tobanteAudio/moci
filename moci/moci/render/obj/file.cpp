@@ -48,43 +48,90 @@ bool OBJFile::Parse()
         // Vertex position 'v'
         if (line[0] == 'v' && line[1] == ' ')
         {
-            auto splits = Strings::Split(line.substr(2), ' ');
-            std::for_each(std::begin(splits), std::end(splits), [](auto& split) { Strings::Trim(split); });
-            splits.erase(                                                         //
-                std::remove_if(splits.begin(),                                    //
-                               splits.end(),                                      //
-                               [](auto const& split) { return split.empty(); }),  //
-                splits.end()                                                      //
-            );
-
-            MOCI_CORE_ASSERT(splits.size() == 3, "Only vec3 supported for positions");
-
-            float x {};
-            float y {};
-            float z {};
-
-            try
-            {
-                x = std::stof(splits[0]);
-                y = std::stof(splits[1]);
-                z = std::stof(splits[2]);
-            }
-            catch (...)
-            {
-                MOCI_CORE_CRITICAL("Exception during string to float conversion");
-            }
-
-            vertices_.emplace_back(x, y, z);
+            line = line.substr(2);
+            vertices_.push_back(parseLineToVec3(line));
             continue;
         }
-    }
 
-    for (auto const& vertex : vertices_)
-    {
-        MOCI_CORE_INFO("{}, {}, {}", vertex.x, vertex.y, vertex.z);
+        // Vertex normal 'vn'
+        if (line[0] == 'v' && line[1] == 'n')
+        {
+            line = line.substr(3);
+            normals_.push_back(parseLineToVec3(line));
+            continue;
+        }
+
+        // Face 'f'
+        if (line[0] == 'f' && line[1] == ' ')
+        {
+            line = line.substr(2);
+            parseLineToFace(line);
+            continue;
+        }
     }
 
     return true;
 }
 
+glm::vec3 OBJFile::parseLineToVec3(std::string& line)
+{
+
+    auto splits = Strings::Split(line, ' ');
+    std::for_each(std::begin(splits), std::end(splits), [](auto& split) { Strings::Trim(split); });
+    splits.erase(                                                         //
+        std::remove_if(splits.begin(),                                    //
+                       splits.end(),                                      //
+                       [](auto const& split) { return split.empty(); }),  //
+        splits.end()                                                      //
+    );
+
+    MOCI_CORE_ASSERT(splits.size() == 3, "Only vec3 supported for positions");
+
+    float x {};
+    float y {};
+    float z {};
+
+    try
+    {
+        x = std::stof(splits[0]);
+        y = std::stof(splits[1]);
+        z = std::stof(splits[2]);
+    }
+    catch (...)
+    {
+        MOCI_CORE_CRITICAL("Exception during string to float conversion");
+    }
+
+    return {x, y, z};
+}
+
+void OBJFile::parseLineToFace(std::string& line)
+{
+    auto splits = Strings::Split(line, ' ');
+    std::for_each(std::begin(splits), std::end(splits), [](auto& split) { Strings::Trim(split); });
+    splits.erase(                                                         //
+        std::remove_if(splits.begin(),                                    //
+                       splits.end(),                                      //
+                       [](auto const& split) { return split.empty(); }),  //
+        splits.end()                                                      //
+    );
+
+    MOCI_CORE_ASSERT(splits.size() == 3, "");
+
+    for (auto& split : splits)
+    {
+        auto indices = Strings::Split(split, '/');
+        MOCI_CORE_ASSERT(indices.size() == 3, "");
+        auto const vertexIdx  = Strings::ToInt(indices[0]);
+        auto const textureIdx = Strings::ToInt(indices[1]);
+        auto const normalIdx  = Strings::ToInt(indices[2]);
+        MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
+
+        auto const vertex  = vertices_.at(vertexIdx.value() - 1);
+        auto const normal  = normals_.at(normalIdx.value() - 1);
+        auto const texture = glm::vec2 {};
+
+        model_.push_back({vertex, normal, texture});
+    }
+}
 }  // namespace moci
