@@ -63,6 +63,7 @@ public:
 
     void OnAttach() override
     {
+
         auto col = 0.0f;
         for (auto& vertex : CubeVertices)
         {
@@ -76,11 +77,18 @@ public:
         moci::BufferLayout layout = {
             {moci::ShaderDataType::Float3, "position"},  //
             {moci::ShaderDataType::Float4, "color"},     //
-            // {moci::ShaderDataType::Float2, "texture"},             //
-            // {moci::ShaderDataType::Float, "textureIndex"},         //
-            // {moci::ShaderDataType::Float, "textureIsMonochrome"},  //
         };
-        vbo_.reset(moci::VertexBuffer::Create(reinterpret_cast<float*>(CubeVertices), sizeof(CubeVertices), false));
+
+        std::vector<Vertex> cube {};
+        model.Parse();
+        for (auto const& vertex : model.GetVertexData())
+        {
+            cube.push_back(Vertex {vertex.position, moci::Colors::Blue.GetData()});
+        }
+
+        vbo_.reset(
+            moci::VertexBuffer::Create(reinterpret_cast<float*>(cube.data()), cube.size() * sizeof(Vertex), false));
+        // vbo_.reset(moci::VertexBuffer::Create(reinterpret_cast<float*>(CubeVertices), sizeof(CubeVertices), false));
         vbo_->SetLayout(layout);
         vbo_->Unbind();
         ibo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
@@ -109,7 +117,7 @@ public:
         shader_->SetMat4("u_MVP", proj);
 
         vao_->Bind();
-        moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, 12 * 3);
+        moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, model.GetVertexData().size());
     }
 
     void OnEvent(moci::Event& e) override
@@ -152,6 +160,8 @@ public:
     float height_ = 1024.0f;
 
     glm::vec3 cameraPos_ {4.0f, 3.0f, 3.0f};
+
+    moci::OBJFile model {"sandbox3D/teapot.obj"};
 
     std::shared_ptr<moci::Shader> shader_;
     std::shared_ptr<moci::VertexBuffer> vbo_;

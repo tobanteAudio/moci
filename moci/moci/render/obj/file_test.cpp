@@ -9,12 +9,21 @@
 #include "moci/core/preprocessor.hpp"
 
 #if !defined(MOCI_WINDOWS)
-TEST_CASE("moci/render: OBJFile", "[render]")
+TEST_CASE("moci/render: OBJFileCube", "[render]")
 {
     moci::OBJFile model("test_data/cube.obj");
     REQUIRE(model.Parse() == true);
     REQUIRE(model.GetVertices().size() == 8);
     REQUIRE(model.GetNormals().size() == 6);
     REQUIRE(model.GetVertexData().size() == 36);
+}
+
+TEST_CASE("moci/render: OBJFileTeapot", "[render]")
+{
+    moci::OBJFile model("test_data/teapot.obj");
+    REQUIRE(model.Parse() == true);
+    REQUIRE(model.GetVertices().size() == 3644);
+    REQUIRE(model.GetNormals().size() == 0);
+    REQUIRE(model.GetVertexData().size() == 18960);
 }
 #endif

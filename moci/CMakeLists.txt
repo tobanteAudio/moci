@@ -229,3 +229,11 @@ execute_process(
         ${CMAKE_CURRENT_SOURCE_DIR}/test_data/cube.obj
         ${CMAKE_CURRENT_BINARY_DIR}/test_data/cube.obj
 )
+
+execute_process(
+    COMMAND 
+        ${CMAKE_COMMAND} -E 
+        copy_if_different 
+        ${CMAKE_CURRENT_SOURCE_DIR}/test_data/teapot.obj
+        ${CMAKE_CURRENT_BINARY_DIR}/test_data/teapot.obj
+)

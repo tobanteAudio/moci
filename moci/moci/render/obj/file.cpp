@@ -121,17 +121,31 @@ void OBJFile::parseLineToFace(std::string& line)
     for (auto& split : splits)
     {
         auto indices = Strings::Split(split, '/');
-        MOCI_CORE_ASSERT(indices.size() == 3, "");
-        auto const vertexIdx  = Strings::ToInt(indices[0]);
-        auto const textureIdx = Strings::ToInt(indices[1]);
-        auto const normalIdx  = Strings::ToInt(indices[2]);
-        MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
+        if (indices.size() == 3)
+        {
+            auto const vertexIdx  = Strings::ToInt(indices[0]);
+            auto const textureIdx = Strings::ToInt(indices[1]);
+            auto const normalIdx  = Strings::ToInt(indices[2]);
+            MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
 
-        auto const vertex  = vertices_.at(vertexIdx.value() - 1);
-        auto const normal  = normals_.at(normalIdx.value() - 1);
-        auto const texture = glm::vec2 {};
+            auto const vertex  = vertices_.at(vertexIdx.value() - 1);
+            auto const normal  = normals_.at(normalIdx.value() - 1);
+            auto const texture = glm::vec2 {};
 
-        model_.push_back({vertex, normal, texture});
+            model_.push_back({vertex, normal, texture});
+        }
+
+        if (indices.size() == 1)
+        {
+            auto const vertexIdx = Strings::ToInt(indices[0]);
+            MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
+
+            auto const vertex  = vertices_.at(vertexIdx.value() - 1);
+            auto const normal  = glm::vec3 {};
+            auto const texture = glm::vec2 {};
+
+            model_.push_back({vertex, normal, texture});
+        }
     }
 }
 }  // namespace moci
