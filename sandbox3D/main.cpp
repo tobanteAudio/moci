@@ -145,6 +145,14 @@ public:
         {
             cameraPos_.x = cameraPos_.x + moveAmount;
         }
+        if (e.GetKeyCode() == MOCI_KEY_DOWN)
+        {
+            cameraPos_.y = cameraPos_.y - moveAmount;
+        }
+        if (e.GetKeyCode() == MOCI_KEY_UP)
+        {
+            cameraPos_.y = cameraPos_.y + moveAmount;
+        }
         return true;
     }
 
