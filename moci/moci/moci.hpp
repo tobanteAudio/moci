@@ -41,6 +41,8 @@
 #include "moci/render/texture.hpp"
 #include "moci/render/vertex_array.hpp"
 
+#include "moci/render/obj/file.hpp"
+
 #include "moci/ui/component.hpp"
 #include "moci/ui/component_layer.hpp"
 #include "moci/ui/style.hpp"

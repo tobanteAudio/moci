@@ -83,6 +83,9 @@ set(moci_sources
     moci/render/freetype/library.hpp
     moci/render/freetype/library.cpp
 
+    moci/render/obj/file.hpp
+    moci/render/obj/file.cpp
+
     moci/render/opengles2/buffer.hpp
     moci/render/opengles2/buffer.cpp
     moci/render/opengles2/graphics_context.hpp
@@ -191,6 +194,7 @@ set (moci_test_src
     moci/render/font_test.cpp
 
     moci/render/freetype/library_test.cpp
+    moci/render/obj/file_test.cpp
 
     moci/ui/component_test.cpp
     moci/ui/widgets_test.cpp
