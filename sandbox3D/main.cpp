@@ -82,8 +82,8 @@ public:
         };
 
         std::vector<Vertex> cube {};
-        model.Parse();
-        for (auto const& vertex : model.GetVertexData())
+        model_.Parse();
+        for (auto const& vertex : model_.GetVertexData())
         {
             cube.push_back(Vertex {vertex.position, {}, moci::Colors::Blue.GetData()});
         }
@@ -108,20 +108,20 @@ public:
         moci::RenderCommand::Clear();
 
         // Camera matrix
-        glm::mat4 Projection = glm::perspective(glm::radians(45.0f), width_ / height_, 0.1f, 100.0f);
-        glm::mat4 View       = glm::lookAt(cameraPos_,          // Camera is at (4,3,3), in World Space
+        glm::mat4 model      = glm::mat4(1.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), width_ / height_, 0.1f, 100.0f);
+        glm::mat4 view       = glm::lookAt(cameraPos_,          // Camera is at (4,3,3), in World Space
                                      glm::vec3(0, 0, 0),  // and looks at the origin
                                      glm::vec3(0, 1, 0)   // Head is up (set to 0,-1,0 to look upside-down)
         );
-
-        // Model matrix : an identity matrix (model will be at the origin)
-        glm::mat4 Model = glm::mat4(1.0f);
-        glm::mat4 proj  = Projection * View * Model;  // Remember, matrix multiplication is the other way around
-        shader_->SetMat4("u_MVP", proj);
+        // glm::mat4 proj  = projection * view * model;  // Remember, matrix multiplication is the other way around
+        shader_->SetMat4("u_Model", model);
+        shader_->SetMat4("u_View", view);
+        shader_->SetMat4("u_Projection", projection);
         shader_->SetFloat("u_Ambient", ambientLight_);
 
         vao_->Bind();
-        moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, model.GetVertexData().size());
+        moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, model_.GetVertexData().size());
     }
 
     void OnEvent(moci::Event& e) override
@@ -174,7 +174,7 @@ public:
     glm::vec3 cameraPos_ {4.0f, 4.0f, 3.0f};
     glm::vec3 lightColor_ {1.0f, 1.0f, 1.0f};
     float ambientLight_ = 0.1f;
-    moci::OBJFile model {"sandbox3D/cube.obj"};
+    moci::OBJFile model_ {"sandbox3D/cube.obj"};
 
     std::shared_ptr<moci::Shader> shader_;
     std::shared_ptr<moci::VertexBuffer> vbo_;
