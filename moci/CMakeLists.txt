@@ -214,26 +214,12 @@ target_link_libraries(moci_tests
 catch_discover_tests(moci_tests)
 
 # copy testfiles
+foreach(_target OpenSans-Bold.ttf red_pepper.obj cube.obj teapot.obj)
 execute_process(
     COMMAND 
         ${CMAKE_COMMAND} -E 
         copy_if_different 
-        ${CMAKE_CURRENT_SOURCE_DIR}/test_data/OpenSans-Bold.ttf
-        ${CMAKE_CURRENT_BINARY_DIR}/test_data/OpenSans-Bold.ttf
+        ${CMAKE_CURRENT_SOURCE_DIR}/test_data/${_target}
+        ${CMAKE_CURRENT_BINARY_DIR}/test_data/${_target}
 )
-
-execute_process(
-    COMMAND 
-        ${CMAKE_COMMAND} -E 
-        copy_if_different 
-        ${CMAKE_CURRENT_SOURCE_DIR}/test_data/cube.obj
-        ${CMAKE_CURRENT_BINARY_DIR}/test_data/cube.obj
-)
-
-execute_process(
-    COMMAND 
-        ${CMAKE_COMMAND} -E 
-        copy_if_different 
-        ${CMAKE_CURRENT_SOURCE_DIR}/test_data/teapot.obj
-        ${CMAKE_CURRENT_BINARY_DIR}/test_data/teapot.obj
-)
+endforeach()

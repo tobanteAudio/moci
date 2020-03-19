@@ -26,4 +26,13 @@ TEST_CASE("moci/render: OBJFileTeapot", "[render]")
     REQUIRE(model.GetNormals().size() == 0);
     REQUIRE(model.GetVertexData().size() == 18960);
 }
+
+TEST_CASE("moci/render: OBJFileRedPepper", "[render]")
+{
+    moci::OBJFile model("test_data/red_pepper.obj");
+    REQUIRE(model.Parse() == true);
+    REQUIRE(model.GetVertices().size() == 14980);
+    REQUIRE(model.GetNormals().size() == 0);
+    REQUIRE(model.GetVertexData().size() == 89868);
+}
 #endif

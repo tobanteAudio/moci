@@ -86,6 +86,7 @@ public:
             cube.push_back(Vertex {vertex.position, moci::Colors::Blue.GetData()});
         }
 
+        MOCI_INFO("Num vertices: {}", cube.size());
         vbo_.reset(
             moci::VertexBuffer::Create(reinterpret_cast<float*>(cube.data()), cube.size() * sizeof(Vertex), false));
         // vbo_.reset(moci::VertexBuffer::Create(reinterpret_cast<float*>(CubeVertices), sizeof(CubeVertices), false));
@@ -167,9 +168,9 @@ public:
     float width_  = 1280.0f;
     float height_ = 1024.0f;
 
-    glm::vec3 cameraPos_ {4.0f, 3.0f, 3.0f};
+    glm::vec3 cameraPos_ {80.0f, 80.0f, 60.0f};
 
-    moci::OBJFile model {"sandbox3D/teapot.obj"};
+    moci::OBJFile model {"sandbox3D/red_pepper.obj"};
 
     std::shared_ptr<moci::Shader> shader_;
     std::shared_ptr<moci::VertexBuffer> vbo_;
