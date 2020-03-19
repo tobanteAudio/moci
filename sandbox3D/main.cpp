@@ -85,7 +85,7 @@ public:
         model_.Parse();
         for (auto const& vertex : model_.GetVertexData())
         {
-            cube.push_back(Vertex {vertex.position, {}, moci::Colors::Blue.GetData()});
+            cube.push_back(Vertex {vertex.position, vertex.normal, moci::Colors::Blue.GetData()});
         }
 
         MOCI_INFO("Num vertices: {}", cube.size());
@@ -119,6 +119,7 @@ public:
         shader_->SetMat4("u_View", view);
         shader_->SetMat4("u_Projection", projection);
         shader_->SetFloat("u_Ambient", ambientLight_);
+        shader_->SetFloat3("u_LightPos", lightPos_);
 
         vao_->Bind();
         moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, model_.GetVertexData().size());
@@ -164,6 +165,7 @@ public:
     {
         ImGui::Begin("Settings");
         ImGui::SliderFloat("Ambient Light", &ambientLight_, 0.0f, 1.0f);
+        ImGui::SliderFloat3("Light Pos", glm::value_ptr(lightPos_), 0.0f, 10.0f);
         ImGui::End();
     }
 
@@ -172,6 +174,7 @@ public:
     float height_ = 1024.0f;
 
     glm::vec3 cameraPos_ {4.0f, 4.0f, 3.0f};
+    glm::vec3 lightPos_ {4.0f, 4.0f, 3.0f};
     glm::vec3 lightColor_ {1.0f, 1.0f, 1.0f};
     float ambientLight_ = 0.1f;
     moci::OBJFile model_ {"sandbox3D/cube.obj"};
