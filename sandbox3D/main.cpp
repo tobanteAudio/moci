@@ -178,7 +178,7 @@ public:
     glm::vec3 lightPos_ {4.0f, 4.0f, 3.0f};
     glm::vec3 lightColor_ {1.0f, 1.0f, 1.0f};
     float ambientLight_ = 0.1f;
-    moci::OBJFile model_ {"sandbox3D/cube.obj"};
+    moci::OBJFile model_ {"sandbox3D/teapot.obj"};
 
     std::shared_ptr<moci::Shader> shader_;
     std::shared_ptr<moci::VertexBuffer> vbo_;
