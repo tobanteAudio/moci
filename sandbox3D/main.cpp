@@ -11,6 +11,7 @@
 struct Vertex
 {
     glm::vec3 position {};
+    glm::vec3 normal {};
     glm::vec4 color {};
 };
 
@@ -76,6 +77,7 @@ public:
 
         moci::BufferLayout layout = {
             {moci::ShaderDataType::Float3, "position"},  //
+            {moci::ShaderDataType::Float3, "normal"},    //
             {moci::ShaderDataType::Float4, "color"},     //
         };
 
@@ -83,7 +85,7 @@ public:
         model.Parse();
         for (auto const& vertex : model.GetVertexData())
         {
-            cube.push_back(Vertex {vertex.position, moci::Colors::Blue.GetData()});
+            cube.push_back(Vertex {vertex.position, {}, moci::Colors::Blue.GetData()});
         }
 
         MOCI_INFO("Num vertices: {}", cube.size());
