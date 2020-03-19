@@ -63,11 +63,12 @@ $(function() {
 <div class="title">tobanteAudio - moci </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><ul>
+<div class="textblock"><p>General purpose application library. Currently supports desktop &amp; mobil OpenGL. Runs on devices which only support OpenGLES 2.0.</p>
+<h2>Status</h2>
+<ul>
 <li><a href="https::/github.com/tobanteAudio/moci">GitHub Repository</a></li>
 <li><a href="https://tobanteaudio.github.io/moci/classes.html">API Reference</a></li>
 </ul>
-<h2>Status</h2>
 <table class="doxtable">
 <tr>
 <th align="center">License </th><th align="center">macOS </th><th align="center">Windows </th><th align="center">Linux </th><th align="center">Coverage </th><th align="center">Issues  </th></tr>
@@ -84,7 +85,26 @@ $(function() {
 <li>Ninja Build</li>
 </ul>
 <p>Clone with submodules:</p>
-<div class="fragment"><div class="line">git clone --recursive https://github.com/tobanteAudio/moci.git</div></div><!-- fragment --><div class="fragment"><div class="line">CONFIG=Debug make config build</div><div class="line">CONFIG=Debug make config-gles build # Link against OpenGLES 2.0</div></div><!-- fragment --><h3>clang-tidy</h3>
+<div class="fragment"><div class="line">git clone --recursive https://github.com/tobanteAudio/moci.git</div></div><!-- fragment --><h3>macOS &amp; Linux</h3>
+<p>Running the <code>Makefile</code> builds the project with your default compiler &amp; ninja.</p>
+<div class="fragment"><div class="line"># Link against desktop OpenGL.</div><div class="line">CONFIG=Debug make</div><div class="line"># Same as</div><div class="line">CONFIG=Debug make config build test</div><div class="line"># Link against OpenGLES 2.0. This also excludes glew from being build.</div><div class="line">CONFIG=Debug make config-gles build test</div></div><!-- fragment --><h3>Windows (Visual Studio)</h3>
+<p>Running the <code>Makefile</code> builds the project Visual Studio.</p>
+<div class="fragment"><div class="line"># Link against desktop OpenGL.</div><div class="line">CONFIG=Debug make config-vs build test</div><div class="line"># or</div><div class="line">CONFIG=Release make config-vs build test</div></div><!-- fragment --><h2>Development</h2>
+<h3>Dependencies (submodules)</h3>
+<ul>
+<li>[Catch2: Unit tests]()</li>
+<li>[freetype: Font loader]()</li>
+<li>[glew: OpenGL function loader]()</li>
+<li>[glfw: Cross platform window library]()</li>
+<li>[glm: Math library]()</li>
+<li>[GSL: C++ guideline support library]()</li>
+<li>[imgui: GUI library]()</li>
+<li>[spdlog: Logging]()</li>
+<li>[stb: Image file loader]()</li>
+</ul>
+<h3>Dependencies Linux</h3>
+<p>Look at the <code>circleci</code> config in <a href="https://github.com/tobanteAudio/moci/blob/master/.circleci/config.yml"><code>.circleci/config.yml</code></a> for Ubuntu packages. Otherwise just try building the project. CMake will tell you whats missing.</p>
+<h3>clang-tidy</h3>
 <p>Two options. Somehow not all headers are found in either option:</p>
 <div class="fragment"><div class="line">CONFIG=Debug make tidy</div><div class="line">CONFIG=Debug make tidy-fix</div><div class="line">./scripts/moci-clang-tidy.sh</div></div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
