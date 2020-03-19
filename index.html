@@ -64,7 +64,32 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>General purpose application library. Currently supports desktop &amp; mobil OpenGL. Runs on devices which only support OpenGLES 2.0.</p>
-<h2>Features</h2>
+<h2>Status</h2>
+<ul>
+<li><a href="https::/github.com/tobanteAudio/moci">GitHub Repository</a></li>
+<li><a href="https://tobanteaudio.github.io/moci/classes.html">API Reference</a></li>
+</ul>
+<table class="doxtable">
+<tr>
+<th align="center">License </th><th align="center">macOS </th><th align="center">Windows </th><th align="center">Linux </th><th align="center">Coverage </th><th align="center">Issues  </th></tr>
+<tr>
+<td align="center"><a href="https://github.com/tobanteAudio/moci/blob/master/LICENSE"></a> </td><td align="center"><a href="https://travis-ci.org/tobanteAudio/moci"></a> </td><td align="center"><a href="https://ci.appveyor.com/project/tobanteAudio/moci"></a> </td><td align="center"><a href="https://circleci.com/gh/tobanteAudio/moci"></a> </td><td align="center"><a href="https://codecov.io/gh/tobanteAudio/moci"></a> </td><td align="center"><div class="image">
+<object type="image/svg+xml" data="https://img.shields.io/github/issues/tobanteAudio/moci.svg" alt="GitHub issues"></object>
+</div>
+ </td></tr>
+</table>
+<h2>Quick Start</h2>
+<ul>
+<li>C++17</li>
+<li>CMake &gt; 3.13</li>
+<li>Ninja Build</li>
+</ul>
+<p>Clone with submodules:</p>
+<div class="fragment"><div class="line">git clone --recursive https://github.com/tobanteAudio/moci.git</div></div><!-- fragment --><h3>macOS &amp; Linux</h3>
+<p>Running the <code>Makefile</code> builds the project with your default compiler &amp; ninja.</p>
+<div class="fragment"><div class="line"># Link against desktop OpenGL.</div><div class="line">CONFIG=Debug make</div><div class="line"># Same as</div><div class="line">CONFIG=Debug make config build test</div><div class="line"># Link against OpenGLES 2.0. This also excludes glew from being build.</div><div class="line">CONFIG=Debug make config-gles build test</div></div><!-- fragment --><h3>Windows (Visual Studio)</h3>
+<p>Running the <code>Makefile</code> builds the project Visual Studio.</p>
+<div class="fragment"><div class="line"># Link against desktop OpenGL.</div><div class="line">CONFIG=Debug make config-vs build test</div><div class="line"># or</div><div class="line">CONFIG=Release make config-vs build test</div></div><!-- fragment --><h2>Features</h2>
 <ul>
 <li>Application<ul>
 <li>Cross platform window creation. Currently based on <code>GLFW</code>.</li>
@@ -110,32 +135,7 @@ $(function() {
 </ul>
 </li>
 </ul>
-<h2>Status</h2>
-<ul>
-<li><a href="https::/github.com/tobanteAudio/moci">GitHub Repository</a></li>
-<li><a href="https://tobanteaudio.github.io/moci/classes.html">API Reference</a></li>
-</ul>
-<table class="doxtable">
-<tr>
-<th align="center">License </th><th align="center">macOS </th><th align="center">Windows </th><th align="center">Linux </th><th align="center">Coverage </th><th align="center">Issues  </th></tr>
-<tr>
-<td align="center"><a href="https://github.com/tobanteAudio/moci/blob/master/LICENSE"></a> </td><td align="center"><a href="https://travis-ci.org/tobanteAudio/moci"></a> </td><td align="center"><a href="https://ci.appveyor.com/project/tobanteAudio/moci"></a> </td><td align="center"><a href="https://circleci.com/gh/tobanteAudio/moci"></a> </td><td align="center"><a href="https://codecov.io/gh/tobanteAudio/moci"></a> </td><td align="center"><div class="image">
-<object type="image/svg+xml" data="https://img.shields.io/github/issues/tobanteAudio/moci.svg" alt="GitHub issues"></object>
-</div>
- </td></tr>
-</table>
-<h2>Quick Start</h2>
-<ul>
-<li>C++17</li>
-<li>CMake &gt; 3.13</li>
-<li>Ninja Build</li>
-</ul>
-<p>Clone with submodules:</p>
-<div class="fragment"><div class="line">git clone --recursive https://github.com/tobanteAudio/moci.git</div></div><!-- fragment --><h3>macOS &amp; Linux</h3>
-<p>Running the <code>Makefile</code> builds the project with your default compiler &amp; ninja.</p>
-<div class="fragment"><div class="line"># Link against desktop OpenGL.</div><div class="line">CONFIG=Debug make</div><div class="line"># Same as</div><div class="line">CONFIG=Debug make config build test</div><div class="line"># Link against OpenGLES 2.0. This also excludes glew from being build.</div><div class="line">CONFIG=Debug make config-gles build test</div></div><!-- fragment --><h3>Windows (Visual Studio)</h3>
-<p>Running the <code>Makefile</code> builds the project Visual Studio.</p>
-<div class="fragment"><div class="line"># Link against desktop OpenGL.</div><div class="line">CONFIG=Debug make config-vs build test</div><div class="line"># or</div><div class="line">CONFIG=Release make config-vs build test</div></div><!-- fragment --><h2>Development</h2>
+<h2>Development</h2>
 <h3>Dependencies (submodules)</h3>
 <ul>
 <li>[Catch2: Unit tests]()</li>
