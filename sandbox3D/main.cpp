@@ -120,6 +120,7 @@ public:
         shader_->SetMat4("u_Projection", projection);
         shader_->SetFloat("u_Ambient", ambientLight_);
         shader_->SetFloat3("u_LightPos", lightPos_);
+        shader_->SetFloat3("u_ViewPos", cameraPos_);
 
         vao_->Bind();
         moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, model_.GetVertexData().size());
