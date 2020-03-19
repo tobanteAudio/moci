@@ -1,9 +1,11 @@
 # tobanteAudio - moci
 
-- [GitHub Repository](https::/github.com/tobanteAudio/moci)
-- [API Reference](https://tobanteaudio.github.io/moci/classes.html)
+General purpose application library. Currently supports desktop & mobil OpenGL. Runs on devices which only support OpenGLES 2.0.
 
 ## Status
+
+- [GitHub Repository](https::/github.com/tobanteAudio/moci)
+- [API Reference](https://tobanteaudio.github.io/moci/classes.html)
 
 |                                                                 License                                                                 |                                                         macOS                                                         |                                                                 Windows                                                                 |                                                       Linux                                                       |                                                           Coverage                                                           |                                    Issues                                    |
 | :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------: |
@@ -21,10 +23,47 @@ Clone with submodules:
 git clone --recursive https://github.com/tobanteAudio/moci.git
 ```
 
+### macOS & Linux
+
+Running the `Makefile` builds the project with your default compiler & ninja.
+
 ```sh
-CONFIG=Debug make config build
-CONFIG=Debug make config-gles build # Link against OpenGLES 2.0
+# Link against desktop OpenGL.
+CONFIG=Debug make
+# Same as
+CONFIG=Debug make config build test
+# Link against OpenGLES 2.0. This also excludes glew from being build.
+CONFIG=Debug make config-gles build test
 ```
+
+### Windows (Visual Studio)
+
+Running the `Makefile` builds the project Visual Studio.
+
+```sh
+# Link against desktop OpenGL.
+CONFIG=Debug make config-vs build test
+# or
+CONFIG=Release make config-vs build test
+```
+
+## Development
+
+### Dependencies (submodules)
+
+- [Catch2: Unit tests]()
+- [freetype: Font loader]()
+- [glew: OpenGL function loader]()
+- [glfw: Cross platform window library]()
+- [glm: Math library]()
+- [GSL: C++ guideline support library]()
+- [imgui: GUI library]()
+- [spdlog: Logging]()
+- [stb: Image file loader]()
+
+### Dependencies Linux
+
+Look at the `circleci` config in [`.circleci/config.yml`](https://github.com/tobanteAudio/moci/blob/master/.circleci/config.yml) for Ubuntu packages. Otherwise just try building the project. CMake will tell you whats missing.
 
 ### clang-tidy
 
