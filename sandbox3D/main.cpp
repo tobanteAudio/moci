@@ -118,6 +118,7 @@ public:
         glm::mat4 Model = glm::mat4(1.0f);
         glm::mat4 proj  = Projection * View * Model;  // Remember, matrix multiplication is the other way around
         shader_->SetMat4("u_MVP", proj);
+        shader_->SetFloat("u_Ambient", ambientLight_);
 
         vao_->Bind();
         moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, model.GetVertexData().size());
@@ -162,7 +163,7 @@ public:
     void OnImGuiRender() override
     {
         ImGui::Begin("Settings");
-        ImGui::Text("Number: %d", 1);
+        ImGui::SliderFloat("Ambient Light", &ambientLight_, 0.0f, 1.0f);
         ImGui::End();
     }
 
@@ -171,7 +172,8 @@ public:
     float height_ = 1024.0f;
 
     glm::vec3 cameraPos_ {4.0f, 4.0f, 3.0f};
-
+    glm::vec3 lightColor_ {1.0f, 1.0f, 1.0f};
+    float ambientLight_ = 0.1f;
     moci::OBJFile model {"sandbox3D/cube.obj"};
 
     std::shared_ptr<moci::Shader> shader_;

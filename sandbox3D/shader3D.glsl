@@ -19,11 +19,16 @@ void main() {
 precision mediump float;
 #endif
 
+uniform float u_Ambient;
+
 varying vec4 v_Color;  
+
 
 void main() 
 { 
-    gl_FragColor = v_Color;  
+    vec3 ambient = u_Ambient * vec3(1.0, 1.0, 1.0);
+    vec4 color = vec4(ambient, 1.0) * v_Color;
+    gl_FragColor = color;  
 }
 
 
