@@ -168,9 +168,9 @@ public:
     float width_  = 1280.0f;
     float height_ = 1024.0f;
 
-    glm::vec3 cameraPos_ {80.0f, 80.0f, 60.0f};
+    glm::vec3 cameraPos_ {4.0f, 4.0f, 3.0f};
 
-    moci::OBJFile model {"sandbox3D/red_pepper.obj"};
+    moci::OBJFile model {"sandbox3D/cube.obj"};
 
     std::shared_ptr<moci::Shader> shader_;
     std::shared_ptr<moci::VertexBuffer> vbo_;

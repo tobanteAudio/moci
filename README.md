@@ -2,6 +2,34 @@
 
 General purpose application library. Currently supports desktop & mobil OpenGL. Runs on devices which only support OpenGLES 2.0.
 
+## Features
+
+- Application
+  - Cross platform window creation. Currently based on `GLFW`.
+- Rendering
+  - `ImGui` integration
+  - 2D batch renderer
+  - Custom shaders, buffers & textures
+  - Fonts
+- Geometry
+  - Basic shapes & transformations, using `glm`.
+- Network
+  - Cross platform UDP socket listen & write
+- System
+  - Query CPU & OS information
+- Debug
+  - Create profiles readable by `Chrome` tracing.
+
+## Long Term Goals
+
+- Application
+  - Native windowing APIs.
+- Audio
+  - Native sound APIs.
+  - Audio Plugins. (VST3, AudioUnit)
+- Rendering
+  - Metal, Vulkan & DirectX. (Priority as listed)
+
 ## Status
 
 - [GitHub Repository](https::/github.com/tobanteAudio/moci)
