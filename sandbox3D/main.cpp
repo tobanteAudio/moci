@@ -76,9 +76,9 @@ public:
         shader_->Bind();
 
         moci::BufferLayout layout = {
-            {moci::ShaderDataType::Float3, "position"},  //
-            {moci::ShaderDataType::Float3, "normal"},    //
-            {moci::ShaderDataType::Float4, "color"},     //
+            {moci::ShaderDataType::Float3, "a_Position"},  //
+            {moci::ShaderDataType::Float3, "a_Normal"},    //
+            {moci::ShaderDataType::Float4, "a_Color"},     //
         };
 
         std::vector<Vertex> cube {};
