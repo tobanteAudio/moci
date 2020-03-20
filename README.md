@@ -79,6 +79,7 @@ CONFIG=Release make config-vs build test
 
 ### Dependencies (submodules)
 
+- [assimp: 3D Model loader](https://github.com/assimp/assimp)
 - [Catch2: Unit tests]()
 - [freetype: Font loader]()
 - [glew: OpenGL function loader]()
