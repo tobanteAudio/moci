@@ -268,7 +268,7 @@ private:
 class DemoLayer : public moci::Layer
 {
 public:
-    DemoLayer() : mesh_("sandbox3D/cube.obj") {};
+    DemoLayer() : mesh_("sandbox3D/teapot.obj") {};
     ~DemoLayer() override = default;
 
     void OnAttach() override
