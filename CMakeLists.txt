@@ -69,6 +69,7 @@ endif(MOCI_CLANG_TIDY)
 configure_file(.clang-tidy .clang-tidy COPYONLY)
 
 # 3rd party libraries
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/assimp     EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/freetype   EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glm        EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glfw       EXCLUDE_FROM_ALL)
