@@ -43,7 +43,7 @@ public:
     glm::mat4 Transform;
 };
 
-static const uint32_t s_MeshImportFlags
+static constexpr uint32_t s_MeshImportFlags
     =                        //
                              // aiProcess_CalcTangentSpace |           // Create binormals/tangents just in case
     aiProcess_Triangulate |  // Make sure we're triangles
@@ -253,7 +253,7 @@ public:
         // m_Scene = scene;
     }
 
-    gsl::span<Vertex> GetVertices() noexcept { return m_StaticVertices; }
+    gsl::span<Vertex const> GetVertices() const noexcept { return m_StaticVertices; }
 
 private:
     std::string m_FilePath {};
