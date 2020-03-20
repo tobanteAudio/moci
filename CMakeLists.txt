@@ -10,7 +10,6 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set(CMAKE_CXX_EXTENSIONS OFF)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
     set(BUILD_SHARED_LIBS OFF)
-    set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared library")
 
 
     # Let's nicely support folders in IDE's
@@ -72,7 +71,13 @@ endif(MOCI_CLANG_TIDY)
 configure_file(.clang-tidy .clang-tidy COPYONLY)
 
 # 3rd party libraries
+set(ASSIMP_BUILD_OBJ_IMPORTER ON CACHE BOOL "Build shared library")
+set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE BOOL "")
+set(ASSIMP_BUILD_ALL_EXPORTERS_BY_DEFAULT OFF CACHE BOOL "")
+set(ASSIMP_BUILD_ASSBIN_EXPORTER OFF CACHE BOOL "")
+set(ASSIMP_BUILD_ASSXML_EXPORTER OFF CACHE BOOL "")
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/assimp     EXCLUDE_FROM_ALL)
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/freetype   EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glm        EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glfw       EXCLUDE_FROM_ALL)
