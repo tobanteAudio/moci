@@ -30,6 +30,7 @@
 #include "moci/network/datagram.hpp"
 
 #include "moci/render/buffer.hpp"
+#include "moci/render/camera.hpp"
 #include "moci/render/color.hpp"
 #include "moci/render/font.hpp"
 #include "moci/render/graphics_context.hpp"

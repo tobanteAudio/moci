@@ -15,47 +15,6 @@ struct Vertex
     glm::vec4 color {};
 };
 
-// Our vertices. Three consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
-// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
-static Vertex CubeVertices[] = {
-    {{-1.0f, -1.0f, -1.0f}},  // triangle 1 : begin
-    {{-1.0f, -1.0f, 1.0f}},   //
-    {{-1.0f, 1.0f, 1.0f}},    // triangle 1 : end
-    {{1.0f, 1.0f, -1.0f}},    // triangle 2 : begin
-    {{-1.0f, -1.0f, -1.0f}},  //
-    {{-1.0f, 1.0f, -1.0f}},   // triangle 2 : end
-    {{1.0f, -1.0f, 1.0f}},    //
-    {{-1.0f, -1.0f, -1.0f}},  //
-    {{1.0f, -1.0f, -1.0f}},   //
-    {{1.0f, 1.0f, -1.0f}},    //
-    {{1.0f, -1.0f, -1.0f}},   //
-    {{-1.0f, -1.0f, -1.0f}},  //
-    {{-1.0f, -1.0f, -1.0f}},  //
-    {{-1.0f, 1.0f, 1.0f}},    //
-    {{-1.0f, 1.0f, -1.0f}},   //
-    {{1.0f, -1.0f, 1.0f}},    //
-    {{-1.0f, -1.0f, 1.0f}},   //
-    {{-1.0f, -1.0f, -1.0f}},  //
-    {{-1.0f, 1.0f, 1.0f}},    //
-    {{-1.0f, -1.0f, 1.0f}},   //
-    {{1.0f, -1.0f, 1.0f}},    //
-    {{1.0f, 1.0f, 1.0f}},     //
-    {{1.0f, -1.0f, -1.0f}},   //
-    {{1.0f, 1.0f, -1.0f}},    //
-    {{1.0f, -1.0f, -1.0f}},   //
-    {{1.0f, 1.0f, 1.0f}},     //
-    {{1.0f, -1.0f, 1.0f}},    //
-    {{1.0f, 1.0f, 1.0f}},     //
-    {{1.0f, 1.0f, -1.0f}},    //
-    {{-1.0f, 1.0f, -1.0f}},   //
-    {{1.0f, 1.0f, 1.0f}},     //
-    {{-1.0f, 1.0f, -1.0f}},   //
-    {{-1.0f, 1.0f, 1.0f}},    //
-    {{1.0f, 1.0f, 1.0f}},     //
-    {{-1.0f, 1.0f, 1.0f}},    //
-    {{1.0f, -1.0f, 1.0f}},    //
-};
-
 class DemoLayer : public moci::Layer
 {
 public:
@@ -64,13 +23,6 @@ public:
 
     void OnAttach() override
     {
-
-        auto col = 0.0f;
-        for (auto& vertex : CubeVertices)
-        {
-            vertex.color = {col * 2.0f, col * 5.0f, 0.0f, 1.0f};
-            col += 0.01;
-        }
 
         shader_ = moci::Shader::Create("sandbox3D/shader3D.glsl");
         shader_->Bind();
@@ -91,7 +43,6 @@ public:
         MOCI_INFO("Num vertices: {}", cube.size());
         vbo_.reset(
             moci::VertexBuffer::Create(reinterpret_cast<float*>(cube.data()), cube.size() * sizeof(Vertex), false));
-        // vbo_.reset(moci::VertexBuffer::Create(reinterpret_cast<float*>(CubeVertices), sizeof(CubeVertices), false));
         vbo_->SetLayout(layout);
         vbo_->Unbind();
         ibo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));

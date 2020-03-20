@@ -59,6 +59,8 @@ set(moci_sources
         
     moci/render/buffer.hpp
     moci/render/buffer.cpp
+    moci/render/camera.hpp
+    moci/render/camera.cpp
     moci/render/color.hpp
     # moci/render/color.cpp
     moci/render/font.hpp
@@ -190,6 +192,7 @@ set (moci_test_src
     moci/network/datagram_test.cpp
 
     moci/render/buffer_test.cpp
+    moci/render/camera_test.cpp
     moci/render/color_test.cpp
     moci/render/font_test.cpp
 
