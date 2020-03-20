@@ -3,6 +3,7 @@
 
 #include "imgui.h"
 
+#define GLM_ENABLE_EXPERIMENTAL
 #include "glm/glm.hpp"
 
 #include "glm/ext/matrix_transform.hpp"
@@ -11,7 +12,6 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/gtx/transform.hpp"
 
-#define GLM_ENABLE_EXPERIMENTAL
 #include "glm/gtx/quaternion.hpp"
 
 #include "assimp/DefaultLogger.hpp"
@@ -268,11 +268,12 @@ private:
 class DemoLayer : public moci::Layer
 {
 public:
-    DemoLayer() : mesh_("sandbox3D/teapot.obj") {};
+    DemoLayer() : mesh_("sandbox3D/cube.obj") {};
     ~DemoLayer() override = default;
 
     void OnAttach() override
     {
+        vertices_.reserve(mesh_.GetVertices().size());
 
         shader_ = moci::Shader::Create("sandbox3D/shader3D.glsl");
         shader_->Bind();
@@ -283,16 +284,8 @@ public:
             {moci::ShaderDataType::Float4, "a_Color"},     //
         };
 
-        std::vector<Vertex> cube {};
-        model_.Parse();
-        for (auto const& vertex : model_.GetVertexData())
-        {
-            cube.push_back(Vertex {vertex.position, vertex.normal, moci::Colors::Blue.GetData()});
-        }
-
-        MOCI_INFO("Num vertices: {}", cube.size());
-        vbo_.reset(moci::VertexBuffer::Create(reinterpret_cast<float*>(mesh_.GetVertices().data()),
-                                              mesh_.GetVertices().size() * sizeof(Vertex), false));
+        MOCI_INFO("Num vertices: {}", mesh_.GetVertices().size());
+        vbo_.reset(moci::VertexBuffer::Create(nullptr, mesh_.GetVertices().size() * sizeof(Vertex), true));
         vbo_->SetLayout(layout);
         vbo_->Unbind();
         ibo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
@@ -307,6 +300,16 @@ public:
     {
         moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         moci::RenderCommand::Clear();
+
+        for (auto& vertex : mesh_.GetVertices())
+        {
+            auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
+            auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {modelScale_, modelScale_, modelScale_});
+            auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 0.0f);
+            auto const position    = glm::vec3(position4.x, position4.y, position4.z);
+            // vertex.position        = position;
+            vertices_.push_back({position, vertex.normal, vertex.color});
+        }
 
         // Camera matrix
         glm::mat4 model      = glm::mat4(1.0f);
@@ -324,7 +327,9 @@ public:
         shader_->SetFloat3("u_ViewPos", cameraPos_);
 
         vao_->Bind();
-        moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, mesh_.GetVertices().size());
+        vbo_->UploadData(0, vertices_.size() * sizeof(Vertex), vertices_.data());
+        moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices_.size());
+        vertices_.clear();
     }
 
     void OnEvent(moci::Event& e) override
@@ -368,6 +373,7 @@ public:
         ImGui::Begin("Settings");
         ImGui::SliderFloat("Ambient Light", &ambientLight_, 0.0f, 1.0f);
         ImGui::SliderFloat3("Light Pos", glm::value_ptr(lightPos_), 0.0f, 10.0f);
+        ImGui::SliderFloat("Model scale", &modelScale_, 0.01f, 10.0f);
         ImGui::End();
     }
 
@@ -378,15 +384,16 @@ public:
     glm::vec3 cameraPos_ {4.0f, 4.0f, 3.0f};
     glm::vec3 lightPos_ {4.0f, 4.0f, 3.0f};
     glm::vec3 lightColor_ {1.0f, 1.0f, 1.0f};
-    float ambientLight_ = 0.1f;
-    moci::OBJFile model_ {"sandbox3D/cube.obj"};
-
+    float modelScale_                        = 1.0f;
+    float ambientLight_                      = 0.1f;
     std::shared_ptr<moci::Shader> shader_    = nullptr;
     std::shared_ptr<moci::VertexBuffer> vbo_ = nullptr;
     std::shared_ptr<moci::IndexBuffer> ibo_  = nullptr;
     std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 
     Mesh mesh_;
+
+    std::vector<Vertex> vertices_ {};
 };
 
 class Sandbox : public moci::Application
