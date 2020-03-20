@@ -180,10 +180,10 @@ public:
     float ambientLight_ = 0.1f;
     moci::OBJFile model_ {"sandbox3D/teapot.obj"};
 
-    std::shared_ptr<moci::Shader> shader_;
-    std::shared_ptr<moci::VertexBuffer> vbo_;
-    std::shared_ptr<moci::IndexBuffer> ibo_;
-    std::shared_ptr<moci::VertexArray> vao_;
+    std::shared_ptr<moci::Shader> shader_    = nullptr;
+    std::shared_ptr<moci::VertexBuffer> vbo_ = nullptr;
+    std::shared_ptr<moci::IndexBuffer> ibo_  = nullptr;
+    std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 };
 
 class Sandbox : public moci::Application
