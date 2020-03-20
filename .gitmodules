@@ -25,3 +25,6 @@
 [submodule "3rd_party/freetype"]
 	path = 3rd_party/freetype
 	url = https://git.savannah.gnu.org/git/freetype/freetype2.git
+[submodule "3rd_party/assimp"]
+	path = 3rd_party/assimp
+	url = https://github.com/assimp/assimp
