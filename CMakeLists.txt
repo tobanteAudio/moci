@@ -71,13 +71,16 @@ endif(MOCI_CLANG_TIDY)
 configure_file(.clang-tidy .clang-tidy COPYONLY)
 
 # 3rd party libraries
-set(ASSIMP_BUILD_OBJ_IMPORTER ON CACHE BOOL "Build shared library")
+# assimp
+set(BUILD_SHARED_LIBS ON CACHE BOOL "Build shared library")
+set(ASSIMP_BUILD_OBJ_IMPORTER ON CACHE BOOL "")
 set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE BOOL "")
 set(ASSIMP_BUILD_ALL_EXPORTERS_BY_DEFAULT OFF CACHE BOOL "")
 set(ASSIMP_BUILD_ASSBIN_EXPORTER OFF CACHE BOOL "")
 set(ASSIMP_BUILD_ASSXML_EXPORTER OFF CACHE BOOL "")
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/assimp     EXCLUDE_FROM_ALL)
 
+# other
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/freetype   EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glm        EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glfw       EXCLUDE_FROM_ALL)
