@@ -25,6 +25,7 @@ struct Vertex
     glm::vec3 position {};
     glm::vec3 normal {};
     glm::vec4 color {};
+    glm::vec2 texCoord {};
 };
 
 struct Index
@@ -157,8 +158,8 @@ public:
                     //     vertex.Binormal = {mesh->mBitangents[i].x, mesh->mBitangents[i].y, mesh->mBitangents[i].z};
                     // }
 
-                    // if (mesh->HasTextureCoords(0))
-                    //     vertex.Texcoord = {mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y};
+                    if (mesh->HasTextureCoords(0))
+                        vertex.texCoord = {mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y};
 
                     m_StaticVertices.push_back(vertex);
                 }
@@ -285,9 +286,10 @@ public:
         shader_->Bind();
 
         moci::BufferLayout layout = {
-            {moci::ShaderDataType::Float3, "a_Position"},  //
-            {moci::ShaderDataType::Float3, "a_Normal"},    //
-            {moci::ShaderDataType::Float4, "a_Color"},     //
+            {moci::ShaderDataType::Float3, "a_Position"},   //
+            {moci::ShaderDataType::Float3, "a_Normal"},     //
+            {moci::ShaderDataType::Float4, "a_Color"},      //
+            {moci::ShaderDataType::Float2, "a_TexCoords"},  //
         };
 
         MOCI_INFO("Num vertices: {}", numVertices);
@@ -301,7 +303,7 @@ public:
         vao_->SetIndexBuffer(ibo_);
         vao_->Unbind();
 
-        texture_ = moci::Texture2D::Create("moci/moci/assets/white_10x10.png");
+        texture_ = moci::Texture2D::Create("sandbox3D/assets/textures/colors.png");
     }
 
     void OnUpdate(moci::Timestep ts) override
@@ -309,22 +311,22 @@ public:
         moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         moci::RenderCommand::Clear();
 
-        for (auto& vertex : mesh_.GetVertices())
+        for (auto const& vertex : mesh_.GetVertices())
         {
             auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
             auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {modelScale_, modelScale_, modelScale_});
             auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 0.0f);
             auto const position    = glm::vec3(position4.x, position4.y, position4.z);
-            vertices_.push_back({position, vertex.normal, vertex.color});
+            vertices_.push_back({position, vertex.normal, vertex.color, vertex.texCoord});
         }
 
-        for (auto& vertex : floor_.GetVertices())
+        for (auto const& vertex : floor_.GetVertices())
         {
             auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
             auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {5.0f, 5.0f, 5.0f});
             auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 0.0f);
             auto const position    = glm::vec3(position4.x, position4.y, position4.z);
-            vertices_.push_back({position, vertex.normal, {1.0f, 1.0f, 0.5f, 1.0f}});
+            vertices_.push_back({position, vertex.normal, {1.0f, 1.0f, 0.5f, 1.0f}, vertex.texCoord});
         }
 
         // Camera matrix
