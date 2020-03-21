@@ -10,6 +10,7 @@ uniform mat4 u_Projection;
 varying vec3 v_Normal;
 varying vec3 v_FragPos;
 varying vec4 v_Color;
+varying vec2 v_TexCoords;
 
 float Inverse(float m) { return 1.0 / m; }
 
@@ -110,7 +111,8 @@ void main()
     // Simpler version, No need for custom inverse & transpose functions on ES2.0.
     // v_Normal = a_Normal;
 
-    v_Color = a_Color;
+    v_Color     = a_Color;
+    v_TexCoords = vec2(0.0, 0.0);
 
     // v_FragPos = vec3(model * vec4(a_Position, 1.0));
     // gl_Position = u_Projection * u_View * model * vec4(a_Position, 1.0);
@@ -128,10 +130,12 @@ precision mediump float;
 uniform float u_Ambient;
 uniform vec3 u_LightPos;
 uniform vec3 u_ViewPos;
+uniform sampler2D u_Texture;
 
 varying vec3 v_Normal;
 varying vec3 v_FragPos;
 varying vec4 v_Color;
+varying vec2 v_TexCoords;
 
 void main()
 {
@@ -157,5 +161,7 @@ void main()
     // vec3 light   = ambient + diffuse + specular;
     vec3 light = ambient + diffuse;
 
-    gl_FragColor = vec4(light, 1.0) * v_Color;
+    // texture
+    vec4 texture = texture2D(u_Texture, v_TexCoords);
+    gl_FragColor = vec4(light, 1.0) * texture;
 }

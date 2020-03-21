@@ -300,6 +300,8 @@ public:
         vao_->AddVertexBuffer(vbo_);
         vao_->SetIndexBuffer(ibo_);
         vao_->Unbind();
+
+        texture_ = moci::Texture2D::Create("moci/moci/assets/white_10x10.png");
     }
 
     void OnUpdate(moci::Timestep ts) override
@@ -341,7 +343,9 @@ public:
 
         vao_->Bind();
         vbo_->UploadData(0, vertices_.size() * sizeof(Vertex), vertices_.data());
+        texture_->Bind(0);
         moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices_.size());
+        texture_->Unbind();
         vertices_.clear();
     }
 
@@ -406,6 +410,8 @@ public:
 
     Mesh mesh_ {"sandbox3D/assets/models/cube.obj"};
     Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
+
+    moci::Texture2D::Ptr texture_ {};
 
     std::vector<Vertex> vertices_ {};
 };
