@@ -54,4 +54,11 @@ auto OpenGLESRendererAPI::MaxVertexAttributes() -> std::uint32_t
     return static_cast<std::uint32_t>(maxAttributes);
 }
 
+auto OpenGLESRendererAPI::MaxUniformVectors() -> std::uint32_t
+{
+    GLint maxUniformVectors = 0;
+    GLCall(glGetIntegerv(GL_MAX_FRAGMENT_UNIFORM_VECTORS, &maxUniformVectors));
+    return static_cast<std::uint32_t>(maxUniformVectors);
+}
+
 }  // namespace moci

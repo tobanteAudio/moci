@@ -23,6 +23,7 @@ public:
     auto MaxTextureSize() -> std::uint32_t override;
     auto MaxTextureUnits() -> std::uint32_t override;
     auto MaxVertexAttributes() -> std::uint32_t override;
+    auto MaxUniformVectors() -> std::uint32_t override;
 };
 
 }  // namespace moci

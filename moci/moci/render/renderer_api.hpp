@@ -45,6 +45,7 @@ public:
     virtual auto MaxTextureSize() -> std::uint32_t                                            = 0;
     virtual auto MaxTextureUnits() -> std::uint32_t                                           = 0;
     virtual auto MaxVertexAttributes() -> std::uint32_t                                       = 0;
+    virtual auto MaxUniformVectors() -> std::uint32_t                                         = 0;
     inline static auto GetAPI() -> API { return s_API; }
 
 private:

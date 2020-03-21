@@ -273,6 +273,10 @@ public:
 
     void OnAttach() override
     {
+        MOCI_INFO("Max vertex attributes: {}", moci::RenderCommand::MaxVertexAttributes());
+        MOCI_INFO("Max texture size: {}", moci::RenderCommand::MaxTextureSize());
+        MOCI_INFO("Max texture units: {}", moci::RenderCommand::MaxTextureUnits());
+        MOCI_INFO("Max uniform vectors: {}", moci::RenderCommand::MaxUniformVectors());
         vertices_.reserve(mesh_.GetVertices().size());
 
         shader_ = moci::Shader::Create("sandbox3D/shader3D.glsl");

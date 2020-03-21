@@ -35,6 +35,7 @@ public:
     inline static auto MaxTextureSize() -> std::uint32_t { return s_RendererAPI->MaxTextureSize(); }
     inline static auto MaxTextureUnits() -> std::uint32_t { return s_RendererAPI->MaxTextureUnits(); }
     inline static auto MaxVertexAttributes() -> std::uint32_t { return s_RendererAPI->MaxVertexAttributes(); }
+    inline static auto MaxUniformVectors() -> std::uint32_t { return s_RendererAPI->MaxUniformVectors(); }
 
 private:
     static std::unique_ptr<RendererAPI> s_RendererAPI;
