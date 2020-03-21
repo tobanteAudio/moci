@@ -4,7 +4,6 @@ attribute vec3 a_Position;
 attribute vec3 a_Normal;
 attribute vec4 a_Color;
 
-uniform mat4 u_Model;
 uniform mat4 u_View;
 uniform mat4 u_Projection;
 
@@ -104,11 +103,20 @@ mat4 Transpose(mat4 m)
 
 void main()
 {
+    // Model transform should already be applied to the vertex on the host side.
+    mat4 model = mat4(1.0);
+
+    v_Normal = mat3(Transpose(Inverse(model))) * a_Normal;
+    // Simpler version, No need for custom inverse & transpose functions on ES2.0.
     // v_Normal = a_Normal;
-    v_Normal    = mat3(Transpose(Inverse(u_Model))) * a_Normal;
-    v_Color     = a_Color;
-    v_FragPos   = vec3(u_Model * vec4(a_Position, 1.0));
-    gl_Position = u_Projection * u_View * u_Model * vec4(a_Position, 1.0);
+
+    v_Color = a_Color;
+
+    // v_FragPos = vec3(model * vec4(a_Position, 1.0));
+    // gl_Position = u_Projection * u_View * model * vec4(a_Position, 1.0);
+    // Unnecessary vector multplication if model matrix is the identity matrix.
+    v_FragPos   = a_Position;
+    gl_Position = u_Projection * u_View * vec4(a_Position, 1.0);
 }
 
 #shader fragment

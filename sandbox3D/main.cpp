@@ -313,7 +313,6 @@ public:
             auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {modelScale_, modelScale_, modelScale_});
             auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 0.0f);
             auto const position    = glm::vec3(position4.x, position4.y, position4.z);
-            // vertex.position        = position;
             vertices_.push_back({position, vertex.normal, vertex.color});
         }
 
@@ -323,18 +322,17 @@ public:
             auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {5.0f, 5.0f, 5.0f});
             auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 0.0f);
             auto const position    = glm::vec3(position4.x, position4.y, position4.z);
-            // vertex.position        = position;
             vertices_.push_back({position, vertex.normal, {1.0f, 1.0f, 0.5f, 1.0f}});
         }
+
         // Camera matrix
-        glm::mat4 model      = glm::mat4(1.0f);
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), width_ / height_, 0.1f, 100.0f);
-        glm::mat4 view       = glm::lookAt(cameraPos_,          // Camera is at (4,3,3), in World Space
-                                     glm::vec3(0, 0, 0),  // and looks at the origin
-                                     glm::vec3(0, 1, 0)   // Head is up (set to 0,-1,0 to look upside-down)
+        glm::mat4 view       = glm::lookAt(  //
+            cameraPos_,                // Camera is at (x,y,z), in World Space
+            glm::vec3(0, 0, 0),        // and looks at the origin
+            glm::vec3(0, 1, 0)         // Head is up (set to 0,-1,0 to look upside-down)
         );
-        // glm::mat4 proj  = projection * view * model;  // Remember, matrix multiplication is the other way around
-        shader_->SetMat4("u_Model", model);
+
         shader_->SetMat4("u_View", view);
         shader_->SetMat4("u_Projection", projection);
         shader_->SetFloat("u_Ambient", ambientLight_);
@@ -406,7 +404,7 @@ public:
     std::shared_ptr<moci::IndexBuffer> ibo_  = nullptr;
     std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 
-    Mesh mesh_ {"sandbox3D/assets/models/teapot.obj"};
+    Mesh mesh_ {"sandbox3D/assets/models/cube.obj"};
     Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 
     std::vector<Vertex> vertices_ {};
