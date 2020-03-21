@@ -390,7 +390,37 @@ public:
 
     void OnImGuiRender() override
     {
+
         ImGui::Begin("Settings");
+        if (ImGui::BeginMenu("test1"))
+        {
+            static auto test = false;
+            ImGui::Checkbox("Imgui Demo", &test);
+            ImGui::Checkbox("Imgui Demo", &test);
+            ImGui::Checkbox("Imgui Demo", &test);
+            ImGui::Checkbox("Imgui Demo", &test);
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("test2"))
+        {
+            if (ImGui::BeginMenu("test2.1"))
+            {
+                static auto test = false;
+                ImGui::Checkbox("Imgui Demo", &test);
+                ImGui::Checkbox("Imgui Demo", &test);
+                ImGui::Checkbox("Imgui Demo", &test);
+                ImGui::Checkbox("Imgui Demo", &test);
+                ImGui::EndMenu();
+            }
+
+            static auto test = false;
+            ImGui::Checkbox("Imgui Demo", &test);
+            ImGui::Checkbox("Imgui Demo", &test);
+            ImGui::Checkbox("Imgui Demo", &test);
+            ImGui::Checkbox("Imgui Demo", &test);
+            ImGui::EndMenu();
+        }
+
         ImGui::SliderFloat("Ambient Light", &ambientLight_, 0.0f, 1.0f);
         ImGui::SliderFloat3("Light Pos", glm::value_ptr(lightPos_), 0.0f, 10.0f);
         ImGui::SliderFloat("Model scale", &modelScale_, 0.01f, 10.0f);
@@ -411,7 +441,7 @@ public:
     std::shared_ptr<moci::IndexBuffer> ibo_  = nullptr;
     std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 
-    Mesh mesh_ {"sandbox3D/assets/models/donut.obj"};
+    Mesh mesh_ {"sandbox3D/assets/models/teapot.obj"};
     Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 
     moci::Texture2D::Ptr textureSolid_ {};
