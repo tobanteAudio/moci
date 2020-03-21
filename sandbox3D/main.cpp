@@ -279,7 +279,10 @@ public:
         MOCI_INFO("Max texture units: {}", moci::RenderCommand::MaxTextureUnits());
         MOCI_INFO("Max uniform vectors: {}", moci::RenderCommand::MaxUniformVectors());
 
-        auto const numVertices = mesh_.GetVertices().size() + floor_.GetVertices().size();
+        auto const numVertices = mesh_.GetVertices().size()     //
+                                 + floor_.GetVertices().size()  //
+                                 + lightMesh_.GetVertices().size();
+
         vertices_.reserve(numVertices);
 
         shader_ = moci::Shader::Create("sandbox3D/assets/shader/shader3D.glsl");
@@ -316,16 +319,25 @@ public:
         {
             auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
             auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {modelScale_, modelScale_, modelScale_});
-            auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 0.0f);
+            auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
             auto const position    = glm::vec3(position4.x, position4.y, position4.z);
             vertices_.push_back({position, vertex.normal, vertex.color, vertex.texCoord});
+        }
+
+        for (auto const& vertex : lightMesh_.GetVertices())
+        {
+            auto const model       = glm::translate(glm::mat4(1.0f), lightPos_);
+            auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {lightScale_, lightScale_, lightScale_});
+            auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+            auto const position    = glm::vec3(position4.x, position4.y, position4.z);
+            vertices_.push_back({position, vertex.normal, {1.0f, 1.0f, 1.0f, 1.0f}, vertex.texCoord});
         }
 
         for (auto const& vertex : floor_.GetVertices())
         {
             auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
             auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {5.0f, 5.0f, 5.0f});
-            auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 0.0f);
+            auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
             auto const position    = glm::vec3(position4.x, position4.y, position4.z);
             vertices_.push_back({position, vertex.normal, {1.0f, 1.0f, 0.5f, 1.0f}, vertex.texCoord});
         }
@@ -390,39 +402,11 @@ public:
 
     void OnImGuiRender() override
     {
-
-        ImGui::Begin("Settings");
-        if (ImGui::BeginMenu("test1"))
-        {
-            static auto test = false;
-            ImGui::Checkbox("Imgui Demo", &test);
-            ImGui::Checkbox("Imgui Demo", &test);
-            ImGui::Checkbox("Imgui Demo", &test);
-            ImGui::Checkbox("Imgui Demo", &test);
-            ImGui::EndMenu();
-        }
-        if (ImGui::BeginMenu("test2"))
-        {
-            if (ImGui::BeginMenu("test2.1"))
-            {
-                static auto test = false;
-                ImGui::Checkbox("Imgui Demo", &test);
-                ImGui::Checkbox("Imgui Demo", &test);
-                ImGui::Checkbox("Imgui Demo", &test);
-                ImGui::Checkbox("Imgui Demo", &test);
-                ImGui::EndMenu();
-            }
-
-            static auto test = false;
-            ImGui::Checkbox("Imgui Demo", &test);
-            ImGui::Checkbox("Imgui Demo", &test);
-            ImGui::Checkbox("Imgui Demo", &test);
-            ImGui::Checkbox("Imgui Demo", &test);
-            ImGui::EndMenu();
-        }
-
+        ImGui::Begin("Sandbox 3D");
+        ImGui::SliderFloat3("Camera Pos", glm::value_ptr(cameraPos_), -100.0f, 100.0f);
         ImGui::SliderFloat("Ambient Light", &ambientLight_, 0.0f, 1.0f);
         ImGui::SliderFloat3("Light Pos", glm::value_ptr(lightPos_), 0.0f, 10.0f);
+        ImGui::SliderFloat("Light scale", &lightScale_, 0.01f, 10.0f);
         ImGui::SliderFloat("Model scale", &modelScale_, 0.01f, 10.0f);
         ImGui::End();
     }
@@ -434,14 +418,18 @@ public:
     glm::vec3 cameraPos_ {4.0f, 4.0f, 3.0f};
     glm::vec3 lightPos_ {4.0f, 4.0f, 3.0f};
     glm::vec3 lightColor_ {1.0f, 1.0f, 1.0f};
-    float modelScale_                        = 1.0f;
-    float ambientLight_                      = 0.1f;
+
+    float modelScale_   = 1.0f;
+    float lightScale_   = 0.5f;
+    float ambientLight_ = 0.1f;
+
     std::shared_ptr<moci::Shader> shader_    = nullptr;
     std::shared_ptr<moci::VertexBuffer> vbo_ = nullptr;
     std::shared_ptr<moci::IndexBuffer> ibo_  = nullptr;
     std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 
     Mesh mesh_ {"sandbox3D/assets/models/teapot.obj"};
+    Mesh lightMesh_ {"sandbox3D/assets/models/cube.obj"};
     Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 
     moci::Texture2D::Ptr textureSolid_ {};
