@@ -268,7 +268,7 @@ private:
 class DemoLayer : public moci::Layer
 {
 public:
-    DemoLayer() : mesh_("sandbox3D/teapot.obj") {};
+    DemoLayer()           = default;
     ~DemoLayer() override = default;
 
     void OnAttach() override
@@ -277,9 +277,11 @@ public:
         MOCI_INFO("Max texture size: {}", moci::RenderCommand::MaxTextureSize());
         MOCI_INFO("Max texture units: {}", moci::RenderCommand::MaxTextureUnits());
         MOCI_INFO("Max uniform vectors: {}", moci::RenderCommand::MaxUniformVectors());
-        vertices_.reserve(mesh_.GetVertices().size());
 
-        shader_ = moci::Shader::Create("sandbox3D/shader3D.glsl");
+        auto const numVertices = mesh_.GetVertices().size() + floor_.GetVertices().size();
+        vertices_.reserve(numVertices);
+
+        shader_ = moci::Shader::Create("sandbox3D/assets/shader/shader3D.glsl");
         shader_->Bind();
 
         moci::BufferLayout layout = {
@@ -288,8 +290,8 @@ public:
             {moci::ShaderDataType::Float4, "a_Color"},     //
         };
 
-        MOCI_INFO("Num vertices: {}", mesh_.GetVertices().size());
-        vbo_.reset(moci::VertexBuffer::Create(nullptr, mesh_.GetVertices().size() * sizeof(Vertex), true));
+        MOCI_INFO("Num vertices: {}", numVertices);
+        vbo_.reset(moci::VertexBuffer::Create(nullptr, numVertices * sizeof(Vertex), true));
         vbo_->SetLayout(layout);
         vbo_->Unbind();
         ibo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
@@ -315,6 +317,15 @@ public:
             vertices_.push_back({position, vertex.normal, vertex.color});
         }
 
+        for (auto& vertex : floor_.GetVertices())
+        {
+            auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
+            auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {5.0f, 5.0f, 5.0f});
+            auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 0.0f);
+            auto const position    = glm::vec3(position4.x, position4.y, position4.z);
+            // vertex.position        = position;
+            vertices_.push_back({position, vertex.normal, {1.0f, 1.0f, 0.5f, 1.0f}});
+        }
         // Camera matrix
         glm::mat4 model      = glm::mat4(1.0f);
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), width_ / height_, 0.1f, 100.0f);
@@ -395,7 +406,8 @@ public:
     std::shared_ptr<moci::IndexBuffer> ibo_  = nullptr;
     std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 
-    Mesh mesh_;
+    Mesh mesh_ {"sandbox3D/assets/models/teapot.obj"};
+    Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 
     std::vector<Vertex> vertices_ {};
 };
