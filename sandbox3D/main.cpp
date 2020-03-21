@@ -303,7 +303,8 @@ public:
         vao_->SetIndexBuffer(ibo_);
         vao_->Unbind();
 
-        texture_ = moci::Texture2D::Create("sandbox3D/assets/textures/colors.png");
+        textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
+        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/colors.png");
     }
 
     void OnUpdate(moci::Timestep ts) override
@@ -345,9 +346,9 @@ public:
 
         vao_->Bind();
         vbo_->UploadData(0, vertices_.size() * sizeof(Vertex), vertices_.data());
-        texture_->Bind(0);
+        textureColors_->Bind(0);
         moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices_.size());
-        texture_->Unbind();
+        textureColors_->Unbind();
         vertices_.clear();
     }
 
@@ -410,10 +411,11 @@ public:
     std::shared_ptr<moci::IndexBuffer> ibo_  = nullptr;
     std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 
-    Mesh mesh_ {"sandbox3D/assets/models/cube.obj"};
+    Mesh mesh_ {"sandbox3D/assets/models/donut.obj"};
     Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 
-    moci::Texture2D::Ptr texture_ {};
+    moci::Texture2D::Ptr textureSolid_ {};
+    moci::Texture2D::Ptr textureColors_ {};
 
     std::vector<Vertex> vertices_ {};
 };
