@@ -295,7 +295,6 @@ public:
             {moci::ShaderDataType::Float2, "a_TexCoords"},  //
         };
 
-        MOCI_INFO("Num vertices: {}", numVertices);
         vbo_.reset(moci::VertexBuffer::Create(nullptr, numVertices * sizeof(Vertex), true));
         vbo_->SetLayout(layout);
         vbo_->Unbind();
@@ -307,7 +306,7 @@ public:
         vao_->Unbind();
 
         textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
-        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/colors.png");
+        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
     }
 
     void OnUpdate(moci::Timestep ts) override
@@ -341,6 +340,8 @@ public:
             auto const position    = glm::vec3(position4.x, position4.y, position4.z);
             vertices_.push_back({position, vertex.normal, {1.0f, 1.0f, 0.5f, 1.0f}, vertex.texCoord});
         }
+
+        numVertices_ = vertices_.size();
 
         // Camera matrix
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), width_ / height_, 0.1f, 100.0f);
@@ -402,6 +403,18 @@ public:
 
     void OnImGuiRender() override
     {
+        auto const fps       = fmt::format("{0:0.1f} FPS", ImGui::GetIO().Framerate);
+        auto const vertices  = fmt::format("{} Vertices", numVertices_);
+        auto const triangles = fmt::format("{} Triangles", numVertices_ / 3);
+
+        if (ImGui::BeginMenuBar())
+        {
+            ImGui::Text(fps.c_str());
+            ImGui::Text(vertices.c_str());
+            ImGui::Text(triangles.c_str());
+            ImGui::EndMenuBar();
+        }
+
         ImGui::Begin("Sandbox 3D");
         ImGui::SliderFloat3("Camera Pos", glm::value_ptr(cameraPos_), -100.0f, 100.0f);
         ImGui::SliderFloat("Ambient Light", &ambientLight_, 0.0f, 1.0f);
@@ -428,6 +441,7 @@ public:
     std::shared_ptr<moci::IndexBuffer> ibo_  = nullptr;
     std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 
+    std::size_t numVertices_ {};
     Mesh mesh_ {"sandbox3D/assets/models/teapot.obj"};
     Mesh lightMesh_ {"sandbox3D/assets/models/cube.obj"};
     Mesh floor_ {"sandbox3D/assets/models/plane.obj"};

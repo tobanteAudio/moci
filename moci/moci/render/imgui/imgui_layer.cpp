@@ -135,18 +135,6 @@ void ImGuiLayer::OnImGuiRender()
     static auto dock = true;
     DockSpace(&dock);
 
-    auto const fps       = ImGui::GetIO().Framerate;
-    auto const fpsString = fmt::format("{0:0.1f} FPS", fps);
-
-    if (ImGui::BeginMenuBar())
-    {
-        if (ImGui::BeginMenu(fpsString.c_str()))
-        {
-            ImGui::EndMenu();
-        }
-        ImGui::EndMenuBar();
-    }
-
     // // ImGui Demo
     // if (m_show_imgui_demo)
     // {
