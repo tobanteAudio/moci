@@ -318,36 +318,33 @@ public:
         {
             auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
             auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {modelScale_, modelScale_, modelScale_});
-            auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-            auto const position    = glm::vec3(position4.x, position4.y, position4.z);
-            vertices_.push_back({position, vertex.normal, vertex.color, vertex.texCoord});
+            auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+            vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
         }
 
         for (auto const& vertex : lightMesh_.GetVertices())
         {
             auto const model       = glm::translate(glm::mat4(1.0f), lightPos_);
             auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {lightScale_, lightScale_, lightScale_});
-            auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-            auto const position    = glm::vec3(position4.x, position4.y, position4.z);
-            vertices_.push_back({position, vertex.normal, {1.0f, 1.0f, 1.0f, 1.0f}, vertex.texCoord});
+            auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+            vertices_.push_back({glm::vec3(position), vertex.normal, {1.0f, 1.0f, 1.0f, 1.0f}, vertex.texCoord});
         }
 
         for (auto const& vertex : floor_.GetVertices())
         {
             auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
             auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {5.0f, 5.0f, 5.0f});
-            auto const position4   = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-            auto const position    = glm::vec3(position4.x, position4.y, position4.z);
-            vertices_.push_back({position, vertex.normal, {1.0f, 1.0f, 0.5f, 1.0f}, vertex.texCoord});
+            auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+            vertices_.push_back({glm::vec3(position), vertex.normal, {1.0f, 1.0f, 0.5f, 1.0f}, vertex.texCoord});
         }
 
         numVertices_ = vertices_.size();
 
         // Camera matrix
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), width_ / height_, 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(cameraFOV_), width_ / height_, 0.1f, 100.0f);
         glm::mat4 view       = glm::lookAt(  //
             cameraPos_,                // Camera is at (x,y,z), in World Space
-            glm::vec3(0, 0, 0),        // and looks at the origin
+            cameraLookAt_,             // and looks at the origin
             glm::vec3(0, 1, 0)         // Head is up (set to 0,-1,0 to look upside-down)
         );
 
@@ -417,10 +414,12 @@ public:
 
         ImGui::Begin("Sandbox 3D");
         ImGui::SliderFloat3("Camera Pos", glm::value_ptr(cameraPos_), -100.0f, 100.0f);
-        ImGui::SliderFloat("Ambient Light", &ambientLight_, 0.0f, 1.0f);
-        ImGui::SliderFloat3("Light Pos", glm::value_ptr(lightPos_), 0.0f, 10.0f);
-        ImGui::SliderFloat("Light scale", &lightScale_, 0.01f, 10.0f);
-        ImGui::SliderFloat("Model scale", &modelScale_, 0.01f, 10.0f);
+        ImGui::SliderFloat3("Camera Look At", glm::value_ptr(cameraLookAt_), -10.0f, 10.0f);
+        ImGui::SliderFloat("Camera FOV", &cameraFOV_, 5.0f, 85.0f);
+        ImGui::SliderFloat("Ambient Light", &ambientLight_, 0.0f, 0.4f);
+        ImGui::SliderFloat3("Light Pos", glm::value_ptr(lightPos_), -20.0f, 20.0f);
+        ImGui::SliderFloat("Light scale", &lightScale_, 0.1f, 1.0f);
+        ImGui::SliderFloat("Model scale", &modelScale_, 0.1f, 10.0f);
         ImGui::End();
     }
 
@@ -429,12 +428,15 @@ public:
     float height_ = 1024.0f;
 
     glm::vec3 cameraPos_ {4.0f, 4.0f, 3.0f};
+    glm::vec3 cameraLookAt_ {0.0f, 0.0f, 0.0f};
+    float cameraFOV_ = 45.0f;
+
     glm::vec3 lightPos_ {4.0f, 4.0f, 3.0f};
     glm::vec3 lightColor_ {1.0f, 1.0f, 1.0f};
-
-    float modelScale_   = 1.0f;
     float lightScale_   = 0.5f;
     float ambientLight_ = 0.1f;
+
+    float modelScale_ = 1.0f;
 
     std::shared_ptr<moci::Shader> shader_    = nullptr;
     std::shared_ptr<moci::VertexBuffer> vbo_ = nullptr;
