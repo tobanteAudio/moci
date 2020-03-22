@@ -374,17 +374,6 @@ public:
             moci::RenderCommand::Clear();
         }
 
-        {
-            MOCI_PROFILE_SCOPE("Translate Light");
-            for (auto const& vertex : lightMesh_.GetVertices())
-            {
-                auto const model       = glm::translate(glm::mat4(1.0f), lightPos_);
-                auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {lightScale_, lightScale_, lightScale_});
-                auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-                light.vertices.push_back({glm::vec3(position), {1.0f, 1.0f, 1.0f, 1.0f}});
-            }
-        }
-
         // Camera matrix
         glm::mat4 const projection = glm::perspective(glm::radians(cameraFOV_), width_ / height_, 0.1f, 100.0f);
         glm::mat4 const view       = glm::lookAt(  //
@@ -400,6 +389,7 @@ public:
             shader_->SetMat4("u_Projection", projection);
             shader_->SetFloat("u_Ambient", ambientLight_);
             shader_->SetFloat3("u_LightPos", lightPos_);
+            shader_->SetFloat3("u_LightColor", glm::vec3(lightColor_));
             shader_->SetFloat3("u_ViewPos", cameraPos_);
         }
 
@@ -409,6 +399,18 @@ public:
             textureColors_->Bind(0);
             moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices_.size());
             textureColors_->Unbind();
+        }
+
+        {
+            MOCI_PROFILE_SCOPE("Translate Light");
+            for (auto const& vertex : lightMesh_.GetVertices())
+            {
+                auto const model       = glm::translate(glm::mat4(1.0f), lightPos_);
+                auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {lightScale_, lightScale_, lightScale_});
+                auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+                auto const color       = lightColor_;
+                light.vertices.push_back({glm::vec3(position), color});
+            }
         }
 
         {
@@ -491,6 +493,7 @@ public:
 
             ImGui::SliderFloat("Ambient", &ambientLight_, 0.0f, 0.4f);
             ImGui::SliderFloat3("Light Position", glm::value_ptr(lightPos_), -20.0f, 20.0f);
+            ImGui::ColorEdit4("Light Color", glm::value_ptr(lightColor_), 0);
             ImGui::SliderFloat("Light Scale", &lightScale_, 0.1f, 1.0f);
         }
 
@@ -511,7 +514,7 @@ public:
     float cameraFOV_ = 45.0f;
 
     glm::vec3 lightPos_ {4.0f, 4.0f, 3.0f};
-    glm::vec3 lightColor_ {1.0f, 1.0f, 1.0f};
+    glm::vec4 lightColor_ {1.0f, 1.0f, 1.0f, 1.0f};
     float lightScale_   = 0.5f;
     float ambientLight_ = 0.1f;
 
