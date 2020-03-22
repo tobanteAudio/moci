@@ -15,8 +15,12 @@ auto Texture2D::Create(std::string const& path) -> std::shared_ptr<Texture2D>
         case RendererAPI::API::None:
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
+#if defined(MOCI_API_OPENGL)
         case RendererAPI::API::OpenGL: return std::make_shared<OpenGLTexture2D>(path);
+#endif
+#if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return std::make_shared<OpenGLESTexture2D>(path);
+#endif
         default: break;
     }
 
@@ -32,8 +36,12 @@ auto Texture2D::Create(Texture::Format format, uint32_t width, uint32_t height, 
         case RendererAPI::API::None:
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
+#if defined(MOCI_API_OPENGL)
         case RendererAPI::API::OpenGL: return std::make_shared<OpenGLTexture2D>(format, width, height, data);
+#endif
+#if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return std::make_shared<OpenGLESTexture2D>(format, width, height, data);
+#endif
         default: break;
     }
 
