@@ -363,8 +363,12 @@ public:
 
         textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
-        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A.png");
 
+#if defined(MOCI_GRAPHICS_API_OPENGLES)
+        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
+#else
+        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
+#endif
         fpsHistory_.reserve(10'000);
     }
 
