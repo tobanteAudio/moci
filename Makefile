@@ -18,7 +18,7 @@ config-gles:
 
 .PHONY: config-vs
 config-vs:
-	cmake $(CMAKE_FLAGS) -B$(BUILD_DIR_BASE)_$(CONFIG) -DCMAKE_BUILD_TYPE=$(CONFIG) .
+	cmake $(CMAKE_FLAGS) -B$(BUILD_DIR_BASE)_$(CONFIG) -DCMAKE_BUILD_TYPE=$(CONFIG) -DMOCI_API_OPENGL_LEGACY=ON .
 
 .PHONY: build
 build:
@@ -29,6 +29,7 @@ build:
 sanitize:
 	cmake -G$(CMAKE_GENERATOR) $(CMAKE_FLAGS) -B$(BUILD_DIR_BASE)_sanitize \
 		-DCMAKE_BUILD_TYPE=$(CONFIG) \
+		-DMOCI_API_OPENGL_LEGACY=ON \
 		-DMOCI_BUILD_TESTS=ON \
 		-DMOCI_BUILD_ASAN=ON \
 		-DMOCI_BUILD_UBSAN=ON \
@@ -42,17 +43,17 @@ test:
 
 .PHONY: tidy
 tidy:
-	cmake -S. -G"Ninja" $(CMAKE_FLAGS) -B $(BUILD_DIR_BASE)_tidy -DMOCI_CLANG_TIDY=ON
+	cmake -S. -G"Ninja" $(CMAKE_FLAGS) -B $(BUILD_DIR_BASE)_tidy -DMOCI_CLANG_TIDY=ON -DMOCI_API_OPENGL_LEGACY=ON
 	cmake --build $(BUILD_DIR_BASE)_tidy
 
 .PHONY: tidy-fix
 tidy-fix:
-	cmake -S. -G"Unix Makefiles" $(CMAKE_FLAGS) -B $(BUILD_DIR_BASE)_tidy-fix -DMOCI_CLANG_TIDY_FIX=ON
+	cmake -S. -G"Unix Makefiles" $(CMAKE_FLAGS) -B $(BUILD_DIR_BASE)_tidy-fix -DMOCI_CLANG_TIDY_FIX=ON -DMOCI_API_OPENGL_LEGACY=ON
 	cd $(BUILD_DIR_BASE)_tidy-fix && make -j1
 
 .PHONY: coverage
 coverage:
-	cmake -S. -G"Unix Makefiles" $(CMAKE_FLAGS) -B $(BUILD_DIR_BASE)_coverage -DMOCI_ENABLE_COVERAGE=ON
+	cmake -S. -G"Unix Makefiles" $(CMAKE_FLAGS) -B $(BUILD_DIR_BASE)_coverage -DMOCI_ENABLE_COVERAGE=ON -DMOCI_API_OPENGL_LEGACY=ON
 	cd $(BUILD_DIR_BASE)_coverage && make -j3
 	cd $(BUILD_DIR_BASE)_coverage && lcov -c -i -d . --base-directory . -o base_cov.info
 	cd $(BUILD_DIR_BASE)_coverage && ctest
