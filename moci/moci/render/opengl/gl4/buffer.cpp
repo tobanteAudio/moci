@@ -29,6 +29,11 @@ void OpenGLVertexBuffer::Bind() const { glBindBuffer(GL_ARRAY_BUFFER, m_Renderer
 
 void OpenGLVertexBuffer::Unbind() const { glBindBuffer(GL_ARRAY_BUFFER, 0); }
 
+auto OpenGLVertexBuffer::UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void
+{
+    glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+}
+
 /////////////////////////////////////////////////////////////////////////////
 // IndexBuffer //////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
@@ -58,4 +63,8 @@ void OpenGLIndexBuffer::Bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_R
 
 void OpenGLIndexBuffer::Unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
+auto OpenGLIndexBuffer::UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void
+{
+    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, data);
+}
 }  // namespace moci

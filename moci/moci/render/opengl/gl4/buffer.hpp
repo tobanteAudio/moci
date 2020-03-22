@@ -16,7 +16,7 @@ public:
 
     const BufferLayout& GetLayout() const override { return m_Layout; }
     void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
-    void UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override {}
+    void UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override;
 
 private:
     uint32_t m_RendererID;
@@ -33,7 +33,7 @@ public:
     void Unbind() const override;
 
     uint32_t GetCount() const override { return m_Count; }
-    void UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override {}
+    void UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override;
 
 private:
     uint32_t m_RendererID;
