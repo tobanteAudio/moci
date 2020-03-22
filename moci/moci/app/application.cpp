@@ -19,6 +19,7 @@ Application::Application()
 {
     MOCI_CORE_ASSERT(!s_Instance, "Application already exists!");
     s_Instance = this;
+    MOCI_CORE_INFO("Initializing App...");
 
     m_Window = std::unique_ptr<Window>(Window::Create());
     m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));

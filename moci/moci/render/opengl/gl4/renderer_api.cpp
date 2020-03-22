@@ -47,6 +47,43 @@ void OpenGLRendererAPI::SetClearColor(const glm::vec4& color) { glClearColor(col
 
 void OpenGLRendererAPI::Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 
+void OpenGLRendererAPI::DrawArrays(RendererAPI::DrawMode mode, uint32_t first, uint32_t count)
+{
+    glDrawArrays(GL_TRIANGLES, first, count);
+}
+
+void OpenGLRendererAPI::DrawElements(RendererAPI::DrawMode mode, uint32_t count, RendererAPI::ElementType type,
+                                     void* indices)
+{
+    glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, indices);
+}
+
+auto OpenGLRendererAPI::MaxTextureSize() -> std::uint32_t
+{
+    GLint maxTextureSize = 0;
+    glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
+    return static_cast<std::uint32_t>(maxTextureSize);
+}
+auto OpenGLRendererAPI::MaxTextureUnits() -> std::uint32_t
+{
+    GLint maxTextureUnits = 0;
+    glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, &maxTextureUnits);
+    return static_cast<std::uint32_t>(maxTextureUnits);
+}
+auto OpenGLRendererAPI::MaxVertexAttributes() -> std::uint32_t
+{
+    GLint maxAttributes = 0;
+    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxAttributes);
+    return static_cast<std::uint32_t>(maxAttributes);
+}
+
+auto OpenGLRendererAPI::MaxUniformVectors() -> std::uint32_t
+{
+    GLint maxUniformVectors = 0;
+    glGetIntegerv(GL_MAX_FRAGMENT_UNIFORM_VECTORS, &maxUniformVectors);
+    return static_cast<std::uint32_t>(maxUniformVectors);
+}
+
 // void OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
 // {
 //     glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
