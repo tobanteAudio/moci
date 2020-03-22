@@ -10,6 +10,7 @@ namespace moci
 
 auto Shader::Create(std::string const& filepath) -> std::shared_ptr<Shader>
 {
+    MOCI_CORE_INFO("Creating shader from: {}", filepath);
     switch (Renderer::GetAPI())
     {
         case RendererAPI::API::None:
