@@ -406,9 +406,9 @@ public:
 
         if (ImGui::BeginMenuBar())
         {
-            ImGui::Text(fps.c_str());
-            ImGui::Text(vertices.c_str());
-            ImGui::Text(triangles.c_str());
+            ImGui::TextUnformatted(fps.c_str());
+            ImGui::TextUnformatted(vertices.c_str());
+            ImGui::TextUnformatted(triangles.c_str());
             ImGui::EndMenuBar();
         }
 
