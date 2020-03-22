@@ -173,8 +173,8 @@ target_link_libraries(${PROJECT_NAME}
         Moci::CompilerWarnings
 )
 
-if (${MOCI_API_OPENGL})
-    target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL=1)
+if (${MOCI_API_OPENGL_MODERN})
+    target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL_MODERN=1)
 endif()
 
 if (${MOCI_API_OPENGL_LEGACY})

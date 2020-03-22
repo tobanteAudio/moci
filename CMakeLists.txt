@@ -32,9 +32,9 @@ option(MOCI_BUILD_COVERAGE       "Build with coverage enabled"       OFF)
 option(MOCI_CLANG_TIDY           "Run clang-tidy with the compiler." OFF)
 option(MOCI_CLANG_TIDY_FIX       "Run & auto fix clang-tidy with the compiler." OFF)
 option(MOCI_GIT_SUBMODULE        "Check submodules during build"     ON)
-option(MOCI_API_OPENGL           "Use OpenGL 4.0 implementation"        OFF)
-option(MOCI_API_OPENGL_LEGACY    "Use OpenGL 2.0 implementation"        OFF)
-option(MOCI_API_OPENGL_ES             "Link against OpenGL ES 2.0"        OFF)
+option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"     OFF)
+option(MOCI_API_OPENGL_LEGACY    "Use OpenGL 2.0 implementation"     OFF)
+option(MOCI_API_OPENGL_ES        "Link against OpenGL ES 2.0"        OFF)
 
 # Cmake setup
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")

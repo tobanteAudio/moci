@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(MOCI_API_OPENGL)
+#if defined(MOCI_API_OPENGL_MODERN)
 
 #include "moci/core/preprocessor.hpp"
 

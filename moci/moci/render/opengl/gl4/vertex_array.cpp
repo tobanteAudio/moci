@@ -1,6 +1,6 @@
 #include "moci/render/opengl/gl4/vertex_array.hpp"
 
-#if defined(MOCI_API_OPENGL)
+#if defined(MOCI_API_OPENGL_MODERN)
 
 #include "moci/debug/instrumentor.hpp"
 #include "moci/render/opengl/gl4/gl4.hpp"

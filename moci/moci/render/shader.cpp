@@ -16,7 +16,7 @@ auto Shader::Create(std::string const& filepath) -> std::shared_ptr<Shader>
         case RendererAPI::API::None:
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
-#if defined(MOCI_API_OPENGL)
+#if defined(MOCI_API_OPENGL_MODERN)
         case RendererAPI::API::OpenGL: return std::make_shared<OpenGLShader>(filepath);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
@@ -37,7 +37,7 @@ auto Shader::Create(std::string const& name, std::string const& vertexSrc, std::
         case RendererAPI::API::None:
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
-#if defined(MOCI_API_OPENGL)
+#if defined(MOCI_API_OPENGL_MODERN)
         case RendererAPI::API::OpenGL: return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)

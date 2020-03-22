@@ -17,7 +17,7 @@ auto VertexBuffer::Create(float* vertices, uint32_t size, bool dynamic) -> Verte
         case RendererAPI::API::None:
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
-#if defined(MOCI_API_OPENGL)
+#if defined(MOCI_API_OPENGL_MODERN)
         case RendererAPI::API::OpenGL: return new OpenGLVertexBuffer(vertices, size, dynamic);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
@@ -37,7 +37,7 @@ auto IndexBuffer::Create(uint32_t* indices, uint32_t size, bool dynamic) -> Inde
         case RendererAPI::API::None:
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
-#if defined(MOCI_API_OPENGL)
+#if defined(MOCI_API_OPENGL_MODERN)
         case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(indices, size, dynamic);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)

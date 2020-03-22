@@ -15,7 +15,7 @@ auto VertexArray::Create() -> std::shared_ptr<VertexArray>
         case RendererAPI::API::None:
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
-#if defined(MOCI_API_OPENGL)
+#if defined(MOCI_API_OPENGL_MODERN)
         case RendererAPI::API::OpenGL: return std::make_shared<OpenGLVertexArray>();
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
