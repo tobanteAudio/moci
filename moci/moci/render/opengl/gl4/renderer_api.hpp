@@ -14,6 +14,13 @@ public:
     void SetClearColor(const glm::vec4& color) override;
     void Clear() override;
 
+    void DrawArrays(DrawMode mode, uint32_t first, uint32_t count) override {}
+    void DrawElements(DrawMode mode, uint32_t count, ElementType type, void* indices) override {}
+    auto MaxTextureSize() -> std::uint32_t override {}
+    auto MaxTextureUnits() -> std::uint32_t override {}
+    auto MaxVertexAttributes() -> std::uint32_t override {}
+    auto MaxUniformVectors() -> std::uint32_t override {}
+
     // void DrawIndexed(const Ref<VertexArray>& vertexArray) override;
 };
 
