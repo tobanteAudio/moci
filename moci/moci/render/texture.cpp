@@ -3,6 +3,7 @@
 #include "renderer.hpp"
 
 #include "moci/render/opengl/es2/texture.hpp"
+#include "moci/render/opengl/gl4/texture.hpp"
 
 namespace moci
 {
@@ -14,8 +15,9 @@ auto Texture2D::Create(std::string const& path) -> std::shared_ptr<Texture2D>
         case RendererAPI::API::None:
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
-        // case RendererAPI::API::OpenGL: return std::make_shared<OpenGLTexture2D>(path);
+        case RendererAPI::API::OpenGL: return std::make_shared<OpenGLTexture2D>(path);
         case RendererAPI::API::OpenGLES: return std::make_shared<OpenGLESTexture2D>(path);
+        default: break;
     }
 
     MOCI_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -30,8 +32,9 @@ auto Texture2D::Create(Texture::Format format, uint32_t width, uint32_t height, 
         case RendererAPI::API::None:
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
-        // case RendererAPI::API::OpenGL: return std::make_shared<OpenGLTexture2D>(path);
+        case RendererAPI::API::OpenGL: return std::make_shared<OpenGLTexture2D>(format, width, height, data);
         case RendererAPI::API::OpenGLES: return std::make_shared<OpenGLESTexture2D>(format, width, height, data);
+        default: break;
     }
 
     MOCI_CORE_ASSERT(false, "Unknown RendererAPI!");
