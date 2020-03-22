@@ -28,6 +28,11 @@ public:
     void SetFloat4(const std::string& name, const glm::vec4& value) override;
     void SetMat4(const std::string& name, const glm::mat4& value) override;
 
+    void SetInts(std::string const& name, int count, int* value) override {}
+    void SetFloat(std::string const& name, float value) override {}
+    void SetFloat2(std::string const& name, glm::vec2 const& value) override {}
+    void SetMat3(std::string const& name, glm::mat3 const& value) override {}
+
     const std::string& GetName() const override { return m_Name; }
 
     void UploadUniformInt(const std::string& name, int value);
