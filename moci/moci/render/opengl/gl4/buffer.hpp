@@ -8,7 +8,7 @@ namespace moci
 class OpenGLVertexBuffer : public VertexBuffer
 {
 public:
-    OpenGLVertexBuffer(float* vertices, uint32_t size);
+    OpenGLVertexBuffer(float* vertices, uint32_t size, bool dynamic = false);
     virtual ~OpenGLVertexBuffer();
 
     void Bind() const override;
@@ -16,6 +16,7 @@ public:
 
     const BufferLayout& GetLayout() const override { return m_Layout; }
     void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
+    void UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override {}
 
 private:
     uint32_t m_RendererID;
@@ -25,13 +26,14 @@ private:
 class OpenGLIndexBuffer : public IndexBuffer
 {
 public:
-    OpenGLIndexBuffer(uint32_t* indices, uint32_t count);
-    virtual ~OpenGLIndexBuffer();
+    OpenGLIndexBuffer(uint32_t* indices, uint32_t count, bool dynamic = false);
+    ~OpenGLIndexBuffer() override;
 
-    virtual void Bind() const;
-    virtual void Unbind() const;
+    void Bind() const override;
+    void Unbind() const override;
 
-    virtual uint32_t GetCount() const { return m_Count; }
+    uint32_t GetCount() const override { return m_Count; }
+    void UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override {}
 
 private:
     uint32_t m_RendererID;

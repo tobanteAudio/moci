@@ -6,7 +6,7 @@
 namespace moci
 {
 
-OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
+OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size, bool dynamic)
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -40,7 +40,7 @@ void OpenGLVertexBuffer::Unbind() const
 // IndexBuffer //////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count) : m_Count(count)
+OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count, bool dynamic) : m_Count(count)
 {
     MOCI_PROFILE_FUNCTION();
 

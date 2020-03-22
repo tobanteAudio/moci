@@ -10,8 +10,8 @@ class RendererAPI
 public:
     enum class API
     {
-        None = 0,
-        // OpenGL   = 1,
+        None     = 0,
+        OpenGL   = 1,
         OpenGLES = 2
     };
 

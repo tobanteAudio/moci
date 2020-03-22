@@ -3,6 +3,7 @@
 #include "renderer.hpp"
 
 #include "moci/render/opengl/es2/buffer.hpp"
+#include "moci/render/opengl/gl4/buffer.hpp"
 
 namespace moci
 {
@@ -14,8 +15,9 @@ auto VertexBuffer::Create(float* vertices, uint32_t size, bool dynamic) -> Verte
         case RendererAPI::API::None:
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
-        // case RendererAPI::API::OpenGL: return new OpenGLVertexBuffer(vertices, size, dynamic);
+        case RendererAPI::API::OpenGL: return new OpenGLVertexBuffer(vertices, size, dynamic);
         case RendererAPI::API::OpenGLES: return new OpenGLESVertexBuffer(vertices, size, dynamic);
+        default: break;
     }
 
     MOCI_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -29,8 +31,9 @@ auto IndexBuffer::Create(uint32_t* indices, uint32_t size, bool dynamic) -> Inde
         case RendererAPI::API::None:
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
-        // case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(indices, size, dynamic);
+        case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(indices, size, dynamic);
         case RendererAPI::API::OpenGLES: return new OpenGLESIndexBuffer(indices, size, dynamic);
+        default: break;
     }
 
     MOCI_CORE_ASSERT(false, "Unknown RendererAPI!");
