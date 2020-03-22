@@ -48,7 +48,6 @@ namespace moci
 
 OpenGLESShader::OpenGLESShader(std::string const& filepath)
 {
-    MOCI_PROFILE_FUNCTION();
     auto [vertexSource, fragmentSource] = parseShader(filepath);
     m_RendererID                        = createShader(vertexSource.c_str(), fragmentSource.c_str());
 }
@@ -56,15 +55,10 @@ OpenGLESShader::OpenGLESShader(std::string const& filepath)
 OpenGLESShader::OpenGLESShader(std::string name, std::string const& vertexSrc, std::string const& fragmentSrc)
     : m_Name(std::move(name))
 {
-    MOCI_PROFILE_FUNCTION();
     m_RendererID = createShader(vertexSrc.c_str(), fragmentSrc.c_str());
 }
 
-OpenGLESShader::~OpenGLESShader()
-{
-    MOCI_PROFILE_FUNCTION();
-    GLCall(glDeleteProgram(m_RendererID));
-}
+OpenGLESShader::~OpenGLESShader() { GLCall(glDeleteProgram(m_RendererID)); }
 
 auto OpenGLESShader::parseShader(std::string const& filepath) -> ShaderProgramSource
 {
@@ -159,75 +153,29 @@ auto OpenGLESShader::createShader(const char* vertexSource, const char* fragment
     return shaderProgram;
 }
 
-void OpenGLESShader::Bind() const
-{
-    MOCI_PROFILE_FUNCTION();
+void OpenGLESShader::Bind() const { GLCall(glUseProgram(m_RendererID)); }
 
-    GLCall(glUseProgram(m_RendererID));
-}
+void OpenGLESShader::Unbind() const { GLCall(glUseProgram(0)); }
 
-void OpenGLESShader::Unbind() const
-{
-    MOCI_PROFILE_FUNCTION();
-
-    GLCall(glUseProgram(0));
-}
-
-void OpenGLESShader::SetInt(std::string const& name, int value)
-{
-    MOCI_PROFILE_FUNCTION();
-
-    UploadUniformInt(name, value);
-}
+void OpenGLESShader::SetInt(std::string const& name, int value) { UploadUniformInt(name, value); }
 
 void OpenGLESShader::SetInts(std::string const& name, int count, int* values)
 {
-    MOCI_PROFILE_FUNCTION();
 
     UploadUniformInts(name, count, values);
 }
 
-void OpenGLESShader::SetFloat(std::string const& name, float const value)
-{
-    MOCI_PROFILE_FUNCTION();
+void OpenGLESShader::SetFloat(std::string const& name, float const value) { UploadUniformFloat(name, value); }
 
-    UploadUniformFloat(name, value);
-}
+void OpenGLESShader::SetFloat2(std::string const& name, const glm::vec2& value) { UploadUniformFloat2(name, value); }
 
-void OpenGLESShader::SetFloat2(std::string const& name, const glm::vec2& value)
-{
-    MOCI_PROFILE_FUNCTION();
+void OpenGLESShader::SetFloat3(std::string const& name, const glm::vec3& value) { UploadUniformFloat3(name, value); }
 
-    UploadUniformFloat2(name, value);
-}
+void OpenGLESShader::SetFloat4(std::string const& name, const glm::vec4& value) { UploadUniformFloat4(name, value); }
 
-void OpenGLESShader::SetFloat3(std::string const& name, const glm::vec3& value)
-{
-    MOCI_PROFILE_FUNCTION();
+void OpenGLESShader::SetMat3(std::string const& name, const glm::mat3& value) { UploadUniformMat3(name, value); }
 
-    UploadUniformFloat3(name, value);
-}
-
-void OpenGLESShader::SetFloat4(std::string const& name, const glm::vec4& value)
-{
-    MOCI_PROFILE_FUNCTION();
-
-    UploadUniformFloat4(name, value);
-}
-
-void OpenGLESShader::SetMat3(std::string const& name, const glm::mat3& value)
-{
-    MOCI_PROFILE_FUNCTION();
-
-    UploadUniformMat3(name, value);
-}
-
-void OpenGLESShader::SetMat4(std::string const& name, const glm::mat4& value)
-{
-    MOCI_PROFILE_FUNCTION();
-
-    UploadUniformMat4(name, value);
-}
+void OpenGLESShader::SetMat4(std::string const& name, const glm::mat4& value) { UploadUniformMat4(name, value); }
 
 void OpenGLESShader::UploadUniformInt(std::string const& name, int value)
 {

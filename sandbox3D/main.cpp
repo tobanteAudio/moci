@@ -363,6 +363,7 @@ public:
 
         textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
+        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A.png");
 
         fpsHistory_.reserve(10'000);
     }
@@ -371,7 +372,6 @@ public:
     {
         MOCI_PROFILE_FUNCTION();
         {
-            MOCI_PROFILE_SCOPE("Clear");
             drawStats_.numVertices = 0;
             moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
             moci::RenderCommand::Clear();
@@ -531,7 +531,7 @@ public:
 
             if (ImGui::CollapsingHeader("Model"))
             {
-                ImGui::SliderFloat("Scale", &modelScale_, 0.5f, 20.0f);
+                ImGui::SliderFloat("Scale", &modelScale_, 0.01f, 20.0f);
             }
 
             if (ImGui::CollapsingHeader("Stats"))
@@ -570,7 +570,7 @@ public:
     ;
     float ambientLight_ = 0.1f;
 
-    float modelScale_ = 10.0f;
+    float modelScale_ = 0.1f;
 
     struct Light
     {
@@ -599,7 +599,8 @@ public:
     std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 
     std::size_t numVertices_ {};
-    Mesh mesh_ {"sandbox3D/assets/models/donut.obj"};
+    // Mesh mesh_ {"sandbox3D/assets/models/donut.obj"};
+    Mesh mesh_ {"sandbox3D/assets/models/cerberus.fbx"};
     Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
     Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 

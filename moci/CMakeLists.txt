@@ -217,7 +217,7 @@ target_link_libraries(moci_tests
 catch_discover_tests(moci_tests)
 
 # copy testfiles
-foreach(_target OpenSans-Bold.ttf red_pepper.obj cube.obj teapot.obj)
+foreach(_target OpenSans-Bold.ttf cube.obj teapot.obj)
 execute_process(
     COMMAND 
         ${CMAKE_COMMAND} -E 
