@@ -285,7 +285,7 @@ public:
 
         vertices_.reserve(numVertices);
 
-        shader_ = moci::Shader::Create("sandbox3D/assets/shader/shader3D.glsl");
+        shader_ = moci::Shader::Create("sandbox3D/assets/shader/es2_general.glsl");
         shader_->Bind();
 
         {
@@ -343,7 +343,7 @@ public:
         vao_->Unbind();
 
         // Light buffer
-        light.shader = moci::Shader::Create("sandbox3D/assets/shader/shader3D_simple.glsl");
+        light.shader = moci::Shader::Create("sandbox3D/assets/shader/es2_light_source.glsl");
         light.shader->Bind();
         moci::BufferLayout lightLayout = {
             {moci::ShaderDataType::Float3, "a_Position"},  //
