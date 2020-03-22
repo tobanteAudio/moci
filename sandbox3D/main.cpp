@@ -279,8 +279,8 @@ public:
         MOCI_INFO("Max texture units: {}", moci::RenderCommand::MaxTextureUnits());
         MOCI_INFO("Max uniform vectors: {}", moci::RenderCommand::MaxUniformVectors());
 
-        auto const numVertices = mesh_.GetVertices().size()     //
-                                 + floor_.GetVertices().size()  //
+        auto const numVertices = (mesh_.GetVertices().size() * 11)  //
+                                 + floor_.GetVertices().size()      //
                                  + lightMesh_.GetVertices().size();
 
         vertices_.reserve(numVertices);
@@ -320,6 +320,18 @@ public:
             auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {modelScale_, modelScale_, modelScale_});
             auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
             vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
+        }
+
+        for (auto x = 1; x <= 10; x++)
+        {
+            for (auto const& vertex : mesh_.GetVertices())
+            {
+                auto const model = glm::translate(glm::mat4(1.0f), glm::vec3((3.0f * x), 5.0f, 1.0f));
+                auto const scale
+                    = glm::scale(glm::mat4(1.0f), {modelScale_ / 2.0f, modelScale_ / 2.0f, modelScale_ / 2.0f});
+                auto const position = model * scale * glm::vec4(vertex.position, 1.0f);
+                vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
+            }
         }
 
         for (auto const& vertex : lightMesh_.GetVertices())
