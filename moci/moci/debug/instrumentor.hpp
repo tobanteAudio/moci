@@ -6,6 +6,7 @@
 #include <chrono>
 #include <fstream>
 #include <iomanip>
+#include <memory>
 #include <mutex>
 #include <sstream>
 #include <string>
@@ -34,8 +35,9 @@ class Instrumentor
 {
 private:
     std::mutex m_Mutex;
-    InstrumentationSession* m_CurrentSession {nullptr};
+    std::unique_ptr<InstrumentationSession> m_CurrentSession {nullptr};
     std::ofstream m_OutputStream;
+    std::stringstream m_MemoryStream;
 
 public:
     Instrumentor() = default;
@@ -60,7 +62,8 @@ public:
 
         if (m_OutputStream.is_open())
         {
-            m_CurrentSession = new InstrumentationSession({name});
+            m_CurrentSession       = std::make_unique<InstrumentationSession>();
+            m_CurrentSession->Name = name;
             WriteHeader();
         }
         else
@@ -80,27 +83,21 @@ public:
 
     void WriteProfile(const ProfileResult& result)
     {
-        std::stringstream json;
-
-        std::string name = result.Name;
+        auto name = result.Name;
         std::replace(name.begin(), name.end(), '"', '\'');
 
-        json << std::setprecision(3) << std::fixed;
-        json << ",{";
-        json << R"("cat":"function",)";
-        json << "\"dur\":" << (result.ElapsedTime.count()) << ',';
-        json << R"("name":")" << name << "\",";
-        json << R"("ph":"X",)";
-        json << "\"pid\":0,";
-        json << R"("tid":")" << result.ThreadID << "\",";
-        json << "\"ts\":" << result.Start.count();
-        json << "}";
+        auto const json = fmt::format(                                                                    //
+            R"(,{{"cat":"function","dur": {0},"name": "{1}","ph":"X","pid":0,"tid": "{2}","ts": {3}}})",  //
+            result.ElapsedTime.count(),                                                                   //
+            name,                                                                                         //
+            result.ThreadID,                                                                              //
+            result.Start.count()                                                                          //
+        );
 
         std::lock_guard<std::mutex> lock(m_Mutex);
         if (m_CurrentSession != nullptr)
         {
-            m_OutputStream << json.str();
-            m_OutputStream.flush();
+            m_MemoryStream << json;
         }
     }
 
@@ -127,11 +124,14 @@ private:
     // calling InternalEndSession()
     void InternalEndSession()
     {
+
         if (m_CurrentSession != nullptr)
         {
+            m_OutputStream << m_MemoryStream.str();
+            m_OutputStream.flush();
             WriteFooter();
             m_OutputStream.close();
-            delete m_CurrentSession;
+            m_CurrentSession.reset(nullptr);
             m_CurrentSession = nullptr;
         }
     }
@@ -173,7 +173,7 @@ private:
 };
 }  // namespace moci
 
-#define MOCI_PROFILE 0
+#define MOCI_PROFILE 1
 #if MOCI_PROFILE
    // Resolve which function signature macro will be used. Note that this only
 // is resolved when the (pre)compiler starts, so the syntax highlighting
