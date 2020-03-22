@@ -288,13 +288,6 @@ public:
         shader_ = moci::Shader::Create("sandbox3D/assets/shader/shader3D.glsl");
         shader_->Bind();
 
-        moci::BufferLayout layout = {
-            {moci::ShaderDataType::Float3, "a_Position"},   //
-            {moci::ShaderDataType::Float3, "a_Normal"},     //
-            {moci::ShaderDataType::Float4, "a_Color"},      //
-            {moci::ShaderDataType::Float2, "a_TexCoords"},  //
-        };
-
         {
             MOCI_PROFILE_SCOPE("Translate");
             for (auto const& vertex : mesh_.GetVertices())
@@ -320,14 +313,6 @@ public:
                 }
             }
 
-            for (auto const& vertex : lightMesh_.GetVertices())
-            {
-                auto const model       = glm::translate(glm::mat4(1.0f), lightPos_);
-                auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {lightScale_, lightScale_, lightScale_});
-                auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-                vertices_.push_back({glm::vec3(position), vertex.normal, {1.0f, 1.0f, 1.0f, 1.0f}, vertex.texCoord});
-            }
-
             for (auto const& vertex : floor_.GetVertices())
             {
                 auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
@@ -339,6 +324,13 @@ public:
             numVertices_ = vertices_.size();
         }
 
+        // Mesh buffer
+        moci::BufferLayout layout = {
+            {moci::ShaderDataType::Float3, "a_Position"},   //
+            {moci::ShaderDataType::Float3, "a_Normal"},     //
+            {moci::ShaderDataType::Float4, "a_Color"},      //
+            {moci::ShaderDataType::Float2, "a_TexCoords"},  //
+        };
         vbo_.reset(moci::VertexBuffer::Create(reinterpret_cast<float*>(vertices_.data()),
                                               vertices_.size() * sizeof(Vertex), false));
         vbo_->SetLayout(layout);
@@ -350,6 +342,25 @@ public:
         vao_->SetIndexBuffer(ibo_);
         vao_->Unbind();
 
+        // Light buffer
+        light.shader = moci::Shader::Create("sandbox3D/assets/shader/shader3D_simple.glsl");
+        light.shader->Bind();
+        moci::BufferLayout lightLayout = {
+            {moci::ShaderDataType::Float3, "a_Position"},  //
+            {moci::ShaderDataType::Float4, "a_Color"},     //
+        };
+
+        auto const lightVertices = lightMesh_.GetVertices().size();
+        light.vbo.reset(moci::VertexBuffer::Create(nullptr, lightVertices * sizeof(Light::Vertex), true));
+        light.vbo->SetLayout(lightLayout);
+        light.vbo->Unbind();
+        light.ibo.reset(moci::IndexBuffer::Create(nullptr, 1, true));
+        light.ibo->Unbind();
+        light.vao = moci::VertexArray::Create();
+        light.vao->AddVertexBuffer(light.vbo);
+        light.vao->SetIndexBuffer(light.ibo);
+        light.vao->Unbind();
+
         textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
     }
@@ -357,26 +368,34 @@ public:
     void OnUpdate(moci::Timestep ts) override
     {
         MOCI_PROFILE_FUNCTION();
-        moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
-        moci::RenderCommand::Clear();
+        {
+            MOCI_PROFILE_SCOPE("Clear");
+            moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+            moci::RenderCommand::Clear();
+        }
 
-        // auto const numVertices = (mesh_.GetVertices().size() * 11)  //
-        //                          + floor_.GetVertices().size()      //
-        //                          + lightMesh_.GetVertices().size();
-
-        // vertices_.reserve(numVertices);
+        {
+            MOCI_PROFILE_SCOPE("Translate Light");
+            for (auto const& vertex : lightMesh_.GetVertices())
+            {
+                auto const model       = glm::translate(glm::mat4(1.0f), lightPos_);
+                auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {lightScale_, lightScale_, lightScale_});
+                auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+                light.vertices.push_back({glm::vec3(position), {1.0f, 1.0f, 1.0f, 1.0f}});
+            }
+        }
 
         // Camera matrix
-        glm::mat4 projection = glm::perspective(glm::radians(cameraFOV_), width_ / height_, 0.1f, 100.0f);
-        glm::mat4 view       = glm::lookAt(  //
-            cameraPos_,                // Camera is at (x,y,z), in World Space
-            cameraLookAt_,             // and looks at the origin
-            glm::vec3(0, 1, 0)         // Head is up (set to 0,-1,0 to look upside-down)
+        glm::mat4 const projection = glm::perspective(glm::radians(cameraFOV_), width_ / height_, 0.1f, 100.0f);
+        glm::mat4 const view       = glm::lookAt(  //
+            cameraPos_,                      // Camera is at (x,y,z), in World Space
+            cameraLookAt_,                   // and looks at the origin
+            glm::vec3(0, 1, 0)               // Head is up (set to 0,-1,0 to look upside-down)
         );
 
         {
-            MOCI_PROFILE_SCOPE("Uniforms");
-
+            MOCI_PROFILE_SCOPE("Uniforms Mesh");
+            shader_->Bind();
             shader_->SetMat4("u_View", view);
             shader_->SetMat4("u_Projection", projection);
             shader_->SetFloat("u_Ambient", ambientLight_);
@@ -384,19 +403,28 @@ public:
             shader_->SetFloat3("u_ViewPos", cameraPos_);
         }
 
-        vao_->Bind();
-        // {
-        //     MOCI_PROFILE_SCOPE("Upload");
-        //     vbo_->UploadData(0, vertices_.size() * sizeof(Vertex), vertices_.data());
-        // }
-        textureColors_->Bind(0);
+        {
+            MOCI_PROFILE_SCOPE("DrawArrays Mesh");
+            vao_->Bind();
+            textureColors_->Bind(0);
+            moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices_.size());
+            textureColors_->Unbind();
+        }
 
         {
-            MOCI_PROFILE_SCOPE("DrawArrays");
-            moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices_.size());
+            MOCI_PROFILE_SCOPE("Uniforms Light");
+            light.shader->Bind();
+            light.shader->SetMat4("u_View", view);
+            light.shader->SetMat4("u_Projection", projection);
         }
-        textureColors_->Unbind();
-        // vertices_.clear();
+
+        {
+            MOCI_PROFILE_SCOPE("DrawArrays Light");
+            light.vao->Bind();
+            light.vbo->UploadData(0, light.vertices.size() * sizeof(Light::Vertex), light.vertices.data());
+            moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, light.vertices.size());
+            light.vertices.clear();
+        }
     }
 
     void OnEvent(moci::Event& e) override
@@ -488,6 +516,23 @@ public:
     float ambientLight_ = 0.1f;
 
     float modelScale_ = 1.0f;
+
+    struct Light
+    {
+        struct Vertex
+        {
+            glm::vec3 position {};
+            glm::vec4 color {};
+        };
+
+        std::shared_ptr<moci::Shader> shader    = nullptr;
+        std::shared_ptr<moci::VertexBuffer> vbo = nullptr;
+        std::shared_ptr<moci::IndexBuffer> ibo  = nullptr;
+        std::shared_ptr<moci::VertexArray> vao  = nullptr;
+        std::vector<Light::Vertex> vertices     = {};
+    };
+
+    Light light {};
 
     std::shared_ptr<moci::Shader> shader_    = nullptr;
     std::shared_ptr<moci::VertexBuffer> vbo_ = nullptr;

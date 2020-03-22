@@ -132,6 +132,7 @@ uniform float u_Ambient;
 uniform vec3 u_LightPos;
 uniform vec3 u_ViewPos;
 uniform sampler2D u_Texture;
+// uniform vec3 u_LightColor;
 
 varying vec3 v_Normal;
 varying vec3 v_FragPos;
