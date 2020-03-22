@@ -26,13 +26,15 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     endif()
 endif()
 
-option(MOCI_BUILD_GRPC           "Build grpc & projects using it"    OFF)
-option(MOCI_BUILD_TESTS          "Build the unit tests with Catch2"  ON)
-option(MOCI_BUILD_COVERAGE       "Build with coverage enabled"       OFF)
-option(MOCI_CLANG_TIDY           "Run clang-tidy with the compiler." OFF)
-option(MOCI_CLANG_TIDY_FIX       "Run & auto fix clang-tidy with the compiler." OFF)
-option(MOCI_GIT_SUBMODULE        "Check submodules during build"     ON)
-option(MOCI_GRAPHICS_API_GLES    "Link against GLES"                 OFF)
+option(MOCI_BUILD_GRPC                    "Build grpc & projects using it"    OFF)
+option(MOCI_BUILD_TESTS                   "Build the unit tests with Catch2"  ON)
+option(MOCI_BUILD_COVERAGE                "Build with coverage enabled"       OFF)
+option(MOCI_CLANG_TIDY                    "Run clang-tidy with the compiler." OFF)
+option(MOCI_CLANG_TIDY_FIX                "Run & auto fix clang-tidy with the compiler." OFF)
+option(MOCI_GIT_SUBMODULE                 "Check submodules during build"     ON)
+option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"        OFF)
+option(MOCI_API_OPENGL_LEGACY    "Use OpenGL 2.0 implementation"        OFF)
+option(MOCI_API_GLES             "Link against OpenGL ES 2.0"        OFF)
 
 # Cmake setup
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -89,7 +91,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/GSL        EXCLUDE_FROM_A
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/spdlog     EXCLUDE_FROM_ALL)
 
 # Only include glew on desktop
-if (${MOCI_GRAPHICS_API_GLES})
+if (${MOCI_API_GLES})
 else()
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glew   EXCLUDE_FROM_ALL)
 endif()

@@ -116,7 +116,7 @@
 
 #if defined(__arm__) || defined(__arm64__) || defined(__aarch64__)
 #define MOCI_ARM 1
-#define MOCI_GRAPHICS_API_OPENGLES 1
+// #define MOCI_API_OPENGLES 1
 #elif __MMX__ || __SSE__ || __amd64__
 #define MOCI_INTEL 1
 #endif

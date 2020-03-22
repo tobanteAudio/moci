@@ -364,7 +364,7 @@ public:
         textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
 
-        // #if defined(MOCI_GRAPHICS_API_OPENGLES)
+        // #if defined(MOCI_API_GLES)
         //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
         // #else
         //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
