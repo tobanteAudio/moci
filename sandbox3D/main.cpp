@@ -567,7 +567,7 @@ public:
     float width_  = 1280.0f;
     float height_ = 1024.0f;
 
-    glm::vec3 cameraPos_ {4.0f, 4.0f, 3.0f};
+    glm::vec3 cameraPos_ {11.0f, 8.70f, 3.0f};
     glm::vec3 cameraLookAt_ {0.0f, 0.0f, 0.0f};
     float cameraFOV_ = 45.0f;
 
@@ -584,7 +584,7 @@ public:
             glm::vec4 color    = {};
         };
 
-        glm::vec3 position = {4.0f, 4.0f, 3.0f};
+        glm::vec3 position = {8.4f, 4.0f, 3.0f};
         glm::vec4 color    = {1.0f, 1.0f, 1.0f, 1.0f};
         float scale        = 0.5f;
 
