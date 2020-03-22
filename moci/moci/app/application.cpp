@@ -36,7 +36,6 @@ void Application::PushOverlay(Layer* layer) { m_LayerStack.PushOverlay(layer); }
 
 void Application::OnEvent(Event& e)
 {
-    MOCI_PROFILE_FUNCTION();
     if (e.GetEventType() == EventType::KeyPressed)
     {
         auto* keyEvent = dynamic_cast<KeyPressedEvent*>(&e);

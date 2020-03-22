@@ -376,6 +376,7 @@ public:
     {
         MOCI_PROFILE_FUNCTION();
         {
+            MOCI_PROFILE_SCOPE("OnUpdate::Clear");
             drawStats_.numVertices = 0;
             moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
             moci::RenderCommand::Clear();
@@ -390,7 +391,7 @@ public:
         );
 
         {
-            MOCI_PROFILE_SCOPE("Uniforms Mesh");
+            MOCI_PROFILE_SCOPE("OnUpdate::Uniforms Mesh");
             shader_->Bind();
             shader_->SetMat4("u_View", view);
             shader_->SetMat4("u_Projection", projection);
@@ -401,7 +402,7 @@ public:
         }
 
         {
-            MOCI_PROFILE_SCOPE("DrawArrays Mesh");
+            MOCI_PROFILE_SCOPE("OnUpdate::DrawArrays Mesh");
             vao_->Bind();
             textureColors_->Bind(0);
             moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices_.size());
@@ -410,26 +411,26 @@ public:
         }
 
         {
-            MOCI_PROFILE_SCOPE("Translate Light");
+            MOCI_PROFILE_SCOPE("OnUpdate::Translate Light");
+            auto const model       = glm::translate(glm::mat4(1.0f), light.position);
+            auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {light.scale, light.scale, light.scale});
+            auto const color       = light.color;
             for (auto const& vertex : lightMesh_.GetVertices())
             {
-                auto const model       = glm::translate(glm::mat4(1.0f), light.position);
-                auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {light.scale, light.scale, light.scale});
-                auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-                auto const color       = light.color;
+                auto const position = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
                 light.vertices.push_back({glm::vec3(position), color});
             }
         }
 
         {
-            MOCI_PROFILE_SCOPE("Uniforms Light");
+            MOCI_PROFILE_SCOPE("OnUpdate::Uniforms Light");
             light.shader->Bind();
             light.shader->SetMat4("u_View", view);
             light.shader->SetMat4("u_Projection", projection);
         }
 
         {
-            MOCI_PROFILE_SCOPE("DrawArrays Light");
+            MOCI_PROFILE_SCOPE("OnUpdate::DrawArrays Light");
             light.vao->Bind();
             light.vbo->UploadData(0, light.vertices.size() * sizeof(Light::Vertex), light.vertices.data());
             moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, light.vertices.size());
@@ -476,6 +477,7 @@ public:
 
     void OnImGuiRender() override
     {
+        MOCI_PROFILE_FUNCTION();
         if (drawStats_.resetCounter >= DrawStats::ResetRate)
         {
             drawStats_.minFPS       = 9999.0f;
@@ -540,6 +542,7 @@ public:
 
             if (ImGui::CollapsingHeader("Stats"))
             {
+                MOCI_PROFILE_SCOPE("ImGui::Stats");
                 fpsHistory_.push_back(fps);
                 auto const vertices  = fmt::format("{} Vertices", drawStats_.numVertices);
                 auto const triangles = fmt::format("{} Triangles", drawStats_.numVertices / 3);
@@ -552,6 +555,8 @@ public:
                 ImGui::TextUnformatted(vertices.c_str());
                 ImGui::TextUnformatted(triangles.c_str());
                 ImGui::TextUnformatted(megabyte.c_str());
+                auto const lightStr = fmt::format("Light vertices: {}", lightMesh_.GetVertices().size());
+                ImGui::TextUnformatted(lightStr.c_str());
             }
             ImGui::End();
         }

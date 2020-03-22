@@ -2,6 +2,7 @@
 
 #include "moci/app/application.hpp"
 #include "moci/core/logging.hpp"
+#include "moci/debug/instrumentor.hpp"
 
 namespace moci
 {
@@ -59,22 +60,28 @@ void ImGuiLayer::OnDetach()
 
 void ImGuiLayer::Begin()
 {
+    MOCI_PROFILE_FUNCTION();
+
+    {
+        MOCI_PROFILE_SCOPE("ImGui::Begin::NewFrame");
 #if !defined(MOCI_MAC)
-    ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplOpenGL3_NewFrame();
 #else
-    ImGui_ImplOpenGL2_NewFrame();
+        ImGui_ImplOpenGL2_NewFrame();
 #endif
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+    }
 
     // Docking
+    ImGuiWindowFlags window_flags {};
     static bool opt_fullscreen_persistant     = true;
     bool opt_fullscreen                       = opt_fullscreen_persistant;
     static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
 
     // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
     // because it would be confusing to have two docking targets within each others.
-    ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+    window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
     if (opt_fullscreen)
     {
         ImGuiViewport* viewport = ImGui::GetMainViewport();
@@ -111,10 +118,11 @@ void ImGuiLayer::Begin()
         ImGuiID dockspace_id = ImGui::GetID("dock_space");
         ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
     }
-}
+}  // namespace moci
 
 void ImGuiLayer::End()
 {
+    MOCI_PROFILE_FUNCTION();
     // Docking
     ImGui::End();
 
@@ -132,13 +140,8 @@ void ImGuiLayer::End()
 
 void ImGuiLayer::OnImGuiRender()
 {
+    MOCI_PROFILE_FUNCTION();
     static auto dock = true;
     DockSpace(&dock);
-
-    // // ImGui Demo
-    // if (m_show_imgui_demo)
-    // {
-    //     ImGui::ShowDemoWindow(&m_show_imgui_demo);
-    // }
 }
 }  // namespace moci

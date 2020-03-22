@@ -22,8 +22,5 @@ public:
     void OnAttach() override;
     void OnDetach() override;
     void OnImGuiRender() override;
-
-private:
-    bool m_show_imgui_demo = false;
 };
 }  // namespace moci
