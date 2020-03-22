@@ -531,7 +531,7 @@ public:
 
             if (ImGui::CollapsingHeader("Model"))
             {
-                ImGui::SliderFloat("Scale", &modelScale_, 0.1f, 10.0f);
+                ImGui::SliderFloat("Scale", &modelScale_, 0.5f, 20.0f);
             }
 
             if (ImGui::CollapsingHeader("Stats"))
@@ -570,7 +570,7 @@ public:
     ;
     float ambientLight_ = 0.1f;
 
-    float modelScale_ = 1.0f;
+    float modelScale_ = 10.0f;
 
     struct Light
     {
@@ -599,7 +599,7 @@ public:
     std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 
     std::size_t numVertices_ {};
-    Mesh mesh_ {"sandbox3D/assets/models/teapot.obj"};
+    Mesh mesh_ {"sandbox3D/assets/models/donut.obj"};
     Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
     Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 
