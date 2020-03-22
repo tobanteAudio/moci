@@ -514,7 +514,7 @@ public:
     float cameraFOV_ = 45.0f;
 
     glm::vec3 lightPos_ {4.0f, 4.0f, 3.0f};
-    glm::vec4 lightColor_ {1.0f, 1.0f, 1.0f, 1.0f};
+    glm::vec4 lightColor_ {1.0f, 1.0f, 1.0f, 0.5f};
     float lightScale_   = 0.5f;
     float ambientLight_ = 0.1f;
 
@@ -544,7 +544,7 @@ public:
 
     std::size_t numVertices_ {};
     Mesh mesh_ {"sandbox3D/assets/models/teapot.obj"};
-    Mesh lightMesh_ {"sandbox3D/assets/models/cube.obj"};
+    Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
     Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 
     moci::Texture2D::Ptr textureSolid_ {};
