@@ -10,9 +10,17 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size, bool dyna
 {
     MOCI_PROFILE_FUNCTION();
 
-    glCreateBuffers(1, &m_RendererID);
+    glGenBuffers(1, &m_RendererID);
     glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
-    glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+
+    if (dynamic)
+    {
+        glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
+    }
+    else
+    {
+        glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+    }
 }
 
 OpenGLVertexBuffer::~OpenGLVertexBuffer() { glDeleteBuffers(1, &m_RendererID); }
@@ -29,9 +37,19 @@ OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count, bool dyn
 {
     MOCI_PROFILE_FUNCTION();
 
-    glCreateBuffers(1, &m_RendererID);
-    glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
-    glBufferData(GL_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
+    glGenBuffers(1, &m_RendererID);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
+
+    if (dynamic)
+    {
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_Count * sizeof(uint32_t), nullptr, GL_DYNAMIC_DRAW);
+    }
+    else
+    {
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_Count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
+    }
+
+    Unbind();
 }
 
 OpenGLIndexBuffer::~OpenGLIndexBuffer() { glDeleteBuffers(1, &m_RendererID); }
