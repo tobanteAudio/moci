@@ -377,6 +377,7 @@ public:
         MOCI_PROFILE_FUNCTION();
         {
             MOCI_PROFILE_SCOPE("OnUpdate::Clear");
+            lastTimestep_          = ts.GetMilliseconds();
             drawStats_.numVertices = 0;
             moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
             moci::RenderCommand::Clear();
@@ -496,9 +497,10 @@ public:
             drawStats_.maxFPS = fps;
         }
 
-        auto const fpsStr    = fmt::format("{0:0.1f} FPS", fps);
+        auto const fpsStr    = fmt::format("FPS: {0:0.1f}", fps);
         auto const minFPSStr = fmt::format("Min: {0:0.1f}", drawStats_.minFPS);
         auto const maxFPSStr = fmt::format("Max: {0:0.1f}", drawStats_.maxFPS);
+        auto const ts        = fmt::format("Timestep: {0:0.1f}", lastTimestep_);
 
         if (ImGui::BeginMenuBar())
         {
@@ -512,6 +514,7 @@ public:
             ImGui::TextUnformatted(fpsStr.c_str());
             ImGui::TextUnformatted(minFPSStr.c_str());
             ImGui::TextUnformatted(maxFPSStr.c_str());
+            ImGui::TextUnformatted(ts.c_str());
             ImGui::EndMenuBar();
         }
 
@@ -569,8 +572,9 @@ public:
     }
 
 public:
-    float width_  = 1280.0f;
-    float height_ = 1024.0f;
+    float width_        = 1280.0f;
+    float height_       = 1024.0f;
+    float lastTimestep_ = 0.0f;
 
     glm::vec3 cameraPos_ {11.0f, 8.70f, 3.0f};
     glm::vec3 cameraLookAt_ {0.0f, 0.0f, 0.0f};
