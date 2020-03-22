@@ -363,6 +363,8 @@ public:
 
         textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
+
+        fpsHistory_.reserve(10'000);
     }
 
     void OnUpdate(moci::Timestep ts) override
@@ -370,6 +372,7 @@ public:
         MOCI_PROFILE_FUNCTION();
         {
             MOCI_PROFILE_SCOPE("Clear");
+            drawStats_.numVertices = 0;
             moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
             moci::RenderCommand::Clear();
         }
@@ -388,8 +391,8 @@ public:
             shader_->SetMat4("u_View", view);
             shader_->SetMat4("u_Projection", projection);
             shader_->SetFloat("u_Ambient", ambientLight_);
-            shader_->SetFloat3("u_LightPos", lightPos_);
-            shader_->SetFloat3("u_LightColor", glm::vec3(lightColor_));
+            shader_->SetFloat3("u_LightPos", light.position);
+            shader_->SetFloat3("u_LightColor", glm::vec3(light.color));
             shader_->SetFloat3("u_ViewPos", cameraPos_);
         }
 
@@ -398,6 +401,7 @@ public:
             vao_->Bind();
             textureColors_->Bind(0);
             moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices_.size());
+            drawStats_.numVertices += vertices_.size();
             textureColors_->Unbind();
         }
 
@@ -405,10 +409,10 @@ public:
             MOCI_PROFILE_SCOPE("Translate Light");
             for (auto const& vertex : lightMesh_.GetVertices())
             {
-                auto const model       = glm::translate(glm::mat4(1.0f), lightPos_);
-                auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {lightScale_, lightScale_, lightScale_});
+                auto const model       = glm::translate(glm::mat4(1.0f), light.position);
+                auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {light.scale, light.scale, light.scale});
                 auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-                auto const color       = lightColor_;
+                auto const color       = light.color;
                 light.vertices.push_back({glm::vec3(position), color});
             }
         }
@@ -425,6 +429,7 @@ public:
             light.vao->Bind();
             light.vbo->UploadData(0, light.vertices.size() * sizeof(Light::Vertex), light.vertices.data());
             moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, light.vertices.size());
+            drawStats_.numVertices += light.vertices.size();
             light.vertices.clear();
         }
     }
@@ -467,42 +472,91 @@ public:
 
     void OnImGuiRender() override
     {
-        auto const fps       = fmt::format("{0:0.1f} FPS", ImGui::GetIO().Framerate);
-        auto const vertices  = fmt::format("{} Vertices", numVertices_);
-        auto const triangles = fmt::format("{} Triangles", numVertices_ / 3);
+        if (drawStats_.resetCounter >= DrawStats::ResetRate)
+        {
+            drawStats_.minFPS       = 9999.0f;
+            drawStats_.maxFPS       = 0.0f;
+            drawStats_.resetCounter = 0;
+        }
+        drawStats_.resetCounter += 1;
+
+        auto const fps = ImGui::GetIO().Framerate;
+        if (fps < drawStats_.minFPS)
+        {
+            drawStats_.minFPS = fps;
+        }
+        if (fps > drawStats_.maxFPS)
+        {
+            drawStats_.maxFPS = fps;
+        }
+
+        auto const fpsStr    = fmt::format("{0:0.1f} FPS", fps);
+        auto const minFPSStr = fmt::format("Min: {0:0.1f}", drawStats_.minFPS);
+        auto const maxFPSStr = fmt::format("Max: {0:0.1f}", drawStats_.maxFPS);
 
         if (ImGui::BeginMenuBar())
         {
-            ImGui::TextUnformatted(fps.c_str());
-            ImGui::TextUnformatted(vertices.c_str());
-            ImGui::TextUnformatted(triangles.c_str());
+            if (ImGui::BeginMenu("Debug"))
+            {
+                ImGui::Checkbox("Sandbox3D", &imguiWindow_);
+                ImGui::Checkbox("Imgui Demo", &imguiDemo_);
+                ImGui::EndMenu();
+            }
+
+            ImGui::TextUnformatted(fpsStr.c_str());
+            ImGui::TextUnformatted(minFPSStr.c_str());
+            ImGui::TextUnformatted(maxFPSStr.c_str());
             ImGui::EndMenuBar();
         }
 
-        ImGui::Begin("Sandbox 3D");
-
-        if (ImGui::CollapsingHeader("Camera"))
+        if (imguiWindow_)
         {
-            ImGui::SliderFloat3("Position", glm::value_ptr(cameraPos_), -100.0f, 100.0f);
-            ImGui::SliderFloat3("Look At", glm::value_ptr(cameraLookAt_), -10.0f, 10.0f);
-            ImGui::SliderFloat("FOV", &cameraFOV_, 5.0f, 85.0f);
+            ImGui::Begin("Sandbox 3D", &imguiWindow_);
+
+            if (ImGui::CollapsingHeader("Camera"))
+            {
+                ImGui::SliderFloat3("Position", glm::value_ptr(cameraPos_), -100.0f, 100.0f);
+                ImGui::SliderFloat3("Look At", glm::value_ptr(cameraLookAt_), -10.0f, 10.0f);
+                ImGui::SliderFloat("FOV", &cameraFOV_, 5.0f, 85.0f);
+            }
+
+            if (ImGui::CollapsingHeader("Light"))
+            {
+
+                ImGui::SliderFloat("Ambient", &ambientLight_, 0.0f, 0.4f);
+                ImGui::SliderFloat3("Light Position", glm::value_ptr(light.position), -20.0f, 20.0f);
+                ImGui::ColorEdit4("Light Color", glm::value_ptr(light.color), 0);
+                ImGui::SliderFloat("Light Scale", &light.scale, 0.1f, 1.0f);
+            }
+
+            if (ImGui::CollapsingHeader("Model"))
+            {
+                ImGui::SliderFloat("Scale", &modelScale_, 0.1f, 10.0f);
+            }
+
+            if (ImGui::CollapsingHeader("Stats"))
+            {
+                fpsHistory_.push_back(fps);
+                auto const vertices  = fmt::format("{} Vertices", drawStats_.numVertices);
+                auto const triangles = fmt::format("{} Triangles", drawStats_.numVertices / 3);
+                auto const mb        = drawStats_.numVertices * sizeof(Vertex) / 1'000'000.0f;
+                auto const megabyte  = fmt::format("{0:0.1f} Mbytes", mb);
+                ImGui::TextUnformatted(fpsStr.c_str());
+                ImGui::TextUnformatted(minFPSStr.c_str());
+                ImGui::TextUnformatted(maxFPSStr.c_str());
+                ImGui::PlotLines("FPS", fpsHistory_.data(), fpsHistory_.size(), 0, "", 50.0f, 75.0f, ImVec2(0, 80));
+                ImGui::TextUnformatted(vertices.c_str());
+                ImGui::TextUnformatted(triangles.c_str());
+                ImGui::TextUnformatted(megabyte.c_str());
+            }
+            ImGui::End();
         }
 
-        if (ImGui::CollapsingHeader("Light"))
+        // ImGui Demo
+        if (imguiDemo_)
         {
-
-            ImGui::SliderFloat("Ambient", &ambientLight_, 0.0f, 0.4f);
-            ImGui::SliderFloat3("Light Position", glm::value_ptr(lightPos_), -20.0f, 20.0f);
-            ImGui::ColorEdit4("Light Color", glm::value_ptr(lightColor_), 0);
-            ImGui::SliderFloat("Light Scale", &lightScale_, 0.1f, 1.0f);
+            ImGui::ShowDemoWindow(&imguiDemo_);
         }
-
-        if (ImGui::CollapsingHeader("Model"))
-        {
-            ImGui::SliderFloat("Scale", &modelScale_, 0.1f, 10.0f);
-        }
-
-        ImGui::End();
     }
 
 public:
@@ -513,9 +567,7 @@ public:
     glm::vec3 cameraLookAt_ {0.0f, 0.0f, 0.0f};
     float cameraFOV_ = 45.0f;
 
-    glm::vec3 lightPos_ {4.0f, 4.0f, 3.0f};
-    glm::vec4 lightColor_ {1.0f, 1.0f, 1.0f, 0.5f};
-    float lightScale_   = 0.5f;
+    ;
     float ambientLight_ = 0.1f;
 
     float modelScale_ = 1.0f;
@@ -524,9 +576,13 @@ public:
     {
         struct Vertex
         {
-            glm::vec3 position {};
-            glm::vec4 color {};
+            glm::vec3 position = {};
+            glm::vec4 color    = {};
         };
+
+        glm::vec3 position = {4.0f, 4.0f, 3.0f};
+        glm::vec4 color    = {1.0f, 1.0f, 1.0f, 1.0f};
+        float scale        = 0.5f;
 
         std::shared_ptr<moci::Shader> shader    = nullptr;
         std::shared_ptr<moci::VertexBuffer> vbo = nullptr;
@@ -551,6 +607,22 @@ public:
     moci::Texture2D::Ptr textureColors_ {};
 
     std::vector<Vertex> vertices_ {};
+
+    // imgui
+    struct DrawStats
+    {
+        static constexpr std::size_t ResetRate = 1'000;
+        std::uint32_t resetCounter {};
+        std::uint32_t numVertices {};
+        float minFPS = 9999.0f;
+        float maxFPS = 0.0f;
+    };
+
+    DrawStats drawStats_ {};
+
+    std::vector<float> fpsHistory_ = {};
+    bool imguiWindow_              = true;
+    bool imguiDemo_                = false;
 };
 
 class Sandbox : public moci::Application
