@@ -4,5 +4,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="moci::OrthographicCamera",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmoci_1_1OrthographicCamera.html"];
+  Node0 [label="moci::OBJFile::VertexData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structmoci_1_1OBJFile_1_1VertexData.html"];
 }
