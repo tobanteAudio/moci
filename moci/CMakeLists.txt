@@ -185,9 +185,9 @@ if (${MOCI_API_OPENGL_ES})
     # old
     # target_link_libraries(${PROJECT_NAME} PUBLIC -lGLESv2)
     # raspberry pi 3
-    # target_link_libraries(${PROJECT_NAME} PUBLIC /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2)
+    target_link_libraries(${PROJECT_NAME} PUBLIC /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2)
     # desktop linux
-    target_link_libraries(${PROJECT_NAME} PUBLIC /usr/lib/x86_64-linux-gnu/libGLESv2.so)
+    # target_link_libraries(${PROJECT_NAME} PUBLIC /usr/lib/x86_64-linux-gnu/libGLESv2.so)
     
     target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL_ES=1)
 else()
