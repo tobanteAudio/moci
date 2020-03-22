@@ -34,30 +34,14 @@ OpenGLVertexArray::OpenGLVertexArray()
     glCreateVertexArrays(1, &m_RendererID);
 }
 
-OpenGLVertexArray::~OpenGLVertexArray()
-{
-    MOCI_PROFILE_FUNCTION();
+OpenGLVertexArray::~OpenGLVertexArray() { glDeleteVertexArrays(1, &m_RendererID); }
 
-    glDeleteVertexArrays(1, &m_RendererID);
-}
+void OpenGLVertexArray::Bind() const { glBindVertexArray(m_RendererID); }
 
-void OpenGLVertexArray::Bind() const
-{
-    MOCI_PROFILE_FUNCTION();
-
-    glBindVertexArray(m_RendererID);
-}
-
-void OpenGLVertexArray::Unbind() const
-{
-    MOCI_PROFILE_FUNCTION();
-
-    glBindVertexArray(0);
-}
+void OpenGLVertexArray::Unbind() const { glBindVertexArray(0); }
 
 void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 {
-    MOCI_PROFILE_FUNCTION();
 
     MOCI_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
@@ -80,7 +64,6 @@ void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& ver
 
 void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
 {
-    MOCI_PROFILE_FUNCTION();
 
     glBindVertexArray(m_RendererID);
     indexBuffer->Bind();

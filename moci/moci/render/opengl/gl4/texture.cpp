@@ -71,12 +71,7 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : m_Path(path)
     stbi_image_free(data);
 }
 
-OpenGLTexture2D::~OpenGLTexture2D()
-{
-    MOCI_PROFILE_FUNCTION();
-
-    glDeleteTextures(1, &m_RendererID);
-}
+OpenGLTexture2D::~OpenGLTexture2D() { glDeleteTextures(1, &m_RendererID); }
 
 void OpenGLTexture2D::SetData(void* data, uint32_t size)
 {
@@ -87,10 +82,5 @@ void OpenGLTexture2D::SetData(void* data, uint32_t size)
     glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 }
 
-void OpenGLTexture2D::Bind(uint32_t slot) const
-{
-    MOCI_PROFILE_FUNCTION();
-
-    glBindTextureUnit(slot, m_RendererID);
-}
+void OpenGLTexture2D::Bind(uint32_t slot) const { glBindTextureUnit(slot, m_RendererID); }
 }  // namespace moci
