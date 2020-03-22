@@ -6,6 +6,7 @@
 
 #include "moci/render/imgui/imgui_layer.hpp"
 
+#include <chrono>
 #include <memory>
 
 auto main(int argc, char** argv) -> int;
@@ -36,11 +37,12 @@ private:
 
 private:
     std::unique_ptr<Window> m_Window;
-    ImGuiLayer* m_ImGuiLayer;
-    bool m_Running   = true;
-    bool m_Minimized = false;
-    LayerStack m_LayerStack;
-    float m_LastFrameTime = 0.0f;
+    ImGuiLayer* m_ImGuiLayer                                                = nullptr;
+    bool m_Running                                                          = true;
+    bool m_Minimized                                                        = false;
+    LayerStack m_LayerStack                                                 = {};
+    float m_LastFrameTime                                                   = 0.0f;
+    std::chrono::time_point<std::chrono::steady_clock> m_LastFrameTimepoint = {};
 
 private:
     static Application* s_Instance;

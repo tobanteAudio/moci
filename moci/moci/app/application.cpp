@@ -2,7 +2,6 @@
 
 #include "moci/core/logging.hpp"
 #include "moci/debug/instrumentor.hpp"
-#include "moci/render/opengl/es2/es2.hpp"
 #include "moci/render/renderer.hpp"
 
 #include "moci/app/events/key_event.hpp"
@@ -62,12 +61,15 @@ void Application::OnEvent(Event& e)
 
 void Application::Run()
 {
+    using namespace std::chrono;
     while (m_Running)
     {
         MOCI_PROFILE_SCOPE("App::Run::Loop");
-        auto time         = (float)glfwGetTime();
-        Timestep timestep = time - m_LastFrameTime;
-        m_LastFrameTime   = time;
+        auto const now         = steady_clock::now();
+        auto const elapsedTime = time_point_cast<microseconds>(now).time_since_epoch()
+                                 - time_point_cast<microseconds>(m_LastFrameTimepoint).time_since_epoch();
+        auto const timestep  = Timestep {static_cast<float>(elapsedTime.count()) / 1'000.0f / 1'000.0f};
+        m_LastFrameTimepoint = now;
 
         if (!m_Minimized)
         {
