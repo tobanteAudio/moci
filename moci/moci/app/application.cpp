@@ -1,6 +1,7 @@
 #include "application.hpp"
 
 #include "moci/core/logging.hpp"
+#include "moci/debug/instrumentor.hpp"
 #include "moci/render/opengles2/opengles2.hpp"
 #include "moci/render/renderer.hpp"
 
@@ -35,6 +36,7 @@ void Application::PushOverlay(Layer* layer) { m_LayerStack.PushOverlay(layer); }
 
 void Application::OnEvent(Event& e)
 {
+    MOCI_PROFILE_FUNCTION();
     if (e.GetEventType() == EventType::KeyPressed)
     {
         auto* keyEvent = dynamic_cast<KeyPressedEvent*>(&e);
@@ -63,6 +65,7 @@ void Application::Run()
 {
     while (m_Running)
     {
+        MOCI_PROFILE_SCOPE("App::Run::Loop");
         auto time         = (float)glfwGetTime();
         Timestep timestep = time - m_LastFrameTime;
         m_LastFrameTime   = time;
@@ -75,14 +78,20 @@ void Application::Run()
             }
         }
 
-        moci::ImGuiLayer::Begin();
-        for (Layer* layer : m_LayerStack)
         {
-            layer->OnImGuiRender();
+            MOCI_PROFILE_SCOPE("App::Run::Loop::ImGui");
+            moci::ImGuiLayer::Begin();
+            for (Layer* layer : m_LayerStack)
+            {
+                layer->OnImGuiRender();
+            }
+            moci::ImGuiLayer::End();
         }
-        moci::ImGuiLayer::End();
 
-        m_Window->OnUpdate();
+        {
+            MOCI_PROFILE_SCOPE("App::Run::Loop::WindowUpdate");
+            m_Window->OnUpdate();
+        }
     }
 }
 
