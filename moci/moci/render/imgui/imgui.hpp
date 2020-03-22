@@ -1,7 +1,7 @@
 #include "moci/core/preprocessor.hpp"
 
 // glew is not needed for opengl es 2.0
-#if defined(MOCI_API_GLES)
+#if defined(MOCI_API_OPENGL_ES)
 #define IMGUI_IMPL_OPENGL_ES2
 #define IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #else

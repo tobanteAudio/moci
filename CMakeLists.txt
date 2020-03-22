@@ -34,7 +34,7 @@ option(MOCI_CLANG_TIDY_FIX       "Run & auto fix clang-tidy with the compiler." 
 option(MOCI_GIT_SUBMODULE        "Check submodules during build"     ON)
 option(MOCI_API_OPENGL           "Use OpenGL 4.0 implementation"        OFF)
 option(MOCI_API_OPENGL_LEGACY    "Use OpenGL 2.0 implementation"        OFF)
-option(MOCI_API_GLES             "Link against OpenGL ES 2.0"        OFF)
+option(MOCI_API_OPENGL_ES             "Link against OpenGL ES 2.0"        OFF)
 
 # Cmake setup
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -91,7 +91,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/GSL        EXCLUDE_FROM_A
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/spdlog     EXCLUDE_FROM_ALL)
 
 # Only include glew on desktop
-if (${MOCI_API_GLES})
+if (${MOCI_API_OPENGL_ES})
 else()
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glew   EXCLUDE_FROM_ALL)
 endif()

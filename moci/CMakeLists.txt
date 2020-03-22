@@ -175,7 +175,7 @@ target_link_libraries(${PROJECT_NAME}
 
 
 
-if (${MOCI_API_GLES})
+if (${MOCI_API_OPENGL_ES})
     # old
     # target_link_libraries(${PROJECT_NAME} PUBLIC -lGLESv2)
     # raspberry pi 3
@@ -183,7 +183,7 @@ if (${MOCI_API_GLES})
     # desktop linux
     # target_link_libraries(${PROJECT_NAME} PUBLIC /usr/lib/x86_64-linux-gnu/libGLESv2.so)
     
-    target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_GLES=1)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL_ES=1)
 else()
     if (${MOCI_API_OPENGL})
         target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL=1)

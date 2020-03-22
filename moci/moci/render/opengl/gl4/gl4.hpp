@@ -5,7 +5,7 @@
 #include "moci/core/logging.hpp"
 
 // glfw use gles headers
-#if defined(MOCI_API_GLES)
+#if defined(MOCI_API_OPENGL_ES)
 // #define GLFW_INCLUDE_ES2
 #endif
 
@@ -16,7 +16,7 @@
 #endif
 
 // glew is not needed for opengl es 2.0 or on macOS
-#if defined(MOCI_API_GLES)
+#if defined(MOCI_API_OPENGL_ES)
 #else
 #if defined(MOCI_MAC)
 #else
