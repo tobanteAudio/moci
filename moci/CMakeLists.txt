@@ -173,13 +173,7 @@ target_link_libraries(${PROJECT_NAME}
         Moci::CompilerWarnings
 )
 
-if (${MOCI_API_OPENGL_MODERN})
-    target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL_MODERN=1)
-endif()
 
-if (${MOCI_API_OPENGL_LEGACY})
-    target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL_LEGACY=1)
-endif()
 
 if (${MOCI_API_GLES})
     # old
@@ -191,6 +185,13 @@ if (${MOCI_API_GLES})
     
     target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_GLES=1)
 else()
+    if (${MOCI_API_OPENGL})
+        target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL=1)
+    endif()
+
+    if (${MOCI_API_OPENGL_LEGACY})
+        target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL_LEGACY=1)
+    endif()
     target_link_libraries(${PROJECT_NAME} PUBLIC libglew_static)
 endif()
 
