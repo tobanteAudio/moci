@@ -83,4 +83,5 @@ stats:
 format:
 	find moci -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
 	find sandbox -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
+	find sandbox3D -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
 
