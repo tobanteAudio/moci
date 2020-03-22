@@ -1,4 +1,4 @@
-#include "shader.hpp"
+#include "moci/render/opengl/es2/shader.hpp"
 
 #include "moci/core/logging.hpp"
 #include "moci/core/strings.hpp"

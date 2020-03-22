@@ -2,7 +2,7 @@
 #include "vertex_array.hpp"
 #include "renderer.hpp"
 
-#include "moci/render/opengles2/vertex_array.hpp"
+#include "moci/render/opengl/es2/vertex_array.hpp"
 
 namespace moci
 {

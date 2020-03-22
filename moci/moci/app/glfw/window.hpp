@@ -3,7 +3,7 @@
 #include "moci/app/window.hpp"
 
 #include "moci/render/graphics_context.hpp"
-#include "moci/render/opengles2/opengles2.hpp"
+#include "moci/render/opengl/es2/es2.hpp"
 
 #include <memory>
 

@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "moci/render/opengles2/opengles2.hpp"
+#include "moci/render/opengl/es2/es2.hpp"
 
 #include "moci/app/layer.hpp"
 

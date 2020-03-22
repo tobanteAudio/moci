@@ -88,20 +88,20 @@ set(moci_sources
     moci/render/obj/file.hpp
     moci/render/obj/file.cpp
 
-    moci/render/opengles2/buffer.hpp
-    moci/render/opengles2/buffer.cpp
-    moci/render/opengles2/graphics_context.hpp
-    moci/render/opengles2/graphics_context.cpp
-    moci/render/opengles2/opengles2.hpp
-    moci/render/opengles2/opengles2.cpp
-    moci/render/opengles2/renderer_api.hpp
-    moci/render/opengles2/renderer_api.cpp
-    moci/render/opengles2/shader.hpp
-    moci/render/opengles2/shader.cpp
-    moci/render/opengles2/texture.hpp
-    moci/render/opengles2/texture.cpp
-    moci/render/opengles2/vertex_array.hpp
-    moci/render/opengles2/vertex_array.cpp
+    moci/render/opengl/es2/buffer.hpp
+    moci/render/opengl/es2/buffer.cpp
+    moci/render/opengl/es2/graphics_context.hpp
+    moci/render/opengl/es2/graphics_context.cpp
+    moci/render/opengl/es2/es2.hpp
+    moci/render/opengl/es2/es2.cpp
+    moci/render/opengl/es2/renderer_api.hpp
+    moci/render/opengl/es2/renderer_api.cpp
+    moci/render/opengl/es2/shader.hpp
+    moci/render/opengl/es2/shader.cpp
+    moci/render/opengl/es2/texture.hpp
+    moci/render/opengl/es2/texture.cpp
+    moci/render/opengl/es2/vertex_array.hpp
+    moci/render/opengl/es2/vertex_array.cpp
 
     moci/ui/component_layer.hpp
     moci/ui/component_layer.cpp

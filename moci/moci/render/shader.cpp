@@ -2,7 +2,7 @@
 
 #include "renderer.hpp"
 
-#include "moci/render/opengles2/shader.hpp"
+#include "moci/render/opengl/es2/shader.hpp"
 
 namespace moci
 {

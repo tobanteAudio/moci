@@ -2,7 +2,7 @@
 
 #include "renderer.hpp"
 
-#include "moci/render/opengles2/texture.hpp"
+#include "moci/render/opengl/es2/texture.hpp"
 
 namespace moci
 {

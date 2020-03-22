@@ -1,6 +1,6 @@
 #include "graphics_context.hpp"
 
-#include "opengles2.hpp"
+#include "moci/render/opengl/es2/es2.hpp"
 
 #include "moci/core/logging.hpp"
 

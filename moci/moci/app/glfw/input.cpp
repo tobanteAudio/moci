@@ -1,7 +1,7 @@
 #include "input.hpp"
 
 #include "moci/app/application.hpp"
-#include "moci/render/opengles2/opengles2.hpp"
+#include "moci/render/opengl/es2/es2.hpp"
 
 namespace moci
 {

@@ -1,6 +1,6 @@
-#include "buffer.hpp"
+#include "moci/render/opengl/es2/buffer.hpp"
 
-#include "opengles2.hpp"
+#include "moci/render/opengl/es2/es2.hpp"
 
 namespace moci
 {
