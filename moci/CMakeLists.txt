@@ -2,7 +2,7 @@ project(moci)
 
 set(moci_sources
     moci/moci.hpp
-    # moci/moci.cpp
+    moci/moci.cpp
     
     moci/core/algorithm.hpp
     moci/core/logging.hpp
@@ -24,7 +24,7 @@ set(moci_sources
     moci/app/events/key_event.hpp
     moci/app/events/mouse_event.hpp
     moci/app/input.hpp
-    # moci/app/input.cpp
+    moci/app/input.cpp
     moci/app/key_codes.hpp
     moci/app/layer_stack.hpp
     moci/app/layer_stack.cpp
@@ -33,7 +33,7 @@ set(moci_sources
     moci/app/mouse_button_codes.hpp
     moci/app/timestep.hpp
     moci/app/window.hpp
-    # moci/app/window.cpp
+    moci/app/window.cpp
     
     moci/app/glfw/input.hpp
     moci/app/glfw/input.cpp
@@ -62,11 +62,11 @@ set(moci_sources
     moci/render/camera.hpp
     moci/render/camera.cpp
     moci/render/color.hpp
-    # moci/render/color.cpp
+    moci/render/color.cpp
     moci/render/font.hpp
     moci/render/font.cpp
     moci/render/graphics_context.hpp
-    # moci/render/graphics_context.cpp
+    moci/render/graphics_context.cpp
     moci/render/render_command.hpp
     moci/render/render_command.cpp
     moci/render/render_queue.hpp
@@ -87,6 +87,21 @@ set(moci_sources
 
     moci/render/obj/file.hpp
     moci/render/obj/file.cpp
+
+    moci/render/opengl/gl4/buffer.hpp
+    moci/render/opengl/gl4/buffer.cpp
+    moci/render/opengl/gl4/graphics_context.hpp
+    moci/render/opengl/gl4/graphics_context.cpp
+    moci/render/opengl/gl4/gl4.hpp
+    moci/render/opengl/gl4/gl4.cpp
+    moci/render/opengl/gl4/renderer_api.hpp
+    moci/render/opengl/gl4/renderer_api.cpp
+    moci/render/opengl/gl4/shader.hpp
+    moci/render/opengl/gl4/shader.cpp
+    moci/render/opengl/gl4/texture.hpp
+    moci/render/opengl/gl4/texture.cpp
+    moci/render/opengl/gl4/vertex_array.hpp
+    moci/render/opengl/gl4/vertex_array.cpp
 
     moci/render/opengl/es2/buffer.hpp
     moci/render/opengl/es2/buffer.cpp
