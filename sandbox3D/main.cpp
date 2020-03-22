@@ -284,8 +284,11 @@ public:
                                  + lightMesh_.GetVertices().size();
 
         vertices_.reserve(numVertices);
-
-        shader_ = moci::Shader::Create("sandbox3D/assets/shader/gl4_general.glsl");
+#if defined(MOCI_API_OPENGL_LEGACY)
+        shader_ = moci::Shader::Create("sandbox3D/assets/shader/es2_general.glsl");
+#else
+        shader_      = moci::Shader::Create("sandbox3D/assets/shader/gl4_general.glsl");
+#endif
         shader_->Bind();
 
         {
@@ -342,8 +345,12 @@ public:
         vao_->SetIndexBuffer(ibo_);
         vao_->Unbind();
 
-        // Light buffer
+// Light buffer
+#if defined(MOCI_API_OPENGL_LEGACY)
+        light.shader = moci::Shader::Create("sandbox3D/assets/shader/es2_light_source.glsl");
+#else
         light.shader = moci::Shader::Create("sandbox3D/assets/shader/gl4_light_source.glsl");
+#endif
         light.shader->Bind();
         moci::BufferLayout lightLayout = {
             {moci::ShaderDataType::Float3, "a_Position"},  //

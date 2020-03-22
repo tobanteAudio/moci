@@ -12,7 +12,11 @@ namespace moci
 
 RenderQueue::RenderQueue()
 {
-    data_.shader = moci::Shader::Create("moci/moci/assets/shader_client_unit.glsl");
+#if defined(MOCI_API_OPENGL_LEGACY)
+    data_.shader = moci::Shader::Create("moci/moci/assets/es2_batch_render.glsl");
+#else
+    data_.shader = moci::Shader::Create("moci/moci/assets/gl4_batch_render.glsl");
+#endif
     data_.shader->Bind();
 
     data_.vertices.reserve(MaxVertexCount);
