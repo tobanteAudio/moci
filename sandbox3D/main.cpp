@@ -413,13 +413,27 @@ public:
         }
 
         ImGui::Begin("Sandbox 3D");
-        ImGui::SliderFloat3("Camera Pos", glm::value_ptr(cameraPos_), -100.0f, 100.0f);
-        ImGui::SliderFloat3("Camera Look At", glm::value_ptr(cameraLookAt_), -10.0f, 10.0f);
-        ImGui::SliderFloat("Camera FOV", &cameraFOV_, 5.0f, 85.0f);
-        ImGui::SliderFloat("Ambient Light", &ambientLight_, 0.0f, 0.4f);
-        ImGui::SliderFloat3("Light Pos", glm::value_ptr(lightPos_), -20.0f, 20.0f);
-        ImGui::SliderFloat("Light scale", &lightScale_, 0.1f, 1.0f);
-        ImGui::SliderFloat("Model scale", &modelScale_, 0.1f, 10.0f);
+
+        if (ImGui::CollapsingHeader("Camera"))
+        {
+            ImGui::SliderFloat3("Position", glm::value_ptr(cameraPos_), -100.0f, 100.0f);
+            ImGui::SliderFloat3("Look At", glm::value_ptr(cameraLookAt_), -10.0f, 10.0f);
+            ImGui::SliderFloat("FOV", &cameraFOV_, 5.0f, 85.0f);
+        }
+
+        if (ImGui::CollapsingHeader("Light"))
+        {
+
+            ImGui::SliderFloat("Ambient", &ambientLight_, 0.0f, 0.4f);
+            ImGui::SliderFloat3("Light Position", glm::value_ptr(lightPos_), -20.0f, 20.0f);
+            ImGui::SliderFloat("Light Scale", &lightScale_, 0.1f, 1.0f);
+        }
+
+        if (ImGui::CollapsingHeader("Model"))
+        {
+            ImGui::SliderFloat("Scale", &modelScale_, 0.1f, 10.0f);
+        }
+
         ImGui::End();
     }
 
