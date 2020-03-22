@@ -364,11 +364,11 @@ public:
         textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
 
-#if defined(MOCI_GRAPHICS_API_OPENGLES)
-        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
-#else
-        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
-#endif
+        // #if defined(MOCI_GRAPHICS_API_OPENGLES)
+        //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
+        // #else
+        //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
+        // #endif
         fpsHistory_.reserve(10'000);
     }
 
@@ -574,7 +574,7 @@ public:
     ;
     float ambientLight_ = 0.1f;
 
-    float modelScale_ = 0.1f;
+    float modelScale_ = 0.15f;
 
     struct Light
     {
@@ -604,7 +604,7 @@ public:
 
     std::size_t numVertices_ {};
     // Mesh mesh_ {"sandbox3D/assets/models/donut.obj"};
-    Mesh mesh_ {"sandbox3D/assets/models/cerberus.fbx"};
+    Mesh mesh_ {"sandbox3D/assets/models/cottage.obj"};
     Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
     Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 
