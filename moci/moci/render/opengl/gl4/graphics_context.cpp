@@ -1,5 +1,7 @@
 #include "moci/render/opengl/gl4/graphics_context.hpp"
 
+#if defined(MOCI_API_OPENGL)
+
 #include "moci/debug/instrumentor.hpp"
 #include "moci/render/opengl/gl4/gl4.hpp"
 
@@ -46,3 +48,5 @@ void OpenGLContext::SwapBuffers()
 }
 
 }  // namespace moci
+
+#endif

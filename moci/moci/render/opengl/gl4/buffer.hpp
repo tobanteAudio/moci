@@ -1,5 +1,7 @@
 #pragma once
 
+#if defined(MOCI_API_OPENGL)
+
 #include "moci/render/buffer.hpp"
 
 namespace moci
@@ -41,3 +43,5 @@ private:
 };
 
 }  // namespace moci
+
+#endif

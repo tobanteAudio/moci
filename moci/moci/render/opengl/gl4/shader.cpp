@@ -1,5 +1,6 @@
 #include "moci/render/opengl/gl4/shader.hpp"
 
+#if defined(MOCI_API_OPENGL)
 #include "moci/debug/instrumentor.hpp"
 #include "moci/render/opengl/gl4/gl4.hpp"
 
@@ -252,3 +253,5 @@ void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& m
 }
 
 }  // namespace moci
+
+#endif

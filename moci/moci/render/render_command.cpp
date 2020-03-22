@@ -6,5 +6,5 @@
 namespace moci
 {
 
-std::unique_ptr<RendererAPI> RenderCommand::s_RendererAPI = std::make_unique<OpenGLESRendererAPI>();
+std::unique_ptr<RendererAPI> RenderCommand::s_RendererAPI = std::make_unique<OpenGLRendererAPI>();
 }

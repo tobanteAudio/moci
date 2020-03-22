@@ -1,5 +1,7 @@
 #include "moci/render/opengl/gl4/texture.hpp"
 
+#if defined(MOCI_API_OPENGL)
+
 #include "moci/debug/instrumentor.hpp"
 #include "moci/render/opengl/gl4/gl4.hpp"
 
@@ -84,3 +86,5 @@ void OpenGLTexture2D::SetData(void* data, uint32_t size)
 
 void OpenGLTexture2D::Bind(uint32_t slot) const { glBindTextureUnit(slot, m_RendererID); }
 }  // namespace moci
+
+#endif

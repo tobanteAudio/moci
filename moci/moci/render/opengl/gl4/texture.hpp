@@ -1,5 +1,7 @@
 #pragma once
 
+#if defined(MOCI_API_OPENGL)
+
 #include "moci/render/texture.hpp"
 
 #include "moci/render/opengl/gl4/gl4.hpp"
@@ -33,3 +35,5 @@ private:
 };
 
 }  // namespace moci
+
+#endif

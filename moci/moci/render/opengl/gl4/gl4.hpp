@@ -1,5 +1,7 @@
 #pragma once
 
+#if defined(MOCI_API_OPENGL)
+
 #include "moci/core/preprocessor.hpp"
 
 #include "moci/core/logging.hpp"
@@ -25,3 +27,5 @@
 #endif
 
 #include <GLFW/glfw3.h>
+
+#endif

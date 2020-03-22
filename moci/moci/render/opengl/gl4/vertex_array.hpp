@@ -2,6 +2,7 @@
 
 #include "moci/render/vertex_array.hpp"
 
+#if defined(MOCI_API_OPENGL)
 namespace moci
 {
 
@@ -28,3 +29,5 @@ private:
 };
 
 }  // namespace moci
+
+#endif

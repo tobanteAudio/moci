@@ -1,5 +1,7 @@
 #include "moci/render/opengl/gl4/renderer_api.hpp"
 
+#if defined(MOCI_API_OPENGL)
+
 #include "moci/debug/instrumentor.hpp"
 #include "moci/render/opengl/gl4/gl4.hpp"
 
@@ -91,3 +93,5 @@ auto OpenGLRendererAPI::MaxUniformVectors() -> std::uint32_t
 // }
 
 }  // namespace moci
+
+#endif

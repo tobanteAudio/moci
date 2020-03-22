@@ -1,5 +1,7 @@
 #include "moci/render/opengl/gl4/vertex_array.hpp"
 
+#if defined(MOCI_API_OPENGL)
+
 #include "moci/debug/instrumentor.hpp"
 #include "moci/render/opengl/gl4/gl4.hpp"
 
@@ -73,3 +75,5 @@ void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& index
 }
 
 }  // namespace moci
+
+#endif

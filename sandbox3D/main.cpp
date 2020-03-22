@@ -285,7 +285,7 @@ public:
 
         vertices_.reserve(numVertices);
 
-        shader_ = moci::Shader::Create("sandbox3D/assets/shader/es2_general.glsl");
+        shader_ = moci::Shader::Create("sandbox3D/assets/shader/gl4_general.glsl");
         shader_->Bind();
 
         {
@@ -343,7 +343,7 @@ public:
         vao_->Unbind();
 
         // Light buffer
-        light.shader = moci::Shader::Create("sandbox3D/assets/shader/es2_light_source.glsl");
+        light.shader = moci::Shader::Create("sandbox3D/assets/shader/gl4_light_source.glsl");
         light.shader->Bind();
         moci::BufferLayout lightLayout = {
             {moci::ShaderDataType::Float3, "a_Position"},  //
@@ -364,7 +364,7 @@ public:
         textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
 
-        // #if defined(MOCI_API_GLES)
+        // #if defined(MOCI_API_OPENGL_ES)
         //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
         // #else
         //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_4096x4096.png");

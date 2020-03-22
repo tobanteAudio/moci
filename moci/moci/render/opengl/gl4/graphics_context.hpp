@@ -1,5 +1,7 @@
 #pragma once
 
+#if defined(MOCI_API_OPENGL)
+
 #include "moci/render/graphics_context.hpp"
 
 struct GLFWwindow;
@@ -20,3 +22,5 @@ private:
 };
 
 }  // namespace moci
+
+#endif

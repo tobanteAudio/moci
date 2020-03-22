@@ -1,5 +1,7 @@
 #include "moci/render/opengl/gl4/buffer.hpp"
 
+#if defined(MOCI_API_OPENGL)
+
 #include "moci/debug/instrumentor.hpp"
 #include "moci/render/opengl/gl4/gl4.hpp"
 
@@ -68,3 +70,5 @@ auto OpenGLIndexBuffer::UploadData(std::uint32_t offset, std::uint32_t size, con
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, data);
 }
 }  // namespace moci
+
+#endif

@@ -1,5 +1,7 @@
 #pragma once
 
+#if defined(MOCI_API_OPENGL)
+
 #include "moci/render/shader.hpp"
 
 #include <glm/glm.hpp>
@@ -56,3 +58,5 @@ private:
 };
 
 }  // namespace moci
+
+#endif

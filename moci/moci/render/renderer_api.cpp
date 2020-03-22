@@ -3,5 +3,5 @@
 namespace moci
 {
 
-RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGLES;
+RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGL;
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#if defined(MOCI_API_OPENGL)
+
 #include "moci/render/renderer_api.hpp"
 
 namespace moci
@@ -27,3 +29,5 @@ public:
 };
 
 }  // namespace moci
+
+#endif
