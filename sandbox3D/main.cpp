@@ -295,7 +295,52 @@ public:
             {moci::ShaderDataType::Float2, "a_TexCoords"},  //
         };
 
-        vbo_.reset(moci::VertexBuffer::Create(nullptr, numVertices * sizeof(Vertex), true));
+        {
+            MOCI_PROFILE_SCOPE("Translate");
+            for (auto const& vertex : mesh_.GetVertices())
+            {
+                auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
+                auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {modelScale_, modelScale_, modelScale_});
+                auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+                vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
+            }
+
+            {
+                MOCI_PROFILE_SCOPE("Translate Small Teapots");
+                for (auto x = 1; x <= 10; x++)
+                {
+                    auto const modelScale = modelScale_ / 2.0f;
+                    auto const scale      = glm::scale(glm::mat4(1.0f), {modelScale, modelScale, modelScale});
+                    auto const model      = glm::translate(glm::mat4(1.0f), glm::vec3((3.0f * x), 5.0f, 1.0f));
+                    for (auto const& vertex : mesh_.GetVertices())
+                    {
+                        auto const position = model * scale * glm::vec4(vertex.position, 1.0f);
+                        vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
+                    }
+                }
+            }
+
+            for (auto const& vertex : lightMesh_.GetVertices())
+            {
+                auto const model       = glm::translate(glm::mat4(1.0f), lightPos_);
+                auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {lightScale_, lightScale_, lightScale_});
+                auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+                vertices_.push_back({glm::vec3(position), vertex.normal, {1.0f, 1.0f, 1.0f, 1.0f}, vertex.texCoord});
+            }
+
+            for (auto const& vertex : floor_.GetVertices())
+            {
+                auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
+                auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {5.0f, 5.0f, 5.0f});
+                auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+                vertices_.push_back({glm::vec3(position), vertex.normal, {1.0f, 1.0f, 0.5f, 1.0f}, vertex.texCoord});
+            }
+
+            numVertices_ = vertices_.size();
+        }
+
+        vbo_.reset(moci::VertexBuffer::Create(reinterpret_cast<float*>(vertices_.data()),
+                                              vertices_.size() * sizeof(Vertex), false));
         vbo_->SetLayout(layout);
         vbo_->Unbind();
         ibo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
@@ -311,46 +356,15 @@ public:
 
     void OnUpdate(moci::Timestep ts) override
     {
+        MOCI_PROFILE_FUNCTION();
         moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         moci::RenderCommand::Clear();
 
-        for (auto const& vertex : mesh_.GetVertices())
-        {
-            auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
-            auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {modelScale_, modelScale_, modelScale_});
-            auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-            vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
-        }
+        // auto const numVertices = (mesh_.GetVertices().size() * 11)  //
+        //                          + floor_.GetVertices().size()      //
+        //                          + lightMesh_.GetVertices().size();
 
-        for (auto x = 1; x <= 10; x++)
-        {
-            for (auto const& vertex : mesh_.GetVertices())
-            {
-                auto const model = glm::translate(glm::mat4(1.0f), glm::vec3((3.0f * x), 5.0f, 1.0f));
-                auto const scale
-                    = glm::scale(glm::mat4(1.0f), {modelScale_ / 2.0f, modelScale_ / 2.0f, modelScale_ / 2.0f});
-                auto const position = model * scale * glm::vec4(vertex.position, 1.0f);
-                vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
-            }
-        }
-
-        for (auto const& vertex : lightMesh_.GetVertices())
-        {
-            auto const model       = glm::translate(glm::mat4(1.0f), lightPos_);
-            auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {lightScale_, lightScale_, lightScale_});
-            auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-            vertices_.push_back({glm::vec3(position), vertex.normal, {1.0f, 1.0f, 1.0f, 1.0f}, vertex.texCoord});
-        }
-
-        for (auto const& vertex : floor_.GetVertices())
-        {
-            auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
-            auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {5.0f, 5.0f, 5.0f});
-            auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-            vertices_.push_back({glm::vec3(position), vertex.normal, {1.0f, 1.0f, 0.5f, 1.0f}, vertex.texCoord});
-        }
-
-        numVertices_ = vertices_.size();
+        // vertices_.reserve(numVertices);
 
         // Camera matrix
         glm::mat4 projection = glm::perspective(glm::radians(cameraFOV_), width_ / height_, 0.1f, 100.0f);
@@ -360,18 +374,29 @@ public:
             glm::vec3(0, 1, 0)         // Head is up (set to 0,-1,0 to look upside-down)
         );
 
-        shader_->SetMat4("u_View", view);
-        shader_->SetMat4("u_Projection", projection);
-        shader_->SetFloat("u_Ambient", ambientLight_);
-        shader_->SetFloat3("u_LightPos", lightPos_);
-        shader_->SetFloat3("u_ViewPos", cameraPos_);
+        {
+            MOCI_PROFILE_SCOPE("Uniforms");
+
+            shader_->SetMat4("u_View", view);
+            shader_->SetMat4("u_Projection", projection);
+            shader_->SetFloat("u_Ambient", ambientLight_);
+            shader_->SetFloat3("u_LightPos", lightPos_);
+            shader_->SetFloat3("u_ViewPos", cameraPos_);
+        }
 
         vao_->Bind();
-        vbo_->UploadData(0, vertices_.size() * sizeof(Vertex), vertices_.data());
+        // {
+        //     MOCI_PROFILE_SCOPE("Upload");
+        //     vbo_->UploadData(0, vertices_.size() * sizeof(Vertex), vertices_.data());
+        // }
         textureColors_->Bind(0);
-        moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices_.size());
+
+        {
+            MOCI_PROFILE_SCOPE("DrawArrays");
+            moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices_.size());
+        }
         textureColors_->Unbind();
-        vertices_.clear();
+        // vertices_.clear();
     }
 
     void OnEvent(moci::Event& e) override
