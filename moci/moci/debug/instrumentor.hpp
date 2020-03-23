@@ -147,14 +147,14 @@ private:
 class InstrumentationTimer
 {
 public:
-    InstrumentationTimer(const char* name) : m_Name(name), m_Stopped(false)
+    InstrumentationTimer(const char* name) : name_(name), stopped_(false)
     {
-        m_StartTimepoint = std::chrono::steady_clock::now();
+        startTimepoint_ = std::chrono::steady_clock::now();
     }
 
     ~InstrumentationTimer()
     {
-        if (!m_Stopped)
+        if (!stopped_)
         {
             Stop();
         }
@@ -163,50 +163,28 @@ public:
     void Stop()
     {
         auto endTimepoint = std::chrono::steady_clock::now();
-        auto highResStart = FloatingPointMicroseconds {m_StartTimepoint.time_since_epoch()};
+        auto highResStart = FloatingPointMicroseconds {startTimepoint_.time_since_epoch()};
         auto elapsedTime
             = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch()
-              - std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch();
+              - std::chrono::time_point_cast<std::chrono::microseconds>(startTimepoint_).time_since_epoch();
 
-        Instrumentor::Get().WriteProfile({m_Name, highResStart, elapsedTime, std::this_thread::get_id()});
+        Instrumentor::Get().WriteProfile({name_, highResStart, elapsedTime, std::this_thread::get_id()});
 
-        m_Stopped = true;
+        stopped_ = true;
     }
 
 private:
-    const char* m_Name;
-    std::chrono::time_point<std::chrono::steady_clock> m_StartTimepoint;
-    bool m_Stopped;
+    const char* name_;
+    std::chrono::time_point<std::chrono::steady_clock> startTimepoint_;
+    bool stopped_;
 };
 }  // namespace moci
 
 #define MOCI_PROFILE 1
 #if MOCI_PROFILE
-   // Resolve which function signature macro will be used. Note that this only
-// is resolved when the (pre)compiler starts, so the syntax highlighting
-// could mark the wrong one in your editor!
-#if defined(__GNUC__) || (defined(__MWERKS__) && (__MWERKS__ >= 0x3000)) || (defined(__ICC) && (__ICC >= 600))         \
-    || defined(__ghs__)
-#define MOCI_FUNC_SIG __PRETTY_FUNCTION__
-#elif defined(__DMC__) && (__DMC__ >= 0x810)
-#define MOCI_FUNC_SIG __PRETTY_FUNCTION__
-#elif defined(__FUNCSIG__)
-#define MOCI_FUNC_SIG __FUNCSIG__
-#elif (defined(__INTEL_COMPILER) && (__INTEL_COMPILER >= 600)) || (defined(__IBMCPP__) && (__IBMCPP__ >= 500))
-#define MOCI_FUNC_SIG __FUNCTION__
-#elif defined(__BORLANDC__) && (__BORLANDC__ >= 0x550)
-#define MOCI_FUNC_SIG __FUNC__
-#elif defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901)
-#define MOCI_FUNC_SIG __func__
-#elif defined(__cplusplus) && (__cplusplus >= 201103)
-#define MOCI_FUNC_SIG __func__
-#else
-#define MOCI_FUNC_SIG "MOCI_FUNC_SIG unknown!"
-#endif
-
 #define MOCI_PROFILE_BEGIN_SESSION(name, filepath) ::moci::Instrumentor::Get().BeginSession(name, filepath)
 #define MOCI_PROFILE_END_SESSION() ::moci::Instrumentor::Get().EndSession()
-#define MOCI_PROFILE_SCOPE(name) ::moci::InstrumentationTimer timer##__LINE__(name);
+#define MOCI_PROFILE_SCOPE(name) ::moci::InstrumentationTimer MOCI_ANONYMOUS_VARIABLE(timer)(name);
 #define MOCI_PROFILE_FUNCTION() MOCI_PROFILE_SCOPE(MOCI_FUNC_SIG)
 #else
 #define MOCI_PROFILE_BEGIN_SESSION(name, filepath)

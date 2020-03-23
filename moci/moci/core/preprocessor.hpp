@@ -136,6 +136,28 @@
 #error unknown compiler
 #endif
 
+// Resolve which function signature macro will be used. Note that this only
+// is resolved when the (pre)compiler starts, so the syntax highlighting
+// could mark the wrong one in your editor!
+#if defined(__GNUC__) || (defined(__MWERKS__) && (__MWERKS__ >= 0x3000)) || (defined(__ICC) && (__ICC >= 600))         \
+    || defined(__ghs__)
+#define MOCI_FUNC_SIG __PRETTY_FUNCTION__
+#elif defined(__DMC__) && (__DMC__ >= 0x810)
+#define MOCI_FUNC_SIG __PRETTY_FUNCTION__
+#elif defined(__FUNCSIG__)
+#define MOCI_FUNC_SIG __FUNCSIG__
+#elif (defined(__INTEL_COMPILER) && (__INTEL_COMPILER >= 600)) || (defined(__IBMCPP__) && (__IBMCPP__ >= 500))
+#define MOCI_FUNC_SIG __FUNCTION__
+#elif defined(__BORLANDC__) && (__BORLANDC__ >= 0x550)
+#define MOCI_FUNC_SIG __FUNC__
+#elif defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901)
+#define MOCI_FUNC_SIG __func__
+#elif defined(__cplusplus) && (__cplusplus >= 201103)
+#define MOCI_FUNC_SIG __func__
+#else
+#define MOCI_FUNC_SIG "MOCI_FUNC_SIG unknown!"
+#endif
+
 #define MOCI_ENABLE_ASSERTS 1
 #ifdef MOCI_ENABLE_ASSERTS
 #define MOCI_ASSERT(x, ...)                                                                                            \
@@ -161,6 +183,40 @@
 
 #include <functional>
 #define MOCI_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+#if defined(__has_builtin)
+#define MOCI_HAS_BUILTIN(...) __has_builtin(__VA_ARGS__)
+#else
+#define MOCI_HAS_BUILTIN(...) 0
+#endif
+
+#if defined(__has_feature)
+#define MOCI_HAS_FEATURE(...) __has_feature(__VA_ARGS__)
+#else
+#define MOCI_HAS_FEATURE(...) 0
+#endif
+
+/**
+ * MOCI_ANONYMOUS_VARIABLE(str) introduces an identifier starting with
+ * str and ending with a number that varies with the line.
+ */
+#ifndef MOCI_ANONYMOUS_VARIABLE
+#define MOCI_CONCATENATE_IMPL(s1, s2) s1##s2
+#define MOCI_CONCATENATE(s1, s2) MOCI_CONCATENATE_IMPL(s1, s2)
+#ifdef __COUNTER__
+// Modular builds build each module with its own preprocessor state, meaning
+// `__COUNTER__` no longer provides a unique number across a TU.  Instead of
+// calling back to just `__LINE__`, use a mix of `__COUNTER__` and `__LINE__`
+// to try provide as much uniqueness as possible.
+#if MOCI_HAS_FEATURE(modules)
+#define MOCI_ANONYMOUS_VARIABLE(str) MOCI_CONCATENATE(MOCI_CONCATENATE(MOCI_CONCATENATE(str, __COUNTER__), _), __LINE__)
+#else
+#define MOCI_ANONYMOUS_VARIABLE(str) MOCI_CONCATENATE(str, __COUNTER__)
+#endif
+#else
+#define MOCI_ANONYMOUS_VARIABLE(str) MOCI_CONCATENATE(str, __LINE__)
+#endif
+#endif
 
 namespace moci
 {
