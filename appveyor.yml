@@ -19,9 +19,9 @@ build:
 # BUILD
 build_script:
   - cmd: >-
-      mkdir build_release
+      mkdir build
 
-      cd build_release
+      cd build
 
       cmake .. -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release -DMOCI_BUILD_TESTS=ON -DMOCI_API_OPENGL_LEGACY=ON -Wno-dev
 
@@ -32,12 +32,6 @@ build_script:
 # TEST
 test_script:
   - cmd: >-
-      cd build_debug
-
-      ctest -C Debug
-
-      cd ..
-
-      cd build_release
+      cd build
 
       ctest -C Release
