@@ -4,9 +4,11 @@ digraph "moci::ComponentLayer::OnUpdate"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node21 [label="moci::ComponentLayer\l::OnUpdate",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node21 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node22 [label="moci::RenderCommand\l::SetClearColor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmoci_1_1RenderCommand.html#a3bef05cc11cbdab48c2c682b2eea12cd"];
-  Node21 -> Node23 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node23 [label="moci::RenderCommand\l::Clear",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmoci_1_1RenderCommand.html#a02a096848b31bed79a2b6b1365532dbc"];
+  Node23 [label="moci::ComponentLayer\l::OnUpdate",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node23 -> Node24 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node24 [label="moci::IgnoreUnused",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacemoci.html#ae476b7800a4885ccb9a99952efba1628"];
+  Node23 -> Node25 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node25 [label="moci::RenderCommand\l::SetClearColor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmoci_1_1RenderCommand.html#a3bef05cc11cbdab48c2c682b2eea12cd"];
+  Node23 -> Node26 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node26 [label="moci::RenderCommand\l::Clear",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmoci_1_1RenderCommand.html#a02a096848b31bed79a2b6b1365532dbc"];
 }
