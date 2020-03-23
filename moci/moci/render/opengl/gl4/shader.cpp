@@ -4,6 +4,7 @@
 #include "moci/debug/instrumentor.hpp"
 #include "moci/render/opengl/gl4/gl4.hpp"
 
+#include <array>
 #include <fstream>
 
 #include <glm/gtc/type_ptr.hpp>
