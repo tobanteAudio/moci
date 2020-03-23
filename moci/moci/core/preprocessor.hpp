@@ -158,8 +158,8 @@
 #define MOCI_FUNC_SIG "MOCI_FUNC_SIG unknown!"
 #endif
 
-#define MOCI_ENABLE_ASSERTS 1
-#ifdef MOCI_ENABLE_ASSERTS
+#define MOCI_ENABLE_ASSERTIONS 1
+#ifdef MOCI_ENABLE_ASSERTIONS
 #define MOCI_ASSERT(x, ...)                                                                                            \
     {                                                                                                                  \
         if (!(x))                                                                                                      \
