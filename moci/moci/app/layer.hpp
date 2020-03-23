@@ -3,6 +3,7 @@
 #include "events/event.hpp"
 #include "timestep.hpp"
 
+#include <memory>
 #include <string>
 
 namespace moci
@@ -10,6 +11,9 @@ namespace moci
 
 class Layer
 {
+public:
+    using Ptr = std::unique_ptr<Layer>;
+
 public:
     Layer(std::string name = "Layer");
     virtual ~Layer() = default;

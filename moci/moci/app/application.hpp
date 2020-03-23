@@ -22,8 +22,8 @@ public:
 
     void OnEvent(Event& e);
 
-    void PushLayer(Layer* layer);
-    void PushOverlay(Layer* layer);
+    void PushLayer(Layer::Ptr&& layer);
+    void PushOverlay(Layer::Ptr&& layer);
 
     inline auto GetWindow() -> Window& { return *m_Window; }
 
@@ -37,7 +37,6 @@ private:
 
 private:
     std::unique_ptr<Window> m_Window;
-    ImGuiLayer* m_ImGuiLayer                                                = nullptr;
     bool m_Running                                                          = true;
     bool m_Minimized                                                        = false;
     LayerStack m_LayerStack                                                 = {};

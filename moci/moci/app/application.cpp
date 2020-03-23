@@ -25,14 +25,12 @@ Application::Application()
     m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
     Renderer::Init();
-
-    m_ImGuiLayer = new ImGuiLayer();
-    PushOverlay(m_ImGuiLayer);
+    PushOverlay(std::make_unique<ImGuiLayer>());
 }
 
-void Application::PushLayer(Layer* layer) { m_LayerStack.PushLayer(layer); }
+void Application::PushLayer(Layer::Ptr&& layer) { m_LayerStack.PushLayer(std::move(layer)); }
 
-void Application::PushOverlay(Layer* layer) { m_LayerStack.PushOverlay(layer); }
+void Application::PushOverlay(Layer::Ptr&& layer) { m_LayerStack.PushOverlay(std::move(layer)); }
 
 void Application::OnEvent(Event& e)
 {
@@ -74,7 +72,7 @@ void Application::Run()
 
         if (!m_Minimized)
         {
-            for (Layer* layer : m_LayerStack)
+            for (auto& layer : m_LayerStack)
             {
                 layer->OnUpdate(timestep);
             }
@@ -83,7 +81,7 @@ void Application::Run()
         {
             MOCI_PROFILE_SCOPE("App::Run::Loop::ImGui");
             moci::ImGuiLayer::Begin();
-            for (Layer* layer : m_LayerStack)
+            for (auto& layer : m_LayerStack)
             {
                 layer->OnImGuiRender();
             }

@@ -133,7 +133,7 @@ public:
     Sandbox()
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox", "moci-sandbox.json");
-        PushLayer(new moci::ComponentLayer(std::make_unique<MultiChannel>()));
+        PushLayer(std::make_unique<moci::ComponentLayer>(std::make_unique<MultiChannel>()));
     }
 
     ~Sandbox() override { MOCI_PROFILE_END_SESSION(); }

@@ -293,7 +293,7 @@ public:
 #if defined(MOCI_API_OPENGL_LEGACY)
             shader_ = moci::Shader::Create("sandbox3D/assets/shader/es2_general.glsl");
 #else
-            shader_      = moci::Shader::Create("sandbox3D/assets/shader/gl4_general.glsl");
+            shader_        = moci::Shader::Create("sandbox3D/assets/shader/gl4_general.glsl");
 #endif
             shader_->Bind();
         }
@@ -360,7 +360,7 @@ public:
 #if defined(MOCI_API_OPENGL_LEGACY)
             light.shader = moci::Shader::Create("sandbox3D/assets/shader/es2_light_source.glsl");
 #else
-            light.shader = moci::Shader::Create("sandbox3D/assets/shader/gl4_light_source.glsl");
+            light.shader   = moci::Shader::Create("sandbox3D/assets/shader/gl4_light_source.glsl");
 #endif
             light.shader->Bind();
             moci::BufferLayout lightLayout = {
@@ -384,11 +384,11 @@ public:
             MOCI_PROFILE_SCOPE("OnAttach::Textures");
             textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
             textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
-            // #if defined(MOCI_API_OPENGL_ES)
-            //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
-            // #else
-            //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
-            // #endif
+#if defined(MOCI_API_OPENGL_ES)
+            textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
+#else
+            textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
+#endif
         }
 
         fpsHistory_.reserve(10'000);
@@ -635,7 +635,7 @@ public:
 
     std::size_t numVertices_ {};
     // Mesh mesh_ {"sandbox3D/assets/models/donut.obj"};
-    Mesh mesh_ {"sandbox3D/assets/models/cottage.obj"};
+    Mesh mesh_ {"sandbox3D/assets/models/cerberus.fbx"};
     Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
     Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 
@@ -667,7 +667,7 @@ public:
     Sandbox()
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox-3d", "moci-sandbox-3d.json");
-        PushLayer(new DemoLayer());
+        PushLayer(std::make_unique<DemoLayer>());
     }
 
     ~Sandbox() override { MOCI_PROFILE_END_SESSION(); }

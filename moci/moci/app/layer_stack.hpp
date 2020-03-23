@@ -13,16 +13,16 @@ public:
     LayerStack();
     ~LayerStack();
 
-    void PushLayer(Layer* layer);
-    void PushOverlay(Layer* overlay);
-    void PopLayer(Layer* layer);
-    void PopOverlay(Layer* overlay);
+    void PushLayer(Layer::Ptr&& layer);
+    void PushOverlay(Layer::Ptr&& overlay);
+    // void PopLayer(Layer* layer);
+    // void PopOverlay(Layer* overlay);
 
-    auto begin() -> std::vector<Layer*>::iterator { return m_Layers.begin(); }
-    auto end() -> std::vector<Layer*>::iterator { return m_Layers.end(); }
+    auto begin() -> std::vector<Layer::Ptr>::iterator { return m_Layers.begin(); }
+    auto end() -> std::vector<Layer::Ptr>::iterator { return m_Layers.end(); }
 
 private:
-    std::vector<Layer*> m_Layers;
+    std::vector<Layer::Ptr> m_Layers;
     unsigned int m_LayerInsertIndex = 0;
 };
 
