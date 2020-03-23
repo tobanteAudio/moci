@@ -11,6 +11,7 @@
 #include <sstream>
 #include <string>
 #include <thread>
+#include <vector>
 
 namespace moci
 {
@@ -34,18 +35,18 @@ struct InstrumentationSession
 class Instrumentor
 {
 private:
-    std::mutex m_Mutex;
-    std::unique_ptr<InstrumentationSession> m_CurrentSession {nullptr};
-    std::ofstream m_OutputStream;
-    std::stringstream m_MemoryStream;
+    std::mutex mutex_;
+    std::unique_ptr<InstrumentationSession> currentSession_ {nullptr};
+    std::ofstream outputStream_;
+    std::vector<std::string> buffer_;
 
 public:
     Instrumentor() = default;
 
     void BeginSession(std::string const& name, std::string const& filepath = "results.json")
     {
-        std::lock_guard<std::mutex> lock(m_Mutex);
-        if (m_CurrentSession != nullptr)
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (currentSession_ != nullptr)
         {
             // If there is already a current session, then close it before beginning new one.
             // Subsequent profiling output meant for the original session will end up in the
@@ -54,16 +55,18 @@ public:
             if (Log::GetCoreLogger())
             {  // Edge case: BeginSession() might be before Log::Init()
                 MOCI_CORE_ERROR("Instrumentor::BeginSession('{0}') when session '{1}' already open.", name,
-                                m_CurrentSession->Name);
+                                currentSession_->Name);
             }
             InternalEndSession();
         }
-        m_OutputStream.open(filepath);
 
-        if (m_OutputStream.is_open())
+        buffer_.reserve(1'000'000);
+
+        outputStream_.open(filepath);
+        if (outputStream_.is_open())
         {
-            m_CurrentSession       = std::make_unique<InstrumentationSession>();
-            m_CurrentSession->Name = name;
+            currentSession_       = std::make_unique<InstrumentationSession>();
+            currentSession_->Name = name;
             WriteHeader();
         }
         else
@@ -77,7 +80,7 @@ public:
 
     void EndSession()
     {
-        std::lock_guard<std::mutex> lock(m_Mutex);
+        std::lock_guard<std::mutex> lock(mutex_);
         InternalEndSession();
     }
 
@@ -94,10 +97,10 @@ public:
             result.Start.count()                                                                          //
         );
 
-        std::lock_guard<std::mutex> lock(m_Mutex);
-        if (m_CurrentSession != nullptr)
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (currentSession_ != nullptr)
         {
-            m_MemoryStream << json;
+            buffer_.push_back(std::move(json));
         }
     }
 
@@ -110,29 +113,33 @@ public:
 private:
     void WriteHeader()
     {
-        m_OutputStream << R"({"otherData": {},"traceEvents":[{})";
-        m_OutputStream.flush();
+        outputStream_ << R"({"otherData": {},"traceEvents":[{})";
+        outputStream_.flush();
     }
 
     void WriteFooter()
     {
-        m_OutputStream << "]}";
-        m_OutputStream.flush();
+        outputStream_ << "]}";
+        outputStream_.flush();
     }
 
-    // Note: you must already own lock on m_Mutex before
+    // Note: you must already own lock on mutex_ before
     // calling InternalEndSession()
     void InternalEndSession()
     {
 
-        if (m_CurrentSession != nullptr)
+        if (currentSession_ != nullptr)
         {
-            m_OutputStream << m_MemoryStream.str();
-            m_OutputStream.flush();
+            for (auto const& item : buffer_)
+            {
+                outputStream_ << item;
+            }
+
+            outputStream_.flush();
             WriteFooter();
-            m_OutputStream.close();
-            m_CurrentSession.reset(nullptr);
-            m_CurrentSession = nullptr;
+            outputStream_.close();
+            currentSession_.reset(nullptr);
+            currentSession_ = nullptr;
         }
     }
 };
