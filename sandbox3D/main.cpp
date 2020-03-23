@@ -274,22 +274,29 @@ public:
 
     void OnAttach() override
     {
-        MOCI_INFO("Max vertex attributes: {}", moci::RenderCommand::MaxVertexAttributes());
-        MOCI_INFO("Max texture size: {}", moci::RenderCommand::MaxTextureSize());
-        MOCI_INFO("Max texture units: {}", moci::RenderCommand::MaxTextureUnits());
-        MOCI_INFO("Max uniform vectors: {}", moci::RenderCommand::MaxUniformVectors());
+        MOCI_PROFILE_FUNCTION();
+        {
+            MOCI_PROFILE_SCOPE("OnAttach::GPUQuery");
+            MOCI_INFO("Max vertex attributes: {}", moci::RenderCommand::MaxVertexAttributes());
+            MOCI_INFO("Max texture size: {}", moci::RenderCommand::MaxTextureSize());
+            MOCI_INFO("Max texture units: {}", moci::RenderCommand::MaxTextureUnits());
+            MOCI_INFO("Max uniform vectors: {}", moci::RenderCommand::MaxUniformVectors());
+        }
 
         auto const numVertices = (mesh_.GetVertices().size() * 11)  //
                                  + floor_.GetVertices().size()      //
                                  + lightMesh_.GetVertices().size();
 
         vertices_.reserve(numVertices);
+        {
+            MOCI_PROFILE_SCOPE("OnAttach::Shader");
 #if defined(MOCI_API_OPENGL_LEGACY)
-        shader_ = moci::Shader::Create("sandbox3D/assets/shader/es2_general.glsl");
+            shader_ = moci::Shader::Create("sandbox3D/assets/shader/es2_general.glsl");
 #else
-        shader_      = moci::Shader::Create("sandbox3D/assets/shader/gl4_general.glsl");
+            shader_      = moci::Shader::Create("sandbox3D/assets/shader/gl4_general.glsl");
 #endif
-        shader_->Bind();
+            shader_->Bind();
+        }
 
         {
             MOCI_PROFILE_SCOPE("Translate");
@@ -328,54 +335,62 @@ public:
         }
 
         // Mesh buffer
-        moci::BufferLayout layout = {
-            {moci::ShaderDataType::Float3, "a_Position"},   //
-            {moci::ShaderDataType::Float3, "a_Normal"},     //
-            {moci::ShaderDataType::Float4, "a_Color"},      //
-            {moci::ShaderDataType::Float2, "a_TexCoords"},  //
-        };
-        vbo_.reset(moci::VertexBuffer::Create(reinterpret_cast<float*>(vertices_.data()),
-                                              vertices_.size() * sizeof(Vertex), false));
-        vbo_->SetLayout(layout);
-        vbo_->Unbind();
-        ibo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
-        ibo_->Unbind();
-        vao_ = moci::VertexArray::Create();
-        vao_->AddVertexBuffer(vbo_);
-        vao_->SetIndexBuffer(ibo_);
-        vao_->Unbind();
-
-// Light buffer
+        {
+            MOCI_PROFILE_SCOPE("OnAttach::MeshBuffer");
+            moci::BufferLayout layout = {
+                {moci::ShaderDataType::Float3, "a_Position"},   //
+                {moci::ShaderDataType::Float3, "a_Normal"},     //
+                {moci::ShaderDataType::Float4, "a_Color"},      //
+                {moci::ShaderDataType::Float2, "a_TexCoords"},  //
+            };
+            vbo_.reset(moci::VertexBuffer::Create(reinterpret_cast<float*>(vertices_.data()),
+                                                  vertices_.size() * sizeof(Vertex), false));
+            vbo_->SetLayout(layout);
+            vbo_->Unbind();
+            ibo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
+            ibo_->Unbind();
+            vao_ = moci::VertexArray::Create();
+            vao_->AddVertexBuffer(vbo_);
+            vao_->SetIndexBuffer(ibo_);
+            vao_->Unbind();
+        }
+        {
+            // Light buffer
+            MOCI_PROFILE_SCOPE("OnAttach::LightBuffer");
 #if defined(MOCI_API_OPENGL_LEGACY)
-        light.shader = moci::Shader::Create("sandbox3D/assets/shader/es2_light_source.glsl");
+            light.shader = moci::Shader::Create("sandbox3D/assets/shader/es2_light_source.glsl");
 #else
-        light.shader = moci::Shader::Create("sandbox3D/assets/shader/gl4_light_source.glsl");
+            light.shader = moci::Shader::Create("sandbox3D/assets/shader/gl4_light_source.glsl");
 #endif
-        light.shader->Bind();
-        moci::BufferLayout lightLayout = {
-            {moci::ShaderDataType::Float3, "a_Position"},  //
-            {moci::ShaderDataType::Float4, "a_Color"},     //
-        };
+            light.shader->Bind();
+            moci::BufferLayout lightLayout = {
+                {moci::ShaderDataType::Float3, "a_Position"},  //
+                {moci::ShaderDataType::Float4, "a_Color"},     //
+            };
 
-        auto const lightVertices = lightMesh_.GetVertices().size();
-        light.vbo.reset(moci::VertexBuffer::Create(nullptr, lightVertices * sizeof(Light::Vertex), true));
-        light.vbo->SetLayout(lightLayout);
-        light.vbo->Unbind();
-        light.ibo.reset(moci::IndexBuffer::Create(nullptr, 1, true));
-        light.ibo->Unbind();
-        light.vao = moci::VertexArray::Create();
-        light.vao->AddVertexBuffer(light.vbo);
-        light.vao->SetIndexBuffer(light.ibo);
-        light.vao->Unbind();
+            auto const lightVertices = lightMesh_.GetVertices().size();
+            light.vbo.reset(moci::VertexBuffer::Create(nullptr, lightVertices * sizeof(Light::Vertex), true));
+            light.vbo->SetLayout(lightLayout);
+            light.vbo->Unbind();
+            light.ibo.reset(moci::IndexBuffer::Create(nullptr, 1, true));
+            light.ibo->Unbind();
+            light.vao = moci::VertexArray::Create();
+            light.vao->AddVertexBuffer(light.vbo);
+            light.vao->SetIndexBuffer(light.ibo);
+            light.vao->Unbind();
+        }
 
-        textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
-        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
+        {
+            MOCI_PROFILE_SCOPE("OnAttach::Textures");
+            textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
+            textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
+            // #if defined(MOCI_API_OPENGL_ES)
+            //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
+            // #else
+            //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
+            // #endif
+        }
 
-        // #if defined(MOCI_API_OPENGL_ES)
-        //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
-        // #else
-        //         textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
-        // #endif
         fpsHistory_.reserve(10'000);
     }
 

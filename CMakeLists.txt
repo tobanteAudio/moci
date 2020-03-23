@@ -26,14 +26,13 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     endif()
 endif()
 
-option(MOCI_BUILD_GRPC           "Build grpc & projects using it"    OFF)
 option(MOCI_BUILD_TESTS          "Build the unit tests with Catch2"  ON)
 option(MOCI_BUILD_COVERAGE       "Build with coverage enabled"       OFF)
 option(MOCI_CLANG_TIDY           "Run clang-tidy with the compiler." OFF)
 option(MOCI_CLANG_TIDY_FIX       "Run & auto fix clang-tidy with the compiler." OFF)
 option(MOCI_GIT_SUBMODULE        "Check submodules during build"     ON)
 option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"     OFF)
-option(MOCI_API_OPENGL_LEGACY    "Use OpenGL 2.0 implementation"     OFF)
+option(MOCI_API_OPENGL_LEGACY    "Use OpenGL Legacy implementation"  OFF)
 option(MOCI_API_OPENGL_ES        "Link against OpenGL ES 2.0"        OFF)
 
 # Cmake setup
