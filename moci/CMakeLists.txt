@@ -161,6 +161,8 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Threads
         Moci::ImGui
         Moci::StbImage
+        Moci::StbImageWrite
+        Moci::StbImageResize
         spdlog::spdlog
         glfw 
         ${GLFW_LIBRARIES}
