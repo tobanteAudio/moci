@@ -30,6 +30,7 @@ public:
 
     void OnUpdate(Timestep ts) override
     {
+        IgnoreUnused(ts);
         // MOCI_CORE_ASSERT(rootComponent_ != nullptr);
         RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         RenderCommand::Clear();
@@ -69,6 +70,7 @@ public:
 
     bool OnMouseMoved(MouseMovedEvent& e)
     {
+        IgnoreUnused(e);
         // MOCI_CORE_INFO("Mouse: {}, {}", e.GetX(), e.GetY());
         return true;
     }
