@@ -5,6 +5,7 @@ var searchData=
   ['rectangle_3c_20int_20_3e',['Rectangle&lt; int &gt;',['../classmoci_1_1Rectangle.html',1,'moci']]],
   ['red',['Red',['../classmoci_1_1Colors.html#a80697327ce989eaea700cc9272de2f0d',1,'moci::Colors']]],
   ['reduced',['Reduced',['../classmoci_1_1Rectangle.html#a3152e77a224b45e410017f70d5f2396d',1,'moci::Rectangle::Reduced(Type deltaX, Type deltaY) const noexcept -&gt; Rectangle&lt; Type &gt;'],['../classmoci_1_1Rectangle.html#a402b286249c34ed9ed6c578e79502aa3',1,'moci::Rectangle::Reduced(Type delta) const noexcept -&gt; Rectangle&lt; Type &gt;']]],
+  ['ref',['Ref',['../namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31',1,'moci']]],
   ['removefrombottom',['RemoveFromBottom',['../classmoci_1_1Rectangle.html#a87ee45609a842f3b201ebc94c81d7094',1,'moci::Rectangle']]],
   ['removefromleft',['RemoveFromLeft',['../classmoci_1_1Rectangle.html#a4e9a6f1bce9af720b0dfcdb0e17c2c2d',1,'moci::Rectangle']]],
   ['removefromright',['RemoveFromRight',['../classmoci_1_1Rectangle.html#a19e52fd6d0e2b1c26e0c140f424dbb28',1,'moci::Rectangle']]],

@@ -226,6 +226,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr class="memitem:a0026500ddfc8f3723b5cb3e8b5b4c901"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a0026500ddfc8f3723b5cb3e8b5b4c901"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a0026500ddfc8f3723b5cb3e8b5b4c901">Scope</a> = std::unique_ptr&lt; T &gt;</td></tr>
+<tr class="separator:a0026500ddfc8f3723b5cb3e8b5b4c901"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dc87f967df15767eb2bbac78fab1a31"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3dc87f967df15767eb2bbac78fab1a31"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a> = std::shared_ptr&lt; T &gt;</td></tr>
+<tr class="separator:a3dc87f967df15767eb2bbac78fab1a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bd47ebedaee533b16e4e3fb6ac2a051"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a6bd47ebedaee533b16e4e3fb6ac2a051">FloatingPointMicroseconds</a> = std::chrono::duration&lt; double, std::micro &gt;</td></tr>
 <tr class="separator:a6bd47ebedaee533b16e4e3fb6ac2a051"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -320,6 +326,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ab099bc47ed0f27f0ee4de9600126eff4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ab099bc47ed0f27f0ee4de9600126eff4"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; bool, int &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#ab099bc47ed0f27f0ee4de9600126eff4">FindInVector</a> (const std::vector&lt; T &gt; &amp;vec, const T &amp;element)</td></tr>
 <tr class="separator:ab099bc47ed0f27f0ee4de9600126eff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebad0b2258569bb3093624b229bfb915"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Args&gt; </td></tr>
+<tr class="memitem:aebad0b2258569bb3093624b229bfb915"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="namespacemoci.html#a0026500ddfc8f3723b5cb3e8b5b4c901">Scope</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#aebad0b2258569bb3093624b229bfb915">MakeScope</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="separator:aebad0b2258569bb3093624b229bfb915"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a949b07c0da5bcbfe927563d477f3af29"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Args&gt; </td></tr>
+<tr class="memitem:a949b07c0da5bcbfe927563d477f3af29"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a949b07c0da5bcbfe927563d477f3af29">MakeRef</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="separator:a949b07c0da5bcbfe927563d477f3af29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae476b7800a4885ccb9a99952efba1628"><td class="memTemplParams" colspan="2">template&lt;typename Type &gt; </td></tr>
 <tr class="memitem:ae476b7800a4885ccb9a99952efba1628"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#ae476b7800a4885ccb9a99952efba1628">IgnoreUnused</a> (Type const &amp;)</td></tr>
 <tr class="separator:ae476b7800a4885ccb9a99952efba1628"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -362,6 +374,38 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="namespacemoci.html#a6bd47ebedaee533b16e4e3fb6ac2a051">moci::FloatingPointMicroseconds</a> = typedef std::chrono::duration&lt;double, std::micro&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3dc87f967df15767eb2bbac78fab1a31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dc87f967df15767eb2bbac78fab1a31">&#9670;&nbsp;</a></span>Ref</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">moci::Ref</a> = typedef std::shared_ptr&lt;T&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0026500ddfc8f3723b5cb3e8b5b4c901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0026500ddfc8f3723b5cb3e8b5b4c901">&#9670;&nbsp;</a></span>Scope</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacemoci.html#a0026500ddfc8f3723b5cb3e8b5b4c901">moci::Scope</a> = typedef std::unique_ptr&lt;T&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -529,6 +573,46 @@ template&lt;typename Type &gt; </div>
           <td>(</td>
           <td class="paramtype">Type const &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a949b07c0da5bcbfe927563d477f3af29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a949b07c0da5bcbfe927563d477f3af29">&#9670;&nbsp;</a></span>MakeRef()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt;T&gt; moci::MakeRef </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aebad0b2258569bb3093624b229bfb915"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebad0b2258569bb3093624b229bfb915">&#9670;&nbsp;</a></span>MakeScope()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="namespacemoci.html#a0026500ddfc8f3723b5cb3e8b5b4c901">Scope</a>&lt;T&gt; moci::MakeScope </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
