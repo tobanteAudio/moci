@@ -2,7 +2,7 @@
 
 #include "renderer_api.hpp"
 
-#include <memory>
+#include "moci/core/memory.hpp"
 
 namespace moci
 {
@@ -38,7 +38,7 @@ public:
     inline static auto MaxUniformVectors() -> std::uint32_t { return s_RendererAPI->MaxUniformVectors(); }
 
 private:
-    static std::unique_ptr<RendererAPI> s_RendererAPI;
+    static Scope<RendererAPI> s_RendererAPI;
 };
 
 }  // namespace moci

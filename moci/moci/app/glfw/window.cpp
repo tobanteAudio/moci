@@ -58,7 +58,7 @@ void GlfwWindow::Init(const WindowProps& props)
 
     ++s_GLFWWindowCount;
 
-    m_Context = std::unique_ptr<GraphicsContext>(GraphicsContext::Create(m_Window));
+    m_Context = Scope<GraphicsContext>(GraphicsContext::Create(m_Window));
     m_Context->Init();
 
     glfwSetWindowUserPointer(m_Window, &m_Data);

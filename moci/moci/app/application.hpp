@@ -36,7 +36,7 @@ private:
     auto OnWindowResize(WindowResizeEvent& e) -> bool;
 
 private:
-    std::unique_ptr<Window> m_Window;
+    Scope<Window> m_Window;
     bool m_Running                                                          = true;
     bool m_Minimized                                                        = false;
     LayerStack m_LayerStack                                                 = {};

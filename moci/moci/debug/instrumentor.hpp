@@ -36,7 +36,7 @@ class Instrumentor
 {
 private:
     std::mutex mutex_;
-    std::unique_ptr<InstrumentationSession> currentSession_ {nullptr};
+    Scope<InstrumentationSession> currentSession_ {nullptr};
     std::ofstream outputStream_;
     std::vector<std::string> buffer_;
 
@@ -65,7 +65,7 @@ public:
         outputStream_.open(filepath);
         if (outputStream_.is_open())
         {
-            currentSession_       = std::make_unique<InstrumentationSession>();
+            currentSession_       = MakeScope<InstrumentationSession>();
             currentSession_->Name = name;
             WriteHeader();
         }

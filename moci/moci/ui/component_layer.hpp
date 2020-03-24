@@ -16,12 +16,12 @@ namespace moci
 class ComponentLayer : public Layer
 {
 public:
-    ComponentLayer(std::unique_ptr<Component>&& root) : Layer("component-layer"), rootComponent_(std::move(root)) {}
+    ComponentLayer(Scope<Component>&& root) : Layer("component-layer"), rootComponent_(std::move(root)) {}
     ~ComponentLayer() override = default;
 
     void OnAttach() override
     {
-        renderQueue_ = std::make_unique<RenderQueue>();
+        renderQueue_ = MakeScope<RenderQueue>();
         rootComponent_->SetStyle(&defaultStyle_);
         rootComponent_->SetSize(static_cast<int>(width_), static_cast<int>(height_));
     }
@@ -86,8 +86,8 @@ private:
     float width_  = 1280.0f;
     float height_ = 1024.0f;
 
-    std::unique_ptr<RenderQueue> renderQueue_ {};
+    Scope<RenderQueue> renderQueue_ {};
     Style defaultStyle_ {};
-    std::unique_ptr<Component> rootComponent_;
+    Scope<Component> rootComponent_;
 };
 }  // namespace moci

@@ -21,11 +21,11 @@ Application::Application()
     s_Instance = this;
     MOCI_CORE_INFO("Initializing App...");
 
-    m_Window = std::unique_ptr<Window>(Window::Create());
+    m_Window = Scope<Window>(Window::Create());
     m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
     Renderer::Init();
-    PushOverlay(std::make_unique<ImGuiLayer>());
+    PushOverlay(MakeScope<ImGuiLayer>());
 }
 
 void Application::PushLayer(Layer::Ptr&& layer) { m_LayerStack.PushLayer(std::move(layer)); }

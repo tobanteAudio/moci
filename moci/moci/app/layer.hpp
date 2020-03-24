@@ -1,7 +1,8 @@
 #pragma once
 
-#include "events/event.hpp"
-#include "timestep.hpp"
+#include "moci/core/memory.hpp"
+#include "moci/app/events/event.hpp"
+#include "moci/app/timestep.hpp"
 
 #include <memory>
 #include <string>
@@ -12,7 +13,7 @@ namespace moci
 class Layer
 {
 public:
-    using Ptr = std::unique_ptr<Layer>;
+    using Ptr = Scope<Layer>;
 
 public:
     Layer(std::string name = "Layer");

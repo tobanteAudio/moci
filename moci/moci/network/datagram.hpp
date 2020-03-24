@@ -2,7 +2,8 @@
 
 #include <cstddef>
 
-#include <memory>
+#include "moci/core/memory.hpp"
+
 #include <vector>
 
 #include <gsl/gsl>
@@ -32,7 +33,7 @@ public:
 
 private:
     class Pimpl;
-    std::unique_ptr<Pimpl> pimpl_;
+    Scope<Pimpl> pimpl_;
 };
 
 }  // namespace moci

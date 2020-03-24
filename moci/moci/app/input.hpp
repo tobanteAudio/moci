@@ -1,6 +1,7 @@
 #pragma once
 
-#include <memory>
+#include "moci/core/memory.hpp"
+
 #include <tuple>
 
 namespace moci
@@ -29,6 +30,6 @@ private:
     virtual auto GetMouseYImpl() -> float                          = 0;
 
 private:
-    static std::unique_ptr<Input> s_Instance;
+    static Scope<Input> s_Instance;
 };
 }  // namespace moci

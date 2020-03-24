@@ -13,7 +13,7 @@ int main(int argc, char** argv)
     moci::Log::Init();
     MOCI_CORE_INFO("Initialized Log!");
 
-    auto app = std::unique_ptr<moci::Application>(moci::CreateApplication());
+    auto app = moci::Scope<moci::Application>(moci::CreateApplication());
     app->Run();
 
     return EXIT_SUCCESS;

@@ -3,6 +3,7 @@
 #if defined(MOCI_API_OPENGL_MODERN)
 
 #include "moci/render/renderer_api.hpp"
+#include "moci/core/memory.hpp"
 
 namespace moci
 {

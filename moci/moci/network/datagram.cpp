@@ -9,7 +9,7 @@
 
 namespace moci
 {
-DatagramSocket::DatagramSocket() { pimpl_ = std::make_unique<Pimpl>(); }
+DatagramSocket::DatagramSocket() { pimpl_ = MakeScope<Pimpl>(); }
 
 DatagramSocket::~DatagramSocket() { pimpl_.reset(nullptr); }
 
