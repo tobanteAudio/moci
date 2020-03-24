@@ -108,7 +108,8 @@ void main()
     // Model transform should already be applied to the vertex on the host side.
     mat4 model = mat4(1.0);
 
-    v_Normal = mat3(Transpose(Inverse(model))) * a_Normal;
+    mat4 tmp = Transpose(Inverse(model));
+    v_Normal = mat3(tmp[0].xyz, tmp[1].xyz, tmp[2].xyz) * a_Normal;
     // Simpler version, No need for custom inverse & transpose functions on ES2.0.
     // v_Normal = a_Normal;
 
