@@ -68,6 +68,8 @@ set(moci_sources
     moci/render/font.cpp
     moci/render/graphics_context.hpp
     moci/render/graphics_context.cpp
+    moci/render/light.hpp
+    moci/render/light.cpp
     moci/render/mesh.hpp
     moci/render/mesh.cpp
     moci/render/render_command.hpp

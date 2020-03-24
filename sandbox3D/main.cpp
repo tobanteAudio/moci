@@ -32,8 +32,8 @@ public:
         }
 
         auto const numVertices = (mesh_.GetVertices().size() * 11)  //
-                                 + floor_.GetVertices().size()      //
-                                 + lightMesh_.GetVertices().size();
+                                 + floor_.GetVertices().size();     //
+                                                                    //  + lightMesh_.GetVertices().size();
 
         vertices_.reserve(numVertices);
         {
@@ -103,31 +103,9 @@ public:
             vao_->SetIndexBuffer(ibo_);
             vao_->Unbind();
         }
-        {
-            // Light buffer
-            MOCI_PROFILE_SCOPE("OnAttach::LightBuffer");
-#if defined(MOCI_API_OPENGL_LEGACY)
-            light.shader = moci::Shader::Create("sandbox3D/assets/shader/es2_light_source.glsl");
-#else
-            light.shader   = moci::Shader::Create("sandbox3D/assets/shader/gl4_light_source.glsl");
-#endif
-            light.shader->Bind();
-            moci::BufferLayout lightLayout = {
-                {moci::ShaderDataType::Float3, "a_Position"},  //
-                {moci::ShaderDataType::Float4, "a_Color"},     //
-            };
 
-            auto const size = static_cast<uint32_t>(lightMesh_.GetVertices().size() * sizeof(Light::Vertex));
-            light.vbo.reset(moci::VertexBuffer::Create(nullptr, size, true));
-            light.vbo->SetLayout(lightLayout);
-            light.vbo->Unbind();
-            light.ibo.reset(moci::IndexBuffer::Create(nullptr, 1, true));
-            light.ibo->Unbind();
-            light.vao = moci::VertexArray::Create();
-            light.vao->AddVertexBuffer(light.vbo);
-            light.vao->SetIndexBuffer(light.ibo);
-            light.vao->Unbind();
-        }
+        // light
+        light = moci::MakeScope<moci::Light>();
 
         {
             MOCI_PROFILE_SCOPE("OnAttach::Textures");
@@ -166,8 +144,8 @@ public:
             shader_->SetMat4("u_View", view);
             shader_->SetMat4("u_Projection", projection);
             shader_->SetFloat("u_Ambient", ambientLight_);
-            shader_->SetFloat3("u_LightPos", light.position);
-            shader_->SetFloat3("u_LightColor", glm::vec3(light.color));
+            shader_->SetFloat3("u_LightPos", light->position);
+            shader_->SetFloat3("u_LightColor", glm::vec3(light->color));
             shader_->SetFloat3("u_ViewPos", cameraPos_);
 
             vao_->Bind();
@@ -180,25 +158,7 @@ public:
 
         {
             MOCI_PROFILE_SCOPE("OnUpdate::Light");
-            auto const model       = glm::translate(glm::mat4(1.0f), light.position);
-            auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {light.scale, light.scale, light.scale});
-            auto const color       = light.color;
-            for (auto const& vertex : lightMesh_.GetVertices())
-            {
-                auto const position = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-                light.vertices.push_back({glm::vec3(position), color});
-            }
-
-            light.shader->Bind();
-            light.shader->SetMat4("u_View", view);
-            light.shader->SetMat4("u_Projection", projection);
-
-            light.vao->Bind();
-            light.vbo->UploadData(0, light.vertices.size() * sizeof(Light::Vertex), light.vertices.data());
-            moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, light.vertices.size());
-            drawStats_.numVertices += light.vertices.size();
-            light.vertices.clear();
-            light.vao->Unbind();
+            light->Render(view, projection);
         }
     }
 
@@ -295,9 +255,9 @@ public:
             {
 
                 ImGui::SliderFloat("Ambient", &ambientLight_, 0.0f, 0.4f);
-                ImGui::SliderFloat3("Light Position", glm::value_ptr(light.position), -20.0f, 20.0f);
-                ImGui::ColorEdit4("Light Color", glm::value_ptr(light.color), 0);
-                ImGui::SliderFloat("Light Scale", &light.scale, 0.1f, 1.0f);
+                ImGui::SliderFloat3("Light Position", glm::value_ptr(light->position), -20.0f, 20.0f);
+                ImGui::ColorEdit4("Light Color", glm::value_ptr(light->color), 0);
+                ImGui::SliderFloat("Light Scale", &light->scale, 0.1f, 1.0f);
             }
 
             if (ImGui::CollapsingHeader("Model"))
@@ -320,8 +280,8 @@ public:
                 ImGui::TextUnformatted(vertices.c_str());
                 ImGui::TextUnformatted(triangles.c_str());
                 ImGui::TextUnformatted(megabyte.c_str());
-                auto const lightStr = fmt::format("Light vertices: {}", lightMesh_.GetVertices().size());
-                ImGui::TextUnformatted(lightStr.c_str());
+                // auto const lightStr = fmt::format("Light vertices: {}", lightMesh_.GetVertices().size());
+                // ImGui::TextUnformatted(lightStr.c_str());
                 auto const size = static_cast<int>(fpsHistory_.size());
                 ImGui::PlotLines("FPS", fpsHistory_.data(), size, 0, "", 50.0f, 75.0f, ImVec2(0, 80));
             }
@@ -350,26 +310,7 @@ public:
 
     float modelScale_ = 0.15f;
 
-    struct Light
-    {
-        struct Vertex
-        {
-            glm::vec3 position = {};
-            glm::vec4 color    = {};
-        };
-
-        glm::vec3 position = {8.4f, 4.0f, 3.0f};
-        glm::vec4 color    = {1.0f, 1.0f, 1.0f, 1.0f};
-        float scale        = 0.5f;
-
-        moci::Ref<moci::Shader> shader      = nullptr;
-        moci::Ref<moci::VertexBuffer> vbo   = nullptr;
-        moci::Ref<moci::IndexBuffer> ibo    = nullptr;
-        moci::Ref<moci::VertexArray> vao    = nullptr;
-        std::vector<Light::Vertex> vertices = {};
-    };
-
-    Light light {};
+    moci::Scope<moci::Light> light {};
 
     moci::Ref<moci::Shader> shader_    = nullptr;
     moci::Ref<moci::VertexBuffer> vbo_ = nullptr;
@@ -379,7 +320,6 @@ public:
     std::size_t numVertices_ {};
     // moci::Mesh mesh_ {"sandbox3D/assets/models/donut.obj"};
     moci::Mesh mesh_ {"sandbox3D/assets/models/cerberus.fbx"};
-    moci::Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
     moci::Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 
     moci::Texture2D::Ptr textureSolid_ {};
