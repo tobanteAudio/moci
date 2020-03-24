@@ -1,11 +1,13 @@
 #include "moci/ui/component.hpp"
 
+#include "moci/core/preprocessor.hpp"
+
 namespace moci
 {
 
 Component::Component(std::string id) : id_(std::move(id)) {}
 
-void Component::OnDraw(RenderQueue& painter) {}
+void Component::OnDraw(RenderQueue& painter) { IgnoreUnused(painter); }
 
 void Component::OnResize() {}
 

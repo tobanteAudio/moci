@@ -343,8 +343,9 @@ public:
                 {moci::ShaderDataType::Float4, "a_Color"},      //
                 {moci::ShaderDataType::Float2, "a_TexCoords"},  //
             };
-            vbo_.reset(moci::VertexBuffer::Create(reinterpret_cast<float*>(vertices_.data()),
-                                                  vertices_.size() * sizeof(Vertex), false));
+            auto* data      = reinterpret_cast<float*>(vertices_.data());
+            auto const size = static_cast<std::uint32_t>(vertices_.size() * sizeof(Vertex));
+            vbo_.reset(moci::VertexBuffer::Create(data, size, false));
             vbo_->SetLayout(layout);
             vbo_->Unbind();
             ibo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
@@ -368,8 +369,8 @@ public:
                 {moci::ShaderDataType::Float4, "a_Color"},     //
             };
 
-            auto const lightVertices = lightMesh_.GetVertices().size();
-            light.vbo.reset(moci::VertexBuffer::Create(nullptr, lightVertices * sizeof(Light::Vertex), true));
+            auto const size = static_cast<uint32_t>(lightMesh_.GetVertices().size() * sizeof(Light::Vertex));
+            light.vbo.reset(moci::VertexBuffer::Create(nullptr, size, true));
             light.vbo->SetLayout(lightLayout);
             light.vbo->Unbind();
             light.ibo.reset(moci::IndexBuffer::Create(nullptr, 1, true));
@@ -428,8 +429,9 @@ public:
             MOCI_PROFILE_SCOPE("OnUpdate::DrawArrays Mesh");
             vao_->Bind();
             textureColors_->Bind(0);
-            moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices_.size());
-            drawStats_.numVertices += vertices_.size();
+            moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0,
+                                            static_cast<std::uint32_t>(vertices_.size()));
+            drawStats_.numVertices += static_cast<std::uint32_t>(vertices_.size());
             textureColors_->Unbind();
         }
 
@@ -576,12 +578,13 @@ public:
                 ImGui::TextUnformatted(fpsStr.c_str());
                 ImGui::TextUnformatted(minFPSStr.c_str());
                 ImGui::TextUnformatted(maxFPSStr.c_str());
-                ImGui::PlotLines("FPS", fpsHistory_.data(), fpsHistory_.size(), 0, "", 50.0f, 75.0f, ImVec2(0, 80));
                 ImGui::TextUnformatted(vertices.c_str());
                 ImGui::TextUnformatted(triangles.c_str());
                 ImGui::TextUnformatted(megabyte.c_str());
                 auto const lightStr = fmt::format("Light vertices: {}", lightMesh_.GetVertices().size());
                 ImGui::TextUnformatted(lightStr.c_str());
+                auto const size = static_cast<int>(fpsHistory_.size());
+                ImGui::PlotLines("FPS", fpsHistory_.data(), size, 0, "", 50.0f, 75.0f, ImVec2(0, 80));
             }
             ImGui::End();
         }
