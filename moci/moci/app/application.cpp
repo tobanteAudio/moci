@@ -97,6 +97,7 @@ void Application::Run()
 
 auto Application::OnWindowClose(WindowCloseEvent& e) -> bool
 {
+    IgnoreUnused(e);
     m_Running = false;
     return true;
 }
