@@ -398,13 +398,11 @@ public:
     void OnUpdate(moci::Timestep ts) override
     {
         MOCI_PROFILE_FUNCTION();
-        {
-            MOCI_PROFILE_SCOPE("OnUpdate::Clear");
-            lastTimestep_          = ts.GetMilliseconds();
-            drawStats_.numVertices = 0;
-            moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
-            moci::RenderCommand::Clear();
-        }
+        drawStats_.frameCounter += 1;
+        lastTimestep_          = ts.GetMilliseconds();
+        drawStats_.numVertices = 0;
+        moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+        moci::RenderCommand::Clear();
 
         // Camera matrix
         glm::mat4 const projection = glm::perspective(glm::radians(cameraFOV_), width_ / height_, 0.1f, 100.0f);
@@ -415,7 +413,7 @@ public:
         );
 
         {
-            MOCI_PROFILE_SCOPE("OnUpdate::Uniforms Mesh");
+            MOCI_PROFILE_SCOPE("OnUpdate::Mesh");
             shader_->Bind();
             shader_->SetMat4("u_View", view);
             shader_->SetMat4("u_Projection", projection);
@@ -423,10 +421,7 @@ public:
             shader_->SetFloat3("u_LightPos", light.position);
             shader_->SetFloat3("u_LightColor", glm::vec3(light.color));
             shader_->SetFloat3("u_ViewPos", cameraPos_);
-        }
 
-        {
-            MOCI_PROFILE_SCOPE("OnUpdate::DrawArrays Mesh");
             vao_->Bind();
             textureColors_->Bind(0);
             moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0,
@@ -436,7 +431,7 @@ public:
         }
 
         {
-            MOCI_PROFILE_SCOPE("OnUpdate::Translate Light");
+            MOCI_PROFILE_SCOPE("OnUpdate::Light");
             auto const model       = glm::translate(glm::mat4(1.0f), light.position);
             auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {light.scale, light.scale, light.scale});
             auto const color       = light.color;
@@ -445,17 +440,11 @@ public:
                 auto const position = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
                 light.vertices.push_back({glm::vec3(position), color});
             }
-        }
 
-        {
-            MOCI_PROFILE_SCOPE("OnUpdate::Uniforms Light");
             light.shader->Bind();
             light.shader->SetMat4("u_View", view);
             light.shader->SetMat4("u_Projection", projection);
-        }
 
-        {
-            MOCI_PROFILE_SCOPE("OnUpdate::DrawArrays Light");
             light.vao->Bind();
             light.vbo->UploadData(0, light.vertices.size() * sizeof(Light::Vertex), light.vertices.data());
             moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, light.vertices.size());
@@ -503,23 +492,17 @@ public:
 
     void OnImGuiRender() override
     {
-        MOCI_PROFILE_FUNCTION();
-        if (drawStats_.resetCounter >= DrawStats::ResetRate)
-        {
-            drawStats_.minFPS       = 9999.0f;
-            drawStats_.maxFPS       = 0.0f;
-            drawStats_.resetCounter = 0;
-        }
-        drawStats_.resetCounter += 1;
-
         auto const fps = ImGui::GetIO().Framerate;
-        if (fps < drawStats_.minFPS)
+        if (drawStats_.frameCounter >= 100)
         {
-            drawStats_.minFPS = fps;
-        }
-        if (fps > drawStats_.maxFPS)
-        {
-            drawStats_.maxFPS = fps;
+            if (fps < drawStats_.minFPS)
+            {
+                drawStats_.minFPS = fps;
+            }
+            if (fps > drawStats_.maxFPS)
+            {
+                drawStats_.maxFPS = fps;
+            }
         }
 
         auto const fpsStr    = fmt::format("FPS: {0:0.1f}", fps);
@@ -576,12 +559,13 @@ public:
 
             if (ImGui::CollapsingHeader("Stats"))
             {
-                MOCI_PROFILE_SCOPE("ImGui::Stats");
                 fpsHistory_.push_back(fps);
-                auto const vertices  = fmt::format("{} Vertices", drawStats_.numVertices);
-                auto const triangles = fmt::format("{} Triangles", drawStats_.numVertices / 3);
-                auto const mb        = drawStats_.numVertices * sizeof(Vertex) / 1'000'000.0f;
-                auto const megabyte  = fmt::format("{0:0.1f} Mbytes", mb);
+                auto const frameCount = fmt::format("{} Frames", drawStats_.frameCounter);
+                auto const vertices   = fmt::format("{} Vertices", drawStats_.numVertices);
+                auto const triangles  = fmt::format("{} Triangles", drawStats_.numVertices / 3);
+                auto const mb         = drawStats_.numVertices * sizeof(Vertex) / 1'000'000.0f;
+                auto const megabyte   = fmt::format("{0:0.1f} Mbytes", mb);
+                ImGui::TextUnformatted(frameCount.c_str());
                 ImGui::TextUnformatted(fpsStr.c_str());
                 ImGui::TextUnformatted(minFPSStr.c_str());
                 ImGui::TextUnformatted(maxFPSStr.c_str());
@@ -658,8 +642,7 @@ public:
     // imgui
     struct DrawStats
     {
-        static constexpr std::size_t ResetRate = 1'000;
-        std::uint32_t resetCounter {};
+        std::uint32_t frameCounter {};
         std::uint32_t numVertices {};
         float minFPS = 9999.0f;
         float maxFPS = 0.0f;

@@ -54,16 +54,13 @@ void ImGuiLayer::Begin()
 {
     MOCI_PROFILE_FUNCTION();
 
-    {
-        MOCI_PROFILE_SCOPE("ImGui::Begin::NewFrame");
 #if !defined(MOCI_MAC)
-        ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplOpenGL3_NewFrame();
 #else
-        ImGui_ImplOpenGL2_NewFrame();
+    ImGui_ImplOpenGL2_NewFrame();
 #endif
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-    }
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
 
     // Docking
     ImGuiWindowFlags window_flags {};
