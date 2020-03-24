@@ -614,11 +614,11 @@ public:
         glm::vec4 color    = {1.0f, 1.0f, 1.0f, 1.0f};
         float scale        = 0.5f;
 
-        moci::Ref<moci::Shader> shader    = nullptr;
-        moci::Ref<moci::VertexBuffer> vbo = nullptr;
-        moci::Ref<moci::IndexBuffer> ibo  = nullptr;
-        moci::Ref<moci::VertexArray> vao  = nullptr;
-        std::vector<Light::Vertex> vertices     = {};
+        moci::Ref<moci::Shader> shader      = nullptr;
+        moci::Ref<moci::VertexBuffer> vbo   = nullptr;
+        moci::Ref<moci::IndexBuffer> ibo    = nullptr;
+        moci::Ref<moci::VertexArray> vao    = nullptr;
+        std::vector<Light::Vertex> vertices = {};
     };
 
     Light light {};

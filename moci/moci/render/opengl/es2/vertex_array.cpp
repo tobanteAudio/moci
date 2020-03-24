@@ -41,14 +41,8 @@ void OpenGLESVertexArray::Unbind() const
     m_VertexBuffer->Unbind();
 }
 
-void OpenGLESVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
-{
-    m_VertexBuffer = vertexBuffer;
-}
-void OpenGLESVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
-{
-    m_IndexBuffer = indexBuffer;
-}
+void OpenGLESVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) { m_VertexBuffer = vertexBuffer; }
+void OpenGLESVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) { m_IndexBuffer = indexBuffer; }
 void OpenGLESVertexArray::setLayout() const
 {
     const auto& elements = m_VertexBuffer->GetLayout().GetElements();

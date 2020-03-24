@@ -1,6 +1,5 @@
 #include "renderer.hpp"
 
-
 // #include "Platform/OpenGL/OpenGLShader.h"
 // #include "Platform/OpenGLES/OpenGLESShader.h"
 // #include "Renderer2D.h"

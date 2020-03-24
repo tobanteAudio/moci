@@ -17,10 +17,7 @@ public:
     void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
     void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
-    [[nodiscard]] auto GetVertexBuffer() const -> const Ref<VertexBuffer>& override
-    {
-        return m_VertexBuffer;
-    }
+    [[nodiscard]] auto GetVertexBuffer() const -> const Ref<VertexBuffer>& override { return m_VertexBuffer; }
     [[nodiscard]] auto GetIndexBuffer() const -> const Ref<IndexBuffer>& override { return m_IndexBuffer; }
 
 private:

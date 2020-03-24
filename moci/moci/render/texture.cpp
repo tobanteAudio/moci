@@ -28,8 +28,7 @@ auto Texture2D::Create(std::string const& path) -> Ref<Texture2D>
     return nullptr;
 }
 
-auto Texture2D::Create(Texture::Format format, uint32_t width, uint32_t height, void* data)
-    -> Ref<Texture2D>
+auto Texture2D::Create(Texture::Format format, uint32_t width, uint32_t height, void* data) -> Ref<Texture2D>
 {
     switch (Renderer::GetAPI())
     {

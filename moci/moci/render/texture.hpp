@@ -42,8 +42,7 @@ public:
 
 public:
     static auto Create(std::string const& path) -> Ref<Texture2D>;
-    static auto Create(Texture::Format format, uint32_t width, uint32_t height, void* data)
-        -> Ref<Texture2D>;
+    static auto Create(Texture::Format format, uint32_t width, uint32_t height, void* data) -> Ref<Texture2D>;
 };
 
 }  // namespace moci

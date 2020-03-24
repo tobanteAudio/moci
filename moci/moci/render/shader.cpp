@@ -1,6 +1,5 @@
 #include "shader.hpp"
 
-
 #include "renderer.hpp"
 
 #include "moci/render/opengl/es2/shader.hpp"
