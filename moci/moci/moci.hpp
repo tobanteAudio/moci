@@ -4,6 +4,7 @@
 
 #include "moci/core/algorithm.hpp"
 #include "moci/core/logging.hpp"
+#include "moci/core/memory.hpp"
 #include "moci/core/property_map.hpp"
 #include "moci/core/scope_close.hpp"
 #include "moci/core/strings.hpp"

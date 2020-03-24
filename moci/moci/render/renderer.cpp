@@ -1,5 +1,6 @@
 #include "renderer.hpp"
 
+
 // #include "Platform/OpenGL/OpenGLShader.h"
 // #include "Platform/OpenGLES/OpenGLESShader.h"
 // #include "Renderer2D.h"
@@ -24,7 +25,7 @@ void Renderer::OnWindowResize(uint32_t width, uint32_t height) { RenderCommand::
 
 // void Renderer::EndScene() {}
 
-// void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray,
+// void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray,
 //                       const glm::mat4& transform)
 // {
 //     shader->Bind();

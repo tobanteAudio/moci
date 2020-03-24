@@ -8,7 +8,7 @@
 namespace moci
 {
 
-auto VertexArray::Create() -> std::shared_ptr<VertexArray>
+auto VertexArray::Create() -> Ref<VertexArray>
 {
     switch (Renderer::GetAPI())
     {
@@ -16,10 +16,10 @@ auto VertexArray::Create() -> std::shared_ptr<VertexArray>
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return std::make_shared<OpenGLVertexArray>();
+        case RendererAPI::API::OpenGL: return MakeRef<OpenGLVertexArray>();
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES: return std::make_shared<OpenGLESVertexArray>();
+        case RendererAPI::API::OpenGLES: return MakeRef<OpenGLESVertexArray>();
 #endif
         default: break;
     }

@@ -2,6 +2,8 @@
 
 #include "buffer.hpp"
 
+#include "moci/core/memory.hpp"
+
 #include <memory>
 
 namespace moci
@@ -15,13 +17,13 @@ public:
     virtual void Bind() const   = 0;
     virtual void Unbind() const = 0;
 
-    virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) = 0;
-    virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)    = 0;
+    virtual void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) = 0;
+    virtual void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)    = 0;
 
-    [[nodiscard]] virtual auto GetVertexBuffer() const -> const std::shared_ptr<VertexBuffer>& = 0;
-    [[nodiscard]] virtual auto GetIndexBuffer() const -> const std::shared_ptr<IndexBuffer>&   = 0;
+    [[nodiscard]] virtual auto GetVertexBuffer() const -> const Ref<VertexBuffer>& = 0;
+    [[nodiscard]] virtual auto GetIndexBuffer() const -> const Ref<IndexBuffer>&   = 0;
 
-    static auto Create() -> std::shared_ptr<VertexArray>;
+    static auto Create() -> Ref<VertexArray>;
 };
 
 }  // namespace moci

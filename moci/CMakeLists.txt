@@ -7,6 +7,7 @@ set(moci_sources
     moci/core/algorithm.hpp
     moci/core/logging.hpp
     moci/core/logging.cpp
+    moci/core/memory.hpp
     moci/core/preprocessor.hpp
     moci/core/property_map.hpp
     moci/core/property_map.cpp

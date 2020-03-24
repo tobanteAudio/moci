@@ -1,5 +1,7 @@
 #pragma once
 
+#include "moci/core/memory.hpp"
+
 #include <glm/glm.hpp>
 
 #include <memory>
@@ -33,9 +35,9 @@ public:
 
     [[nodiscard]] virtual auto GetName() const -> std::string const& = 0;
 
-    static auto Create(std::string const& filepath) -> std::shared_ptr<Shader>;
+    static auto Create(std::string const& filepath) -> Ref<Shader>;
     static auto Create(std::string const& name, std::string const& vertexSrc, std::string const& fragmentSrc)
-        -> std::shared_ptr<Shader>;
+        -> Ref<Shader>;
 };
 
 }  // namespace moci

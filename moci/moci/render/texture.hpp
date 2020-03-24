@@ -1,6 +1,7 @@
 #pragma once
 
 #include "moci/core/logging.hpp"
+#include "moci/core/memory.hpp"
 
 #include <memory>
 #include <optional>
@@ -36,13 +37,13 @@ public:
 class Texture2D : public Texture
 {
 public:
-    using Ptr      = std::shared_ptr<Texture2D>;
+    using Ptr      = Ref<Texture2D>;
     using Optional = std::optional<Ptr>;
 
 public:
-    static auto Create(std::string const& path) -> std::shared_ptr<Texture2D>;
+    static auto Create(std::string const& path) -> Ref<Texture2D>;
     static auto Create(Texture::Format format, uint32_t width, uint32_t height, void* data)
-        -> std::shared_ptr<Texture2D>;
+        -> Ref<Texture2D>;
 };
 
 }  // namespace moci

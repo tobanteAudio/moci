@@ -1,6 +1,7 @@
 #pragma once
 
 #include "moci/core/preprocessor.hpp"
+#include "moci/core/memory.hpp"
 
 #include "spdlog/fmt/ostr.h"
 #include "spdlog/spdlog.h"
@@ -13,12 +14,12 @@ class Log
 public:
     static void Init();
 
-    inline static auto GetCoreLogger() -> std::shared_ptr<spdlog::logger>& { return s_CoreLogger; }
-    inline static auto GetClientLogger() -> std::shared_ptr<spdlog::logger>& { return s_ClientLogger; }
+    inline static auto GetCoreLogger() -> Ref<spdlog::logger>& { return s_CoreLogger; }
+    inline static auto GetClientLogger() -> Ref<spdlog::logger>& { return s_ClientLogger; }
 
 private:
-    static std::shared_ptr<spdlog::logger> s_CoreLogger;
-    static std::shared_ptr<spdlog::logger> s_ClientLogger;
+    static Ref<spdlog::logger> s_CoreLogger;
+    static Ref<spdlog::logger> s_ClientLogger;
 };
 
 }  // namespace moci

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moci/core/memory.hpp"
 #include "moci/geometry/rectangle.hpp"
 #include "moci/render/buffer.hpp"
 #include "moci/render/color.hpp"
@@ -65,10 +66,10 @@ private:
 
     struct RenderData
     {
-        std::shared_ptr<VertexBuffer> vbo;
-        std::shared_ptr<IndexBuffer> ibo;
-        std::shared_ptr<VertexArray> vao;
-        std::shared_ptr<Shader> shader;
+        Ref<VertexBuffer> vbo;
+        Ref<IndexBuffer> ibo;
+        Ref<VertexArray> vao;
+        Ref<Shader> shader;
 
         std::vector<Vertex> vertices;
         std::vector<unsigned short> indices;

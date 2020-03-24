@@ -15,17 +15,17 @@ public:
     void Bind() const override;
     void Unbind() const override;
 
-    void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) override;
-    void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) override;
+    void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
+    void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
-    const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const override { return m_VertexBuffer; }
-    const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuffer; }
+    const Ref<VertexBuffer>& GetVertexBuffer() const override { return m_VertexBuffer; }
+    const Ref<IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuffer; }
 
 private:
     uint32_t m_RendererID;
     uint32_t m_VertexBufferIndex = 0;
-    std::shared_ptr<VertexBuffer> m_VertexBuffer;
-    std::shared_ptr<IndexBuffer> m_IndexBuffer;
+    Ref<VertexBuffer> m_VertexBuffer;
+    Ref<IndexBuffer> m_IndexBuffer;
 };
 
 }  // namespace moci

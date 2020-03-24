@@ -14,21 +14,21 @@ public:
     void Bind() const override;
     void Unbind() const override;
 
-    void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) override;
-    void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) override;
+    void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
+    void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
-    [[nodiscard]] auto GetVertexBuffer() const -> const std::shared_ptr<VertexBuffer>& override
+    [[nodiscard]] auto GetVertexBuffer() const -> const Ref<VertexBuffer>& override
     {
         return m_VertexBuffer;
     }
-    [[nodiscard]] auto GetIndexBuffer() const -> const std::shared_ptr<IndexBuffer>& override { return m_IndexBuffer; }
+    [[nodiscard]] auto GetIndexBuffer() const -> const Ref<IndexBuffer>& override { return m_IndexBuffer; }
 
 private:
     void setLayout() const;
 
 private:
-    std::shared_ptr<VertexBuffer> m_VertexBuffer;
-    std::shared_ptr<IndexBuffer> m_IndexBuffer;
+    Ref<VertexBuffer> m_VertexBuffer;
+    Ref<IndexBuffer> m_IndexBuffer;
 };
 
 }  // namespace moci
