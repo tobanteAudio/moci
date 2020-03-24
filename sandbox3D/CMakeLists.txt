@@ -6,5 +6,4 @@ target_link_libraries(${PROJECT_NAME}
         Moci::CompilerOptions 
         Moci::CompilerWarnings
         Moci::Moci
-        assimp::assimp
 )

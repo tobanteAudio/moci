@@ -68,6 +68,8 @@ set(moci_sources
     moci/render/font.cpp
     moci/render/graphics_context.hpp
     moci/render/graphics_context.cpp
+    moci/render/mesh.hpp
+    moci/render/mesh.cpp
     moci/render/render_command.hpp
     moci/render/render_command.cpp
     moci/render/render_queue.hpp
@@ -170,6 +172,7 @@ target_link_libraries(${PROJECT_NAME}
         glm::glm
         GSL
         freetype
+        assimp::assimp
     PRIVATE 
         Moci::CodeCoverage
         Moci::CompilerOptions

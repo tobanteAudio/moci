@@ -14,257 +14,7 @@
 
 #include "glm/gtx/quaternion.hpp"
 
-#include "assimp/DefaultLogger.hpp"
-#include "assimp/Importer.hpp"
-#include "assimp/LogStream.hpp"
-#include "assimp/postprocess.h"
-#include "assimp/scene.h"
 
-struct Vertex
-{
-    glm::vec3 position {};
-    glm::vec3 normal {};
-    glm::vec4 color {};
-    glm::vec2 texCoord {};
-};
-
-struct Index
-{
-    uint32_t V1, V2, V3;
-};
-
-class Submesh
-{
-public:
-    uint32_t BaseVertex;
-    uint32_t BaseIndex;
-    uint32_t MaterialIndex;
-    uint32_t IndexCount;
-
-    glm::mat4 Transform;
-};
-
-static constexpr uint32_t s_MeshImportFlags
-    =                        //
-                             // aiProcess_CalcTangentSpace |           // Create binormals/tangents just in case
-    aiProcess_Triangulate |  // Make sure we're triangles
-    aiProcess_SortByPType |  // Split meshes by primitive type
-    aiProcess_GenNormals |   // Make sure we have legit normals
-    // aiProcess_GenUVCoords |                // Convert UVs if required
-    aiProcess_OptimizeMeshes |        // Batch draws where possible
-    aiProcess_ValidateDataStructure;  // Validation
-
-struct LogStream : public Assimp::LogStream
-{
-    static void Initialize()
-    {
-        if (Assimp::DefaultLogger::isNullLogger())
-        {
-            Assimp::DefaultLogger::create("", Assimp::Logger::VERBOSE);
-            Assimp::DefaultLogger::get()->attachStream(new LogStream, Assimp::Logger::Err | Assimp::Logger::Warn);
-        }
-    }
-
-    void write(const char* message) override { MOCI_CORE_ERROR("Assimp error: {0}", message); }
-};
-
-static glm::mat4 aiMatrix4x4ToGlm(const aiMatrix4x4& from)
-{
-    glm::mat4 to;
-    // the a,b,c,d in assimp is the row ; the 1,2,3,4 is the column
-    // clang-format off
-		to[0][0] = from.a1; to[1][0] = from.a2; to[2][0] = from.a3; to[3][0] = from.a4;
-		to[0][1] = from.b1; to[1][1] = from.b2; to[2][1] = from.b3; to[3][1] = from.b4;
-		to[0][2] = from.c1; to[1][2] = from.c2; to[2][2] = from.c3; to[3][2] = from.c4;
-		to[0][3] = from.d1; to[1][3] = from.d2; to[2][3] = from.d3; to[3][3] = from.d4;
-    // clang-format on
-    return to;
-}
-
-class Mesh
-{
-public:
-    Mesh(const std::string& filename) : m_FilePath(filename)
-    {
-        LogStream::Initialize();
-
-        MOCI_CORE_INFO("Loading mesh: {0}", filename.c_str());
-
-        m_Importer = moci::MakeScope<Assimp::Importer>();
-
-        const aiScene* scene = m_Importer->ReadFile(filename, s_MeshImportFlags);
-        if (!scene || !scene->HasMeshes()) MOCI_CORE_ERROR("Failed to load mesh file: {0}", filename);
-
-        m_IsAnimated = scene->mAnimations != nullptr;
-        // m_MeshShader = m_IsAnimated ? Renderer::GetShaderLibrary()->Get("HazelPBR_Anim")
-        //                             : Renderer::GetShaderLibrary()->Get("HazelPBR_Static");
-        // m_Material.reset(new moci::Material(m_MeshShader));
-        m_InverseTransform = glm::inverse(aiMatrix4x4ToGlm(scene->mRootNode->mTransformation));
-
-        uint32_t vertexCount = 0;
-        uint32_t indexCount  = 0;
-
-        m_Submeshes.reserve(scene->mNumMeshes);
-        for (size_t m = 0; m < scene->mNumMeshes; m++)
-        {
-            aiMesh* mesh = scene->mMeshes[m];
-
-            Submesh submesh;
-            submesh.BaseVertex    = vertexCount;
-            submesh.BaseIndex     = indexCount;
-            submesh.MaterialIndex = mesh->mMaterialIndex;
-            submesh.IndexCount    = mesh->mNumFaces * 3;
-            m_Submeshes.push_back(submesh);
-
-            vertexCount += mesh->mNumVertices;
-            indexCount += submesh.IndexCount;
-
-            MOCI_CORE_ASSERT(mesh->HasPositions(), "Meshes require positions.");
-            MOCI_CORE_ASSERT(mesh->HasNormals(), "Meshes require normals.");
-
-            // Vertices
-            if (m_IsAnimated)
-            {
-                // for (size_t i = 0; i < mesh->mNumVertices; i++)
-                // {
-                //     AnimatedVertex vertex;
-                //     vertex.Position = {mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z};
-                //     vertex.Normal   = {mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z};
-
-                //     if (mesh->HasTangentsAndBitangents())
-                //     {
-                //         vertex.Tangent  = {mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z};
-                //         vertex.Binormal = {mesh->mBitangents[i].x, mesh->mBitangents[i].y, mesh->mBitangents[i].z};
-                //     }
-
-                //     if (mesh->HasTextureCoords(0))
-                //         vertex.Texcoord = {mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y};
-
-                //     m_AnimatedVertices.push_back(vertex);
-                // }
-            }
-            else
-            {
-                for (size_t i = 0; i < mesh->mNumVertices; i++)
-                {
-                    Vertex vertex;
-                    vertex.position = {mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z};
-                    vertex.normal   = {mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z};
-                    vertex.color    = moci::Colors::Blue.GetData();
-
-                    // if (mesh->HasTangentsAndBitangents())
-                    // {
-                    //     vertex.Tangent  = {mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z};
-                    //     vertex.Binormal = {mesh->mBitangents[i].x, mesh->mBitangents[i].y, mesh->mBitangents[i].z};
-                    // }
-
-                    if (mesh->HasTextureCoords(0))
-                        vertex.texCoord = {mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y};
-
-                    m_StaticVertices.push_back(vertex);
-                }
-            }
-
-            // Indices
-            for (size_t i = 0; i < mesh->mNumFaces; i++)
-            {
-                MOCI_CORE_ASSERT(mesh->mFaces[i].mNumIndices == 3, "Must have 3 indices.");
-                m_Indices.push_back(
-                    {mesh->mFaces[i].mIndices[0], mesh->mFaces[i].mIndices[1], mesh->mFaces[i].mIndices[2]});
-            }
-        }
-
-        // MOCI_CORE_TRACE("NODES:");
-        // MOCI_CORE_TRACE("-----------------------------");
-        // TraverseNodes(scene->mRootNode);
-        // MOCI_CORE_TRACE("-----------------------------");
-
-        // // Bones
-        // if (m_IsAnimated)
-        // {
-        //     for (size_t m = 0; m < scene->mNumMeshes; m++)
-        //     {
-        //         aiMesh* mesh     = scene->mMeshes[m];
-        //         Submesh& submesh = m_Submeshes[m];
-
-        //         for (size_t i = 0; i < mesh->mNumBones; i++)
-        //         {
-        //             aiBone* bone = mesh->mBones[i];
-        //             std::string boneName(bone->mName.data);
-        //             int boneIndex = 0;
-
-        //             if (m_BoneMapping.find(boneName) == m_BoneMapping.end())
-        //             {
-        //                 // Allocate an index for a new bone
-        //                 boneIndex = m_BoneCount;
-        //                 m_BoneCount++;
-        //                 BoneInfo bi;
-        //                 m_BoneInfo.push_back(bi);
-        //                 m_BoneInfo[boneIndex].BoneOffset = aiMatrix4x4ToGlm(bone->mOffsetMatrix);
-        //                 m_BoneMapping[boneName]          = boneIndex;
-        //             }
-        //             else
-        //             {
-        //                 MOCI_CORE_TRACE("Found existing bone in map");
-        //                 boneIndex = m_BoneMapping[boneName];
-        //             }
-
-        //             for (size_t j = 0; j < bone->mNumWeights; j++)
-        //             {
-        //                 int VertexID = submesh.BaseVertex + bone->mWeights[j].mVertexId;
-        //                 float Weight = bone->mWeights[j].mWeight;
-        //                 m_AnimatedVertices[VertexID].AddBoneData(boneIndex, Weight);
-        //             }
-        //         }
-        //     }
-        // }
-
-        // m_VertexArray = VertexArray::Create();
-        // if (m_IsAnimated)
-        // {
-        //     auto vb
-        //         = VertexBuffer::Create(m_AnimatedVertices.data(), m_AnimatedVertices.size() *
-        //         sizeof(AnimatedVertex));
-        //     vb->SetLayout({
-        //         {ShaderDataType::Float3, "a_Position"},
-        //         {ShaderDataType::Float3, "a_Normal"},
-        //         {ShaderDataType::Float3, "a_Tangent"},
-        //         {ShaderDataType::Float3, "a_Binormal"},
-        //         {ShaderDataType::Float2, "a_TexCoord"},
-        //         {ShaderDataType::Int4, "a_BoneIDs"},
-        //         {ShaderDataType::Float4, "a_BoneWeights"},
-        //     });
-        //     m_VertexArray->AddVertexBuffer(vb);
-        // }
-        // else
-        // {
-        //     auto vb = VertexBuffer::Create(m_StaticVertices.data(), m_StaticVertices.size() * sizeof(Vertex));
-        //     vb->SetLayout({
-        //         {ShaderDataType::Float3, "a_Position"},
-        //         {ShaderDataType::Float3, "a_Normal"},
-        //         {ShaderDataType::Float3, "a_Tangent"},
-        //         {ShaderDataType::Float3, "a_Binormal"},
-        //         {ShaderDataType::Float2, "a_TexCoord"},
-        //     });
-        //     m_VertexArray->AddVertexBuffer(vb);
-        // }
-
-        // auto ib = IndexBuffer::Create(m_Indices.data(), m_Indices.size() * sizeof(Index));
-        // m_VertexArray->SetIndexBuffer(ib);
-        // m_Scene = scene;
-    }
-
-    gsl::span<Vertex const> GetVertices() const noexcept { return m_StaticVertices; }
-
-private:
-    std::string m_FilePath {};
-    moci::Scope<Assimp::Importer> m_Importer {};
-    glm::mat4 m_InverseTransform {};
-    std::vector<Submesh> m_Submeshes {};
-    std::vector<Vertex> m_StaticVertices {};
-    bool m_IsAnimated = false;
-    std::vector<Index> m_Indices {};
-};
 
 class DemoLayer : public moci::Layer
 {
@@ -344,7 +94,7 @@ public:
                 {moci::ShaderDataType::Float2, "a_TexCoords"},  //
             };
             auto* data      = reinterpret_cast<float*>(vertices_.data());
-            auto const size = static_cast<std::uint32_t>(vertices_.size() * sizeof(Vertex));
+            auto const size = static_cast<std::uint32_t>(vertices_.size() * sizeof(moci::Mesh::Vertex));
             vbo_.reset(moci::VertexBuffer::Create(data, size, false));
             vbo_->SetLayout(layout);
             vbo_->Unbind();
@@ -563,7 +313,7 @@ public:
                 auto const frameCount = fmt::format("{} Frames", drawStats_.frameCounter);
                 auto const vertices   = fmt::format("{} Vertices", drawStats_.numVertices);
                 auto const triangles  = fmt::format("{} Triangles", drawStats_.numVertices / 3);
-                auto const mb         = drawStats_.numVertices * sizeof(Vertex) / 1'000'000.0f;
+                auto const mb         = drawStats_.numVertices * sizeof(moci::Mesh::Vertex) / 1'000'000.0f;
                 auto const megabyte   = fmt::format("{0:0.1f} Mbytes", mb);
                 ImGui::TextUnformatted(frameCount.c_str());
                 ImGui::TextUnformatted(fpsStr.c_str());
@@ -629,15 +379,15 @@ public:
     moci::Ref<moci::VertexArray> vao_  = nullptr;
 
     std::size_t numVertices_ {};
-    // Mesh mesh_ {"sandbox3D/assets/models/donut.obj"};
-    Mesh mesh_ {"sandbox3D/assets/models/cerberus.fbx"};
-    Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
-    Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
+    // moci::Mesh mesh_ {"sandbox3D/assets/models/donut.obj"};
+    moci::Mesh mesh_ {"sandbox3D/assets/models/cerberus.fbx"};
+    moci::Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
+    moci::Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
 
     moci::Texture2D::Ptr textureSolid_ {};
     moci::Texture2D::Ptr textureColors_ {};
 
-    std::vector<Vertex> vertices_ {};
+    std::vector<moci::Mesh::Vertex> vertices_ {};
 
     // imgui
     struct DrawStats
