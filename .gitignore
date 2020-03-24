@@ -23,6 +23,7 @@ imgui.ini
 moci-sandbox.json
 moci-sandbox-3d.json
 moci-sandbox-3d-rpi.json
+moci-model-viewer.json
 
 # Log
 moci.log
