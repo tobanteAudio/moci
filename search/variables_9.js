@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['offset',['Offset',['../structmoci_1_1BufferElement.html#a31f6a6c2b1e30c4a704879b205b83519',1,'moci::BufferElement']]]
+  ['materialindex',['MaterialIndex',['../classmoci_1_1Mesh_1_1Submesh.html#a738cf9f0de2bf6fb8193be2380e04533',1,'moci::Mesh::Submesh']]]
 ];

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['tobanteaudio_20_2d_20moci',['tobanteAudio - moci',['../index.html',1,'']]],
+  ['texcoord',['texCoord',['../structmoci_1_1Mesh_1_1Vertex.html#a8c907440ebeb662962bb3e177c8832c2',1,'moci::Mesh::Vertex']]],
   ['texture',['Texture',['../classmoci_1_1Texture.html',1,'moci']]],
   ['texture2d',['Texture2D',['../classmoci_1_1Texture2D.html',1,'moci']]],
   ['texturecount',['textureCount',['../structmoci_1_1RenderQueue_1_1Stats.html#a5d1713034e0a26a5e29d062cf73fc937',1,'moci::RenderQueue::Stats']]],
@@ -14,6 +15,7 @@ var searchData=
   ['tointeger',['ToInteger',['../classmoci_1_1Strings.html#a4ef9c69dd9f6e59374d27cb92729fd47',1,'moci::Strings']]],
   ['topleft',['topLeft',['../structmoci_1_1Typeface_1_1Character.html#aea048c5444c95845c09fe438c4f93227',1,'moci::Typeface::Character']]],
   ['tostring',['ToString',['../classmoci_1_1WindowResizeEvent.html#a73a89a250f3cd38b19f277c7412a2f84',1,'moci::WindowResizeEvent::ToString()'],['../classmoci_1_1Event.html#a6feffc49976ebb3312d4c23cc0146035',1,'moci::Event::ToString()'],['../classmoci_1_1KeyPressedEvent.html#a1b954493b85b8e46add37b0d38658e82',1,'moci::KeyPressedEvent::ToString()'],['../classmoci_1_1KeyReleasedEvent.html#adddb8fbdb42868f898d1d8f486d42515',1,'moci::KeyReleasedEvent::ToString()'],['../classmoci_1_1KeyTypedEvent.html#ab5fa37faa616dd466f3df710981567f8',1,'moci::KeyTypedEvent::ToString()'],['../classmoci_1_1MouseMovedEvent.html#ad7736ad74ff388cc21134e9617216412',1,'moci::MouseMovedEvent::ToString()'],['../classmoci_1_1MouseScrolledEvent.html#a3f99ed86367216e8551db544666e9194',1,'moci::MouseScrolledEvent::ToString()'],['../classmoci_1_1MouseButtonPressedEvent.html#a7e4ae4349b2aeca425677a215cef76c3',1,'moci::MouseButtonPressedEvent::ToString()'],['../classmoci_1_1MouseButtonReleasedEvent.html#a9af4b68e3811c0b37d08863ecd9eb300',1,'moci::MouseButtonReleasedEvent::ToString()']]],
+  ['transform',['Transform',['../classmoci_1_1Mesh_1_1Submesh.html#ae0b97f4ec43464ade41d2fe8f0355ccd',1,'moci::Mesh::Submesh']]],
   ['trianglefan',['TriangleFan',['../classmoci_1_1RendererAPI.html#a861d075e7f082191f022ab2c77519184a18d58fde618e4a30e2dfdc122e693047',1,'moci::RendererAPI']]],
   ['triangles',['Triangles',['../classmoci_1_1RendererAPI.html#a861d075e7f082191f022ab2c77519184a7ca66fdfaad3eb33fc65d7490178f856',1,'moci::RendererAPI']]],
   ['trianglestrips',['TriangleStrips',['../classmoci_1_1RendererAPI.html#a861d075e7f082191f022ab2c77519184ae6d0d2fdd0c5b200112e07e15b3cb2f0',1,'moci::RendererAPI']]],
