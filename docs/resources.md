@@ -1,6 +1,16 @@
 # Resources
 
+## 3D
+
+- [Hit Test](https://metalbyexample.com/picking-hit-testing/#more-738)
+
 ## Apple
+
+### Metal
+
+- [Metal by example](https://metalbyexample.com/)
+- [Writing a Modern Metal App from Scratch: Part 1](https://metalbyexample.com/modern-metal-1/#more-645)
+- [Writing a Modern Metal App from Scratch: Part 2](https://metalbyexample.com/modern-metal-2/#more-669)
 
 ### macOS
 
