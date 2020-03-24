@@ -9,6 +9,10 @@ build
 build-*
 build_*
 
+# Python
+venv
+.venv
+
 # macOS
 .DS_Store
 
