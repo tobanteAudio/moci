@@ -90,7 +90,7 @@ public:
 
         MOCI_CORE_INFO("Loading mesh: {0}", filename.c_str());
 
-        m_Importer = std::make_unique<Assimp::Importer>();
+        m_Importer = moci::MakeScope<Assimp::Importer>();
 
         const aiScene* scene = m_Importer->ReadFile(filename, s_MeshImportFlags);
         if (!scene || !scene->HasMeshes()) MOCI_CORE_ERROR("Failed to load mesh file: {0}", filename);
@@ -258,7 +258,7 @@ public:
 
 private:
     std::string m_FilePath {};
-    std::unique_ptr<Assimp::Importer> m_Importer {};
+    moci::Scope<Assimp::Importer> m_Importer {};
     glm::mat4 m_InverseTransform {};
     std::vector<Submesh> m_Submeshes {};
     std::vector<Vertex> m_StaticVertices {};
@@ -614,19 +614,19 @@ public:
         glm::vec4 color    = {1.0f, 1.0f, 1.0f, 1.0f};
         float scale        = 0.5f;
 
-        std::shared_ptr<moci::Shader> shader    = nullptr;
-        std::shared_ptr<moci::VertexBuffer> vbo = nullptr;
-        std::shared_ptr<moci::IndexBuffer> ibo  = nullptr;
-        std::shared_ptr<moci::VertexArray> vao  = nullptr;
+        moci::Ref<moci::Shader> shader    = nullptr;
+        moci::Ref<moci::VertexBuffer> vbo = nullptr;
+        moci::Ref<moci::IndexBuffer> ibo  = nullptr;
+        moci::Ref<moci::VertexArray> vao  = nullptr;
         std::vector<Light::Vertex> vertices     = {};
     };
 
     Light light {};
 
-    std::shared_ptr<moci::Shader> shader_    = nullptr;
-    std::shared_ptr<moci::VertexBuffer> vbo_ = nullptr;
-    std::shared_ptr<moci::IndexBuffer> ibo_  = nullptr;
-    std::shared_ptr<moci::VertexArray> vao_  = nullptr;
+    moci::Ref<moci::Shader> shader_    = nullptr;
+    moci::Ref<moci::VertexBuffer> vbo_ = nullptr;
+    moci::Ref<moci::IndexBuffer> ibo_  = nullptr;
+    moci::Ref<moci::VertexArray> vao_  = nullptr;
 
     std::size_t numVertices_ {};
     // Mesh mesh_ {"sandbox3D/assets/models/donut.obj"};
@@ -661,7 +661,7 @@ public:
     Sandbox()
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox-3d", "moci-sandbox-3d.json");
-        PushLayer(std::make_unique<DemoLayer>());
+        PushLayer(moci::MakeScope<DemoLayer>());
     }
 
     ~Sandbox() override { MOCI_PROFILE_END_SESSION(); }

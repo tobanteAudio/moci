@@ -67,7 +67,7 @@ public:
         for (auto i = 0; i < 5; i++)
         {
             auto col     = moci::Color {0.2f * static_cast<float>(i), 0.8f, 0.2f, 1.0f};
-            auto channel = std::make_unique<LevelMeterView>(col);
+            auto channel = moci::MakeScope<LevelMeterView>(col);
             AddChild(channel.get());
             channels_.push_back(std::move(channel));
         }
@@ -75,7 +75,7 @@ public:
         for (auto i = 0; i < 10; i++)
         {
             auto col    = moci::Color {0.2f * static_cast<float>(i), 0.8f, 0.2f, 1.0f};
-            auto slider = std::make_unique<moci::Slider>(col);
+            auto slider = moci::MakeScope<moci::Slider>(col);
             slider->SetValue(i / 10.0f);
             AddChild(slider.get());
             sliders_.push_back(std::move(slider));
@@ -84,7 +84,7 @@ public:
         for (auto i = 0; i < 20; i++)
         {
             auto col   = moci::Color {0.2f * static_cast<float>(i), 0.8f, 0.2f, 1.0f};
-            auto label = std::make_unique<moci::Label>(fmt::format("Test: {}", i), col);
+            auto label = moci::MakeScope<moci::Label>(fmt::format("Test: {}", i), col);
             AddChild(label.get());
             labels_.push_back(std::move(label));
         }
@@ -122,9 +122,9 @@ public:
 
 private:
     moci::DatagramSocket listener_ {};
-    std::vector<std::unique_ptr<LevelMeterView>> channels_;
-    std::vector<std::unique_ptr<moci::Slider>> sliders_;
-    std::vector<std::unique_ptr<moci::Label>> labels_;
+    std::vector<moci::Scope<LevelMeterView>> channels_;
+    std::vector<moci::Scope<moci::Slider>> sliders_;
+    std::vector<moci::Scope<moci::Label>> labels_;
 };
 
 class Sandbox : public moci::Application
@@ -133,7 +133,7 @@ public:
     Sandbox()
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox", "moci-sandbox.json");
-        PushLayer(std::make_unique<moci::ComponentLayer>(std::make_unique<MultiChannel>()));
+        PushLayer(moci::MakeScope<moci::ComponentLayer>(moci::MakeScope<MultiChannel>()));
     }
 
     ~Sandbox() override { MOCI_PROFILE_END_SESSION(); }
