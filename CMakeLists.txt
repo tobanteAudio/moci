@@ -9,7 +9,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set(CMAKE_CXX_STANDARD 17)
     set(CMAKE_CXX_EXTENSIONS OFF)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-    set(BUILD_SHARED_LIBS OFF)
+    # set(BUILD_SHARED_LIBS OFF)
 
 
     # Let's nicely support folders in IDE's
@@ -73,7 +73,7 @@ configure_file(.clang-tidy .clang-tidy COPYONLY)
 
 # 3rd party libraries
 # assimp
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared library")
+# set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared library")
 set(ASSIMP_BUILD_OBJ_IMPORTER ON CACHE BOOL "")
 set(ASSIMP_BUILD_FBX_IMPORTER ON CACHE BOOL "")
 set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE BOOL "")
