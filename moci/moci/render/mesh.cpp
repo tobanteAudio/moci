@@ -47,27 +47,27 @@ glm::mat4 aiMatrix4x4ToGlm(const aiMatrix4x4& from)
 }
 }  // namespace
 
-Mesh::Mesh(const std::string& filename) : m_FilePath(filename)
+Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
 {
     LogStream::Initialize();
 
-    MOCI_CORE_INFO("Loading mesh: {0}", filename.c_str());
+    MOCI_CORE_INFO("Loading mesh: {0}", filePath_.c_str());
 
-    m_Importer = moci::MakeScope<Assimp::Importer>();
+    importer_ = moci::MakeScope<Assimp::Importer>();
 
-    const aiScene* scene = m_Importer->ReadFile(filename, s_MeshImportFlags);
-    if (!scene || !scene->HasMeshes()) MOCI_CORE_ERROR("Failed to load mesh file: {0}", filename);
+    const aiScene* scene = importer_->ReadFile(filePath_, s_MeshImportFlags);
+    if (!scene || !scene->HasMeshes()) MOCI_CORE_ERROR("Failed to load mesh file: {0}", filePath_);
 
-    m_IsAnimated = scene->mAnimations != nullptr;
-    // m_MeshShader = m_IsAnimated ? Renderer::GetShaderLibrary()->Get("HazelPBR_Anim")
+    isAnimated_ = scene->mAnimations != nullptr;
+    // m_MeshShader = isAnimated_ ? Renderer::GetShaderLibrary()->Get("HazelPBR_Anim")
     //                             : Renderer::GetShaderLibrary()->Get("HazelPBR_Static");
     // m_Material.reset(new moci::Material(m_MeshShader));
-    m_InverseTransform = glm::inverse(aiMatrix4x4ToGlm(scene->mRootNode->mTransformation));
+    inverseTransform_ = glm::inverse(aiMatrix4x4ToGlm(scene->mRootNode->mTransformation));
 
     uint32_t vertexCount = 0;
     uint32_t indexCount  = 0;
 
-    m_Submeshes.reserve(scene->mNumMeshes);
+    submeshes_.reserve(scene->mNumMeshes);
     for (size_t m = 0; m < scene->mNumMeshes; m++)
     {
         aiMesh* mesh = scene->mMeshes[m];
@@ -77,7 +77,7 @@ Mesh::Mesh(const std::string& filename) : m_FilePath(filename)
         submesh.BaseIndex     = indexCount;
         submesh.MaterialIndex = mesh->mMaterialIndex;
         submesh.IndexCount    = mesh->mNumFaces * 3;
-        m_Submeshes.push_back(submesh);
+        submeshes_.push_back(submesh);
 
         vertexCount += mesh->mNumVertices;
         indexCount += submesh.IndexCount;
@@ -86,7 +86,7 @@ Mesh::Mesh(const std::string& filename) : m_FilePath(filename)
         MOCI_CORE_ASSERT(mesh->HasNormals(), "Meshes require normals.");
 
         // Vertices
-        if (m_IsAnimated)
+        if (isAnimated_)
         {
             // for (size_t i = 0; i < mesh->mNumVertices; i++)
             // {
@@ -124,7 +124,7 @@ Mesh::Mesh(const std::string& filename) : m_FilePath(filename)
                 if (mesh->HasTextureCoords(0))
                     vertex.texCoord = {mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y};
 
-                m_StaticVertices.push_back(vertex);
+                staticVertices_.push_back(vertex);
             }
         }
 
@@ -132,7 +132,7 @@ Mesh::Mesh(const std::string& filename) : m_FilePath(filename)
         for (size_t i = 0; i < mesh->mNumFaces; i++)
         {
             MOCI_CORE_ASSERT(mesh->mFaces[i].mNumIndices == 3, "Must have 3 indices.");
-            m_Indices.push_back(
+            indices_.push_back(
                 {mesh->mFaces[i].mIndices[0], mesh->mFaces[i].mIndices[1], mesh->mFaces[i].mIndices[2]});
         }
     }
@@ -143,12 +143,12 @@ Mesh::Mesh(const std::string& filename) : m_FilePath(filename)
     // MOCI_CORE_TRACE("-----------------------------");
 
     // // Bones
-    // if (m_IsAnimated)
+    // if (isAnimated_)
     // {
     //     for (size_t m = 0; m < scene->mNumMeshes; m++)
     //     {
     //         aiMesh* mesh     = scene->mMeshes[m];
-    //         Submesh& submesh = m_Submeshes[m];
+    //         Submesh& submesh = submeshes_[m];
 
     //         for (size_t i = 0; i < mesh->mNumBones; i++)
     //         {
@@ -183,7 +183,7 @@ Mesh::Mesh(const std::string& filename) : m_FilePath(filename)
     // }
 
     // m_VertexArray = VertexArray::Create();
-    // if (m_IsAnimated)
+    // if (isAnimated_)
     // {
     //     auto vb
     //         = VertexBuffer::Create(m_AnimatedVertices.data(), m_AnimatedVertices.size() *
@@ -201,7 +201,7 @@ Mesh::Mesh(const std::string& filename) : m_FilePath(filename)
     // }
     // else
     // {
-    //     auto vb = VertexBuffer::Create(m_StaticVertices.data(), m_StaticVertices.size() * sizeof(Vertex));
+    //     auto vb = VertexBuffer::Create(staticVertices_.data(), staticVertices_.size() * sizeof(Vertex));
     //     vb->SetLayout({
     //         {ShaderDataType::Float3, "a_Position"},
     //         {ShaderDataType::Float3, "a_Normal"},
@@ -212,7 +212,7 @@ Mesh::Mesh(const std::string& filename) : m_FilePath(filename)
     //     m_VertexArray->AddVertexBuffer(vb);
     // }
 
-    // auto ib = IndexBuffer::Create(m_Indices.data(), m_Indices.size() * sizeof(Index));
+    // auto ib = IndexBuffer::Create(indices_.data(), indices_.size() * sizeof(Index));
     // m_VertexArray->SetIndexBuffer(ib);
     // m_Scene = scene;
 }

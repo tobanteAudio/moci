@@ -41,16 +41,16 @@ public:
     };
 
 public:
-    Mesh(const std::string& filename);
-    gsl::span<Vertex const> GetVertices() const noexcept { return m_StaticVertices; }
+    Mesh(std::string filePath);
+    gsl::span<Vertex const> GetVertices() const noexcept { return staticVertices_; }
 
 private:
-    std::string m_FilePath {};
-    moci::Scope<Assimp::Importer> m_Importer {};
-    glm::mat4 m_InverseTransform {};
-    std::vector<Submesh> m_Submeshes {};
-    std::vector<Vertex> m_StaticVertices {};
-    bool m_IsAnimated = false;
-    std::vector<Index> m_Indices {};
+    std::string filePath_ {};
+    moci::Scope<Assimp::Importer> importer_ {};
+    glm::mat4 inverseTransform_ {};
+    std::vector<Submesh> submeshes_ {};
+    std::vector<Vertex> staticVertices_ {};
+    bool isAnimated_ = false;
+    std::vector<Index> indices_ {};
 };
 }  // namespace moci
