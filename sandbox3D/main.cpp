@@ -14,8 +14,6 @@
 
 #include "glm/gtx/quaternion.hpp"
 
-
-
 class DemoLayer : public moci::Layer
 {
 public:

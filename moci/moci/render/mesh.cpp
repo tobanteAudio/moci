@@ -10,12 +10,12 @@ namespace moci
 
 namespace
 {
-static constexpr uint32_t s_MeshImportFlags =                        
-                             // aiProcess_CalcTangentSpace |           // Create binormals/tangents just in case
+static constexpr uint32_t s_MeshImportFlags =
+    aiProcess_CalcTangentSpace |           // Create binormals/tangents just in case
     aiProcess_Triangulate |  // Make sure we're triangles
     aiProcess_SortByPType |  // Split meshes by primitive type
     aiProcess_GenNormals |   // Make sure we have legit normals
-    // aiProcess_GenUVCoords |                // Convert UVs if required
+    aiProcess_GenUVCoords |                // Convert UVs if required
     aiProcess_OptimizeMeshes |        // Batch draws where possible
     aiProcess_ValidateDataStructure;  // Validation
 
@@ -132,8 +132,7 @@ Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
         for (size_t i = 0; i < mesh->mNumFaces; i++)
         {
             MOCI_CORE_ASSERT(mesh->mFaces[i].mNumIndices == 3, "Must have 3 indices.");
-            indices_.push_back(
-                {mesh->mFaces[i].mIndices[0], mesh->mFaces[i].mIndices[1], mesh->mFaces[i].mIndices[2]});
+            indices_.push_back({mesh->mFaces[i].mIndices[0], mesh->mFaces[i].mIndices[1], mesh->mFaces[i].mIndices[2]});
         }
     }
 

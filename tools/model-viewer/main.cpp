@@ -10,8 +10,8 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/quaternion.hpp"
 #include "glm/gtc/type_ptr.hpp"
-#include "glm/gtx/transform.hpp"
 #include "glm/gtx/quaternion.hpp"
+#include "glm/gtx/transform.hpp"
 
 class MociModelViwerLayer : public moci::Layer
 {
@@ -19,9 +19,7 @@ public:
     MociModelViwerLayer()           = default;
     ~MociModelViwerLayer() override = default;
 
-    void OnAttach() override
-    {
-    }
+    void OnAttach() override {}
 
     void OnUpdate(moci::Timestep ts) override
     {
@@ -37,7 +35,6 @@ public:
         //     cameraLookAt_,                   // and looks at the origin
         //     glm::vec3(0, 1, 0)               // Head is up (set to 0,-1,0 to look upside-down)
         // );
-
     }
 
     void OnEvent(moci::Event& e) override
@@ -54,10 +51,7 @@ public:
         return false;
     }
 
-    bool OnKeyPressed(moci::KeyPressedEvent& e)
-    {
-         return false;
-    }
+    bool OnKeyPressed(moci::KeyPressedEvent& e) { return false; }
 
     void OnImGuiRender() override
     {
@@ -135,7 +129,6 @@ public:
     float height_       = 1024.0f;
     float lastTimestep_ = 0.0f;
     bool fullscreen_    = false;
-
 
     moci::Ref<moci::Shader> shader_    = nullptr;
     moci::Ref<moci::VertexBuffer> vbo_ = nullptr;
