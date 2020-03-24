@@ -80,15 +80,15 @@ CONFIG=Release make config-vs build test
 ### Dependencies (submodules)
 
 - [assimp: 3D Model loader](https://github.com/assimp/assimp)
-- [Catch2: Unit tests]()
-- [freetype: Font loader]()
-- [glew: OpenGL function loader]()
-- [glfw: Cross platform window library]()
-- [glm: Math library]()
-- [GSL: C++ guideline support library]()
-- [imgui: GUI library]()
-- [spdlog: Logging]()
-- [stb: Image file loader]()
+- [Catch2: Unit tests](https://github.com/catchorg/Catch2)
+- [freetype: Font loader](https://www.freetype.org/)
+- [glew: OpenGL function loader](http://glew.sourceforge.net/)
+- [glfw: Cross platform window library](https://www.glfw.org/)
+- [glm: Math library](https://glm.g-truc.net/0.9.9/index.html)
+- [GSL: C++ guideline support library](https://github.com/microsoft/GSL)
+- [imgui: GUI library](https://github.com/ocornut/imgui)
+- [spdlog: Logging](https://github.com/gabime/spdlog)
+- [stb: Image file loader](https://github.com/nothings/stb)
 
 ### Dependencies Linux
 
