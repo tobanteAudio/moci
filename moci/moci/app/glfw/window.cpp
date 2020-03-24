@@ -181,4 +181,37 @@ void GlfwWindow::SetVSync(bool enabled)
 
 auto GlfwWindow::IsVSync() const -> bool { return m_Data.VSync; }
 
+void GlfwWindow::SetFullscreen(bool enabled)
+{
+    if (IsFullscreen() == enabled) return;
+    MOCI_CORE_INFO("Setting window fullscreen to {}", enabled);
+
+    if (enabled)
+    {
+        // backup window position and window size
+        auto x = 0;
+        auto y = 0;
+        glfwGetWindowPos(m_Window, &m_Data.Position[0], &m_Data.Position[1]);
+        glfwGetWindowSize(m_Window, &x, &y);
+        m_Data.Width  = static_cast<unsigned>(x);
+        m_Data.Height = static_cast<unsigned>(y);
+
+        // get resolution of monitor
+        auto* monitor    = glfwGetPrimaryMonitor();
+        auto const* mode = glfwGetVideoMode(monitor);
+
+        // switch to full screen
+        glfwSetWindowMonitor(m_Window, monitor, 0, 0, mode->width, mode->height, 0);
+    }
+    else
+    {
+        // restore last window size and position
+        glfwSetWindowMonitor(m_Window, nullptr, m_Data.Position[0], m_Data.Position[1], m_Data.Width, m_Data.Height, 0);
+    }
+
+    m_Data.Fullscreen = enabled;
+}
+
+bool GlfwWindow::IsFullscreen() const { return m_Data.Fullscreen; }
+
 }  // namespace moci

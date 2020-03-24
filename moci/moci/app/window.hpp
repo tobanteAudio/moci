@@ -39,6 +39,9 @@ public:
     virtual void SetVSync(bool enabled)                            = 0;
     [[nodiscard]] virtual auto IsVSync() const -> bool             = 0;
 
+    virtual void SetFullscreen(bool enabled)        = 0;
+    [[nodiscard]] virtual bool IsFullscreen() const = 0;
+
     [[nodiscard]] virtual auto GetNativeWindow() const -> void* = 0;
 
     static auto Create(const WindowProps& props = WindowProps()) -> Window*;

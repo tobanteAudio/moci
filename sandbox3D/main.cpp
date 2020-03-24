@@ -532,6 +532,8 @@ public:
             {
                 ImGui::Checkbox("Sandbox3D", &imguiWindow_);
                 ImGui::Checkbox("Imgui Demo", &imguiDemo_);
+                ImGui::Checkbox("Fullscreen", &fullscreen_);
+
                 ImGui::EndMenu();
             }
 
@@ -545,6 +547,10 @@ public:
         if (imguiWindow_)
         {
             ImGui::Begin("Sandbox 3D", &imguiWindow_);
+            if (ImGui::Button("Fullscreen"))
+            {
+                moci::Application::Get().GetWindow().SetFullscreen(true);
+            }
 
             if (ImGui::CollapsingHeader("Camera"))
             {
@@ -600,6 +606,7 @@ public:
     float width_        = 1280.0f;
     float height_       = 1024.0f;
     float lastTimestep_ = 0.0f;
+    bool fullscreen_    = false;
 
     glm::vec3 cameraPos_ {11.0f, 8.70f, 3.0f};
     glm::vec3 cameraLookAt_ {0.0f, 0.0f, 0.0f};

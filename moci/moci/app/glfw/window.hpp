@@ -5,6 +5,7 @@
 #include "moci/render/graphics_context.hpp"
 #include "moci/render/opengl/es2/es2.hpp"
 
+#include <array>
 #include <memory>
 
 namespace moci
@@ -26,6 +27,9 @@ public:
     void SetVSync(bool enabled) override;
     [[nodiscard]] auto IsVSync() const -> bool override;
 
+    void SetFullscreen(bool enabled) override;
+    [[nodiscard]] bool IsFullscreen() const override;
+
     [[nodiscard]] inline auto GetNativeWindow() const -> void* override { return m_Window; }
 
 private:
@@ -40,7 +44,9 @@ private:
     {
         std::string Title;
         unsigned int Width {}, Height {};
+        std::array<int, 2> Position {};
         bool VSync {};
+        bool Fullscreen {};
 
         EventCallbackFn EventCallback;
     };
