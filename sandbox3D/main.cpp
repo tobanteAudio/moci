@@ -461,6 +461,7 @@ public:
             moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, light.vertices.size());
             drawStats_.numVertices += light.vertices.size();
             light.vertices.clear();
+            light.vao->Unbind();
         }
     }
 
