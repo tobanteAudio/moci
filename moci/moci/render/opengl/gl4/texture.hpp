@@ -34,6 +34,28 @@ private:
     GLenum m_InternalFormat, m_DataFormat;
 };
 
+class OpenGLTextureCube : public TextureCube
+{
+public:
+    OpenGLTextureCube(std::vector<std::string> paths);
+
+    OpenGLTextureCube(const OpenGLTextureCube&) = delete;
+    OpenGLTextureCube& operator=(const OpenGLTextureCube&) = delete;
+
+    ~OpenGLTextureCube() override;
+
+    [[nodiscard]] std::uint32_t GetWidth() const override { return 0; }
+    [[nodiscard]] std::uint32_t GetHeight() const override { return 0; }
+    [[nodiscard]] std::uint32_t GetID() const override { return renderID_; }
+
+    void Bind(std::uint32_t slot = 0) const override;
+    void Unbind() const override;
+
+private:
+    std::vector<std::string> paths_;
+    std::uint32_t renderID_ {};
+};
+
 }  // namespace moci
 
 #endif
