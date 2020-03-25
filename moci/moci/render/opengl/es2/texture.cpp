@@ -3,6 +3,7 @@
 #include <utility>
 
 #include "stb_image.h"
+#include "stb_image_resize.h"
 
 #include "moci/core/logging.hpp"
 
@@ -114,20 +115,28 @@ OpenGLESTextureCube::OpenGLESTextureCube(std::vector<std::string> paths) : paths
     GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
     GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
     GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-    GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
 
-    // stbi_set_flip_vertically_on_load(1);
     for (GLuint i = 0; i < paths_.size(); i++)
     {
-        int width      = 0;
-        int height     = 0;
-        int nrChannels = 0;
-        auto* data     = stbi_load(paths_[i].c_str(), &width, &height, &nrChannels, 0);
+        int width       = 0;
+        int height      = 0;
+        int numChannels = 0;
+        auto* data      = stbi_load(paths_[i].c_str(), &width, &height, &numChannels, 0);
         if (data != nullptr)
         {
             MOCI_CORE_INFO("stbi loaded: {} {}x{}", paths_[i].c_str(), width, height);
+
+            // Resize
+            auto const newSize = 256;
+            std::vector<stbi_uc> outBuffer {};
+            outBuffer.resize(newSize * newSize * numChannels);
+            if (stbir_resize_uint8(data, width, height, 0, outBuffer.data(), newSize, newSize, 0, numChannels) == 0)
+            {
+                MOCI_ERROR("stbi resize error");
+            }
+
             auto const position = GL_TEXTURE_CUBE_MAP_POSITIVE_X + i;
-            GLCall(glTexImage2D(position, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data));
+            GLCall(glTexImage2D(position, 0, GL_RGB, newSize, newSize, 0, GL_RGB, GL_UNSIGNED_BYTE, outBuffer.data()));
         }
         else
         {
