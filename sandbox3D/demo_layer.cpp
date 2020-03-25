@@ -302,6 +302,7 @@ void DemoLayer::OnImGuiRender()
             ImGui::Checkbox("Sandbox3D", &imguiWindow_);
             ImGui::Checkbox("Imgui Demo", &imguiDemo_);
             ImGui::Checkbox("Fullscreen", &fullscreen_);
+            moci::Application::Get().GetWindow().SetFullscreen(fullscreen_);
 
             ImGui::EndMenu();
         }
@@ -316,11 +317,6 @@ void DemoLayer::OnImGuiRender()
     if (imguiWindow_)
     {
         ImGui::Begin("Sandbox 3D", &imguiWindow_);
-        if (ImGui::Button("Fullscreen"))
-        {
-            moci::Application::Get().GetWindow().SetFullscreen(true);
-        }
-
         if (ImGui::CollapsingHeader("Camera"))
         {
             ImGui::SliderFloat3("Position", glm::value_ptr(cameraPos_), -100.0f, 100.0f);
