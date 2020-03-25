@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['scale',['scale',['../structmoci_1_1Light.html#a88145eeeaa90131af8a30ebd5984ac9b',1,'moci::Light']]],
   ['scope',['Scope',['../namespacemoci.html#a0026500ddfc8f3723b5cb3e8b5b4c901',1,'moci']]],
   ['scopeguard',['ScopeGuard',['../classmoci_1_1ScopeGuard.html',1,'moci::ScopeGuard&lt; Lambda &gt;'],['../classmoci_1_1ScopeGuard.html#a0fb8335f0c0f9368cbebad125b05fa0d',1,'moci::ScopeGuard::ScopeGuard(const Lambda &amp;_l)'],['../classmoci_1_1ScopeGuard.html#aa9221343560faae0b72735c486a5391b',1,'moci::ScopeGuard::ScopeGuard(const ScopeGuard &amp;_sc)'],['../classmoci_1_1ScopeGuard.html#adfa19f691bcb58220b08a372c92e1735',1,'moci::ScopeGuard::ScopeGuard(ScopeGuard &amp;&amp;_sc)'],['../classmoci_1_1ScopeGuard.html#ab2fc10440c901f280f94c031f0ece652',1,'moci::ScopeGuard::ScopeGuard(const AdquireLambda &amp;_al, const Lambda &amp;_l)'],['../classmoci_1_1ScopeGuard.html#aadda0f2853b73f74937608b39d465b04',1,'moci::ScopeGuard::ScopeGuard(AdquireLambda &amp;&amp;_al, L &amp;&amp;_l)']]],
   ['setalpha',['SetAlpha',['../classmoci_1_1Color.html#ad4526533214126f0d24be3749b3ca664',1,'moci::Color']]],
@@ -41,7 +42,7 @@ var searchData=
   ['setx',['SetX',['../classmoci_1_1Point.html#ad51bb3f5b713a75d8b4496e3efd91126',1,'moci::Point::SetX()'],['../classmoci_1_1Rectangle.html#ad574ad82888b9c76dc52b39a9d1a974b',1,'moci::Rectangle::SetX()']]],
   ['sety',['SetY',['../classmoci_1_1Point.html#a4893478211a1d337842ca10e2186b62a',1,'moci::Point::SetY()'],['../classmoci_1_1Rectangle.html#a4fc1de2a2bd61afd169a92387c9521a9',1,'moci::Rectangle::SetY()']]],
   ['setzoomlevel',['SetZoomLevel',['../classmoci_1_1OrthographicCameraController.html#a106b5e859af1007b26d66c1da4ee737f',1,'moci::OrthographicCameraController']]],
-  ['shader',['Shader',['../classmoci_1_1Shader.html',1,'moci']]],
+  ['shader',['Shader',['../classmoci_1_1Shader.html',1,'moci::Shader'],['../structmoci_1_1Light.html#acf4b919ddc4e0995ad37f95e210fd525',1,'moci::Light::shader()']]],
   ['shaderdatatype',['ShaderDataType',['../namespacemoci.html#a8c901ad2cb670c104e7c07add30c83ee',1,'moci']]],
   ['shaderdatatypesize',['ShaderDataTypeSize',['../namespacemoci.html#ad804ae08831e89ad3e99cdaa0a3c9701',1,'moci']]],
   ['shaderprogramsource',['ShaderProgramSource',['../structmoci_1_1ShaderProgramSource.html',1,'moci']]],

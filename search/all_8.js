@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['ibo',['ibo',['../structmoci_1_1Light.html#ad9b5937af4d5f2442fe195e8b399de22',1,'moci::Light']]],
   ['ignoreunused',['IgnoreUnused',['../namespacemoci.html#ae476b7800a4885ccb9a99952efba1628',1,'moci']]],
   ['imguilayer',['ImGuiLayer',['../classmoci_1_1ImGuiLayer.html',1,'moci::ImGuiLayer'],['../classmoci_1_1ImGuiLayer.html#a646dc010366918b93e8d449e62d92ff2',1,'moci::ImGuiLayer::ImGuiLayer()'],['../classmoci_1_1ImGuiLayer.html#a68fb062aa7024f0b2fa1145931782bda',1,'moci::ImGuiLayer::ImGuiLayer(std::string const &amp;name)']]],
   ['index',['Index',['../structmoci_1_1Mesh_1_1Index.html',1,'moci::Mesh']]],

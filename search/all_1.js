@@ -8,7 +8,7 @@ var searchData=
   ['black',['Black',['../classmoci_1_1Colors.html#a258907eb7decc26c79a883c782dd88a2',1,'moci::Colors']]],
   ['blue',['Blue',['../classmoci_1_1Colors.html#a56f559d799c985f4c22a99b714f16d96',1,'moci::Colors']]],
   ['bool',['Bool',['../namespacemoci.html#a8c901ad2cb670c104e7c07add30c83eeac26f15e86e3de4c398a8273272aba034',1,'moci']]],
-  ['buffer',['buffer',['../structmoci_1_1Typeface_1_1Character.html#a30f53c6777bb63e9d9646c75ec3a044e',1,'moci::Typeface::Character::buffer()'],['../classmoci_1_1DatagramSocket.html#a92f2be7a3b17934caa554a7de4eb7f77',1,'moci::DatagramSocket::Buffer()'],['../classmoci_1_1Typeface.html#ae415d14a5ea34f9165915f5a09d09e8b',1,'moci::Typeface::Buffer()']]],
+  ['buffer',['Buffer',['../classmoci_1_1DatagramSocket.html#a92f2be7a3b17934caa554a7de4eb7f77',1,'moci::DatagramSocket::Buffer()'],['../classmoci_1_1Typeface.html#ae415d14a5ea34f9165915f5a09d09e8b',1,'moci::Typeface::Buffer()'],['../structmoci_1_1Typeface_1_1Character.html#a30f53c6777bb63e9d9646c75ec3a044e',1,'moci::Typeface::Character::buffer()']]],
   ['bufferelement',['BufferElement',['../structmoci_1_1BufferElement.html',1,'moci::BufferElement'],['../structmoci_1_1BufferElement.html#a53dd5677ad8856a101ec257ff44bdf36',1,'moci::BufferElement::BufferElement()']]],
   ['bufferlayout',['BufferLayout',['../classmoci_1_1BufferLayout.html',1,'moci::BufferLayout'],['../classmoci_1_1BufferLayout.html#a021af9bb8298d04573b0e678af64b022',1,'moci::BufferLayout::BufferLayout()=default'],['../classmoci_1_1BufferLayout.html#acde600e513b0a74716dafa8f799c62b9',1,'moci::BufferLayout::BufferLayout(std::initializer_list&lt; BufferElement &gt; elements)']]]
 ];
