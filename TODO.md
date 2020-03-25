@@ -33,6 +33,7 @@
 ### OpenGL
 
 - Select shader file based on api. GL4 or ES2.
+- TextureCube resize based on original resolution & max on es2/ARM
 
 ## Misc
 

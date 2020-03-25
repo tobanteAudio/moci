@@ -6,6 +6,7 @@
 #include "stb_image_resize.h"
 
 #include "moci/core/logging.hpp"
+#include "moci/core/preprocessor.hpp"
 
 #include "moci/render/opengl/es2/es2.hpp"
 
@@ -125,9 +126,10 @@ OpenGLESTextureCube::OpenGLESTextureCube(std::vector<std::string> paths) : paths
         if (data != nullptr)
         {
             MOCI_CORE_INFO("stbi loaded: {} {}x{}", paths_[i].c_str(), width, height);
-
+            auto const position = GL_TEXTURE_CUBE_MAP_POSITIVE_X + i;
+#if MOCI_ARM
             // Resize
-            auto const newSize = 256;
+            auto const newSize = 1024;
             std::vector<stbi_uc> outBuffer {};
             outBuffer.resize(newSize * newSize * numChannels);
             if (stbir_resize_uint8(data, width, height, 0, outBuffer.data(), newSize, newSize, 0, numChannels) == 0)
@@ -135,8 +137,11 @@ OpenGLESTextureCube::OpenGLESTextureCube(std::vector<std::string> paths) : paths
                 MOCI_ERROR("stbi resize error");
             }
 
-            auto const position = GL_TEXTURE_CUBE_MAP_POSITIVE_X + i;
             GLCall(glTexImage2D(position, 0, GL_RGB, newSize, newSize, 0, GL_RGB, GL_UNSIGNED_BYTE, outBuffer.data()));
+#else
+
+            GLCall(glTexImage2D(position, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data));
+#endif
         }
         else
         {
