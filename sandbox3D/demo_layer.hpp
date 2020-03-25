@@ -58,6 +58,12 @@ private:
     moci::Texture2D::Ptr textureSolid_  = {};
     moci::Texture2D::Ptr textureColors_ = {};
 
+    moci::Ref<moci::Shader> skyboxShader_       = nullptr;
+    moci::Ref<moci::VertexBuffer> skyboxVbo_    = nullptr;
+    moci::Ref<moci::IndexBuffer> skyboxIbo_     = nullptr;
+    moci::Ref<moci::VertexArray> skyboxVao_     = nullptr;
+    moci::Ref<moci::TextureCube> skyBoxTexture_ = {};
+
     std::vector<moci::Mesh::Vertex> vertices_ = {};
 
     // imgui

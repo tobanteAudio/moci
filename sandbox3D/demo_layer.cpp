@@ -13,6 +13,53 @@
 
 #include "glm/gtx/quaternion.hpp"
 
+namespace
+{
+std::vector<float> skyboxVertices = {
+    // positions
+    -1.0f, 1.0f,  -1.0f,  //
+    -1.0f, -1.0f, -1.0f,  //
+    1.0f,  -1.0f, -1.0f,  //
+    1.0f,  -1.0f, -1.0f,  //
+    1.0f,  1.0f,  -1.0f,  //
+    -1.0f, 1.0f,  -1.0f,  //
+
+    -1.0f, -1.0f, 1.0f,   //
+    -1.0f, -1.0f, -1.0f,  //
+    -1.0f, 1.0f,  -1.0f,  //
+    -1.0f, 1.0f,  -1.0f,  //
+    -1.0f, 1.0f,  1.0f,   //
+    -1.0f, -1.0f, 1.0f,   //
+
+    1.0f,  -1.0f, -1.0f,  //
+    1.0f,  -1.0f, 1.0f,   //
+    1.0f,  1.0f,  1.0f,   //
+    1.0f,  1.0f,  1.0f,   //
+    1.0f,  1.0f,  -1.0f,  //
+    1.0f,  -1.0f, -1.0f,  //
+
+    -1.0f, -1.0f, 1.0f,  //
+    -1.0f, 1.0f,  1.0f,  //
+    1.0f,  1.0f,  1.0f,  //
+    1.0f,  1.0f,  1.0f,  //
+    1.0f,  -1.0f, 1.0f,  //
+    -1.0f, -1.0f, 1.0f,  //
+
+    -1.0f, 1.0f,  -1.0f,  //
+    1.0f,  1.0f,  -1.0f,  //
+    1.0f,  1.0f,  1.0f,   //
+    1.0f,  1.0f,  1.0f,   //
+    -1.0f, 1.0f,  1.0f,   //
+    -1.0f, 1.0f,  -1.0f,  //
+
+    -1.0f, -1.0f, -1.0f,  //
+    -1.0f, -1.0f, 1.0f,   //
+    1.0f,  -1.0f, -1.0f,  //
+    1.0f,  -1.0f, -1.0f,  //
+    -1.0f, -1.0f, 1.0f,   //
+    1.0f,  -1.0f, 1.0f    //
+};
+}
 void DemoLayer::OnAttach()
 {
     MOCI_PROFILE_FUNCTION();
@@ -71,6 +118,39 @@ void DemoLayer::OnAttach()
         }
 
         numVertices_ = vertices_.size();
+    }
+
+    // Skybox buffer
+    {
+#if defined(MOCI_API_OPENGL_LEGACY)
+        skyboxShader_ = moci::Shader::Create("sandbox3D/assets/shader/es2_skybox.glsl");
+#else
+        skyboxShader_  = moci::Shader::Create("sandbox3D/assets/shader/gl4_skybox.glsl");
+#endif
+        skyboxShader_->Bind();
+        skyboxShader_->SetInt("u_Skybox", 0);
+        moci::BufferLayout layout = {{moci::ShaderDataType::Float3, "a_Position"}};
+        auto* data                = reinterpret_cast<float*>(skyboxVertices.data());
+        auto const size           = static_cast<std::uint32_t>(skyboxVertices.size() * 12);
+        skyboxVbo_.reset(moci::VertexBuffer::Create(data, size, false));
+        skyboxVbo_->SetLayout(layout);
+        skyboxVbo_->Unbind();
+        skyboxIbo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
+        skyboxIbo_->Unbind();
+        skyboxVao_ = moci::VertexArray::Create();
+        skyboxVao_->AddVertexBuffer(skyboxVbo_);
+        skyboxVao_->SetIndexBuffer(skyboxIbo_);
+        skyboxVao_->Unbind();
+        std::vector<std::string> faces {
+            std::string("sandbox3D/assets/textures/skybox/right.jpg"),   //
+            std::string("sandbox3D/assets/textures/skybox/left.jpg"),    //
+            std::string("sandbox3D/assets/textures/skybox/top.jpg"),     //
+            std::string("sandbox3D/assets/textures/skybox/bottom.jpg"),  //
+            std::string("sandbox3D/assets/textures/skybox/front.jpg"),   //
+            std::string("sandbox3D/assets/textures/skybox/back.jpg")     //
+        };
+
+        skyBoxTexture_ = moci::TextureCube::Create(faces);
     }
 
     // Mesh buffer
@@ -151,6 +231,21 @@ void DemoLayer::OnUpdate(moci::Timestep ts)
         MOCI_PROFILE_SCOPE("OnUpdate::Light");
         light->Render(view, projection);
     }
+
+    // skybox
+    // change depth function so depth test passes when values are equal to depth buffer's content
+    GLCall(glDepthFunc(GL_LEQUAL));
+    skyboxShader_->Bind();
+    auto const skyboxView = glm::mat4(glm::mat3(view));
+    skyboxShader_->SetMat4("u_View", skyboxView);
+    skyboxShader_->SetMat4("u_Projection", projection);
+    skyboxShader_->SetInt("u_Skybox", 0);
+    // skybox cube
+    skyboxVao_->Bind();
+    skyBoxTexture_->Bind(0);
+    moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, 36);
+    skyboxVao_->Unbind();
+    GLCall(glDepthFunc(GL_LESS));  // set depth function back to default
 }
 
 void DemoLayer::OnEvent(moci::Event& e)

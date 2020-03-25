@@ -49,10 +49,6 @@ public:
 class TextureCube : public Texture
 {
 public:
-    using Ptr      = Ref<TextureCube>;
-    using Optional = std::optional<Ptr>;
-
-public:
     static auto Create(std::vector<std::string> paths) -> Ref<TextureCube>;
 };
 }  // namespace moci
