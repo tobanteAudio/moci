@@ -48,4 +48,23 @@ auto Texture2D::Create(Texture::Format format, uint32_t width, uint32_t height, 
     return nullptr;
 }
 
+auto TextureCube::Create(std::vector<std::string> paths) -> Ref<TextureCube>
+{
+    switch (Renderer::GetAPI())
+    {
+        case RendererAPI::API::None:
+            MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
+            return nullptr;
+#if defined(MOCI_API_OPENGL_MODERN)
+        case RendererAPI::API::OpenGL: return MakeRef<OpenGLTextureCube>(paths);
+#endif
+#if defined(MOCI_API_OPENGL_LEGACY)
+        case RendererAPI::API::OpenGLES: return MakeRef<OpenGLESTextureCube>(paths);
+#endif
+        default: break;
+    }
+
+    MOCI_CORE_ASSERT(false, "Unknown RendererAPI!");
+    return nullptr;
+}
 }  // namespace moci

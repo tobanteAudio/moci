@@ -99,4 +99,53 @@ void OpenGLESTexture2D::Unbind() const
     GLCall(glActiveTexture(GL_TEXTURE0));
     GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
+
+OpenGLESTextureCube::OpenGLESTextureCube(std::vector<std::string> paths) : paths_(std::move(paths))
+{
+
+    // Generate a texture object
+    GLCall(glGenTextures(1, &renderID_));
+
+    // Bind the texture object
+    GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, renderID_));
+
+    stbi_set_flip_vertically_on_load(1);
+    for (GLuint i = 0; i < paths_.size(); i++)
+    {
+        unsigned char* data;
+        int width, height, nrChannels;
+        data = stbi_load(paths_[i].c_str(), &width, &height, &nrChannels, 0);
+        if (data == nullptr)
+        {
+            MOCI_CORE_ERROR("stbi error");
+        }
+
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        if (data != nullptr)
+        {
+            stbi_image_free(data);
+        }
+    }
+
+    // Set the filtering mode1
+    GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+    GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+    GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+    GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+    GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
+}
+
+OpenGLESTextureCube::~OpenGLESTextureCube() { GLCall(glDeleteTextures(1, &renderID_)); }
+
+void OpenGLESTextureCube::Bind(uint32_t slot) const
+{
+    GLCall(glActiveTexture(GL_TEXTURE0 + slot));
+    GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, renderID_));
+}
+
+void OpenGLESTextureCube::Unbind() const
+{
+    GLCall(glActiveTexture(GL_TEXTURE0));
+    GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, 0));
+}
 }  // namespace moci

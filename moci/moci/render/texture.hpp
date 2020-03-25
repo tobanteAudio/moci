@@ -6,6 +6,7 @@
 #include <memory>
 #include <optional>
 #include <string>
+#include <vector>
 
 namespace moci
 {
@@ -45,4 +46,13 @@ public:
     static auto Create(Texture::Format format, uint32_t width, uint32_t height, void* data) -> Ref<Texture2D>;
 };
 
+class TextureCube : public Texture
+{
+public:
+    using Ptr      = Ref<TextureCube>;
+    using Optional = std::optional<Ptr>;
+
+public:
+    static auto Create(std::vector<std::string> paths) -> Ref<TextureCube>;
+};
 }  // namespace moci
