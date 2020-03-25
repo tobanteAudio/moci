@@ -126,26 +126,36 @@ OpenGLESTextureCube::OpenGLESTextureCube(std::vector<std::string> paths) : paths
         if (data != nullptr)
         {
             MOCI_CORE_INFO("stbi loaded: {} {}x{}", paths_[i].c_str(), width, height);
-            auto const position = GL_TEXTURE_CUBE_MAP_POSITIVE_X + i;
-#if MOCI_ARM
-            // Resize
-            auto const newSize = 1024;
-            std::vector<stbi_uc> outBuffer {};
-            outBuffer.resize(newSize * newSize * numChannels);
-            if (stbir_resize_uint8(data, width, height, 0, outBuffer.data(), newSize, newSize, 0, numChannels) == 0)
+            auto const pos = GL_TEXTURE_CUBE_MAP_POSITIVE_X + i;
+
+            // Resize on ARM devices with little VRAM. (RPi3 for example)
+#if defined(MOCI_ARM)
+            if (width > 1024)
             {
-                MOCI_ERROR("stbi resize error");
+                auto const newSize = 1024;
+                MOCI_CORE_INFO("stbi resize: FROM:{}x{} TO: {}x{}", width, height, newSize, newSize);
+                std::vector<stbi_uc> outBuffer {};
+                outBuffer.resize(newSize * newSize * numChannels);
+                if (stbir_resize_uint8(data, width, height, 0, outBuffer.data(), newSize, newSize, 0, numChannels) == 0)
+                {
+                    MOCI_ERROR("stbi resize error");
+                }
+
+                GLCall(glTexImage2D(pos, 0, GL_RGB, newSize, newSize, 0, GL_RGB, GL_UNSIGNED_BYTE, outBuffer.data()));
+            }
+            else
+            {
+
+                GLCall(glTexImage2D(pos, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data));
             }
 
-            GLCall(glTexImage2D(position, 0, GL_RGB, newSize, newSize, 0, GL_RGB, GL_UNSIGNED_BYTE, outBuffer.data()));
 #else
-
-            GLCall(glTexImage2D(position, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data));
+            GLCall(glTexImage2D(pos, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data));
 #endif
         }
         else
         {
-            MOCI_CORE_ERROR("stbi error: {}", paths_[i].c_str());
+            MOCI_CORE_ERROR("stbi error: {}", paths_[i]);
         }
 
         stbi_image_free(data);
