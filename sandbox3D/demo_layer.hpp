@@ -55,8 +55,8 @@ private:
     moci::Mesh mesh_         = {"sandbox3D/assets/models/cerberus.fbx"};
     moci::Mesh floor_        = {"sandbox3D/assets/models/plane.obj"};
 
-    moci::Texture2D::Ptr textureSolid_  = {};
-    moci::Texture2D::Ptr textureColors_ = {};
+    moci::Ref<moci::Texture2D> textureSolid_  = {};
+    moci::Ref<moci::Texture2D> textureColors_ = {};
 
     moci::Ref<moci::Shader> skyboxShader_       = nullptr;
     moci::Ref<moci::VertexBuffer> skyboxVbo_    = nullptr;
