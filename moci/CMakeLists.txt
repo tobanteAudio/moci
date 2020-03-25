@@ -68,6 +68,8 @@ set(moci_sources
     moci/render/font.cpp
     moci/render/graphics_context.hpp
     moci/render/graphics_context.cpp
+    moci/render/image.hpp
+    moci/render/image.cpp
     moci/render/light.hpp
     moci/render/light.cpp
     moci/render/mesh.hpp
@@ -226,6 +228,7 @@ set (moci_test_src
     moci/render/camera_test.cpp
     moci/render/color_test.cpp
     moci/render/font_test.cpp
+    moci/render/image_test.cpp
 
     moci/render/freetype/library_test.cpp
     moci/render/obj/file_test.cpp
@@ -248,7 +251,7 @@ target_link_libraries(moci_tests
 catch_discover_tests(moci_tests)
 
 # copy testfiles
-foreach(_target OpenSans-Bold.ttf cube.obj teapot.obj)
+foreach(_target OpenSans-Bold.ttf cube.obj teapot.obj colors.png)
 execute_process(
     COMMAND 
         ${CMAKE_COMMAND} -E 
