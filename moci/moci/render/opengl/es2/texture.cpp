@@ -133,12 +133,12 @@ OpenGLESTextureCube::OpenGLESTextureCube(std::vector<std::string> paths) : paths
             if (width > 1024)
             {
                 auto const newSize = 1024;
-                MOCI_CORE_INFO("stbi resize: FROM:{}x{} TO: {}x{}", width, height, newSize, newSize);
+                MOCI_CORE_INFO("    stbi resize: FROM: {}x{} TO: {}x{}", width, height, newSize, newSize);
                 std::vector<stbi_uc> outBuffer {};
                 outBuffer.resize(newSize * newSize * numChannels);
                 if (stbir_resize_uint8(data, width, height, 0, outBuffer.data(), newSize, newSize, 0, numChannels) == 0)
                 {
-                    MOCI_ERROR("stbi resize error");
+                    MOCI_ERROR("    stbi resize error");
                 }
 
                 GLCall(glTexImage2D(pos, 0, GL_RGB, newSize, newSize, 0, GL_RGB, GL_UNSIGNED_BYTE, outBuffer.data()));
