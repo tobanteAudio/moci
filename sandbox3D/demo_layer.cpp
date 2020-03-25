@@ -127,14 +127,9 @@ void DemoLayer::OnUpdate(moci::Timestep ts)
     glm::mat4 const projection = glm::perspective(glm::radians(cameraFOV_), width_ / height_, 0.1f, 100.0f);
     glm::mat4 const view       = glm::lookAt(  //
         cameraPos_,                      // Camera is at (x,y,z), in World Space
-        cameraPos_ + cameraFront_,       // and looks at the origin
+        cameraPos_ + cameraFront_,       // and looks at
         cameraUp_                        // Head is up (set to 0,-1,0 to look upside-down)
     );
-    // glm::mat4 const view       = glm::lookAt(  //
-    //     cameraPos_,                      // Camera is at (x,y,z), in World Space
-    //     cameraLookAt_,                   // and looks at the origin
-    //     glm::vec3(0, 1, 0)               // Head is up (set to 0,-1,0 to look upside-down)
-    // );
 
     {
         MOCI_PROFILE_SCOPE("OnUpdate::Mesh");
