@@ -26,7 +26,10 @@ private:
     float lastTimestep_ = 0.0f;
     bool fullscreen_    = false;
 
-    glm::vec3 cameraPos_ {11.0f, 8.70f, 3.0f};
+    glm::vec3 cameraPos_ {15.0f, 8.70f, 50.0f};
+    glm::vec3 cameraFront_ {0.0f, 0.0f, -1.0f};
+    glm::vec3 cameraUp_ {0.0f, 1.0f, 0.0f};
+
     glm::vec3 cameraLookAt_ {0.0f, 0.0f, 0.0f};
     float cameraFOV_    = 45.0f;
     float ambientLight_ = 0.1f;
