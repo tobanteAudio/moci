@@ -161,6 +161,7 @@ void DemoLayer::OnEvent(moci::Event& e)
     dispatcher.Dispatch<moci::WindowResizeEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnWindowResized));
     dispatcher.Dispatch<moci::KeyPressedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnKeyPressed));
     dispatcher.Dispatch<moci::MouseScrolledEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnMouseScrolled));
+    dispatcher.Dispatch<moci::MouseMovedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnMouseMoved));
 }
 
 bool DemoLayer::OnWindowResized(moci::WindowResizeEvent& e)
@@ -206,6 +207,49 @@ bool DemoLayer::OnMouseScrolled(moci::MouseScrolledEvent& e)
     {
         cameraFOV_ = maxFOV;
     }
+    return true;
+}
+
+bool DemoLayer::OnMouseMoved(moci::MouseMovedEvent& e)
+{
+    if (moci::Input::IsMouseButtonPressed(MOCI_MOUSE_BUTTON_3))
+    {
+        if (firstMouse_)
+        {
+            cameraLastX_ = e.GetX();
+            cameraLastY_ = e.GetY();
+            firstMouse_  = false;
+        }
+
+        auto xOffset = e.GetX() - cameraLastX_;
+        auto yOffset = cameraLastY_ - e.GetY();
+        cameraLastX_ = e.GetX();
+        cameraLastY_ = e.GetY();
+
+        auto const sensitifity = 0.1f;
+        xOffset *= sensitifity;
+        yOffset *= sensitifity;
+
+        cameraYaw_ += xOffset;
+        cameraPitch_ += yOffset;
+
+        if (cameraPitch_ > 89.0f)
+        {
+            cameraPitch_ = 89.0f;
+        }
+
+        if (cameraPitch_ < -89.0f)
+        {
+            cameraPitch_ = -89.0f;
+        }
+
+        auto front   = glm::vec3 {};
+        front.x      = glm::cos(glm::radians(cameraYaw_)) * glm::cos(glm::radians(cameraPitch_));
+        front.y      = glm::sin(glm::radians(cameraPitch_));
+        front.z      = glm::sin(glm::radians(cameraYaw_)) * glm::cos(glm::radians(cameraPitch_));
+        cameraFront_ = glm::normalize(front);
+    }
+
     return true;
 }
 
