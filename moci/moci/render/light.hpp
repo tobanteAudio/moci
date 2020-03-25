@@ -70,8 +70,8 @@ public:
         auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {scale, scale, scale});
         for (auto const& vertex : lightMesh_.GetVertices())
         {
-            auto const position = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-            vertices.push_back({glm::vec3(position), color});
+            auto const transformedPos = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+            vertices.push_back({glm::vec3(transformedPos), color});
         }
 
         shader->Bind();
@@ -79,8 +79,10 @@ public:
         shader->SetMat4("u_Projection", projection);
 
         vao->Bind();
-        vbo->UploadData(0, vertices.size() * sizeof(Light::Vertex), vertices.data());
-        moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, vertices.size());
+        auto const sizeInBytes = static_cast<std::uint32_t>(vertices.size() * sizeof(Light::Vertex));
+        vbo->UploadData(0, sizeInBytes, vertices.data());
+        moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0,
+                                        static_cast<std::uint32_t>(vertices.size()));
         // drawStats_.numVertices += vertices.size();
         vertices.clear();
         vao->Unbind();

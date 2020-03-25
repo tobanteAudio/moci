@@ -80,7 +80,7 @@ public:
     [[nodiscard]] Type GetAngleRadians() const noexcept
     {
         auto const angle = std::atan2(end_.GetY() - start_.GetY(), end_.GetX() - start_.GetX());
-        return angle;
+        return static_cast<Type>(angle);
     }
 
     /**
