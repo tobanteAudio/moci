@@ -21,6 +21,8 @@ private:
     bool OnKeyPressed(moci::KeyPressedEvent& e);
     bool OnMouseScrolled(moci::MouseScrolledEvent& e);
     bool OnMouseMoved(moci::MouseMovedEvent& e);
+    bool OnMousePressed(moci::MouseButtonPressedEvent& e);
+    bool OnMouseReleased(moci::MouseButtonReleasedEvent& e);
 
 private:
     float width_        = 1280.0f;
@@ -37,6 +39,7 @@ private:
     bool firstMouse_       = true;
     float cameraLastX_     = {width_ / 2.0f};
     float cameraLastY_     = {height_ / 2.0f};
+    bool isMouseDragging_  = false;
 
     glm::vec3 cameraLookAt_        = {0.0f, 0.0f, 0.0f};
     float ambientLight_            = 0.1f;

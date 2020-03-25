@@ -160,6 +160,8 @@ void DemoLayer::OnEvent(moci::Event& e)
     dispatcher.Dispatch<moci::KeyPressedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnKeyPressed));
     dispatcher.Dispatch<moci::MouseScrolledEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnMouseScrolled));
     dispatcher.Dispatch<moci::MouseMovedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnMouseMoved));
+    dispatcher.Dispatch<moci::MouseButtonPressedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnMousePressed));
+    dispatcher.Dispatch<moci::MouseButtonReleasedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnMouseReleased));
 }
 
 bool DemoLayer::OnWindowResized(moci::WindowResizeEvent& e)
@@ -208,9 +210,31 @@ bool DemoLayer::OnMouseScrolled(moci::MouseScrolledEvent& e)
     return true;
 }
 
+bool DemoLayer::OnMousePressed(moci::MouseButtonPressedEvent& e)
+{
+    if (e.GetMouseButton() == MOCI_MOUSE_BUTTON_3)
+    {
+        isMouseDragging_ = true;
+        return true;
+    }
+
+    return false;
+}
+bool DemoLayer::OnMouseReleased(moci::MouseButtonReleasedEvent& e)
+{
+    if (e.GetMouseButton() == MOCI_MOUSE_BUTTON_3)
+    {
+        isMouseDragging_ = false;
+        firstMouse_      = true;
+        return true;
+    }
+
+    return false;
+}
+
 bool DemoLayer::OnMouseMoved(moci::MouseMovedEvent& e)
 {
-    if (moci::Input::IsMouseButtonPressed(MOCI_MOUSE_BUTTON_3))
+    if (isMouseDragging_)
     {
         if (firstMouse_)
         {
