@@ -49,18 +49,16 @@ void DemoLayer::OnAttach()
             vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
         }
 
+        for (auto x = 1; x <= 10; x++)
         {
-            MOCI_PROFILE_SCOPE("Translate Small Teapots");
-            for (auto x = 1; x <= 10; x++)
+            auto const modelScale = modelScale_ / 2.0f;
+            auto const rotate     = glm::rotate(glm::mat4(1.0f), glm::radians(-90.0f), {1.0f, 0.0f, 0.0f});
+            auto const scale      = glm::scale(glm::mat4(1.0f), {modelScale, modelScale, modelScale});
+            auto const model      = glm::translate(glm::mat4(1.0f), glm::vec3((3.0f * x), 5.0f, 1.0f));
+            for (auto const& vertex : mesh_.GetVertices())
             {
-                auto const modelScale = modelScale_ / 2.0f;
-                auto const scale      = glm::scale(glm::mat4(1.0f), {modelScale, modelScale, modelScale});
-                auto const model      = glm::translate(glm::mat4(1.0f), glm::vec3((3.0f * x), 5.0f, 1.0f));
-                for (auto const& vertex : mesh_.GetVertices())
-                {
-                    auto const position = model * scale * glm::vec4(vertex.position, 1.0f);
-                    vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
-                }
+                auto const position = model * scale * rotate * glm::vec4(vertex.position, 1.0f);
+                vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
             }
         }
 
