@@ -165,6 +165,7 @@ void DemoLayer::OnEvent(moci::Event& e)
     moci::EventDispatcher dispatcher(e);
     dispatcher.Dispatch<moci::WindowResizeEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnWindowResized));
     dispatcher.Dispatch<moci::KeyPressedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnKeyPressed));
+    dispatcher.Dispatch<moci::MouseScrolledEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnMouseScrolled));
 }
 
 bool DemoLayer::OnWindowResized(moci::WindowResizeEvent& e)
@@ -194,6 +195,22 @@ bool DemoLayer::OnKeyPressed(moci::KeyPressedEvent& e)
         cameraPos_ += glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed;
     }
 
+    return true;
+}
+
+bool DemoLayer::OnMouseScrolled(moci::MouseScrolledEvent& e)
+{
+    cameraFOV_ -= e.GetYOffset();
+    constexpr auto minFOV = 1.0f;
+    constexpr auto maxFOV = 75.0f;
+    if (cameraFOV_ < minFOV)
+    {
+        cameraFOV_ = minFOV;
+    }
+    if (cameraFOV_ > maxFOV)
+    {
+        cameraFOV_ = maxFOV;
+    }
     return true;
 }
 
