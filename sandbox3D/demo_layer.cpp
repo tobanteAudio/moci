@@ -71,9 +71,9 @@ void DemoLayer::OnAttach()
         MOCI_INFO("Max uniform vectors: {}", moci::RenderCommand::MaxUniformVectors());
     }
 
-    auto const numVertices = (mesh_.GetVertices().size() * 11)  //
-                             + floor_.GetVertices().size();     //
-                                                                //  + lightMesh_.GetVertices().size();
+    auto const numVertices = (mesh_.GetVertices().size() * 5)  //
+                             + floor_.GetVertices().size();    //
+                                                               //  + lightMesh_.GetVertices().size();
 
     vertices_.reserve(numVertices);
     {
@@ -96,7 +96,7 @@ void DemoLayer::OnAttach()
             vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
         }
 
-        for (auto x = 1; x <= 10; x++)
+        for (auto x = 1; x <= 5; x++)
         {
             auto const modelScale = modelScale_ / 2.0f;
             auto const rotate     = glm::rotate(glm::mat4(1.0f), glm::radians(-90.0f), {1.0f, 0.0f, 0.0f});
