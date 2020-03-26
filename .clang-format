@@ -52,3 +52,5 @@ Standard: Cpp11
 UseTab: Never
 ---
 Language: Proto
+---
+Language: ObjC
