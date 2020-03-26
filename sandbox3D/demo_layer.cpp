@@ -131,7 +131,7 @@ void DemoLayer::OnAttach()
         skyboxShader_->SetInt("u_Skybox", 0);
         moci::BufferLayout layout = {{moci::ShaderDataType::Float3, "a_Position"}};
         auto* data                = reinterpret_cast<float*>(skyboxVertices.data());
-        auto const size           = static_cast<std::uint32_t>(skyboxVertices.size() * 12);
+        auto const size           = static_cast<std::uint32_t>(skyboxVertices.size() * sizeof(float));
         skyboxVbo_.reset(moci::VertexBuffer::Create(data, size, false));
         skyboxVbo_->SetLayout(layout);
         skyboxVbo_->Unbind();
