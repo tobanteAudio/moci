@@ -3,10 +3,10 @@
 #include "moci/core/logging.hpp"
 #include "moci/core/memory.hpp"
 
+#include "moci/core/vector.hpp"
 #include <memory>
 #include <optional>
 #include <string>
-#include "moci/core/vector.hpp"
 
 namespace moci
 {

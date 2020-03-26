@@ -14,8 +14,8 @@
 #include <cstddef>
 #include <cstdint>
 
-#include <map>
 #include "moci/core/vector.hpp"
+#include <map>
 
 namespace moci
 {

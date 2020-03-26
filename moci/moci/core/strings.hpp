@@ -5,12 +5,12 @@
 #include <cstdio>
 #include <cstdlib>
 
+#include "moci/core/vector.hpp"
 #include <algorithm>
 #include <iostream>
 #include <locale>
 #include <optional>
 #include <sstream>
-#include "moci/core/vector.hpp"
 
 namespace moci
 {

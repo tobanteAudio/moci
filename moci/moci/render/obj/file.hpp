@@ -4,8 +4,8 @@
 
 #include <gsl/gsl>
 
-#include <string>
 #include "moci/core/vector.hpp"
+#include <string>
 
 namespace moci
 {

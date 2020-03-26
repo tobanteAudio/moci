@@ -4,10 +4,10 @@
 
 #include <cstdint>
 
+#include "moci/core/vector.hpp"
 #include <map>
 #include <string>
 #include <string_view>
-#include "moci/core/vector.hpp"
 
 namespace moci
 {

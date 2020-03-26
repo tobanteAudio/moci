@@ -3,11 +3,11 @@
 #include "moci/geometry/rectangle.hpp"
 #include "moci/render/render_queue.hpp"
 
+#include "moci/core/vector.hpp"
 #include <memory>
 #include <string>
 #include <string_view>
 #include <utility>
-#include "moci/core/vector.hpp"
 
 namespace moci
 {

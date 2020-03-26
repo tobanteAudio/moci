@@ -2,6 +2,7 @@
 
 #include "moci/core/logging.hpp"
 
+#include "moci/core/vector.hpp"
 #include <algorithm>
 #include <chrono>
 #include <fstream>
@@ -11,7 +12,6 @@
 #include <sstream>
 #include <string>
 #include <thread>
-#include "moci/core/vector.hpp"
 
 namespace moci
 {

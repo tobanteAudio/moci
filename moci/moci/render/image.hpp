@@ -26,8 +26,8 @@ public:
 
 private:
     Vector<std::uint8_t> data_ = {};
-    int width_                      = 0;
-    int height_                     = 0;
-    int numChannels_                = 0;
+    int width_                 = 0;
+    int height_                = 0;
+    int numChannels_           = 0;
 };
 }  // namespace moci
