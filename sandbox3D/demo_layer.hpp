@@ -69,7 +69,6 @@ private:
     // imgui
     struct DrawStats
     {
-        std::uint32_t frameCounter {};
         std::uint32_t numVertices {};
         float minFPS = 9999.0f;
         float maxFPS = 0.0f;

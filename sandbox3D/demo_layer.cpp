@@ -195,7 +195,6 @@ void DemoLayer::OnAttach()
 void DemoLayer::OnUpdate(moci::Timestep ts)
 {
     MOCI_PROFILE_FUNCTION();
-    drawStats_.frameCounter += 1;
     lastTimestep_          = ts.GetMilliseconds();
     drawStats_.numVertices = 0;
     moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
@@ -372,8 +371,9 @@ bool DemoLayer::OnMouseMoved(moci::MouseMovedEvent& e)
 
 void DemoLayer::OnImGuiRender()
 {
-    auto const fps = ImGui::GetIO().Framerate;
-    if (drawStats_.frameCounter >= 100)
+    auto const fps        = ImGui::GetIO().Framerate;
+    auto const frameCount = moci::Application::Get().GetWindow().GetFrameCount();
+    if (frameCount >= 100)
     {
         if (fps < drawStats_.minFPS)
         {
@@ -436,12 +436,12 @@ void DemoLayer::OnImGuiRender()
         if (ImGui::CollapsingHeader("Stats"))
         {
             fpsHistory_.push_back(fps);
-            auto const frameCount = fmt::format("{} Frames", drawStats_.frameCounter);
-            auto const vertices   = fmt::format("{} Vertices", drawStats_.numVertices);
-            auto const triangles  = fmt::format("{} Triangles", drawStats_.numVertices / 3);
-            auto const mb         = drawStats_.numVertices * sizeof(moci::Mesh::Vertex) / 1'000'000.0f;
-            auto const megabyte   = fmt::format("{0:0.1f} Mbytes", mb);
-            ImGui::TextUnformatted(frameCount.c_str());
+            auto const frameCounter = fmt::format("{} Frames", frameCount);
+            auto const vertices     = fmt::format("{} Vertices", drawStats_.numVertices);
+            auto const triangles    = fmt::format("{} Triangles", drawStats_.numVertices / 3);
+            auto const mb           = drawStats_.numVertices * sizeof(moci::Mesh::Vertex) / 1'000'000.0f;
+            auto const megabyte     = fmt::format("{0:0.1f} Mbytes", mb);
+            ImGui::TextUnformatted(frameCounter.c_str());
             ImGui::TextUnformatted(fpsStr.c_str());
             ImGui::TextUnformatted(minFPSStr.c_str());
             ImGui::TextUnformatted(maxFPSStr.c_str());

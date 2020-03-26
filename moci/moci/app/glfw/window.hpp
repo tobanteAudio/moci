@@ -30,6 +30,8 @@ public:
     void SetFullscreen(bool enabled) override;
     [[nodiscard]] bool IsFullscreen() const override;
 
+    [[nodiscard]] std::uint32_t GetFrameCount() const noexcept override { return frameCounter_; }
+
     [[nodiscard]] inline auto GetNativeWindow() const -> void* override { return m_Window; }
 
 private:
@@ -52,6 +54,7 @@ private:
     };
 
     WindowData m_Data;
+    std::uint32_t frameCounter_ {};
 };
 
 }  // namespace moci

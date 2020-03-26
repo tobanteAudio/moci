@@ -2,11 +2,10 @@
 
 ## 3D
 
-- Camera movement.
+- Add perspective camera to moci
 
 ## Application
 
-- Add frame counter.
 - Add events.
   - Lost/Gain Focus
 
