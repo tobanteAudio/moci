@@ -1,4 +1,5 @@
 ---
+Language: Cpp
 BasedOnStyle: WebKit
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: "true"
@@ -31,7 +32,6 @@ FixNamespaceComments: "true"
 IndentCaseLabels: "true"
 IndentWrappedFunctionNames: "false"
 KeepEmptyLinesAtTheStartOfBlocks: "true"
-Language: Cpp
 MaxEmptyLinesToKeep: "1"
 NamespaceIndentation: None
 PointerAlignment: Left
@@ -54,3 +54,6 @@ UseTab: Never
 Language: Proto
 ---
 Language: ObjC
+BasedOnStyle: WebKit
+ColumnLimit: "120"
+
