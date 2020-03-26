@@ -1,10 +1,10 @@
 /**
- * @file scope_close_test.cpp
+ * @file scope_guard_test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
 #include "catch2/catch.hpp"
 
-#include "moci/core/scope_close.hpp"
+#include "moci/core/scope_guard.hpp"
 
 TEST_CASE("moci/core: MakeScopeGuard", "[core]")
 {

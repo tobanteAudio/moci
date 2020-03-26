@@ -6,7 +6,7 @@
 #include "moci/core/logging.hpp"
 #include "moci/core/memory.hpp"
 #include "moci/core/property_map.hpp"
-#include "moci/core/scope_close.hpp"
+#include "moci/core/scope_guard.hpp"
 #include "moci/core/strings.hpp"
 
 #include "moci/debug/instrumentor.hpp"

@@ -11,8 +11,8 @@ set(moci_sources
     moci/core/preprocessor.hpp
     moci/core/property_map.hpp
     moci/core/property_map.cpp
-    moci/core/scope_close.hpp
-    moci/core/scope_close.cpp
+    moci/core/scope_guard.hpp
+    moci/core/scope_guard.cpp
     moci/core/strings.hpp
 
     moci/debug/instrumentor.hpp
@@ -210,7 +210,7 @@ set (moci_test_src
     
     moci/core/algorithm_test.cpp
     moci/core/property_map_test.cpp
-    moci/core/scope_close_test.cpp
+    moci/core/scope_guard_test.cpp
     moci/core/strings_test.cpp
 
     moci/app/layer_stack_test.cpp
