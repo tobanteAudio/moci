@@ -23,7 +23,7 @@ build_script:
 
       cd build
 
-      cmake .. -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release -DMOCI_API_OPENGL_LEGACY=ON -Wno-dev
+      cmake .. -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release -DMOCI_API_OPENGL_MODERN=ON -Wno-dev
 
       cmake --build . --config "Release"
 
