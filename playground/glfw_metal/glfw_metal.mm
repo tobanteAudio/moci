@@ -1,3 +1,5 @@
+#include "mtlpp.hpp"
+
 #define GLFW_INCLUDE_NONE
 #import <GLFW/glfw3.h>
 #define GLFW_EXPOSE_NATIVE_COCOA
@@ -24,7 +26,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 int main(void)
 {
-	id<MTLDevice> device = MTLCreateSystemDefaultDevice();
+    mtlpp::Device dev = mtlpp::Device::CreateSystemDefaultDevice();
+    id<MTLDevice> device = (__bridge id<MTLDevice>)dev.GetPtr();
+
 	if (!device)
 		exit(EXIT_FAILURE);
 
