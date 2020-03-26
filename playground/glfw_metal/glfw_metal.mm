@@ -10,131 +10,122 @@
 #import <simd/simd.h>
 
 #include <assert.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-static void error_callback(int error, const char* description)
-{
-    fputs(description, stderr);
+static void error_callback(int error, const char *description) {
+  fputs(description, stderr);
 }
 
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GLFW_TRUE);
+static void key_callback(GLFWwindow *window, int key, int scancode, int action,
+                         int mods) {
+  if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
-int main(void)
-{
-    mtlpp::Device dev = mtlpp::Device::CreateSystemDefaultDevice();
-    id<MTLDevice> device = (__bridge id<MTLDevice>)dev.GetPtr();
+int main(void) {
+  mtlpp::Device dev = mtlpp::Device::CreateSystemDefaultDevice();
+  id<MTLDevice> device = (__bridge id<MTLDevice>)dev.GetPtr();
 
-	if (!device)
-		exit(EXIT_FAILURE);
+  if (!device)
+    exit(EXIT_FAILURE);
 
-    glfwSetErrorCallback(error_callback);
+  glfwSetErrorCallback(error_callback);
 
-    if (!glfwInit())
-        exit(EXIT_FAILURE);
+  if (!glfwInit())
+    exit(EXIT_FAILURE);
 
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    GLFWwindow* window = glfwCreateWindow(640, 480, "Metal Example", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        exit(EXIT_FAILURE);
-    }
-
-    NSWindow* nswin = glfwGetCocoaWindow(window);
-    CAMetalLayer* layer = [CAMetalLayer layer];
-    layer.device = device;
-    layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
-    nswin.contentView.layer = layer;
-    nswin.contentView.wantsLayer = YES;
-
-    MTLCompileOptions* compileOptions = [MTLCompileOptions new];
-    compileOptions.languageVersion = MTLLanguageVersion1_1;
-    NSError* compileError;
-    id<MTLLibrary> lib = [device newLibraryWithSource:
-       @"#include <metal_stdlib>\n"
-        "using namespace metal;\n"
-        "vertex float4 v_simple(\n"
-        "    constant float4* in  [[buffer(0)]],\n"
-        "    uint             vid [[vertex_id]])\n"
-        "{\n"
-        "    return in[vid];\n"
-        "}\n"
-        "fragment float4 f_simple(\n"
-        "    float4 in [[stage_in]])\n"
-        "{\n"
-        "    return float4(1, 0, 0, 1);\n"
-        "}\n"
-       options:compileOptions error:&compileError];
-    if (!lib)
-    {
-        NSLog(@"can't create library: %@", compileError);
-        glfwTerminate();
-        exit(EXIT_FAILURE);
-    }
-
-    id<MTLFunction> vs = [lib newFunctionWithName:@"v_simple"];
-    assert(vs);
-    id<MTLFunction> fs = [lib newFunctionWithName:@"f_simple"];
-    assert(fs);
-
-    id<MTLCommandQueue> cq = [device newCommandQueue];
-    assert(cq);
-
-    MTLRenderPipelineDescriptor* rpd = [MTLRenderPipelineDescriptor new];
-    rpd.vertexFunction = vs;
-    rpd.fragmentFunction = fs;
-    rpd.colorAttachments[0].pixelFormat = layer.pixelFormat;
-    id<MTLRenderPipelineState> rps = [device newRenderPipelineStateWithDescriptor:rpd error:NULL];
-    assert(rps);
-
-    glfwSetKeyCallback(window, key_callback);
-
-    while (!glfwWindowShouldClose(window))
-    {
-        float ratio;
-        int width, height;
-
-        glfwGetFramebufferSize(window, &width, &height);
-        ratio = width / (float) height;
-
-        layer.drawableSize = CGSizeMake(width, height);
-        id<CAMetalDrawable> drawable = [layer nextDrawable];
-        assert(drawable);
-
-        id<MTLCommandBuffer> cb = [cq commandBuffer];
-
-        MTLRenderPassDescriptor* rpd = [MTLRenderPassDescriptor new];
-        MTLRenderPassColorAttachmentDescriptor* cd = rpd.colorAttachments[0];
-        cd.texture = drawable.texture;
-        cd.loadAction = MTLLoadActionClear;
-        cd.clearColor = MTLClearColorMake(1.0, 1.0, 1.0, 1.0);
-        cd.storeAction = MTLStoreActionStore;
-        id<MTLRenderCommandEncoder> rce = [cb renderCommandEncoderWithDescriptor:rpd];
-
-        [rce setRenderPipelineState:rps];
-        [rce setVertexBytes:(vector_float4[]){
-            { 0, 0, 0, 1 },
-            { -1, -1, 0, 1 },
-            { 1, -1, 0, 1 },
-        } length:3 * sizeof(vector_float4) atIndex:0];
-        [rce drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:3];
-
-        [rce endEncoding];
-        [cb presentDrawable:drawable];
-        [cb commit];
-
-        glfwPollEvents();
-    }
-
-    glfwDestroyWindow(window);
-
+  glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+  GLFWwindow *window = glfwCreateWindow(640, 480, "Metal Example", NULL, NULL);
+  if (!window) {
     glfwTerminate();
-    exit(EXIT_SUCCESS);
+    exit(EXIT_FAILURE);
+  }
+
+  NSWindow *nswin = glfwGetCocoaWindow(window);
+  CAMetalLayer *layer = [CAMetalLayer layer];
+  layer.device = device;
+  layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
+  nswin.contentView.layer = layer;
+  nswin.contentView.wantsLayer = YES;
+
+  auto const shaderSrc = "#include <metal_stdlib>\n"
+                           "using namespace metal;\n"
+                           "vertex float4 v_simple(\n"
+                           "    constant float4* in  [[buffer(0)]],\n"
+                           "    uint             vid [[vertex_id]])\n"
+                           "{\n"
+                           "    return in[vid];\n"
+                           "}\n"
+                           "fragment float4 f_simple(\n"
+                           "    float4 in [[stage_in]])\n"
+                           "{\n"
+                           "    return float4(1, 0, 0, 1);\n"
+                           "}\n";
+  mtlpp::Library library =
+      dev.NewLibrary(shaderSrc, mtlpp::CompileOptions(), nullptr);
+  assert(library);
+  mtlpp::Function vertFunc = library.NewFunction("v_simple");
+  assert(vertFunc);
+  mtlpp::Function fragFunc = library.NewFunction("f_simple");
+  assert(fragFunc);
+
+  id<MTLCommandQueue> cq = [device newCommandQueue];
+  assert(cq);
+
+  MTLRenderPipelineDescriptor *rpd = [MTLRenderPipelineDescriptor new];
+  rpd.vertexFunction = (__bridge id<MTLFunction>)vertFunc.GetPtr();
+  rpd.fragmentFunction = (__bridge id<MTLFunction>)fragFunc.GetPtr();
+  rpd.colorAttachments[0].pixelFormat = layer.pixelFormat;
+  id<MTLRenderPipelineState> rps =
+      [device newRenderPipelineStateWithDescriptor:rpd error:NULL];
+  assert(rps);
+
+  glfwSetKeyCallback(window, key_callback);
+
+  while (!glfwWindowShouldClose(window)) {
+    float ratio;
+    int width, height;
+
+    glfwGetFramebufferSize(window, &width, &height);
+    ratio = width / (float)height;
+
+    layer.drawableSize = CGSizeMake(width, height);
+    id<CAMetalDrawable> drawable = [layer nextDrawable];
+    assert(drawable);
+
+    id<MTLCommandBuffer> cb = [cq commandBuffer];
+
+    MTLRenderPassDescriptor *rpd = [MTLRenderPassDescriptor new];
+    MTLRenderPassColorAttachmentDescriptor *cd = rpd.colorAttachments[0];
+    cd.texture = drawable.texture;
+    cd.loadAction = MTLLoadActionClear;
+    cd.clearColor = MTLClearColorMake(1.0, 1.0, 1.0, 1.0);
+    cd.storeAction = MTLStoreActionStore;
+    id<MTLRenderCommandEncoder> rce =
+        [cb renderCommandEncoderWithDescriptor:rpd];
+
+    [rce setRenderPipelineState:rps];
+    [rce setVertexBytes:(vector_float4[]){
+                            {0, 0, 0, 1},
+                            {-1, -1, 0, 1},
+                            {1, -1, 0, 1},
+                        }
+                 length:3 * sizeof(vector_float4)
+                atIndex:0];
+    [rce drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:3];
+
+    [rce endEncoding];
+    [cb presentDrawable:drawable];
+    [cb commit];
+
+    glfwPollEvents();
+  }
+
+  glfwDestroyWindow(window);
+
+  glfwTerminate();
+  exit(EXIT_SUCCESS);
 }
 
 //! [code]

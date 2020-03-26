@@ -18,7 +18,7 @@ if(APPLE)
             # RESOURCE "src/Main.storyboard"
             # MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/Info.plist"
     )
-    target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
+    target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
     target_compile_options(${PROJECT_NAME} PRIVATE "-mmacosx-version-min=10.12")
     target_link_libraries(${PROJECT_NAME} 
         PRIVATE 
