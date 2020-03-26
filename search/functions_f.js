@@ -43,7 +43,7 @@ var searchData=
   ['shaderdatatypesize',['ShaderDataTypeSize',['../namespacemoci.html#ad804ae08831e89ad3e99cdaa0a3c9701',1,'moci']]],
   ['shutdown',['Shutdown',['../classmoci_1_1DatagramSocket.html#af4e5b907bff757b3121f517851f1c509',1,'moci::DatagramSocket']]],
   ['slider',['Slider',['../classmoci_1_1Slider.html#a65c6d84a43b2190932f8a12e15f18a81',1,'moci::Slider']]],
-  ['split',['Split',['../classmoci_1_1Strings.html#a5a88ce5343cd72f46f14987c27b15ee2',1,'moci::Strings']]],
+  ['split',['Split',['../classmoci_1_1Strings.html#a385b495e2a7ee1fc7e780d98cab79dcb',1,'moci::Strings']]],
   ['startframe',['StartFrame',['../classmoci_1_1RenderQueue.html#a3b85ace79947f24ad044582f4af8f4a0',1,'moci::RenderQueue']]],
   ['stop',['Stop',['../classmoci_1_1InstrumentationTimer.html#a1ab9dea0c04e47a87f860fe6aab8b97c',1,'moci::InstrumentationTimer']]],
   ['strings',['Strings',['../classmoci_1_1Strings.html#a1e832ab7badb7d902790f3bbe1745efb',1,'moci::Strings']]],

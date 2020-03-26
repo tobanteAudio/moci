@@ -49,7 +49,7 @@ var searchData=
   ['shutdown',['Shutdown',['../classmoci_1_1DatagramSocket.html#af4e5b907bff757b3121f517851f1c509',1,'moci::DatagramSocket']]],
   ['size',['Size',['../structmoci_1_1BufferElement.html#ac96229ec4c055e04575ae611cf71a4f2',1,'moci::BufferElement']]],
   ['slider',['Slider',['../classmoci_1_1Slider.html',1,'moci::Slider'],['../classmoci_1_1Slider.html#a65c6d84a43b2190932f8a12e15f18a81',1,'moci::Slider::Slider()']]],
-  ['split',['Split',['../classmoci_1_1Strings.html#a5a88ce5343cd72f46f14987c27b15ee2',1,'moci::Strings']]],
+  ['split',['Split',['../classmoci_1_1Strings.html#a385b495e2a7ee1fc7e780d98cab79dcb',1,'moci::Strings']]],
   ['start',['Start',['../structmoci_1_1ProfileResult.html#a7adffce7011d2e2da92e42e65753e291',1,'moci::ProfileResult']]],
   ['startframe',['StartFrame',['../classmoci_1_1RenderQueue.html#a3b85ace79947f24ad044582f4af8f4a0',1,'moci::RenderQueue']]],
   ['stats',['Stats',['../structmoci_1_1RenderQueue_1_1Stats.html',1,'moci::RenderQueue']]],

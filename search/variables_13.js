@@ -7,5 +7,5 @@ var searchData=
   ['vbo',['vbo',['../structmoci_1_1Light.html#a38a1e52dcfe90d350be71a96b4c4dff1',1,'moci::Light']]],
   ['vertexcount',['vertexCount',['../structmoci_1_1RenderQueue_1_1Stats.html#aad647ef7030ec57f524cd91def87ea33',1,'moci::RenderQueue::Stats']]],
   ['vertexsource',['VertexSource',['../structmoci_1_1ShaderProgramSource.html#a4e4a31a4dd4d98afa89f724b4fa79288',1,'moci::ShaderProgramSource']]],
-  ['vertices',['vertices',['../structmoci_1_1Light.html#a9f49242adb4d71991dfd868c73baba18',1,'moci::Light']]]
+  ['vertices',['vertices',['../structmoci_1_1Light.html#a990d8573da381d849a5245a2d0c6eb25',1,'moci::Light']]]
 ];
