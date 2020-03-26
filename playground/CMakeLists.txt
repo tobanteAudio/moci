@@ -16,7 +16,6 @@ target_link_libraries(font_atlas
         Moci::Moci 
 )
 
-add_subdirectory(glfw_metal)
 
 if(WIN32)
     add_executable(win32_gl WIN32 win32_gl.cpp)
@@ -31,3 +30,7 @@ if(WIN32)
             gdi32.lib
     )
 endif()
+
+add_subdirectory(allocator)
+add_subdirectory(glfw_metal)
+add_subdirectory(thread_pool)
