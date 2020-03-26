@@ -34,6 +34,10 @@ bool DatagramSocket::Pimpl::Write(std::string const& host, int port, DatagramSoc
 
 bool DatagramSocket::Pimpl::Write(std::string const& host, int port, std::uint8_t const* const buffer, size_t numBytes)
 {
+    IgnoreUnused(host);
+    IgnoreUnused(port);
+    IgnoreUnused(buffer);
+    IgnoreUnused(numBytes);
     return false;
 }
 
@@ -59,7 +63,7 @@ bool DatagramSocket::Pimpl::Bind(std::string ip, int port)
 
     SOCKADDR_IN addr;
     addr.sin_family      = AF_INET;
-    addr.sin_port        = htons(port);
+    addr.sin_port        = htons(static_cast<unsigned short>(port));
     addr.sin_addr.s_addr = ADDR_ANY;
 
     rc = bind(socketDescriptor_, (SOCKADDR*)&addr, sizeof(SOCKADDR_IN));
@@ -88,8 +92,8 @@ void DatagramSocket::Pimpl::Listen()
         isRunning_.store(true);
         while (isRunning_.load())
         {
-            auto const rc = recvfrom(socketDescriptor_, reinterpret_cast<char*>(buffer_.data()), buffer_.size(), 0,
-                                     (SOCKADDR*)&remoteAddr, &remoteAddrLen);
+            auto const rc = recvfrom(socketDescriptor_, reinterpret_cast<char*>(buffer_.data()),
+                                     static_cast<int>(buffer_.size()), 0, (SOCKADDR*)&remoteAddr, &remoteAddrLen);
             if (rc == SOCKET_ERROR)
             {
                 MOCI_CORE_ERROR("recvfrom, error code: {}", WSAGetLastError());

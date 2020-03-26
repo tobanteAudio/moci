@@ -24,7 +24,7 @@ public:
         }
     }
 
-    ScopeGuard(ScopeGuard&& _sc) : committed(false), rollbackLambda(_sc.rollbackLambda)
+    ScopeGuard(ScopeGuard&& _sc) noexcept : committed(false), rollbackLambda(_sc.rollbackLambda)
     {
         if (_sc.committed)
         {

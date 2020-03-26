@@ -52,7 +52,7 @@ public:
     {
         listener_.Bind("", 8080);
         listener_.SetMessageCallback([](auto const& buffer, auto const size) {
-            moci::IgnoreUnused(size); 
+            moci::IgnoreUnused(size);
             auto data = float {};
             std::memcpy(&data, buffer.data(), sizeof(data));
 

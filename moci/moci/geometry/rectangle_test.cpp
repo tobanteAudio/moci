@@ -206,7 +206,7 @@ TEST_CASE("moci/geometry: RectangleToInt", "[geometry]")
 
 TEST_CASE("moci/geometry: RectangleToFloat", "[geometry]")
 {
-    auto p = moci::Rectangle<float>(0.0, 0.0, 50.5, 100.1);
+    auto p = moci::Rectangle<float>(0.0f, 0.0f, 50.5f, 100.1f);
     auto n = p.ToFloat();
     REQUIRE(n.GetX() == 0.0f);
     REQUIRE(n.GetY() == 0.0f);

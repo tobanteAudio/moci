@@ -45,8 +45,8 @@ TEST_CASE("moci/core: MakeScopeGuardNoRolebackOnAquireThrowThrow", "[core]")
                                                                             });
 
             throw 1;
-            b.commit();
-            a.commit();
+            // b.commit();
+            // a.commit();
         };
 
         doesNOTRollbackIfAdquireThrows();

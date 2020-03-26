@@ -23,7 +23,7 @@ public:
     ~OpenGLShader() override;
 
     std::string const& GetName() const override { return m_Name; }
-    
+
     void Bind() const override;
     void Unbind() const override;
 
@@ -35,7 +35,6 @@ public:
     void SetFloat4(std::string const& name, glm::vec4 const& value) override;
     void SetMat3(std::string const& name, glm::mat3 const& value) override;
     void SetMat4(std::string const& name, glm::mat4 const& value) override;
-
 
     void UploadUniformInt(std::string const& name, int value);
     void UploadUniformInts(std::string const& name, int count, int* values);

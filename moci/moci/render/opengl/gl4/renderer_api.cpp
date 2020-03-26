@@ -11,6 +11,12 @@ namespace moci
 void OpenGLMessageCallback(unsigned source, unsigned type, unsigned id, unsigned severity, int length,
                            const char* message, const void* userParam)
 {
+    IgnoreUnused(source);
+    IgnoreUnused(type);
+    IgnoreUnused(id);
+    IgnoreUnused(length);
+    IgnoreUnused(userParam);
+
     switch (severity)
     {
         case GL_DEBUG_SEVERITY_HIGH: MOCI_CORE_CRITICAL(message); return;
@@ -51,12 +57,15 @@ void OpenGLRendererAPI::Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_
 
 void OpenGLRendererAPI::DrawArrays(RendererAPI::DrawMode mode, uint32_t first, uint32_t count)
 {
+    IgnoreUnused(mode);
     glDrawArrays(GL_TRIANGLES, first, count);
 }
 
 void OpenGLRendererAPI::DrawElements(RendererAPI::DrawMode mode, uint32_t count, RendererAPI::ElementType type,
                                      void* indices)
 {
+    IgnoreUnused(mode);
+    IgnoreUnused(type);
     glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, indices);
 }
 

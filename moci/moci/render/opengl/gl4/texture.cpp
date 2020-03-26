@@ -76,6 +76,7 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : m_Path(path)
 OpenGLTexture2D::OpenGLTexture2D(Texture::Format format, std::uint32_t width, std::uint32_t height, void* data)
     : m_Width(width), m_Height(height)
 {
+    IgnoreUnused(format);
     glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
     glTextureStorage2D(m_RendererID, 1, GL_RED, m_Width, m_Height);
 

@@ -61,6 +61,8 @@ OpenGLESTexture2D::OpenGLESTexture2D(std::string path) : m_Path(std::move(path))
 
 OpenGLESTexture2D::OpenGLESTexture2D(Texture::Format format, uint32_t width, uint32_t height, void* data)
 {
+    IgnoreUnused(format);
+
     GLCall(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));  // Disable byte-alignment restriction
 
     GLCall(glGenTextures(1, &m_RendererID));

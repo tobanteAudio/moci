@@ -151,6 +151,11 @@ set(moci_sources
 add_library(${PROJECT_NAME} STATIC ${moci_sources})
 add_library(Moci::Moci ALIAS ${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
+foreach(source IN LISTS moci_sources)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+endforeach()
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC 
     NDEBUG=1

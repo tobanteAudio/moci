@@ -177,8 +177,8 @@ auto RenderQueue::Flush() -> void
     data_.vao->Bind();
     {
         MOCI_PROFILE_SCOPE("RenderQueue::Flush::Draw");
-        auto const mode = RendererAPI::DrawMode::Triangles;
-        auto const type = RendererAPI::ElementType::UnsignedShort;
+        auto const mode       = RendererAPI::DrawMode::Triangles;
+        auto const type       = RendererAPI::ElementType::UnsignedShort;
         auto const numIndices = static_cast<std::uint32_t>(data_.indices.size());
         RenderCommand::DrawElements(mode, numIndices, type, nullptr);
     }
@@ -256,7 +256,7 @@ auto RenderQueue::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Option
 
 auto RenderQueue::DrawCircle(float x, float y, float radius, int numSides, Color color) -> void
 {
-    FlushIf(data_.indices.size() + (3 * numSides) >= MaxIndexCount);
+    FlushIf(data_.indices.size() + (static_cast<size_t>(3) * static_cast<size_t>(numSides)) >= MaxIndexCount);
 
     auto const numVertices = numSides + 2;
     auto const doublePI    = 3.141f * 2.0f;
@@ -271,9 +271,9 @@ auto RenderQueue::DrawCircle(float x, float y, float radius, int numSides, Color
     auto const origin = data_.indexOffset;
     for (auto i = 0; i < numSides; i++)
     {
-        data_.indices.push_back(origin);
-        data_.indices.push_back(origin + (1 + i));
-        data_.indices.push_back(origin + (2 + i));
+        data_.indices.push_back(static_cast<unsigned short>(origin));
+        data_.indices.push_back(static_cast<unsigned short>(origin + (1 + i)));
+        data_.indices.push_back(static_cast<unsigned short>(origin + (2 + i)));
     }
     data_.indexOffset += numVertices;
 

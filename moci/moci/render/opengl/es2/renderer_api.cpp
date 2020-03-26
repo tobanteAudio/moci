@@ -26,12 +26,15 @@ void OpenGLESRendererAPI::Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFE
 
 void OpenGLESRendererAPI::DrawArrays(RendererAPI::DrawMode mode, uint32_t first, uint32_t count)
 {
+    IgnoreUnused(mode);
     GLCall(glDrawArrays(GL_TRIANGLES, first, count));
 }
 
 void OpenGLESRendererAPI::DrawElements(RendererAPI::DrawMode mode, uint32_t count, RendererAPI::ElementType type,
                                        void* indices)
 {
+    IgnoreUnused(mode);
+    IgnoreUnused(type);
     GLCall(glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, indices));
 }
 

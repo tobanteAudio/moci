@@ -100,7 +100,7 @@ public:
         std::lock_guard<std::mutex> lock(mutex_);
         if (currentSession_ != nullptr)
         {
-            buffer_.push_back(std::move(json));
+            buffer_.push_back(json);
         }
     }
 
