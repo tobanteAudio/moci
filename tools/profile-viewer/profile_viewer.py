@@ -130,13 +130,7 @@ def show_range(data):
     plt.show()
 
 def standard_deviation(data):
-    data.remove(max(data))
-    data.remove(min(data))
-    performance = []
-    for trace in data:
-        performance.append(trace)
-
-    return np.std(performance)
+    return np.std(data)
 
 
 def main():
