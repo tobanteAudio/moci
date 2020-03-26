@@ -51,7 +51,11 @@ public:
         return false;
     }
 
-    bool OnKeyPressed(moci::KeyPressedEvent& e) { return false; }
+    bool OnKeyPressed(moci::KeyPressedEvent& e)
+    {
+        moci::IgnoreUnused(e);
+        return false;
+    }
 
     void OnImGuiRender() override
     {

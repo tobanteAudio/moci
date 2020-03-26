@@ -4,10 +4,19 @@
 
 #pragma comment(lib, "opengl32.lib")
 
+template <typename Type>
+void IgnoreUnused(Type const& /*unused*/)
+{
+}
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 int WinMain(__in HINSTANCE hInstance, __in_opt HINSTANCE hPrevInstance, __in_opt LPSTR lpCmdLine, __in int nShowCmd)
 {
+    IgnoreUnused(nShowCmd);
+    IgnoreUnused(lpCmdLine);
+    IgnoreUnused(hPrevInstance);
+
     MSG msg          = {0};
     WNDCLASS wc      = {0};
     wc.lpfnWndProc   = WndProc;
