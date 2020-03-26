@@ -27,7 +27,7 @@ int main(int, char**)
     }
 
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    GLFWwindow* window = glfwCreateWindow(640, 480, "Metal Example", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(1280, 720, "GLFW Metal", NULL, NULL);
     if (!window) {
         glfwTerminate();
         MOCI_ERROR("Failed to init window");
@@ -80,10 +80,9 @@ int main(int, char**)
     MOCI_ASSERT(cq, "");
 
     mtlpp::RenderPipelineDescriptor renderPipelineDesc;
-    MTLRenderPipelineDescriptor*  rpd = (__bridge MTLRenderPipelineDescriptor* )renderPipelineDesc.GetPtr();
     renderPipelineDesc.SetVertexFunction(vertFunc);
     renderPipelineDesc.SetFragmentFunction(fragFunc);
-    renderPipelineDesc.GetColorAttachments()[0].SetPixelFormat(mtlpp::PixelFormat::R8Unorm);
+    renderPipelineDesc.GetColorAttachments()[0].SetPixelFormat(mtlpp::PixelFormat::BGRA8Unorm);
     mtlpp::RenderPipelineState renderPipelineState = dev.NewRenderPipelineState(renderPipelineDesc, nullptr);
     MOCI_ASSERT(renderPipelineState, "");
     id<MTLRenderPipelineState> rps = (__bridge id<MTLRenderPipelineState>)renderPipelineState.GetPtr();
