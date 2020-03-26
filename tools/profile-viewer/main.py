@@ -129,21 +129,15 @@ def show_range(data):
     plt.title('Range')
     plt.show()
 
-def show_standard_deviation(data):
+def standard_deviation(data):
     data.remove(max(data))
     data.remove(min(data))
     performance = []
     for trace in data:
         performance.append(trace)
 
-    deviation = int(np.std(performance))
-    print(f"Standard deviation: {deviation} micro seconds") 
+    return np.std(performance)
 
-    # y_pos = np.arange(len(performance))
-    # plt.plot(y_pos, performance)
-    # plt.ylabel('Microseconds')
-    # plt.title('Range')
-    # plt.show()
 
 def main():
     profile = read_profile_json("moci-sandbox-3d.json")
@@ -153,7 +147,8 @@ def main():
 
     grouped = group_by_event(profile)
     # show_range(grouped['virtual void DemoLayer::OnUpdate(moci::Timestep)'])
-    show_standard_deviation(grouped['virtual void DemoLayer::OnUpdate(moci::Timestep)'])
+    deviation = standard_deviation(grouped['virtual void DemoLayer::OnUpdate(moci::Timestep)'])
+    print(f"Standard deviation: {int(deviation)} micro seconds") 
 
     # averages = average_for_each_event(grouped)
     # show_averages(averages)
