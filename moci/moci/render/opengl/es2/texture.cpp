@@ -104,7 +104,7 @@ void OpenGLESTexture2D::Unbind() const
     GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
-OpenGLESTextureCube::OpenGLESTextureCube(std::vector<std::string> paths) : paths_(std::move(paths))
+OpenGLESTextureCube::OpenGLESTextureCube(Vector<std::string> paths) : paths_(std::move(paths))
 {
 
     // Generate a texture object
@@ -136,7 +136,7 @@ OpenGLESTextureCube::OpenGLESTextureCube(std::vector<std::string> paths) : paths
             {
                 auto const newSize = 1024;
                 MOCI_CORE_INFO("    stbi resize: FROM: {}x{} TO: {}x{}", width, height, newSize, newSize);
-                std::vector<stbi_uc> outBuffer {};
+                Vector<stbi_uc> outBuffer {};
                 outBuffer.resize(newSize * newSize * numChannels);
                 if (stbir_resize_uint8(data, width, height, 0, outBuffer.data(), newSize, newSize, 0, numChannels) == 0)
                 {

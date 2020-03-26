@@ -1,4 +1,5 @@
 #include "moci/core/logging.hpp"
+#include "moci/core/vector.hpp"
 
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
@@ -11,7 +12,7 @@ Ref<spdlog::logger> Log::s_ClientLogger;
 
 void Log::Init()
 {
-    std::vector<spdlog::sink_ptr> logSinks {};
+    Vector<spdlog::sink_ptr> logSinks {};
     logSinks.emplace_back(MakeRef<spdlog::sinks::stdout_color_sink_mt>());
     logSinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>("moci.log", true));
 

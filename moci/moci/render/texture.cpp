@@ -48,7 +48,7 @@ auto Texture2D::Create(Texture::Format format, uint32_t width, uint32_t height, 
     return nullptr;
 }
 
-auto TextureCube::Create(std::vector<std::string> paths) -> Ref<TextureCube>
+auto TextureCube::Create(Vector<std::string> paths) -> Ref<TextureCube>
 {
     switch (Renderer::GetAPI())
     {

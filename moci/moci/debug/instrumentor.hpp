@@ -11,7 +11,7 @@
 #include <sstream>
 #include <string>
 #include <thread>
-#include <vector>
+#include "moci/core/vector.hpp"
 
 namespace moci
 {
@@ -38,7 +38,7 @@ private:
     std::mutex mutex_;
     Scope<InstrumentationSession> currentSession_ {nullptr};
     std::ofstream outputStream_;
-    std::vector<std::string> buffer_;
+    Vector<std::string> buffer_;
 
 public:
     Instrumentor() = default;

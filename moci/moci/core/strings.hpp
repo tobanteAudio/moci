@@ -10,7 +10,7 @@
 #include <locale>
 #include <optional>
 #include <sstream>
-#include <vector>
+#include "moci/core/vector.hpp"
 
 namespace moci
 {
@@ -82,9 +82,9 @@ public:
     /**
      * @brief Returns a vector of string splits. Split by the delimiter.
      */
-    static inline auto Split(std::string const& s, char delimiter) -> std::vector<std::string>
+    static inline auto Split(std::string const& s, char delimiter) -> Vector<std::string>
     {
-        std::vector<std::string> tokens;
+        Vector<std::string> tokens;
         std::string token;
         std::istringstream tokenStream(s);
         while (std::getline(tokenStream, token, delimiter))

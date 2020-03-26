@@ -38,7 +38,7 @@ std::optional<Typeface> FreetypeLibrary::CreateTypefaceFromFont(std::string font
             continue;
         }
 
-        auto buffer = std::vector<std::uint8_t>(
+        auto buffer = Vector<std::uint8_t>(
             face->glyph->bitmap.buffer,                                                          //
             face->glyph->bitmap.buffer + (face->glyph->bitmap.width * face->glyph->bitmap.rows)  //
         );

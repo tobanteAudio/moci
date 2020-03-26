@@ -4,7 +4,7 @@
 
 #include <cstdint>
 
-#include <vector>
+#include "moci/core/vector.hpp"
 
 namespace moci
 {
@@ -25,7 +25,7 @@ public:
     [[nodiscard]] gsl::span<std::uint8_t> Data() noexcept { return data_; }
 
 private:
-    std::vector<std::uint8_t> data_ = {};
+    Vector<std::uint8_t> data_ = {};
     int width_                      = 0;
     int height_                     = 0;
     int numChannels_                = 0;

@@ -4,7 +4,7 @@
 
 #include "moci/core/memory.hpp"
 
-#include <vector>
+#include "moci/core/vector.hpp"
 
 #include <gsl/gsl>
 
@@ -13,7 +13,7 @@ namespace moci
 class DatagramSocket
 {
 public:
-    using Buffer = std::vector<std::uint8_t>;
+    using Buffer = Vector<std::uint8_t>;
 
 public:
     DatagramSocket();

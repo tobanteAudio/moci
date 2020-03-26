@@ -15,7 +15,7 @@
 
 namespace
 {
-std::vector<float> skyboxVertices = {
+moci::Vector<float> skyboxVertices = {
     // positions
     -1.0f, 1.0f,  -1.0f,  //
     -1.0f, -1.0f, -1.0f,  //
@@ -141,7 +141,7 @@ void DemoLayer::OnAttach()
         skyboxVao_->AddVertexBuffer(skyboxVbo_);
         skyboxVao_->SetIndexBuffer(skyboxIbo_);
         skyboxVao_->Unbind();
-        std::vector<std::string> faces {
+        moci::Vector<std::string> faces {
             std::string("sandbox3D/assets/textures/skybox/right.jpg"),   //
             std::string("sandbox3D/assets/textures/skybox/left.jpg"),    //
             std::string("sandbox3D/assets/textures/skybox/top.jpg"),     //

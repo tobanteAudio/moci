@@ -7,7 +7,7 @@
 #include <string>
 #include <string_view>
 #include <utility>
-#include <vector>
+#include "moci/core/vector.hpp"
 
 namespace moci
 {
@@ -90,7 +90,7 @@ public:
     /**
      * @brief Returns a vector of all children.
      */
-    [[nodiscard]] auto GetChildren() const noexcept -> std::vector<Component*> const&;
+    [[nodiscard]] auto GetChildren() const noexcept -> Vector<Component*> const&;
 
     /**
      * @brief Sets the bottom left as (x, y).
@@ -150,7 +150,7 @@ public:
 private:
     std::string id_ {};
     Component* parent_ {nullptr};
-    std::vector<Component*> children_ {};
+    Vector<Component*> children_ {};
     Rectangle<int> bounds_ {};
     Style* style_ {nullptr};
 };

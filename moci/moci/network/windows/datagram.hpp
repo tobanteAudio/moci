@@ -12,7 +12,7 @@
 #include <functional>
 #include <string>
 #include <thread>
-#include <vector>
+#include "moci/core/vector.hpp"
 
 namespace moci
 {

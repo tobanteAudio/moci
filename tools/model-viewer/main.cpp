@@ -152,9 +152,9 @@ public:
 
     DrawStats drawStats_ {};
 
-    std::vector<float> fpsHistory_ = {};
-    bool imguiWindow_              = true;
-    bool imguiDemo_                = false;
+    moci::Vector<float> fpsHistory_ = {};
+    bool imguiWindow_               = true;
+    bool imguiDemo_                 = false;
 };
 
 class MociModelViwerApp : public moci::Application

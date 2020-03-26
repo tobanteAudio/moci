@@ -14,6 +14,7 @@ set(moci_sources
     moci/core/scope_guard.hpp
     moci/core/scope_guard.cpp
     moci/core/strings.hpp
+    moci/core/vector.hpp
 
     moci/debug/instrumentor.hpp
     

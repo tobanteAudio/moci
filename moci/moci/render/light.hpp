@@ -36,7 +36,7 @@ struct Light
     moci::Ref<moci::IndexBuffer> ibo  = nullptr;
     moci::Ref<moci::VertexArray> vao  = nullptr;
     moci::Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
-    std::vector<Light::Vertex> vertices = {};
+    Vector<Light::Vertex> vertices = {};
 
 public:
     Light()

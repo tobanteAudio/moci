@@ -123,9 +123,9 @@ public:
 
 private:
     moci::DatagramSocket listener_ {};
-    std::vector<moci::Scope<LevelMeterView>> channels_;
-    std::vector<moci::Scope<moci::Slider>> sliders_;
-    std::vector<moci::Scope<moci::Label>> labels_;
+    moci::Vector<moci::Scope<LevelMeterView>> channels_;
+    moci::Vector<moci::Scope<moci::Slider>> sliders_;
+    moci::Vector<moci::Scope<moci::Label>> labels_;
 };
 
 class Sandbox : public moci::Application

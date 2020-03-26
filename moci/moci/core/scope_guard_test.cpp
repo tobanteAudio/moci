@@ -5,6 +5,7 @@
 #include "catch2/catch.hpp"
 
 #include "moci/core/scope_guard.hpp"
+#include "moci/core/vector.hpp"
 
 TEST_CASE("moci/core: MakeScopeGuard", "[core]")
 {
@@ -27,8 +28,8 @@ TEST_CASE("moci/core: MakeScopeGuardMultiple", "[core]")
 
 TEST_CASE("moci/core: MakeScopeGuardNoRolebackOnAquireThrowThrow", "[core]")
 {
-    std::vector<int> vec1;
-    std::vector<int> vec2;
+    moci::Vector<int> vec1;
+    moci::Vector<int> vec2;
     try
     {
         auto doesNOTRollbackIfAdquireThrows = [&]() {
@@ -60,8 +61,8 @@ TEST_CASE("moci/core: MakeScopeGuardNoRolebackOnAquireThrowThrow", "[core]")
 
 TEST_CASE("moci/core: MakeScopeGuardNoRolebackOnAquireThrowNoThrow", "[core]")
 {
-    std::vector<int> vec1;
-    std::vector<int> vec2;
+    moci::Vector<int> vec1;
+    moci::Vector<int> vec2;
     auto doesNOTRollbackIfAdquireThrows = [&]() {
         vec1.push_back(42);
         auto a = moci::MakeScopeGuard([&]() {
@@ -85,8 +86,8 @@ TEST_CASE("moci/core: MakeScopeGuardNoRolebackOnAquireThrowNoThrow", "[core]")
 
 TEST_CASE("moci/core: MakeScopeGuardRolebackOnAquireThrow", "[core]")
 {
-    std::vector<int> vec1;
-    std::vector<int> vec2;
+    moci::Vector<int> vec1;
+    moci::Vector<int> vec2;
     try
     {
         auto doesRollbackIfAdquireThrows = [&]() {

@@ -21,7 +21,7 @@ bool Image::LoadFromFile(std::string const& path)
 
     auto* start = reinterpret_cast<std::uint8_t*>(data);
     auto* end   = reinterpret_cast<std::uint8_t*>(data) + width_ * height_ * numChannels_;
-    data_       = std::vector<std::uint8_t>(start, end);
+    data_       = Vector<std::uint8_t>(start, end);
 
     stbi_image_free(data);
 

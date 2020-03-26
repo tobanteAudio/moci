@@ -52,7 +52,7 @@ void Component::AddChild(Component* child)
     child->SetParent(this);
 }
 
-auto Component::GetChildren() const noexcept -> std::vector<Component*> const& { return children_; }
+auto Component::GetChildren() const noexcept -> Vector<Component*> const& { return children_; }
 
 void Component::SetPosition(int x, int y) noexcept
 {

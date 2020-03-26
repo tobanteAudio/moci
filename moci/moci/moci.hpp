@@ -8,6 +8,7 @@
 #include "moci/core/property_map.hpp"
 #include "moci/core/scope_guard.hpp"
 #include "moci/core/strings.hpp"
+#include "moci/core/vector.hpp"
 
 #include "moci/debug/instrumentor.hpp"
 

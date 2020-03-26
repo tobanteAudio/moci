@@ -2,6 +2,7 @@
 
 #include "moci/core/logging.hpp"
 #include "moci/core/memory.hpp"
+#include "moci/core/vector.hpp"
 #include "moci/render/color.hpp"
 
 #include "glm/glm.hpp"
@@ -48,9 +49,9 @@ private:
     std::string filePath_ {};
     moci::Scope<Assimp::Importer> importer_ {};
     glm::mat4 inverseTransform_ {};
-    std::vector<Submesh> submeshes_ {};
-    std::vector<Vertex> staticVertices_ {};
+    Vector<Submesh> submeshes_ {};
+    Vector<Vertex> staticVertices_ {};
     bool isAnimated_ = false;
-    std::vector<Index> indices_ {};
+    Vector<Index> indices_ {};
 };
 }  // namespace moci

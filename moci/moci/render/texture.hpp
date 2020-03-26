@@ -6,7 +6,7 @@
 #include <memory>
 #include <optional>
 #include <string>
-#include <vector>
+#include "moci/core/vector.hpp"
 
 namespace moci
 {
@@ -49,6 +49,6 @@ public:
 class TextureCube : public Texture
 {
 public:
-    static auto Create(std::vector<std::string> paths) -> Ref<TextureCube>;
+    static auto Create(Vector<std::string> paths) -> Ref<TextureCube>;
 };
 }  // namespace moci

@@ -28,7 +28,7 @@ int main(int, char**)
 
     // Resize
     auto const newSize = 512;
-    std::vector<stbi_uc> outBuffer {};
+    moci::Vector<stbi_uc> outBuffer {};
     outBuffer.resize(newSize * newSize * bpp);
     if (stbir_resize_uint8(buffer, width, height, 0, outBuffer.data(), newSize, newSize, 0, bpp) == 0)
     {

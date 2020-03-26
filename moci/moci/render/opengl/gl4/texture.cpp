@@ -101,7 +101,7 @@ void OpenGLTexture2D::SetData(void* data, uint32_t size)
 
 void OpenGLTexture2D::Bind(uint32_t slot) const { glBindTextureUnit(slot, m_RendererID); }
 
-OpenGLTextureCube::OpenGLTextureCube(std::vector<std::string> paths) : paths_(std::move(paths))
+OpenGLTextureCube::OpenGLTextureCube(Vector<std::string> paths) : paths_(std::move(paths))
 {
 
     // Generate a texture object

@@ -2,6 +2,7 @@
 
 #include "moci/core/logging.hpp"
 #include "moci/core/strings.hpp"
+#include "moci/core/vector.hpp"
 #include "moci/debug/instrumentor.hpp"
 
 #include <fstream>
@@ -10,6 +11,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <utility>
 
+namespace moci
+{
 namespace
 {
 struct ShaderAttribute
@@ -19,10 +22,10 @@ struct ShaderAttribute
     std::string type;
 };
 
-auto GetAttributeLayout(std::string src) -> std::vector<ShaderAttribute>
+auto GetAttributeLayout(std::string src) -> Vector<ShaderAttribute>
 {
     std::istringstream f(src);
-    auto result = std::vector<ShaderAttribute>();
+    auto result = Vector<ShaderAttribute>();
     std::string line;
     while (std::getline(f, line))
     {
@@ -43,8 +46,6 @@ auto GetAttributeLayout(std::string src) -> std::vector<ShaderAttribute>
     return result;
 };
 }  // namespace
-namespace moci
-{
 
 OpenGLESShader::OpenGLESShader(std::string const& filepath)
 {
