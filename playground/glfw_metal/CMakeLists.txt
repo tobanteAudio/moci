@@ -19,7 +19,7 @@ if(APPLE)
             # MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/Info.plist"
     )
     target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
-    target_compile_options(${PROJECT_NAME} PRIVATE "-mmacosx-version-min=10.12")
+    target_compile_options(${PROJECT_NAME} PRIVATE "--target=x86_64-apple-macos10.15")
     target_link_libraries(${PROJECT_NAME} 
         PRIVATE 
             Moci::CompilerOptions 
