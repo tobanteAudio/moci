@@ -4,6 +4,8 @@ set(moci_sources
     moci/moci.hpp
     moci/moci.cpp
     
+    moci/benchmark/benchmark.hpp
+
     moci/core/algorithm.hpp
     moci/core/logging.hpp
     moci/core/logging.cpp

@@ -1,4 +1,5 @@
-#include <chrono>
+#include "moci/moci.hpp"
+
 #include <iostream>
 #include <memory>
 #include <type_traits>
@@ -86,29 +87,6 @@ private:
     Item* mNextFree               = nullptr;
 };
 
-template<class Resolution = std::chrono::microseconds>
-class ExecutionTimer final
-{
-public:
-    using Clock = std::conditional_t<std::chrono::high_resolution_clock::is_steady, std::chrono::high_resolution_clock,
-                                     std::chrono::steady_clock>;
-
-    ExecutionTimer() = default;
-
-    ~ExecutionTimer()
-    {
-        std::cout << "Elapsed: " << std::chrono::duration_cast<Resolution>(Clock::now() - mStart).count() << "μs\n";
-    }
-
-private:
-    Clock::time_point mStart = Clock::now();
-};
-
-template<class T>
-void doNotOptimizeAway(T&& datum)
-{
-    asm volatile("" : "+r"(datum));
-}
 
 struct S
 {
@@ -118,26 +96,27 @@ struct S
     float w;
 };
 
-int main()
+int main(int,char**)
 {
+    moci::Log::Init();
 
     {
-        ExecutionTimer<> timer;
+        moci::ExecutionTimer<> timer;
         ObjectPool<S> pool;
         for (auto i = 0; i < 1'000'000; ++i)
         {
             auto* data = pool.construct();
-            doNotOptimizeAway(data);
+            moci::DoNotOptimizeAway(*data);
             pool.destroy(data);
         }
     }
 
     {
-        ExecutionTimer<> timer;
+        moci::ExecutionTimer<> timer;
         for (auto i = 0; i < 1'000'000; ++i)
         {
             auto* data = new S;
-            doNotOptimizeAway(data);
+            moci::DoNotOptimizeAway(*data);
             delete data;
         }
     }

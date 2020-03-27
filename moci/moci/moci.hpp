@@ -2,6 +2,8 @@
 
 #include "moci/core/preprocessor.hpp"
 
+#include "moci/benchmark/benchmark.hpp"
+
 #include "moci/core/algorithm.hpp"
 #include "moci/core/logging.hpp"
 #include "moci/core/memory.hpp"
