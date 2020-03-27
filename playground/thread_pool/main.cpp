@@ -1,3 +1,5 @@
+#include "moci/moci.hpp"
+
 #include <chrono>
 #include <condition_variable>
 #include <functional>
@@ -97,14 +99,9 @@ private:
     bool shouldStop_ = false;
 };
 
-template<class T>
-void doNotOptimizeAway(T&& datum)
+int main(int, char**)
 {
-    asm volatile("" : "+r"(datum));
-}
-
-int main()
-{
+    moci::Log::Init();
     {
         Timer t {};
         ThreadPool pool {1};
@@ -114,7 +111,7 @@ int main()
             pool.Enqueue([] {
                 std::vector<int> v(5'000'000);
                 std::sort(std::begin(v), std::end(v));
-                doNotOptimizeAway(v.data());
+                moci::DoNotOptimizeAway(v.data());
             });
         }
     }
@@ -125,7 +122,7 @@ int main()
         {
             std::vector<int> v(5'000'000);
             std::sort(std::begin(v), std::end(v));
-            doNotOptimizeAway(v.data());
+            moci::DoNotOptimizeAway(v.data());
         }
     }
 
