@@ -98,6 +98,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1EventDispatcher.html">EventDispatcher</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1ExecutionTimer.html">ExecutionTimer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple RAII timer. Prints the measured time to log info.  <a href="classmoci_1_1ExecutionTimer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Font.html">Font</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1FreetypeLibrary.html">FreetypeLibrary</a></td></tr>
@@ -236,6 +239,8 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr class="memitem:a6bd47ebedaee533b16e4e3fb6ac2a051"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a6bd47ebedaee533b16e4e3fb6ac2a051">FloatingPointMicroseconds</a> = std::chrono::duration&lt; double, std::micro &gt;</td></tr>
+<tr class="separator:a6bd47ebedaee533b16e4e3fb6ac2a051"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0026500ddfc8f3723b5cb3e8b5b4c901"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a0026500ddfc8f3723b5cb3e8b5b4c901"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a0026500ddfc8f3723b5cb3e8b5b4c901">Scope</a> = std::unique_ptr&lt; T &gt;</td></tr>
 <tr class="separator:a0026500ddfc8f3723b5cb3e8b5b4c901"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -245,8 +250,6 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a29985a0dea3a037c1b833065bfefe37d"><td class="memTemplParams" colspan="2">template&lt;typename Type &gt; </td></tr>
 <tr class="memitem:a29985a0dea3a037c1b833065bfefe37d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a29985a0dea3a037c1b833065bfefe37d">Vector</a> = std::vector&lt; Type &gt;</td></tr>
 <tr class="separator:a29985a0dea3a037c1b833065bfefe37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bd47ebedaee533b16e4e3fb6ac2a051"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a6bd47ebedaee533b16e4e3fb6ac2a051">FloatingPointMicroseconds</a> = std::chrono::duration&lt; double, std::micro &gt;</td></tr>
-<tr class="separator:a6bd47ebedaee533b16e4e3fb6ac2a051"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -336,6 +339,10 @@ Functions</h2></td></tr>
 <tr class="separator:a4db23f853b9476f63ea9574d29f589ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22794a43d64af5a654b21cee36982571"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a22794a43d64af5a654b21cee36982571">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classmoci_1_1Event.html">Event</a> &amp;e) -&gt; std::ostream &amp;</td></tr>
 <tr class="separator:a22794a43d64af5a654b21cee36982571"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59cbf7585e3da5caa16d9d527ae6e5ad"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a59cbf7585e3da5caa16d9d527ae6e5ad"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a59cbf7585e3da5caa16d9d527ae6e5ad">DoNotOptimizeAway</a> (const T &amp;datum) -&gt; void</td></tr>
+<tr class="memdesc:a59cbf7585e3da5caa16d9d527ae6e5ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Useful for writting benchmarks.  <a href="#a59cbf7585e3da5caa16d9d527ae6e5ad">More...</a><br /></td></tr>
+<tr class="separator:a59cbf7585e3da5caa16d9d527ae6e5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe9c0262baec265dc1b4e80d7bfe93ed"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:abe9c0262baec265dc1b4e80d7bfe93ed"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; bool, int &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#abe9c0262baec265dc1b4e80d7bfe93ed">FindInVector</a> (const <a class="el" href="namespacemoci.html#a29985a0dea3a037c1b833065bfefe37d">Vector</a>&lt; T &gt; &amp;vec, const T &amp;element)</td></tr>
 <tr class="separator:abe9c0262baec265dc1b4e80d7bfe93ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -556,6 +563,29 @@ template&lt;typename Type &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a59cbf7585e3da5caa16d9d527ae6e5ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59cbf7585e3da5caa16d9d527ae6e5ad">&#9670;&nbsp;</a></span>DoNotOptimizeAway()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto moci::DoNotOptimizeAway </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>datum</em></td><td>)</td>
+          <td> -&gt; void
+</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Useful for writting benchmarks. </p>
 
 </div>
 </div>
