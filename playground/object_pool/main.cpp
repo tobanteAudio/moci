@@ -7,11 +7,10 @@ template<class T>
 class ObjectPool final
 {
 public:
-    const static std::size_t Size = 100000;
-
     using value_type = T;
     using pointer    = value_type*;
 
+public:
     ObjectPool()
     {
         for (auto i = 1; i < Size; ++i) mPool[i - 1].mNext = &mPool[i];
@@ -24,6 +23,20 @@ public:
     ObjectPool(ObjectPool&& other) noexcept : mPool {std::move(other.mPool)}, mNextFree {other.mNextFree}
     {
         other.mNextFree = nullptr;
+    }
+
+    ObjectPool& operator=(const ObjectPool&) = delete;
+
+    ObjectPool& operator=(ObjectPool&& other) noexcept
+    {
+        if (this == &other) return *this;
+
+        mPool     = std::move(other.mPool);
+        mNextFree = other.mNextFree;
+
+        other.mNextFree = nullptr;
+
+        return *this;
     }
 
     ~ObjectPool() = default;
@@ -60,19 +73,8 @@ public:
         deallocate(p);
     }
 
-    ObjectPool& operator=(const ObjectPool&) = delete;
-
-    ObjectPool& operator=(ObjectPool&& other) noexcept
-    {
-        if (this == &other) return *this;
-
-        mPool     = std::move(other.mPool);
-        mNextFree = other.mNextFree;
-
-        other.mNextFree = nullptr;
-
-        return *this;
-    }
+private:
+    const static std::size_t Size = 100000;
 
 private:
     union Item {
