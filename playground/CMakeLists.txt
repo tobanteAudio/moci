@@ -33,4 +33,5 @@ endif()
 
 add_subdirectory(allocator)
 add_subdirectory(glfw_metal)
+add_subdirectory(object_pool)
 add_subdirectory(thread_pool)

@@ -28,6 +28,7 @@ class ThreadPool
 {
 public:
     using Task = std::function<void()>;
+
 public:
     explicit ThreadPool(std::size_t const numthreads) { start(numthreads); }
     ~ThreadPool() { stop(); }
@@ -96,17 +97,24 @@ private:
     bool shouldStop_ = false;
 };
 
+template<class T>
+void doNotOptimizeAway(T&& datum)
+{
+    asm volatile("" : "+r"(datum));
+}
+
 int main()
 {
     {
         Timer t {};
-        ThreadPool pool {4};
+        ThreadPool pool {1};
 
         for (auto i = 0; i < 36; ++i)
         {
             pool.Enqueue([] {
-                std::vector<int> v(50'000'000);
+                std::vector<int> v(5'000'000);
                 std::sort(std::begin(v), std::end(v));
+                doNotOptimizeAway(v.data());
             });
         }
     }
@@ -115,8 +123,9 @@ int main()
         Timer t {};
         for (auto i = 0; i < 36; ++i)
         {
-            std::vector<int> v(50'000'000);
+            std::vector<int> v(5'000'000);
             std::sort(std::begin(v), std::end(v));
+            doNotOptimizeAway(v.data());
         }
     }
 
