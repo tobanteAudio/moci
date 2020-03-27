@@ -3,6 +3,7 @@
 #include "moci/core/preprocessor.hpp"
 
 #include "moci/benchmark/benchmark.hpp"
+#include "moci/benchmark/profile.hpp"
 
 #include "moci/core/algorithm.hpp"
 #include "moci/core/logging.hpp"
@@ -12,7 +13,6 @@
 #include "moci/core/strings.hpp"
 #include "moci/core/vector.hpp"
 
-#include "moci/debug/instrumentor.hpp"
 
 #include "moci/app/application.hpp"
 #include "moci/app/input.hpp"

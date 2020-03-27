@@ -3,7 +3,7 @@
 
 #include "moci/app/application.hpp"
 #include "moci/core/logging.hpp"
-#include "moci/debug/instrumentor.hpp"
+#include "moci/benchmark/profile.hpp"
 
 namespace moci
 {

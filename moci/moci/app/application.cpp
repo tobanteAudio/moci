@@ -1,7 +1,7 @@
 #include "application.hpp"
 
 #include "moci/core/logging.hpp"
-#include "moci/debug/instrumentor.hpp"
+#include "moci/benchmark/profile.hpp"
 #include "moci/render/renderer.hpp"
 
 #include "moci/app/events/key_event.hpp"

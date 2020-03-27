@@ -5,6 +5,7 @@ set(moci_sources
     moci/moci.cpp
     
     moci/benchmark/benchmark.hpp
+    moci/benchmark/profile.hpp
 
     moci/core/algorithm.hpp
     moci/core/logging.hpp
@@ -18,7 +19,6 @@ set(moci_sources
     moci/core/strings.hpp
     moci/core/vector.hpp
 
-    moci/debug/instrumentor.hpp
     
     moci/app/application.hpp
     moci/app/application.cpp

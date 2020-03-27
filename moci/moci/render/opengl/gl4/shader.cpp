@@ -1,7 +1,7 @@
 #include "moci/render/opengl/gl4/shader.hpp"
 
 #if defined(MOCI_API_OPENGL_MODERN)
-#include "moci/debug/instrumentor.hpp"
+#include "moci/benchmark/profile.hpp"
 #include "moci/render/opengl/gl4/gl4.hpp"
 
 #include <array>
