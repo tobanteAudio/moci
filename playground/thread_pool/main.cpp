@@ -28,53 +28,43 @@ class ThreadPool
 {
 public:
     using Task = std::function<void()>;
-
-    explicit ThreadPool(std::size_t numThreads) { start(numThreads); }
-
+public:
+    explicit ThreadPool(std::size_t const numthreads) { start(numthreads); }
     ~ThreadPool() { stop(); }
 
     template<class T>
-    auto enqueue(T task) -> std::future<decltype(task())>
+    auto Enqueue(T task) -> std::future<decltype(task())>
     {
         auto wrapper = std::make_shared<std::packaged_task<decltype(task())()>>(std::move(task));
 
         {
-            std::unique_lock<std::mutex> lock {mEventMutex};
-            mTasks.emplace([=] { (*wrapper)(); });
+            std::unique_lock<std::mutex> lock {eventMutex_};
+            tasks_.emplace([=] { (*wrapper)(); });
         }
 
-        mEventVar.notify_one();
+        eventVar_.notify_one();
         return wrapper->get_future();
     }
 
 private:
-    std::vector<std::thread> mThreads;
-
-    std::condition_variable mEventVar;
-
-    std::mutex mEventMutex;
-    bool mStopping = false;
-
-    std::queue<Task> mTasks;
-
-    void start(std::size_t numThreads)
+    void start(std::size_t const numthreads)
     {
-        for (auto i = 0u; i < numThreads; ++i)
+        for (auto i = 0u; i < numthreads; ++i)
         {
-            mThreads.emplace_back([=] {
+            threads_.emplace_back([=] {
                 while (true)
                 {
                     Task task;
 
                     {
-                        std::unique_lock<std::mutex> lock {mEventMutex};
+                        std::unique_lock<std::mutex> lock {eventMutex_};
 
-                        mEventVar.wait(lock, [=] { return mStopping || !mTasks.empty(); });
+                        eventVar_.wait(lock, [=] { return shouldStop_ || !tasks_.empty(); });
 
-                        if (mStopping && mTasks.empty()) break;
+                        if (shouldStop_ && tasks_.empty()) break;
 
-                        task = std::move(mTasks.front());
-                        mTasks.pop();
+                        task = std::move(tasks_.front());
+                        tasks_.pop();
                     }
 
                     task();
@@ -86,14 +76,24 @@ private:
     void stop() noexcept
     {
         {
-            std::unique_lock<std::mutex> lock {mEventMutex};
-            mStopping = true;
+            std::unique_lock<std::mutex> lock {eventMutex_};
+            shouldStop_ = true;
         }
 
-        mEventVar.notify_all();
+        eventVar_.notify_all();
 
-        for (auto& thread : mThreads) thread.join();
+        for (auto& thread : threads_)
+        {
+            thread.join();
+        }
     }
+
+private:
+    std::queue<Task> tasks_;
+    std::vector<std::thread> threads_;
+    std::condition_variable eventVar_;
+    std::mutex eventMutex_;
+    bool shouldStop_ = false;
 };
 
 int main()
@@ -104,12 +104,10 @@ int main()
 
         for (auto i = 0; i < 36; ++i)
         {
-            pool.enqueue([i] {
+            pool.Enqueue([] {
                 std::vector<int> v(50'000'000);
                 std::sort(std::begin(v), std::end(v));
-                // std::printf("Tasked finished: #%d\n", i + 1);
             });
-            // std::printf("Tasked enqueued: #%d\n", i + 1);
         }
     }
 
