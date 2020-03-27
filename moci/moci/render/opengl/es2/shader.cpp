@@ -1,9 +1,9 @@
 #include "moci/render/opengl/es2/shader.hpp"
 
+#include "moci/benchmark/profile.hpp"
 #include "moci/core/logging.hpp"
 #include "moci/core/strings.hpp"
 #include "moci/core/vector.hpp"
-#include "moci/benchmark/profile.hpp"
 
 #include <fstream>
 #include <sstream>

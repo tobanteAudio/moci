@@ -13,7 +13,6 @@
 #include "moci/core/strings.hpp"
 #include "moci/core/vector.hpp"
 
-
 #include "moci/app/application.hpp"
 #include "moci/app/input.hpp"
 #include "moci/app/key_codes.hpp"
