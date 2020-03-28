@@ -122,7 +122,7 @@ int main(int, char**)
 
         [rce endEncoding];
         // [cb presentDrawable:drawable];
-        commandBuffer.Present(ns::Handle{drawable.texture});
+        commandBuffer.Present(ns::Handle{drawable});
         commandBuffer.Commit();
 
         glfwPollEvents();
