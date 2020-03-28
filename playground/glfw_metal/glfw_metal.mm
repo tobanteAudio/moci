@@ -17,6 +17,21 @@
 
 GLFWwindow* initGLFW();
 
+constexpr char shaderSrc[] = R"""(
+    #include <metal_stdlib>
+    using namespace metal;
+    vertex float4 v_simple (
+        constant float4* in  [[buffer(0)]],
+        uint             vid [[vertex_id]])
+    {
+        return in[vid];
+    }
+    fragment float4 f_simple (float4 in [[stage_in]])
+    {
+        return float4(1, 0, 0, 1);
+    }
+)""";
+
 int main(int, char**)
 {
     auto* const window = initGLFW();
@@ -30,22 +45,9 @@ int main(int, char**)
     nswin.contentView.layer = layer;
     nswin.contentView.wantsLayer = YES;
 
-    constexpr char shaderSrc[] = R"""(
-        #include <metal_stdlib>
-        using namespace metal;
-        vertex float4 v_simple (
-            constant float4* in  [[buffer(0)]],
-            uint             vid [[vertex_id]])
-        {
-            return in[vid];
-        }
-        fragment float4 f_simple (float4 in [[stage_in]])
-        {
-            return float4(1, 0, 0, 1);
-        }
-    )""";
-
     mtlpp::Library library = device.NewLibrary(shaderSrc, mtlpp::CompileOptions(), nullptr);
+    // auto const shaderPath = ns::String{"playground/glfw_metal/shader.metal"};
+    // mtlpp::Library library = device.NewLibrary(shaderPath, nullptr);
     MOCI_ASSERT(library, "Failed to create shader library");
     mtlpp::Function vertFunc = library.NewFunction("v_simple");
     MOCI_ASSERT(vertFunc, "Failed to create shader vertex function");
