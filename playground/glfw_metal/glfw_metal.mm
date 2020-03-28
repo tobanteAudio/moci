@@ -15,41 +15,17 @@
 #include <cstdio>
 #include <cstdlib>
 
+GLFWwindow* initGLFW();
+
 int main(int, char**)
 {
-
-    moci::Log::Init();
-    glfwSetErrorCallback([](int error, const char* description) { MOCI_ERROR("{}", description); });
-
-    if (!glfwInit()) {
-        MOCI_ERROR("Failed to init glfw");
-        exit(EXIT_FAILURE);
-    }
-
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "GLFW Metal", NULL, NULL);
-    if (!window) {
-        glfwTerminate();
-        MOCI_ERROR("Failed to init window");
-        exit(EXIT_FAILURE);
-    }
-
-    glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
-        if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-            glfwSetWindowShouldClose(window, GLFW_TRUE);
-    });
-
-    mtlpp::Device dev = mtlpp::Device::CreateSystemDefaultDevice();
-    id<MTLDevice> device = (__bridge id<MTLDevice>)dev.GetPtr();
-
-    if (!device) {
-        MOCI_ERROR("Failed to init device");
-        exit(EXIT_FAILURE);
-    }
+    auto* const window = initGLFW();
+    mtlpp::Device device = mtlpp::Device::CreateSystemDefaultDevice();
+    MOCI_ASSERT(device, "Failed to init device");
 
     NSWindow* nswin = glfwGetCocoaWindow(window);
     CAMetalLayer* layer = [CAMetalLayer layer];
-    layer.device = device;
+    layer.device = (__bridge id<MTLDevice>)device.GetPtr();
     layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
     nswin.contentView.layer = layer;
     nswin.contentView.wantsLayer = YES;
@@ -69,14 +45,14 @@ int main(int, char**)
         }
     )""";
 
-    mtlpp::Library library = dev.NewLibrary(shaderSrc, mtlpp::CompileOptions(), nullptr);
-    MOCI_ASSERT(library, "");
+    mtlpp::Library library = device.NewLibrary(shaderSrc, mtlpp::CompileOptions(), nullptr);
+    MOCI_ASSERT(library, "Failed to create shader library");
     mtlpp::Function vertFunc = library.NewFunction("v_simple");
-    MOCI_ASSERT(vertFunc, "");
+    MOCI_ASSERT(vertFunc, "Failed to create shader vertex function");
     mtlpp::Function fragFunc = library.NewFunction("f_simple");
-    MOCI_ASSERT(fragFunc, "");
+    MOCI_ASSERT(fragFunc, "Failed to create shader fragment function");
 
-    mtlpp::CommandQueue commandQueue = dev.NewCommandQueue();
+    mtlpp::CommandQueue commandQueue = device.NewCommandQueue();
     id<MTLCommandQueue> cq = (__bridge id<MTLCommandQueue>)commandQueue.GetPtr();
     MOCI_ASSERT(cq, "");
 
@@ -84,7 +60,7 @@ int main(int, char**)
     renderPipelineDesc.SetVertexFunction(vertFunc);
     renderPipelineDesc.SetFragmentFunction(fragFunc);
     renderPipelineDesc.GetColorAttachments()[0].SetPixelFormat(mtlpp::PixelFormat::BGRA8Unorm);
-    mtlpp::RenderPipelineState renderPipelineState = dev.NewRenderPipelineState(renderPipelineDesc, nullptr);
+    mtlpp::RenderPipelineState renderPipelineState = device.NewRenderPipelineState(renderPipelineDesc, nullptr);
     MOCI_ASSERT(renderPipelineState, "");
     id<MTLRenderPipelineState> rps = (__bridge id<MTLRenderPipelineState>)renderPipelineState.GetPtr();
 
@@ -122,7 +98,7 @@ int main(int, char**)
 
         [rce endEncoding];
         // [cb presentDrawable:drawable];
-        commandBuffer.Present(ns::Handle{drawable});
+        commandBuffer.Present(ns::Handle { drawable });
         commandBuffer.Commit();
 
         glfwPollEvents();
@@ -134,4 +110,28 @@ int main(int, char**)
     return EXIT_SUCCESS;
 }
 
-//! [code]
+GLFWwindow* initGLFW()
+{
+    moci::Log::Init();
+    glfwSetErrorCallback([](int error, const char* description) { MOCI_ERROR("{}", description); });
+
+    if (!glfwInit()) {
+        MOCI_ERROR("Failed to init glfw");
+        exit(EXIT_FAILURE);
+    }
+
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    GLFWwindow* window = glfwCreateWindow(1280, 720, "GLFW Metal", NULL, NULL);
+    if (!window) {
+        glfwTerminate();
+        MOCI_ERROR("Failed to init window");
+        exit(EXIT_FAILURE);
+    }
+
+    glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+        if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+            glfwSetWindowShouldClose(window, GLFW_TRUE);
+    });
+
+    return window;
+}
