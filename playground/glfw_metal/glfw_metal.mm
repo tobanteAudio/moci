@@ -76,7 +76,8 @@ int main(int, char**)
     mtlpp::Function fragFunc = library.NewFunction("f_simple");
     MOCI_ASSERT(fragFunc, "");
 
-    id<MTLCommandQueue> cq = [device newCommandQueue];
+    mtlpp::CommandQueue commandQueue = dev.NewCommandQueue();
+    id<MTLCommandQueue> cq = (__bridge id<MTLCommandQueue>)commandQueue.GetPtr();
     MOCI_ASSERT(cq, "");
 
     mtlpp::RenderPipelineDescriptor renderPipelineDesc;
@@ -98,7 +99,8 @@ int main(int, char**)
         id<CAMetalDrawable> drawable = [layer nextDrawable];
         assert(drawable);
 
-        id<MTLCommandBuffer> cb = [cq commandBuffer];
+        mtlpp::CommandBuffer commandBuffer = commandQueue.CommandBuffer();
+        id<MTLCommandBuffer> cb = (__bridge id<MTLCommandBuffer>)commandBuffer.GetPtr();
 
         MTLRenderPassDescriptor* rpd = [MTLRenderPassDescriptor new];
         MTLRenderPassColorAttachmentDescriptor* cd = rpd.colorAttachments[0];
@@ -119,8 +121,9 @@ int main(int, char**)
         [rce drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:3];
 
         [rce endEncoding];
-        [cb presentDrawable:drawable];
-        [cb commit];
+        // [cb presentDrawable:drawable];
+        commandBuffer.Present(ns::Handle{drawable.texture});
+        commandBuffer.Commit();
 
         glfwPollEvents();
     }
