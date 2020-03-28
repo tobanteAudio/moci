@@ -38,6 +38,11 @@ void OpenGLESRendererAPI::DrawElements(RendererAPI::DrawMode mode, uint32_t coun
     GLCall(glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, indices));
 }
 
+void OpenGLESRendererAPI::DrawIndexed(Ref<VertexArray> const& vertexArray)
+{
+    glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+}
+
 auto OpenGLESRendererAPI::MaxTextureSize() -> std::uint32_t
 {
     GLint maxTextureSize = 0;
