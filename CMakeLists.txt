@@ -15,12 +15,19 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     # Let's nicely support folders in IDE's
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+    # Arch: native
+    include(CheckCXXCompilerFlag)
+    check_cxx_compiler_flag("-march=native" COMPILER_SUPPORTS_MARCH_NATIVE)
+    if(COMPILER_SUPPORTS_MARCH_NATIVE)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+    endif()
+
     # LTO
     include(CheckIPOSupported)
     check_ipo_supported(RESULT MOCI_SUPPORTS_LTO)
     if(MOCI_SUPPORTS_LTO)
-      message(STATUS "Moci: lto is supported, but NOT enabled.")
-      # set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+      message(STATUS "Moci: lto is supported")
+      set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
     else()
       message(STATUS "Moci: lto is NOT supported.")
     endif()
