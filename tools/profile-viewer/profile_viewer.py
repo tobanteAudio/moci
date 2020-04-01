@@ -19,10 +19,14 @@ def top_level_groups(data):
 
 
 def num_trace_events(data):
+    """Returns the total number of traces captured
+    """
     return len(data["traceEvents"])
 
 
 def num_unique_trace_events(data):
+    """Returns the total number of unique traces captured
+    """
     unique_events = {}
     for event in data["traceEvents"]:
         if "name" in event:
@@ -31,6 +35,8 @@ def num_unique_trace_events(data):
 
 
 def group_by_event(data):
+    """Returns a dict with lists of floats. Key is the trace name.
+    """
     average_collector = {}
     for event in data["traceEvents"]:
         if "name" in event:
@@ -42,6 +48,8 @@ def group_by_event(data):
 
 
 def average_for_each_event(data):
+    """Returns a dict with min, max & average for each unique trace event.
+    """
     averages = {}
     for key, event in data.items():
         total = 0.0
@@ -61,13 +69,6 @@ def average_for_each_event(data):
                              "min": minimum,
                              "max": maximum}
     return averages
-
-
-def range_for_event(data):
-    ranges = {}
-    for key, trace in data.items():
-        ranges[key] = trace["max"] - trace["min"]
-    return ranges
 
 
 def show_averages(data):
@@ -128,6 +129,9 @@ def show_range(data):
     plt.title('Range')
     plt.show()
 
+def standard_deviation(data):
+    return np.std(data)
+
 
 def main():
     profile = read_profile_json("moci-sandbox-3d.json")
@@ -137,9 +141,11 @@ def main():
 
     grouped = group_by_event(profile)
     # show_range(grouped['virtual void DemoLayer::OnUpdate(moci::Timestep)'])
+    deviation = standard_deviation(grouped['virtual void DemoLayer::OnUpdate(moci::Timestep)'])
+    print(f"Standard deviation: {int(deviation)} micro seconds") 
 
-    averages = average_for_each_event(grouped)
-    show_averages(averages)
+    # averages = average_for_each_event(grouped)
+    # show_averages(averages)
 
 
 if __name__ == "__main__":

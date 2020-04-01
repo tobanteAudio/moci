@@ -4,8 +4,8 @@
 
 #include <gsl/gsl>
 
+#include "moci/core/vector.hpp"
 #include <string>
-#include <vector>
 
 namespace moci
 {
@@ -54,9 +54,9 @@ private:
 
 private:
     std::string path_;
-    std::vector<glm::vec3> vertices_;
-    std::vector<glm::vec3> normals_;
-    std::vector<glm::vec2> uvs_;
-    std::vector<VertexData> model_;
+    Vector<glm::vec3> vertices_;
+    Vector<glm::vec3> normals_;
+    Vector<glm::vec2> uvs_;
+    Vector<VertexData> model_;
 };
 }  // namespace moci

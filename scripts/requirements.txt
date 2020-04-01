@@ -1,5 +1,0 @@
-pylint
-autopep8
-
-numpy
-matplotlib

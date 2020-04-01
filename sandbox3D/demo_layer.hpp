@@ -64,19 +64,18 @@ private:
     moci::Ref<moci::VertexArray> skyboxVao_     = nullptr;
     moci::Ref<moci::TextureCube> skyBoxTexture_ = {};
 
-    std::vector<moci::Mesh::Vertex> vertices_ = {};
+    moci::Vector<moci::Mesh::Vertex> vertices_ = {};
 
     // imgui
     struct DrawStats
     {
-        std::uint32_t frameCounter {};
         std::uint32_t numVertices {};
         float minFPS = 9999.0f;
         float maxFPS = 0.0f;
     };
 
-    DrawStats drawStats_           = {};
-    std::vector<float> fpsHistory_ = {};
-    bool imguiWindow_              = true;
-    bool imguiDemo_                = false;
+    DrawStats drawStats_            = {};
+    moci::Vector<float> fpsHistory_ = {};
+    bool imguiWindow_               = true;
+    bool imguiDemo_                 = false;
 };

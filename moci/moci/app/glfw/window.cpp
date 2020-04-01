@@ -1,6 +1,7 @@
 #include "window.hpp"
 
 #include "moci/core/logging.hpp"
+#include "moci/core/preprocessor.hpp"
 
 #include "moci/app/events/application_event.hpp"
 #include "moci/app/events/key_event.hpp"
@@ -81,6 +82,9 @@ void GlfwWindow::Init(const WindowProps& props)
     });
 
     glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+        IgnoreUnused(scancode);
+        IgnoreUnused(mods);
+
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
         switch (action)
@@ -114,6 +118,7 @@ void GlfwWindow::Init(const WindowProps& props)
     });
 
     glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
+        IgnoreUnused(mods);
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
         switch (action)
@@ -161,6 +166,7 @@ void GlfwWindow::Shutdown()
 
 void GlfwWindow::OnUpdate()
 {
+    frameCounter_++;
     glfwPollEvents();
     m_Context->SwapBuffers();
 }

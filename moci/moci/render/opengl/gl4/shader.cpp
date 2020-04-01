@@ -1,7 +1,7 @@
 #include "moci/render/opengl/gl4/shader.hpp"
 
 #if defined(MOCI_API_OPENGL_MODERN)
-#include "moci/debug/instrumentor.hpp"
+#include "moci/benchmark/profile.hpp"
 #include "moci/render/opengl/gl4/gl4.hpp"
 
 #include <array>
@@ -12,7 +12,7 @@
 namespace moci
 {
 
-static GLenum ShaderTypeFromString(const std::string& type)
+static GLenum ShaderTypeFromString(std::string const& type)
 {
     if (type == "vertex") return GL_VERTEX_SHADER;
     if (type == "fragment" || type == "pixel") return GL_FRAGMENT_SHADER;
@@ -21,7 +21,7 @@ static GLenum ShaderTypeFromString(const std::string& type)
     return 0;
 }
 
-OpenGLShader::OpenGLShader(const std::string& filepath)
+OpenGLShader::OpenGLShader(std::string const& filepath)
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -37,7 +37,7 @@ OpenGLShader::OpenGLShader(const std::string& filepath)
     m_Name         = filepath.substr(lastSlash, count);
 }
 
-OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+OpenGLShader::OpenGLShader(std::string const& name, std::string const& vertexSrc, std::string const& fragmentSrc)
     : m_Name(name)
 {
     MOCI_PROFILE_FUNCTION();
@@ -55,7 +55,7 @@ OpenGLShader::~OpenGLShader()
     glDeleteProgram(m_RendererID);
 }
 
-std::string OpenGLShader::ReadFile(const std::string& filepath)
+std::string OpenGLShader::ReadFile(std::string const& filepath)
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -85,7 +85,7 @@ std::string OpenGLShader::ReadFile(const std::string& filepath)
     return result;
 }
 
-std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
+std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(std::string const& source)
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -125,7 +125,7 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
     for (auto& kv : shaderSources)
     {
         GLenum type               = kv.first;
-        const std::string& source = kv.second;
+        std::string const& source = kv.second;
 
         GLuint shader = glCreateShader(type);
 
@@ -141,7 +141,7 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
             GLint maxLength = 0;
             glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
 
-            std::vector<GLchar> infoLog(maxLength);
+            Vector<GLchar> infoLog(maxLength);
             glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
 
             glDeleteShader(shader);
@@ -169,7 +169,7 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
         glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
 
         // The maxLength includes the NULL character
-        std::vector<GLchar> infoLog(maxLength);
+        Vector<GLchar> infoLog(maxLength);
         glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
 
         // We don't need the program anymore.
@@ -192,62 +192,67 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
 void OpenGLShader::Bind() const
 {
     MOCI_PROFILE_FUNCTION();
-
     glUseProgram(m_RendererID);
 }
 
 void OpenGLShader::Unbind() const
 {
     MOCI_PROFILE_FUNCTION();
-
     glUseProgram(0);
 }
 
-void OpenGLShader::SetInt(const std::string& name, int value) { UploadUniformInt(name, value); }
+void OpenGLShader::SetInt(std::string const& name, int value) { UploadUniformInt(name, value); }
+void OpenGLShader::SetInts(std::string const& name, int count, int* values) { UploadUniformInts(name, count, values); }
+void OpenGLShader::SetFloat(std::string const& name, float value) { UploadUniformFloat(name, value); }
+void OpenGLShader::SetFloat2(std::string const& name, glm::vec2 const& value) { UploadUniformFloat2(name, value); }
+void OpenGLShader::SetFloat3(std::string const& name, const glm::vec3& value) { UploadUniformFloat3(name, value); }
+void OpenGLShader::SetFloat4(std::string const& name, const glm::vec4& value) { UploadUniformFloat4(name, value); }
+void OpenGLShader::SetMat3(std::string const& name, glm::mat3 const& value) { UploadUniformMat3(name, value); }
+void OpenGLShader::SetMat4(std::string const& name, const glm::mat4& value) { UploadUniformMat4(name, value); }
 
-void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value) { UploadUniformFloat3(name, value); }
-
-void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value) { UploadUniformFloat4(name, value); }
-
-void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value) { UploadUniformMat4(name, value); }
-
-void OpenGLShader::UploadUniformInt(const std::string& name, int value)
+void OpenGLShader::UploadUniformInt(std::string const& name, int value)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform1i(location, value);
 }
 
-void OpenGLShader::UploadUniformFloat(const std::string& name, float value)
+void OpenGLShader::UploadUniformInts(std::string const& name, int count, int* values)
+{
+    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+    glUniform1iv(location, count, values);
+}
+
+void OpenGLShader::UploadUniformFloat(std::string const& name, float value)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform1f(location, value);
 }
 
-void OpenGLShader::UploadUniformFloat2(const std::string& name, const glm::vec2& value)
+void OpenGLShader::UploadUniformFloat2(std::string const& name, const glm::vec2& value)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform2f(location, value.x, value.y);
 }
 
-void OpenGLShader::UploadUniformFloat3(const std::string& name, const glm::vec3& value)
+void OpenGLShader::UploadUniformFloat3(std::string const& name, const glm::vec3& value)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform3f(location, value.x, value.y, value.z);
 }
 
-void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4& value)
+void OpenGLShader::UploadUniformFloat4(std::string const& name, const glm::vec4& value)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform4f(location, value.x, value.y, value.z, value.w);
 }
 
-void OpenGLShader::UploadUniformMat3(const std::string& name, const glm::mat3& matrix)
+void OpenGLShader::UploadUniformMat3(std::string const& name, const glm::mat3& matrix)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
-void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
+void OpenGLShader::UploadUniformMat4(std::string const& name, const glm::mat4& matrix)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));

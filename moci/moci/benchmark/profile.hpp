@@ -2,6 +2,7 @@
 
 #include "moci/core/logging.hpp"
 
+#include "moci/core/vector.hpp"
 #include <algorithm>
 #include <chrono>
 #include <fstream>
@@ -11,7 +12,6 @@
 #include <sstream>
 #include <string>
 #include <thread>
-#include <vector>
 
 namespace moci
 {
@@ -38,7 +38,7 @@ private:
     std::mutex mutex_;
     Scope<InstrumentationSession> currentSession_ {nullptr};
     std::ofstream outputStream_;
-    std::vector<std::string> buffer_;
+    Vector<std::string> buffer_;
 
 public:
     Instrumentor() = default;
@@ -100,7 +100,7 @@ public:
         std::lock_guard<std::mutex> lock(mutex_);
         if (currentSession_ != nullptr)
         {
-            buffer_.push_back(std::move(json));
+            buffer_.push_back(json);
         }
     }
 

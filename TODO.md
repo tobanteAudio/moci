@@ -2,11 +2,10 @@
 
 ## 3D
 
-- Camera movement.
+- Add perspective camera to moci
 
 ## Application
 
-- Add frame counter.
 - Add events.
   - Lost/Gain Focus
 
@@ -34,6 +33,9 @@
 
 - Select shader file based on api. GL4 or ES2.
 - TextureCube resize based on original resolution & max on es2/ARM
+- Fix GL4 texture upload
+- Add abstraction for texture color format
+  - Auto-detect
 
 ## Misc
 

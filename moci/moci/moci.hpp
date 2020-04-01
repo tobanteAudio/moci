@@ -2,14 +2,16 @@
 
 #include "moci/core/preprocessor.hpp"
 
+#include "moci/benchmark/benchmark.hpp"
+#include "moci/benchmark/profile.hpp"
+
 #include "moci/core/algorithm.hpp"
 #include "moci/core/logging.hpp"
 #include "moci/core/memory.hpp"
 #include "moci/core/property_map.hpp"
-#include "moci/core/scope_close.hpp"
+#include "moci/core/scope_guard.hpp"
 #include "moci/core/strings.hpp"
-
-#include "moci/debug/instrumentor.hpp"
+#include "moci/core/vector.hpp"
 
 #include "moci/app/application.hpp"
 #include "moci/app/input.hpp"

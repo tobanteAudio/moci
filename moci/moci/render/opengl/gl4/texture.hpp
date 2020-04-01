@@ -14,7 +14,7 @@ class OpenGLTexture2D : public Texture2D
 public:
     OpenGLTexture2D(uint32_t width, uint32_t height);
     OpenGLTexture2D(const std::string& path);
-    OpenGLTexture2D(Texture::Format format, std::uint32_t width, std::uint32_t height, void* data) {}
+    OpenGLTexture2D(Texture::Format format, std::uint32_t width, std::uint32_t height, void* data);
 
     ~OpenGLTexture2D() override;
 
@@ -37,7 +37,7 @@ private:
 class OpenGLTextureCube : public TextureCube
 {
 public:
-    OpenGLTextureCube(std::vector<std::string> paths);
+    OpenGLTextureCube(Vector<std::string> paths);
 
     OpenGLTextureCube(const OpenGLTextureCube&) = delete;
     OpenGLTextureCube& operator=(const OpenGLTextureCube&) = delete;
@@ -52,7 +52,7 @@ public:
     void Unbind() const override;
 
 private:
-    std::vector<std::string> paths_;
+    Vector<std::string> paths_;
     std::uint32_t renderID_ {};
 };
 

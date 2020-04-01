@@ -4,6 +4,9 @@ set(moci_sources
     moci/moci.hpp
     moci/moci.cpp
     
+    moci/benchmark/benchmark.hpp
+    moci/benchmark/profile.hpp
+
     moci/core/algorithm.hpp
     moci/core/logging.hpp
     moci/core/logging.cpp
@@ -11,11 +14,11 @@ set(moci_sources
     moci/core/preprocessor.hpp
     moci/core/property_map.hpp
     moci/core/property_map.cpp
-    moci/core/scope_close.hpp
-    moci/core/scope_close.cpp
+    moci/core/scope_guard.hpp
+    moci/core/scope_guard.cpp
     moci/core/strings.hpp
+    moci/core/vector.hpp
 
-    moci/debug/instrumentor.hpp
     
     moci/app/application.hpp
     moci/app/application.cpp
@@ -151,6 +154,11 @@ set(moci_sources
 add_library(${PROJECT_NAME} STATIC ${moci_sources})
 add_library(Moci::Moci ALIAS ${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
+foreach(source IN LISTS moci_sources)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+endforeach()
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC 
     NDEBUG=1
@@ -210,7 +218,7 @@ set (moci_test_src
     
     moci/core/algorithm_test.cpp
     moci/core/property_map_test.cpp
-    moci/core/scope_close_test.cpp
+    moci/core/scope_guard_test.cpp
     moci/core/strings_test.cpp
 
     moci/app/layer_stack_test.cpp

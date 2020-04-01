@@ -51,7 +51,11 @@ public:
         return false;
     }
 
-    bool OnKeyPressed(moci::KeyPressedEvent& e) { return false; }
+    bool OnKeyPressed(moci::KeyPressedEvent& e)
+    {
+        moci::IgnoreUnused(e);
+        return false;
+    }
 
     void OnImGuiRender() override
     {
@@ -148,9 +152,9 @@ public:
 
     DrawStats drawStats_ {};
 
-    std::vector<float> fpsHistory_ = {};
-    bool imguiWindow_              = true;
-    bool imguiDemo_                = false;
+    moci::Vector<float> fpsHistory_ = {};
+    bool imguiWindow_               = true;
+    bool imguiDemo_                 = false;
 };
 
 class MociModelViwerApp : public moci::Application

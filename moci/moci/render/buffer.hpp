@@ -1,6 +1,7 @@
 #pragma once
 
 #include "moci/core/logging.hpp"
+#include "moci/core/vector.hpp"
 
 #include <cstdint>
 
@@ -93,12 +94,12 @@ public:
     BufferLayout(std::initializer_list<BufferElement> elements) : m_Elements(elements) { CalculateOffsetsAndStride(); }
 
     [[nodiscard]] inline auto GetStride() const -> std::uint32_t { return m_Stride; }
-    [[nodiscard]] inline auto GetElements() const -> std::vector<BufferElement> const& { return m_Elements; }
+    [[nodiscard]] inline auto GetElements() const -> Vector<BufferElement> const& { return m_Elements; }
 
-    auto begin() -> std::vector<BufferElement>::iterator { return m_Elements.begin(); }
-    auto end() -> std::vector<BufferElement>::iterator { return m_Elements.end(); }
-    [[nodiscard]] auto begin() const -> std::vector<BufferElement>::const_iterator { return m_Elements.begin(); }
-    [[nodiscard]] auto end() const -> std::vector<BufferElement>::const_iterator { return m_Elements.end(); }
+    auto begin() -> Vector<BufferElement>::iterator { return m_Elements.begin(); }
+    auto end() -> Vector<BufferElement>::iterator { return m_Elements.end(); }
+    [[nodiscard]] auto begin() const -> Vector<BufferElement>::const_iterator { return m_Elements.begin(); }
+    [[nodiscard]] auto end() const -> Vector<BufferElement>::const_iterator { return m_Elements.end(); }
 
 private:
     void CalculateOffsetsAndStride()
@@ -114,7 +115,7 @@ private:
     }
 
 private:
-    std::vector<BufferElement> m_Elements;
+    Vector<BufferElement> m_Elements;
     uint32_t m_Stride = 0;
 };
 

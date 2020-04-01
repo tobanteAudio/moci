@@ -1,10 +1,10 @@
 #pragma once
 
+#include "moci/core/vector.hpp"
+
 #include <algorithm>
 #include <iterator>
 #include <tuple>
-#include <vector>
-
 namespace moci
 {
 /*
@@ -16,7 +16,7 @@ int : Represents the index of element in vector if its found else -1
 
 */
 template<typename T>
-std::pair<bool, int> FindInVector(const std::vector<T>& vec, const T& element)
+std::pair<bool, int> FindInVector(const Vector<T>& vec, const T& element)
 {
     std::pair<bool, int> result;
 

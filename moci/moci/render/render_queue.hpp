@@ -14,8 +14,8 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "moci/core/vector.hpp"
 #include <map>
-#include <vector>
 
 namespace moci
 {
@@ -71,12 +71,12 @@ private:
         Ref<VertexArray> vao;
         Ref<Shader> shader;
 
-        std::vector<Vertex> vertices;
-        std::vector<unsigned short> indices;
+        Vector<Vertex> vertices;
+        Vector<unsigned short> indices;
         std::uint32_t indexOffset;
 
         Texture2D::Ptr defaultTexture;
-        std::vector<Texture2D::Ptr> textures;
+        Vector<Texture2D::Ptr> textures;
 
         RenderQueue::Stats renderStats;
     };

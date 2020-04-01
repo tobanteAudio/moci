@@ -8,7 +8,7 @@
 
 TEST_CASE("moci/core: AlgorithmFindInVector", "[core]")
 {
-    auto v = std::vector<int> {1, 2, 3};
+    auto v = moci::Vector<int> {1, 2, 3};
 
     {
         auto result = moci::FindInVector(v, 0);

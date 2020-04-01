@@ -52,6 +52,7 @@ public:
     {
         listener_.Bind("", 8080);
         listener_.SetMessageCallback([](auto const& buffer, auto const size) {
+            moci::IgnoreUnused(size);
             auto data = float {};
             std::memcpy(&data, buffer.data(), sizeof(data));
 
@@ -92,7 +93,7 @@ public:
 
     ~MultiChannel() override { listener_.Shutdown(); };
 
-    auto OnDraw(moci::RenderQueue& painter) -> void override {}
+    auto OnDraw(moci::RenderQueue& painter) -> void override { moci::IgnoreUnused(painter); }
 
     auto OnResize() -> void override
     {
@@ -100,9 +101,9 @@ public:
         auto const width        = area.GetWidth();
         auto labelArea          = area.RemoveFromRight(width / 3).Reduced(20);
         auto sliderArea         = area.RemoveFromRight(width / 3).Reduced(20);
-        auto const sliderHeight = sliderArea.GetHeight() / sliders_.size();
-        auto const labelHeight  = labelArea.GetHeight() / labels_.size();
-        auto const channelWidth = area.GetWidth() / channels_.size();
+        auto const sliderHeight = static_cast<int>(sliderArea.GetHeight() / sliders_.size());
+        auto const labelHeight  = static_cast<int>(labelArea.GetHeight() / labels_.size());
+        auto const channelWidth = static_cast<int>(area.GetWidth() / channels_.size());
 
         for (auto& channel : channels_)
         {
@@ -122,9 +123,9 @@ public:
 
 private:
     moci::DatagramSocket listener_ {};
-    std::vector<moci::Scope<LevelMeterView>> channels_;
-    std::vector<moci::Scope<moci::Slider>> sliders_;
-    std::vector<moci::Scope<moci::Label>> labels_;
+    moci::Vector<moci::Scope<LevelMeterView>> channels_;
+    moci::Vector<moci::Scope<moci::Slider>> sliders_;
+    moci::Vector<moci::Scope<moci::Label>> labels_;
 };
 
 class Sandbox : public moci::Application

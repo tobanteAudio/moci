@@ -18,7 +18,7 @@ config-gles:
 
 .PHONY: config-vs
 config-vs:
-	cmake $(CMAKE_FLAGS) -B$(BUILD_DIR_BASE)_$(CONFIG) -DCMAKE_BUILD_TYPE=$(CONFIG) -DMOCI_API_OPENGL_LEGACY=ON .
+	cmake $(CMAKE_FLAGS) -B$(BUILD_DIR_BASE)_$(CONFIG) -DCMAKE_BUILD_TYPE=$(CONFIG) -DMOCI_API_OPENGL_MODERN=ON .
 
 .PHONY: build
 build:
@@ -78,7 +78,14 @@ clean:
 
 .PHONY: stats
 stats:
-	@cloc --exclude-dir=3rd_party,build_coverage,build_sanitize,build_Debug,build_Release,venv .
+	cloc --exclude-dir=3rd_party\
+	,build_coverage\
+	,build_sanitize\
+	,build_Debug\
+	,build_Release\
+	,documentation\
+	,venv\
+	,playground .
 
 .PHONY: format
 format:

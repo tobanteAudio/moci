@@ -1,6 +1,6 @@
 #include "render_queue.hpp"
 
-#include "moci/debug/instrumentor.hpp"
+#include "moci/benchmark/profile.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -159,8 +159,10 @@ auto RenderQueue::EndBatch() -> void
 {
     MOCI_PROFILE_FUNCTION();
     data_.vao->Bind();
-    data_.vbo->UploadData(0, data_.vertices.size() * sizeof(Vertex), data_.vertices.data());
-    data_.ibo->UploadData(0, data_.indices.size() * sizeof(unsigned short), data_.indices.data());
+    auto const verticesSize = static_cast<std::uint32_t>(data_.vertices.size() * sizeof(Vertex));
+    data_.vbo->UploadData(0, verticesSize, data_.vertices.data());
+    auto const indicesSize = static_cast<std::uint32_t>(data_.indices.size() * sizeof(unsigned short));
+    data_.ibo->UploadData(0, indicesSize, data_.indices.data());
     data_.vao->Unbind();
 }
 
@@ -169,15 +171,16 @@ auto RenderQueue::Flush() -> void
     MOCI_PROFILE_FUNCTION();
     for (size_t i = 0; i < data_.textures.size(); i++)
     {
-        data_.textures[i]->Bind(i);
+        data_.textures[i]->Bind(static_cast<std::uint32_t>(i));
     }
 
     data_.vao->Bind();
     {
         MOCI_PROFILE_SCOPE("RenderQueue::Flush::Draw");
-        auto const mode = RendererAPI::DrawMode::Triangles;
-        auto const type = RendererAPI::ElementType::UnsignedShort;
-        RenderCommand::DrawElements(mode, data_.indices.size(), type, nullptr);
+        auto const mode       = RendererAPI::DrawMode::Triangles;
+        auto const type       = RendererAPI::ElementType::UnsignedShort;
+        auto const numIndices = static_cast<std::uint32_t>(data_.indices.size());
+        RenderCommand::DrawElements(mode, numIndices, type, nullptr);
     }
     data_.vao->Unbind();
     for (auto const& tex : data_.textures)
@@ -204,7 +207,7 @@ auto RenderQueue::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Option
     int texID {-1};
     if (texture)
     {
-        size_t counter = 0;
+        std::uint32_t counter = 0;
         for (auto& tex : data_.textures)
         {
             if (tex.get() == texture->get())
@@ -219,7 +222,7 @@ auto RenderQueue::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Option
         {
             FlushIf(data_.textures.size() == MaxTextureUnits);
 
-            texID = data_.textures.size();
+            texID = static_cast<uint32_t>(data_.textures.size());
             data_.textures.push_back(texture.value());
             data_.renderStats.textureCount++;
         }
@@ -243,7 +246,7 @@ auto RenderQueue::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Option
 
     for (auto const i : {0, 1, 2, 2, 3, 0})
     {
-        data_.indices.push_back(data_.indexOffset + i);
+        data_.indices.push_back(static_cast<unsigned short>(data_.indexOffset + i));
     }
     data_.indexOffset += 4;
 
@@ -253,7 +256,7 @@ auto RenderQueue::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Option
 
 auto RenderQueue::DrawCircle(float x, float y, float radius, int numSides, Color color) -> void
 {
-    FlushIf(data_.indices.size() + (3 * numSides) >= MaxIndexCount);
+    FlushIf(data_.indices.size() + (static_cast<size_t>(3) * static_cast<size_t>(numSides)) >= MaxIndexCount);
 
     auto const numVertices = numSides + 2;
     auto const doublePI    = 3.141f * 2.0f;
@@ -268,9 +271,9 @@ auto RenderQueue::DrawCircle(float x, float y, float radius, int numSides, Color
     auto const origin = data_.indexOffset;
     for (auto i = 0; i < numSides; i++)
     {
-        data_.indices.push_back(origin);
-        data_.indices.push_back(origin + (1 + i));
-        data_.indices.push_back(origin + (2 + i));
+        data_.indices.push_back(static_cast<unsigned short>(origin));
+        data_.indices.push_back(static_cast<unsigned short>(origin + (1 + i)));
+        data_.indices.push_back(static_cast<unsigned short>(origin + (2 + i)));
     }
     data_.indexOffset += numVertices;
 

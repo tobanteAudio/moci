@@ -8,11 +8,11 @@
 
 #include <cstdint>
 
+#include "moci/core/vector.hpp"
 #include <atomic>
 #include <functional>
 #include <string>
 #include <thread>
-#include <vector>
 
 namespace moci
 {

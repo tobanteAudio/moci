@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 
     // quick and dirty max texture size estimate
 
-    int max_dim   = (1 + (face->size->metrics.height >> 6)) * ceilf(sqrtf(NUM_GLYPHS));
+    int max_dim   = (1 + (face->size->metrics.height >> 6)) * static_cast<int> (ceilf(sqrtf(NUM_GLYPHS)));
     int tex_width = 1;
     while (tex_width < max_dim)
     {
@@ -59,15 +59,15 @@ int main(int argc, char** argv)
 
         FT_Bitmap* bmp = &face->glyph->bitmap;
 
-        if (pen_x + bmp->width >= tex_width)
+        if (pen_x + static_cast<int>(bmp->width) >= tex_width)
         {
             pen_x = 0;
             pen_y += ((face->size->metrics.height >> 6) + 1);
         }
 
-        for (int row = 0; row < bmp->rows; ++row)
+        for (int row = 0; row < static_cast<int>(bmp->rows); ++row)
         {
-            for (int col = 0; col < bmp->width; ++col)
+            for (int col = 0; col < static_cast<int>(bmp->width); ++col)
             {
                 int x                     = pen_x + col;
                 int y                     = pen_y + row;

@@ -27,6 +27,10 @@ class Window
 public:
     using EventCallbackFn = std::function<void(Event&)>;
 
+public:
+    static auto Create(const WindowProps& props = WindowProps()) -> Window*;
+
+public:
     virtual ~Window() = default;
 
     virtual void OnUpdate() = 0;
@@ -36,15 +40,16 @@ public:
 
     // Window attributes
     virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
-    virtual void SetVSync(bool enabled)                            = 0;
-    [[nodiscard]] virtual auto IsVSync() const -> bool             = 0;
+
+    virtual void SetVSync(bool enabled)                = 0;
+    [[nodiscard]] virtual auto IsVSync() const -> bool = 0;
 
     virtual void SetFullscreen(bool enabled)        = 0;
     [[nodiscard]] virtual bool IsFullscreen() const = 0;
 
-    [[nodiscard]] virtual auto GetNativeWindow() const -> void* = 0;
+    [[nodiscard]] virtual std::uint32_t GetFrameCount() const = 0;
 
-    static auto Create(const WindowProps& props = WindowProps()) -> Window*;
+    [[nodiscard]] virtual auto GetNativeWindow() const -> void* = 0;
 };
 
 }  // namespace moci

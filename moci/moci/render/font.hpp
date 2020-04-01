@@ -4,10 +4,10 @@
 
 #include <cstdint>
 
+#include "moci/core/vector.hpp"
 #include <map>
 #include <string>
 #include <string_view>
-#include <vector>
 
 namespace moci
 {
@@ -15,7 +15,7 @@ namespace moci
 class Typeface
 {
 public:
-    using Buffer = std::vector<std::uint8_t>;
+    using Buffer = Vector<std::uint8_t>;
 
     struct Character
     {
