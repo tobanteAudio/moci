@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.13...3.16)
 project(MociLibrary LANGUAGES CXX)
 
+# LTO
 cmake_policy(SET CMP0069 NEW) 
 set(CMAKE_POLICY_DEFAULT_CMP0069 NEW)
+
+# OpenGL
+cmake_policy(SET CMP0072 NEW)
+set(CMAKE_POLICY_DEFAULT_CMP0072 NEW)
 
 # Only do these if this is the main project, and not if it is included through add_subdirectory
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
