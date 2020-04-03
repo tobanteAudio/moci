@@ -30,18 +30,24 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     CHECK_CXX_COMPILER_FLAG("-march=native" COMPILER_OPT_ARCH_NATIVE_SUPPORTED)
     if (COMPILER_OPT_ARCH_NATIVE_SUPPORTED)
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
-    else()
+    endif()
+
+    if(MSVC)
       CHECK_CXX_COMPILER_FLAG("/arch:AVX2" COMPILER_OPT_ARCH_AVX2_SUPPORTED)
       if(COMPILER_OPT_ARCH_AVX2_SUPPORTED)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX2")
       endif()
+      CHECK_CXX_COMPILER_FLAG("/MP" COMPILER_OPT_MP_BUILD_SUPPORTED)
+      if(COMPILER_OPT_MP_BUILD_SUPPORTED)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+      endif()
     endif()
-
-    CHECK_CXX_COMPILER_FLAG("/MP" COMPILER_OPT_MP_BUILD_SUPPORTED)
-    if(COMPILER_OPT_MP_BUILD_SUPPORTED)
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+    
+    CHECK_CXX_COMPILER_FLAG("-ffast-math" COMPILER_OPT_FAST_MATH_SUPPORTED)
+    if (COMPILER_OPT_FAST_MATH_SUPPORTED)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffast-math")
     endif()
-
+    
     # LTO
     include(CheckIPOSupported)
     check_ipo_supported(RESULT MOCI_SUPPORTS_LTO)
@@ -67,7 +73,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(MociCodeCoverage)
 include(MociCompilerOptions)
 include(MociCompilerWarnings)
-include(MociGitSubmodules)
+# include(MociGitSubmodules)
 include(MociThreading)
 
 # tidy, has to be enabled for each target.
