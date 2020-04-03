@@ -44,3 +44,11 @@
 ## Textures
 
 - Load highest resolution from disk. Scale for device.
+
+## Bug Reports
+
+- assimp
+  - Hardcoded shared lib build.
+  - Hardcoded `-g`. Even in Release.
+  - Hardcoded `CXX11`.
+  - Hardcoded `-fPiC`.
