@@ -27,9 +27,19 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
     # Arch: native
     include(CheckCXXCompilerFlag)
-    check_cxx_compiler_flag("-march=native" COMPILER_SUPPORTS_MARCH_NATIVE)
-    if(COMPILER_SUPPORTS_MARCH_NATIVE)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+    CHECK_CXX_COMPILER_FLAG("-march=native" COMPILER_OPT_ARCH_NATIVE_SUPPORTED)
+    if (COMPILER_OPT_ARCH_NATIVE_SUPPORTED)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+    else()
+      CHECK_CXX_COMPILER_FLAG("/arch:AVX2" COMPILER_OPT_ARCH_AVX2_SUPPORTED)
+      if(COMPILER_OPT_ARCH_AVX2_SUPPORTED)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX2")
+      endif()
+    endif()
+
+    CHECK_CXX_COMPILER_FLAG("/MP" COMPILER_OPT_MP_BUILD_SUPPORTED)
+    if(COMPILER_OPT_MP_BUILD_SUPPORTED)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
     endif()
 
     # LTO
