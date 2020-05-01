@@ -24,6 +24,7 @@ moci-sandbox.json
 moci-sandbox-3d.json
 moci-sandbox-3d-rpi.json
 moci-model-viewer.json
+perf.data*
 
 # Log
 moci.log

@@ -14,7 +14,7 @@ static std::atomic<float> Level = 0;
 class LevelMeterView : public moci::Component
 {
 public:
-    LevelMeterView(moci::Color col) : Component("color"), color_(col) {}
+    LevelMeterView(moci::Color col) : Component("color"), color_(col) { }
     ~LevelMeterView() override = default;
 
     auto OnDraw(moci::RenderQueue& painter) -> void override

@@ -11,7 +11,7 @@ public:
     /**
      * @brief Default construct. Bottom left at (0,0), no size.
      */
-    explicit constexpr Rectangle() noexcept : position_(Type(0), Type(0)), width_(Type(0)), height_(Type(0)) {}
+    explicit constexpr Rectangle() noexcept : position_(Type(0), Type(0)), width_(Type(0)), height_(Type(0)) { }
 
     /**
      * @brief Construct at (x, y), with width & height.

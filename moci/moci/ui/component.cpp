@@ -5,11 +5,11 @@
 namespace moci
 {
 
-Component::Component(std::string id) : id_(std::move(id)) {}
+Component::Component(std::string id) : id_(std::move(id)) { }
 
 void Component::OnDraw(RenderQueue& painter) { IgnoreUnused(painter); }
 
-void Component::OnResize() {}
+void Component::OnResize() { }
 
 void Component::Draw(RenderQueue& painter)
 {

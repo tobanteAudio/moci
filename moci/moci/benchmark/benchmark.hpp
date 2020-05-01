@@ -10,7 +10,7 @@ namespace moci
 #ifdef _MSC_VER
 
 #pragma optimize("", off)
-inline void DoNotOptimizeDependencySink(const void*) {}
+inline void DoNotOptimizeDependencySink(const void*) { }
 #pragma optimize("", on)
 
 /**

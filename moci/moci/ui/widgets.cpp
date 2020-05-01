@@ -4,7 +4,7 @@
 
 namespace moci
 {
-Label::Label(std::string text, Color col) : Component("label"), text_(std::move(text)), color_(col) {}
+Label::Label(std::string text, Color col) : Component("label"), text_(std::move(text)), color_(col) { }
 
 void Label::OnDraw(RenderQueue& painter)
 {
@@ -14,7 +14,7 @@ void Label::OnDraw(RenderQueue& painter)
     style->DrawLabel(painter, GetBounds(), *this);
 }
 
-Slider::Slider(Color col) : Component("slider"), color_(col) {}
+Slider::Slider(Color col) : Component("slider"), color_(col) { }
 
 void Slider::OnDraw(RenderQueue& painter)
 {

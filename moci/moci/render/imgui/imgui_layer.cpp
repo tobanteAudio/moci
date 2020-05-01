@@ -10,7 +10,7 @@ namespace moci
 
 ImGuiLayer::ImGuiLayer() = default;
 
-ImGuiLayer::ImGuiLayer(std::string const& /*unused*/) {}
+ImGuiLayer::ImGuiLayer(std::string const& /*unused*/) { }
 
 ImGuiLayer::~ImGuiLayer() = default;
 
@@ -127,5 +127,5 @@ void ImGuiLayer::End()
 #endif
 }
 
-void ImGuiLayer::OnImGuiRender() {}
+void ImGuiLayer::OnImGuiRender() { }
 }  // namespace moci

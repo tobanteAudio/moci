@@ -10,7 +10,7 @@ namespace moci
 class MouseMovedEvent : public Event
 {
 public:
-    MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) {}
+    MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) { }
 
     [[nodiscard]] inline auto GetX() const -> float { return m_MouseX; }
     [[nodiscard]] inline auto GetY() const -> float { return m_MouseY; }
@@ -31,7 +31,7 @@ private:
 class MouseScrolledEvent : public Event
 {
 public:
-    MouseScrolledEvent(float xOffset, float yOffset) : m_XOffset(xOffset), m_YOffset(yOffset) {}
+    MouseScrolledEvent(float xOffset, float yOffset) : m_XOffset(xOffset), m_YOffset(yOffset) { }
 
     [[nodiscard]] inline auto GetXOffset() const -> float { return m_XOffset; }
     [[nodiscard]] inline auto GetYOffset() const -> float { return m_YOffset; }
@@ -52,7 +52,7 @@ private:
 class MouseButtonEvent : public Event
 {
 public:
-    MouseButtonEvent(int button) : m_Button(button) {}
+    MouseButtonEvent(int button) : m_Button(button) { }
     [[nodiscard]] inline auto GetMouseButton() const -> int { return m_Button; }
 
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
@@ -63,7 +63,7 @@ private:
 class MouseButtonPressedEvent : public MouseButtonEvent
 {
 public:
-    MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {}
+    MouseButtonPressedEvent(int button) : MouseButtonEvent(button) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
@@ -78,7 +78,7 @@ public:
 class MouseButtonReleasedEvent : public MouseButtonEvent
 {
 public:
-    MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}
+    MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
     {

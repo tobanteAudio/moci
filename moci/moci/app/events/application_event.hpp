@@ -10,7 +10,7 @@ namespace moci
 class WindowResizeEvent : public Event
 {
 public:
-    WindowResizeEvent(unsigned int width, unsigned int height) : m_Width(width), m_Height(height) {}
+    WindowResizeEvent(unsigned int width, unsigned int height) : m_Width(width), m_Height(height) { }
 
     [[nodiscard]] inline auto GetWidth() const -> unsigned int { return m_Width; }
     [[nodiscard]] inline auto GetHeight() const -> unsigned int { return m_Height; }

@@ -8,7 +8,7 @@ namespace moci
 class KeyEvent : public Event
 {
 public:
-    KeyEvent(int keycode) : m_KeyCode(keycode) {}
+    KeyEvent(int keycode) : m_KeyCode(keycode) { }
     [[nodiscard]] inline auto GetKeyCode() const -> int { return m_KeyCode; }
 
     EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
@@ -20,7 +20,7 @@ private:
 class KeyPressedEvent : public KeyEvent
 {
 public:
-    KeyPressedEvent(int keycode, int repeatCount) : KeyEvent(keycode), m_RepeatCount(repeatCount) {}
+    KeyPressedEvent(int keycode, int repeatCount) : KeyEvent(keycode), m_RepeatCount(repeatCount) { }
 
     [[nodiscard]] inline auto GetRepeatCount() const -> int { return m_RepeatCount; }
 
@@ -39,7 +39,7 @@ private:
 class KeyReleasedEvent : public KeyEvent
 {
 public:
-    KeyReleasedEvent(int keycode) : KeyEvent(keycode) {}
+    KeyReleasedEvent(int keycode) : KeyEvent(keycode) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
@@ -54,7 +54,7 @@ public:
 class KeyTypedEvent : public KeyEvent
 {
 public:
-    KeyTypedEvent(int keycode) : KeyEvent(keycode) {}
+    KeyTypedEvent(int keycode) : KeyEvent(keycode) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
     {

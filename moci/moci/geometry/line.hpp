@@ -19,12 +19,12 @@ public:
     /**
      * @brief Construct empty line. Start and end at (0,0)
      */
-    explicit constexpr Line() noexcept : start_({0, 0}), end_({0, 0}) {}
+    explicit constexpr Line() noexcept : start_({0, 0}), end_({0, 0}) { }
 
     /**
      * @brief Construct line from two points.
      */
-    constexpr Line(Point<Type> start, Point<Type> end) noexcept : start_(start), end_(end) {}
+    constexpr Line(Point<Type> start, Point<Type> end) noexcept : start_(start), end_(end) { }
 
     /**
      * @brief Returns true if start & end are equal.

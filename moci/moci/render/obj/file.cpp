@@ -10,7 +10,7 @@
 namespace moci
 {
 
-OBJFile::OBJFile(std::string path) : path_(std::move(path)) {}
+OBJFile::OBJFile(std::string path) : path_(std::move(path)) { }
 
 bool OBJFile::Parse()
 {

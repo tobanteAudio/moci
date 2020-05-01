@@ -6,7 +6,7 @@
 
 namespace moci
 {
-Typeface::Typeface(std::string name) : name_(std::move(name)) {}
+Typeface::Typeface(std::string name) : name_(std::move(name)) { }
 
 void Typeface::AddCharacter(char c, std::uint32_t height, std::uint32_t width, Point<std::uint32_t> topLeft,
                             std::uint32_t advance, Buffer buffer)

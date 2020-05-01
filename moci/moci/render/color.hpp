@@ -6,9 +6,9 @@ namespace moci
 class Color
 {
 public:
-    constexpr Color() noexcept : data_({0.0f, 0.0f, 0.0f, 0.0f}) {}
-    constexpr Color(float r, float g, float b) noexcept : data_({r, g, b, 1.0f}) {}
-    constexpr Color(float r, float g, float b, float alpha) noexcept : data_({r, g, b, alpha}) {}
+    constexpr Color() noexcept : data_({0.0f, 0.0f, 0.0f, 0.0f}) { }
+    constexpr Color(float r, float g, float b) noexcept : data_({r, g, b, 1.0f}) { }
+    constexpr Color(float r, float g, float b, float alpha) noexcept : data_({r, g, b, alpha}) { }
 
     [[nodiscard]] constexpr auto GetData() const noexcept -> glm::vec4 { return data_; }
 

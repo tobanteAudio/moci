@@ -2,17 +2,26 @@ cmake_minimum_required(VERSION 3.13...3.16)
 project(MociLibrary LANGUAGES CXX)
 
 # LTO
-cmake_policy(SET CMP0069 NEW) 
+cmake_policy(SET CMP0069 NEW)
 set(CMAKE_POLICY_DEFAULT_CMP0069 NEW)
 
 # OpenGL
 cmake_policy(SET CMP0072 NEW)
 set(CMAKE_POLICY_DEFAULT_CMP0072 NEW)
 
-# Only do these if this is the main project, and not if it is included through add_subdirectory
+option(MOCI_BUILD_TESTS          "Build the unit tests with Catch2"             ON)
+option(MOCI_BUILD_COVERAGE       "Build with coverage enabled"                  OFF)
+option(MOCI_BUILD_FRAMEPOINTER   "Build with frame pointer. For profiles"       OFF)
+option(MOCI_CLANG_TIDY           "Run clang-tidy with the compiler."            OFF)
+option(MOCI_CLANG_TIDY_FIX       "Run & auto fix clang-tidy with the compiler." OFF)
+option(MOCI_GIT_SUBMODULE        "Check submodules during build"                ON)
+option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"                OFF)
+option(MOCI_API_OPENGL_LEGACY    "Use OpenGL Legacy implementation"             OFF)
+option(MOCI_API_OPENGL_ES        "Link against OpenGL ES 2.0"                   OFF)
+
+# Only do these if this is the main project,
+# and not if it is included through add_subdirectory.
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    # Optionally set things like CMAKE_CXX_STANDARD, CMAKE_POSITION_INDEPENDENT_CODE her
-    # Let's ensure -std=c++xx instead of -std=g++xx
     set(CMAKE_CXX_STANDARD 17)
     set(CMAKE_CXX_EXTENSIONS OFF)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -42,12 +51,19 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
       endif()
     endif()
-    
+
+    if(MOCI_BUILD_FRAMEPOINTER)
+      CHECK_CXX_COMPILER_FLAG("-fno-omit-frame-pointer" COMPILER_NO_OMIT_FRAMEPOINTER_SUPPORTED)
+      if (COMPILER_NO_OMIT_FRAMEPOINTER_SUPPORTED)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer")
+      endif()
+    endif(MOCI_BUILD_FRAMEPOINTER)
+
     CHECK_CXX_COMPILER_FLAG("-ffast-math" COMPILER_OPT_FAST_MATH_SUPPORTED)
     if (COMPILER_OPT_FAST_MATH_SUPPORTED)
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffast-math")
     endif()
-    
+
     # LTO
     include(CheckIPOSupported)
     check_ipo_supported(RESULT MOCI_SUPPORTS_LTO)
@@ -58,15 +74,6 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
       message(STATUS "Moci: lto is NOT supported.")
     endif()
 endif()
-
-option(MOCI_BUILD_TESTS          "Build the unit tests with Catch2"  ON)
-option(MOCI_BUILD_COVERAGE       "Build with coverage enabled"       OFF)
-option(MOCI_CLANG_TIDY           "Run clang-tidy with the compiler." OFF)
-option(MOCI_CLANG_TIDY_FIX       "Run & auto fix clang-tidy with the compiler." OFF)
-option(MOCI_GIT_SUBMODULE        "Check submodules during build"     ON)
-option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"     OFF)
-option(MOCI_API_OPENGL_LEGACY    "Use OpenGL Legacy implementation"  OFF)
-option(MOCI_API_OPENGL_ES        "Link against OpenGL ES 2.0"        OFF)
 
 # Cmake setup
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")

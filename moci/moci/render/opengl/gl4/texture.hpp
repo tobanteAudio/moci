@@ -25,7 +25,7 @@ public:
     void SetData(void* data, uint32_t size);
 
     void Bind(uint32_t slot = 0) const override;
-    void Unbind() const override {}
+    void Unbind() const override { }
 
 private:
     std::string m_Path;

@@ -19,7 +19,7 @@ public:
     MociModelViwerLayer()           = default;
     ~MociModelViwerLayer() override = default;
 
-    void OnAttach() override {}
+    void OnAttach() override { }
 
     void OnUpdate(moci::Timestep ts) override
     {

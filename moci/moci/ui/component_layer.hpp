@@ -16,7 +16,7 @@ namespace moci
 class ComponentLayer : public Layer
 {
 public:
-    ComponentLayer(Scope<Component>&& root) : Layer("component-layer"), rootComponent_(std::move(root)) {}
+    ComponentLayer(Scope<Component>&& root) : Layer("component-layer"), rootComponent_(std::move(root)) { }
     ~ComponentLayer() override = default;
 
     void OnAttach() override
@@ -26,7 +26,7 @@ public:
         rootComponent_->SetSize(static_cast<int>(width_), static_cast<int>(height_));
     }
 
-    void OnDetach() override {}
+    void OnDetach() override { }
 
     void OnUpdate(Timestep ts) override
     {

@@ -6,8 +6,8 @@ template<typename Type>
 class Point
 {
 public:
-    explicit constexpr Point() noexcept : x_(Type(0)), y_(Type(0)) {}
-    constexpr Point(Type x, Type y) noexcept : x_(x), y_(y) {}
+    explicit constexpr Point() noexcept : x_(Type(0)), y_(Type(0)) { }
+    constexpr Point(Type x, Type y) noexcept : x_(x), y_(y) { }
 
     ~Point() = default;
 
@@ -15,7 +15,7 @@ public:
     auto operator=(Point const&) -> Point& = default;
 
     Point(Point&&) = default;
-    auto operator=(Point &&) -> Point& = default;
+    auto operator=(Point&&) -> Point& = default;
 
     [[nodiscard]] constexpr auto IsOrigin() const noexcept -> bool { return x_ == Type(0) && y_ == Type(0); }
 
