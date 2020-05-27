@@ -29,8 +29,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set(CMAKE_CXX_STANDARD 17)
     set(CMAKE_CXX_EXTENSIONS OFF)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-    if(APPLE)
-    else()
+    if(NOT APPLE)
       set(BUILD_SHARED_LIBS OFF)
     endif()  
 
@@ -105,9 +104,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/GSL        EXCLUDE_FROM_A
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/spdlog     EXCLUDE_FROM_ALL)
 
 # Only include glew on desktop
-if (${MOCI_API_OPENGL_ES})
-else()
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glew   EXCLUDE_FROM_ALL)
+if (NOT ${MOCI_API_OPENGL_ES})
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glew   EXCLUDE_FROM_ALL)
 endif()
 
 # Testing
@@ -129,6 +127,5 @@ add_subdirectory(moci)
 add_subdirectory(sandbox)
 add_subdirectory(sandbox3D)
 
-add_subdirectory(tools/model-viewer)
-
-add_subdirectory(playground)
+# add_subdirectory(tools/model-viewer)
+# add_subdirectory(playground)
