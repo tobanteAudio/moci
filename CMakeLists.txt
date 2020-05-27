@@ -80,7 +80,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(MociCodeCoverage)
 include(MociCompilerOptions)
 include(MociCompilerWarnings)
-# include(MociGitSubmodules)
+include(MociGitSubmodules)
 include(MociThreading)
 
 # tidy, has to be enabled for each target.
