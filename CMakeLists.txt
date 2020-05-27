@@ -65,14 +65,14 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     endif()
 
     # LTO
-    include(CheckIPOSupported)
-    check_ipo_supported(RESULT MOCI_SUPPORTS_LTO)
-    if(MOCI_SUPPORTS_LTO)
-      message(STATUS "Moci: lto is supported")
-      set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
-    else()
-      message(STATUS "Moci: lto is NOT supported.")
-    endif()
+    # include(CheckIPOSupported)
+    # check_ipo_supported(RESULT MOCI_SUPPORTS_LTO)
+    # if(MOCI_SUPPORTS_LTO)
+    #   message(STATUS "Moci: lto is supported")
+    #   set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+    # else()
+    #   message(STATUS "Moci: lto is NOT supported.")
+    # endif()
 endif()
 
 # Cmake setup
