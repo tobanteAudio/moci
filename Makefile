@@ -43,13 +43,7 @@ test:
 
 .PHONY: tidy
 tidy:
-	cmake -S. -G"Ninja" $(CMAKE_FLAGS) -B $(BUILD_DIR_BASE)_tidy -DMOCI_CLANG_TIDY=ON -DMOCI_API_OPENGL_LEGACY=ON
-	cmake --build $(BUILD_DIR_BASE)_tidy
-
-.PHONY: tidy-fix
-tidy-fix:
-	cmake -S. -G"Unix Makefiles" $(CMAKE_FLAGS) -B $(BUILD_DIR_BASE)_tidy-fix -DMOCI_CLANG_TIDY_FIX=ON -DMOCI_API_OPENGL_LEGACY=ON
-	cd $(BUILD_DIR_BASE)_tidy-fix && make -j1
+	./scripts/moci-clang-tidy.sh
 
 .PHONY: coverage
 coverage:

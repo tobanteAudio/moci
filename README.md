@@ -99,7 +99,5 @@ Look at the `circleci` config in [`.circleci/config.yml`](https://github.com/tob
 Two options. Somehow not all headers are found in either option:
 
 ```sh
-CONFIG=Debug make tidy
-CONFIG=Debug make tidy-fix
 ./scripts/moci-clang-tidy.sh
 ```
