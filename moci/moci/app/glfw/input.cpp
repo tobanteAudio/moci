@@ -1,6 +1,6 @@
 #include "input.hpp"
 
-#include "math.h"
+#include <cmath>
 
 #include "moci/app/application.hpp"
 #include "moci/render/opengl/es2/es2.hpp"

@@ -25,8 +25,8 @@ public:
 
     bool Bind(std::string ip, int port);
 
-    bool Write(std::string const& host, int port, gsl::span<std::uint8_t> buffer);
-    bool Write(std::string const& host, int port, DatagramSocket::Buffer const& buffer);
+    static bool Write(std::string const& host, int port, gsl::span<std::uint8_t> buffer);
+    static bool Write(std::string const& host, int port, DatagramSocket::Buffer const& buffer);
     static bool Write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes);
 
     void Listen();
