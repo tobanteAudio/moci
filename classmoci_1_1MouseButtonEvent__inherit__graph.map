@@ -1,0 +1,5 @@
+<map id="moci::MouseButtonEvent" name="moci::MouseButtonEvent">
+<area shape="rect" id="node3" href="$classmoci_1_1MouseButtonPressedEvent.html" title="moci::MouseButtonPressed\lEvent" alt="" coords="5,155,204,196"/>
+<area shape="rect" id="node4" href="$classmoci_1_1MouseButtonReleasedEvent.html" title="moci::MouseButtonReleased\lEvent" alt="" coords="228,155,435,196"/>
+<area shape="rect" id="node2" href="$classmoci_1_1Event.html" title="moci::Event" alt="" coords="169,5,267,32"/>
+</map>

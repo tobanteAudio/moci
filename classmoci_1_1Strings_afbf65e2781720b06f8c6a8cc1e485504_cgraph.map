@@ -1,0 +1,4 @@
+<map id="moci::Strings::Trim" name="moci::Strings::Trim">
+<area shape="rect" id="node2" href="$classmoci_1_1Strings.html#ab52943c5649d2ef80ff45678fc95fe51" title="Remove all leading spaces on the given string in place. " alt="" coords="201,5,369,32"/>
+<area shape="rect" id="node3" href="$classmoci_1_1Strings.html#a8dc2163fcc5ff7c71c49e2bd939961fe" title="Remove all trailing spaces on the given string in place. " alt="" coords="196,56,373,83"/>
+</map>

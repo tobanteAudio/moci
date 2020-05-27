@@ -1,0 +1,6 @@
+<map id="moci::KeyEvent" name="moci::KeyEvent">
+<area shape="rect" id="node3" href="$classmoci_1_1KeyPressedEvent.html" title="moci::KeyPressedEvent" alt="" coords="5,155,180,181"/>
+<area shape="rect" id="node4" href="$classmoci_1_1KeyReleasedEvent.html" title="moci::KeyReleasedEvent" alt="" coords="204,155,387,181"/>
+<area shape="rect" id="node5" href="$classmoci_1_1KeyTypedEvent.html" title="moci::KeyTypedEvent" alt="" coords="411,155,572,181"/>
+<area shape="rect" id="node2" href="$classmoci_1_1Event.html" title="moci::Event" alt="" coords="246,5,345,32"/>
+</map>

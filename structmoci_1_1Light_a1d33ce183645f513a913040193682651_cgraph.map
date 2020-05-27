@@ -1,0 +1,7 @@
+<map id="moci::Light::Light" name="moci::Light::Light">
+<area shape="rect" id="node2" href="$classmoci_1_1Shader.html#a30f3630e1a899c3e50b3a18cae0c390c" title="moci::Shader::Create" alt="" coords="198,5,357,32"/>
+<area shape="rect" id="node3" href="$classmoci_1_1Mesh.html#a85d2a7409f7d5b21d74a252056708e28" title="moci::Mesh::GetVertices" alt="" coords="188,56,367,83"/>
+<area shape="rect" id="node4" href="$classmoci_1_1VertexBuffer.html#ae514acff4f398fc1a4a413a934c97d9f" title="moci::VertexBuffer\l::Create" alt="" coords="206,107,349,149"/>
+<area shape="rect" id="node5" href="$classmoci_1_1IndexBuffer.html#a509994ce893c891d1d121a7aa4e6e37d" title="moci::IndexBuffer::\lCreate" alt="" coords="205,173,350,214"/>
+<area shape="rect" id="node6" href="$classmoci_1_1VertexArray.html#a69d5813def4d61637e010aac213b00aa" title="moci::VertexArray::\lCreate" alt="" coords="204,238,351,279"/>
+</map>
