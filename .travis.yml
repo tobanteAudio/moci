@@ -16,6 +16,7 @@ script-anchors:
 matrix:
   include:
     - os: osx
+      osx_image: xcode11
       script: *script-macOS
 
     - os: linux
