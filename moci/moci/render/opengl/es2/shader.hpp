@@ -37,15 +37,15 @@ public:
     [[nodiscard]] auto GetName() const -> std::string const& override { return m_Name; }
 
 public:
-    void UploadUniformInt(std::string const& name, int value);
-    void UploadUniformInts(std::string const& name, int count, int* values);
-    void UploadUniformFloat(std::string const& name, float value);
-    void UploadUniformFloat2(std::string const& name, const glm::vec2& value);
-    void UploadUniformFloat3(std::string const& name, const glm::vec3& value);
-    void UploadUniformFloat4(std::string const& name, glm::vec4 const& value);
+    void UploadUniformInt(std::string const& name, int value) const;
+    void UploadUniformInts(std::string const& name, int count, int* values) const;
+    void UploadUniformFloat(std::string const& name, float value) const;
+    void UploadUniformFloat2(std::string const& name, const glm::vec2& value) const;
+    void UploadUniformFloat3(std::string const& name, const glm::vec3& value) const;
+    void UploadUniformFloat4(std::string const& name, glm::vec4 const& value) const;
 
-    void UploadUniformMat3(std::string const& name, glm::mat3 const& matrix);
-    void UploadUniformMat4(std::string const& name, glm::mat4 const& matrix);
+    void UploadUniformMat3(std::string const& name, glm::mat3 const& matrix) const;
+    void UploadUniformMat4(std::string const& name, glm::mat4 const& matrix) const;
 
 private:
     // std::string ReadFile(std::string const& filepath);

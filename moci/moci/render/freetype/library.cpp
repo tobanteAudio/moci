@@ -14,14 +14,14 @@ std::optional<Typeface> FreetypeLibrary::CreateTypefaceFromFont(std::string font
         return std::nullopt;
     }
 
-    FT_Library ft;
+    FT_Library ft = nullptr;
     if (FT_Init_FreeType(&ft) != 0)
     {
         return std::nullopt;
     }
     auto closeLibrary = moci::MakeScopeGuard([&ft]() { FT_Done_FreeType(ft); });
 
-    FT_Face face;
+    FT_Face face = nullptr;
     if (FT_New_Face(ft, fontPath.c_str(), 0, &face) != 0)
     {
         return std::nullopt;

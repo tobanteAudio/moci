@@ -49,7 +49,7 @@ public:
     [[nodiscard]] gsl::span<VertexData> GetVertexData() { return model_; }
 
 private:
-    glm::vec3 parseLineToVec3(std::string& line);
+    static glm::vec3 parseLineToVec3(std::string& line);
     void parseLineToFace(std::string& line);
 
 private:

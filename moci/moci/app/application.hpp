@@ -35,7 +35,7 @@ private:
     auto OnWindowClose(WindowCloseEvent& e) -> bool;
     auto OnWindowResize(WindowResizeEvent& e) -> bool;
 
-private:
+
     Scope<Window> m_Window;
     bool m_Running                                                          = true;
     bool m_Minimized                                                        = false;
@@ -43,7 +43,7 @@ private:
     float m_LastFrameTime                                                   = 0.0f;
     std::chrono::time_point<std::chrono::steady_clock> m_LastFrameTimepoint = {};
 
-private:
+
     static Application* s_Instance;
     friend auto ::main(int argc, char** argv) -> int;
 };

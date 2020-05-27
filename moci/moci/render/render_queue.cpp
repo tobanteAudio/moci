@@ -97,13 +97,13 @@ auto RenderQueue::DrawText(std::string text, glm::vec2 position, float scale, Co
 
 auto RenderQueue::FontInit(std::string const& fontPath) -> void
 {
-    FT_Library ft;
+    FT_Library ft = nullptr;
     if (FT_Init_FreeType(&ft) != 0)
     {
         MOCI_CORE_ERROR("freetype: Could not init FreeType Library");
     }
 
-    FT_Face face;
+    FT_Face face = nullptr;
     if (FT_New_Face(ft, fontPath.c_str(), 0, &face) != 0)
     {
         MOCI_CORE_ERROR("freetype: Failed to load font");

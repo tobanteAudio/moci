@@ -23,7 +23,7 @@ TEST_CASE("moci/render: OBJFileTeapot", "[render]")
     moci::OBJFile model("test_data/teapot.obj");
     REQUIRE(model.Parse() == true);
     REQUIRE(model.GetVertices().size() == 3644);
-    REQUIRE(model.GetNormals().size() == 0);
+    REQUIRE(model.GetNormals().empty());
     REQUIRE(model.GetVertexData().size() == 18960);
 }
 

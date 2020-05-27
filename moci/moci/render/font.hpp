@@ -36,7 +36,7 @@ public:
     [[nodiscard]] std::size_t GetNumCharacters() const noexcept { return characters_.size(); }
     [[nodiscard]] Character const& GetCharacter(char c) const noexcept { return (*characters_.find(c)).second; }
 
-    [[nodiscard]] std::uint32_t GetWidthForString(std::string const& str, float scale = 1.0f);
+    [[nodiscard]] std::uint32_t GetWidthForString(std::string const& text, float scale = 1.0f);
 
 private:
     std::string name_ {};

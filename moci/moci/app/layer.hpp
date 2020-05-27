@@ -15,7 +15,7 @@ class Layer
 public:
     using Ptr = Scope<Layer>;
 
-public:
+
     Layer(std::string name = "Layer");
     virtual ~Layer() = default;
 

@@ -36,7 +36,7 @@ bool DatagramSocket::Pimpl::Write(std::string const& host, int port, DatagramSoc
 bool DatagramSocket::Pimpl::Write(std::string const& host, int port, std::uint8_t const* const buffer, size_t numBytes)
 {
     // Creating socket file descriptor
-    int sockDescriptor;
+    int sockDescriptor = 0;
     if ((sockDescriptor = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
     {
         return false;
@@ -101,7 +101,7 @@ void DatagramSocket::Pimpl::Listen()
         isRunning_.store(true);
         while (isRunning_.load())
         {
-            unsigned int len;
+            unsigned int len = 0;
             auto const numBytesRecv = recvfrom(socketDescriptor_, buffer_.data(), maxMsgSize, MSG_WAITALL,
                                                reinterpret_cast<sockaddr*>(&cliaddr), &len);
 

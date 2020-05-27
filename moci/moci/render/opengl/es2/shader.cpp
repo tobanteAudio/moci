@@ -101,10 +101,10 @@ auto OpenGLESShader::createShader(const char* vertexSource, const char* fragment
 {
     constexpr auto INFO_LOG_LENGTH = 512;
     GLchar infoLog[INFO_LOG_LENGTH];
-    GLint success;
+    GLint success = 0;
 
     // Vertex shader
-    GLint vertex_shader;
+    GLint vertex_shader = 0;
     GLCall(vertex_shader = glCreateShader(GL_VERTEX_SHADER));
     GLCall(glShaderSource(vertex_shader, 1, &vertexSource, nullptr));
     GLCall(glCompileShader(vertex_shader));
@@ -116,7 +116,7 @@ auto OpenGLESShader::createShader(const char* vertexSource, const char* fragment
     }
 
     // Fragment shader
-    GLint fragment_shader;
+    GLint fragment_shader = 0;
     GLCall(fragment_shader = glCreateShader(GL_FRAGMENT_SHADER));
     GLCall(glShaderSource(fragment_shader, 1, &fragmentSource, nullptr));
     GLCall(glCompileShader(fragment_shader));
@@ -128,7 +128,7 @@ auto OpenGLESShader::createShader(const char* vertexSource, const char* fragment
     }
 
     // Link shaders
-    GLint shaderProgram;
+    GLint shaderProgram = 0;
     GLCall(shaderProgram = glCreateProgram());
     GLCall(glAttachShader(shaderProgram, vertex_shader));
     GLCall(glAttachShader(shaderProgram, fragment_shader));
@@ -178,49 +178,49 @@ void OpenGLESShader::SetMat3(std::string const& name, const glm::mat3& value) { 
 
 void OpenGLESShader::SetMat4(std::string const& name, const glm::mat4& value) { UploadUniformMat4(name, value); }
 
-void OpenGLESShader::UploadUniformInt(std::string const& name, int value)
+void OpenGLESShader::UploadUniformInt(std::string const& name, int value) const
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     GLCall(glUniform1i(location, value));
 }
 
-void OpenGLESShader::UploadUniformInts(std::string const& name, int count, int* values)
+void OpenGLESShader::UploadUniformInts(std::string const& name, int count, int* values) const
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     GLCall(glUniform1iv(location, count, values));
 }
 
-void OpenGLESShader::UploadUniformFloat(std::string const& name, float value)
+void OpenGLESShader::UploadUniformFloat(std::string const& name, float value) const
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     GLCall(glUniform1f(location, value));
 }
 
-void OpenGLESShader::UploadUniformFloat2(std::string const& name, const glm::vec2& value)
+void OpenGLESShader::UploadUniformFloat2(std::string const& name, const glm::vec2& value) const
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     GLCall(glUniform2f(location, value.x, value.y));
 }
 
-void OpenGLESShader::UploadUniformFloat3(std::string const& name, const glm::vec3& value)
+void OpenGLESShader::UploadUniformFloat3(std::string const& name, const glm::vec3& value) const
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     GLCall(glUniform3f(location, value.x, value.y, value.z));
 }
 
-void OpenGLESShader::UploadUniformFloat4(std::string const& name, const glm::vec4& value)
+void OpenGLESShader::UploadUniformFloat4(std::string const& name, const glm::vec4& value) const
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     GLCall(glUniform4f(location, value.x, value.y, value.z, value.w));
 }
 
-void OpenGLESShader::UploadUniformMat3(std::string const& name, const glm::mat3& matrix)
+void OpenGLESShader::UploadUniformMat3(std::string const& name, const glm::mat3& matrix) const
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     GLCall(glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix)));
 }
 
-void OpenGLESShader::UploadUniformMat4(std::string const& name, const glm::mat4& matrix)
+void OpenGLESShader::UploadUniformMat4(std::string const& name, const glm::mat4& matrix) const
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     GLCall(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix)));

@@ -121,7 +121,9 @@ Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
                 // }
 
                 if (mesh->HasTextureCoords(0))
+                {
                     vertex.texCoord = {mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y};
+                }
 
                 staticVertices_.push_back(vertex);
             }

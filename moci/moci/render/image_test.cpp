@@ -12,7 +12,7 @@ TEST_CASE("moci/render: ImageDefaultConstructor", "[render]")
     REQUIRE(img.GetWidth() == 0);
     REQUIRE(img.GetHeight() == 0);
     REQUIRE(img.Empty() == true);
-    REQUIRE(img.Data().size() == 0);
+    REQUIRE(img.Data().empty());
 }
 
 TEST_CASE("moci/render: ImagePathConstructor", "[render]")
@@ -44,5 +44,5 @@ TEST_CASE("moci/render: ImageLoadFromFileFail", "[render]")
     REQUIRE(img.GetHeight() == 0);
     REQUIRE(img.GetNumChannels() == 0);
     REQUIRE(img.Empty() == true);
-    REQUIRE(img.Data().size() == 0);
+    REQUIRE(img.Data().empty());
 }
