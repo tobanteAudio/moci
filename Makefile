@@ -47,7 +47,7 @@ tidy:
 
 .PHONY: coverage
 coverage:
-	cmake -S. -G"Unix Makefiles" $(CMAKE_FLAGS) -B $(BUILD_DIR_BASE)_coverage -DMOCI_ENABLE_COVERAGE=ON -DMOCI_API_OPENGL_LEGACY=ON
+	cmake -S. -G"Unix Makefiles" $(CMAKE_FLAGS) -B $(BUILD_DIR_BASE)_coverage -DMOCI_ENABLE_COVERAGE=ON -DMOCI_BUILD_LTO=OFF
 	cd $(BUILD_DIR_BASE)_coverage && make -j3
 	cd $(BUILD_DIR_BASE)_coverage && lcov -c -i -d . --base-directory . -o base_cov.info
 	cd $(BUILD_DIR_BASE)_coverage && ctest

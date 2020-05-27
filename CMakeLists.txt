@@ -83,8 +83,7 @@ include(MociThreading)
 
 # 3rd party libraries
 # assimp
-if(APPLE)
-else()
+if(NOT APPLE)
   set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared library")
 endif()
 
