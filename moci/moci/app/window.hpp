@@ -27,9 +27,7 @@ class Window
 public:
     using EventCallbackFn = std::function<void(Event&)>;
 
-
     static auto Create(const WindowProps& props = WindowProps()) -> Window*;
-
 
     virtual ~Window() = default;
 

@@ -114,7 +114,6 @@ private:
         }
     }
 
-
     Vector<BufferElement> m_Elements;
     uint32_t m_Stride = 0;
 };

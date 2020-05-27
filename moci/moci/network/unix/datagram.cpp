@@ -101,7 +101,7 @@ void DatagramSocket::Pimpl::Listen()
         isRunning_.store(true);
         while (isRunning_.load())
         {
-            unsigned int len = 0;
+            unsigned int len        = 0;
             auto const numBytesRecv = recvfrom(socketDescriptor_, buffer_.data(), maxMsgSize, MSG_WAITALL,
                                                reinterpret_cast<sockaddr*>(&cliaddr), &len);
 

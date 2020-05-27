@@ -35,14 +35,12 @@ private:
     auto OnWindowClose(WindowCloseEvent& e) -> bool;
     auto OnWindowResize(WindowResizeEvent& e) -> bool;
 
-
     Scope<Window> m_Window;
     bool m_Running                                                          = true;
     bool m_Minimized                                                        = false;
     LayerStack m_LayerStack                                                 = {};
     float m_LastFrameTime                                                   = 0.0f;
     std::chrono::time_point<std::chrono::steady_clock> m_LastFrameTimepoint = {};
-
 
     static Application* s_Instance;
     friend auto ::main(int argc, char** argv) -> int;

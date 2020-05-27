@@ -29,7 +29,6 @@ private:
     virtual auto GetMouseXImpl() -> float                          = 0;
     virtual auto GetMouseYImpl() -> float                          = 0;
 
-
     static Scope<Input> s_Instance;
 };
 }  // namespace moci

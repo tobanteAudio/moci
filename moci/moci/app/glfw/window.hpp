@@ -38,7 +38,6 @@ private:
     virtual void Init(const WindowProps& props);
     virtual void Shutdown();
 
-
     GLFWwindow* m_Window {};
     Scope<GraphicsContext> m_Context;
 

@@ -32,7 +32,6 @@ public:
         std::uint32_t circleCount {0};
     };
 
-
     RenderQueue();
     ~RenderQueue();
 
@@ -89,14 +88,12 @@ private:
         std::uint32_t Advance {};     // Offset to advance to next glyph
     };
 
-
     auto FontInit(std::string const& fontPath) -> void;
     auto BeginBatch() -> void;
     auto Flush() -> void;
     auto FlushIf(bool shouldFlush) -> void;
     auto EndBatch() -> void;
     auto ResetStats() -> void;
-
 
     RenderData data_ {};
     std::map<char, Character> characters_;

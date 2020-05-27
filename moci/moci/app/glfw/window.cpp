@@ -189,9 +189,10 @@ auto GlfwWindow::IsVSync() const -> bool { return m_Data.VSync; }
 
 void GlfwWindow::SetFullscreen(bool enabled)
 {
-    if (IsFullscreen() == enabled) { return;
-
-}
+    if (IsFullscreen() == enabled)
+    {
+        return;
+    }
     MOCI_CORE_INFO("Setting window fullscreen to {}", enabled);
 
     if (enabled)

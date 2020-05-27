@@ -32,7 +32,6 @@ public:
 private:
     constexpr static int numLEDs = 100;
 
-
     moci::Color color_ {};
 };
 
