@@ -4,7 +4,7 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci_application/layer_stack.hpp"
+#include "moci_render_api/moci_render_api.hpp"
 
 #include <iterator>
 #include <memory>

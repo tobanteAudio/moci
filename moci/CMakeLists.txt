@@ -352,6 +352,15 @@ set(moci_render_api_sources
     moci_render_api/render/texture.cpp
     moci_render_api/render/vertex_array.cpp
 
+    moci_render_api/layer/layer_stack.hpp
+    moci_render_api/layer/layer_stack.cpp
+    moci_render_api/layer/layer.hpp
+    moci_render_api/layer/layer.cpp
+
+    moci_render_api/imgui/imgui_build.cpp
+    moci_render_api/imgui/imgui_layer.hpp
+    moci_render_api/imgui/imgui_layer.cpp
+
 )
 
 add_library(moci_render_api_lib STATIC ${moci_render_api_sources})
@@ -359,23 +368,55 @@ add_library(Moci::RenderApi ALIAS moci_render_api_lib)
 target_link_libraries(moci_render_api_lib PUBLIC Moci::RenderOpenGL Moci::RenderOpenGLES Moci::Events Moci::ImGui)
 
 
-# set (moci_render_api_test_src
+set (moci_render_api_test_src
+    test_main.cpp
+    
+    moci_render_api/layer/layer_stack_test.cpp
+)
+add_executable(moci_render_api_tests ${moci_render_api_test_src})
+target_link_libraries(moci_render_api_tests PRIVATE Moci::RenderApi Catch2::Catch2)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_api_test_src})
+catch_discover_tests(moci_render_api_tests)
+
+
+
+
+
+
+# APPLICATION
+set(moci_application_sources
+    moci_application/application.hpp
+    moci_application/application.cpp
+    moci_application/entry_point.hpp
+    moci_application/window.hpp
+    moci_application/window.cpp
+    
+    moci_application/glfw/input.hpp
+    moci_application/glfw/input.cpp
+    moci_application/glfw/window.hpp
+    moci_application/glfw/window.cpp
+)
+
+add_library(moci_application_lib STATIC ${moci_application_sources})
+add_library(Moci::Application ALIAS moci_application_lib)
+target_link_libraries(moci_application_lib PUBLIC Moci::RenderApi)
+
+
+# set (moci_application_test_src
 #     test_main.cpp
     
-#     moci_render_api/layer_stack_test.cpp
+#     moci_application/layer_stack_test.cpp
 # )
-# add_executable(moci_render_api_tests ${moci_render_api_test_src})
-# target_link_libraries(moci_render_api_tests PRIVATE Moci::RenderApi Catch2::Catch2)
-# source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_api_test_src})
-# catch_discover_tests(moci_render_api_tests)
+# add_executable(moci_application_tests ${moci_application_test_src})
+# target_link_libraries(moci_application_tests PRIVATE Moci::Application Catch2::Catch2)
+# source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_application_test_src})
+# catch_discover_tests(moci_application_tests)
 
 
 
 # GRAPHICS 
 set(moci_graphics_sources
-    moci_graphics/imgui/imgui_build.cpp
-    moci_graphics/imgui/imgui_layer.hpp
-    moci_graphics/imgui/imgui_layer.cpp
+
         
     moci_graphics/camera.hpp
     moci_graphics/camera.cpp
@@ -404,7 +445,7 @@ add_library(moci_graphics_lib STATIC ${moci_graphics_sources})
 add_library(Moci::Graphics ALIAS moci_graphics_lib)
 target_link_libraries(moci_graphics_lib 
     PUBLIC 
-        Moci::RenderApi 
+        Moci::Application 
         assimp::assimp
 )
 
@@ -425,40 +466,6 @@ target_link_libraries(moci_graphics_tests PRIVATE Moci::Graphics Catch2::Catch2)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_graphics_test_src})
 catch_discover_tests(moci_graphics_tests)
 
-
-
-# APPLICATION
-set(moci_application_sources
-    moci_application/application.hpp
-    moci_application/application.cpp
-    moci_application/entry_point.hpp
-    moci_application/layer_stack.hpp
-    moci_application/layer_stack.cpp
-    moci_application/layer.hpp
-    moci_application/layer.cpp
-    moci_application/window.hpp
-    moci_application/window.cpp
-    
-    moci_application/glfw/input.hpp
-    moci_application/glfw/input.cpp
-    moci_application/glfw/window.hpp
-    moci_application/glfw/window.cpp
-)
-
-add_library(moci_application_lib STATIC ${moci_application_sources})
-add_library(Moci::Application ALIAS moci_application_lib)
-target_link_libraries(moci_application_lib PUBLIC Moci::Graphics)
-
-
-set (moci_application_test_src
-    test_main.cpp
-    
-    moci_application/layer_stack_test.cpp
-)
-add_executable(moci_application_tests ${moci_application_test_src})
-target_link_libraries(moci_application_tests PRIVATE Moci::Application Catch2::Catch2)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_application_test_src})
-catch_discover_tests(moci_application_tests)
 
 # ORIGINAL
 set(moci_sources
