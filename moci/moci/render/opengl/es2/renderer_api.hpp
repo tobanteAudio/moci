@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci/render/renderer_api.hpp"
+#include "moci_graphics_api_base/moci_graphics_api_base.hpp"
 
 #include <glm/glm.hpp>
 
