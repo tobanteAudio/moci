@@ -1,9 +1,9 @@
-#include "moci/render/opengl/gl4/renderer_api.hpp"
+#include "moci_render_opengl/renderer_api.hpp"
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "moci/render/opengl/gl4/gl4.hpp"
 #include "moci_core/benchmark/profile.hpp"
+#include "moci_render_opengl/gl4.hpp"
 
 namespace moci
 {

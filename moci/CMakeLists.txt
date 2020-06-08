@@ -263,6 +263,81 @@ endforeach()
 
 
 
+
+
+# GRAPHICS API OPENGL
+set(moci_render_opengl_sources
+    moci_render_opengl/moci_render_opengl.hpp
+    moci_render_opengl/buffer.hpp
+    moci_render_opengl/buffer.cpp
+    moci_render_opengl/graphics_context.hpp
+    moci_render_opengl/graphics_context.cpp
+    moci_render_opengl/gl4.hpp
+    moci_render_opengl/gl4.cpp
+    moci_render_opengl/renderer_api.hpp
+    moci_render_opengl/renderer_api.cpp
+    moci_render_opengl/shader.hpp
+    moci_render_opengl/shader.cpp
+    moci_render_opengl/texture.hpp
+    moci_render_opengl/texture.cpp
+    moci_render_opengl/vertex_array.hpp
+    moci_render_opengl/vertex_array.cpp
+
+)
+
+add_library(moci_render_opengl_lib STATIC ${moci_render_opengl_sources})
+add_library(Moci::GraphicsApiOpenGL ALIAS moci_render_opengl_lib)
+target_link_libraries(moci_render_opengl_lib 
+    PUBLIC 
+        Moci::GraphicsApiBase
+        Moci::StbImage
+        Moci::StbImageWrite
+        Moci::StbImageResize
+        freetype
+        glfw 
+        ${GLFW_LIBRARIES}
+)
+
+if (${MOCI_API_OPENGL_MODERN})
+    target_compile_definitions(moci_render_opengl_lib PUBLIC MOCI_API_OPENGL_MODERN=1)
+endif()
+
+if (${MOCI_API_OPENGL_LEGACY})
+    target_compile_definitions(moci_render_opengl_lib PUBLIC MOCI_API_OPENGL_LEGACY=1)
+endif()
+
+if (${MOCI_API_OPENGL_ES})
+    # old
+    # target_link_libraries(moci_render_opengl_lib PUBLIC -lGLESv2)
+    # raspberry pi 3
+    target_link_libraries(moci_render_opengl_lib PUBLIC /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2)
+    # desktop linux
+    # target_link_libraries(moci_render_opengl_lib PUBLIC /usr/lib/x86_64-linux-gnu/libGLESv2.so)
+    
+    target_compile_definitions(moci_render_opengl_lib PUBLIC MOCI_API_OPENGL_ES=1)
+else()
+    target_link_libraries(moci_render_opengl_lib PUBLIC libglew_static)
+endif()
+
+
+foreach(source IN LISTS moci_sources)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+endforeach()
+
+# set (moci_render_opengl_test_src
+#     test_main.cpp
+
+#     moci_render_opengl/render/buffer_test.cpp
+# )
+# add_executable(moci_render_opengl_tests ${moci_render_opengl_test_src})
+# target_link_libraries(moci_render_opengl_tests PRIVATE Moci::GraphicsApiOpenGL Catch2::Catch2)
+# source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_opengl_test_src})
+# catch_discover_tests(moci_render_opengl_tests)
+
+
+
 # ORIGINAL
 set(moci_sources
     moci/moci.hpp
@@ -327,23 +402,6 @@ set(moci_sources
     moci/render/obj/file.hpp
     moci/render/obj/file.cpp
 
-    moci/render/opengl/gl4/buffer.hpp
-    moci/render/opengl/gl4/buffer.cpp
-    moci/render/opengl/gl4/graphics_context.hpp
-    moci/render/opengl/gl4/graphics_context.cpp
-    moci/render/opengl/gl4/gl4.hpp
-    moci/render/opengl/gl4/gl4.cpp
-    moci/render/opengl/gl4/renderer_api.hpp
-    moci/render/opengl/gl4/renderer_api.cpp
-    moci/render/opengl/gl4/shader.hpp
-    moci/render/opengl/gl4/shader.cpp
-    moci/render/opengl/gl4/texture.hpp
-    moci/render/opengl/gl4/texture.cpp
-    moci/render/opengl/gl4/vertex_array.hpp
-    moci/render/opengl/gl4/vertex_array.cpp
-
-
-
     moci/ui/component_layer.hpp
     moci/ui/component_layer.cpp
     moci/ui/component.hpp
@@ -378,6 +436,7 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Math
         Moci::Network
         Moci::System
+        Moci::GraphicsApiOpenGL
         Moci::GraphicsApiOpenGLES
         Moci::ImGui
         assimp::assimp
