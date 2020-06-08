@@ -1,9 +1,7 @@
 #include "moci_graphics/camera.hpp"
 
 #include "moci_core/core/preprocessor.hpp"
-
-#include "moci/app/input.hpp"
-#include "moci/app/key_codes.hpp"
+#include "moci_events/moci_events.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
 

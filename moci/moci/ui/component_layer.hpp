@@ -1,8 +1,7 @@
 #pragma once
 
-#include "moci/app/events/application_event.hpp"
-#include "moci/app/events/mouse_event.hpp"
-#include "moci/app/input.hpp"
+#include "moci_events/moci_events.hpp"
+
 #include "moci/app/layer.hpp"
 #include "moci/ui/component.hpp"
 #include "moci/ui/style.hpp"

@@ -1,9 +1,6 @@
 #pragma once
 
-#include "moci/app/events/application_event.hpp"
-#include "moci/app/events/key_event.hpp"
-#include "moci/app/events/mouse_event.hpp"
-#include "moci/app/timestep.hpp"
+#include "moci_events/moci_events.hpp"
 
 #include "glm/glm.hpp"
 

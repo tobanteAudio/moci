@@ -134,6 +134,42 @@ catch_discover_tests(moci_system_tests)
 
 
 
+
+
+# EVENTS
+set(moci_events_sources
+    moci_events/events/application_event.hpp
+    moci_events/events/event.hpp
+    moci_events/events/key_event.hpp
+    moci_events/events/mouse_event.hpp
+    moci_events/input.hpp
+    moci_events/input.cpp
+    moci_events/key_codes.hpp
+    moci_events/mouse_button_codes.hpp
+    moci_events/timestep.hpp
+)
+
+add_library(moci_events_lib STATIC ${moci_events_sources})
+add_library(Moci::Events ALIAS moci_events_lib)
+target_link_libraries(moci_events_lib PUBLIC Moci::Core glm::glm)
+
+
+set (moci_events_test_src
+    test_main.cpp
+    
+    moci_events/events/application_event_test.cpp
+    moci_events/events/key_event_test.cpp
+    moci_events/events/mouse_event_test.cpp
+)
+add_executable(moci_events_tests ${moci_events_test_src})
+target_link_libraries(moci_events_tests PRIVATE Moci::Events Catch2::Catch2)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_events_test_src})
+catch_discover_tests(moci_events_tests)
+
+
+
+
+
 # GRAPHICS API BASE
 set(moci_render_base_sources
     moci_render_base/render/api.hpp
@@ -344,7 +380,8 @@ add_library(Moci::Graphics ALIAS moci_graphics_lib)
 target_link_libraries(moci_graphics_lib 
     PUBLIC 
         Moci::RenderOpenGL 
-        Moci::RenderOpenGLES         
+        Moci::RenderOpenGLES  
+        Moci::Events       
         Moci::ImGui
 
         assimp::assimp
@@ -376,19 +413,10 @@ set(moci_sources
     moci/app/application.hpp
     moci/app/application.cpp
     moci/app/entry_point.hpp
-    moci/app/events/application_event.hpp
-    moci/app/events/event.hpp
-    moci/app/events/key_event.hpp
-    moci/app/events/mouse_event.hpp
-    moci/app/input.hpp
-    moci/app/input.cpp
-    moci/app/key_codes.hpp
     moci/app/layer_stack.hpp
     moci/app/layer_stack.cpp
     moci/app/layer.hpp
     moci/app/layer.cpp
-    moci/app/mouse_button_codes.hpp
-    moci/app/timestep.hpp
     moci/app/window.hpp
     moci/app/window.cpp
     
@@ -438,9 +466,6 @@ set (moci_test_src
     test_main.cpp
 
     moci/app/layer_stack_test.cpp
-    moci/app/events/application_event_test.cpp
-    moci/app/events/key_event_test.cpp
-    moci/app/events/mouse_event_test.cpp
 
     moci/ui/component_test.cpp
     moci/ui/widgets_test.cpp

@@ -4,11 +4,11 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/app/events/key_event.hpp"
+#include "moci_events/events/key_event.hpp"
 
 using Catch::Matchers::Contains;
 
-TEST_CASE("moci/app/events: KeyPressedEvent", "[app][events]")
+TEST_CASE("moci_events/events: KeyPressedEvent", "[app][events]")
 {
     auto const event = moci::KeyPressedEvent(1, 1);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyPressed);
@@ -23,7 +23,7 @@ TEST_CASE("moci/app/events: KeyPressedEvent", "[app][events]")
     REQUIRE_THAT(event.ToString(), Contains("KeyPressed"));
 }
 
-TEST_CASE("moci/app/events: KeyReleasedEvent", "[app][events]")
+TEST_CASE("moci_events/events: KeyReleasedEvent", "[app][events]")
 {
     auto const event = moci::KeyReleasedEvent(1);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyReleased);
@@ -37,7 +37,7 @@ TEST_CASE("moci/app/events: KeyReleasedEvent", "[app][events]")
     REQUIRE_THAT(event.ToString(), Contains("KeyReleased"));
 }
 
-TEST_CASE("moci/app/events: KeyTypedEvent", "[app][events]")
+TEST_CASE("moci_events/events: KeyTypedEvent", "[app][events]")
 {
     auto const event = moci::KeyTypedEvent(1);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyTyped);

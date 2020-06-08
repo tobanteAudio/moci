@@ -2,11 +2,8 @@
 
 #include "moci_core/benchmark/profile.hpp"
 #include "moci_core/core/logging.hpp"
+#include "moci_events/moci_events.hpp"
 #include "moci_graphics/renderer.hpp"
-
-#include "moci/app/events/key_event.hpp"
-#include "moci/app/events/mouse_event.hpp"
-#include "moci/app/key_codes.hpp"
 
 namespace moci
 {
