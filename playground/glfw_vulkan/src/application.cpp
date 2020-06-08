@@ -57,7 +57,7 @@ void Application::Run()
         VULKAN_CALL(vkAcquireNextImageKHR(device, swapChain, std::numeric_limits<uint64_t>::max(),
                                           semaphoreImageAvailable, VK_NULL_HANDLE, &imageIndex));
 
-        auto waitStageMask = std::array<VkPipelineStageFlags, 1> {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
+        auto waitStageMask = std::array {VkPipelineStageFlags {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT}};
         auto submitInfo    = VkSubmitInfo {};
         submitInfo.sType   = VK_STRUCTURE_TYPE_SUBMIT_INFO;
         submitInfo.pNext   = nullptr;
