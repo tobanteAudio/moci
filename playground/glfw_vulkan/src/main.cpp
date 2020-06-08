@@ -134,7 +134,19 @@ public:
 
         destroySwapChain();
 
-        auto const oldSwapChain = swapChain;
+        auto* const oldSwapChain = swapChain;
+
+        auto surfaceCapabilities = VkSurfaceCapabilitiesKHR {};
+        vkGetPhysicalDeviceSurfaceCapabilitiesKHR(physicalDevices[0], surface, &surfaceCapabilities);
+
+        if (width > surfaceCapabilities.maxImageExtent.width)
+        {
+            width = surfaceCapabilities.maxImageExtent.width;
+        }
+        if (height > surfaceCapabilities.maxImageExtent.height)
+        {
+            height = surfaceCapabilities.maxImageExtent.height;
+        }
 
         createSwapChain();
         createImageViews();
@@ -160,11 +172,11 @@ private:
             vkDestroyFramebuffer(device, framebuffer, nullptr);
         }
 
-        vkDestroyPipeline(device, pipeline, nullptr);
+        // vkDestroyPipeline(device, pipeline, nullptr);
         vkDestroyRenderPass(device, renderPass, nullptr);
-        vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
-        vkDestroyShaderModule(device, vertexShaderModule, nullptr);
-        vkDestroyShaderModule(device, fragmentShaderModule, nullptr);
+        // vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
+        // vkDestroyShaderModule(device, vertexShaderModule, nullptr);
+        // vkDestroyShaderModule(device, fragmentShaderModule, nullptr);
 
         for (auto const& imageView : imageViews)
         {
@@ -190,12 +202,7 @@ private:
 
         glfwSetWindowUserPointer(window, this);
         glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int width, int height) {
-            auto& data               = *static_cast<Application*>(glfwGetWindowUserPointer(window));
-            auto surfaceCapabilities = VkSurfaceCapabilitiesKHR {};
-            vkGetPhysicalDeviceSurfaceCapabilitiesKHR(data.physicalDevices[0], data.surface, &surfaceCapabilities);
-
-            if (width > surfaceCapabilities.maxImageExtent.width) width = surfaceCapabilities.maxImageExtent.width;
-            if (height > surfaceCapabilities.maxImageExtent.height) height = surfaceCapabilities.maxImageExtent.height;
+            auto& data = *static_cast<Application*>(glfwGetWindowUserPointer(window));
 
             if (width == 0 || height == 0) return;
 
@@ -556,6 +563,18 @@ private:
         colorBlendInfo.blendConstants[2] = 0.0f;
         colorBlendInfo.blendConstants[3] = 0.0f;
 
+        auto const dynamicStates = std::vector<VkDynamicState> {
+            VK_DYNAMIC_STATE_SCISSOR,
+            VK_DYNAMIC_STATE_VIEWPORT,
+        };
+
+        auto dynamicStateInfo              = VkPipelineDynamicStateCreateInfo {};
+        dynamicStateInfo.sType             = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+        dynamicStateInfo.pNext             = nullptr;
+        dynamicStateInfo.flags             = 0;
+        dynamicStateInfo.dynamicStateCount = dynamicStates.size();
+        dynamicStateInfo.pDynamicStates    = dynamicStates.data();
+
         auto pipelineLayoutInfo                   = VkPipelineLayoutCreateInfo {};
         pipelineLayoutInfo.sType                  = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
         pipelineLayoutInfo.pNext                  = nullptr;
@@ -581,7 +600,7 @@ private:
         pipelineInfo.pMultisampleState   = &multisampleInfo;
         pipelineInfo.pDepthStencilState  = nullptr;
         pipelineInfo.pColorBlendState    = &colorBlendInfo;
-        pipelineInfo.pDynamicState       = nullptr;
+        pipelineInfo.pDynamicState       = &dynamicStateInfo;
         pipelineInfo.layout              = pipelineLayout;
         pipelineInfo.renderPass          = renderPass;
         pipelineInfo.subpass             = 0;
@@ -669,6 +688,21 @@ private:
 
             vkCmdBeginRenderPass(commandBuffer, &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
             vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
+
+            auto viewport     = VkViewport {};
+            viewport.x        = 0.0f;
+            viewport.y        = 0.0f;
+            viewport.width    = windowData_.width;
+            viewport.height   = windowData_.height;
+            viewport.minDepth = 0.0f;
+            viewport.maxDepth = 1.0f;
+            vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
+
+            auto scissor   = VkRect2D {};
+            scissor.offset = {0, 0};
+            scissor.extent = {static_cast<uint32_t>(windowData_.width), static_cast<uint32_t>(windowData_.height)};
+            vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
+
             vkCmdDraw(commandBuffer, 3, 1, 0, 0);
             vkCmdEndRenderPass(commandBuffer);
 
