@@ -15,10 +15,8 @@
 #endif
 
 // glew is not needed for opengl es 2.0 or on macOS
-#if defined(MOCI_API_OPENGL_ES)
-#else
-#if defined(MOCI_MAC)
-#else
+#if not defined(MOCI_API_OPENGL_ES)
+#if not defined(MOCI_MAC)
 #include <GL/glew.h>
 #endif
 #endif
