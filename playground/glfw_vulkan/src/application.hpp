@@ -195,16 +195,16 @@ private:
         shaderStages[0] = vertexShaderStageInfo;
         shaderStages[1] = fragmentShaderStageInfo;
 
-        auto vertexBindingDescription   = th::GetVertexBindingDescription();
-        auto vertexAttributeDescription = th::GetVertexAttributeDescription();
+        vertexBufferBindDesc_      = th::GetVertexBindingDescription();
+        vertexBufferAttributeDesc_ = th::GetVertexAttributeDescription();
 
         vertexInputInfo.sType                           = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
         vertexInputInfo.pNext                           = nullptr;
         vertexInputInfo.flags                           = 0;
         vertexInputInfo.vertexBindingDescriptionCount   = 1;
-        vertexInputInfo.pVertexBindingDescriptions      = &vertexBindingDescription;
-        vertexInputInfo.vertexAttributeDescriptionCount = vertexAttributeDescription.size();
-        vertexInputInfo.pVertexAttributeDescriptions    = vertexAttributeDescription.data();
+        vertexInputInfo.pVertexBindingDescriptions      = &vertexBufferBindDesc_;
+        vertexInputInfo.vertexAttributeDescriptionCount = vertexBufferAttributeDesc_.size();
+        vertexInputInfo.pVertexAttributeDescriptions    = vertexBufferAttributeDesc_.data();
 
         inputAssemnblyInfo.sType                  = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
         inputAssemnblyInfo.pNext                  = nullptr;
@@ -680,8 +680,8 @@ private:
 public:
     struct WindowData
     {
-        int width               = 0;
-        int height              = 0;
+        int width               = DEFAULT_WIDTH;
+        int height              = DEFAULT_HEIGHT;
         bool framebufferResized = false;
     };
 
@@ -689,30 +689,32 @@ public:
     std::vector<VkPhysicalDevice> physicalDevices = {};
 
 private:
-    GLFWwindow* window                                          = nullptr;
-    VkSurfaceKHR surface                                        = VK_NULL_HANDLE;
-    VkApplicationInfo appInfo                                   = {};
-    VkInstance instance                                         = VK_NULL_HANDLE;
-    uint32_t queueFamilyIdx                                     = UINT32_MAX;
-    VkDevice device                                             = VK_NULL_HANDLE;
-    VkQueue queue                                               = {};
-    std::vector<VkImage> swapChainImages                        = {};
-    VkSwapchainKHR swapChain                                    = VK_NULL_HANDLE;
-    std::vector<VkImageView> imageViews                         = {};
-    VkRenderPass renderPass                                     = VK_NULL_HANDLE;
-    VkPipeline pipeline                                         = VK_NULL_HANDLE;
-    std::vector<VkFramebuffer> framebuffers                     = {};
-    VkCommandPool commandPool                                   = VK_NULL_HANDLE;
-    std::vector<VkCommandBuffer> commandBuffers                 = {};
-    VkPipelineLayout pipelineLayout                             = VK_NULL_HANDLE;
-    VkSemaphore semaphoreImageAvailable                         = VK_NULL_HANDLE;
-    VkSemaphore semaphoreRenderDone                             = VK_NULL_HANDLE;
-    VkShaderModule vertexShaderModule                           = VK_NULL_HANDLE;
-    VkShaderModule fragmentShaderModule                         = VK_NULL_HANDLE;
-    VkPipelineVertexInputStateCreateInfo vertexInputInfo        = {};
-    VkPipelineInputAssemblyStateCreateInfo inputAssemnblyInfo   = {};
-    std::array<VkPipelineShaderStageCreateInfo, 2> shaderStages = {};
-    VkBuffer vertexBuffer_                                      = VK_NULL_HANDLE;
-    VkDeviceMemory vertexBufferMemory_                          = VK_NULL_HANDLE;
+    GLFWwindow* window                                                        = nullptr;
+    VkSurfaceKHR surface                                                      = VK_NULL_HANDLE;
+    VkApplicationInfo appInfo                                                 = {};
+    VkInstance instance                                                       = VK_NULL_HANDLE;
+    uint32_t queueFamilyIdx                                                   = UINT32_MAX;
+    VkDevice device                                                           = VK_NULL_HANDLE;
+    VkQueue queue                                                             = {};
+    std::vector<VkImage> swapChainImages                                      = {};
+    VkSwapchainKHR swapChain                                                  = VK_NULL_HANDLE;
+    std::vector<VkImageView> imageViews                                       = {};
+    VkRenderPass renderPass                                                   = VK_NULL_HANDLE;
+    VkPipeline pipeline                                                       = VK_NULL_HANDLE;
+    std::vector<VkFramebuffer> framebuffers                                   = {};
+    VkCommandPool commandPool                                                 = VK_NULL_HANDLE;
+    std::vector<VkCommandBuffer> commandBuffers                               = {};
+    VkPipelineLayout pipelineLayout                                           = VK_NULL_HANDLE;
+    VkSemaphore semaphoreImageAvailable                                       = VK_NULL_HANDLE;
+    VkSemaphore semaphoreRenderDone                                           = VK_NULL_HANDLE;
+    VkShaderModule vertexShaderModule                                         = VK_NULL_HANDLE;
+    VkShaderModule fragmentShaderModule                                       = VK_NULL_HANDLE;
+    VkPipelineVertexInputStateCreateInfo vertexInputInfo                      = {};
+    VkPipelineInputAssemblyStateCreateInfo inputAssemnblyInfo                 = {};
+    std::array<VkPipelineShaderStageCreateInfo, 2> shaderStages               = {};
+    VkBuffer vertexBuffer_                                                    = VK_NULL_HANDLE;
+    VkDeviceMemory vertexBufferMemory_                                        = VK_NULL_HANDLE;
+    VkVertexInputBindingDescription vertexBufferBindDesc_                     = {};
+    std::vector<VkVertexInputAttributeDescription> vertexBufferAttributeDesc_ = {};
 };
 }  // namespace th

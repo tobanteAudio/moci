@@ -82,15 +82,15 @@ void Application::Run()
         presentInfo.pResults           = nullptr;
 
         auto result = vkQueuePresentKHR(queue, &presentInfo);
-        // if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || windowData_.framebufferResized)
-        // {
-        //     windowData_.framebufferResized = false;
-        //     RecreateSwapChain();
-        // }
-        // else if (result != VK_SUCCESS)
-        // {
-        //     throw std::runtime_error("failed to present swap chain image!");
-        // }
+        if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || windowData_.framebufferResized)
+        {
+            windowData_.framebufferResized = false;
+            RecreateSwapChain();
+        }
+        else if (result != VK_SUCCESS)
+        {
+            throw std::runtime_error("failed to present swap chain image!");
+        }
     }
 }
 void Application::Shutdown()
