@@ -4,7 +4,7 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/app/layer_stack.hpp"
+#include "moci_application/layer_stack.hpp"
 
 #include <iterator>
 #include <memory>
@@ -21,19 +21,19 @@ public:
 };
 }  // namespace
 
-TEST_CASE("moci/app: Layer", "[app]")
+TEST_CASE("moci_application: Layer", "[app]")
 {
     moci::Scope<moci::Layer> layer(new TestLayer("test"));
     REQUIRE(layer->GetName() == "test");
 }
 
-TEST_CASE("moci/app: LayerStackConstructor", "[app]")
+TEST_CASE("moci_application: LayerStackConstructor", "[app]")
 {
     auto stack = moci::LayerStack();
     REQUIRE(std::distance(stack.begin(), stack.end()) == 0);
 }
 
-TEST_CASE("moci/app: LayerStackPushLayer", "[app]")
+TEST_CASE("moci_application: LayerStackPushLayer", "[app]")
 {
     auto stack = moci::LayerStack();
     REQUIRE(stack.begin() == stack.end());

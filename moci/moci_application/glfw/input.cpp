@@ -2,8 +2,15 @@
 
 #include <cmath>
 
-#include "moci/app/application.hpp"
-#include "moci_render_opengles/moci_render_opengles.hpp"
+#include "moci_application/application.hpp"
+// glew is not needed for opengl es 2.0 or on macOS
+#if not defined(MOCI_API_OPENGL_ES)
+#if not defined(MOCI_MAC)
+#include <GL/glew.h>
+#endif
+#endif
+
+#include <GLFW/glfw3.h>
 
 namespace moci
 {

@@ -170,6 +170,8 @@ catch_discover_tests(moci_events_tests)
 
 
 
+
+
 # RENDER BASE
 set(moci_render_base_sources
     moci_render_base/render/api.hpp
@@ -184,7 +186,7 @@ set(moci_render_base_sources
 )
 
 add_library(moci_render_base_lib STATIC ${moci_render_base_sources})
-add_library(Moci::GraphicsApiBase ALIAS moci_render_base_lib)
+add_library(Moci::RenderApiBase ALIAS moci_render_base_lib)
 target_link_libraries(moci_render_base_lib PUBLIC Moci::Math)
 
 
@@ -194,7 +196,7 @@ set (moci_render_base_test_src
     moci_render_base/render/buffer_test.cpp
 )
 add_executable(moci_render_base_tests ${moci_render_base_test_src})
-target_link_libraries(moci_render_base_tests PRIVATE Moci::GraphicsApiBase Catch2::Catch2)
+target_link_libraries(moci_render_base_tests PRIVATE Moci::RenderApiBase Catch2::Catch2)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_base_test_src})
 catch_discover_tests(moci_render_base_tests)
 
@@ -225,7 +227,7 @@ add_library(moci_render_opengles_lib STATIC ${moci_render_opengles_sources})
 add_library(Moci::RenderOpenGLES ALIAS moci_render_opengles_lib)
 target_link_libraries(moci_render_opengles_lib 
     PUBLIC 
-        Moci::GraphicsApiBase
+        Moci::RenderApiBase
         Moci::StbImage
         Moci::StbImageWrite
         Moci::StbImageResize
@@ -295,7 +297,7 @@ add_library(moci_render_opengl_lib STATIC ${moci_render_opengl_sources})
 add_library(Moci::RenderOpenGL ALIAS moci_render_opengl_lib)
 target_link_libraries(moci_render_opengl_lib 
     PUBLIC 
-        Moci::GraphicsApiBase
+        Moci::RenderApiBase
         Moci::StbImage
         Moci::StbImageWrite
         Moci::StbImageResize
@@ -405,29 +407,45 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_graphics_test_src})
 catch_discover_tests(moci_graphics_tests)
 
 
+
+# APPLICATION
+set(moci_application_sources
+    moci_application/application.hpp
+    moci_application/application.cpp
+    moci_application/entry_point.hpp
+    moci_application/layer_stack.hpp
+    moci_application/layer_stack.cpp
+    moci_application/layer.hpp
+    moci_application/layer.cpp
+    moci_application/window.hpp
+    moci_application/window.cpp
+    
+    moci_application/glfw/input.hpp
+    moci_application/glfw/input.cpp
+    moci_application/glfw/window.hpp
+    moci_application/glfw/window.cpp
+)
+
+add_library(moci_application_lib STATIC ${moci_application_sources})
+add_library(Moci::Application ALIAS moci_application_lib)
+target_link_libraries(moci_application_lib PUBLIC Moci::Graphics)
+
+
+set (moci_application_test_src
+    test_main.cpp
+    
+    moci_application/layer_stack_test.cpp
+)
+add_executable(moci_application_tests ${moci_application_test_src})
+target_link_libraries(moci_application_tests PRIVATE Moci::Application Catch2::Catch2)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_application_test_src})
+catch_discover_tests(moci_application_tests)
+
 # ORIGINAL
 set(moci_sources
     moci/moci.hpp
     moci/moci.cpp
     
-    moci/app/application.hpp
-    moci/app/application.cpp
-    moci/app/entry_point.hpp
-    moci/app/layer_stack.hpp
-    moci/app/layer_stack.cpp
-    moci/app/layer.hpp
-    moci/app/layer.cpp
-    moci/app/window.hpp
-    moci/app/window.cpp
-    
-    moci/app/glfw/input.hpp
-    moci/app/glfw/input.cpp
-    moci/app/glfw/window.hpp
-    moci/app/glfw/window.cpp
-
-
-  
-
     moci/ui/component_layer.hpp
     moci/ui/component_layer.cpp
     moci/ui/component.hpp
@@ -435,9 +453,7 @@ set(moci_sources
     moci/ui/style.hpp
     moci/ui/style.cpp
     moci/ui/widgets.hpp
-    moci/ui/widgets.cpp
-
-    
+    moci/ui/widgets.cpp   
 )
 
 add_library(${PROJECT_NAME} STATIC ${moci_sources})
@@ -458,14 +474,13 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Network
         Moci::System
         Moci::Graphics
+        Moci::Application
 )
 
 
 # tests
 set (moci_test_src
     test_main.cpp
-
-    moci/app/layer_stack_test.cpp
 
     moci/ui/component_test.cpp
     moci/ui/widgets_test.cpp

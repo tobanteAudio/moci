@@ -1,9 +1,17 @@
 #pragma once
 
-#include "moci/app/window.hpp"
+#include "moci_application/window.hpp"
 
 #include "moci_render_base/moci_render_base.hpp"
-#include "moci_render_opengles/moci_render_opengles.hpp"
+
+// glew is not needed for opengl es 2.0 or on macOS
+#if not defined(MOCI_API_OPENGL_ES)
+#if not defined(MOCI_MAC)
+#include <GL/glew.h>
+#endif
+#endif
+
+#include <GLFW/glfw3.h>
 
 #include <array>
 #include <memory>
