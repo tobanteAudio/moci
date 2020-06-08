@@ -1,7 +1,3 @@
-branches:
-  only:
-    - master
-
 language: cpp
 
 script-anchors:
@@ -22,6 +18,9 @@ matrix:
 
     - os: linux
       dist: bionic
+      branches:
+        only:
+          - master
       addons:
         apt:
           packages:
