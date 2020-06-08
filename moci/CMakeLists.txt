@@ -37,7 +37,18 @@ foreach(source IN LISTS moci_sources)
     source_group("${source_path_msvc}" FILES "${source}")
 endforeach()
 
-
+set (moci_core_test_src
+    test_main.cpp
+    
+    moci_core/core/algorithm_test.cpp
+    moci_core/core/property_map_test.cpp
+    moci_core/core/scope_guard_test.cpp
+    moci_core/core/strings_test.cpp
+)
+add_executable(moci_core_tests ${moci_core_test_src})
+target_link_libraries(moci_core_tests PRIVATE Moci::Core Catch2::Catch2)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_core_test_src})
+catch_discover_tests(moci_core_tests)
 
 set(moci_sources
     moci/moci.hpp
@@ -233,11 +244,6 @@ endif()
 # tests
 set (moci_test_src
     test_main.cpp
-    
-    moci_core/core/algorithm_test.cpp
-    moci_core/core/property_map_test.cpp
-    moci_core/core/scope_guard_test.cpp
-    moci_core/core/strings_test.cpp
 
     moci/app/layer_stack_test.cpp
     moci/app/events/application_event_test.cpp

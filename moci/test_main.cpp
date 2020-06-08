@@ -6,7 +6,7 @@
 #define CATCH_CONFIG_RUNNER
 #include "catch2/catch.hpp"
 
-#include "moci/moci.hpp"
+#include "moci_core/moci_core.hpp"
 
 int main(int argc, char* argv[])
 {
