@@ -8,6 +8,7 @@ script-anchors:
   - &script-documentation
     - cd $TRAVIS_BUILD_DIR
     - make docs
+    - cp -r .circleci $TRAVIS_BUILD_DIR/docs/documentation/html/
 
   - &script-macOS
     - brew install ninja
