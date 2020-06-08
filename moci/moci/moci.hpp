@@ -2,6 +2,8 @@
 
 #include "moci_core/moci_core.hpp"
 
+#include "moci_math/moci_math.hpp"
+
 #include "moci/app/application.hpp"
 #include "moci/app/input.hpp"
 #include "moci/app/key_codes.hpp"
@@ -14,10 +16,6 @@
 #include "moci/app/events/application_event.hpp"
 #include "moci/app/events/key_event.hpp"
 #include "moci/app/events/mouse_event.hpp"
-
-#include "moci/geometry/line.hpp"
-#include "moci/geometry/point.hpp"
-#include "moci/geometry/rectangle.hpp"
 
 #include "moci/network/datagram.hpp"
 

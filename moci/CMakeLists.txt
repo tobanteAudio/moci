@@ -1,5 +1,6 @@
 project(moci)
 
+# CORE
 set(moci_core_sources
     moci_core/benchmark/benchmark.hpp
     moci_core/benchmark/profile.hpp
@@ -50,6 +51,44 @@ target_link_libraries(moci_core_tests PRIVATE Moci::Core Catch2::Catch2)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_core_test_src})
 catch_discover_tests(moci_core_tests)
 
+
+
+
+
+# MATH
+set(moci_math_sources
+    moci_math/geometry/line.hpp
+    moci_math/geometry/rectangle.hpp
+    moci_math/geometry/rectangle.cpp
+    moci_math/geometry/point.hpp
+)
+
+add_library(moci_math_lib STATIC ${moci_math_sources})
+add_library(Moci::Math ALIAS moci_math_lib)
+target_link_libraries(moci_math_lib PUBLIC Moci::Core)
+
+foreach(source IN LISTS moci_sources)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+endforeach()
+
+set (moci_math_test_src
+    test_main.cpp
+    
+    moci_math/geometry/line_test.cpp
+    moci_math/geometry/rectangle_test.cpp
+    moci_math/geometry/point_test.cpp
+)
+add_executable(moci_math_tests ${moci_math_test_src})
+target_link_libraries(moci_math_tests PRIVATE Moci::Math Catch2::Catch2)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_math_test_src})
+catch_discover_tests(moci_math_tests)
+
+
+
+
+# ORIGINAL
 set(moci_sources
     moci/moci.hpp
     moci/moci.cpp
@@ -78,9 +117,7 @@ set(moci_sources
     moci/app/glfw/window.hpp
     moci/app/glfw/window.cpp
 
-    moci/geometry/line.hpp
-    moci/geometry/rectangle.hpp
-    moci/geometry/point.hpp
+
 
     moci/network/datagram.hpp
     moci/network/datagram.cpp
@@ -208,6 +245,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 target_link_libraries(${PROJECT_NAME} 
     PUBLIC 
         Moci::Core
+        Moci::Math
         Moci::Threads
         Moci::ImGui
         Moci::StbImage
@@ -249,10 +287,6 @@ set (moci_test_src
     moci/app/events/application_event_test.cpp
     moci/app/events/key_event_test.cpp
     moci/app/events/mouse_event_test.cpp
-
-    moci/geometry/line_test.cpp
-    moci/geometry/rectangle_test.cpp
-    moci/geometry/point_test.cpp
 
     moci/network/datagram_test.cpp
 

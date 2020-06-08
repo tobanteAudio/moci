@@ -4,23 +4,23 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/geometry/point.hpp"
+#include "moci_math/geometry/point.hpp"
 
-TEST_CASE("moci/geometry: PointConstructionEmpty", "[geometry]")
+TEST_CASE("moci_math/geometry: PointConstructionEmpty", "[geometry]")
 {
     auto p = moci::Point<float>();
     REQUIRE(p.GetX() == 0.0f);
     REQUIRE(p.GetY() == 0.0f);
 }
 
-TEST_CASE("moci/geometry: PointConstructionWithValues", "[geometry]")
+TEST_CASE("moci_math/geometry: PointConstructionWithValues", "[geometry]")
 {
     constexpr auto p = moci::Point<float>(1.0f, 2.0f);
     REQUIRE(p.GetX() == 1.0f);
     REQUIRE(p.GetY() == 2.0f);
 }
 
-TEST_CASE("moci/geometry: PointCopyConstruction", "[geometry]")
+TEST_CASE("moci_math/geometry: PointCopyConstruction", "[geometry]")
 {
     constexpr auto p1 = moci::Point<float>(1.0f, 2.0f);
     moci::Point<float> const p2(p1);
@@ -28,7 +28,7 @@ TEST_CASE("moci/geometry: PointCopyConstruction", "[geometry]")
     REQUIRE(p1.GetY() == p2.GetY());
 }
 
-TEST_CASE("moci/geometry: PointCopyAssignment", "[geometry]")
+TEST_CASE("moci_math/geometry: PointCopyAssignment", "[geometry]")
 {
     auto p1 = moci::Point<float>(1.0f, 2.0f);
     auto p2 = p1;
@@ -36,7 +36,7 @@ TEST_CASE("moci/geometry: PointCopyAssignment", "[geometry]")
     REQUIRE(p1.GetY() == p2.GetY());
 }
 
-TEST_CASE("moci/geometry: PointIsOrigin", "[geometry]")
+TEST_CASE("moci_math/geometry: PointIsOrigin", "[geometry]")
 {
     auto p = moci::Point<int>();
     REQUIRE(p.IsOrigin() == true);
@@ -44,7 +44,7 @@ TEST_CASE("moci/geometry: PointIsOrigin", "[geometry]")
     REQUIRE(p.IsOrigin() == false);
 }
 
-TEST_CASE("moci/geometry: PointSetXY", "[geometry]")
+TEST_CASE("moci_math/geometry: PointSetXY", "[geometry]")
 {
     auto p = moci::Point<int>();
     REQUIRE(p.GetX() == 0);
@@ -55,7 +55,7 @@ TEST_CASE("moci/geometry: PointSetXY", "[geometry]")
     REQUIRE(p.GetY() == 20);
 }
 
-TEST_CASE("moci/geometry: PointOperatorEqual", "[geometry]")
+TEST_CASE("moci_math/geometry: PointOperatorEqual", "[geometry]")
 {
     {
         constexpr auto p1 = moci::Point<int>();
@@ -69,7 +69,7 @@ TEST_CASE("moci/geometry: PointOperatorEqual", "[geometry]")
     }
 }
 
-TEST_CASE("moci/geometry: PointOperatorNotEqual", "[geometry]")
+TEST_CASE("moci_math/geometry: PointOperatorNotEqual", "[geometry]")
 {
     {
         constexpr auto p1 = moci::Point<int>();

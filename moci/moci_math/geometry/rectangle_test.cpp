@@ -4,9 +4,9 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/geometry/rectangle.hpp"
+#include "moci_math/geometry/rectangle.hpp"
 
-TEST_CASE("moci/geometry: RectangleConstructionEmpty", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleConstructionEmpty", "[geometry]")
 {
     moci::Rectangle<float> r {};
     REQUIRE(r.IsEmpty() == true);
@@ -16,7 +16,7 @@ TEST_CASE("moci/geometry: RectangleConstructionEmpty", "[geometry]")
     REQUIRE(r.GetHeight() == 0.0f);
 }
 
-TEST_CASE("moci/geometry: RectangleConstructionWithValues", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleConstructionWithValues", "[geometry]")
 {
     constexpr moci::Rectangle<float> r(1.0f, 2.0f, 10.0f, 10.0f);
     REQUIRE(r.IsEmpty() == false);
@@ -26,7 +26,7 @@ TEST_CASE("moci/geometry: RectangleConstructionWithValues", "[geometry]")
     REQUIRE(r.GetHeight() == 10.0f);
 }
 
-TEST_CASE("moci/geometry: RectangleCopyConstruction", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleCopyConstruction", "[geometry]")
 {
     auto r = moci::Rectangle<float>(1.0f, 2.0f, 10.0f, 10.0f);
     moci::Rectangle<float> const r2(r);
@@ -36,7 +36,7 @@ TEST_CASE("moci/geometry: RectangleCopyConstruction", "[geometry]")
     REQUIRE(r.GetWidth() == r2.GetWidth());
 }
 
-TEST_CASE("moci/geometry: RectangleCopyAssignment", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleCopyAssignment", "[geometry]")
 {
     auto r1 = moci::Rectangle<float>(1.0f, 2.0f, 10.0f, 10.0f);
     auto r2 = r1;
@@ -44,7 +44,7 @@ TEST_CASE("moci/geometry: RectangleCopyAssignment", "[geometry]")
     REQUIRE(r1.GetY() == r2.GetY());
 }
 
-TEST_CASE("moci/geometry: RectangleSetPositionXY", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleSetPositionXY", "[geometry]")
 {
     auto r = moci::Rectangle<int> {};
     r.SetPosition(20, 10);
@@ -52,7 +52,7 @@ TEST_CASE("moci/geometry: RectangleSetPositionXY", "[geometry]")
     REQUIRE(r.GetY() == 10);
 }
 
-TEST_CASE("moci/geometry: RectangleSetPositionPoint", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleSetPositionPoint", "[geometry]")
 {
     auto r = moci::Rectangle<int> {};
     r.SetPosition(moci::Point<int>(10, 5));
@@ -60,7 +60,7 @@ TEST_CASE("moci/geometry: RectangleSetPositionPoint", "[geometry]")
     REQUIRE(r.GetY() == 5);
 }
 
-TEST_CASE("moci/geometry: RectangleSetWidth", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleSetWidth", "[geometry]")
 {
     auto r = moci::Rectangle<double> {};
     REQUIRE(r.IsEmpty() == true);
@@ -69,7 +69,7 @@ TEST_CASE("moci/geometry: RectangleSetWidth", "[geometry]")
     REQUIRE(r.GetWidth() == 20.0);
 }
 
-TEST_CASE("moci/geometry: RectangleSetHeight", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleSetHeight", "[geometry]")
 {
     auto r = moci::Rectangle<double> {};
     REQUIRE(r.IsEmpty() == true);
@@ -78,7 +78,7 @@ TEST_CASE("moci/geometry: RectangleSetHeight", "[geometry]")
     REQUIRE(r.GetHeight() == 20.0);
 }
 
-TEST_CASE("moci/geometry: RectangleSetXY", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleSetXY", "[geometry]")
 {
     auto p = moci::Rectangle<int>();
     REQUIRE(p.GetX() == 0);
@@ -89,7 +89,7 @@ TEST_CASE("moci/geometry: RectangleSetXY", "[geometry]")
     REQUIRE(p.GetY() == 20);
 }
 
-TEST_CASE("moci/geometry: RectangleRemoveFromTop", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleRemoveFromTop", "[geometry]")
 {
     auto p = moci::Rectangle<int>(0, 0, 50, 100);
     REQUIRE(p.GetY() == 0);
@@ -106,7 +106,7 @@ TEST_CASE("moci/geometry: RectangleRemoveFromTop", "[geometry]")
     REQUIRE(p.GetHeight() == 90);
 }
 
-TEST_CASE("moci/geometry: RectangleRemoveFromBottom", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleRemoveFromBottom", "[geometry]")
 {
     auto p = moci::Rectangle<int>(0, 0, 50, 100);
     REQUIRE(p.GetY() == 0);
@@ -123,7 +123,7 @@ TEST_CASE("moci/geometry: RectangleRemoveFromBottom", "[geometry]")
     REQUIRE(p.GetHeight() == 90);
 }
 
-TEST_CASE("moci/geometry: RectangleRemoveFromLeft", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleRemoveFromLeft", "[geometry]")
 {
     auto p = moci::Rectangle<int>(0, 0, 50, 100);
     REQUIRE(p.GetX() == 0);
@@ -140,7 +140,7 @@ TEST_CASE("moci/geometry: RectangleRemoveFromLeft", "[geometry]")
     REQUIRE(p.GetHeight() == 100);
 }
 
-TEST_CASE("moci/geometry: RectangleRemoveFromRight", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleRemoveFromRight", "[geometry]")
 {
     auto p = moci::Rectangle<int>(0, 0, 50, 100);
     REQUIRE(p.GetX() == 0);
@@ -157,7 +157,7 @@ TEST_CASE("moci/geometry: RectangleRemoveFromRight", "[geometry]")
     REQUIRE(p.GetHeight() == 100);
 }
 
-TEST_CASE("moci/geometry: RectangleReduced", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleReduced", "[geometry]")
 {
     auto p = moci::Rectangle<int>(0, 0, 50, 100);
     REQUIRE(p.GetX() == 0);
@@ -170,7 +170,7 @@ TEST_CASE("moci/geometry: RectangleReduced", "[geometry]")
     REQUIRE(n.GetHeight() == 80);
 }
 
-TEST_CASE("moci/geometry: RectangleReducedXY", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleReducedXY", "[geometry]")
 {
     auto p = moci::Rectangle<int>(0, 0, 50, 100);
     REQUIRE(p.GetX() == 0);
@@ -184,7 +184,7 @@ TEST_CASE("moci/geometry: RectangleReducedXY", "[geometry]")
     REQUIRE(n.GetHeight() == 60);
 }
 
-TEST_CASE("moci/geometry: RectangleTo", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleTo", "[geometry]")
 {
     auto p = moci::Rectangle<double>(0.0, 0.0, 50.5, 100.1);
     auto n = p.To<int>();
@@ -194,7 +194,7 @@ TEST_CASE("moci/geometry: RectangleTo", "[geometry]")
     REQUIRE(n.GetHeight() == 100);
 }
 
-TEST_CASE("moci/geometry: RectangleToInt", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleToInt", "[geometry]")
 {
     auto p = moci::Rectangle<double>(0.0, 0.0, 50.5, 100.1);
     auto n = p.ToInt();
@@ -204,7 +204,7 @@ TEST_CASE("moci/geometry: RectangleToInt", "[geometry]")
     REQUIRE(n.GetHeight() == 100);
 }
 
-TEST_CASE("moci/geometry: RectangleToFloat", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleToFloat", "[geometry]")
 {
     auto p = moci::Rectangle<float>(0.0f, 0.0f, 50.5f, 100.1f);
     auto n = p.ToFloat();
@@ -214,7 +214,7 @@ TEST_CASE("moci/geometry: RectangleToFloat", "[geometry]")
     REQUIRE(n.GetHeight() == 100.1f);
 }
 
-TEST_CASE("moci/geometry: RectangleOperatorEqual", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleOperatorEqual", "[geometry]")
 {
     {
         constexpr auto r1 = moci::Rectangle<int> {};
@@ -228,7 +228,7 @@ TEST_CASE("moci/geometry: RectangleOperatorEqual", "[geometry]")
     }
 }
 
-TEST_CASE("moci/geometry: RectangleOperatorNotEqual", "[geometry]")
+TEST_CASE("moci_math/geometry: RectangleOperatorNotEqual", "[geometry]")
 {
     {
         constexpr auto r1 = moci::Rectangle<int> {};
