@@ -23,7 +23,6 @@
 #include "moci/render/camera.hpp"
 #include "moci/render/color.hpp"
 #include "moci/render/font.hpp"
-#include "moci/render/graphics_context.hpp"
 #include "moci/render/image.hpp"
 #include "moci/render/light.hpp"
 #include "moci/render/mesh.hpp"

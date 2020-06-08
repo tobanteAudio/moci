@@ -159,6 +159,8 @@ set(moci_graphics_api_base_sources
     moci_graphics_api_base/render/api.hpp
     moci_graphics_api_base/render/buffer.hpp
     moci_graphics_api_base/render/buffer.cpp
+    moci_graphics_api_base/render/graphics_context.hpp
+    moci_graphics_api_base/render/graphics_context.cpp
     moci_graphics_api_base/render/texture.hpp
     moci_graphics_api_base/render/vertex_array.hpp
 
@@ -227,8 +229,6 @@ set(moci_sources
     moci/render/color.cpp
     moci/render/font.hpp
     moci/render/font.cpp
-    moci/render/graphics_context.hpp
-    moci/render/graphics_context.cpp
     moci/render/image.hpp
     moci/render/image.cpp
     moci/render/light.hpp

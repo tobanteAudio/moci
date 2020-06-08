@@ -2,8 +2,8 @@
 
 #include "moci/app/window.hpp"
 
-#include "moci/render/graphics_context.hpp"
 #include "moci/render/opengl/es2/es2.hpp"
+#include "moci_graphics_api_base/moci_graphics_api_base.hpp"
 
 #include <array>
 #include <memory>
