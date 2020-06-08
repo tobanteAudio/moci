@@ -1,0 +1,60 @@
+@startuml
+
+skinparam dpi 200
+skinparam FooterFontColor Black
+skinparam backgroundColor #FFFFF
+skinparam titleBorderRoundCorner 0
+skinparam titleBorderThickness 1
+skinparam titleBorderColor Black
+skinparam monochrome true
+' skinparam handwritten true
+
+title
+MoCi Modules
+end title
+
+center footer tobanteAudio
+
+package "MoCi" {
+    [Core]
+    [Math]
+    [Network]
+    [System]
+    [Graphics]
+    [Render Base]
+    [Render OpenGL]
+    [Render OpenGLES]
+}
+
+package "External" {
+    [glm]
+    [spdlog]
+    [glfw]
+    [GSL]
+    [freetype]
+    [assimp]
+    [glew]
+    [stb image]
+}
+
+[spdlog] --> [Core]
+[GSL] --> [Core]
+[Core] --> [Math]
+[Core] --> [Network]
+[Core] --> [System]
+
+[glm] --> [Math]
+[Math] --> [Render Base]
+
+[Render Base] --> [Render OpenGL]
+[Render Base] --> [Render OpenGLES]
+
+
+[Render OpenGL] --> [Graphics]
+[Render OpenGLES] --> [Graphics]
+[assimp] --> [Graphics]
+[glfw] --> [Graphics]
+[stb image] --> [Graphics]
+[freetype] --> [Graphics]
+
+@enduml
