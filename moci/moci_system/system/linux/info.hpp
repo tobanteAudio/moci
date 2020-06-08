@@ -1,12 +1,17 @@
 #pragma once
 #include "moci_core/core/preprocessor.hpp"
 
-#if defined(MOCI_MAC)
+#if defined(MOCI_LINUX)
 
-#include "moci/system/info.hpp"
+#include "moci_system/system/info.hpp"
+
+#include <string>
+#include <unordered_map>
 
 namespace moci
 {
+std::unordered_map<std::string, std::string> SystemInfoLinuxReadProcInfo();
+
 class SystemInfo::Pimpl
 {
 public:

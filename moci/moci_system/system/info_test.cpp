@@ -4,23 +4,23 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/system/info.hpp"
+#include "moci_system/system/info.hpp"
 
 #include "moci_core/core/preprocessor.hpp"
 
 #if defined(MOCI_LINUX)
-TEST_CASE("moci/system: SystemInfoOSName", "[system]") { REQUIRE(moci::SystemInfo::GetOSName() == "Linux"); }
+TEST_CASE("moci_system/system: SystemInfoOSName", "[system]") { REQUIRE(moci::SystemInfo::GetOSName() == "Linux"); }
 #endif
 
 #if defined(MOCI_MAC)
-TEST_CASE("moci/system: SystemInfoOSName", "[system]") { REQUIRE(moci::SystemInfo::GetOSName() == "Darwin"); }
+TEST_CASE("moci_system/system: SystemInfoOSName", "[system]") { REQUIRE(moci::SystemInfo::GetOSName() == "Darwin"); }
 #endif
 
 #if defined(MOCI_WINDOWS)
-TEST_CASE("moci/system: SystemInfoOSName", "[system]") { REQUIRE(moci::SystemInfo::GetOSName() == "Windows"); }
+TEST_CASE("moci_system/system: SystemInfoOSName", "[system]") { REQUIRE(moci::SystemInfo::GetOSName() == "Windows"); }
 #endif
 
-TEST_CASE("moci/system: SystemInfoDummyChecks", "[system]")
+TEST_CASE("moci_system/system: SystemInfoDummyChecks", "[system]")
 {
     // REQUIRE(moci::SystemInfo::GetVendor().empty() == false);
     // REQUIRE(moci::SystemInfo::GetCPUModel().empty() == false);

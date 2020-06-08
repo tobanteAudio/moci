@@ -1,13 +1,13 @@
-#include "moci/system/info.hpp"
+#include "moci_system/system/info.hpp"
 
 #include "moci_core/core/preprocessor.hpp"
 
 #if defined(MOCI_LINUX)
-#include "moci/system/linux/info.hpp"
+#include "moci_system/system/linux/info.hpp"
 #elif defined(MOCI_MAC)
-#include "moci/system/apple/info.hpp"
+#include "moci_system/system/apple/info.hpp"
 #elif defined(MOCI_WINDOWS)
-#include "moci/system/windows/info.hpp"
+#include "moci_system/system/windows/info.hpp"
 #endif
 
 namespace moci

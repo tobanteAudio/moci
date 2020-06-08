@@ -28,7 +28,6 @@ target_link_libraries(moci_core_lib
         Moci::CompilerOptions
         Moci::CompilerWarnings
         spdlog::spdlog
-        glm::glm
         GSL
 )
 
@@ -65,7 +64,7 @@ set(moci_math_sources
 
 add_library(moci_math_lib STATIC ${moci_math_sources})
 add_library(Moci::Math ALIAS moci_math_lib)
-target_link_libraries(moci_math_lib PUBLIC Moci::Core)
+target_link_libraries(moci_math_lib PUBLIC Moci::Core glm::glm)
 
 foreach(source IN LISTS moci_sources)
     get_filename_component(source_path "${source}" PATH)
@@ -118,6 +117,40 @@ add_executable(moci_network_tests ${moci_network_test_src})
 target_link_libraries(moci_network_tests PRIVATE Moci::Network Catch2::Catch2)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_network_test_src})
 catch_discover_tests(moci_network_tests)
+
+
+
+# SYSTEM
+set(moci_system_sources
+    moci_system/system/info.hpp
+    moci_system/system/info.cpp
+    moci_system/system/apple/info.hpp
+    moci_system/system/apple/info.cpp
+    moci_system/system/linux/info.hpp
+    moci_system/system/linux/info.cpp
+    moci_system/system/windows/info.hpp
+    moci_system/system/windows/info.cpp
+)
+
+add_library(moci_system_lib STATIC ${moci_system_sources})
+add_library(Moci::System ALIAS moci_system_lib)
+target_link_libraries(moci_system_lib PUBLIC Moci::Core Moci::Threads)
+
+foreach(source IN LISTS moci_sources)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+endforeach()
+
+set (moci_system_test_src
+    test_main.cpp
+    
+    moci_system/system/info_test.cpp
+)
+add_executable(moci_system_tests ${moci_system_test_src})
+target_link_libraries(moci_system_tests PRIVATE Moci::System Catch2::Catch2)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_system_test_src})
+catch_discover_tests(moci_system_tests)
 
 
 
@@ -232,17 +265,6 @@ set(moci_sources
     moci/ui/widgets.hpp
     moci/ui/widgets.cpp
 
-    moci/system/info.hpp
-    moci/system/info.cpp
-    
-    moci/system/apple/info.hpp
-    moci/system/apple/info.cpp
-
-    moci/system/linux/info.hpp
-    moci/system/linux/info.cpp
-
-    moci/system/windows/info.hpp
-    moci/system/windows/info.cpp
     
 )
 
@@ -254,10 +276,6 @@ foreach(source IN LISTS moci_sources)
     string(REPLACE "/" "\\" source_path_msvc "${source_path}")
     source_group("${source_path_msvc}" FILES "${source}")
 endforeach()
-
-target_compile_definitions(${PROJECT_NAME} PUBLIC 
-    NDEBUG=1
-)
 
 target_include_directories(${PROJECT_NAME} PUBLIC 
     ${CMAKE_SOURCE_DIR}/3rd_party/glfw/include
@@ -271,13 +289,13 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Core
         Moci::Math
         Moci::Network
+        Moci::System
         Moci::ImGui
         Moci::StbImage
         Moci::StbImageWrite
         Moci::StbImageResize
         glfw 
         ${GLFW_LIBRARIES}
-        glm::glm
         freetype
         assimp::assimp
 )
@@ -324,7 +342,6 @@ set (moci_test_src
     moci/ui/component_test.cpp
     moci/ui/widgets_test.cpp
 
-    moci/system/info_test.cpp
 )
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_test_src})
 add_executable(moci_tests ${moci_test_src})
