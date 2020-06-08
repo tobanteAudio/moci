@@ -3,7 +3,7 @@
 #include "moci_core/benchmark/profile.hpp"
 #include "moci_core/core/logging.hpp"
 #include "moci_events/moci_events.hpp"
-#include "moci_graphics/renderer.hpp"
+#include "moci_render_api/moci_render_api.hpp"
 
 namespace moci
 {

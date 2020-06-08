@@ -339,13 +339,44 @@ endif()
 
 
 
+
+# RENDER API
+set(moci_render_api_sources
+    moci_render_api/render/buffer.cpp
+    moci_render_api/render/render_command.hpp
+    moci_render_api/render/render_command.cpp
+    moci_render_api/render/renderer_api.cpp
+    moci_render_api/render/renderer.hpp
+    moci_render_api/render/renderer.cpp
+    moci_render_api/render/shader.cpp
+    moci_render_api/render/texture.cpp
+    moci_render_api/render/vertex_array.cpp
+
+)
+
+add_library(moci_render_api_lib STATIC ${moci_render_api_sources})
+add_library(Moci::RenderApi ALIAS moci_render_api_lib)
+target_link_libraries(moci_render_api_lib PUBLIC Moci::RenderOpenGL Moci::RenderOpenGLES Moci::Events Moci::ImGui)
+
+
+# set (moci_render_api_test_src
+#     test_main.cpp
+    
+#     moci_render_api/layer_stack_test.cpp
+# )
+# add_executable(moci_render_api_tests ${moci_render_api_test_src})
+# target_link_libraries(moci_render_api_tests PRIVATE Moci::RenderApi Catch2::Catch2)
+# source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_api_test_src})
+# catch_discover_tests(moci_render_api_tests)
+
+
+
 # GRAPHICS 
 set(moci_graphics_sources
     moci_graphics/imgui/imgui_build.cpp
     moci_graphics/imgui/imgui_layer.hpp
     moci_graphics/imgui/imgui_layer.cpp
         
-    moci_graphics/buffer.cpp
     moci_graphics/camera.hpp
     moci_graphics/camera.cpp
     moci_graphics/color.hpp
@@ -358,16 +389,8 @@ set(moci_graphics_sources
     moci_graphics/light.cpp
     moci_graphics/mesh.hpp
     moci_graphics/mesh.cpp
-    moci_graphics/render_command.hpp
-    moci_graphics/render_command.cpp
     moci_graphics/render_queue.hpp
     moci_graphics/render_queue.cpp
-    moci_graphics/renderer_api.cpp
-    moci_graphics/renderer.hpp
-    moci_graphics/renderer.cpp
-    moci_graphics/shader.cpp
-    moci_graphics/texture.cpp
-    moci_graphics/vertex_array.cpp
 
     moci_graphics/freetype/library.hpp
     moci_graphics/freetype/library.cpp
@@ -381,11 +404,7 @@ add_library(moci_graphics_lib STATIC ${moci_graphics_sources})
 add_library(Moci::Graphics ALIAS moci_graphics_lib)
 target_link_libraries(moci_graphics_lib 
     PUBLIC 
-        Moci::RenderOpenGL 
-        Moci::RenderOpenGLES  
-        Moci::Events       
-        Moci::ImGui
-
+        Moci::RenderApi 
         assimp::assimp
 )
 

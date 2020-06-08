@@ -6,6 +6,7 @@
 #include "moci_graphics/moci_graphics.hpp"
 #include "moci_math/moci_math.hpp"
 #include "moci_network/moci_network.hpp"
+#include "moci_render_api/moci_render_api.hpp"
 #include "moci_render_base/moci_render_base.hpp"
 #include "moci_system/moci_system.hpp"
 
