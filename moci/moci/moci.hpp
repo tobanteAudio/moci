@@ -5,7 +5,7 @@
 #include "moci_network/moci_network.hpp"
 #include "moci_system/moci_system.hpp"
 
-#include "moci_graphics_api_base/moci_graphics_api_base.hpp"
+#include "moci_render_base/moci_render_base.hpp"
 
 #include "moci/app/application.hpp"
 #include "moci/app/input.hpp"

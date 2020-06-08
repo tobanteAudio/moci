@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_graphics_api_base/moci_graphics_api_base.hpp"
+#include "moci_render_base/moci_render_base.hpp"
 
 #if defined(MOCI_API_OPENGL_MODERN)
 namespace moci

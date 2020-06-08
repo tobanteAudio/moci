@@ -1,6 +1,6 @@
-#include "moci_graphics_api_opengles/vertex_array.hpp"
+#include "moci_render_opengles/vertex_array.hpp"
 
-#include "moci_graphics_api_opengles/es2.hpp"
+#include "moci_render_opengles/es2.hpp"
 
 namespace moci
 {

@@ -1,4 +1,4 @@
-#include "moci_graphics_api_opengles/shader.hpp"
+#include "moci_render_opengles/shader.hpp"
 
 #include "moci_core/benchmark/profile.hpp"
 #include "moci_core/core/logging.hpp"

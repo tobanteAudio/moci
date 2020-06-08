@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_graphics_api_base/render/vertex_array.hpp"
+#include "moci_render_base/render/vertex_array.hpp"
 
 #include <glm/glm.hpp>
 

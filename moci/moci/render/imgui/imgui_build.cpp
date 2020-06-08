@@ -1,4 +1,4 @@
-#include "moci_graphics_api_opengles/moci_graphics_api_opengles.hpp"
+#include "moci_render_opengles/moci_render_opengles.hpp"
 
 #include "moci/render/imgui/imgui.hpp"
 

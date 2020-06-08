@@ -1,4 +1,4 @@
-#include "moci_graphics_api_opengles/es2.hpp"
+#include "moci_render_opengles/es2.hpp"
 
 void GLClearError()
 {

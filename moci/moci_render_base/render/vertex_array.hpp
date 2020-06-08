@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_graphics_api_base/render/buffer.hpp"
+#include "moci_render_base/render/buffer.hpp"
 
 #include "moci_core/core/memory.hpp"
 

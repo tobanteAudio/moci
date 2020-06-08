@@ -2,8 +2,8 @@
 
 #include "moci/app/window.hpp"
 
-#include "moci_graphics_api_base/moci_graphics_api_base.hpp"
-#include "moci_graphics_api_opengles/moci_graphics_api_opengles.hpp"
+#include "moci_render_base/moci_render_base.hpp"
+#include "moci_render_opengles/moci_render_opengles.hpp"
 
 #include <array>
 #include <memory>
