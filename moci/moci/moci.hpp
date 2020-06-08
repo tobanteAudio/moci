@@ -1,8 +1,8 @@
 #pragma once
 
 #include "moci_core/moci_core.hpp"
-
 #include "moci_math/moci_math.hpp"
+#include "moci_network/moci_network.hpp"
 
 #include "moci/app/application.hpp"
 #include "moci/app/input.hpp"
@@ -16,8 +16,6 @@
 #include "moci/app/events/application_event.hpp"
 #include "moci/app/events/key_event.hpp"
 #include "moci/app/events/mouse_event.hpp"
-
-#include "moci/network/datagram.hpp"
 
 #include "moci/render/buffer.hpp"
 #include "moci/render/camera.hpp"

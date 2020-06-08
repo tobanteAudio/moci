@@ -1,10 +1,10 @@
-#include "moci/network/datagram.hpp"
+#include "moci_network/datagram.hpp"
 
 #include "moci_core/core/preprocessor.hpp"
 #if defined(MOCI_MAC) || defined(MOCI_LINUX)
-#include "moci/network/unix/datagram.hpp"
+#include "moci_network/unix/datagram.hpp"
 #elif defined(MOCI_WINDOWS)
-#include "moci/network/windows/datagram.hpp"
+#include "moci_network/windows/datagram.hpp"
 #endif
 
 namespace moci

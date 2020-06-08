@@ -87,6 +87,40 @@ catch_discover_tests(moci_math_tests)
 
 
 
+# NETWORK
+set(moci_network_sources
+    moci_network/datagram.hpp
+    moci_network/datagram.cpp
+
+    moci_network/unix/datagram.hpp
+    moci_network/unix/datagram.cpp
+
+    moci_network/windows/datagram.hpp
+    moci_network/windows/datagram.cpp
+)
+
+add_library(moci_network_lib STATIC ${moci_network_sources})
+add_library(Moci::Network ALIAS moci_network_lib)
+target_link_libraries(moci_network_lib PUBLIC Moci::Core Moci::Threads)
+
+foreach(source IN LISTS moci_sources)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+endforeach()
+
+set (moci_network_test_src
+    test_main.cpp
+    
+    moci_network/datagram_test.cpp
+)
+add_executable(moci_network_tests ${moci_network_test_src})
+target_link_libraries(moci_network_tests PRIVATE Moci::Network Catch2::Catch2)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_network_test_src})
+catch_discover_tests(moci_network_tests)
+
+
+
 
 # ORIGINAL
 set(moci_sources
@@ -117,16 +151,6 @@ set(moci_sources
     moci/app/glfw/window.hpp
     moci/app/glfw/window.cpp
 
-
-
-    moci/network/datagram.hpp
-    moci/network/datagram.cpp
-
-    moci/network/unix/datagram.hpp
-    moci/network/unix/datagram.cpp
-    
-    moci/network/windows/datagram.hpp
-    moci/network/windows/datagram.cpp
 
     moci/render/imgui/imgui_build.cpp
     moci/render/imgui/imgui_layer.hpp
@@ -246,7 +270,7 @@ target_link_libraries(${PROJECT_NAME}
     PUBLIC 
         Moci::Core
         Moci::Math
-        Moci::Threads
+        Moci::Network
         Moci::ImGui
         Moci::StbImage
         Moci::StbImageWrite
@@ -287,8 +311,6 @@ set (moci_test_src
     moci/app/events/application_event_test.cpp
     moci/app/events/key_event_test.cpp
     moci/app/events/mouse_event_test.cpp
-
-    moci/network/datagram_test.cpp
 
     moci/render/buffer_test.cpp
     moci/render/camera_test.cpp
