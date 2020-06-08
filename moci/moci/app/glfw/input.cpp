@@ -3,7 +3,7 @@
 #include <cmath>
 
 #include "moci/app/application.hpp"
-#include "moci/render/opengl/es2/es2.hpp"
+#include "moci_graphics_api_opengles/moci_graphics_api_opengles.hpp"
 
 namespace moci
 {

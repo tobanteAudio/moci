@@ -1,4 +1,4 @@
-#include "moci/render/opengl/es2/shader.hpp"
+#include "moci_graphics_api_opengles/shader.hpp"
 
 #include "moci_core/benchmark/profile.hpp"
 #include "moci_core/core/logging.hpp"

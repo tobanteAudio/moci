@@ -1,4 +1,4 @@
-#include "moci/render/opengl/es2/es2.hpp"
+#include "moci_graphics_api_opengles/moci_graphics_api_opengles.hpp"
 
 #include "moci/render/imgui/imgui.hpp"
 

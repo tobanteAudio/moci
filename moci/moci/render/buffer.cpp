@@ -2,8 +2,8 @@
 
 #include "renderer.hpp"
 
-#include "moci/render/opengl/es2/buffer.hpp"
 #include "moci/render/opengl/gl4/buffer.hpp"
+#include "moci_graphics_api_opengles/moci_graphics_api_opengles.hpp"
 
 #include <memory>
 

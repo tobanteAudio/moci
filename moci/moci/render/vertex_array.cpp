@@ -3,8 +3,8 @@
 
 #include "renderer.hpp"
 
-#include "moci/render/opengl/es2/vertex_array.hpp"
 #include "moci/render/opengl/gl4/vertex_array.hpp"
+#include "moci_graphics_api_opengles/moci_graphics_api_opengles.hpp"
 
 namespace moci
 {

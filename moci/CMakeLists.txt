@@ -161,6 +161,7 @@ set(moci_graphics_api_base_sources
     moci_graphics_api_base/render/buffer.cpp
     moci_graphics_api_base/render/graphics_context.hpp
     moci_graphics_api_base/render/graphics_context.cpp
+    moci_graphics_api_base/render/shader.hpp
     moci_graphics_api_base/render/texture.hpp
     moci_graphics_api_base/render/vertex_array.hpp
 
@@ -185,6 +186,80 @@ add_executable(moci_graphics_api_base_tests ${moci_graphics_api_base_test_src})
 target_link_libraries(moci_graphics_api_base_tests PRIVATE Moci::GraphicsApiBase Catch2::Catch2)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_graphics_api_base_test_src})
 catch_discover_tests(moci_graphics_api_base_tests)
+
+
+
+
+# GRAPHICS API OPENGLES
+set(moci_graphics_api_opengles_sources
+    moci_graphics_api_opengles/moci_graphics_api_opengles.hpp
+    moci_graphics_api_opengles/buffer.hpp
+    moci_graphics_api_opengles/buffer.cpp
+    moci_graphics_api_opengles/graphics_context.hpp
+    moci_graphics_api_opengles/graphics_context.cpp
+    moci_graphics_api_opengles/es2.hpp
+    moci_graphics_api_opengles/es2.cpp
+    moci_graphics_api_opengles/renderer_api.hpp
+    moci_graphics_api_opengles/renderer_api.cpp
+    moci_graphics_api_opengles/shader.hpp
+    moci_graphics_api_opengles/shader.cpp
+    moci_graphics_api_opengles/texture.hpp
+    moci_graphics_api_opengles/texture.cpp
+    moci_graphics_api_opengles/vertex_array.hpp
+    moci_graphics_api_opengles/vertex_array.cpp
+
+)
+
+add_library(moci_graphics_api_opengles_lib STATIC ${moci_graphics_api_opengles_sources})
+add_library(Moci::GraphicsApiOpenGLES ALIAS moci_graphics_api_opengles_lib)
+target_link_libraries(moci_graphics_api_opengles_lib 
+    PUBLIC 
+        Moci::GraphicsApiBase
+        Moci::StbImage
+        Moci::StbImageWrite
+        Moci::StbImageResize
+        freetype
+        glfw 
+        ${GLFW_LIBRARIES}
+)
+
+if (${MOCI_API_OPENGL_MODERN})
+    target_compile_definitions(moci_graphics_api_opengles_lib PUBLIC MOCI_API_OPENGL_MODERN=1)
+endif()
+
+if (${MOCI_API_OPENGL_LEGACY})
+    target_compile_definitions(moci_graphics_api_opengles_lib PUBLIC MOCI_API_OPENGL_LEGACY=1)
+endif()
+
+if (${MOCI_API_OPENGL_ES})
+    # old
+    # target_link_libraries(moci_graphics_api_opengles_lib PUBLIC -lGLESv2)
+    # raspberry pi 3
+    target_link_libraries(moci_graphics_api_opengles_lib PUBLIC /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2)
+    # desktop linux
+    # target_link_libraries(moci_graphics_api_opengles_lib PUBLIC /usr/lib/x86_64-linux-gnu/libGLESv2.so)
+    
+    target_compile_definitions(moci_graphics_api_opengles_lib PUBLIC MOCI_API_OPENGL_ES=1)
+else()
+    target_link_libraries(moci_graphics_api_opengles_lib PUBLIC libglew_static)
+endif()
+
+
+foreach(source IN LISTS moci_sources)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+endforeach()
+
+# set (moci_graphics_api_opengles_test_src
+#     test_main.cpp
+
+#     moci_graphics_api_opengles/render/buffer_test.cpp
+# )
+# add_executable(moci_graphics_api_opengles_tests ${moci_graphics_api_opengles_test_src})
+# target_link_libraries(moci_graphics_api_opengles_tests PRIVATE Moci::GraphicsApiOpenGLES Catch2::Catch2)
+# source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_graphics_api_opengles_test_src})
+# catch_discover_tests(moci_graphics_api_opengles_tests)
 
 
 
@@ -239,7 +314,6 @@ set(moci_sources
     moci/render/render_command.cpp
     moci/render/render_queue.hpp
     moci/render/render_queue.cpp
-    moci/render/renderer_api.hpp
     moci/render/renderer_api.cpp
     moci/render/renderer.hpp
     moci/render/renderer.cpp
@@ -268,20 +342,7 @@ set(moci_sources
     moci/render/opengl/gl4/vertex_array.hpp
     moci/render/opengl/gl4/vertex_array.cpp
 
-    moci/render/opengl/es2/buffer.hpp
-    moci/render/opengl/es2/buffer.cpp
-    moci/render/opengl/es2/graphics_context.hpp
-    moci/render/opengl/es2/graphics_context.cpp
-    moci/render/opengl/es2/es2.hpp
-    moci/render/opengl/es2/es2.cpp
-    moci/render/opengl/es2/renderer_api.hpp
-    moci/render/opengl/es2/renderer_api.cpp
-    moci/render/opengl/es2/shader.hpp
-    moci/render/opengl/es2/shader.cpp
-    moci/render/opengl/es2/texture.hpp
-    moci/render/opengl/es2/texture.cpp
-    moci/render/opengl/es2/vertex_array.hpp
-    moci/render/opengl/es2/vertex_array.cpp
+
 
     moci/ui/component_layer.hpp
     moci/ui/component_layer.cpp
@@ -317,37 +378,11 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Math
         Moci::Network
         Moci::System
-        Moci::GraphicsApiBase
+        Moci::GraphicsApiOpenGLES
         Moci::ImGui
-        Moci::StbImage
-        Moci::StbImageWrite
-        Moci::StbImageResize
-        glfw 
-        ${GLFW_LIBRARIES}
-        freetype
         assimp::assimp
 )
 
-if (${MOCI_API_OPENGL_MODERN})
-    target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL_MODERN=1)
-endif()
-
-if (${MOCI_API_OPENGL_LEGACY})
-    target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL_LEGACY=1)
-endif()
-
-if (${MOCI_API_OPENGL_ES})
-    # old
-    # target_link_libraries(${PROJECT_NAME} PUBLIC -lGLESv2)
-    # raspberry pi 3
-    target_link_libraries(${PROJECT_NAME} PUBLIC /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2)
-    # desktop linux
-    # target_link_libraries(${PROJECT_NAME} PUBLIC /usr/lib/x86_64-linux-gnu/libGLESv2.so)
-    
-    target_compile_definitions(${PROJECT_NAME} PUBLIC MOCI_API_OPENGL_ES=1)
-else()
-    target_link_libraries(${PROJECT_NAME} PUBLIC libglew_static)
-endif()
 
 # tests
 set (moci_test_src
