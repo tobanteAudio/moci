@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci/render/vertex_array.hpp"
+#include "moci_graphics_api_base/moci_graphics_api_base.hpp"
 
 namespace moci
 {

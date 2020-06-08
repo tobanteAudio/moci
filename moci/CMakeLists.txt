@@ -159,6 +159,8 @@ set(moci_graphics_api_base_sources
     moci_graphics_api_base/render/api.hpp
     moci_graphics_api_base/render/buffer.hpp
     moci_graphics_api_base/render/buffer.cpp
+    moci_graphics_api_base/render/vertex_array.hpp
+
 )
 
 add_library(moci_graphics_api_base_lib STATIC ${moci_graphics_api_base_sources})
@@ -244,7 +246,6 @@ set(moci_sources
     moci/render/shader.cpp
     moci/render/texture.hpp
     moci/render/texture.cpp
-    moci/render/vertex_array.hpp
     moci/render/vertex_array.cpp
 
     moci/render/freetype/library.hpp

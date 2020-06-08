@@ -2,8 +2,8 @@
 
 #include "renderer_api.hpp"
 
-#include "moci/render/vertex_array.hpp"
 #include "moci_core/core/memory.hpp"
+#include "moci_graphics_api_base/moci_graphics_api_base.hpp"
 
 namespace moci
 {

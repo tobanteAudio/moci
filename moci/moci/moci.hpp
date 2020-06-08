@@ -33,7 +33,6 @@
 #include "moci/render/renderer_api.hpp"
 #include "moci/render/shader.hpp"
 #include "moci/render/texture.hpp"
-#include "moci/render/vertex_array.hpp"
 
 #include "moci/render/obj/file.hpp"
 

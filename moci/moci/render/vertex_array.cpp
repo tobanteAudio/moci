@@ -1,5 +1,6 @@
 
-#include "vertex_array.hpp"
+#include "moci_graphics_api_base/moci_graphics_api_base.hpp"
+
 #include "renderer.hpp"
 
 #include "moci/render/opengl/es2/vertex_array.hpp"

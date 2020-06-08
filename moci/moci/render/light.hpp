@@ -4,7 +4,8 @@
 #include "moci/render/render_command.hpp"
 #include "moci/render/shader.hpp"
 #include "moci/render/texture.hpp"
-#include "moci/render/vertex_array.hpp"
+
+#include "moci_graphics_api_base/moci_graphics_api_base.hpp"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include "glm/glm.hpp"
