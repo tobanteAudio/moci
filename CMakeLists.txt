@@ -16,7 +16,7 @@ option(MOCI_BUILD_FAST_MATH      "Build with fast math optimizations"           
 option(MOCI_BUILD_FRAMEPOINTER   "Build with frame pointer. For profiles"       OFF)
 option(MOCI_BUILD_TESTS          "Build the unit tests with Catch2"             ON)
 option(MOCI_BUILD_COVERAGE       "Build with coverage enabled"                  OFF)
-option(MOCI_BUILD_PLAYGROUND     "Build playground examples"                    ON)
+option(MOCI_BUILD_PLAYGROUND     "Build playground examples"                    OFF)
 option(MOCI_API_OPENGL_LEGACY    "Use OpenGL Legacy implementation"             ON)
 option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"                OFF)
 option(MOCI_API_OPENGL_ES        "Link against OpenGL ES 2.0"                   OFF)
