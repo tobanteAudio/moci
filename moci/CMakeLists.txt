@@ -166,7 +166,7 @@ set(moci_graphics_api_base_sources
 
 add_library(moci_graphics_api_base_lib STATIC ${moci_graphics_api_base_sources})
 add_library(Moci::GraphicsApiBase ALIAS moci_graphics_api_base_lib)
-target_link_libraries(moci_graphics_api_base_lib PUBLIC Moci::Core Moci::Threads)
+target_link_libraries(moci_graphics_api_base_lib PUBLIC Moci::Math)
 
 foreach(source IN LISTS moci_sources)
     get_filename_component(source_path "${source}" PATH)
@@ -243,7 +243,6 @@ set(moci_sources
     moci/render/renderer_api.cpp
     moci/render/renderer.hpp
     moci/render/renderer.cpp
-    moci/render/shader.hpp
     moci/render/shader.cpp
     moci/render/texture.cpp
     moci/render/vertex_array.cpp

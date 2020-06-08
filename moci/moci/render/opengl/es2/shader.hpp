@@ -2,7 +2,7 @@
 
 #include "moci/render/opengl/es2/es2.hpp"
 
-#include "moci/render/shader.hpp"
+#include "moci_graphics_api_base/moci_graphics_api_base.hpp"
 
 #include <glm/glm.hpp>
 

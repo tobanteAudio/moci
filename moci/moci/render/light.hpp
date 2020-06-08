@@ -2,7 +2,6 @@
 
 #include "moci/render/mesh.hpp"
 #include "moci/render/render_command.hpp"
-#include "moci/render/shader.hpp"
 
 #include "moci_graphics_api_base/moci_graphics_api_base.hpp"
 
