@@ -6,7 +6,10 @@ add_library(Moci::CompilerWarnings ALIAS compiler_warnings)
 if(MSVC)
   target_compile_options(compiler_warnings INTERFACE /W4 "/permissive-" /wd4201)
 else()
-  target_compile_options(compiler_warnings INTERFACE -Wall -Wextra -Wshadow)
+  target_compile_options(compiler_warnings INTERFACE -Wall -Wextra -Wpedantic -Wno-shadow)
+
   # Bugs in assimp
-  add_compile_options(-Wno-error=tautological-compare -Wno-error=class-memaccess)
+  if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    add_compile_options(-Wno-error=tautological-compare -Wno-error=class-memaccess)
+  endif()
 endif()
