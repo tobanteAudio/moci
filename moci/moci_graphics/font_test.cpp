@@ -4,16 +4,16 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/render/font.hpp"
-#include "moci/render/freetype/library.hpp"
+#include "moci_graphics/font.hpp"
+#include "moci_graphics/freetype/library.hpp"
 
-TEST_CASE("moci/render: TypefaceConstruct", "[render]")
+TEST_CASE("moci_graphics: TypefaceConstruct", "[render]")
 {
     moci::Typeface face {"comic-sans"};
     REQUIRE(face.GetName() == "comic-sans");
 }
 
-// TEST_CASE("moci/render: TypefaceGetWidthForString", "[render]")
+// TEST_CASE("moci_graphics: TypefaceGetWidthForString", "[render]")
 // {
 //     auto const path = "test_data/OpenSans-Bold.ttf";
 //     auto const opt  = moci::FreetypeLibrary::CreateTypefaceFromFont(path);

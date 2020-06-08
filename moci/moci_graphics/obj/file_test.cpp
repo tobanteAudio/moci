@@ -4,12 +4,12 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/render/obj/file.hpp"
+#include "moci_graphics/obj/file.hpp"
 
 #include "moci_core/core/preprocessor.hpp"
 
 #if !defined(MOCI_WINDOWS)
-TEST_CASE("moci/render: OBJFileCube", "[render]")
+TEST_CASE("moci_graphics: OBJFileCube", "[render]")
 {
     moci::OBJFile model("test_data/cube.obj");
     REQUIRE(model.Parse() == true);
@@ -18,7 +18,7 @@ TEST_CASE("moci/render: OBJFileCube", "[render]")
     REQUIRE(model.GetVertexData().size() == 36);
 }
 
-TEST_CASE("moci/render: OBJFileTeapot", "[render]")
+TEST_CASE("moci_graphics: OBJFileTeapot", "[render]")
 {
     moci::OBJFile model("test_data/teapot.obj");
     REQUIRE(model.Parse() == true);

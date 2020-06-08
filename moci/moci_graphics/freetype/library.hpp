@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci/render/font.hpp"
+#include "moci_graphics/font.hpp"
 
 #include <optional>
 

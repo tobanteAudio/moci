@@ -4,9 +4,9 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/render/freetype/library.hpp"
+#include "moci_graphics/freetype/library.hpp"
 
-// TEST_CASE("moci/render: FreetypeCreateTypeface", "[render]")
+// TEST_CASE("moci_graphics: FreetypeCreateTypeface", "[render]")
 // {
 //     auto const path     = "test_data/OpenSans-Bold.ttf";
 //     auto const typeface = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
@@ -14,7 +14,7 @@
 //     REQUIRE(typeface.value().GetNumCharacters() == 128);
 // }
 
-TEST_CASE("moci/render: FreetypeCreateTypefaceNoPath", "[render]")
+TEST_CASE("moci_graphics: FreetypeCreateTypefaceNoPath", "[render]")
 {
     {
         auto typeface = moci::FreetypeLibrary::CreateTypefaceFromFont("");

@@ -4,9 +4,9 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/render/image.hpp"
+#include "moci_graphics/image.hpp"
 
-TEST_CASE("moci/render: ImageDefaultConstructor", "[render]")
+TEST_CASE("moci_graphics: ImageDefaultConstructor", "[render]")
 {
     moci::Image img {};
     REQUIRE(img.GetWidth() == 0);
@@ -15,7 +15,7 @@ TEST_CASE("moci/render: ImageDefaultConstructor", "[render]")
     REQUIRE(img.Data().empty());
 }
 
-TEST_CASE("moci/render: ImagePathConstructor", "[render]")
+TEST_CASE("moci_graphics: ImagePathConstructor", "[render]")
 {
     moci::Image img {"test_data/colors.png"};
     REQUIRE(img.GetWidth() == 256);
@@ -25,7 +25,7 @@ TEST_CASE("moci/render: ImagePathConstructor", "[render]")
     REQUIRE(img.Data().size() == 196608);
 }
 
-TEST_CASE("moci/render: ImageLoadFromFileSuccess", "[render]")
+TEST_CASE("moci_graphics: ImageLoadFromFileSuccess", "[render]")
 {
     moci::Image img {};
     REQUIRE(img.LoadFromFile("test_data/colors.png") == true);
@@ -36,7 +36,7 @@ TEST_CASE("moci/render: ImageLoadFromFileSuccess", "[render]")
     REQUIRE(img.Data().size() == 196608);
 }
 
-TEST_CASE("moci/render: ImageLoadFromFileFail", "[render]")
+TEST_CASE("moci_graphics: ImageLoadFromFileFail", "[render]")
 {
     moci::Image img {};
     REQUIRE(img.LoadFromFile("noexist.png") == false);

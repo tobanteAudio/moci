@@ -4,7 +4,7 @@
 #include "layer_stack.hpp"
 #include "window.hpp"
 
-#include "moci/render/imgui/imgui_layer.hpp"
+#include "moci_graphics/imgui/imgui_layer.hpp"
 
 #include <chrono>
 #include <memory>

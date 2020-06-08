@@ -1,5 +1,5 @@
-#include "moci/render/imgui/imgui_layer.hpp"
-#include "moci/render/imgui/imgui.hpp"
+#include "moci_graphics/imgui/imgui_layer.hpp"
+#include "moci_graphics/imgui/imgui.hpp"
 
 #include "moci/app/application.hpp"
 #include "moci_core/benchmark/profile.hpp"

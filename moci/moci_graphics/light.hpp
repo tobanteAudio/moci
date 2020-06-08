@@ -1,7 +1,7 @@
 #pragma once
 
-#include "moci/render/mesh.hpp"
-#include "moci/render/render_command.hpp"
+#include "moci_graphics/mesh.hpp"
+#include "moci_graphics/render_command.hpp"
 
 #include "moci_render_base/moci_render_base.hpp"
 

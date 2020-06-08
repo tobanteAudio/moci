@@ -1,4 +1,4 @@
-#include "moci/render/freetype/library.hpp"
+#include "moci_graphics/freetype/library.hpp"
 
 #include "moci_core/core/scope_guard.hpp"
 

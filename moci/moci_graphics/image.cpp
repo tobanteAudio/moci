@@ -1,4 +1,4 @@
-#include "moci/render/image.hpp"
+#include "moci_graphics/image.hpp"
 
 #include "moci_core/core/logging.hpp"
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci/render/render_queue.hpp"
+#include "moci_graphics/render_queue.hpp"
 #include "moci_math/geometry/rectangle.hpp"
 
 #include "moci_core/core/vector.hpp"

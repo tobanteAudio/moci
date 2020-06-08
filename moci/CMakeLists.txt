@@ -31,11 +31,6 @@ target_link_libraries(moci_core_lib
         GSL
 )
 
-foreach(source IN LISTS moci_sources)
-    get_filename_component(source_path "${source}" PATH)
-    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
-    source_group("${source_path_msvc}" FILES "${source}")
-endforeach()
 
 set (moci_core_test_src
     test_main.cpp
@@ -66,11 +61,6 @@ add_library(moci_math_lib STATIC ${moci_math_sources})
 add_library(Moci::Math ALIAS moci_math_lib)
 target_link_libraries(moci_math_lib PUBLIC Moci::Core glm::glm)
 
-foreach(source IN LISTS moci_sources)
-    get_filename_component(source_path "${source}" PATH)
-    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
-    source_group("${source_path_msvc}" FILES "${source}")
-endforeach()
 
 set (moci_math_test_src
     test_main.cpp
@@ -102,11 +92,6 @@ add_library(moci_network_lib STATIC ${moci_network_sources})
 add_library(Moci::Network ALIAS moci_network_lib)
 target_link_libraries(moci_network_lib PUBLIC Moci::Core Moci::Threads)
 
-foreach(source IN LISTS moci_sources)
-    get_filename_component(source_path "${source}" PATH)
-    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
-    source_group("${source_path_msvc}" FILES "${source}")
-endforeach()
 
 set (moci_network_test_src
     test_main.cpp
@@ -136,11 +121,6 @@ add_library(moci_system_lib STATIC ${moci_system_sources})
 add_library(Moci::System ALIAS moci_system_lib)
 target_link_libraries(moci_system_lib PUBLIC Moci::Core Moci::Threads)
 
-foreach(source IN LISTS moci_sources)
-    get_filename_component(source_path "${source}" PATH)
-    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
-    source_group("${source_path_msvc}" FILES "${source}")
-endforeach()
 
 set (moci_system_test_src
     test_main.cpp
@@ -171,11 +151,6 @@ add_library(moci_render_base_lib STATIC ${moci_render_base_sources})
 add_library(Moci::GraphicsApiBase ALIAS moci_render_base_lib)
 target_link_libraries(moci_render_base_lib PUBLIC Moci::Math)
 
-foreach(source IN LISTS moci_sources)
-    get_filename_component(source_path "${source}" PATH)
-    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
-    source_group("${source_path_msvc}" FILES "${source}")
-endforeach()
 
 set (moci_render_base_test_src
     test_main.cpp
@@ -211,7 +186,7 @@ set(moci_render_opengles_sources
 )
 
 add_library(moci_render_opengles_lib STATIC ${moci_render_opengles_sources})
-add_library(Moci::GraphicsApiOpenGLES ALIAS moci_render_opengles_lib)
+add_library(Moci::RenderOpenGLES ALIAS moci_render_opengles_lib)
 target_link_libraries(moci_render_opengles_lib 
     PUBLIC 
         Moci::GraphicsApiBase
@@ -245,11 +220,6 @@ else()
 endif()
 
 
-foreach(source IN LISTS moci_sources)
-    get_filename_component(source_path "${source}" PATH)
-    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
-    source_group("${source_path_msvc}" FILES "${source}")
-endforeach()
 
 # set (moci_render_opengles_test_src
 #     test_main.cpp
@@ -257,7 +227,7 @@ endforeach()
 #     moci_render_opengles/render/buffer_test.cpp
 # )
 # add_executable(moci_render_opengles_tests ${moci_render_opengles_test_src})
-# target_link_libraries(moci_render_opengles_tests PRIVATE Moci::GraphicsApiOpenGLES Catch2::Catch2)
+# target_link_libraries(moci_render_opengles_tests PRIVATE Moci::RenderOpenGLES Catch2::Catch2)
 # source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_opengles_test_src})
 # catch_discover_tests(moci_render_opengles_tests)
 
@@ -286,7 +256,7 @@ set(moci_render_opengl_sources
 )
 
 add_library(moci_render_opengl_lib STATIC ${moci_render_opengl_sources})
-add_library(Moci::GraphicsApiOpenGL ALIAS moci_render_opengl_lib)
+add_library(Moci::RenderOpenGL ALIAS moci_render_opengl_lib)
 target_link_libraries(moci_render_opengl_lib 
     PUBLIC 
         Moci::GraphicsApiBase
@@ -319,23 +289,83 @@ else()
     target_link_libraries(moci_render_opengl_lib PUBLIC libglew_static)
 endif()
 
-
-foreach(source IN LISTS moci_sources)
-    get_filename_component(source_path "${source}" PATH)
-    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
-    source_group("${source_path_msvc}" FILES "${source}")
-endforeach()
-
 # set (moci_render_opengl_test_src
 #     test_main.cpp
 
 #     moci_render_opengl/render/buffer_test.cpp
 # )
 # add_executable(moci_render_opengl_tests ${moci_render_opengl_test_src})
-# target_link_libraries(moci_render_opengl_tests PRIVATE Moci::GraphicsApiOpenGL Catch2::Catch2)
+# target_link_libraries(moci_render_opengl_tests PRIVATE Moci::RenderOpenGL Catch2::Catch2)
 # source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_opengl_test_src})
 # catch_discover_tests(moci_render_opengl_tests)
 
+
+
+# GRAPHICS 
+set(moci_graphics_sources
+    moci_graphics/imgui/imgui_build.cpp
+    moci_graphics/imgui/imgui_layer.hpp
+    moci_graphics/imgui/imgui_layer.cpp
+        
+    moci_graphics/buffer.cpp
+    moci_graphics/camera.hpp
+    moci_graphics/camera.cpp
+    moci_graphics/color.hpp
+    moci_graphics/color.cpp
+    moci_graphics/font.hpp
+    moci_graphics/font.cpp
+    moci_graphics/image.hpp
+    moci_graphics/image.cpp
+    moci_graphics/light.hpp
+    moci_graphics/light.cpp
+    moci_graphics/mesh.hpp
+    moci_graphics/mesh.cpp
+    moci_graphics/render_command.hpp
+    moci_graphics/render_command.cpp
+    moci_graphics/render_queue.hpp
+    moci_graphics/render_queue.cpp
+    moci_graphics/renderer_api.cpp
+    moci_graphics/renderer.hpp
+    moci_graphics/renderer.cpp
+    moci_graphics/shader.cpp
+    moci_graphics/texture.cpp
+    moci_graphics/vertex_array.cpp
+
+    moci_graphics/freetype/library.hpp
+    moci_graphics/freetype/library.cpp
+
+    moci_graphics/obj/file.hpp
+    moci_graphics/obj/file.cpp
+
+)
+
+add_library(moci_graphics_lib STATIC ${moci_graphics_sources})
+add_library(Moci::Graphics ALIAS moci_graphics_lib)
+target_link_libraries(moci_graphics_lib 
+    PUBLIC 
+        Moci::RenderOpenGL 
+        Moci::RenderOpenGLES         
+        Moci::ImGui
+
+        assimp::assimp
+)
+
+
+set (moci_graphics_test_src
+    test_main.cpp
+
+    moci_graphics/camera_test.cpp
+    moci_graphics/color_test.cpp
+    moci_graphics/font_test.cpp
+    moci_graphics/image_test.cpp
+
+    moci_graphics/freetype/library_test.cpp
+    moci_graphics/obj/file_test.cpp
+)
+add_executable(moci_graphics_tests ${moci_graphics_test_src})
+target_link_libraries(moci_graphics_tests PRIVATE Moci::Graphics Catch2::Catch2)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_graphics_test_src})
+catch_discover_tests(moci_graphics_tests)
 
 
 # ORIGINAL
@@ -368,39 +398,7 @@ set(moci_sources
     moci/app/glfw/window.cpp
 
 
-    moci/render/imgui/imgui_build.cpp
-    moci/render/imgui/imgui_layer.hpp
-    moci/render/imgui/imgui_layer.cpp
-        
-    moci/render/buffer.cpp
-    moci/render/camera.hpp
-    moci/render/camera.cpp
-    moci/render/color.hpp
-    moci/render/color.cpp
-    moci/render/font.hpp
-    moci/render/font.cpp
-    moci/render/image.hpp
-    moci/render/image.cpp
-    moci/render/light.hpp
-    moci/render/light.cpp
-    moci/render/mesh.hpp
-    moci/render/mesh.cpp
-    moci/render/render_command.hpp
-    moci/render/render_command.cpp
-    moci/render/render_queue.hpp
-    moci/render/render_queue.cpp
-    moci/render/renderer_api.cpp
-    moci/render/renderer.hpp
-    moci/render/renderer.cpp
-    moci/render/shader.cpp
-    moci/render/texture.cpp
-    moci/render/vertex_array.cpp
-
-    moci/render/freetype/library.hpp
-    moci/render/freetype/library.cpp
-
-    moci/render/obj/file.hpp
-    moci/render/obj/file.cpp
+  
 
     moci/ui/component_layer.hpp
     moci/ui/component_layer.cpp
@@ -417,11 +415,6 @@ set(moci_sources
 add_library(${PROJECT_NAME} STATIC ${moci_sources})
 add_library(Moci::Moci ALIAS ${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
-foreach(source IN LISTS moci_sources)
-    get_filename_component(source_path "${source}" PATH)
-    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
-    source_group("${source_path_msvc}" FILES "${source}")
-endforeach()
 
 target_include_directories(${PROJECT_NAME} PUBLIC 
     ${CMAKE_SOURCE_DIR}/3rd_party/glfw/include
@@ -436,10 +429,7 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Math
         Moci::Network
         Moci::System
-        Moci::GraphicsApiOpenGL
-        Moci::GraphicsApiOpenGLES
-        Moci::ImGui
-        assimp::assimp
+        Moci::Graphics
 )
 
 
@@ -451,14 +441,6 @@ set (moci_test_src
     moci/app/events/application_event_test.cpp
     moci/app/events/key_event_test.cpp
     moci/app/events/mouse_event_test.cpp
-
-    moci/render/camera_test.cpp
-    moci/render/color_test.cpp
-    moci/render/font_test.cpp
-    moci/render/image_test.cpp
-
-    moci/render/freetype/library_test.cpp
-    moci/render/obj/file_test.cpp
 
     moci/ui/component_test.cpp
     moci/ui/widgets_test.cpp

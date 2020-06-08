@@ -1,4 +1,4 @@
-#include "moci/render/obj/file.hpp"
+#include "moci_graphics/obj/file.hpp"
 
 #include "moci_core/core/logging.hpp"
 #include "moci_core/core/scope_guard.hpp"
