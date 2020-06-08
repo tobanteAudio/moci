@@ -294,7 +294,7 @@ private:
             VULKAN_CALL(vkCreateShaderModule(device, &shaderInfo, nullptr, shaderModule));
         };
 
-        auto vertexShaderBinary = th::ReadFile("build_Debug/shader/vertex.spv");
+        auto vertexShaderBinary = th::ReadFile("playground/glfw_vulkan/shader/vertex.vert.spv");
         createShader(vertexShaderBinary, &vertexShaderModule);
         auto vertexShaderStageInfo                = VkPipelineShaderStageCreateInfo {};
         vertexShaderStageInfo.sType               = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
@@ -305,7 +305,7 @@ private:
         vertexShaderStageInfo.pName               = "main";
         vertexShaderStageInfo.pSpecializationInfo = nullptr;
 
-        auto fragmentShaderBinary = th::ReadFile("build_Debug/shader/fragment.spv");
+        auto fragmentShaderBinary = th::ReadFile("playground/glfw_vulkan/shader/fragment.frag.spv");
         createShader(fragmentShaderBinary, &fragmentShaderModule);
         auto fragmentShaderStageInfo                = VkPipelineShaderStageCreateInfo {};
         fragmentShaderStageInfo.sType               = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
