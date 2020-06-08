@@ -1,5 +1,5 @@
-.PHONY: default
-default: config build test
+.PHONY: all
+all: config build test
 
 BUILD_DIR_BASE = build
 CONFIG ?= Debug
