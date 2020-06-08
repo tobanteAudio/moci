@@ -2,7 +2,7 @@
 
 #if defined(MOCI_WINDOWS) || defined(MOCI_MAC) || defined(MOCI_LINUX)
 
-#include "moci/core/preprocessor.hpp"
+#include "moci_core/core/preprocessor.hpp"
 
 #include <cstdlib>
 

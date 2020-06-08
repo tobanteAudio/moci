@@ -6,7 +6,7 @@
 
 #include "moci/render/obj/file.hpp"
 
-#include "moci/core/preprocessor.hpp"
+#include "moci_core/core/preprocessor.hpp"
 
 #if !defined(MOCI_WINDOWS)
 TEST_CASE("moci/render: OBJFileCube", "[render]")

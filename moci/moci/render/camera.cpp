@@ -1,6 +1,6 @@
 #include "moci/render/camera.hpp"
 
-#include "moci/core/preprocessor.hpp"
+#include "moci_core/core/preprocessor.hpp"
 
 #include "moci/app/input.hpp"
 #include "moci/app/key_codes.hpp"

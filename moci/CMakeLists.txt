@@ -1,24 +1,47 @@
 project(moci)
 
+set(moci_core_sources
+    moci_core/benchmark/benchmark.hpp
+    moci_core/benchmark/profile.hpp
+
+    moci_core/core/algorithm.hpp
+    moci_core/core/logging.hpp
+    moci_core/core/logging.cpp
+    moci_core/core/memory.hpp
+    moci_core/core/preprocessor.hpp
+    moci_core/core/property_map.hpp
+    moci_core/core/property_map.cpp
+    moci_core/core/scope_guard.hpp
+    moci_core/core/scope_guard.cpp
+    moci_core/core/strings.hpp
+    moci_core/core/vector.hpp
+)
+
+add_library(moci_core_lib STATIC ${moci_core_sources})
+add_library(Moci::Core ALIAS moci_core_lib)
+target_compile_definitions(moci_core_lib PUBLIC NDEBUG=1)
+target_include_directories(moci_core_lib PUBLIC ${PROJECT_SOURCE_DIR})
+target_link_libraries(moci_core_lib 
+    PUBLIC 
+        Moci::CodeCoverage
+        Moci::CompilerOptions
+        Moci::CompilerWarnings
+        spdlog::spdlog
+        glm::glm
+        GSL
+)
+
+foreach(source IN LISTS moci_sources)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+endforeach()
+
+
+
 set(moci_sources
     moci/moci.hpp
     moci/moci.cpp
-    
-    moci/benchmark/benchmark.hpp
-    moci/benchmark/profile.hpp
-
-    moci/core/algorithm.hpp
-    moci/core/logging.hpp
-    moci/core/logging.cpp
-    moci/core/memory.hpp
-    moci/core/preprocessor.hpp
-    moci/core/property_map.hpp
-    moci/core/property_map.cpp
-    moci/core/scope_guard.hpp
-    moci/core/scope_guard.cpp
-    moci/core/strings.hpp
-    moci/core/vector.hpp
-
     
     moci/app/application.hpp
     moci/app/application.cpp
@@ -173,22 +196,17 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_link_libraries(${PROJECT_NAME} 
     PUBLIC 
+        Moci::Core
         Moci::Threads
         Moci::ImGui
         Moci::StbImage
         Moci::StbImageWrite
         Moci::StbImageResize
-        spdlog::spdlog
         glfw 
         ${GLFW_LIBRARIES}
         glm::glm
-        GSL
         freetype
         assimp::assimp
-    PRIVATE 
-        Moci::CodeCoverage
-        Moci::CompilerOptions
-        Moci::CompilerWarnings
 )
 
 if (${MOCI_API_OPENGL_MODERN})
@@ -216,10 +234,10 @@ endif()
 set (moci_test_src
     test_main.cpp
     
-    moci/core/algorithm_test.cpp
-    moci/core/property_map_test.cpp
-    moci/core/scope_guard_test.cpp
-    moci/core/strings_test.cpp
+    moci_core/core/algorithm_test.cpp
+    moci_core/core/property_map_test.cpp
+    moci_core/core/scope_guard_test.cpp
+    moci_core/core/strings_test.cpp
 
     moci/app/layer_stack_test.cpp
     moci/app/events/application_event_test.cpp

@@ -2,9 +2,9 @@
 
 #if MOCI_API_OPENGL_MODERN
 
-#include "moci/core/preprocessor.hpp"
+#include "moci_core/core/preprocessor.hpp"
 
-#include "moci/core/logging.hpp"
+#include "moci_core/core/logging.hpp"
 
 // glfw use gles headers
 #if defined(MOCI_API_OPENGL_ES)

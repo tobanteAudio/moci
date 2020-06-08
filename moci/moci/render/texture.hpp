@@ -1,9 +1,9 @@
 #pragma once
 
-#include "moci/core/logging.hpp"
-#include "moci/core/memory.hpp"
+#include "moci_core/core/logging.hpp"
+#include "moci_core/core/memory.hpp"
 
-#include "moci/core/vector.hpp"
+#include "moci_core/core/vector.hpp"
 #include <memory>
 #include <optional>
 #include <string>

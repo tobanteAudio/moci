@@ -1,5 +1,5 @@
-#include "moci/core/logging.hpp"
-#include "moci/core/vector.hpp"
+#include "moci_core/core/logging.hpp"
+#include "moci_core/core/vector.hpp"
 
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/stdout_color_sinks.h"

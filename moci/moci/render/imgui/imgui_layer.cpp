@@ -2,8 +2,8 @@
 #include "moci/render/imgui/imgui.hpp"
 
 #include "moci/app/application.hpp"
-#include "moci/benchmark/profile.hpp"
-#include "moci/core/logging.hpp"
+#include "moci_core/benchmark/profile.hpp"
+#include "moci_core/core/logging.hpp"
 
 namespace moci
 {

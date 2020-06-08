@@ -4,9 +4,9 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/core/algorithm.hpp"
+#include "moci_core/core/algorithm.hpp"
 
-TEST_CASE("moci/core: AlgorithmFindInVector", "[core]")
+TEST_CASE("moci_core: AlgorithmFindInVector", "[core]")
 {
     auto v = moci::Vector<int> {1, 2, 3};
 

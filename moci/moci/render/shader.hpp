@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci/core/memory.hpp"
+#include "moci_core/core/memory.hpp"
 
 #include <glm/glm.hpp>
 

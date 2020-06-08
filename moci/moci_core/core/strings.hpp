@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include "moci/core/vector.hpp"
+#include "moci_core/core/vector.hpp"
 #include <algorithm>
 #include <iostream>
 #include <locale>

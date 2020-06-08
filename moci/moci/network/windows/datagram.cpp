@@ -2,7 +2,7 @@
 
 #if defined(MOCI_WINDOWS)
 
-#include "moci/core/logging.hpp"
+#include "moci_core/core/logging.hpp"
 
 #include <cassert>
 #include <cstdio>

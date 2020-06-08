@@ -1,7 +1,7 @@
 #include "window.hpp"
 
-#include "moci/core/logging.hpp"
-#include "moci/core/preprocessor.hpp"
+#include "moci_core/core/logging.hpp"
+#include "moci_core/core/preprocessor.hpp"
 
 #include "moci/app/events/application_event.hpp"
 #include "moci/app/events/key_event.hpp"

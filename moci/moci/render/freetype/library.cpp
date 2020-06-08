@@ -1,6 +1,6 @@
 #include "moci/render/freetype/library.hpp"
 
-#include "moci/core/scope_guard.hpp"
+#include "moci_core/core/scope_guard.hpp"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H

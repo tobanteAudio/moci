@@ -2,7 +2,7 @@
 
 #if defined(MOCI_LINUX) || defined(MOCI_MAC)
 
-#include "moci/core/logging.hpp"
+#include "moci_core/core/logging.hpp"
 
 #include <cassert>
 #include <cstdio>

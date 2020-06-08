@@ -1,8 +1,8 @@
 #include "moci/render/obj/file.hpp"
 
-#include "moci/core/logging.hpp"
-#include "moci/core/scope_guard.hpp"
-#include "moci/core/strings.hpp"
+#include "moci_core/core/logging.hpp"
+#include "moci_core/core/scope_guard.hpp"
+#include "moci_core/core/strings.hpp"
 
 #include <fstream>
 #include <utility>

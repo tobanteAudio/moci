@@ -2,7 +2,7 @@
 
 #include "moci/app/events/event.hpp"
 #include "moci/app/timestep.hpp"
-#include "moci/core/memory.hpp"
+#include "moci_core/core/memory.hpp"
 
 #include <memory>
 #include <string>

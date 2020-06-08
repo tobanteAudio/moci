@@ -1,6 +1,6 @@
 #include "moci/network/datagram.hpp"
 
-#include "moci/core/preprocessor.hpp"
+#include "moci_core/core/preprocessor.hpp"
 #if defined(MOCI_MAC) || defined(MOCI_LINUX)
 #include "moci/network/unix/datagram.hpp"
 #elif defined(MOCI_WINDOWS)

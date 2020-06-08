@@ -2,7 +2,7 @@
 
 #include "moci/render/opengl/es2/es2.hpp"
 
-#include "moci/core/logging.hpp"
+#include "moci_core/core/logging.hpp"
 
 namespace moci
 {

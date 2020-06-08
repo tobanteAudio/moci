@@ -2,9 +2,9 @@
 
 #include <cstddef>
 
-#include "moci/core/memory.hpp"
+#include "moci_core/core/memory.hpp"
 
-#include "moci/core/vector.hpp"
+#include "moci_core/core/vector.hpp"
 
 #include <gsl/gsl>
 

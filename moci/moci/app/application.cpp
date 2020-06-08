@@ -1,8 +1,8 @@
 #include "application.hpp"
 
-#include "moci/benchmark/profile.hpp"
-#include "moci/core/logging.hpp"
 #include "moci/render/renderer.hpp"
+#include "moci_core/benchmark/profile.hpp"
+#include "moci_core/core/logging.hpp"
 
 #include "moci/app/events/key_event.hpp"
 #include "moci/app/events/mouse_event.hpp"

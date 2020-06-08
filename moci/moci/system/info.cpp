@@ -1,6 +1,6 @@
 #include "moci/system/info.hpp"
 
-#include "moci/core/preprocessor.hpp"
+#include "moci_core/core/preprocessor.hpp"
 
 #if defined(MOCI_LINUX)
 #include "moci/system/linux/info.hpp"

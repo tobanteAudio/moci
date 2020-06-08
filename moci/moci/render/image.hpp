@@ -4,7 +4,7 @@
 
 #include <cstdint>
 
-#include "moci/core/vector.hpp"
+#include "moci_core/core/vector.hpp"
 
 namespace moci
 {

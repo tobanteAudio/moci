@@ -4,8 +4,8 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/core/preprocessor.hpp"
 #include "moci/network/datagram.hpp"
+#include "moci_core/core/preprocessor.hpp"
 
 #if defined(MOCI_LINUX) || defined(MOCI_MAC)
 

@@ -1,6 +1,6 @@
 #include "moci/render/image.hpp"
 
-#include "moci/core/logging.hpp"
+#include "moci_core/core/logging.hpp"
 
 #include "stb_image.h"
 #include "stb_image_resize.h"

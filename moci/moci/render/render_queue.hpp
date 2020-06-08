@@ -1,6 +1,5 @@
 #pragma once
 
-#include "moci/core/memory.hpp"
 #include "moci/geometry/rectangle.hpp"
 #include "moci/render/buffer.hpp"
 #include "moci/render/color.hpp"
@@ -8,13 +7,14 @@
 #include "moci/render/shader.hpp"
 #include "moci/render/texture.hpp"
 #include "moci/render/vertex_array.hpp"
+#include "moci_core/core/memory.hpp"
 
 #include <glm/glm.hpp>
 
 #include <cstddef>
 #include <cstdint>
 
-#include "moci/core/vector.hpp"
+#include "moci_core/core/vector.hpp"
 #include <map>
 
 namespace moci

@@ -2,8 +2,8 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "moci/benchmark/profile.hpp"
 #include "moci/render/opengl/gl4/gl4.hpp"
+#include "moci_core/benchmark/profile.hpp"
 
 namespace moci
 {

@@ -1,6 +1,6 @@
 #include "render_queue.hpp"
 
-#include "moci/benchmark/profile.hpp"
+#include "moci_core/benchmark/profile.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
 

@@ -2,8 +2,8 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "moci/core/memory.hpp"
 #include "moci/render/renderer_api.hpp"
+#include "moci_core/core/memory.hpp"
 
 namespace moci
 {
