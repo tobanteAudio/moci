@@ -159,6 +159,7 @@ set(moci_graphics_api_base_sources
     moci_graphics_api_base/render/api.hpp
     moci_graphics_api_base/render/buffer.hpp
     moci_graphics_api_base/render/buffer.cpp
+    moci_graphics_api_base/render/texture.hpp
     moci_graphics_api_base/render/vertex_array.hpp
 
 )
@@ -244,7 +245,6 @@ set(moci_sources
     moci/render/renderer.cpp
     moci/render/shader.hpp
     moci/render/shader.cpp
-    moci/render/texture.hpp
     moci/render/texture.cpp
     moci/render/vertex_array.cpp
 

@@ -32,7 +32,6 @@
 #include "moci/render/renderer.hpp"
 #include "moci/render/renderer_api.hpp"
 #include "moci/render/shader.hpp"
-#include "moci/render/texture.hpp"
 
 #include "moci/render/obj/file.hpp"
 

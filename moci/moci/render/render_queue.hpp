@@ -5,7 +5,6 @@
 #include "moci/render/color.hpp"
 #include "moci/render/render_command.hpp"
 #include "moci/render/shader.hpp"
-#include "moci/render/texture.hpp"
 #include "moci_core/core/memory.hpp"
 #include "moci_math/geometry/rectangle.hpp"
 
