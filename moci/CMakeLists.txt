@@ -151,7 +151,7 @@ set(moci_events_sources
 
 add_library(moci_events_lib STATIC ${moci_events_sources})
 add_library(Moci::Events ALIAS moci_events_lib)
-target_link_libraries(moci_events_lib PUBLIC Moci::Core glm::glm)
+target_link_libraries(moci_events_lib PUBLIC Moci::Core)
 
 
 set (moci_events_test_src
@@ -170,7 +170,7 @@ catch_discover_tests(moci_events_tests)
 
 
 
-# GRAPHICS API BASE
+# RENDER BASE
 set(moci_render_base_sources
     moci_render_base/render/api.hpp
     moci_render_base/render/buffer.hpp
@@ -201,7 +201,7 @@ catch_discover_tests(moci_render_base_tests)
 
 
 
-# GRAPHICS API OPENGLES
+# RENDER OPENGLES
 set(moci_render_opengles_sources
     moci_render_opengles/moci_render_opengles.hpp
     moci_render_opengles/buffer.hpp
@@ -271,7 +271,7 @@ endif()
 
 
 
-# GRAPHICS API OPENGL
+# RENDER OPENGL
 set(moci_render_opengl_sources
     moci_render_opengl/moci_render_opengl.hpp
     moci_render_opengl/buffer.hpp
