@@ -154,6 +154,34 @@ catch_discover_tests(moci_system_tests)
 
 
 
+# GRAPHICS API BASE
+set(moci_graphics_api_base_sources
+    moci_graphics_api_base/render/api.hpp
+    moci_graphics_api_base/render/buffer.hpp
+    moci_graphics_api_base/render/buffer.cpp
+)
+
+add_library(moci_graphics_api_base_lib STATIC ${moci_graphics_api_base_sources})
+add_library(Moci::GraphicsApiBase ALIAS moci_graphics_api_base_lib)
+target_link_libraries(moci_graphics_api_base_lib PUBLIC Moci::Core Moci::Threads)
+
+foreach(source IN LISTS moci_sources)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+endforeach()
+
+set (moci_graphics_api_base_test_src
+    test_main.cpp
+
+    moci_graphics_api_base/render/buffer_test.cpp
+)
+add_executable(moci_graphics_api_base_tests ${moci_graphics_api_base_test_src})
+target_link_libraries(moci_graphics_api_base_tests PRIVATE Moci::GraphicsApiBase Catch2::Catch2)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_graphics_api_base_test_src})
+catch_discover_tests(moci_graphics_api_base_tests)
+
+
 
 # ORIGINAL
 set(moci_sources
@@ -189,7 +217,6 @@ set(moci_sources
     moci/render/imgui/imgui_layer.hpp
     moci/render/imgui/imgui_layer.cpp
         
-    moci/render/buffer.hpp
     moci/render/buffer.cpp
     moci/render/camera.hpp
     moci/render/camera.cpp
@@ -290,6 +317,7 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Math
         Moci::Network
         Moci::System
+        Moci::GraphicsApiBase
         Moci::ImGui
         Moci::StbImage
         Moci::StbImageWrite
@@ -330,7 +358,6 @@ set (moci_test_src
     moci/app/events/key_event_test.cpp
     moci/app/events/mouse_event_test.cpp
 
-    moci/render/buffer_test.cpp
     moci/render/camera_test.cpp
     moci/render/color_test.cpp
     moci/render/font_test.cpp

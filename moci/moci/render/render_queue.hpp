@@ -1,6 +1,7 @@
 #pragma once
 
-#include "moci/render/buffer.hpp"
+#include "moci_graphics_api_base/moci_graphics_api_base.hpp"
+
 #include "moci/render/color.hpp"
 #include "moci/render/render_command.hpp"
 #include "moci/render/shader.hpp"

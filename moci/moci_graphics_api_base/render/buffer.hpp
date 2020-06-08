@@ -1,7 +1,6 @@
 #pragma once
 
-#include "moci_core/core/logging.hpp"
-#include "moci_core/core/vector.hpp"
+#include "moci_core/moci_core.hpp"
 
 #include <cstdint>
 
