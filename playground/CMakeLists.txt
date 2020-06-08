@@ -28,6 +28,7 @@ if(WIN32)
             Moci::Moci 
             user32.lib 
             gdi32.lib
+            
     )
 endif()
 
@@ -35,3 +36,7 @@ add_subdirectory(allocator)
 add_subdirectory(glfw_metal)
 add_subdirectory(object_pool)
 add_subdirectory(thread_pool)
+
+if(MOCI_API_VULKAN)
+  add_subdirectory(glfw_vulkan)
+endif()
