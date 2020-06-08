@@ -16,14 +16,19 @@ end title
 center footer tobanteAudio
 
 package "MoCi" {
+    [Application]
     [Core]
+    [Events]
     [Math]
     [Network]
     [System]
     [Graphics]
+    [UI]
     [Render Base]
     [Render OpenGL]
     [Render OpenGLES]
+    [Render API]
+    [MoCi Headers]
 }
 
 package "External" {
@@ -39,22 +44,37 @@ package "External" {
 
 [spdlog] --> [Core]
 [GSL] --> [Core]
-[Core] --> [Math]
+
 [Core] --> [Network]
+
+
 [Core] --> [System]
 
+[Core] --> [Events]
+
+[Core] --> [Math]
 [glm] --> [Math]
 [Math] --> [Render Base]
 
+[glfw] --> [Render Base]
+[glew] --> [Render Base]
+[stb image] --> [Render Base]
+[freetype] --> [Render Base]
 [Render Base] --> [Render OpenGL]
 [Render Base] --> [Render OpenGLES]
 
 
-[Render OpenGL] --> [Graphics]
-[Render OpenGLES] --> [Graphics]
+[Events] --> [Render API]
+[Render OpenGL] --> [Render API]
+[Render OpenGLES] --> [Render API]
+
+[Render API] --> [Application]
+
+[Application] --> [Graphics]
 [assimp] --> [Graphics]
-[glfw] --> [Graphics]
-[stb image] --> [Graphics]
-[freetype] --> [Graphics]
+
+[Graphics] --> [UI]
+
+[UI] --> [MoCi Headers]
 
 @enduml
