@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['clear',['Clear',['../classmoci_1_1OpenGLESRendererAPI.html#a28a2f25583e6df0fe84442b20bab4625',1,'moci::OpenGLESRendererAPI::Clear()'],['../classmoci_1_1RenderCommand.html#a02a096848b31bed79a2b6b1365532dbc',1,'moci::RenderCommand::Clear()'],['../classmoci_1_1RendererAPI.html#a08548a545daef2597e698ae9225d6989',1,'moci::RendererAPI::Clear()']]],
+  ['clear',['Clear',['../classmoci_1_1RenderCommand.html#a02a096848b31bed79a2b6b1365532dbc',1,'moci::RenderCommand::Clear()'],['../classmoci_1_1RendererAPI.html#a08548a545daef2597e698ae9225d6989',1,'moci::RendererAPI::Clear()'],['../classmoci_1_1OpenGLESRendererAPI.html#a28a2f25583e6df0fe84442b20bab4625',1,'moci::OpenGLESRendererAPI::Clear()']]],
   ['color',['Color',['../classmoci_1_1Color.html#a61776ed35ea5cad2a4a32b0e10c5cd71',1,'moci::Color::Color() noexcept'],['../classmoci_1_1Color.html#a8662d6a452f0d37669bd40ad80fea9f4',1,'moci::Color::Color(float r, float g, float b) noexcept'],['../classmoci_1_1Color.html#a2ca1acaea64fd5dff079c00b9c6d1fec',1,'moci::Color::Color(float r, float g, float b, float alpha) noexcept']]],
   ['commit',['commit',['../classmoci_1_1ScopeGuard.html#ace38e013d5cbfa8a51616238b438a413',1,'moci::ScopeGuard']]],
   ['component',['Component',['../classmoci_1_1Component.html#aadee0bf9c5123a7618150e2e4477b158',1,'moci::Component::Component()=default'],['../classmoci_1_1Component.html#a363f1656d5bf729ce3352c42ffdf87e5',1,'moci::Component::Component(std::string id)']]],
