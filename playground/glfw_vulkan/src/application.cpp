@@ -82,15 +82,15 @@ void Application::Run()
         presentInfo.pResults           = nullptr;
 
         auto result = vkQueuePresentKHR(queue, &presentInfo);
-        if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || windowData_.framebufferResized)
-        {
-            windowData_.framebufferResized = false;
-            RecreateSwapChain();
-        }
-        else if (result != VK_SUCCESS)
-        {
-            throw std::runtime_error("failed to present swap chain image!");
-        }
+        // if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || windowData_.framebufferResized)
+        // {
+        //     windowData_.framebufferResized = false;
+        //     RecreateSwapChain();
+        // }
+        // else if (result != VK_SUCCESS)
+        // {
+        //     throw std::runtime_error("failed to present swap chain image!");
+        // }
     }
 }
 void Application::Shutdown()
@@ -113,7 +113,8 @@ void Application::Shutdown()
 
 void Application::RecreateSwapChain()
 {
-    int width = 0, height = 0;
+    int width  = 0;
+    int height = 0;
     glfwGetFramebufferSize(window, &width, &height);
     while (width == 0 || height == 0)
     {
@@ -146,6 +147,7 @@ void Application::RecreateSwapChain()
     createPipeline();
     createFrameBuffers();
     createCommandPool();
+    createVertexBuffer();
     createCommandBuffers();
     recordCommandBuffers();
 

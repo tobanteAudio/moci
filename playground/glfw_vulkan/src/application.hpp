@@ -216,12 +216,12 @@ private:
     void createQueue()
     {
         // Create Vulkan device
-        float const priorities[]         = {1.0f};
+        auto const priorities            = std::array {1.0f};
         auto queueCreateInfo             = VkDeviceQueueCreateInfo {};
         queueCreateInfo.sType            = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
         queueCreateInfo.queueCount       = 1;
         queueCreateInfo.queueFamilyIndex = queueFamilyIdx;
-        queueCreateInfo.pQueuePriorities = priorities;
+        queueCreateInfo.pQueuePriorities = priorities.data();
 
         auto deviceExtensions                    = std::vector<char const*> {VK_KHR_SWAPCHAIN_EXTENSION_NAME};
         auto deviceFeature                       = VkPhysicalDeviceFeatures {};
@@ -364,8 +364,8 @@ private:
         auto viewport     = VkViewport {};
         viewport.x        = 0.0f;
         viewport.y        = 0.0f;
-        viewport.width    = windowData_.width;
-        viewport.height   = windowData_.height;
+        viewport.width    = static_cast<float>(windowData_.width);
+        viewport.height   = static_cast<float>(windowData_.height);
         viewport.minDepth = 0.0f;
         viewport.maxDepth = 1.0f;
 
@@ -627,6 +627,8 @@ private:
             scissor.extent = {static_cast<uint32_t>(windowData_.width), static_cast<uint32_t>(windowData_.height)};
             vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
 
+            auto offsets = std::array {VkDeviceSize {0}};
+            vkCmdBindVertexBuffers(commandBuffer, 0, 1, &vertexBuffer_, offsets.data());
             vkCmdDraw(commandBuffer, 3, 1, 0, 0);
             vkCmdEndRenderPass(commandBuffer);
 
