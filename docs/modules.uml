@@ -1,6 +1,6 @@
 @startuml
 
-skinparam dpi 200
+skinparam dpi 100
 skinparam FooterFontColor Black
 skinparam backgroundColor #FFFFF
 skinparam titleBorderRoundCorner 0

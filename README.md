@@ -90,6 +90,8 @@ CONFIG=Release make config-vs build test
 - [spdlog: Logging](https://github.com/gabime/spdlog)
 - [stb: Image file loader](https://github.com/nothings/stb)
 
+![Module Dependencies](docs/modules.png)
+
 ### Dependencies Linux
 
 Look at the `circleci` config in [`.circleci/config.yml`](https://github.com/tobanteAudio/moci/blob/master/.circleci/config.yml) for Ubuntu packages. Otherwise just try building the project. CMake will tell you whats missing.
