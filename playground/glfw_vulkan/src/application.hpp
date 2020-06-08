@@ -1,13 +1,17 @@
 #pragma once
 
 #include <cstdlib>
+#include <cstring>
 
 #include <array>
+#include <exception>
 #include <limits>
 #include <vector>
 
 #include "util.hpp"
+#include "vertex.hpp"
 #include "vk.hpp"
+
 namespace th
 {
 
@@ -191,13 +195,16 @@ private:
         shaderStages[0] = vertexShaderStageInfo;
         shaderStages[1] = fragmentShaderStageInfo;
 
+        auto vertexBindingDescription   = th::GetVertexBindingDescription();
+        auto vertexAttributeDescription = th::GetVertexAttributeDescription();
+
         vertexInputInfo.sType                           = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
         vertexInputInfo.pNext                           = nullptr;
         vertexInputInfo.flags                           = 0;
-        vertexInputInfo.vertexBindingDescriptionCount   = 0;
-        vertexInputInfo.pVertexBindingDescriptions      = nullptr;
-        vertexInputInfo.vertexAttributeDescriptionCount = 0;
-        vertexInputInfo.pVertexAttributeDescriptions    = nullptr;
+        vertexInputInfo.vertexBindingDescriptionCount   = 1;
+        vertexInputInfo.pVertexBindingDescriptions      = &vertexBindingDescription;
+        vertexInputInfo.vertexAttributeDescriptionCount = vertexAttributeDescription.size();
+        vertexInputInfo.pVertexAttributeDescriptions    = vertexAttributeDescription.data();
 
         inputAssemnblyInfo.sType                  = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
         inputAssemnblyInfo.pNext                  = nullptr;
@@ -526,6 +533,58 @@ private:
         commandBufferBeginInfo.flags            = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT;
         commandBufferBeginInfo.pInheritanceInfo = nullptr;
     }
+
+    void createVertexBuffer()
+    {
+        auto bufferInfo                  = VkBufferCreateInfo {};
+        bufferInfo.sType                 = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+        bufferInfo.pNext                 = nullptr;
+        bufferInfo.flags                 = 0;
+        bufferInfo.size                  = sizeof(th::Vertex) * th::Triangle.size();
+        bufferInfo.usage                 = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
+        bufferInfo.sharingMode           = VK_SHARING_MODE_EXCLUSIVE;
+        bufferInfo.queueFamilyIndexCount = 0;
+        bufferInfo.pQueueFamilyIndices   = nullptr;
+
+        VULKAN_CALL(vkCreateBuffer(device, &bufferInfo, nullptr, &vertexBuffer_));
+
+        auto findMemoryTypeIndex = [&](uint32_t typeFilter, VkMemoryPropertyFlags flags) -> uint32_t {
+            VkPhysicalDeviceMemoryProperties memoryProps {};
+            vkGetPhysicalDeviceMemoryProperties(physicalDevices[0], &memoryProps);
+            for (auto i = uint32_t {0}; i < memoryProps.memoryTypeCount; i++)
+            {
+                auto isTypeFilter = static_cast<bool>(typeFilter & (1 << i));
+                auto hasFlags     = static_cast<bool>(memoryProps.memoryTypes[i].propertyFlags & flags);
+                if (isTypeFilter && hasFlags)
+                {
+                    return i;
+                }
+            }
+
+            throw std::runtime_error("No memory type index found");
+            return {};
+        };
+
+        auto memoryRequirements = VkMemoryRequirements {};
+        vkGetBufferMemoryRequirements(device, vertexBuffer_, &memoryRequirements);
+
+        auto allocateInfo           = VkMemoryAllocateInfo {};
+        allocateInfo.sType          = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+        allocateInfo.pNext          = nullptr;
+        allocateInfo.allocationSize = memoryRequirements.size;
+        allocateInfo.memoryTypeIndex
+            = findMemoryTypeIndex(memoryRequirements.memoryTypeBits,
+                                  VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+
+        VULKAN_CALL(vkAllocateMemory(device, &allocateInfo, nullptr, &vertexBufferMemory_));
+
+        VULKAN_CALL(vkBindBufferMemory(device, vertexBuffer_, vertexBufferMemory_, 0));
+        void* rawData = nullptr;
+        VULKAN_CALL(vkMapMemory(device, vertexBufferMemory_, 0, bufferInfo.size, 0, &rawData));
+        std::memcpy(rawData, th::Triangle.data(), bufferInfo.size);
+        vkUnmapMemory(device, vertexBufferMemory_);
+    }
+
     void recordCommandBuffers()
     {
         auto commandBufferBeginInfo             = VkCommandBufferBeginInfo {};
@@ -651,5 +710,7 @@ private:
     VkPipelineVertexInputStateCreateInfo vertexInputInfo        = {};
     VkPipelineInputAssemblyStateCreateInfo inputAssemnblyInfo   = {};
     std::array<VkPipelineShaderStageCreateInfo, 2> shaderStages = {};
+    VkBuffer vertexBuffer_                                      = VK_NULL_HANDLE;
+    VkDeviceMemory vertexBufferMemory_                          = VK_NULL_HANDLE;
 };
 }  // namespace th

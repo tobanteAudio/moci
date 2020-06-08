@@ -1,5 +1,4 @@
 #include "application.hpp"
-#include "vertex.hpp"
 
 namespace th
 {
@@ -41,6 +40,7 @@ int Application::Startup()
     createFrameBuffers();
     createCommandPool();
     createCommandBuffers();
+    createVertexBuffer();
     recordCommandBuffers();
     createSemaphores();
 
@@ -96,9 +96,11 @@ void Application::Run()
 void Application::Shutdown()
 {
     VULKAN_CALL(vkDeviceWaitIdle(device));
+
+    vkFreeMemory(device, vertexBufferMemory_, nullptr);
+    vkDestroyBuffer(device, vertexBuffer_, nullptr);
     vkDestroySemaphore(device, semaphoreImageAvailable, nullptr);
     vkDestroySemaphore(device, semaphoreRenderDone, nullptr);
-
     destroySwapChain();
     vkDestroySwapchainKHR(device, swapChain, nullptr);
     vkDestroyDevice(device, nullptr);
