@@ -17,7 +17,7 @@ TEST_CASE("moci_graphics: ImageDefaultConstructor", "[render]")
 
 TEST_CASE("moci_graphics: ImagePathConstructor", "[render]")
 {
-    moci::Image img {"test_data/colors.png"};
+    moci::Image img {"moci_test_data/colors.png"};
     REQUIRE(img.GetWidth() == 256);
     REQUIRE(img.GetHeight() == 256);
     REQUIRE(img.GetNumChannels() == 3);
@@ -28,7 +28,7 @@ TEST_CASE("moci_graphics: ImagePathConstructor", "[render]")
 TEST_CASE("moci_graphics: ImageLoadFromFileSuccess", "[render]")
 {
     moci::Image img {};
-    REQUIRE(img.LoadFromFile("test_data/colors.png") == true);
+    REQUIRE(img.LoadFromFile("moci_test_data/colors.png") == true);
     REQUIRE(img.GetWidth() == 256);
     REQUIRE(img.GetHeight() == 256);
     REQUIRE(img.GetNumChannels() == 3);

@@ -15,7 +15,7 @@ TEST_CASE("moci_graphics: TypefaceConstruct", "[render]")
 
 // TEST_CASE("moci_graphics: TypefaceGetWidthForString", "[render]")
 // {
-//     auto const path = "test_data/OpenSans-Bold.ttf";
+//     auto const path = "moci_test_data/OpenSans-Bold.ttf";
 //     auto const opt  = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
 //     REQUIRE(opt.has_value() == true);
 

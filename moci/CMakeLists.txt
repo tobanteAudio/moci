@@ -496,7 +496,7 @@ execute_process(
     COMMAND 
         ${CMAKE_COMMAND} -E 
         copy_if_different 
-        ${CMAKE_CURRENT_SOURCE_DIR}/test_data/${_target}
-        ${CMAKE_CURRENT_BINARY_DIR}/test_data/${_target}
+        ${CMAKE_CURRENT_SOURCE_DIR}/moci_test_data/${_target}
+        ${CMAKE_CURRENT_BINARY_DIR}/moci_test_data/${_target}
 )
 endforeach()
