@@ -13,9 +13,9 @@ namespace moci
 RenderQueue::RenderQueue()
 {
 #if defined(MOCI_API_OPENGL_LEGACY)
-    data_.shader = moci::Shader::Create("moci/moci/assets/es2_batch_render.glsl");
+    data_.shader = moci::Shader::Create("assets/es2_batch_render.glsl");
 #else
-    data_.shader = moci::Shader::Create("moci/moci/assets/gl4_batch_render.glsl");
+    data_.shader = moci::Shader::Create("assets/gl4_batch_render.glsl");
 #endif
     data_.shader->Bind();
 
@@ -23,7 +23,7 @@ RenderQueue::RenderQueue()
     data_.indices.reserve(MaxIndexCount);
     data_.textures.reserve(MaxTextureUnits);
 
-    data_.defaultTexture = moci::Texture2D::Create("moci/moci/assets/white_10x10.png");
+    data_.defaultTexture = moci::Texture2D::Create("assets/white_10x10.png");
 
     moci::BufferLayout layout = {
         {moci::ShaderDataType::Float3, "position"},            //
@@ -42,7 +42,7 @@ RenderQueue::RenderQueue()
     data_.vao->SetIndexBuffer(data_.ibo);
     data_.vao->Unbind();
 
-    FontInit("moci/moci/assets/fonts/open-sans/OpenSans-Bold.ttf");
+    FontInit("assets/fonts/open-sans/OpenSans-Bold.ttf");
 }
 
 RenderQueue::~RenderQueue()
