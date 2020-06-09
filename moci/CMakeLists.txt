@@ -9,32 +9,8 @@ add_subdirectory(moci_math)
 add_subdirectory(moci_network)
 add_subdirectory(moci_system)
 add_subdirectory(moci_events)
+add_subdirectory(moci_render_base)
 
-
-# RENDER BASE
-set(moci_render_base_sources
-    moci_render_base/render/api.hpp
-    moci_render_base/render/buffer.hpp
-    moci_render_base/render/buffer.cpp
-    moci_render_base/render/graphics_context.hpp
-    moci_render_base/render/graphics_context.cpp
-    moci_render_base/render/shader.hpp
-    moci_render_base/render/texture.hpp
-    moci_render_base/render/vertex_array.hpp
-
-)
-
-add_library(moci_render_base_lib STATIC ${moci_render_base_sources})
-add_library(Moci::RenderApiBase ALIAS moci_render_base_lib)
-target_link_libraries(moci_render_base_lib PUBLIC Moci::Math glfw ${GLFW_LIBRARIES})
-target_include_directories(moci_render_base_lib PUBLIC ${CMAKE_SOURCE_DIR}/3rd_party/glfw/include)
-
-
-set (moci_render_base_test_src test_main.cpp moci_render_base/render/buffer_test.cpp)
-add_executable(moci_render_base_tests ${moci_render_base_test_src})
-target_link_libraries(moci_render_base_tests PRIVATE Moci::RenderApiBase Catch2::Catch2)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_base_test_src})
-catch_discover_tests(moci_render_base_tests)
 
 
 
