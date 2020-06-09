@@ -187,14 +187,11 @@ set(moci_render_base_sources
 
 add_library(moci_render_base_lib STATIC ${moci_render_base_sources})
 add_library(Moci::RenderApiBase ALIAS moci_render_base_lib)
-target_link_libraries(moci_render_base_lib PUBLIC Moci::Math)
+target_link_libraries(moci_render_base_lib PUBLIC Moci::Math glfw ${GLFW_LIBRARIES})
+target_include_directories(moci_render_base_lib PUBLIC ${CMAKE_SOURCE_DIR}/3rd_party/glfw/include)
 
 
-set (moci_render_base_test_src
-    test_main.cpp
-
-    moci_render_base/render/buffer_test.cpp
-)
+set (moci_render_base_test_src test_main.cpp moci_render_base/render/buffer_test.cpp)
 add_executable(moci_render_base_tests ${moci_render_base_test_src})
 target_link_libraries(moci_render_base_tests PRIVATE Moci::RenderApiBase Catch2::Catch2)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_base_test_src})
@@ -232,8 +229,6 @@ target_link_libraries(moci_render_opengles_lib
         Moci::StbImageWrite
         Moci::StbImageResize
         freetype
-        glfw 
-        ${GLFW_LIBRARIES}
 )
 
 if (${MOCI_API_OPENGL_MODERN})
@@ -302,8 +297,6 @@ target_link_libraries(moci_render_opengl_lib
         Moci::StbImageWrite
         Moci::StbImageResize
         freetype
-        glfw 
-        ${GLFW_LIBRARIES}
 )
 
 if (${MOCI_API_OPENGL_MODERN})
@@ -498,22 +491,22 @@ catch_discover_tests(moci_widget_tests)
 
 
 
-# ORIGINAL
-set(moci_sources
-    moci/moci.hpp
-    moci/moci.cpp
+# HEADERS
+set(moci_header_sources
+    moci_header/moci/moci.hpp
+    moci_header/moci/moci.cpp
     
 
 )
 
-add_library(${PROJECT_NAME} STATIC ${moci_sources})
+add_library(${PROJECT_NAME} STATIC ${moci_header_sources})
 add_library(Moci::Moci ALIAS ${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
 
 target_include_directories(${PROJECT_NAME} PUBLIC 
-    ${CMAKE_SOURCE_DIR}/3rd_party/glfw/include
+    
     ${CMAKE_SOURCE_DIR}/3rd_party/glm
-    .
+    ${PROJECT_SOURCE_DIR}/moci_header
     /opt/vc/include
 )
 
@@ -527,14 +520,6 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Application
         Moci::Widgets
 )
-
-
-# tests
-set (moci_test_src test_main.cpp)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_test_src})
-add_executable(moci_tests ${moci_test_src})
-target_link_libraries(moci_tests PRIVATE Moci::Moci Catch2::Catch2)
-catch_discover_tests(moci_tests)
 
 # copy testfiles
 foreach(_target OpenSans-Bold.ttf cube.obj teapot.obj colors.png)
