@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci/ui/widgets.hpp"
+#include "moci_widget/widgets/widgets.hpp"
 
 namespace moci
 {

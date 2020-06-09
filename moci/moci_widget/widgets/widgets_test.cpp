@@ -4,17 +4,17 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci/ui/style.hpp"
-#include "moci/ui/widgets.hpp"
+#include "moci_widget/widgets/style.hpp"
+#include "moci_widget/widgets/widgets.hpp"
 
-TEST_CASE("moci/ui: LabelConstruct", "[ui]")
+TEST_CASE("moci_widget: LabelConstruct", "[ui]")
 {
     moci::Label const label {"test", {}};
     REQUIRE(label.GetText() == "test");
     REQUIRE(label.GetTextView() == "test");
 }
 
-TEST_CASE("moci/ui: LabelSetText", "[ui]")
+TEST_CASE("moci_widget: LabelSetText", "[ui]")
 {
     moci::Label label {"", {}};
     REQUIRE(label.GetText().empty());
@@ -24,7 +24,7 @@ TEST_CASE("moci/ui: LabelSetText", "[ui]")
     REQUIRE(label.GetTextView() == "test143");
 }
 
-TEST_CASE("moci/ui: LabelSetTextColor", "[ui]")
+TEST_CASE("moci_widget: LabelSetTextColor", "[ui]")
 {
     moci::Label label {"", {}};
 
@@ -43,13 +43,13 @@ TEST_CASE("moci/ui: LabelSetTextColor", "[ui]")
     REQUIRE(c2.GetAlpha() == 1.0f);
 }
 
-TEST_CASE("moci/ui: SliderConstruct", "[ui]")
+TEST_CASE("moci_widget: SliderConstruct", "[ui]")
 {
     moci::Slider const slider {moci::Colors::Black};
     REQUIRE(slider.GetValue() == 0.0f);
 }
 
-TEST_CASE("moci/ui: SliderSetValue", "[ui]")
+TEST_CASE("moci_widget: SliderSetValue", "[ui]")
 {
     moci::Slider slider {moci::Colors::Black};
     REQUIRE(slider.GetValue() == 0.0f);
@@ -57,7 +57,7 @@ TEST_CASE("moci/ui: SliderSetValue", "[ui]")
     REQUIRE(slider.GetValue() == 143.0f);
 }
 
-TEST_CASE("moci/ui: SliderSetColor", "[ui]")
+TEST_CASE("moci_widget: SliderSetColor", "[ui]")
 {
     moci::Slider slider {{}};
 

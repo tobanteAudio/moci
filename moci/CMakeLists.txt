@@ -467,19 +467,43 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_graphics_test_src})
 catch_discover_tests(moci_graphics_tests)
 
 
+
+
+
+
+
+
+# UI
+set(moci_widget_sources
+    moci_widget/widgets/component_layer.hpp
+    moci_widget/widgets/component_layer.cpp
+    moci_widget/widgets/component.hpp
+    moci_widget/widgets/component.cpp
+    moci_widget/widgets/style.hpp
+    moci_widget/widgets/style.cpp
+    moci_widget/widgets/widgets.hpp
+    moci_widget/widgets/widgets.cpp   
+)
+
+add_library(moci_widget_lib STATIC ${moci_widget_sources})
+add_library(Moci::Widgets ALIAS moci_widget_lib)
+target_link_libraries(moci_widget_lib PUBLIC Moci::Graphics)
+
+
+set (moci_widget_test_src test_main.cpp moci_widget/widgets/widgets_test.cpp moci_widget/widgets/component_test.cpp)
+add_executable(moci_widget_tests ${moci_widget_test_src})
+target_link_libraries(moci_widget_tests PRIVATE Moci::Widgets Catch2::Catch2)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_widget_test_src})
+catch_discover_tests(moci_widget_tests)
+
+
+
 # ORIGINAL
 set(moci_sources
     moci/moci.hpp
     moci/moci.cpp
     
-    moci/ui/component_layer.hpp
-    moci/ui/component_layer.cpp
-    moci/ui/component.hpp
-    moci/ui/component.cpp
-    moci/ui/style.hpp
-    moci/ui/style.cpp
-    moci/ui/widgets.hpp
-    moci/ui/widgets.cpp   
+
 )
 
 add_library(${PROJECT_NAME} STATIC ${moci_sources})
@@ -501,27 +525,15 @@ target_link_libraries(${PROJECT_NAME}
         Moci::System
         Moci::Graphics
         Moci::Application
+        Moci::Widgets
 )
 
 
 # tests
-set (moci_test_src
-    test_main.cpp
-
-    moci/ui/component_test.cpp
-    moci/ui/widgets_test.cpp
-
-)
+set (moci_test_src test_main.cpp)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_test_src})
 add_executable(moci_tests ${moci_test_src})
-target_link_libraries(moci_tests 
-    PRIVATE 
-        Moci::Moci 
-        Moci::CodeCoverage
-        Moci::CompilerOptions
-        Moci::CompilerWarnings
-        Catch2::Catch2
-)
+target_link_libraries(moci_tests PRIVATE Moci::Moci Catch2::Catch2)
 catch_discover_tests(moci_tests)
 
 # copy testfiles

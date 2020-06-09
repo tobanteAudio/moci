@@ -2,8 +2,9 @@
 
 #include "moci_events/moci_events.hpp"
 
-#include "moci/ui/component.hpp"
-#include "moci/ui/style.hpp"
+#include "moci_widget/widgets/component.hpp"
+#include "moci_widget/widgets/style.hpp"
+
 #include "moci_graphics/render_queue.hpp"
 #include "moci_render_api/moci_render_api.hpp"
 

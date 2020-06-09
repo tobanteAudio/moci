@@ -1,4 +1,4 @@
-#include "moci/ui/style.hpp"
+#include "moci_widget/widgets/style.hpp"
 
 namespace moci
 {

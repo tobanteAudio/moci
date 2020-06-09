@@ -9,11 +9,7 @@
 #include "moci_render_api/moci_render_api.hpp"
 #include "moci_render_base/moci_render_base.hpp"
 #include "moci_system/moci_system.hpp"
-
-#include "moci/ui/component.hpp"
-#include "moci/ui/component_layer.hpp"
-#include "moci/ui/style.hpp"
-#include "moci/ui/widgets.hpp"
+#include "moci_widget/moci_widget.hpp"
 
 // main should only be included once.
 #if defined(MOCI_ENTRYPOINT)
