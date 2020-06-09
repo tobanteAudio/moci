@@ -7,37 +7,7 @@ target_include_directories(moci_include_path INTERFACE ${PROJECT_SOURCE_DIR})
 add_subdirectory(moci_core)
 add_subdirectory(moci_math)
 add_subdirectory(moci_network)
-
-
-# SYSTEM
-set(moci_system_sources
-    moci_system/system/info.hpp
-    moci_system/system/info.cpp
-    moci_system/system/apple/info.hpp
-    moci_system/system/apple/info.cpp
-    moci_system/system/linux/info.hpp
-    moci_system/system/linux/info.cpp
-    moci_system/system/windows/info.hpp
-    moci_system/system/windows/info.cpp
-)
-
-add_library(moci_system_lib STATIC ${moci_system_sources})
-add_library(Moci::System ALIAS moci_system_lib)
-target_link_libraries(moci_system_lib PUBLIC Moci::Core Moci::Threads)
-
-
-set (moci_system_test_src
-    test_main.cpp
-    
-    moci_system/system/info_test.cpp
-)
-add_executable(moci_system_tests ${moci_system_test_src})
-target_link_libraries(moci_system_tests PRIVATE Moci::System Catch2::Catch2)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_system_test_src})
-catch_discover_tests(moci_system_tests)
-
-
-
+add_subdirectory(moci_system)
 
 
 # EVENTS
