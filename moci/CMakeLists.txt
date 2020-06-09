@@ -1,52 +1,10 @@
 project(moci)
 
-# CORE
-set(moci_core_sources
-    moci_core/benchmark/benchmark.hpp
-    moci_core/benchmark/profile.hpp
+add_library(moci_include_path INTERFACE)
+add_library(Moci::IncludePath ALIAS moci_include_path)
+target_include_directories(moci_include_path INTERFACE ${PROJECT_SOURCE_DIR})
 
-    moci_core/core/algorithm.hpp
-    moci_core/core/logging.hpp
-    moci_core/core/logging.cpp
-    moci_core/core/memory.hpp
-    moci_core/core/preprocessor.hpp
-    moci_core/core/property_map.hpp
-    moci_core/core/property_map.cpp
-    moci_core/core/scope_guard.hpp
-    moci_core/core/scope_guard.cpp
-    moci_core/core/strings.hpp
-    moci_core/core/vector.hpp
-)
-
-add_library(moci_core_lib STATIC ${moci_core_sources})
-add_library(Moci::Core ALIAS moci_core_lib)
-target_compile_definitions(moci_core_lib PUBLIC NDEBUG=1)
-target_include_directories(moci_core_lib PUBLIC ${PROJECT_SOURCE_DIR})
-target_link_libraries(moci_core_lib 
-    PUBLIC 
-        Moci::CodeCoverage
-        Moci::CompilerOptions
-        Moci::CompilerWarnings
-        spdlog::spdlog
-        GSL
-)
-
-
-set (moci_core_test_src
-    test_main.cpp
-    
-    moci_core/core/algorithm_test.cpp
-    moci_core/core/property_map_test.cpp
-    moci_core/core/scope_guard_test.cpp
-    moci_core/core/strings_test.cpp
-)
-add_executable(moci_core_tests ${moci_core_test_src})
-target_link_libraries(moci_core_tests PRIVATE Moci::Core Catch2::Catch2)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_core_test_src})
-catch_discover_tests(moci_core_tests)
-
-
-
+add_subdirectory(moci_core)
 
 
 # MATH
