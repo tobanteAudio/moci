@@ -16,20 +16,4 @@ add_subdirectory(moci_render_api)
 add_subdirectory(moci_application)
 add_subdirectory(moci_graphics)
 add_subdirectory(moci_widget)
-
-# HEADERS
-add_library(${PROJECT_NAME} STATIC moci_header/moci/moci.hpp moci_header/moci/moci.cpp)
-add_library(Moci::Moci ALIAS ${PROJECT_NAME})
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/moci_header /opt/vc/include)
-target_link_libraries(${PROJECT_NAME} 
-    PUBLIC 
-        Moci::Core
-        Moci::Math
-        Moci::Network
-        Moci::System
-        Moci::Graphics
-        Moci::Application
-        Moci::Widget
-)
-
+add_subdirectory(moci_header)
