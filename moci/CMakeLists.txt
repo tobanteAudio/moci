@@ -12,48 +12,7 @@ add_subdirectory(moci_events)
 add_subdirectory(moci_render_base)
 add_subdirectory(moci_render_opengl)
 add_subdirectory(moci_render_opengles)
-
-# RENDER API
-set(moci_render_api_sources
-    moci_render_api/render/buffer.cpp
-    moci_render_api/render/render_command.hpp
-    moci_render_api/render/render_command.cpp
-    moci_render_api/render/renderer_api.cpp
-    moci_render_api/render/renderer.hpp
-    moci_render_api/render/renderer.cpp
-    moci_render_api/render/shader.cpp
-    moci_render_api/render/texture.cpp
-    moci_render_api/render/vertex_array.cpp
-
-    moci_render_api/layer/layer_stack.hpp
-    moci_render_api/layer/layer_stack.cpp
-    moci_render_api/layer/layer.hpp
-    moci_render_api/layer/layer.cpp
-
-    moci_render_api/imgui/imgui_build.cpp
-    moci_render_api/imgui/imgui_layer.hpp
-    moci_render_api/imgui/imgui_layer.cpp
-
-)
-
-add_library(moci_render_api_lib STATIC ${moci_render_api_sources})
-add_library(Moci::RenderApi ALIAS moci_render_api_lib)
-target_link_libraries(moci_render_api_lib PUBLIC Moci::RenderOpenGL Moci::RenderOpenGLES Moci::Events Moci::ImGui)
-
-
-set (moci_render_api_test_src
-    test_main.cpp
-    
-    moci_render_api/layer/layer_stack_test.cpp
-)
-add_executable(moci_render_api_tests ${moci_render_api_test_src})
-target_link_libraries(moci_render_api_tests PRIVATE Moci::RenderApi Catch2::Catch2)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_api_test_src})
-catch_discover_tests(moci_render_api_tests)
-
-
-
-
+add_subdirectory(moci_render_api)
 add_subdirectory(moci_application)
 
 
