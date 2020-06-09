@@ -23,14 +23,7 @@ set(moci_render_opengl_sources
 
 add_library(moci_render_opengl_lib STATIC ${moci_render_opengl_sources})
 add_library(Moci::RenderOpenGL ALIAS moci_render_opengl_lib)
-target_link_libraries(moci_render_opengl_lib 
-    PUBLIC 
-        Moci::RenderApiBase
-        Moci::StbImage
-        Moci::StbImageWrite
-        Moci::StbImageResize
-        
-)
+target_link_libraries(moci_render_opengl_lib PUBLIC Moci::RenderApiBase)
 
 if (${MOCI_API_OPENGL_MODERN})
     target_compile_definitions(moci_render_opengl_lib PUBLIC MOCI_API_OPENGL_MODERN=1)

@@ -17,8 +17,17 @@ set(moci_render_base_sources
 
 add_library(moci_render_base_lib STATIC ${moci_render_base_sources})
 add_library(Moci::RenderApiBase ALIAS moci_render_base_lib)
-target_link_libraries(moci_render_base_lib PUBLIC Moci::Math glfw ${GLFW_LIBRARIES})
+
 target_include_directories(moci_render_base_lib PUBLIC ${CMAKE_SOURCE_DIR}/3rd_party/glfw/include)
+target_link_libraries(moci_render_base_lib 
+    PUBLIC 
+        Moci::Math 
+        glfw 
+        ${GLFW_LIBRARIES}
+        Moci::StbImage
+        Moci::StbImageWrite
+        Moci::StbImageResize
+)
 
 
 set (moci_render_base_test_src main_test.cpp render/buffer_test.cpp)
