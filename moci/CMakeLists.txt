@@ -8,42 +8,7 @@ add_subdirectory(moci_core)
 add_subdirectory(moci_math)
 add_subdirectory(moci_network)
 add_subdirectory(moci_system)
-
-
-# EVENTS
-set(moci_events_sources
-    moci_events/events/application_event.hpp
-    moci_events/events/event.hpp
-    moci_events/events/key_event.hpp
-    moci_events/events/mouse_event.hpp
-    moci_events/input.hpp
-    moci_events/input.cpp
-    moci_events/key_codes.hpp
-    moci_events/mouse_button_codes.hpp
-    moci_events/timestep.hpp
-)
-
-add_library(moci_events_lib STATIC ${moci_events_sources})
-add_library(Moci::Events ALIAS moci_events_lib)
-target_link_libraries(moci_events_lib PUBLIC Moci::Core)
-
-
-set (moci_events_test_src
-    test_main.cpp
-    
-    moci_events/events/application_event_test.cpp
-    moci_events/events/key_event_test.cpp
-    moci_events/events/mouse_event_test.cpp
-)
-add_executable(moci_events_tests ${moci_events_test_src})
-target_link_libraries(moci_events_tests PRIVATE Moci::Events Catch2::Catch2)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_events_test_src})
-catch_discover_tests(moci_events_tests)
-
-
-
-
-
+add_subdirectory(moci_events)
 
 
 # RENDER BASE
