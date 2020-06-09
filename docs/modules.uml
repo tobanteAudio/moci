@@ -19,16 +19,16 @@ package "MoCi" {
     [Application]
     [Core]
     [Events]
+    [Graphics]
+    [Headers (Moci::Moci)]
     [Math]
     [Network]
-    [System]
-    [Graphics]
-    [UI]
+    [Render API]
     [Render Base]
     [Render OpenGL]
     [Render OpenGLES]
-    [Render API]
-    [MoCi Headers]
+    [System]
+    [Widget]
 }
 
 package "External" {
@@ -73,8 +73,8 @@ package "External" {
 [Application] --> [Graphics]
 [assimp] --> [Graphics]
 
-[Graphics] --> [UI]
+[Graphics] --> [Widget]
 
-[UI] --> [MoCi Headers]
+[Widget] --> [Headers (Moci::Moci)]
 
 @enduml
