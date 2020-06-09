@@ -6,36 +6,7 @@ target_include_directories(moci_include_path INTERFACE ${PROJECT_SOURCE_DIR})
 
 add_subdirectory(moci_core)
 add_subdirectory(moci_math)
-
-
-
-# NETWORK
-set(moci_network_sources
-    moci_network/datagram.hpp
-    moci_network/datagram.cpp
-
-    moci_network/unix/datagram.hpp
-    moci_network/unix/datagram.cpp
-
-    moci_network/windows/datagram.hpp
-    moci_network/windows/datagram.cpp
-)
-
-add_library(moci_network_lib STATIC ${moci_network_sources})
-add_library(Moci::Network ALIAS moci_network_lib)
-target_link_libraries(moci_network_lib PUBLIC Moci::Core Moci::Threads)
-
-
-set (moci_network_test_src
-    test_main.cpp
-    
-    moci_network/datagram_test.cpp
-)
-add_executable(moci_network_tests ${moci_network_test_src})
-target_link_libraries(moci_network_tests PRIVATE Moci::Network Catch2::Catch2)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_network_test_src})
-catch_discover_tests(moci_network_tests)
-
+add_subdirectory(moci_network)
 
 
 # SYSTEM

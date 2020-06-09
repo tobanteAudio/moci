@@ -5,7 +5,7 @@
 #include "catch2/catch.hpp"
 
 #include "moci_core/core/preprocessor.hpp"
-#include "moci_network/datagram.hpp"
+#include "moci_network/moci_network.hpp"
 
 #if defined(MOCI_LINUX) || defined(MOCI_MAC)
 
