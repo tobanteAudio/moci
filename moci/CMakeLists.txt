@@ -15,28 +15,7 @@ add_subdirectory(moci_render_opengles)
 add_subdirectory(moci_render_api)
 add_subdirectory(moci_application)
 add_subdirectory(moci_graphics)
-
-# UI
-set(moci_widget_sources
-    moci_widget/widgets/component_layer.hpp
-    moci_widget/widgets/component_layer.cpp
-    moci_widget/widgets/component.hpp
-    moci_widget/widgets/component.cpp
-    moci_widget/widgets/style.hpp
-    moci_widget/widgets/style.cpp
-    moci_widget/widgets/widgets.hpp
-    moci_widget/widgets/widgets.cpp   
-)
-
-add_library(moci_widget_lib STATIC ${moci_widget_sources})
-add_library(Moci::Widgets ALIAS moci_widget_lib)
-target_link_libraries(moci_widget_lib PUBLIC Moci::Graphics)
-
-set (moci_widget_test_src test_main.cpp moci_widget/widgets/widgets_test.cpp moci_widget/widgets/component_test.cpp)
-add_executable(moci_widget_tests ${moci_widget_test_src})
-target_link_libraries(moci_widget_tests PRIVATE Moci::Widgets Catch2::Catch2)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_widget_test_src})
-catch_discover_tests(moci_widget_tests)
+add_subdirectory(moci_widget)
 
 # HEADERS
 add_library(${PROJECT_NAME} STATIC moci_header/moci/moci.hpp moci_header/moci/moci.cpp)
@@ -51,6 +30,6 @@ target_link_libraries(${PROJECT_NAME}
         Moci::System
         Moci::Graphics
         Moci::Application
-        Moci::Widgets
+        Moci::Widget
 )
 
