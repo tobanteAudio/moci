@@ -44,7 +44,7 @@ auto GetAttributeLayout(std::string src) -> Vector<ShaderAttribute>
     }
 
     return result;
-};
+}
 }  // namespace
 
 OpenGLESShader::OpenGLESShader(std::string const& filepath)

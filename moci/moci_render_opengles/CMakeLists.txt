@@ -24,14 +24,7 @@ set(moci_render_opengles_sources
 add_library(moci_render_opengles_lib STATIC ${moci_render_opengles_sources})
 add_library(Moci::RenderOpenGLES ALIAS moci_render_opengles_lib)
 target_link_libraries(moci_render_opengles_lib PUBLIC Moci::RenderApiBase)
-
-if (${MOCI_API_OPENGL_MODERN})
-    target_compile_definitions(moci_render_opengles_lib PUBLIC MOCI_API_OPENGL_MODERN=1)
-endif()
-
-if (${MOCI_API_OPENGL_LEGACY})
-    target_compile_definitions(moci_render_opengles_lib PUBLIC MOCI_API_OPENGL_LEGACY=1)
-endif()
+target_include_directories(moci_render_opengles_lib PUBLIC /opt/vc/include)
 
 if (${MOCI_API_OPENGL_ES})
     # old
@@ -45,15 +38,3 @@ if (${MOCI_API_OPENGL_ES})
 else()
     target_link_libraries(moci_render_opengles_lib PUBLIC libglew_static)
 endif()
-
-
-
-# set (moci_render_opengles_test_src
-#     test_main.cpp
-
-#     render/buffer_test.cpp
-# )
-# add_executable(moci_render_opengles_tests ${moci_render_opengles_test_src})
-# target_link_libraries(moci_render_opengles_tests PRIVATE Moci::RenderOpenGLES Catch2::Catch2)
-# source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_opengles_test_src})
-# catch_discover_tests(moci_render_opengles_tests)

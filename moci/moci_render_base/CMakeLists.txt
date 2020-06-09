@@ -29,6 +29,14 @@ target_link_libraries(moci_render_base_lib
         Moci::StbImageResize
 )
 
+if (${MOCI_API_OPENGL_MODERN})
+    target_compile_definitions(moci_render_base_lib PUBLIC MOCI_API_OPENGL_MODERN=1)
+endif()
+
+if (${MOCI_API_OPENGL_LEGACY})
+    target_compile_definitions(moci_render_base_lib PUBLIC MOCI_API_OPENGL_LEGACY=1)
+endif()
+
 
 set (moci_render_base_test_src main_test.cpp render/buffer_test.cpp)
 add_executable(moci_render_base_tests ${moci_render_base_test_src})
