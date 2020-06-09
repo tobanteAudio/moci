@@ -14,52 +14,7 @@ add_subdirectory(moci_render_opengl)
 add_subdirectory(moci_render_opengles)
 add_subdirectory(moci_render_api)
 add_subdirectory(moci_application)
-
-
-# GRAPHICS 
-set(moci_graphics_sources
-    moci_graphics/camera.hpp
-    moci_graphics/camera.cpp
-    moci_graphics/color.hpp
-    moci_graphics/color.cpp
-    moci_graphics/font.hpp
-    moci_graphics/font.cpp
-    moci_graphics/image.hpp
-    moci_graphics/image.cpp
-    moci_graphics/light.hpp
-    moci_graphics/light.cpp
-    moci_graphics/mesh.hpp
-    moci_graphics/mesh.cpp
-    moci_graphics/render_queue.hpp
-    moci_graphics/render_queue.cpp
-
-    moci_graphics/freetype/library.hpp
-    moci_graphics/freetype/library.cpp
-
-    moci_graphics/obj/file.hpp
-    moci_graphics/obj/file.cpp
-
-)
-
-add_library(moci_graphics_lib STATIC ${moci_graphics_sources})
-add_library(Moci::Graphics ALIAS moci_graphics_lib)
-target_link_libraries(moci_graphics_lib PUBLIC Moci::Application assimp::assimp freetype)
-
-set (moci_graphics_test_src
-    test_main.cpp
-
-    moci_graphics/camera_test.cpp
-    moci_graphics/color_test.cpp
-    moci_graphics/font_test.cpp
-    moci_graphics/image_test.cpp
-
-    moci_graphics/freetype/library_test.cpp
-    moci_graphics/obj/file_test.cpp
-)
-add_executable(moci_graphics_tests ${moci_graphics_test_src})
-target_link_libraries(moci_graphics_tests PRIVATE Moci::Graphics Catch2::Catch2)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_graphics_test_src})
-catch_discover_tests(moci_graphics_tests)
+add_subdirectory(moci_graphics)
 
 # UI
 set(moci_widget_sources
@@ -99,13 +54,3 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Widgets
 )
 
-# COPY TESTFILES
-foreach(_target OpenSans-Bold.ttf cube.obj teapot.obj colors.png)
-execute_process(
-    COMMAND 
-        ${CMAKE_COMMAND} -E 
-        copy_if_different 
-        ${CMAKE_CURRENT_SOURCE_DIR}/moci_test_data/${_target}
-        ${CMAKE_CURRENT_BINARY_DIR}/moci_test_data/${_target}
-)
-endforeach()
