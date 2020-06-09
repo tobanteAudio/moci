@@ -181,8 +181,7 @@
 
 #define BIT(x) (1 << x)
 
-#include <functional>
-#define MOCI_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+#define MOCI_BIND_EVENT_FN(fn) [self = this](auto& e) { return self->fn(e); }
 
 #if defined(__has_builtin)
 #define MOCI_HAS_BUILTIN(...) __has_builtin(__VA_ARGS__)
