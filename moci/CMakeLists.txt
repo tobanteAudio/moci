@@ -374,37 +374,7 @@ catch_discover_tests(moci_render_api_tests)
 
 
 
-
-
-# APPLICATION
-set(moci_application_sources
-    moci_application/application.hpp
-    moci_application/application.cpp
-    moci_application/entry_point.hpp
-    moci_application/window.hpp
-    moci_application/window.cpp
-    
-    moci_application/glfw/input.hpp
-    moci_application/glfw/input.cpp
-    moci_application/glfw/window.hpp
-    moci_application/glfw/window.cpp
-)
-
-add_library(moci_application_lib STATIC ${moci_application_sources})
-add_library(Moci::Application ALIAS moci_application_lib)
-target_link_libraries(moci_application_lib PUBLIC Moci::RenderApi)
-
-
-# set (moci_application_test_src
-#     test_main.cpp
-    
-#     moci_application/layer_stack_test.cpp
-# )
-# add_executable(moci_application_tests ${moci_application_test_src})
-# target_link_libraries(moci_application_tests PRIVATE Moci::Application Catch2::Catch2)
-# source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_application_test_src})
-# catch_discover_tests(moci_application_tests)
-
+add_subdirectory(moci_application)
 
 
 # GRAPHICS 

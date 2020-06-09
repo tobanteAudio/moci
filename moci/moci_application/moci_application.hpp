@@ -1,4 +1,9 @@
 #pragma once
 
-#include "moci_application/application.hpp"
-#include "moci_application/window.hpp"
+#include "src/application.hpp"
+#include "src/window.hpp"
+
+// main should only be included once.
+#if defined(MOCI_ENTRYPOINT)
+#include "src/entry_point.hpp"
+#endif
