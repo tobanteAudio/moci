@@ -6,9 +6,11 @@
 class Sandbox : public moci::Application
 {
 public:
-    Sandbox()
+    Sandbox() : moci::Application {moci::WindowSpecs {"Sandbox 2D", 1920, 1080}}
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox-3d", "moci-sandbox-3d.json");
+        GetWindow().SetFullscreen(true);
+        GetWindow().SetVSync(false);
         PushLayer(moci::MakeScope<DemoLayer>());
     }
 

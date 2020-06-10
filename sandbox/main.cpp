@@ -133,6 +133,7 @@ public:
     Sandbox() : moci::Application(moci::WindowSpecs {"Sandbox 2D", 1280, 720})
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox", "moci-sandbox.json");
+        GetWindow().SetFullscreen(true);
         PushLayer(moci::MakeScope<moci::ComponentLayer>(moci::MakeScope<MultiChannel>()));
     }
 
