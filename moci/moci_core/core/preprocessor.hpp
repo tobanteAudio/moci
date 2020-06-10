@@ -221,8 +221,9 @@
 
 namespace moci
 {
-template<typename Type>
-void IgnoreUnused(Type const& /*ignored*/)
+template<typename... Types>
+auto IgnoreUnused(Types&&... /*unused*/) -> void
 {
 }
+
 }  // namespace moci
