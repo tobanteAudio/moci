@@ -250,12 +250,12 @@ void DemoLayer::OnUpdate(moci::Timestep ts)
 void DemoLayer::OnEvent(moci::Event& e)
 {
     moci::EventDispatcher dispatcher(e);
-    dispatcher.Dispatch<moci::WindowResizeEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnWindowResized));
-    dispatcher.Dispatch<moci::KeyPressedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnKeyPressed));
-    dispatcher.Dispatch<moci::MouseScrolledEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnMouseScrolled));
-    dispatcher.Dispatch<moci::MouseMovedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnMouseMoved));
-    dispatcher.Dispatch<moci::MouseButtonPressedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnMousePressed));
-    dispatcher.Dispatch<moci::MouseButtonReleasedEvent>(MOCI_BIND_EVENT_FN(DemoLayer::OnMouseReleased));
+    dispatcher.Dispatch<moci::WindowResizeEvent>(MOCI_EVENT_METHOD(DemoLayer::OnWindowResized));
+    dispatcher.Dispatch<moci::KeyPressedEvent>(MOCI_EVENT_METHOD(DemoLayer::OnKeyPressed));
+    dispatcher.Dispatch<moci::MouseScrolledEvent>(MOCI_EVENT_METHOD(DemoLayer::OnMouseScrolled));
+    dispatcher.Dispatch<moci::MouseMovedEvent>(MOCI_EVENT_METHOD(DemoLayer::OnMouseMoved));
+    dispatcher.Dispatch<moci::MouseButtonPressedEvent>(MOCI_EVENT_METHOD(DemoLayer::OnMousePressed));
+    dispatcher.Dispatch<moci::MouseButtonReleasedEvent>(MOCI_EVENT_METHOD(DemoLayer::OnMouseReleased));
 }
 
 bool DemoLayer::OnWindowResized(moci::WindowResizeEvent& e)

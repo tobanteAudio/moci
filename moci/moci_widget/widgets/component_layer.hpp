@@ -55,9 +55,9 @@ public:
     void OnEvent(Event& e) override
     {
         EventDispatcher dispatcher(e);
-        dispatcher.Dispatch<WindowResizeEvent>(MOCI_BIND_EVENT_FN(ComponentLayer::OnWindowResized));
-        dispatcher.Dispatch<MouseMovedEvent>(MOCI_BIND_EVENT_FN(ComponentLayer::OnMouseMoved));
-        dispatcher.Dispatch<MouseButtonPressedEvent>(MOCI_BIND_EVENT_FN(ComponentLayer::OnMousePressed));
+        dispatcher.Dispatch<WindowResizeEvent>(MOCI_EVENT_METHOD(ComponentLayer::OnWindowResized));
+        dispatcher.Dispatch<MouseMovedEvent>(MOCI_EVENT_METHOD(ComponentLayer::OnMouseMoved));
+        dispatcher.Dispatch<MouseButtonPressedEvent>(MOCI_EVENT_METHOD(ComponentLayer::OnMousePressed));
     }
 
     bool OnWindowResized(WindowResizeEvent& e)

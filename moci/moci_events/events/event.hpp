@@ -69,6 +69,8 @@ public:
     }
 };
 
+#define MOCI_EVENT_METHOD(fn) [self = this](auto& e) { return self->fn(e); }
+
 class EventDispatcher
 {
 public:

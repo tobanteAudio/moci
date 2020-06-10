@@ -40,8 +40,8 @@ public:
     void OnEvent(moci::Event& e) override
     {
         moci::EventDispatcher dispatcher(e);
-        dispatcher.Dispatch<moci::WindowResizeEvent>(MOCI_BIND_EVENT_FN(MociModelViwerLayer::OnWindowResized));
-        dispatcher.Dispatch<moci::KeyPressedEvent>(MOCI_BIND_EVENT_FN(MociModelViwerLayer::OnKeyPressed));
+        dispatcher.Dispatch<moci::WindowResizeEvent>(MOCI_EVENT_METHOD(MociModelViwerLayer::OnWindowResized));
+        dispatcher.Dispatch<moci::KeyPressedEvent>(MOCI_EVENT_METHOD(MociModelViwerLayer::OnKeyPressed));
     }
 
     bool OnWindowResized(moci::WindowResizeEvent& e)

@@ -93,8 +93,8 @@ void OrthographicCameraController::OnUpdate(Timestep ts)
 void OrthographicCameraController::OnEvent(Event& e)
 {
     EventDispatcher dispatcher(e);
-    dispatcher.Dispatch<MouseScrolledEvent>(MOCI_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
-    dispatcher.Dispatch<WindowResizeEvent>(MOCI_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
+    dispatcher.Dispatch<MouseScrolledEvent>(MOCI_EVENT_METHOD(OrthographicCameraController::OnMouseScrolled));
+    dispatcher.Dispatch<WindowResizeEvent>(MOCI_EVENT_METHOD(OrthographicCameraController::OnWindowResized));
 }
 
 bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
