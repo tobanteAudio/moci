@@ -6,10 +6,9 @@
 // You tell GLFW to use vulkan by defining GLFW_INCLUDE_VULKAN, GLFW
 // automatically looks for vulkan header in <vulkan/vulkan.h> if not included
 // already.
-#define GLFW_INCLUDE_VULKAN
+#include <vulkan/vulkan.hpp>
+// #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
-
-#include <vulkan/vulkan.h>
 
 inline std::string errorString(VkResult errorCode)
 {

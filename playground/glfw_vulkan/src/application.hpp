@@ -41,11 +41,11 @@ private:
             vkDestroyFramebuffer(device, framebuffer, nullptr);
         }
 
-        // vkDestroyPipeline(device, pipeline, nullptr);
+        vkDestroyPipeline(device, pipeline, nullptr);
         vkDestroyRenderPass(device, renderPass, nullptr);
-        // vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
-        // vkDestroyShaderModule(device, vertexShaderModule, nullptr);
-        // vkDestroyShaderModule(device, fragmentShaderModule, nullptr);
+        vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
+        vkDestroyShaderModule(device, vertexShaderModule, nullptr);
+        vkDestroyShaderModule(device, fragmentShaderModule, nullptr);
 
         for (auto const& imageView : imageViews)
         {

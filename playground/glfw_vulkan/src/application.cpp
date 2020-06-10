@@ -103,6 +103,8 @@ void Application::Shutdown()
     vkDestroySemaphore(device, semaphoreRenderDone, nullptr);
     destroySwapChain();
     vkDestroySwapchainKHR(device, swapChain, nullptr);
+    // vkDestroyShaderModule(device, vertexShaderModule, nullptr);
+    // vkDestroyShaderModule(device, fragmentShaderModule, nullptr);
     vkDestroyDevice(device, nullptr);
     vkDestroySurfaceKHR(instance, surface, nullptr);
     vkDestroyInstance(instance, nullptr);
