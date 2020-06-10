@@ -8,8 +8,6 @@
 namespace moci
 {
 
-#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
-
 Application* Application::s_Instance = nullptr;
 
 Application::Application() : Application(WindowSpecs {}) { }
@@ -21,7 +19,7 @@ Application::Application(WindowSpecs windowSpecs)
     MOCI_CORE_INFO("Initializing App...");
 
     m_Window = Scope<Window>(Window::Create(windowSpecs));
-    m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+    m_Window->SetEventCallback(MOCI_EVENT_METHOD(OnEvent));
 
     Renderer::Init();
     PushOverlay(MakeScope<ImGuiLayer>());
@@ -44,8 +42,8 @@ void Application::OnEvent(Event& e)
     }
 
     EventDispatcher dispatcher(e);
-    dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
-    dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
+    dispatcher.Dispatch<WindowCloseEvent>(MOCI_EVENT_METHOD(OnWindowClose));
+    dispatcher.Dispatch<WindowResizeEvent>(MOCI_EVENT_METHOD(OnWindowResize));
 
     for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
     {
