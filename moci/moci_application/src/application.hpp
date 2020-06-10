@@ -17,6 +17,8 @@ class Application
 {
 public:
     Application();
+    Application(WindowProps windowSpecs);
+
     virtual ~Application() = default;
 
     void OnEvent(Event& e);
