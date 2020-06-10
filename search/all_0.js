@@ -6,7 +6,7 @@ var searchData=
   ['advance',['advance',['../structmoci_1_1Typeface_1_1Character.html#a9ef83ab48c41b16e1f6e1cf8b9366aeb',1,'moci::Typeface::Character']]],
   ['alpha',['Alpha',['../classmoci_1_1Texture.html#a57db5936f0b54c47f796062e080bdde9a6132295fcf5570fb8b0a944ef322a598',1,'moci::Texture']]],
   ['api',['API',['../classmoci_1_1RendererAPI.html#a923c59f4e5298b143fa8233c6ee61477',1,'moci::RendererAPI']]],
-  ['application',['Application',['../classmoci_1_1Application.html',1,'moci::Application'],['../classmoci_1_1Application.html#ad76abfb8fe2f845c1a6433e79e7ac218',1,'moci::Application::Application()']]],
+  ['application',['Application',['../classmoci_1_1Application.html',1,'moci::Application'],['../classmoci_1_1Application.html#ad76abfb8fe2f845c1a6433e79e7ac218',1,'moci::Application::Application()'],['../classmoci_1_1Application.html#aa7c855e90e96b0a680ac811435a2325f',1,'moci::Application::Application(WindowSpecs windowSpecs)']]],
   ['apprender',['AppRender',['../namespacemoci.html#a1ffc575f64d8c1ee66b01f44bbb10036a4b2eb3c601042333ac1c0565ff58e3d6',1,'moci']]],
   ['apprenderevent',['AppRenderEvent',['../classmoci_1_1AppRenderEvent.html',1,'moci::AppRenderEvent'],['../classmoci_1_1AppRenderEvent.html#afd98779ebb1a6f4a42c36fb35b487197',1,'moci::AppRenderEvent::AppRenderEvent()']]],
   ['apptick',['AppTick',['../namespacemoci.html#a1ffc575f64d8c1ee66b01f44bbb10036a559b408d45669603dbac61cd15984f13',1,'moci']]],

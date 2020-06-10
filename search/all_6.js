@@ -77,7 +77,7 @@ var searchData=
   ['getyoffset',['GetYOffset',['../classmoci_1_1MouseScrolledEvent.html#a8246ba1cba9c9ea17814e12f975109bb',1,'moci::MouseScrolledEvent']]],
   ['getzoomlevel',['GetZoomLevel',['../classmoci_1_1OrthographicCameraController.html#af38644543eec8670db1f61558d927673',1,'moci::OrthographicCameraController']]],
   ['glfwinput',['GlfwInput',['../classmoci_1_1GlfwInput.html',1,'moci']]],
-  ['glfwwindow',['GlfwWindow',['../classmoci_1_1GlfwWindow.html',1,'moci::GlfwWindow'],['../classmoci_1_1GlfwWindow.html#a27c9dd05b2063e3aa147a8704617c05a',1,'moci::GlfwWindow::GlfwWindow()']]],
+  ['glfwwindow',['GlfwWindow',['../classmoci_1_1GlfwWindow.html',1,'moci::GlfwWindow'],['../classmoci_1_1GlfwWindow.html#a21ff60876f7bebdd922e84cec9d8be15',1,'moci::GlfwWindow::GlfwWindow()']]],
   ['graphicscontext',['GraphicsContext',['../classmoci_1_1GraphicsContext.html',1,'moci']]],
   ['green',['Green',['../classmoci_1_1Colors.html#acf06622d368c3ce5b2cd2af81695a5be',1,'moci::Colors']]]
 ];

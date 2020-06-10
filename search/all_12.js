@@ -8,7 +8,7 @@ var searchData=
   ['texturecube',['TextureCube',['../classmoci_1_1TextureCube.html',1,'moci']]],
   ['threadid',['ThreadID',['../structmoci_1_1ProfileResult.html#ae9b0acee260ac06dde7c9f4f78b2a267',1,'moci::ProfileResult']]],
   ['timestep',['Timestep',['../classmoci_1_1Timestep.html',1,'moci::Timestep'],['../classmoci_1_1Timestep.html#a820538ae7fd82ca3fa1d35fe59159425',1,'moci::Timestep::Timestep()']]],
-  ['title',['Title',['../structmoci_1_1WindowProps.html#a5c4c10dc4ad672fc5cb04bc519ec9c0b',1,'moci::WindowProps']]],
+  ['title',['Title',['../structmoci_1_1WindowSpecs.html#aeaab0fe9d573b88995bd305081a0df2a',1,'moci::WindowSpecs']]],
   ['to',['To',['../classmoci_1_1Rectangle.html#a08c455c56664cc7875ffaa30d1e91838',1,'moci::Rectangle']]],
   ['todo_20list',['Todo List',['../todo.html',1,'']]],
   ['tofloat',['ToFloat',['../classmoci_1_1Rectangle.html#a4136a62b301eaa7a740918c873a78c70',1,'moci::Rectangle']]],

@@ -232,9 +232,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1WindowCloseEvent.html">WindowCloseEvent</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoci_1_1WindowProps.html">WindowProps</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1WindowResizeEvent.html">WindowResizeEvent</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoci_1_1WindowSpecs.html">WindowSpecs</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -350,9 +350,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a949b07c0da5bcbfe927563d477f3af29"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Args&gt; </td></tr>
 <tr class="memitem:a949b07c0da5bcbfe927563d477f3af29"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a949b07c0da5bcbfe927563d477f3af29">MakeRef</a> (Args &amp;&amp;... args)</td></tr>
 <tr class="separator:a949b07c0da5bcbfe927563d477f3af29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae476b7800a4885ccb9a99952efba1628"><td class="memTemplParams" colspan="2">template&lt;typename Type &gt; </td></tr>
-<tr class="memitem:ae476b7800a4885ccb9a99952efba1628"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#ae476b7800a4885ccb9a99952efba1628">IgnoreUnused</a> (Type const &amp;)</td></tr>
-<tr class="separator:ae476b7800a4885ccb9a99952efba1628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1589c274d25902230a26f6466088839"><td class="memTemplParams" colspan="2">template&lt;typename... Types&gt; </td></tr>
+<tr class="memitem:ad1589c274d25902230a26f6466088839"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#ad1589c274d25902230a26f6466088839">IgnoreUnused</a> (Types &amp;&amp;...) -&gt; void</td></tr>
+<tr class="separator:ad1589c274d25902230a26f6466088839"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ccee1e564cdb80112c1a1097254ec5b"><td class="memTemplParams" colspan="2">template&lt;typename aLambda , typename rLambda &gt; </td></tr>
 <tr class="memitem:a7ccee1e564cdb80112c1a1097254ec5b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classmoci_1_1ScopeGuard.html">ScopeGuard</a>&lt; rLambda &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemoci.html#a7ccee1e564cdb80112c1a1097254ec5b">MakeScopeGuardThatDoesNOTRollbackIfAdquireThrows</a> (aLambda &amp;&amp;_a, rLambda &amp;&amp;_r)</td></tr>
 <tr class="separator:a7ccee1e564cdb80112c1a1097254ec5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -619,20 +619,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ae476b7800a4885ccb9a99952efba1628"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae476b7800a4885ccb9a99952efba1628">&#9670;&nbsp;</a></span>IgnoreUnused()</h2>
+<a id="ad1589c274d25902230a26f6466088839"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1589c274d25902230a26f6466088839">&#9670;&nbsp;</a></span>IgnoreUnused()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Type &gt; </div>
+template&lt;typename... Types&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void moci::IgnoreUnused </td>
+          <td class="memname">auto moci::IgnoreUnused </td>
           <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="paramtype">Types &amp;&amp;&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td> -&gt; void
+</td>
         </tr>
       </table>
 </div><div class="memdoc">
