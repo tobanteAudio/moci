@@ -17,7 +17,7 @@ class Application
 {
 public:
     Application();
-    Application(WindowProps windowSpecs);
+    Application(WindowSpecs windowSpecs);
 
     virtual ~Application() = default;
 

@@ -9,13 +9,13 @@
 namespace moci
 {
 
-struct WindowProps
+struct WindowSpecs
 {
     std::string Title;
     unsigned int Width;
     unsigned int Height;
 
-    WindowProps(std::string title = "moci engine", unsigned int width = 1280, unsigned int height = 1024)
+    WindowSpecs(std::string title = "moci engine", unsigned int width = 1280, unsigned int height = 1024)
         : Title(std::move(title)), Width(width), Height(height)
     {
     }
@@ -27,7 +27,7 @@ class Window
 public:
     using EventCallbackFn = std::function<void(Event&)>;
 
-    static auto Create(const WindowProps& props = WindowProps()) -> Window*;
+    static auto Create(const WindowSpecs& props = WindowSpecs()) -> Window*;
 
     virtual ~Window() = default;
 

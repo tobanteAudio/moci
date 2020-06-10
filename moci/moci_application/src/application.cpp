@@ -12,9 +12,9 @@ namespace moci
 
 Application* Application::s_Instance = nullptr;
 
-Application::Application() : Application(WindowProps {}) { }
+Application::Application() : Application(WindowSpecs {}) { }
 
-Application::Application(WindowProps windowSpecs)
+Application::Application(WindowSpecs windowSpecs)
 {
     MOCI_CORE_ASSERT(!s_Instance, "Application already exists!");
     s_Instance = this;
