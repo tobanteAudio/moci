@@ -95,10 +95,6 @@
 
 #if MOCI_LINUX || MOCI_ANDROID
 
-#ifdef _DEBUG
-#define MOCI_DEBUG 1
-#endif
-
 // Allow override for big-endian Linux platforms
 #if defined(__LITTLE_ENDIAN__) || !defined(MOCI_BIG_ENDIAN)
 #define MOCI_LITTLE_ENDIAN 1
@@ -116,7 +112,6 @@
 
 #if defined(__arm__) || defined(__arm64__) || defined(__aarch64__)
 #define MOCI_ARM 1
-// #define MOCI_API_OPENGLES 1
 #elif __MMX__ || __SSE__ || __amd64__
 #define MOCI_INTEL 1
 #endif
@@ -131,6 +126,15 @@
 
 #elif defined(_MSC_VER)
 #define MOCI_COMPILER_MSVC 1
+
+#elif defined(__INTEL_COMPILER)
+#define MOCI_COMPILER_INTEL 1
+
+#elif defined(__BORLANDC__)
+#define MOCI_COMPILER_BORLAND 1
+
+#elif defined(__IBMCPP__)
+#define MOCI_COMPILER_IBM 1
 
 #else
 #error unknown compiler
