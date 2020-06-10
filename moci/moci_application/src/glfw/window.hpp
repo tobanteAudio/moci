@@ -22,7 +22,7 @@ namespace moci
 class GlfwWindow : public Window
 {
 public:
-    GlfwWindow(const WindowSpecs& props);
+    GlfwWindow(WindowSpecs props);
     ~GlfwWindow() override;
 
     void OnUpdate() override;
@@ -43,7 +43,7 @@ public:
     [[nodiscard]] inline auto GetNativeWindow() const -> void* override { return m_Window; }
 
 private:
-    virtual void Init(const WindowSpecs& props);
+    virtual void Init(WindowSpecs props);
     virtual void Shutdown();
 
     GLFWwindow* m_Window {};

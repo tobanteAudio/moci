@@ -18,7 +18,7 @@ Application::Application(WindowSpecs windowSpecs)
     s_Instance = this;
     MOCI_CORE_INFO("Initializing App...");
 
-    m_Window = Scope<Window>(Window::Create(windowSpecs));
+    m_Window = Scope<Window>(Window::Create(std::move(windowSpecs)));
     m_Window->SetEventCallback(MOCI_EVENT_METHOD(OnEvent));
 
     Renderer::Init();

@@ -36,7 +36,7 @@ private:
     auto OnWindowClose(WindowCloseEvent& e) -> bool;
     auto OnWindowResize(WindowResizeEvent& e) -> bool;
 
-    Scope<Window> m_Window;
+    Scope<Window> m_Window                                                  = nullptr;
     bool m_Running                                                          = true;
     bool m_Minimized                                                        = false;
     LayerStack m_LayerStack                                                 = {};

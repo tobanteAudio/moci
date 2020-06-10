@@ -15,13 +15,13 @@ static void GLFWErrorCallback(int error, const char* description)
     MOCI_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 }
 
-auto Window::Create(const WindowSpecs& props) -> Window* { return new GlfwWindow(props); }
+auto Window::Create(WindowSpecs props) -> Window* { return new GlfwWindow(std::move(props)); }
 
-GlfwWindow::GlfwWindow(const WindowSpecs& props) { Init(props); }
+GlfwWindow::GlfwWindow(WindowSpecs props) { Init(std::move(props)); }
 
 GlfwWindow::~GlfwWindow() { Shutdown(); }
 
-void GlfwWindow::Init(const WindowSpecs& props)
+void GlfwWindow::Init(WindowSpecs props)
 {
     m_Data.Title  = props.Title;
     m_Data.Width  = props.Width;
