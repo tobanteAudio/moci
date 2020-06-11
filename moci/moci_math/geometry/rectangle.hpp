@@ -95,13 +95,36 @@ public:
     [[nodiscard]] constexpr auto GetHeight() const noexcept -> Type { return height_; }
 
     /**
+     * @brief Returns the x coordinate of the rectangle's right-side.
+     */
+    [[nodiscard]] constexpr auto GetRight() const noexcept -> Type { return position_.GetX() + width_; }
+
+    /**
+     * @brief Returns the y coordinate of the rectangle's bottom edge.
+     */
+    [[nodiscard]] constexpr auto GetBottom() const noexcept -> Type { return position_.GetY() + height_; }
+
+    /**
+     * @brief Returns the aspect ratio width / height.
+     */
+    [[nodiscard]] constexpr auto GetAspectRatio() const noexcept -> Type
+    {
+        if (GetWidth() != Type {})
+        {
+            return GetWidth() / GetHeight();
+        }
+
+        return Type {};
+    }
+
+    /**
      * @brief Returns a new rectangle from the top & shrinks the original.
      */
     [[nodiscard]] auto RemoveFromTop(Type amount) noexcept -> Rectangle<Type>
     {
         auto const oldY = GetY();
-        SetHeight(GetHeight() - amount);
         SetY(oldY + amount);
+        SetHeight(GetHeight() - amount);
         return Rectangle<Type> {GetX(), oldY, GetWidth(), amount};
     }
 

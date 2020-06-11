@@ -58,7 +58,7 @@ RenderQueue::~RenderQueue()
 auto RenderQueue::StartFrame(float width, float height) -> void
 {
     data_.shader->Bind();
-    glm::mat4 proj = glm::ortho(0.0f, width, 0.0f, height, -1.0f, 1.0f);
+    glm::mat4 proj = glm::ortho(0.0f, width, height, 0.0f, -1.0f, 1.0f);
     data_.shader->SetMat4("u_MVP", proj);
     int samplers[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     data_.shader->SetInts("u_Textures", 16, samplers);

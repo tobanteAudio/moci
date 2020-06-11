@@ -89,6 +89,36 @@ TEST_CASE("moci_math/geometry: RectangleSetXY", "[geometry]")
     REQUIRE(p.GetY() == 20);
 }
 
+TEST_CASE("moci_math/geometry: RectangleGetRight", "[geometry]")
+{
+    auto empty = moci::Rectangle<int> {};
+    REQUIRE(empty.GetRight() == 0);
+
+    auto square = moci::Rectangle<int> {0, 0, 100, 100};
+    REQUIRE(square.GetRight() == 100);
+}
+
+TEST_CASE("moci_math/geometry: RectangleGetBottom", "[geometry]")
+{
+    auto empty = moci::Rectangle<int> {};
+    REQUIRE(empty.GetBottom() == 0);
+
+    auto square = moci::Rectangle<int> {0, 0, 100, 100};
+    REQUIRE(square.GetBottom() == 100);
+}
+
+TEST_CASE("moci_math/geometry: RectangleGetAspectRatio", "[geometry]")
+{
+    auto empty = moci::Rectangle<int> {};
+    REQUIRE(empty.GetAspectRatio() == 0);
+
+    auto square = moci::Rectangle<int> {0, 0, 100, 100};
+    REQUIRE(square.GetAspectRatio() == 1);
+
+    auto display = moci::Rectangle<float> {0.0f, 0.0f, 1920.0f, 1080.0f};
+    REQUIRE(display.GetAspectRatio() == Approx(16.0f / 9.0f));
+}
+
 TEST_CASE("moci_math/geometry: RectangleRemoveFromTop", "[geometry]")
 {
     auto p = moci::Rectangle<int>(0, 0, 50, 100);
