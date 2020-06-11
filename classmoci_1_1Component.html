@@ -156,6 +156,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5d9ea130af8939dfb44cf3017dd9a5fa"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a5d9ea130af8939dfb44cf3017dd9a5fa">GetBounds</a> () const noexcept -&gt; <a class="el" href="classmoci_1_1Rectangle.html">Rectangle</a>&lt; int &gt;</td></tr>
 <tr class="memdesc:a5d9ea130af8939dfb44cf3017dd9a5fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a the global bounds.  <a href="#a5d9ea130af8939dfb44cf3017dd9a5fa">More...</a><br /></td></tr>
 <tr class="separator:a5d9ea130af8939dfb44cf3017dd9a5fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d72379b17a3200c2eb0d77c237acf15"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a0d72379b17a3200c2eb0d77c237acf15">Contains</a> (<a class="el" href="classmoci_1_1Point.html">Point</a>&lt; int &gt; position) const noexcept -&gt; bool</td></tr>
+<tr class="memdesc:a0d72379b17a3200c2eb0d77c237acf15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true, if the given position is inside this component or it's children.  <a href="#a0d72379b17a3200c2eb0d77c237acf15">More...</a><br /></td></tr>
+<tr class="separator:a0d72379b17a3200c2eb0d77c237acf15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d026a669085f537dc1201756687e363"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a9d026a669085f537dc1201756687e363">FindComponentAt</a> (<a class="el" href="classmoci_1_1Point.html">Point</a>&lt; int &gt; position) noexcept -&gt; <a class="el" href="classmoci_1_1Component.html">Component</a> *</td></tr>
+<tr class="memdesc:a9d026a669085f537dc1201756687e363"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the component at the position.  <a href="#a9d026a669085f537dc1201756687e363">More...</a><br /></td></tr>
+<tr class="separator:a9d026a669085f537dc1201756687e363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c2b94d2566438033ca9ea85510b7c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a51c2b94d2566438033ca9ea85510b7c2">SetStyle</a> (<a class="el" href="classmoci_1_1Style.html">Style</a> *newStyle) noexcept</td></tr>
 <tr class="memdesc:a51c2b94d2566438033ca9ea85510b7c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the style for this component.  <a href="#a51c2b94d2566438033ca9ea85510b7c2">More...</a><br /></td></tr>
 <tr class="separator:a51c2b94d2566438033ca9ea85510b7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -261,6 +267,34 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a0d72379b17a3200c2eb0d77c237acf15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d72379b17a3200c2eb0d77c237acf15">&#9670;&nbsp;</a></span>Contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto moci::Component::Contains </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmoci_1_1Point.html">Point</a>&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td> const -&gt;  bool</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true, if the given position is inside this component or it's children. </p>
+
+</div>
+</div>
 <a id="a70b769b11842ca824c38df17a76385be"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a70b769b11842ca824c38df17a76385be">&#9670;&nbsp;</a></span>Draw()</h2>
 
@@ -278,6 +312,34 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Draw should only be called on the root component. It calls the <a class="el" href="classmoci_1_1Component.html#ac8fcf93e6af01106a1683f4893d63a45" title="Callback for drawing. ">OnDraw()</a> callback on all children. </p>
+
+</div>
+</div>
+<a id="a9d026a669085f537dc1201756687e363"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d026a669085f537dc1201756687e363">&#9670;&nbsp;</a></span>FindComponentAt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto moci::Component::FindComponentAt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmoci_1_1Point.html">Point</a>&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td> -&gt;  <a class="el" href="classmoci_1_1Component.html">Component</a> *</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the component at the position. </p>
 
 </div>
 </div>
