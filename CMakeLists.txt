@@ -19,10 +19,10 @@ option(MOCI_BUILD_COVERAGE       "Build with coverage enabled"                  
 option(MOCI_BUILD_SANDBOX        "Build sandbox applications"                   ON)
 option(MOCI_BUILD_TOOLS          "Build tools"                                  OFF)
 option(MOCI_BUILD_PLAYGROUND     "Build playground examples"                    OFF)
+option(MOCI_API_VULKAN           "Use Vulkan API"                               ON)
 option(MOCI_API_OPENGL_LEGACY    "Use OpenGL Legacy implementation"             ON)
 option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"                OFF)
-option(MOCI_API_OPENGL_ES        "Link against OpenGL ES 2.0"                   OFF)
-option(MOCI_API_VULKAN           "Link against Vulkan"                          ON)
+option(MOCI_LINK_OPENGL_ES       "Link against OpenGL ES 2.0"                   OFF)
 
 # Only do these if this is the main project,
 # and not if it is included through add_subdirectory.
@@ -109,7 +109,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/GSL        EXCLUDE_FROM_A
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/spdlog     EXCLUDE_FROM_ALL)
 
 # Only include glew on desktop
-if (NOT ${MOCI_API_OPENGL_ES})
+if (NOT ${MOCI_LINK_OPENGL_ES})
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glew   EXCLUDE_FROM_ALL)
 endif()
 

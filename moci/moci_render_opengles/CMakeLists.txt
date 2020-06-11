@@ -26,7 +26,7 @@ add_library(Moci::RenderOpenGLES ALIAS moci_render_opengles_lib)
 target_link_libraries(moci_render_opengles_lib PUBLIC Moci::RenderApiBase)
 target_include_directories(moci_render_opengles_lib PUBLIC /opt/vc/include)
 
-if (${MOCI_API_OPENGL_ES})
+if (${MOCI_LINK_OPENGL_ES})
     # old
     # target_link_libraries(moci_render_opengles_lib PUBLIC -lGLESv2)
     # raspberry pi 3
@@ -34,7 +34,7 @@ if (${MOCI_API_OPENGL_ES})
     # desktop linux
     # target_link_libraries(moci_render_opengles_lib PUBLIC /usr/lib/x86_64-linux-gnu/libGLESv2.so)
     
-    target_compile_definitions(moci_render_opengles_lib PUBLIC MOCI_API_OPENGL_ES=1)
+    target_compile_definitions(moci_render_opengles_lib PUBLIC MOCI_LINK_OPENGL_ES=1)
 else()
     target_link_libraries(moci_render_opengles_lib PUBLIC libglew_static)
 endif()
