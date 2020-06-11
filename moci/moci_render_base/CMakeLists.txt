@@ -7,6 +7,7 @@ set(moci_render_base_sources
     render/api.hpp
     render/buffer.hpp
     render/buffer.cpp
+    render/frame_buffer.hpp
     render/graphics_context.hpp
     render/graphics_context.cpp
     render/shader.hpp

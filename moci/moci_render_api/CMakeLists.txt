@@ -2,6 +2,8 @@ project(moci_render_api)
 
 set(moci_render_api_sources
     render/buffer.cpp
+    render/frame_buffer.cpp
+    render/frame_buffer.cpp
     render/render_command.hpp
     render/render_command.cpp
     render/renderer_api.cpp
