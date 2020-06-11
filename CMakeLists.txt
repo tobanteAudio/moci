@@ -120,11 +120,6 @@ if(MOCI_BUILD_TESTS)
   include(Catch)
 endif()
 
-# Custom cmake targets for external code
-add_subdirectory(3rd_party/stb-cmake)
-add_subdirectory(3rd_party/imgui-cmake)
-
-# Project
 add_subdirectory(moci)
 
 add_subdirectory(sandbox)
