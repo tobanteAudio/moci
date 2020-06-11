@@ -1,11 +1,13 @@
 #include "render_queue.hpp"
 
-#include "moci_core/benchmark/profile.hpp"
+#include <array>
 
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
+
+#include "moci_core/benchmark/profile.hpp"
 
 namespace moci
 {
@@ -60,8 +62,8 @@ auto RenderQueue::StartFrame(float width, float height) -> void
     data_.shader->Bind();
     glm::mat4 proj = glm::ortho(0.0f, width, height, 0.0f, -1.0f, 1.0f);
     data_.shader->SetMat4("u_MVP", proj);
-    int samplers[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-    data_.shader->SetInts("u_Textures", 16, samplers);
+    auto samplers = std::array<int, 16> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+    data_.shader->SetInts("u_Textures", samplers.size(), samplers.data());
 
     ResetStats();
     BeginBatch();
@@ -87,8 +89,7 @@ auto RenderQueue::DrawText(std::string text, glm::vec2 position, float scale, Co
         float const w    = ch.Size.x * scale;
         float const h    = ch.Size.y * scale;
 
-        // TODO: Check if size calculation is correct. See negative height in draw call.
-        DrawQuad({xpos, ypos + h, w, -h}, color, ch.TextureID);
+        DrawQuad({xpos, ypos - h, w, h}, color, ch.TextureID);
 
         // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
         position.x += (ch.Advance >> 6) * scale;  // Bitshift by 6 to get value in pixels (2^6 = 64)
