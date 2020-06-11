@@ -100,13 +100,36 @@ TEST_CASE("moci_widget: ComponentSetBounds", "[ui]")
     REQUIRE(bounds.GetHeight() == 20);
 }
 
-TEST_CASE("moci_widget: ComponentContainsPoint", "[ui]")
+TEST_CASE("moci_widget: ComponentContains", "[ui]")
 {
     moci::Component c {};
     c.SetBounds({100, 50, 10, 20});
-    REQUIRE(c.ContainsPoint({0, 0}) == false);
-    REQUIRE(c.ContainsPoint({110, 49}) == false);
-    REQUIRE(c.ContainsPoint({110, 50}) == true);
+    REQUIRE(c.Contains({0, 0}) == false);
+    REQUIRE(c.Contains({110, 49}) == false);
+    REQUIRE(c.Contains({110, 50}) == true);
+}
+
+TEST_CASE("moci_widget: ComponentFindComponentAt", "[ui]")
+{
+    auto area   = moci::Rectangle<int> {0, 0, 100, 100};
+    auto parent = moci::Component {};
+    auto c1     = moci::Component {};
+    auto c2     = moci::Component {};
+    auto c3     = moci::Component {};
+
+    parent.SetBounds(area);
+    parent.AddChild(&c1);
+    parent.AddChild(&c2);
+    parent.AddChild(&c3);
+    c1.SetBounds(area.RemoveFromTop(20));
+    c2.SetBounds(area.RemoveFromTop(20));
+    c3.SetBounds(area.RemoveFromTop(20));
+
+    REQUIRE(parent.FindComponentAt({0, 0}) == &c1);
+    REQUIRE(parent.FindComponentAt({10, 25}) == &c2);
+    REQUIRE(parent.FindComponentAt({20, 45}) == &c3);
+    REQUIRE(parent.FindComponentAt({0, 99}) == &parent);
+    REQUIRE(parent.FindComponentAt({0, 180}) == nullptr);
 }
 
 TEST_CASE("moci_widget: ComponentStyle", "[ui]")

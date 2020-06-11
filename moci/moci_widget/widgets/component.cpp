@@ -89,11 +89,11 @@ void Component::SetBounds(Rectangle<int> bounds) noexcept
 
 auto Component::GetBounds() const noexcept -> Rectangle<int> { return bounds_; }
 
-auto Component::ContainsPoint(Point<int> const& point) const noexcept -> bool
+auto Component::Contains(Point<int> position) const noexcept -> bool
 {
-    if (point.GetX() >= GetX() && point.GetX() <= GetX() + GetWidth())
+    if (position.GetX() >= GetX() && position.GetX() <= GetX() + GetWidth())
     {
-        if (point.GetY() >= GetY() && point.GetY() <= GetY() + GetHeight())
+        if (position.GetY() >= GetY() && position.GetY() <= GetY() + GetHeight())
         {
             return true;
         }
@@ -101,6 +101,30 @@ auto Component::ContainsPoint(Point<int> const& point) const noexcept -> bool
 
     return false;
 }
+
+auto Component::FindComponentAt(Point<int> position) noexcept -> Component*
+{
+    if (!Contains(position))
+    {
+        return nullptr;
+    }
+
+    for (auto* comp : GetChildren())
+    {
+        if (comp->Contains(position))
+        {
+            if (comp->GetChildren().empty())
+            {
+                return comp;
+            }
+
+            return comp->FindComponentAt(position);
+        }
+    }
+
+    return this;
+}
+
 void Component::SetStyle(Style* newStyle) noexcept { style_ = newStyle; }
 
 Style* Component::GetStyle() const noexcept
