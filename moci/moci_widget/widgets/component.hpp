@@ -138,6 +138,11 @@ public:
     [[nodiscard]] auto GetBounds() const noexcept -> Rectangle<int>;
 
     /**
+     * @brief Returns true, if the given point is inside this component or it's children.
+     */
+    [[nodiscard]] auto ContainsPoint(Point<int> const& point) const noexcept -> bool;
+
+    /**
      * @brief Sets the style for this component.
      */
     void SetStyle(Style* newStyle) noexcept;

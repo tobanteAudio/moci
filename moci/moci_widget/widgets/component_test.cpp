@@ -100,6 +100,15 @@ TEST_CASE("moci_widget: ComponentSetBounds", "[ui]")
     REQUIRE(bounds.GetHeight() == 20);
 }
 
+TEST_CASE("moci_widget: ComponentContainsPoint", "[ui]")
+{
+    moci::Component c {};
+    c.SetBounds({100, 50, 10, 20});
+    REQUIRE(c.ContainsPoint({0, 0}) == false);
+    REQUIRE(c.ContainsPoint({110, 49}) == false);
+    REQUIRE(c.ContainsPoint({110, 50}) == true);
+}
+
 TEST_CASE("moci_widget: ComponentStyle", "[ui]")
 {
     moci::Component c {};
