@@ -9,7 +9,7 @@ class Rectangle
 {
 public:
     /**
-     * @brief Default construct. Bottom left at (0,0), no size.
+     * @brief Default construct. Top left at (0,0), no size.
      */
     explicit constexpr Rectangle() noexcept : position_(Type(0), Type(0)), width_(Type(0)), height_(Type(0)) { }
 
@@ -45,17 +45,17 @@ public:
     [[nodiscard]] constexpr auto IsEmpty() const noexcept -> bool { return width_ <= Type(0) && height_ <= Type(0); }
 
     /**
-     * @brief Set bottom left to (x, y).
+     * @brief Set Top left to (x, y).
      */
     auto SetPosition(Type x, Type y) noexcept -> void { position_ = Point<Type>(x, y); }
 
     /**
-     * @brief Set bottom left to position.
+     * @brief Set Top left to position.
      */
     auto SetPosition(Point<Type> position) noexcept -> void { position_ = position; }
 
     /**
-     * @brief Set the x for the bottom left corner.
+     * @brief Set the x for the Top left corner.
      */
     auto SetX(Type x) noexcept -> void { position_.SetX(x); }
 
@@ -65,7 +65,7 @@ public:
     [[nodiscard]] constexpr auto GetX() const noexcept -> Type { return position_.GetX(); }
 
     /**
-     * @brief Set the y for the bottom left corner.
+     * @brief Set the y for the Top left corner.
      */
     auto SetY(Type y) noexcept -> void { position_.SetY(y); }
 
@@ -99,10 +99,10 @@ public:
      */
     [[nodiscard]] auto RemoveFromTop(Type amount) noexcept -> Rectangle<Type>
     {
-        auto const oldHeight = GetHeight();
-        auto const newY      = GetY() + oldHeight - amount;
-        SetHeight(oldHeight - amount);
-        return Rectangle<Type> {GetX(), newY, GetWidth(), amount};
+        auto const oldY = GetY();
+        SetHeight(GetHeight() - amount);
+        SetY(oldY + amount);
+        return Rectangle<Type> {GetX(), oldY, GetWidth(), amount};
     }
 
     /**
@@ -110,10 +110,10 @@ public:
      */
     [[nodiscard]] auto RemoveFromBottom(Type amount) noexcept -> Rectangle<Type>
     {
-        auto const oldY = GetY();
-        SetHeight(GetHeight() - amount);
-        SetY(oldY + amount);
-        return Rectangle<Type> {GetX(), oldY, GetWidth(), amount};
+        auto const oldHeight = GetHeight();
+        auto const newY      = GetY() + oldHeight - amount;
+        SetHeight(oldHeight - amount);
+        return Rectangle<Type> {GetX(), newY, GetWidth(), amount};
     }
 
     /**

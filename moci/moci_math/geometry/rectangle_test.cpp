@@ -97,23 +97,6 @@ TEST_CASE("moci_math/geometry: RectangleRemoveFromTop", "[geometry]")
     REQUIRE(p.GetHeight() == 100);
 
     auto n = p.RemoveFromTop(10);
-    REQUIRE(n.GetY() == 90);
-    REQUIRE(n.GetWidth() == 50);
-    REQUIRE(n.GetHeight() == 10);
-
-    REQUIRE(p.GetY() == 0);
-    REQUIRE(p.GetWidth() == 50);
-    REQUIRE(p.GetHeight() == 90);
-}
-
-TEST_CASE("moci_math/geometry: RectangleRemoveFromBottom", "[geometry]")
-{
-    auto p = moci::Rectangle<int>(0, 0, 50, 100);
-    REQUIRE(p.GetY() == 0);
-    REQUIRE(p.GetWidth() == 50);
-    REQUIRE(p.GetHeight() == 100);
-
-    auto n = p.RemoveFromBottom(10);
     REQUIRE(n.GetY() == 0);
     REQUIRE(n.GetWidth() == 50);
     REQUIRE(n.GetHeight() == 10);
@@ -123,19 +106,32 @@ TEST_CASE("moci_math/geometry: RectangleRemoveFromBottom", "[geometry]")
     REQUIRE(p.GetHeight() == 90);
 }
 
+TEST_CASE("moci_math/geometry: RectangleRemoveFromBottom", "[geometry]")
+{
+    auto p = moci::Rectangle<int>(0, 0, 50, 100);
+
+    auto n = p.RemoveFromBottom(10);
+    REQUIRE(n.GetY() == 90);
+    REQUIRE(n.GetWidth() == 50);
+    REQUIRE(n.GetHeight() == 10);
+
+    REQUIRE(p.GetY() == 0);
+    REQUIRE(p.GetWidth() == 50);
+    REQUIRE(p.GetHeight() == 90);
+}
+
 TEST_CASE("moci_math/geometry: RectangleRemoveFromLeft", "[geometry]")
 {
     auto p = moci::Rectangle<int>(0, 0, 50, 100);
-    REQUIRE(p.GetX() == 0);
-    REQUIRE(p.GetWidth() == 50);
-    REQUIRE(p.GetHeight() == 100);
 
     auto n = p.RemoveFromLeft(10);
     REQUIRE(n.GetX() == 0);
+    REQUIRE(n.GetY() == 0);
     REQUIRE(n.GetWidth() == 10);
     REQUIRE(n.GetHeight() == 100);
 
     REQUIRE(p.GetX() == 10);
+    REQUIRE(p.GetY() == 0);
     REQUIRE(p.GetWidth() == 40);
     REQUIRE(p.GetHeight() == 100);
 }
