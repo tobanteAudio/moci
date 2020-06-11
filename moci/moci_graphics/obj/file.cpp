@@ -123,9 +123,9 @@ void OBJFile::parseLineToFace(std::string& line)
         auto indices = Strings::Split(split, '/');
         if (indices.size() == 3)
         {
-            auto const vertexIdx  = Strings::ToInt(indices[0]);
-            auto const textureIdx = Strings::ToInt(indices[1]);
-            auto const normalIdx  = Strings::ToInt(indices[2]);
+            auto const vertexIdx = Strings::ToInt(indices[0]);
+            // auto const textureIdx = Strings::ToInt(indices[1]);
+            auto const normalIdx = Strings::ToInt(indices[2]);
             MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
 
             auto const vertex  = vertices_.at(vertexIdx.value() - 1);
@@ -137,8 +137,8 @@ void OBJFile::parseLineToFace(std::string& line)
 
         if (indices.size() == 2)
         {
-            auto const vertexIdx  = Strings::ToInt(indices[0]);
-            auto const textureIdx = Strings::ToInt(indices[1]);
+            auto const vertexIdx = Strings::ToInt(indices[0]);
+            // auto const textureIdx = Strings::ToInt(indices[1]);
             MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
 
             auto const vertex  = vertices_.at(vertexIdx.value() - 1);
