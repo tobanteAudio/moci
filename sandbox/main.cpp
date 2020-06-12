@@ -9,7 +9,7 @@
 #include <map>
 #include <thread>
 
-static std::atomic<float> Level = 0;
+static std::atomic<float> Level {0.5f};
 
 class LevelMeterView : public moci::Component
 {
@@ -54,7 +54,6 @@ public:
             moci::IgnoreUnused(size);
             auto data = float {};
             std::memcpy(&data, buffer.data(), sizeof(data));
-
             Level.store((144.0f - std::abs(LinearToDecibel(data))) / 144.0f);
 
             // auto data = Data{};
