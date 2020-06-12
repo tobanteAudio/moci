@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['samples',['samples',['../structmoci_1_1FramebufferSpecs.html#ac03a649aa418b08539d196c832912d32',1,'moci::FramebufferSpecs']]],
   ['scale',['scale',['../structmoci_1_1Light.html#a88145eeeaa90131af8a30ebd5984ac9b',1,'moci::Light']]],
   ['scope',['Scope',['../namespacemoci.html#a0026500ddfc8f3723b5cb3e8b5b4c901',1,'moci']]],
   ['scopeguard',['ScopeGuard',['../classmoci_1_1ScopeGuard.html',1,'moci::ScopeGuard&lt; Lambda &gt;'],['../classmoci_1_1ScopeGuard.html#a0fb8335f0c0f9368cbebad125b05fa0d',1,'moci::ScopeGuard::ScopeGuard(const Lambda &amp;_l)'],['../classmoci_1_1ScopeGuard.html#aa9221343560faae0b72735c486a5391b',1,'moci::ScopeGuard::ScopeGuard(const ScopeGuard &amp;_sc)'],['../classmoci_1_1ScopeGuard.html#a11c43cd51834e52b72922a32b55445f1',1,'moci::ScopeGuard::ScopeGuard(ScopeGuard &amp;&amp;_sc) noexcept'],['../classmoci_1_1ScopeGuard.html#ab2fc10440c901f280f94c031f0ece652',1,'moci::ScopeGuard::ScopeGuard(const AdquireLambda &amp;_al, const Lambda &amp;_l)'],['../classmoci_1_1ScopeGuard.html#aadda0f2853b73f74937608b39d465b04',1,'moci::ScopeGuard::ScopeGuard(AdquireLambda &amp;&amp;_al, L &amp;&amp;_l)']]],
@@ -56,7 +57,7 @@ var searchData=
   ['stop',['Stop',['../classmoci_1_1InstrumentationTimer.html#a1ab9dea0c04e47a87f860fe6aab8b97c',1,'moci::InstrumentationTimer']]],
   ['strings',['Strings',['../classmoci_1_1Strings.html',1,'moci::Strings'],['../classmoci_1_1Strings.html#a1e832ab7badb7d902790f3bbe1745efb',1,'moci::Strings::Strings()']]],
   ['style',['Style',['../classmoci_1_1Style.html',1,'moci::Style'],['../classmoci_1_1Style.html#a33b33c736931fc03fc18c316856ff481',1,'moci::Style::Style()']]],
-  ['stylemethods',['StyleMethods',['../classmoci_1_1Label_1_1StyleMethods.html',1,'moci::Label::StyleMethods'],['../classmoci_1_1Slider_1_1StyleMethods.html',1,'moci::Slider::StyleMethods']]],
+  ['stylemethods',['StyleMethods',['../classmoci_1_1Slider_1_1StyleMethods.html',1,'moci::Slider::StyleMethods'],['../classmoci_1_1Label_1_1StyleMethods.html',1,'moci::Label::StyleMethods']]],
   ['submesh',['Submesh',['../classmoci_1_1Mesh_1_1Submesh.html',1,'moci::Mesh']]],
   ['swapbuffers',['SwapBuffers',['../classmoci_1_1GraphicsContext.html#a78e6f186d9de01f7566281d09dc5d64e',1,'moci::GraphicsContext::SwapBuffers()'],['../classmoci_1_1OpenGLESContext.html#af07c0cdfec36842df25b90acc1430673',1,'moci::OpenGLESContext::SwapBuffers()']]],
   ['systeminfo',['SystemInfo',['../classmoci_1_1SystemInfo.html',1,'moci::SystemInfo'],['../classmoci_1_1SystemInfo.html#aecad1fe050effb4ca431866c30f34845',1,'moci::SystemInfo::SystemInfo()']]]

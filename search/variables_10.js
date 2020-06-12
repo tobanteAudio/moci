@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['samples',['samples',['../structmoci_1_1FramebufferSpecs.html#ac03a649aa418b08539d196c832912d32',1,'moci::FramebufferSpecs']]],
   ['scale',['scale',['../structmoci_1_1Light.html#a88145eeeaa90131af8a30ebd5984ac9b',1,'moci::Light']]],
   ['shader',['shader',['../structmoci_1_1Light.html#acf4b919ddc4e0995ad37f95e210fd525',1,'moci::Light']]],
   ['size',['Size',['../structmoci_1_1BufferElement.html#ac96229ec4c055e04575ae611cf71a4f2',1,'moci::BufferElement']]],

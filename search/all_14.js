@@ -6,7 +6,7 @@ var searchData=
   ['vao',['vao',['../structmoci_1_1Light.html#a303bb95ba49e5011c54d4348d10890eb',1,'moci::Light']]],
   ['vbo',['vbo',['../structmoci_1_1Light.html#a38a1e52dcfe90d350be71a96b4c4dff1',1,'moci::Light']]],
   ['vector',['Vector',['../namespacemoci.html#a29985a0dea3a037c1b833065bfefe37d',1,'moci']]],
-  ['vertex',['Vertex',['../structmoci_1_1Mesh_1_1Vertex.html',1,'moci::Mesh::Vertex'],['../structmoci_1_1Light_1_1Vertex.html',1,'moci::Light::Vertex']]],
+  ['vertex',['Vertex',['../structmoci_1_1Light_1_1Vertex.html',1,'moci::Light::Vertex'],['../structmoci_1_1Mesh_1_1Vertex.html',1,'moci::Mesh::Vertex']]],
   ['vertexarray',['VertexArray',['../classmoci_1_1VertexArray.html',1,'moci']]],
   ['vertexbuffer',['VertexBuffer',['../classmoci_1_1VertexBuffer.html',1,'moci']]],
   ['vertexcount',['vertexCount',['../structmoci_1_1RenderQueue_1_1Stats.html#aad647ef7030ec57f524cd91def87ea33',1,'moci::RenderQueue::Stats']]],
