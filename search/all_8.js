@@ -25,5 +25,6 @@ var searchData=
   ['ismousebuttonpressed',['IsMouseButtonPressed',['../classmoci_1_1Input.html#a611518022c3afd9d5322ac4bc2782b6e',1,'moci::Input']]],
   ['isorigin',['IsOrigin',['../classmoci_1_1Point.html#a841507255edbe5d946c0b6db640d571e',1,'moci::Point']]],
   ['isswapchaintarget',['isSwapChainTarget',['../structmoci_1_1FramebufferSpecs.html#a9a07c645e1417e2532fbf1d903d72b5d',1,'moci::FramebufferSpecs']]],
+  ['istoggle',['isToggle',['../structmoci_1_1ButtonSpecs.html#a4771dc34ede285a04131d58b2b369cf5',1,'moci::ButtonSpecs']]],
   ['isvsync',['IsVSync',['../classmoci_1_1GlfwWindow.html#af6119043d7e96402f77c48a7e05dc3d4',1,'moci::GlfwWindow::IsVSync()'],['../classmoci_1_1Window.html#ae230a3a6b58ea82ab12c4b35bba75883',1,'moci::Window::IsVSync()']]]
 ];

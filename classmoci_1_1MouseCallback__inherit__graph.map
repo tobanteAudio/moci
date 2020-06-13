@@ -1,5 +1,6 @@
 <map id="moci::MouseCallback" name="moci::MouseCallback">
-<area shape="rect" id="node2" href="$classmoci_1_1Component.html" title="Base for all GUI components. " alt="" coords="47,80,184,107"/>
-<area shape="rect" id="node3" href="$classmoci_1_1Label.html" title="moci::Label" alt="" coords="5,155,103,181"/>
-<area shape="rect" id="node4" href="$classmoci_1_1Slider.html" title="moci::Slider" alt="" coords="127,155,226,181"/>
+<area shape="rect" id="node2" href="$classmoci_1_1Component.html" title="Base for all GUI components. " alt="" coords="115,80,252,107"/>
+<area shape="rect" id="node3" href="$classmoci_1_1Button.html" title="moci::Button" alt="" coords="5,155,111,181"/>
+<area shape="rect" id="node4" href="$classmoci_1_1Label.html" title="moci::Label" alt="" coords="135,155,232,181"/>
+<area shape="rect" id="node5" href="$classmoci_1_1Slider.html" title="moci::Slider" alt="" coords="257,155,355,181"/>
 </map>

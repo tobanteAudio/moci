@@ -1,17 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classmoci_1_1Event.html" title="moci::Event" alt="" coords="5,208,104,235"/>
-<area shape="rect" id="node2" href="$classmoci_1_1AppRenderEvent.html" title="moci::AppRenderEvent" alt="" coords="164,5,333,32"/>
-<area shape="rect" id="node3" href="$classmoci_1_1AppTickEvent.html" title="moci::AppTickEvent" alt="" coords="173,56,324,83"/>
-<area shape="rect" id="node4" href="$classmoci_1_1AppUpdateEvent.html" title="moci::AppUpdateEvent" alt="" coords="163,107,334,133"/>
-<area shape="rect" id="node5" href="$classmoci_1_1KeyEvent.html" title="moci::KeyEvent" alt="" coords="187,157,310,184"/>
-<area shape="rect" id="node9" href="$classmoci_1_1MouseButtonEvent.html" title="moci::MouseButtonEvent" alt="" coords="157,208,341,235"/>
-<area shape="rect" id="node12" href="$classmoci_1_1MouseMovedEvent.html" title="moci::MouseMovedEvent" alt="" coords="157,259,341,285"/>
-<area shape="rect" id="node13" href="$classmoci_1_1MouseScrolledEvent.html" title="moci::MouseScrolledEvent" alt="" coords="152,309,345,336"/>
-<area shape="rect" id="node14" href="$classmoci_1_1WindowCloseEvent.html" title="moci::WindowCloseEvent" alt="" coords="155,360,342,387"/>
-<area shape="rect" id="node15" href="$classmoci_1_1WindowResizeEvent.html" title="moci::WindowResizeEvent" alt="" coords="152,411,345,437"/>
-<area shape="rect" id="node6" href="$classmoci_1_1KeyPressedEvent.html" title="moci::KeyPressedEvent" alt="" coords="409,56,584,83"/>
-<area shape="rect" id="node7" href="$classmoci_1_1KeyReleasedEvent.html" title="moci::KeyReleasedEvent" alt="" coords="405,107,588,133"/>
-<area shape="rect" id="node8" href="$classmoci_1_1KeyTypedEvent.html" title="moci::KeyTypedEvent" alt="" coords="416,157,577,184"/>
-<area shape="rect" id="node10" href="$classmoci_1_1MouseButtonPressedEvent.html" title="moci::MouseButtonPressed\lEvent" alt="" coords="397,209,596,250"/>
-<area shape="rect" id="node11" href="$classmoci_1_1MouseButtonReleasedEvent.html" title="moci::MouseButtonReleased\lEvent" alt="" coords="393,274,600,315"/>
+<area shape="rect" id="node1" href="$classmoci_1_1Colors.html" title="moci::Colors" alt="" coords="5,5,108,32"/>
 </map>

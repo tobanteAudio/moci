@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mousecode',['MouseCode',['../namespacemoci.html#a7ecbf624adbc5d28107f19729e2ba175',1,'moci']]]
+  ['keycode',['KeyCode',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fd',1,'moci']]]
 ];

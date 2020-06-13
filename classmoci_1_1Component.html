@@ -80,9 +80,10 @@ Inheritance diagram for moci::Component:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmoci_1_1Component__inherit__graph.png" border="0" usemap="#moci_1_1Component_inherit__map" alt="Inheritance graph"/></div>
 <map name="moci_1_1Component_inherit__map" id="moci_1_1Component_inherit__map">
-<area shape="rect" id="node3" href="classmoci_1_1Label.html" title="moci::Label" alt="" coords="5,155,103,181"/>
-<area shape="rect" id="node4" href="classmoci_1_1Slider.html" title="moci::Slider" alt="" coords="127,155,226,181"/>
-<area shape="rect" id="node2" href="classmoci_1_1MouseCallback.html" title="moci::MouseCallback" alt="" coords="35,5,195,32"/>
+<area shape="rect" id="node3" href="classmoci_1_1Button.html" title="moci::Button" alt="" coords="5,155,111,181"/>
+<area shape="rect" id="node4" href="classmoci_1_1Label.html" title="moci::Label" alt="" coords="135,155,232,181"/>
+<area shape="rect" id="node5" href="classmoci_1_1Slider.html" title="moci::Slider" alt="" coords="257,155,355,181"/>
+<area shape="rect" id="node2" href="classmoci_1_1MouseCallback.html" title="moci::MouseCallback" alt="" coords="103,5,263,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -105,15 +106,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8b2989ccaa2db6f4dbb0c06f24dd15ca"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a8b2989ccaa2db6f4dbb0c06f24dd15ca">~Component</a> ()=default</td></tr>
 <tr class="memdesc:a8b2989ccaa2db6f4dbb0c06f24dd15ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <a href="#a8b2989ccaa2db6f4dbb0c06f24dd15ca">More...</a><br /></td></tr>
 <tr class="separator:a8b2989ccaa2db6f4dbb0c06f24dd15ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8fcf93e6af01106a1683f4893d63a45"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#ac8fcf93e6af01106a1683f4893d63a45">OnDraw</a> (<a class="el" href="classmoci_1_1RenderQueue.html">RenderQueue</a> &amp;painter)</td></tr>
-<tr class="memdesc:ac8fcf93e6af01106a1683f4893d63a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for drawing.  <a href="#ac8fcf93e6af01106a1683f4893d63a45">More...</a><br /></td></tr>
-<tr class="separator:ac8fcf93e6af01106a1683f4893d63a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa1d2ad7d0b263a3ef9bbba1c3bd534a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#aaa1d2ad7d0b263a3ef9bbba1c3bd534a">OnDraw</a> (<a class="el" href="namespacemoci.html#a4da30554d09225e6456073f8c2392b90">Painter</a> &amp;painter)</td></tr>
+<tr class="memdesc:aaa1d2ad7d0b263a3ef9bbba1c3bd534a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for drawing.  <a href="#aaa1d2ad7d0b263a3ef9bbba1c3bd534a">More...</a><br /></td></tr>
+<tr class="separator:aaa1d2ad7d0b263a3ef9bbba1c3bd534a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d58d5d8f8f8b80ad7971ab3be293b04"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a8d58d5d8f8f8b80ad7971ab3be293b04">OnResize</a> ()</td></tr>
 <tr class="memdesc:a8d58d5d8f8f8b80ad7971ab3be293b04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for layout changes.  <a href="#a8d58d5d8f8f8b80ad7971ab3be293b04">More...</a><br /></td></tr>
 <tr class="separator:a8d58d5d8f8f8b80ad7971ab3be293b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70b769b11842ca824c38df17a76385be"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a70b769b11842ca824c38df17a76385be">Draw</a> (<a class="el" href="classmoci_1_1RenderQueue.html">RenderQueue</a> &amp;painter) -&gt; void</td></tr>
-<tr class="memdesc:a70b769b11842ca824c38df17a76385be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw should only be called on the root component. It calls the <a class="el" href="classmoci_1_1Component.html#ac8fcf93e6af01106a1683f4893d63a45" title="Callback for drawing. ">OnDraw()</a> callback on all children.  <a href="#a70b769b11842ca824c38df17a76385be">More...</a><br /></td></tr>
-<tr class="separator:a70b769b11842ca824c38df17a76385be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e32e08143ca34be57bcbf99dab862b8"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a3e32e08143ca34be57bcbf99dab862b8">Draw</a> (<a class="el" href="namespacemoci.html#a4da30554d09225e6456073f8c2392b90">Painter</a> &amp;painter) -&gt; void</td></tr>
+<tr class="memdesc:a3e32e08143ca34be57bcbf99dab862b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw should only be called on the root component. It calls the <a class="el" href="classmoci_1_1Component.html#aaa1d2ad7d0b263a3ef9bbba1c3bd534a" title="Callback for drawing. ">OnDraw()</a> callback on all children.  <a href="#a3e32e08143ca34be57bcbf99dab862b8">More...</a><br /></td></tr>
+<tr class="separator:a3e32e08143ca34be57bcbf99dab862b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6570667b82b524442d39f4b08797e84f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a6570667b82b524442d39f4b08797e84f">Resize</a> () -&gt; void</td></tr>
 <tr class="memdesc:a6570667b82b524442d39f4b08797e84f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize should only be called on the root component. It calls the OnResized() callback on all children.  <a href="#a6570667b82b524442d39f4b08797e84f">More...</a><br /></td></tr>
 <tr class="separator:a6570667b82b524442d39f4b08797e84f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -311,8 +312,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a70b769b11842ca824c38df17a76385be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70b769b11842ca824c38df17a76385be">&#9670;&nbsp;</a></span>Draw()</h2>
+<a id="a3e32e08143ca34be57bcbf99dab862b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e32e08143ca34be57bcbf99dab862b8">&#9670;&nbsp;</a></span>Draw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,14 +321,14 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">auto moci::Component::Draw </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classmoci_1_1RenderQueue.html">RenderQueue</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacemoci.html#a4da30554d09225e6456073f8c2392b90">Painter</a> &amp;&#160;</td>
           <td class="paramname"><em>painter</em></td><td>)</td>
           <td> -&gt;  void</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Draw should only be called on the root component. It calls the <a class="el" href="classmoci_1_1Component.html#ac8fcf93e6af01106a1683f4893d63a45" title="Callback for drawing. ">OnDraw()</a> callback on all children. </p>
+<p>Draw should only be called on the root component. It calls the <a class="el" href="classmoci_1_1Component.html#aaa1d2ad7d0b263a3ef9bbba1c3bd534a" title="Callback for drawing. ">OnDraw()</a> callback on all children. </p>
 
 </div>
 </div>
@@ -613,8 +614,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac8fcf93e6af01106a1683f4893d63a45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8fcf93e6af01106a1683f4893d63a45">&#9670;&nbsp;</a></span>OnDraw()</h2>
+<a id="aaa1d2ad7d0b263a3ef9bbba1c3bd534a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa1d2ad7d0b263a3ef9bbba1c3bd534a">&#9670;&nbsp;</a></span>OnDraw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -625,7 +626,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void moci::Component::OnDraw </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classmoci_1_1RenderQueue.html">RenderQueue</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacemoci.html#a4da30554d09225e6456073f8c2392b90">Painter</a> &amp;&#160;</td>
           <td class="paramname"><em>painter</em></td><td>)</td>
           <td></td>
         </tr>
@@ -639,7 +640,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Callback for drawing. </p>
 
-<p>Reimplemented in <a class="el" href="classmoci_1_1Slider.html#ac58a9eae612328194be9affd5bf21716">moci::Slider</a>, and <a class="el" href="classmoci_1_1Label.html#ae07c05521471284c12d2c95e04941126">moci::Label</a>.</p>
+<p>Reimplemented in <a class="el" href="classmoci_1_1Button.html#a3c43dec20a6cabd0029a3fbd6ce4ef99">moci::Button</a>, <a class="el" href="classmoci_1_1Slider.html#a5a2676d6c3e7c30b1dffcd4486eea588">moci::Slider</a>, and <a class="el" href="classmoci_1_1Label.html#a0d08cebe1df913b3bbee176f4bdd79cb">moci::Label</a>.</p>
 
 </div>
 </div>
