@@ -34,7 +34,7 @@ void Application::OnEvent(Event& e)
     if (e.GetEventType() == EventType::KeyPressed)
     {
         auto* keyEvent = dynamic_cast<KeyPressedEvent*>(&e);
-        if (keyEvent->GetKeyCode() == MOCI_KEY_ESCAPE)
+        if (keyEvent->GetKeyCode() == Key::Escape)
         {
             auto closeEvent = WindowCloseEvent {};
             OnWindowClose(closeEvent);

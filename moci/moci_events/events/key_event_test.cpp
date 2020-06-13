@@ -10,10 +10,10 @@ using Catch::Matchers::Contains;
 
 TEST_CASE("moci_events/events: KeyPressedEvent", "[app][events]")
 {
-    auto const event = moci::KeyPressedEvent(1, 1);
+    auto const event = moci::KeyPressedEvent(moci::Key::Escape, 1);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyPressed);
     REQUIRE(event.GetName() == std::string_view("KeyPressed"));
-    REQUIRE(event.GetKeyCode() == 1);
+    REQUIRE(event.GetKeyCode() == moci::Key::Escape);
     REQUIRE(event.GetRepeatCount() == 1);
     REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryInput) == true);
     REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryKeyboard) == true);
@@ -25,10 +25,10 @@ TEST_CASE("moci_events/events: KeyPressedEvent", "[app][events]")
 
 TEST_CASE("moci_events/events: KeyReleasedEvent", "[app][events]")
 {
-    auto const event = moci::KeyReleasedEvent(1);
+    auto const event = moci::KeyReleasedEvent(moci::Key::A);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyReleased);
     REQUIRE(event.GetName() == std::string_view("KeyReleased"));
-    REQUIRE(event.GetKeyCode() == 1);
+    REQUIRE(event.GetKeyCode() == moci::Key::A);
     REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryInput) == true);
     REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryKeyboard) == true);
     REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryMouse) == false);
@@ -39,10 +39,10 @@ TEST_CASE("moci_events/events: KeyReleasedEvent", "[app][events]")
 
 TEST_CASE("moci_events/events: KeyTypedEvent", "[app][events]")
 {
-    auto const event = moci::KeyTypedEvent(1);
+    auto const event = moci::KeyTypedEvent(moci::Key::Y);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyTyped);
     REQUIRE(event.GetName() == std::string_view("KeyTyped"));
-    REQUIRE(event.GetKeyCode() == 1);
+    REQUIRE(event.GetKeyCode() == moci::Key::Y);
     REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryInput) == true);
     REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryKeyboard) == true);
     REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryMouse) == false);

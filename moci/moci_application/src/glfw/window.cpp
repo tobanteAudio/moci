@@ -79,12 +79,12 @@ void GlfwWindow::Init(WindowSpecs props)
         data.EventCallback(event);
     });
 
-    glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+    glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int glfwKey, int scancode, int action, int mods) {
         IgnoreUnused(scancode);
         IgnoreUnused(mods);
 
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-
+        auto const key   = static_cast<Key>(glfwKey);
         switch (action)
         {
             case GLFW_PRESS:
@@ -108,16 +108,15 @@ void GlfwWindow::Init(WindowSpecs props)
         }
     });
 
-    glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode) {
-        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-
-        KeyTypedEvent event(keycode);
+    glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int glfwKeyCode) {
+        auto event = KeyTypedEvent {static_cast<Key>(glfwKeyCode)};
+        auto& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
         data.EventCallback(event);
     });
 
     glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
         IgnoreUnused(mods);
-        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        auto& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
         switch (action)
         {

@@ -268,19 +268,19 @@ bool DemoLayer::OnWindowResized(moci::WindowResizeEvent& e)
 bool DemoLayer::OnKeyPressed(moci::KeyPressedEvent& e)
 {
     auto const cameraSpeed = 0.15f * lastTimestep_;
-    if (e.GetKeyCode() == MOCI_KEY_UP)
+    if (e.GetKeyCode() == moci::Key::Up)
     {
         cameraPos_ += cameraSpeed * cameraFront_;
     }
-    if (e.GetKeyCode() == MOCI_KEY_DOWN)
+    if (e.GetKeyCode() == moci::Key::Down)
     {
         cameraPos_ -= cameraSpeed * cameraFront_;
     }
-    if (e.GetKeyCode() == MOCI_KEY_LEFT)
+    if (e.GetKeyCode() == moci::Key::Left)
     {
         cameraPos_ -= glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed;
     }
-    if (e.GetKeyCode() == MOCI_KEY_RIGHT)
+    if (e.GetKeyCode() == moci::Key::Right)
     {
         cameraPos_ += glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed;
     }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "key_codes.hpp"
 #include "mouse_button_codes.hpp"
 
 #include "moci_core/core/memory.hpp"
@@ -17,7 +18,7 @@ public:
     auto operator=(const Input&) -> Input& = delete;
     virtual ~Input()                       = default;
 
-    inline static auto IsKeyPressed(int keycode) -> bool { return s_Instance->IsKeyPressedImpl(keycode); }
+    inline static auto IsKeyPressed(Key keycode) -> bool { return s_Instance->IsKeyPressedImpl(keycode); }
 
     inline static auto IsMouseButtonPressed(MouseCode button) -> bool
     {
@@ -28,7 +29,7 @@ public:
     inline static auto GetMouseY() -> float { return s_Instance->GetMouseYImpl(); }
 
 private:
-    virtual auto IsKeyPressedImpl(int keycode) -> bool              = 0;
+    virtual auto IsKeyPressedImpl(Key keycode) -> bool              = 0;
     virtual auto IsMouseButtonPressedImpl(MouseCode button) -> bool = 0;
     virtual auto GetMousePositionImpl() -> std::pair<float, float>  = 0;
     virtual auto GetMouseXImpl() -> float                           = 0;

@@ -13,7 +13,7 @@ public:
     ~GlfwInput() override = default;
 
 private:
-    auto IsKeyPressedImpl(int keycode) -> bool override;
+    auto IsKeyPressedImpl(Key keycode) -> bool override;
 
     auto IsMouseButtonPressedImpl(MouseCode button) -> bool override;
     auto GetMousePositionImpl() -> std::pair<float, float> override;

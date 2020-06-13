@@ -17,10 +17,10 @@ namespace moci
 
 Scope<Input> Input::s_Instance = MakeScope<GlfwInput>();
 
-auto GlfwInput::IsKeyPressedImpl(int keycode) -> bool
+auto GlfwInput::IsKeyPressedImpl(Key keycode) -> bool
 {
     auto* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-    auto state   = glfwGetKey(window, keycode);
+    auto state   = glfwGetKey(window, static_cast<int>(keycode));
     return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
