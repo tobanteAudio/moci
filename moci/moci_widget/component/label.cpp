@@ -6,7 +6,7 @@ namespace moci
 {
 Label::Label(std::string text, Color col) : Component("label"), text_(std::move(text)), color_(col) { }
 
-void Label::OnDraw(RenderQueue& painter)
+void Label::OnDraw(Painter& painter)
 {
     auto* style = GetStyle();
     // If yo hit this assertion, you probably forgot to set the style on the top level component.

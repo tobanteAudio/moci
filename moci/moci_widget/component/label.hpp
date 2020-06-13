@@ -13,14 +13,14 @@ public:
     class StyleMethods
     {
     public:
-        virtual void DrawLabel(RenderQueue& painter, Rectangle<int> bounds, Label const& label) = 0;
+        virtual void DrawLabel(Painter& painter, Rectangle<int> bounds, Label const& label) = 0;
     };
 
 public:
     Label(std::string text, Color col);
     ~Label() override = default;
 
-    auto OnDraw(RenderQueue& painter) -> void override;
+    auto OnDraw(Painter& painter) -> void override;
 
     auto SetText(std::string newText) -> void { text_ = std::move(newText); }
     [[nodiscard]] auto GetText() const noexcept -> std::string const& { return text_; }

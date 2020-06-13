@@ -19,14 +19,14 @@ public:
     class StyleMethods
     {
     public:
-        virtual void DrawSlider(RenderQueue& painter, Rectangle<int> bounds, Slider const& slider) = 0;
+        virtual void DrawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider) = 0;
     };
 
 public:
     Slider(Color col, SliderCallbacks callbacks = SliderCallbacks {});
     ~Slider() override = default;
 
-    auto OnDraw(RenderQueue& painter) -> void override;
+    auto OnDraw(Painter& painter) -> void override;
 
     auto SetValue(float newValue) noexcept -> void;
     [[nodiscard]] auto GetValue() const noexcept -> float;

@@ -8,7 +8,7 @@ Button::Button(std::string text, ButtonSpecs specs) : Component(text), text_(std
 {
 }
 
-void Button::OnDraw(RenderQueue& painter)
+void Button::OnDraw(Painter& painter)
 {
     auto* style = GetStyle();
     // If yo hit this assertion, you probably forgot to set the style on the top level component.

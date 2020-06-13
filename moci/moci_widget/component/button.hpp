@@ -19,7 +19,7 @@ enum class ButtonState
 class ButtonStyleMethods
 {
 public:
-    virtual void DrawButton(RenderQueue& painter, Rectangle<int> bounds, Button const& Button) = 0;
+    virtual void DrawButton(Painter& painter, Rectangle<int> bounds, Button const& Button) = 0;
 };
 
 struct ButtonCallbacks
@@ -39,7 +39,7 @@ public:
     Button(std::string text, ButtonSpecs specs = ButtonSpecs {});
     ~Button() override = default;
 
-    auto OnDraw(RenderQueue& painter) -> void override;
+    auto OnDraw(Painter& painter) -> void override;
 
     auto SetSpecs(ButtonSpecs newSpecs) -> void { specs_ = std::move(newSpecs); }
     [[nodiscard]] auto GetSpecs() const noexcept -> ButtonSpecs const& { return specs_; }

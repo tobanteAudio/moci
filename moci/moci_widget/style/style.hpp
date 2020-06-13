@@ -15,8 +15,8 @@ public:
     Style() = default;
 
 public:
-    void DrawButton(RenderQueue& painter, Rectangle<int> bounds, Button const& button) override;
-    void DrawLabel(RenderQueue& painter, Rectangle<int> bounds, Label const& label) override;
-    void DrawSlider(RenderQueue& painter, Rectangle<int> bounds, Slider const& slider) override;
+    void DrawButton(Painter& painter, Rectangle<int> bounds, Button const& button) override;
+    void DrawLabel(Painter& painter, Rectangle<int> bounds, Label const& label) override;
+    void DrawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider) override;
 };
 }  // namespace moci

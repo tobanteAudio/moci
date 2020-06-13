@@ -2,19 +2,19 @@
 
 namespace moci
 {
-void Style::DrawButton(RenderQueue& painter, Rectangle<int> bounds, Button const& label)
+void Style::DrawButton(Painter& painter, Rectangle<int> bounds, Button const& label)
 {
     auto area = bounds;
     painter.DrawText(label.GetText(), {area.GetX(), area.GetY()}, 0.5f, label.GetTextColor());
 }
 
-void Style::DrawLabel(RenderQueue& painter, Rectangle<int> bounds, Label const& label)
+void Style::DrawLabel(Painter& painter, Rectangle<int> bounds, Label const& label)
 {
     auto area = bounds;
     painter.DrawText(label.GetText(), {area.GetX(), area.GetY()}, 0.5f, label.GetTextColor());
 }
 
-void Style::DrawSlider(RenderQueue& painter, Rectangle<int> bounds, Slider const& slider)
+void Style::DrawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider)
 {
     auto area                   = bounds;
     auto const width            = area.GetWidth();

@@ -9,7 +9,7 @@ Slider::Slider(Color col, SliderCallbacks callbacks)
 {
 }
 
-void Slider::OnDraw(RenderQueue& painter)
+void Slider::OnDraw(Painter& painter)
 {
     auto* style = GetStyle();
     // If yo hit this assertion, you probably forgot to set the style on the top level component.

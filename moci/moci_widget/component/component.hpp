@@ -39,7 +39,7 @@ public:
     /**
      * @brief Callback for drawing.
      */
-    virtual void OnDraw(RenderQueue& painter);
+    virtual void OnDraw(Painter& painter);
 
     /**
      * @brief Callback for layout changes.
@@ -50,7 +50,7 @@ public:
      * @brief Draw should only be called on the root component.
      * It calls the OnDraw() callback on  all children.
      */
-    auto Draw(RenderQueue& painter) -> void;
+    auto Draw(Painter& painter) -> void;
 
     /**
      * @brief Resize should only be called on the root component.

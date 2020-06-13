@@ -17,7 +17,7 @@ public:
     LevelMeterView(moci::Color col, std::string id) : Component(std::move(id)), color_(col) { }
     ~LevelMeterView() override = default;
 
-    auto OnDraw(moci::RenderQueue& painter) -> void override
+    auto OnDraw(moci::Painter& painter) -> void override
     {
         auto area            = GetBounds();
         auto const ledHeight = area.GetHeight() / (numLEDs);
@@ -91,7 +91,7 @@ public:
 
     ~MultiChannel() override { listener_.Shutdown(); };
 
-    auto OnDraw(moci::RenderQueue& painter) -> void override { moci::IgnoreUnused(painter); }
+    auto OnDraw(moci::Painter& painter) -> void override { moci::IgnoreUnused(painter); }
 
     auto OnResize() -> void override
     {

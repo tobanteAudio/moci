@@ -13,6 +13,7 @@ set(moci_graphics_sources
     light.cpp
     mesh.hpp
     mesh.cpp
+    painter.hpp
     render_queue.hpp
     render_queue.cpp
 
