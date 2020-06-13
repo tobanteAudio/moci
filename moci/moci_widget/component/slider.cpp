@@ -13,4 +13,21 @@ void Slider::OnDraw(RenderQueue& painter)
     MOCI_CORE_ASSERT(style != nullptr, "Style should not be null");
     style->DrawSlider(painter, GetBounds(), *this);
 }
+
+bool Slider::MouseClicked(moci::MouseCallback::Click click)
+{
+    auto const bounds    = GetBounds();
+    auto const relativeX = static_cast<float>(click.x - bounds.GetX());
+    SetValue(relativeX / bounds.GetWidth());
+    return true;
+}
+
+bool Slider::MouseScrolled(MouseScrolledEvent scroll)
+{
+    auto newValue = GetValue() + scroll.GetYOffset() * 0.05f;
+    newValue      = std::max(0.0f, newValue);
+    newValue      = std::min(1.0f, newValue);
+    SetValue(newValue);
+    return true;
+}
 }  // namespace moci

@@ -28,22 +28,8 @@ public:
     void SetColor(Color col) noexcept { color_ = std::move(col); }
     [[nodiscard]] Color GetColor() const noexcept { return color_; }
 
-    bool MouseClicked(moci::MouseCallback::Click click) override
-    {
-        auto const bounds    = GetBounds();
-        auto const relativeX = static_cast<float>(click.x - bounds.GetX());
-        SetValue(relativeX / bounds.GetWidth());
-        return true;
-    }
-
-    bool MouseScrolled(MouseScrolledEvent scroll) override
-    {
-        auto newValue = GetValue() + scroll.GetYOffset() * 0.05f;
-        newValue      = std::max(0.0f, newValue);
-        newValue      = std::min(1.0f, newValue);
-        SetValue(newValue);
-        return true;
-    }
+    bool MouseClicked(moci::MouseCallback::Click click) override;
+    bool MouseScrolled(MouseScrolledEvent scroll) override;
 
 private:
     float value_ {};
