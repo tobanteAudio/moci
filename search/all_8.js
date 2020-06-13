@@ -20,7 +20,7 @@ var searchData=
   ['isfullscreen',['IsFullscreen',['../classmoci_1_1GlfwWindow.html#abd1738238e3265bc261744c27b2368c8',1,'moci::GlfwWindow::IsFullscreen()'],['../classmoci_1_1Window.html#afba84ec01682ad5c4ec92ed0c6c97e6d',1,'moci::Window::IsFullscreen()']]],
   ['isincategory',['IsInCategory',['../classmoci_1_1Event.html#a0e9f06c725d88b3aacf684c0754a819a',1,'moci::Event']]],
   ['iskeypressed',['IsKeyPressed',['../classmoci_1_1Input.html#ab62e164396102ab913714310fbd73d05',1,'moci::Input']]],
-  ['ismousebuttonpressed',['IsMouseButtonPressed',['../classmoci_1_1Input.html#aa0ffadc9f31fb8f28c944f80e1738d0f',1,'moci::Input']]],
+  ['ismousebuttonpressed',['IsMouseButtonPressed',['../classmoci_1_1Input.html#a611518022c3afd9d5322ac4bc2782b6e',1,'moci::Input']]],
   ['isorigin',['IsOrigin',['../classmoci_1_1Point.html#a841507255edbe5d946c0b6db640d571e',1,'moci::Point']]],
   ['isswapchaintarget',['isSwapChainTarget',['../structmoci_1_1FramebufferSpecs.html#a9a07c645e1417e2532fbf1d903d72b5d',1,'moci::FramebufferSpecs']]],
   ['isvsync',['IsVSync',['../classmoci_1_1GlfwWindow.html#af6119043d7e96402f77c48a7e05dc3d4',1,'moci::GlfwWindow::IsVSync()'],['../classmoci_1_1Window.html#ae230a3a6b58ea82ab12c4b35bba75883',1,'moci::Window::IsVSync()']]]

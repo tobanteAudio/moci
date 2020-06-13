@@ -37,7 +37,7 @@ var searchData=
   ['getlength',['GetLength',['../classmoci_1_1Line.html#a7fa92e3a014a42be50d7c92b23119b9d',1,'moci::Line']]],
   ['getmidpoint',['GetMidPoint',['../classmoci_1_1Line.html#a2e3e3e4e8e3db2b2fd43ab1ea4b2012c',1,'moci::Line']]],
   ['getmilliseconds',['GetMilliseconds',['../classmoci_1_1Timestep.html#a4fbfe9228900c3302df8ff4c463c9326',1,'moci::Timestep']]],
-  ['getmousebutton',['GetMouseButton',['../classmoci_1_1MouseButtonEvent.html#a0f53bc0390c63d6a7614a063a703dc38',1,'moci::MouseButtonEvent']]],
+  ['getmousebutton',['GetMouseButton',['../classmoci_1_1MouseButtonEvent.html#a618774cbd55c520b20a278cc6897eb73',1,'moci::MouseButtonEvent']]],
   ['getmouseposition',['GetMousePosition',['../classmoci_1_1Input.html#a3383038cade13b36f69f73c689e520de',1,'moci::Input']]],
   ['getmousex',['GetMouseX',['../classmoci_1_1Input.html#a5f14a373460cc3cebed54d6cf5f048f3',1,'moci::Input']]],
   ['getmousey',['GetMouseY',['../classmoci_1_1Input.html#a5a3797a5adda23603f85962163b7be9b',1,'moci::Input']]],

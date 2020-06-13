@@ -11,10 +11,11 @@ var searchData=
   ['maxuniformvectors',['MaxUniformVectors',['../classmoci_1_1RenderCommand.html#a9c7898aa5057ccd947c823170cbf3538',1,'moci::RenderCommand::MaxUniformVectors()'],['../classmoci_1_1RendererAPI.html#af8c87d856873bfba9007cb5f80c217a8',1,'moci::RendererAPI::MaxUniformVectors()'],['../classmoci_1_1OpenGLESRendererAPI.html#a857fe60de7d65e0f1f9356198e6967b1',1,'moci::OpenGLESRendererAPI::MaxUniformVectors()']]],
   ['maxvertexattributes',['MaxVertexAttributes',['../classmoci_1_1RenderCommand.html#a2f5a72037e49841e627087c3b860fa38',1,'moci::RenderCommand::MaxVertexAttributes()'],['../classmoci_1_1RendererAPI.html#a0fcf88a70ba6b255caeec7d91c5ffec3',1,'moci::RendererAPI::MaxVertexAttributes()'],['../classmoci_1_1OpenGLESRendererAPI.html#a77c22e139d2414173620e787d8679e8f',1,'moci::OpenGLESRendererAPI::MaxVertexAttributes()']]],
   ['mesh',['Mesh',['../classmoci_1_1Mesh.html#a28f07bb4a23862b6ef973f6a22bdcfde',1,'moci::Mesh']]],
-  ['mousebuttonevent',['MouseButtonEvent',['../classmoci_1_1MouseButtonEvent.html#a52c9670f02bff378d0d471e3cab10a04',1,'moci::MouseButtonEvent']]],
-  ['mousebuttonpressedevent',['MouseButtonPressedEvent',['../classmoci_1_1MouseButtonPressedEvent.html#a270f0f3ad6f284c36ff758b49a4fdd11',1,'moci::MouseButtonPressedEvent']]],
-  ['mousebuttonreleasedevent',['MouseButtonReleasedEvent',['../classmoci_1_1MouseButtonReleasedEvent.html#aca6795f61a4abc5a7066d4602c89b4f1',1,'moci::MouseButtonReleasedEvent']]],
+  ['mousebuttonevent',['MouseButtonEvent',['../classmoci_1_1MouseButtonEvent.html#ab5616493709730af7b73c8fbe46f3e22',1,'moci::MouseButtonEvent']]],
+  ['mousebuttonpressedevent',['MouseButtonPressedEvent',['../classmoci_1_1MouseButtonPressedEvent.html#af589a5ddbfd783d69c6e79e0ebccfcc0',1,'moci::MouseButtonPressedEvent']]],
+  ['mousebuttonreleasedevent',['MouseButtonReleasedEvent',['../classmoci_1_1MouseButtonReleasedEvent.html#a493d78d9d19ced1c893463c1959f9306',1,'moci::MouseButtonReleasedEvent']]],
   ['mouseclicked',['MouseClicked',['../classmoci_1_1MouseCallback.html#af522b35b31dc594a9a70c737b252ad95',1,'moci::MouseCallback::MouseClicked()'],['../classmoci_1_1Slider.html#aa5ac661856c3b5ba0dabad96c1fee424',1,'moci::Slider::MouseClicked()']]],
   ['mousemovedevent',['MouseMovedEvent',['../classmoci_1_1MouseMovedEvent.html#acbff7069cbadece6b29baf73899e3cc6',1,'moci::MouseMovedEvent']]],
+  ['mousescrolled',['MouseScrolled',['../classmoci_1_1MouseCallback.html#aaa2a7a81f40f09e7cd79a9dfb946b65d',1,'moci::MouseCallback::MouseScrolled()'],['../classmoci_1_1Slider.html#a24ff0ac70f8ce4317e3ec78cbbadad37',1,'moci::Slider::MouseScrolled()']]],
   ['mousescrolledevent',['MouseScrolledEvent',['../classmoci_1_1MouseScrolledEvent.html#af1d62d9c5a678b4c7fdcaa6a743e0e75',1,'moci::MouseScrolledEvent']]]
 ];
