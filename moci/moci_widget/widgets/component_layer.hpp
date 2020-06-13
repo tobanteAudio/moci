@@ -79,9 +79,10 @@ public:
     {
 
         auto const code = e.GetMouseButton();
-        auto const x    = static_cast<int>(Input::GetMouseX());
-        auto const y    = static_cast<int>(Input::GetMouseY());
-        auto* comp      = rootComponent_->FindComponentAt({x, y});
+        IgnoreUnused(code);
+        auto const x = static_cast<int>(Input::GetMouseX());
+        auto const y = static_cast<int>(Input::GetMouseY());
+        auto* comp   = rootComponent_->FindComponentAt({x, y});
         MOCI_CORE_ASSERT(comp, "Should never be null");
 
         while (!comp->MouseClicked(MouseCallback::Click {x, y}))
