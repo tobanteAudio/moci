@@ -1,0 +1,44 @@
+/**
+ * @file button_test.cpp
+ * @copyright Copyright 2019-2020 tobanteAudio.
+ */
+#include "catch2/catch.hpp"
+
+#include "moci_widget/component/button.hpp"
+#include "moci_widget/style/style.hpp"
+
+TEST_CASE("moci_widget: ButtonConstruct", "[ui]")
+{
+    moci::Button const button {"test", {}};
+    REQUIRE(button.GetText() == "test");
+    REQUIRE(button.GetTextView() == "test");
+}
+
+TEST_CASE("moci_widget: ButtonSetText", "[ui]")
+{
+    moci::Button button {"", {}};
+    REQUIRE(button.GetText().empty());
+    REQUIRE(button.GetTextView() == "");
+    button.SetText("test143");
+    REQUIRE(button.GetText() == "test143");
+    REQUIRE(button.GetTextView() == "test143");
+}
+
+TEST_CASE("moci_widget: ButtonSetTextColor", "[ui]")
+{
+    moci::Button button {"", {}};
+
+    auto c1 = button.GetTextColor();
+    REQUIRE(c1.GetRed() == 0.0f);
+    REQUIRE(c1.GetGreen() == 0.0f);
+    REQUIRE(c1.GetBlue() == 0.0f);
+    REQUIRE(c1.GetAlpha() == 0.0f);
+
+    button.SetTextColor(moci::Colors::Black);
+
+    auto c2 = button.GetTextColor();
+    REQUIRE(c2.GetRed() == 0.0f);
+    REQUIRE(c2.GetGreen() == 0.0f);
+    REQUIRE(c2.GetBlue() == 0.0f);
+    REQUIRE(c2.GetAlpha() == 1.0f);
+}

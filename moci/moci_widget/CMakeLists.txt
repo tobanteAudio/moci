@@ -1,6 +1,8 @@
 project(moci_widget)
 
 set(moci_widget_sources
+    component/button.hpp
+    component/button.cpp
     component/component.hpp
     component/component.cpp
     component/label.hpp
@@ -21,6 +23,7 @@ target_link_libraries(moci_widget_lib PUBLIC Moci::Graphics)
 
 set (moci_widget_test_src 
     main_test.cpp 
+    component/button_test.cpp
     component/component_test.cpp
     component/label_test.cpp 
     component/slider_test.cpp
