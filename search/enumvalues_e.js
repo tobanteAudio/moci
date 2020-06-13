@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['windowclose',['WindowClose',['../namespacemoci.html#a1ffc575f64d8c1ee66b01f44bbb10036ac984201d37197ab297a14d19efee4b07',1,'moci']]],
-  ['windowfocus',['WindowFocus',['../namespacemoci.html#a1ffc575f64d8c1ee66b01f44bbb10036a1c68d5453b28d52622bf5486a5fd95ca',1,'moci']]],
-  ['windowlostfocus',['WindowLostFocus',['../namespacemoci.html#a1ffc575f64d8c1ee66b01f44bbb10036a1c2119b9d61e623975f13f1029f1d97c',1,'moci']]],
-  ['windowmoved',['WindowMoved',['../namespacemoci.html#a1ffc575f64d8c1ee66b01f44bbb10036ab94473d9dfc85f8fdbf5cb3b1d992bda',1,'moci']]],
-  ['windowresize',['WindowResize',['../namespacemoci.html#a1ffc575f64d8c1ee66b01f44bbb10036a9f8f27bff2915738c4fe1b970e12f89c',1,'moci']]]
+  ['o',['O',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdaf186217753c37b9b9f958d906208506e',1,'moci']]],
+  ['opengl',['OpenGL',['../classmoci_1_1RendererAPI.html#a923c59f4e5298b143fa8233c6ee61477a760716b590ee7c0adc25f434f577d8be',1,'moci::RendererAPI']]],
+  ['opengles',['OpenGLES',['../classmoci_1_1RendererAPI.html#a923c59f4e5298b143fa8233c6ee61477af4b7db07e13ba92157b1b7d961abfaae',1,'moci::RendererAPI']]]
 ];

@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['eventcategoryapplication',['EventCategoryApplication',['../namespacemoci.html#a340cdd78890d32293a202d287a798a5aa2aebe254a20d38fd582668664ea80399',1,'moci']]],
-  ['eventcategoryinput',['EventCategoryInput',['../namespacemoci.html#a340cdd78890d32293a202d287a798a5aabfdbb5b0baae4c41eccf3c7d7543ec27',1,'moci']]],
-  ['eventcategorykeyboard',['EventCategoryKeyboard',['../namespacemoci.html#a340cdd78890d32293a202d287a798a5aab506282ade212ae0142cc984d7c2b640',1,'moci']]],
-  ['eventcategorymouse',['EventCategoryMouse',['../namespacemoci.html#a340cdd78890d32293a202d287a798a5aa0524603e891be3f3168537c59014ffd4',1,'moci']]],
-  ['eventcategorymousebutton',['EventCategoryMouseButton',['../namespacemoci.html#a340cdd78890d32293a202d287a798a5aa5e02456018b35d754ae13440fec9131f',1,'moci']]]
+  ['c',['C',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fda0d61f8370cad1d412f80b84d143e1257',1,'moci']]],
+  ['capslock',['CapsLock',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fda8d0f4171170104d094d8b6d4f8bf49e6',1,'moci']]],
+  ['comma',['Comma',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fda58be47db9455679e6a44df2eff9c9fa6',1,'moci']]]
 ];

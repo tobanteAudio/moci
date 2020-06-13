@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['b',['B',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fda9d5ed678fe57bcca610140957afab571',1,'moci']]],
+  ['backslash',['Backslash',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdaf6c6379402dce27659f7cffee6bc1f00',1,'moci']]],
+  ['backspace',['Backspace',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdacd7d13ceea728b08555f7c818cfb13ef',1,'moci']]],
   ['bool',['Bool',['../namespacemoci.html#a8c901ad2cb670c104e7c07add30c83eeac26f15e86e3de4c398a8273272aba034',1,'moci']]],
   ['button1',['Button1',['../namespacemoci.html#a7ecbf624adbc5d28107f19729e2ba175a6475a3746209a62a6ce6289a3741d07e',1,'moci']]],
   ['button2',['Button2',['../namespacemoci.html#a7ecbf624adbc5d28107f19729e2ba175ae165925a7c2d5ea94209b91389aa189f',1,'moci']]],
