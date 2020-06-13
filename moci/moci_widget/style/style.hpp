@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moci_widget/component/slider.hpp"
 #include "moci_widget/component/widgets.hpp"
 
 namespace moci

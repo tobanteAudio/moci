@@ -1,17 +1,16 @@
-#include "widgets.hpp"
+#include "slider.hpp"
 
 #include "moci_widget/style/style.hpp"
 
 namespace moci
 {
-Label::Label(std::string text, Color col) : Component("label"), text_(std::move(text)), color_(col) { }
+Slider::Slider(Color col) : Component("slider"), color_(col) { }
 
-void Label::OnDraw(RenderQueue& painter)
+void Slider::OnDraw(RenderQueue& painter)
 {
     auto* style = GetStyle();
     // If yo hit this assertion, you probably forgot to set the style on the top level component.
     MOCI_CORE_ASSERT(style != nullptr, "Style should not be null");
-    style->DrawLabel(painter, GetBounds(), *this);
+    style->DrawSlider(painter, GetBounds(), *this);
 }
-
 }  // namespace moci
