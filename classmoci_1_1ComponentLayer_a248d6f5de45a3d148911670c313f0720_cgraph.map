@@ -1,3 +1,10 @@
 <map id="moci::ComponentLayer::ComponentLayer" name="moci::ComponentLayer::ComponentLayer">
-<area shape="rect" id="node2" href="$classmoci_1_1ComponentLayer.html#a7d879a8f56cef99508f5879ef36558cf" title="moci::ComponentLayer\l::~ComponentLayer" alt="" coords="227,5,400,47"/>
+<area shape="rect" id="node2" href="$classmoci_1_1ComponentLayer.html#a7d879a8f56cef99508f5879ef36558cf" title="moci::ComponentLayer\l::~ComponentLayer" alt="" coords="229,5,402,47"/>
+<area shape="rect" id="node3" href="$classmoci_1_1ComponentLayer.html#a679a8a1be74366271872699510b81a82" title="moci::ComponentLayer\l::OnAttach" alt="" coords="229,71,402,112"/>
+<area shape="rect" id="node4" href="$classmoci_1_1ComponentLayer.html#ab48da1ff7bae4e12fd82d1c316eb93b0" title="moci::ComponentLayer\l::OnDetach" alt="" coords="229,136,402,177"/>
+<area shape="rect" id="node5" href="$classmoci_1_1ComponentLayer.html#a2f8c88fda87bc2452cbb29f34ede1638" title="moci::ComponentLayer\l::OnUpdate" alt="" coords="229,201,402,243"/>
+<area shape="rect" id="node6" href="$classmoci_1_1ComponentLayer.html#a7d299c5e4d25c2733bfb8316d977459b" title="moci::ComponentLayer\l::OnImGuiRender" alt="" coords="229,267,402,308"/>
+<area shape="rect" id="node7" href="$classmoci_1_1ComponentLayer.html#a968a552dd00bfdd651fc0c3c9e8a3bf7" title="moci::ComponentLayer\l::OnEvent" alt="" coords="229,332,402,373"/>
+<area shape="rect" id="node8" href="$classmoci_1_1Input.html#a5f14a373460cc3cebed54d6cf5f048f3" title="moci::Input::GetMouseX" alt="" coords="227,398,404,425"/>
+<area shape="rect" id="node9" href="$classmoci_1_1Input.html#a5a3797a5adda23603f85962163b7be9b" title="moci::Input::GetMouseY" alt="" coords="227,449,403,475"/>
 </map>

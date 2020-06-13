@@ -1,5 +1,0 @@
-<map id="moci::ComponentLayer::OnMousePressed" name="moci::ComponentLayer::OnMousePressed">
-<area shape="rect" id="node2" href="$classmoci_1_1MouseButtonEvent.html#a0f53bc0390c63d6a7614a063a703dc38" title="moci::MouseButtonEvent\l::GetMouseButton" alt="" coords="227,5,411,47"/>
-<area shape="rect" id="node3" href="$classmoci_1_1Input.html#a5f14a373460cc3cebed54d6cf5f048f3" title="moci::Input::GetMouseX" alt="" coords="230,71,407,98"/>
-<area shape="rect" id="node4" href="$classmoci_1_1Input.html#a5a3797a5adda23603f85962163b7be9b" title="moci::Input::GetMouseY" alt="" coords="231,122,407,149"/>
-</map>
