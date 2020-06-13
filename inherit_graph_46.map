@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classmoci_1_1Renderer.html" title="moci::Renderer" alt="" coords="5,5,125,32"/>
+<area shape="rect" id="node1" href="$classmoci_1_1RendererAPI.html" title="moci::RendererAPI" alt="" coords="5,5,147,32"/>
+<area shape="rect" id="node2" href="$classmoci_1_1OpenGLESRendererAPI.html" title="moci::OpenGLESRendererAPI" alt="" coords="195,5,403,32"/>
 </map>

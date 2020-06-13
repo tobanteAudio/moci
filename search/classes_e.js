@@ -7,7 +7,7 @@ var searchData=
   ['stats',['Stats',['../structmoci_1_1RenderQueue_1_1Stats.html',1,'moci::RenderQueue']]],
   ['strings',['Strings',['../classmoci_1_1Strings.html',1,'moci']]],
   ['style',['Style',['../classmoci_1_1Style.html',1,'moci']]],
-  ['stylemethods',['StyleMethods',['../classmoci_1_1Slider_1_1StyleMethods.html',1,'moci::Slider::StyleMethods'],['../classmoci_1_1Label_1_1StyleMethods.html',1,'moci::Label::StyleMethods']]],
+  ['stylemethods',['StyleMethods',['../classmoci_1_1Label_1_1StyleMethods.html',1,'moci::Label::StyleMethods'],['../classmoci_1_1Slider_1_1StyleMethods.html',1,'moci::Slider::StyleMethods']]],
   ['submesh',['Submesh',['../classmoci_1_1Mesh_1_1Submesh.html',1,'moci::Mesh']]],
   ['systeminfo',['SystemInfo',['../classmoci_1_1SystemInfo.html',1,'moci']]]
 ];

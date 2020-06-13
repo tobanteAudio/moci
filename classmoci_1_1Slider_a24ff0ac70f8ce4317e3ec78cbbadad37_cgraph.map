@@ -1,3 +1,5 @@
 <map id="moci::Slider::MouseScrolled" name="moci::Slider::MouseScrolled">
-<area shape="rect" id="node2" href="$classmoci_1_1MouseScrolledEvent.html#a8246ba1cba9c9ea17814e12f975109bb" title="moci::MouseScrolledEvent\l::GetYOffset" alt="" coords="255,5,448,47"/>
+<area shape="rect" id="node2" href="$classmoci_1_1Slider.html#a626f81d523737dacbbec94aacc3d9057" title="moci::Slider::GetValue" alt="" coords="268,5,435,32"/>
+<area shape="rect" id="node3" href="$classmoci_1_1MouseScrolledEvent.html#a8246ba1cba9c9ea17814e12f975109bb" title="moci::MouseScrolledEvent\l::GetYOffset" alt="" coords="255,57,448,98"/>
+<area shape="rect" id="node4" href="$classmoci_1_1Slider.html#a6fb2be146f905fd42374c281d74114ab" title="moci::Slider::SetValue" alt="" coords="269,123,433,149"/>
 </map>
