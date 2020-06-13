@@ -61,8 +61,7 @@ bool ComponentLayer::onMouseMoved(MouseMovedEvent& e)
 
 bool ComponentLayer::onMouseScrolled(MouseScrolledEvent& e)
 {
-    MOCI_CORE_INFO("Mouse: {}, {}", e.GetXOffset(), e.GetYOffset());
-    return true;
+    return handleEvent([&](Component* comp) { return comp->MouseScrolled(e); });
 }
 
 bool ComponentLayer::onMousePressed(MouseButtonPressedEvent& e)

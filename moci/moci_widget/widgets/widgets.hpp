@@ -63,6 +63,15 @@ public:
         return true;
     }
 
+    bool MouseScrolled(MouseScrolledEvent scroll) override
+    {
+        auto newValue = GetValue() + scroll.GetYOffset() * 0.05f;
+        newValue      = std::max(0.0f, newValue);
+        newValue      = std::min(1.0f, newValue);
+        SetValue(newValue);
+        return true;
+    }
+
 private:
     float value_ {};
     Color color_ {};

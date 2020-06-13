@@ -100,9 +100,16 @@ public:
     };
 
     virtual ~MouseCallback() = default;
+
     virtual bool MouseClicked(Click click)
     {
         IgnoreUnused(click);
+        return false;
+    }
+
+    virtual bool MouseScrolled(MouseScrolledEvent scroll)
+    {
+        IgnoreUnused(scroll);
         return false;
     }
 };
