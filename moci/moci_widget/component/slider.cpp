@@ -4,7 +4,10 @@
 
 namespace moci
 {
-Slider::Slider(Color col) : Component("slider"), color_(col) { }
+Slider::Slider(Color col, SliderCallbacks callbacks)
+    : Component("slider"), callbacks_(std::move(callbacks)), color_(col)
+{
+}
 
 void Slider::OnDraw(RenderQueue& painter)
 {
@@ -30,4 +33,19 @@ bool Slider::MouseScrolled(MouseScrolledEvent scroll)
     SetValue(newValue);
     return true;
 }
+
+auto Slider::GetValue() const noexcept -> float { return value_; }
+
+auto Slider::SetValue(float newValue) noexcept -> void
+{
+    value_ = newValue;
+    if (callbacks_.valueChanged)
+    {
+        callbacks_.valueChanged(newValue);
+    }
+}
+
+Color Slider::GetColor() const noexcept { return color_; }
+void Slider::SetColor(Color col) noexcept { color_ = std::move(col); }
+
 }  // namespace moci
