@@ -14,7 +14,7 @@ static std::atomic<float> Level {0.5f};
 class LevelMeterView : public moci::Component
 {
 public:
-    LevelMeterView(moci::Color col) : Component("color"), color_(col) { }
+    LevelMeterView(moci::Color col, std::string id) : Component(std::move(id)), color_(col) { }
     ~LevelMeterView() override = default;
 
     auto OnDraw(moci::RenderQueue& painter) -> void override
@@ -66,7 +66,7 @@ public:
         for (auto i = 0; i < 5; i++)
         {
             auto col     = moci::Color {0.2f * static_cast<float>(i), 0.8f, 0.2f, 1.0f};
-            auto channel = moci::MakeScope<LevelMeterView>(col);
+            auto channel = moci::MakeScope<LevelMeterView>(col, fmt::format("{}", i));
             AddChild(channel.get());
             channels_.push_back(std::move(channel));
         }
