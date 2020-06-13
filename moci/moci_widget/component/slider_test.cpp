@@ -39,3 +39,30 @@ TEST_CASE("moci_widget: SliderSetColor", "[ui]")
     REQUIRE(c2.GetBlue() == 0.0f);
     REQUIRE(c2.GetAlpha() == 1.0f);
 }
+
+TEST_CASE("moci_widget: SliderCallbackValueChanged", "[ui]")
+{
+    auto wasCalled         = false;
+    auto callbacks         = moci::SliderCallbacks {};
+    callbacks.valueChanged = [&](auto val) {
+        REQUIRE(val == 143.0f);
+        wasCalled = true;
+    };
+
+    auto slider = moci::Slider {moci::Colors::Black, callbacks};
+    REQUIRE(slider.GetValue() == 0.0f);
+    slider.SetValue(143.0f);
+    REQUIRE(slider.GetValue() == 143.0f);
+    REQUIRE(wasCalled == true);
+}
+
+TEST_CASE("moci_widget: SliderCallbackValueChangedCallbackNotSet", "[ui]")
+{
+    auto wasCalled = false;
+    auto callbacks = moci::SliderCallbacks {};
+    auto slider    = moci::Slider {moci::Colors::Black, callbacks};
+    REQUIRE(slider.GetValue() == 0.0f);
+    slider.SetValue(143.0f);
+    REQUIRE(slider.GetValue() == 143.0f);
+    REQUIRE(wasCalled == false);
+}
