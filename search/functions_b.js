@@ -14,7 +14,7 @@ var searchData=
   ['mousebuttonevent',['MouseButtonEvent',['../classmoci_1_1MouseButtonEvent.html#ab5616493709730af7b73c8fbe46f3e22',1,'moci::MouseButtonEvent']]],
   ['mousebuttonpressedevent',['MouseButtonPressedEvent',['../classmoci_1_1MouseButtonPressedEvent.html#af589a5ddbfd783d69c6e79e0ebccfcc0',1,'moci::MouseButtonPressedEvent']]],
   ['mousebuttonreleasedevent',['MouseButtonReleasedEvent',['../classmoci_1_1MouseButtonReleasedEvent.html#a493d78d9d19ced1c893463c1959f9306',1,'moci::MouseButtonReleasedEvent']]],
-  ['mouseclicked',['MouseClicked',['../classmoci_1_1MouseCallback.html#af522b35b31dc594a9a70c737b252ad95',1,'moci::MouseCallback::MouseClicked()'],['../classmoci_1_1Slider.html#aa5ac661856c3b5ba0dabad96c1fee424',1,'moci::Slider::MouseClicked()']]],
+  ['mouseclicked',['MouseClicked',['../classmoci_1_1MouseCallback.html#af522b35b31dc594a9a70c737b252ad95',1,'moci::MouseCallback::MouseClicked()'],['../classmoci_1_1Button.html#a5fffd3a3a85ed564d39793b341ba8836',1,'moci::Button::MouseClicked()'],['../classmoci_1_1Slider.html#aa5ac661856c3b5ba0dabad96c1fee424',1,'moci::Slider::MouseClicked()']]],
   ['mousemovedevent',['MouseMovedEvent',['../classmoci_1_1MouseMovedEvent.html#acbff7069cbadece6b29baf73899e3cc6',1,'moci::MouseMovedEvent']]],
   ['mousescrolled',['MouseScrolled',['../classmoci_1_1MouseCallback.html#aaa2a7a81f40f09e7cd79a9dfb946b65d',1,'moci::MouseCallback::MouseScrolled()'],['../classmoci_1_1Slider.html#a24ff0ac70f8ce4317e3ec78cbbadad37',1,'moci::Slider::MouseScrolled()']]],
   ['mousescrolledevent',['MouseScrolledEvent',['../classmoci_1_1MouseScrolledEvent.html#af1d62d9c5a678b4c7fdcaa6a743e0e75',1,'moci::MouseScrolledEvent']]]
