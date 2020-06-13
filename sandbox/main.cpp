@@ -82,10 +82,14 @@ public:
 
         for (auto i = 0; i < 20; i++)
         {
-            auto col   = moci::Color {0.2f * static_cast<float>(i), 0.8f, 0.2f, 1.0f};
-            auto label = moci::MakeScope<moci::Label>(fmt::format("Test: {}", i), col);
-            AddChild(label.get());
-            labels_.push_back(std::move(label));
+            auto specs                    = moci::ButtonSpecs {};
+            specs.callbacks.onStateChange = [](auto state) { moci::IgnoreUnused(state); };
+
+            auto button = moci::MakeScope<moci::Button>(fmt::format("Test: {}", i), specs);
+            button->SetTextColor(moci::Color {0.2f * static_cast<float>(i), 0.8f, 0.2f, 1.0f});
+
+            AddChild(button.get());
+            buttons_.push_back(std::move(button));
         }
     }
 
@@ -97,10 +101,10 @@ public:
     {
         auto area               = GetBounds();
         auto const width        = area.GetWidth();
-        auto labelArea          = area.RemoveFromRight(width / 3).Reduced(20);
+        auto buttonArea         = area.RemoveFromRight(width / 3).Reduced(20);
         auto sliderArea         = area.RemoveFromRight(width / 3).Reduced(20);
         auto const sliderHeight = static_cast<int>(sliderArea.GetHeight() / sliders_.size());
-        auto const labelHeight  = static_cast<int>(labelArea.GetHeight() / labels_.size());
+        auto const buttonHeight = static_cast<int>(buttonArea.GetHeight() / buttons_.size());
         auto const channelWidth = static_cast<int>(area.GetWidth() / channels_.size());
 
         for (auto& channel : channels_)
@@ -113,9 +117,9 @@ public:
             slider->SetBounds(sliderArea.RemoveFromTop(sliderHeight).Reduced(5, 25));
         }
 
-        for (auto& label : labels_)
+        for (auto& button : buttons_)
         {
-            label->SetBounds(labelArea.RemoveFromTop(labelHeight).Reduced(5, 25));
+            button->SetBounds(buttonArea.RemoveFromTop(buttonHeight).Reduced(5, 5));
         }
     }
 
@@ -123,7 +127,7 @@ private:
     moci::DatagramSocket listener_ {};
     moci::Vector<moci::Scope<LevelMeterView>> channels_;
     moci::Vector<moci::Scope<moci::Slider>> sliders_;
-    moci::Vector<moci::Scope<moci::Label>> labels_;
+    moci::Vector<moci::Scope<moci::Button>> buttons_;
 };
 
 class Sandbox : public moci::Application

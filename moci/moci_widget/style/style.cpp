@@ -2,10 +2,41 @@
 
 namespace moci
 {
-void Style::DrawButton(Painter& painter, Rectangle<int> bounds, Button const& label)
+void Style::DrawButton(Painter& painter, Rectangle<int> bounds, Button const& button)
 {
-    auto area = bounds;
-    painter.DrawText(label.GetText(), {area.GetX(), area.GetY()}, 0.5f, label.GetTextColor());
+    auto area                   = bounds;
+    auto const width            = area.GetWidth();
+    auto const height           = area.GetHeight();
+    auto const border           = std::max<int>(1, static_cast<int>(height * 0.1));
+    auto const bottomLeftCorner = Point<int> {area.GetX(), area.GetY()};
+    auto const color            = button.GetTextColor();
+
+    // left
+    auto const leftEdge = Rectangle<int> {bottomLeftCorner, border, area.GetHeight()};
+    painter.DrawQuad(leftEdge.ToFloat(), color);
+
+    // right
+    auto const rightEdge = Rectangle<int> {
+        {bottomLeftCorner.GetX() + width - border, bottomLeftCorner.GetY()},  //
+        border,                                                               //
+        area.GetHeight()                                                      //
+    };
+    painter.DrawQuad(rightEdge.ToFloat(), color);
+
+    // bottom
+    auto const bottomEdge = Rectangle<int> {bottomLeftCorner, area.GetWidth(), border};
+    painter.DrawQuad(bottomEdge.ToFloat(), color);
+
+    // top
+    auto const topEdge = Rectangle<int> {
+        {bottomLeftCorner.GetX(), bottomLeftCorner.GetY() + height - border},  //
+        width,                                                                 //
+        border                                                                 //
+    };
+    painter.DrawQuad(topEdge.ToFloat(), color);
+
+    // text
+    painter.DrawText(button.GetText(), {bounds.GetX() + width / 2, bounds.GetY() + height}, 0.5f, color);
 }
 
 void Style::DrawLabel(Painter& painter, Rectangle<int> bounds, Label const& label)
