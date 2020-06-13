@@ -99,8 +99,8 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a65c6d84a43b2190932f8a12e15f18a81"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Slider.html#a65c6d84a43b2190932f8a12e15f18a81">Slider</a> (<a class="el" href="classmoci_1_1Color.html">Color</a> col)</td></tr>
-<tr class="separator:a65c6d84a43b2190932f8a12e15f18a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa52d680bcd7fc0bccbd31ccb17054caa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Slider.html#aa52d680bcd7fc0bccbd31ccb17054caa">Slider</a> (<a class="el" href="classmoci_1_1Color.html">Color</a> col, <a class="el" href="structmoci_1_1SliderCallbacks.html">SliderCallbacks</a> callbacks=<a class="el" href="structmoci_1_1SliderCallbacks.html">SliderCallbacks</a> {})</td></tr>
+<tr class="separator:aa52d680bcd7fc0bccbd31ccb17054caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78ce10f57d7968bd1997018cb63615bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Slider.html#a78ce10f57d7968bd1997018cb63615bf">~Slider</a> () override=default</td></tr>
 <tr class="separator:a78ce10f57d7968bd1997018cb63615bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac58a9eae612328194be9affd5bf21716"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Slider.html#ac58a9eae612328194be9affd5bf21716">OnDraw</a> (<a class="el" href="classmoci_1_1RenderQueue.html">RenderQueue</a> &amp;painter) -&gt; void override</td></tr>
@@ -202,8 +202,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3cb916d2aa746c8c6cf6144392b423d2 inherit pub_methods_classmoci_1_1MouseCallback"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a65c6d84a43b2190932f8a12e15f18a81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65c6d84a43b2190932f8a12e15f18a81">&#9670;&nbsp;</a></span>Slider()</h2>
+<a id="aa52d680bcd7fc0bccbd31ccb17054caa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa52d680bcd7fc0bccbd31ccb17054caa">&#9670;&nbsp;</a></span>Slider()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,8 +212,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">moci::Slider::Slider </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classmoci_1_1Color.html">Color</a>&#160;</td>
-          <td class="paramname"><em>col</em></td><td>)</td>
+          <td class="paramname"><em>col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="structmoci_1_1SliderCallbacks.html">SliderCallbacks</a>&#160;</td>
+          <td class="paramname"><em>callbacks</em> = <code><a class="el" href="structmoci_1_1SliderCallbacks.html">SliderCallbacks</a>&#160;{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -264,7 +274,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -284,12 +294,12 @@ Public Member Functions</h2></td></tr>
           <td class="memname">auto moci::Slider::GetValue </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const -&gt; float </td>
+          <td> const -&gt;  float</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -315,21 +325,12 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classmoci_1_1MouseCallback.html#af522b35b31dc594a9a70c737b252ad95">moci::MouseCallback</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classmoci_1_1Slider_aa5ac661856c3b5ba0dabad96c1fee424_cgraph.png" border="0" usemap="#classmoci_1_1Slider_aa5ac661856c3b5ba0dabad96c1fee424_cgraph" alt=""/></div>
-<map name="classmoci_1_1Slider_aa5ac661856c3b5ba0dabad96c1fee424_cgraph" id="classmoci_1_1Slider_aa5ac661856c3b5ba0dabad96c1fee424_cgraph">
-<area shape="rect" id="node2" href="classmoci_1_1Component.html#a5d9ea130af8939dfb44cf3017dd9a5fa" title="Returns a the global bounds. " alt="" coords="251,5,467,32"/>
-<area shape="rect" id="node3" href="classmoci_1_1Slider.html#a6fb2be146f905fd42374c281d74114ab" title="moci::Slider::SetValue" alt="" coords="277,56,441,83"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -352,22 +353,12 @@ Here is the call graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classmoci_1_1MouseCallback.html#aaa2a7a81f40f09e7cd79a9dfb946b65d">moci::MouseCallback</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classmoci_1_1Slider_a24ff0ac70f8ce4317e3ec78cbbadad37_cgraph.png" border="0" usemap="#classmoci_1_1Slider_a24ff0ac70f8ce4317e3ec78cbbadad37_cgraph" alt=""/></div>
-<map name="classmoci_1_1Slider_a24ff0ac70f8ce4317e3ec78cbbadad37_cgraph" id="classmoci_1_1Slider_a24ff0ac70f8ce4317e3ec78cbbadad37_cgraph">
-<area shape="rect" id="node2" href="classmoci_1_1Slider.html#a626f81d523737dacbbec94aacc3d9057" title="moci::Slider::GetValue" alt="" coords="268,5,435,32"/>
-<area shape="rect" id="node3" href="classmoci_1_1MouseScrolledEvent.html#a8246ba1cba9c9ea17814e12f975109bb" title="moci::MouseScrolledEvent\l::GetYOffset" alt="" coords="255,57,448,98"/>
-<area shape="rect" id="node4" href="classmoci_1_1Slider.html#a6fb2be146f905fd42374c281d74114ab" title="moci::Slider::SetValue" alt="" coords="269,123,433,149"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -420,7 +411,7 @@ Here is the call graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -441,12 +432,12 @@ Here is the call graph for this function:</div>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>newValue</em></td><td>)</td>
-          <td> -&gt; void </td>
+          <td> -&gt;  void</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
