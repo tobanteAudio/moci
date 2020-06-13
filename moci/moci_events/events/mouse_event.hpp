@@ -1,6 +1,7 @@
 #pragma once
 
 #include "event.hpp"
+#include "moci_events/mouse_button_codes.hpp"
 
 #include <sstream>
 
@@ -52,23 +53,23 @@ private:
 class MouseButtonEvent : public Event
 {
 public:
-    MouseButtonEvent(int button) : m_Button(button) { }
-    [[nodiscard]] inline auto GetMouseButton() const -> int { return m_Button; }
+    MouseButtonEvent(MouseCode button) : m_Button(button) { }
+    [[nodiscard]] inline auto GetMouseButton() const -> MouseCode { return m_Button; }
 
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 private:
-    int m_Button;
+    MouseCode m_Button;
 };
 
 class MouseButtonPressedEvent : public MouseButtonEvent
 {
 public:
-    MouseButtonPressedEvent(int button) : MouseButtonEvent(button) { }
+    MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
         std::stringstream ss;
-        ss << "MouseButtonPressedEvent: " << GetMouseButton();
+        ss << "MouseButtonPressedEvent: " << static_cast<int>(GetMouseButton());
         return ss.str();
     }
 
@@ -78,12 +79,12 @@ public:
 class MouseButtonReleasedEvent : public MouseButtonEvent
 {
 public:
-    MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) { }
+    MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
         std::stringstream ss;
-        ss << "MouseButtonReleasedEvent: " << GetMouseButton();
+        ss << "MouseButtonReleasedEvent: " << static_cast<int>(GetMouseButton());
         return ss.str();
     }
 

@@ -15,7 +15,7 @@ public:
 private:
     auto IsKeyPressedImpl(int keycode) -> bool override;
 
-    auto IsMouseButtonPressedImpl(int button) -> bool override;
+    auto IsMouseButtonPressedImpl(MouseCode button) -> bool override;
     auto GetMousePositionImpl() -> std::pair<float, float> override;
     auto GetMouseXImpl() -> float override;
     auto GetMouseYImpl() -> float override;

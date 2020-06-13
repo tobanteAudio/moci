@@ -306,7 +306,7 @@ bool DemoLayer::OnMouseScrolled(moci::MouseScrolledEvent& e)
 
 bool DemoLayer::OnMousePressed(moci::MouseButtonPressedEvent& e)
 {
-    if (e.GetMouseButton() == MOCI_MOUSE_BUTTON_3)
+    if (e.GetMouseButton() == moci::MouseCode::ButtonMiddle)
     {
         isMouseDragging_ = true;
         return true;
@@ -316,7 +316,7 @@ bool DemoLayer::OnMousePressed(moci::MouseButtonPressedEvent& e)
 }
 bool DemoLayer::OnMouseReleased(moci::MouseButtonReleasedEvent& e)
 {
-    if (e.GetMouseButton() == MOCI_MOUSE_BUTTON_3)
+    if (e.GetMouseButton() == moci::MouseCode::ButtonMiddle)
     {
         isMouseDragging_ = false;
         firstMouse_      = true;

@@ -123,13 +123,13 @@ void GlfwWindow::Init(WindowSpecs props)
         {
             case GLFW_PRESS:
             {
-                MouseButtonPressedEvent event(button);
+                MouseButtonPressedEvent event(static_cast<MouseCode>(button));
                 data.EventCallback(event);
                 break;
             }
             case GLFW_RELEASE:
             {
-                MouseButtonReleasedEvent event(button);
+                MouseButtonReleasedEvent event(static_cast<MouseCode>(button));
                 data.EventCallback(event);
                 break;
             }

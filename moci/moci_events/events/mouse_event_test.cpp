@@ -34,10 +34,10 @@ TEST_CASE("moci_events/events: MouseScrolledEvent", "[app][events]")
 
 TEST_CASE("moci_events/events: MouseButtonPressedEvent", "[app][events]")
 {
-    auto const event = moci::MouseButtonPressedEvent(2);
+    auto const event = moci::MouseButtonPressedEvent(moci::MouseCode::Button2);
     REQUIRE(event.GetStaticType() == moci::EventType::MouseButtonPressed);
     REQUIRE(event.GetName() == std::string_view("MouseButtonPressed"));
-    REQUIRE(event.GetMouseButton() == 2);
+    REQUIRE(event.GetMouseButton() == moci::MouseCode::Button2);
     REQUIRE(event.IsInCategory(moci::EventCategoryInput) == true);
     REQUIRE(event.IsInCategory(moci::EventCategoryMouse) == true);
     REQUIRE_THAT(event.ToString(), Contains("MouseButtonPressed"));
@@ -45,10 +45,10 @@ TEST_CASE("moci_events/events: MouseButtonPressedEvent", "[app][events]")
 
 TEST_CASE("moci_events/events: MouseButtonReleasedEvent", "[app][events]")
 {
-    auto const event = moci::MouseButtonReleasedEvent(2);
+    auto const event = moci::MouseButtonReleasedEvent(moci::MouseCode::ButtonLeft);
     REQUIRE(event.GetStaticType() == moci::EventType::MouseButtonReleased);
     REQUIRE(event.GetName() == std::string_view("MouseButtonReleased"));
-    REQUIRE(event.GetMouseButton() == 2);
+    REQUIRE(event.GetMouseButton() == moci::MouseCode::ButtonLeft);
     REQUIRE(event.IsInCategory(moci::EventCategoryInput) == true);
     REQUIRE(event.IsInCategory(moci::EventCategoryMouse) == true);
     REQUIRE_THAT(event.ToString(), Contains("MouseButtonReleased"));
