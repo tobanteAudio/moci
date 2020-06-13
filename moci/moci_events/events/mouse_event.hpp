@@ -90,4 +90,21 @@ public:
     EVENT_CLASS_TYPE(MouseButtonReleased)
 };
 
+class MouseCallback
+{
+public:
+    struct Click
+    {
+        int x = 0;
+        int y = 0;
+    };
+
+    virtual ~MouseCallback() = default;
+    virtual bool MouseClicked(Click click)
+    {
+        IgnoreUnused(click);
+        return false;
+    }
+};
+
 }  // namespace moci

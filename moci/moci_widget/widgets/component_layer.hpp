@@ -54,7 +54,7 @@ public:
 
     void OnEvent(Event& e) override
     {
-        EventDispatcher dispatcher(e);
+        auto dispatcher = EventDispatcher {e};
         dispatcher.Dispatch<WindowResizeEvent>(MOCI_EVENT_METHOD(ComponentLayer::OnWindowResized));
         dispatcher.Dispatch<MouseMovedEvent>(MOCI_EVENT_METHOD(ComponentLayer::OnMouseMoved));
         dispatcher.Dispatch<MouseButtonPressedEvent>(MOCI_EVENT_METHOD(ComponentLayer::OnMousePressed));
@@ -77,8 +77,22 @@ public:
 
     bool OnMousePressed(MouseButtonPressedEvent& e)
     {
-        MOCI_CORE_INFO("Mouse Click: {}", e.GetMouseButton());
-        MOCI_CORE_INFO("Mouse: {}, {}", Input::GetMouseX(), Input::GetMouseY());
+
+        auto const code = e.GetMouseButton();
+        auto const x    = static_cast<int>(Input::GetMouseX());
+        auto const y    = static_cast<int>(Input::GetMouseY());
+        auto* comp      = rootComponent_->FindComponentAt({x, y});
+        MOCI_CORE_ASSERT(comp, "Should never be null");
+
+        while (!comp->MouseClicked(MouseCallback::Click {x, y}))
+        {
+            comp = comp->GetParent();
+            if (comp == nullptr)
+            {
+                return false;
+            }
+        }
+
         return true;
     }
 

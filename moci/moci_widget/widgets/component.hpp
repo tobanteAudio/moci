@@ -1,7 +1,8 @@
 #pragma once
 
-#include "moci_graphics/render_queue.hpp"
-#include "moci_math/geometry/rectangle.hpp"
+#include "moci_events/moci_events.hpp"
+#include "moci_graphics/moci_graphics.hpp"
+#include "moci_math/moci_math.hpp"
 
 #include "moci_core/core/vector.hpp"
 #include <memory>
@@ -17,7 +18,7 @@ class Style;
 /**
  * @brief Base for all GUI components.
  */
-class Component
+class Component : public MouseCallback
 {
 public:
     /**
