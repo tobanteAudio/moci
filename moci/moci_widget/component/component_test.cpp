@@ -4,8 +4,8 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci_widget/widgets/component.hpp"
-#include "moci_widget/widgets/style.hpp"
+#include "moci_widget/component/component.hpp"
+#include "moci_widget/style/style.hpp"
 
 TEST_CASE("moci_widget: ComponentDefaultConstruct", "[ui]")
 {

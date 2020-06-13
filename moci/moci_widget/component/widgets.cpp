@@ -1,6 +1,6 @@
 #include "widgets.hpp"
 
-#include "moci_widget/widgets/style.hpp"
+#include "moci_widget/style/style.hpp"
 
 namespace moci
 {

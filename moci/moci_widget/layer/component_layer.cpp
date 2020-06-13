@@ -1,4 +1,4 @@
-#include "moci_widget/widgets/component_layer.hpp"
+#include "moci_widget/layer/component_layer.hpp"
 
 namespace moci
 {
