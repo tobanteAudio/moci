@@ -1,4 +1,4 @@
-#include "widgets.hpp"
+#include "label.hpp"
 
 #include "moci_widget/style/style.hpp"
 

@@ -1,10 +1,10 @@
 /**
- * @file widgets_test.cpp
+ * @file label_test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
 #include "catch2/catch.hpp"
 
-#include "moci_widget/component/widgets.hpp"
+#include "moci_widget/component/label.hpp"
 #include "moci_widget/style/style.hpp"
 
 TEST_CASE("moci_widget: LabelConstruct", "[ui]")
