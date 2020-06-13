@@ -4,7 +4,9 @@
 
 namespace moci
 {
-Button::Button(std::string text, Color col) : Component(text), text_(std::move(text)), color_(col) { }
+Button::Button(std::string text, ButtonSpecs specs) : Component(text), text_(std::move(text)), color_({}), specs_(specs)
+{
+}
 
 void Button::OnDraw(RenderQueue& painter)
 {
