@@ -150,7 +150,7 @@ void DemoLayer::OnAttach()
             std::string("sandbox3D/assets/textures/skybox/back.jpg")     //
         };
 
-        skyBoxTexture_ = moci::TextureCube::Create(faces);
+        skyBoxTexture_ = moci::RenderFactory::MakeTextureCube(faces);
     }
 
     // Mesh buffer
@@ -180,12 +180,12 @@ void DemoLayer::OnAttach()
 
     {
         MOCI_PROFILE_SCOPE("OnAttach::Textures");
-        textureSolid_  = moci::Texture2D::Create("sandbox3D/assets/textures/white_10x10.png");
-        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/4color.png");
+        textureSolid_  = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/white_10x10.png");
+        textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/4color.png");
 #if defined(MOCI_API_OPENGL_ES)
-        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
+        textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
 #else
-        textureColors_ = moci::Texture2D::Create("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
+        textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
 #endif
     }
 

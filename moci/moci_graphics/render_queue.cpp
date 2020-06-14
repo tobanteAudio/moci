@@ -25,7 +25,7 @@ RenderQueue::RenderQueue()
     data_.indices.reserve(MaxIndexCount);
     data_.textures.reserve(MaxTextureUnits);
 
-    data_.defaultTexture = moci::Texture2D::Create("assets/white_10x10.png");
+    data_.defaultTexture = moci::RenderFactory::MakeTexture2D("assets/white_10x10.png");
 
     moci::BufferLayout layout = {
         {moci::ShaderDataType::Float3, "position"},            //
@@ -121,11 +121,11 @@ auto RenderQueue::FontInit(std::string const& fontPath) -> void
             continue;
         }
         // Generate texture
-        auto texture = Texture2D::Create(  //
-            Texture::Format::Luminance,    //
-            face->glyph->bitmap.width,     //
-            face->glyph->bitmap.rows,      //
-            face->glyph->bitmap.buffer     //
+        auto texture = RenderFactory::MakeTexture2D(  //
+            Texture::Format::Luminance,               //
+            face->glyph->bitmap.width,                //
+            face->glyph->bitmap.rows,                 //
+            face->glyph->bitmap.buffer                //
         );
 
         Character character = {

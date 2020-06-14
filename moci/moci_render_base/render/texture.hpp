@@ -40,15 +40,10 @@ class Texture2D : public Texture
 public:
     using Ptr      = Ref<Texture2D>;
     using Optional = std::optional<Ptr>;
-
-public:
-    static auto Create(std::string const& path) -> Ref<Texture2D>;
-    static auto Create(Texture::Format format, uint32_t width, uint32_t height, void* data) -> Ref<Texture2D>;
 };
 
 class TextureCube : public Texture
 {
 public:
-    static auto Create(Vector<std::string> paths) -> Ref<TextureCube>;
 };
 }  // namespace moci
