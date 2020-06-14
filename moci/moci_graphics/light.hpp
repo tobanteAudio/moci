@@ -57,7 +57,7 @@ public:
         vbo->Unbind();
         ibo.reset(moci::IndexBuffer::Create(nullptr, 1, true));
         ibo->Unbind();
-        vao = moci::VertexArray::Create();
+        vao = moci::RenderFactory::MakeVertexArray();
         vao->AddVertexBuffer(vbo);
         vao->SetIndexBuffer(ibo);
         vao->Unbind();

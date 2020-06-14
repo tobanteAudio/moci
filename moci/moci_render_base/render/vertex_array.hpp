@@ -22,8 +22,6 @@ public:
 
     [[nodiscard]] virtual auto GetVertexBuffer() const -> const Ref<VertexBuffer>& = 0;
     [[nodiscard]] virtual auto GetIndexBuffer() const -> const Ref<IndexBuffer>&   = 0;
-
-    static auto Create() -> Ref<VertexArray>;
 };
 
 }  // namespace moci

@@ -39,7 +39,7 @@ RenderQueue::RenderQueue()
     data_.vbo->Unbind();
     data_.ibo.reset(moci::IndexBuffer::Create(nullptr, MaxIndexCount, true));
     data_.ibo->Unbind();
-    data_.vao = moci::VertexArray::Create();
+    data_.vao = moci::RenderFactory::MakeVertexArray();
     data_.vao->AddVertexBuffer(data_.vbo);
     data_.vao->SetIndexBuffer(data_.ibo);
     data_.vao->Unbind();

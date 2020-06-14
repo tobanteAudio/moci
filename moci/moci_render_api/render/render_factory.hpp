@@ -14,6 +14,7 @@ struct RenderFactory
     static Ref<Texture2D> MakeTexture2D(std::string const& path);
     static Ref<Texture2D> MakeTexture2D(Texture::Format format, uint32_t width, uint32_t height, void* data);
     static Ref<TextureCube> MakeTextureCube(Vector<std::string> paths);
+    static Ref<VertexArray> MakeVertexArray();
 };
 
 }  // namespace moci

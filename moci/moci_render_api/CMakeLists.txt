@@ -9,7 +9,6 @@ set(moci_render_api_sources
     render/renderer_api.cpp
     render/renderer.hpp
     render/renderer.cpp
-    render/vertex_array.cpp
 
     layer/layer_stack.hpp
     layer/layer_stack.cpp

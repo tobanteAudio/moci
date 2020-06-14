@@ -185,7 +185,7 @@ Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
     //     }
     // }
 
-    // m_VertexArray = VertexArray::Create();
+    // m_VertexArray = RenderFactory::MakeVertexArray();
     // if (isAnimated_)
     // {
     //     auto vb

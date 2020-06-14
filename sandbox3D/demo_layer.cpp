@@ -137,7 +137,7 @@ void DemoLayer::OnAttach()
         skyboxVbo_->Unbind();
         skyboxIbo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
         skyboxIbo_->Unbind();
-        skyboxVao_ = moci::VertexArray::Create();
+        skyboxVao_ = moci::RenderFactory::MakeVertexArray();
         skyboxVao_->AddVertexBuffer(skyboxVbo_);
         skyboxVao_->SetIndexBuffer(skyboxIbo_);
         skyboxVao_->Unbind();
@@ -169,7 +169,7 @@ void DemoLayer::OnAttach()
         vbo_->Unbind();
         ibo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
         ibo_->Unbind();
-        vao_ = moci::VertexArray::Create();
+        vao_ = moci::RenderFactory::MakeVertexArray();
         vao_->AddVertexBuffer(vbo_);
         vao_->SetIndexBuffer(ibo_);
         vao_->Unbind();
