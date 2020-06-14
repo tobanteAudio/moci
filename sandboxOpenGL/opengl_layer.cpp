@@ -1,6 +1,17 @@
 #include "opengl_layer.hpp"
 
-void OpenGLLayer::OnAttach() { }
+#if defined(MOCI_API_OPENGL_LEGACY)
+constexpr auto shaderSuffix = "es2";
+#else
+constexpr auto shaderSuffix = "gl4";
+#endif
+
+void OpenGLLayer::OnAttach()
+{
+    auto const path = fmt::format("assets/shader/basic_{}.glsl", shaderSuffix);
+    shader_         = moci::RenderFactory::MakeShader(path);
+    shader_->Bind();
+}
 
 void OpenGLLayer::OnUpdate(moci::Timestep ts)
 {
