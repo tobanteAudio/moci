@@ -31,7 +31,7 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path) : m_Path(std::move(path))
 
     int width, height, channels;
     stbi_set_flip_vertically_on_load(1);
-    auto* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+    auto* data = stbi_load(m_Path.c_str(), &width, &height, &channels, 0);
     MOCI_CORE_ASSERT(data, "Failed to load image!");
     m_Width  = width;
     m_Height = height;
