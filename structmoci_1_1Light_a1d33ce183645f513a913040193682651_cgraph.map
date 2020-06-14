@@ -1,5 +1,5 @@
 <map id="moci::Light::Light" name="moci::Light::Light">
-<area shape="rect" id="node2" href="$structmoci_1_1RenderFactory.html#a3f6cbaaf8dacc8d71e270a8d131af0fc" title="moci::RenderFactory\l::MakeShader" alt="" coords="200,5,355,47"/>
+<area shape="rect" id="node2" href="$structmoci_1_1RenderFactory.html#a06e347923cbb37629863ff777f524285" title="moci::RenderFactory\l::MakeShader" alt="" coords="200,5,355,47"/>
 <area shape="rect" id="node3" href="$classmoci_1_1Mesh.html#a85d2a7409f7d5b21d74a252056708e28" title="moci::Mesh::GetVertices" alt="" coords="188,71,367,98"/>
 <area shape="rect" id="node4" href="$structmoci_1_1RenderFactory.html#ab42b0f974b7db2354f96ba8dd530e982" title="moci::RenderFactory\l::MakeVertexBuffer" alt="" coords="200,123,355,164"/>
 <area shape="rect" id="node5" href="$structmoci_1_1RenderFactory.html#a524b2446b2fcfb298f594b6cd1172afd" title="moci::RenderFactory\l::MakeIndexBuffer" alt="" coords="200,188,355,229"/>
