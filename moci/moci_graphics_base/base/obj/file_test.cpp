@@ -9,7 +9,7 @@
 #include "moci_core/core/preprocessor.hpp"
 
 #if !defined(MOCI_WINDOWS)
-TEST_CASE("moci_graphics: OBJFileCube", "[render]")
+TEST_CASE("moci_graphics_base: OBJFileCube", "[render]")
 {
     moci::OBJFile model("moci_test_data/cube.obj");
     REQUIRE(model.Parse() == true);
@@ -18,7 +18,7 @@ TEST_CASE("moci_graphics: OBJFileCube", "[render]")
     REQUIRE(model.GetVertexData().size() == 36);
 }
 
-TEST_CASE("moci_graphics: OBJFileTeapot", "[render]")
+TEST_CASE("moci_graphics_base: OBJFileTeapot", "[render]")
 {
     moci::OBJFile model("moci_test_data/teapot.obj");
     REQUIRE(model.Parse() == true);
