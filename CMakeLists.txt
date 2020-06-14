@@ -125,7 +125,7 @@ endif(MOCI_BUILD_TESTS)
 add_subdirectory(moci)
 
 if(MOCI_BUILD_SANDBOX)
-  add_subdirectory(sandbox)
+  add_subdirectory(sandbox2D)
   add_subdirectory(sandbox3D)
 endif(MOCI_BUILD_SANDBOX)
 
