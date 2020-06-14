@@ -4,9 +4,9 @@
 
 namespace moci
 {
-struct FrameBufferFactory
+struct RenderFactory
 {
-    static Ref<Framebuffer> Make(FramebufferSpecs spec);
+    static Ref<Framebuffer> MakeFramebuffer(FramebufferSpecs spec);
 };
 
 }  // namespace moci
