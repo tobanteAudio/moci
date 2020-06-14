@@ -1,42 +1,14 @@
 project(playground)
 
-add_executable(stb_image main.cpp)
-target_link_libraries(stb_image 
-    PRIVATE 
-        Moci::CompilerOptions 
-        Moci::CompilerWarnings
-        Moci::Moci 
-)
-
-add_executable(font_atlas font_atlas.cpp)
-target_link_libraries(font_atlas 
-    PRIVATE 
-        Moci::CompilerOptions 
-        Moci::CompilerWarnings
-        Moci::Moci 
-)
-
-
-if(WIN32)
-    add_executable(win32_gl WIN32 win32_gl.cpp)
-    target_compile_features(win32_gl PRIVATE cxx_std_17)
-    target_compile_definitions(win32_gl PRIVATE "UNICODE" "_UNICODE")
-    target_link_libraries(win32_gl 
-        PRIVATE 
-            Moci::CompilerOptions 
-            Moci::CompilerWarnings
-            Moci::Moci 
-            user32.lib 
-            gdi32.lib
-            
-    )
-endif()
-
-add_subdirectory(allocator)
+add_subdirectory(cxx_allocator)
+add_subdirectory(cxx_object_pool)
+add_subdirectory(cxx_thread_pool)
+add_subdirectory(cxx_stb_image)
+add_subdirectory(freetype_atlas)
 add_subdirectory(glfw_metal)
-add_subdirectory(object_pool)
-add_subdirectory(thread_pool)
+add_subdirectory(glfw_vulkan)
+add_subdirectory(win32_opengl_context)
 
-if(MOCI_API_VULKAN)
-  add_subdirectory(glfw_vulkan)
-endif()
+
+
+
