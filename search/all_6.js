@@ -60,7 +60,7 @@ var searchData=
   ['getseconds',['GetSeconds',['../classmoci_1_1Timestep.html#a2726fcd94e98db55fc5e8b2d05cc5046',1,'moci::Timestep']]],
   ['getslope',['GetSlope',['../classmoci_1_1Line.html#a111efb97d85519342aa37be850ca315f',1,'moci::Line']]],
   ['getspecification',['GetSpecification',['../classmoci_1_1Framebuffer.html#a6e41c347581674f4a7908e0b287bbdd3',1,'moci::Framebuffer']]],
-  ['getspecs',['GetSpecs',['../classmoci_1_1Button.html#a0c840c09955bcfdf0912a71820a61c64',1,'moci::Button']]],
+  ['getspecs',['GetSpecs',['../classmoci_1_1Button.html#ab1d2b6ad3fcdc62ded31fe1f80671ffa',1,'moci::Button']]],
   ['getstart',['GetStart',['../classmoci_1_1Line.html#aac9de0551673fff9ed5db813ea3b4445',1,'moci::Line']]],
   ['getstate',['GetState',['../classmoci_1_1Button.html#a444e05c407b354431976c0b4dcc56117',1,'moci::Button']]],
   ['getstats',['GetStats',['../classmoci_1_1RenderQueue.html#adb51865e2502c8c3665dfd6c292e1e67',1,'moci::RenderQueue']]],
