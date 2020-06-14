@@ -127,6 +127,7 @@ add_subdirectory(moci)
 if(MOCI_BUILD_SANDBOX)
   add_subdirectory(sandbox2D)
   add_subdirectory(sandbox3D)
+  add_subdirectory(sandboxOpenGL)
 endif(MOCI_BUILD_SANDBOX)
 
 if(MOCI_BUILD_TOOLS)
