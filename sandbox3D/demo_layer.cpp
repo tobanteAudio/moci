@@ -15,7 +15,13 @@
 
 namespace
 {
-moci::Vector<float> skyboxVertices = {
+#if defined(MOCI_API_OPENGL_LEGACY)
+constexpr auto shaderPrefix = "es2";
+#else
+constexpr auto shaderPrefix = "gl4";
+#endif
+
+auto skyboxVertices = std::array {
     // positions
     -1.0f, 1.0f,  -1.0f,  //
     -1.0f, -1.0f, -1.0f,  //
@@ -59,32 +65,18 @@ moci::Vector<float> skyboxVertices = {
     -1.0f, -1.0f, 1.0f,   //
     1.0f,  -1.0f, 1.0f    //
 };
-}
+}  // namespace
+
 void DemoLayer::OnAttach()
 {
     MOCI_PROFILE_FUNCTION();
-    {
-        MOCI_PROFILE_SCOPE("OnAttach::GPUQuery");
-        MOCI_INFO("Max vertex attributes: {}", moci::RenderCommand::MaxVertexAttributes());
-        MOCI_INFO("Max texture size: {}", moci::RenderCommand::MaxTextureSize());
-        MOCI_INFO("Max texture units: {}", moci::RenderCommand::MaxTextureUnits());
-        MOCI_INFO("Max uniform vectors: {}", moci::RenderCommand::MaxUniformVectors());
-    }
 
-    auto const numVertices = (mesh_.GetVertices().size() * 5)  //
-                             + floor_.GetVertices().size();    //
-                                                               //  + lightMesh_.GetVertices().size();
-
+    auto const numVertices = (mesh_.GetVertices().size() * 5) + floor_.GetVertices().size();
     vertices_.reserve(numVertices);
-    {
-        MOCI_PROFILE_SCOPE("OnAttach::Shader");
-#if defined(MOCI_API_OPENGL_LEGACY)
-        shader_ = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/es2_general.glsl");
-#else
-        shader_        = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/gl4_general.glsl");
-#endif
-        shader_->Bind();
-    }
+
+    auto const path = fmt::format("sandbox3D/assets/shader/{}_general.glsl", shaderPrefix);
+    shader_         = moci::RenderFactory::MakeShader(path);
+    shader_->Bind();
 
     {
         MOCI_PROFILE_SCOPE("Translate");
@@ -120,74 +112,57 @@ void DemoLayer::OnAttach()
         numVertices_ = vertices_.size();
     }
 
-    // Skybox buffer
-    {
-#if defined(MOCI_API_OPENGL_LEGACY)
-        skyboxShader_ = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/es2_skybox.glsl");
-#else
-        skyboxShader_  = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/gl4_skybox.glsl");
-#endif
-        skyboxShader_->Bind();
-        skyboxShader_->SetInt("u_Skybox", 0);
-        moci::BufferLayout layout = {{moci::ShaderDataType::Float3, "a_Position"}};
-        auto* data                = reinterpret_cast<float*>(skyboxVertices.data());
-        auto const size           = static_cast<std::uint32_t>(skyboxVertices.size() * sizeof(float));
-        skyboxVbo_.reset(moci::RenderFactory::MakeVertexBuffer(data, size, false));
-        skyboxVbo_->SetLayout(layout);
-        skyboxVbo_->Unbind();
-        skyboxIbo_.reset(moci::RenderFactory::MakeIndexBuffer(nullptr, 1, true));
-        skyboxIbo_->Unbind();
-        skyboxVao_ = moci::RenderFactory::MakeVertexArray();
-        skyboxVao_->AddVertexBuffer(skyboxVbo_);
-        skyboxVao_->SetIndexBuffer(skyboxIbo_);
-        skyboxVao_->Unbind();
-        moci::Vector<std::string> faces {
-            std::string("sandbox3D/assets/textures/skybox/right.jpg"),   //
-            std::string("sandbox3D/assets/textures/skybox/left.jpg"),    //
-            std::string("sandbox3D/assets/textures/skybox/top.jpg"),     //
-            std::string("sandbox3D/assets/textures/skybox/bottom.jpg"),  //
-            std::string("sandbox3D/assets/textures/skybox/front.jpg"),   //
-            std::string("sandbox3D/assets/textures/skybox/back.jpg")     //
-        };
+    auto const skyBoxShaderPath = fmt::format("sandbox3D/assets/shader/{}_skybox.glsl", shaderPrefix);
+    skyboxShader_               = moci::RenderFactory::MakeShader(skyBoxShaderPath);
+    skyboxShader_->Bind();
+    skyboxShader_->SetInt("u_Skybox", 0);
+    moci::BufferLayout skyBoxLayout = {{moci::ShaderDataType::Float3, "a_Position"}};
+    auto* skyBoxData                = reinterpret_cast<float*>(skyboxVertices.data());
+    auto const skyBoxSize           = static_cast<std::uint32_t>(skyboxVertices.size() * sizeof(float));
+    skyboxVbo_.reset(moci::RenderFactory::MakeVertexBuffer(skyBoxData, skyBoxSize, false));
+    skyboxVbo_->SetLayout(skyBoxLayout);
+    skyboxVbo_->Unbind();
+    skyboxIbo_.reset(moci::RenderFactory::MakeIndexBuffer(nullptr, 1, true));
+    skyboxIbo_->Unbind();
+    skyboxVao_ = moci::RenderFactory::MakeVertexArray();
+    skyboxVao_->AddVertexBuffer(skyboxVbo_);
+    skyboxVao_->SetIndexBuffer(skyboxIbo_);
+    skyboxVao_->Unbind();
+    moci::Vector<std::string> faces {
+        std::string("sandbox3D/assets/textures/skybox/right.jpg"),   //
+        std::string("sandbox3D/assets/textures/skybox/left.jpg"),    //
+        std::string("sandbox3D/assets/textures/skybox/top.jpg"),     //
+        std::string("sandbox3D/assets/textures/skybox/bottom.jpg"),  //
+        std::string("sandbox3D/assets/textures/skybox/front.jpg"),   //
+        std::string("sandbox3D/assets/textures/skybox/back.jpg")     //
+    };
 
-        skyBoxTexture_ = moci::RenderFactory::MakeTextureCube(faces);
-    }
+    skyBoxTexture_ = moci::RenderFactory::MakeTextureCube(faces);
 
-    // Mesh buffer
-    {
-        MOCI_PROFILE_SCOPE("OnAttach::MeshBuffer");
-        moci::BufferLayout layout = {
-            {moci::ShaderDataType::Float3, "a_Position"},   //
-            {moci::ShaderDataType::Float3, "a_Normal"},     //
-            {moci::ShaderDataType::Float4, "a_Color"},      //
-            {moci::ShaderDataType::Float2, "a_TexCoords"},  //
-        };
-        auto* data      = reinterpret_cast<float*>(vertices_.data());
-        auto const size = static_cast<std::uint32_t>(vertices_.size() * sizeof(moci::Mesh::Vertex));
-        vbo_.reset(moci::RenderFactory::MakeVertexBuffer(data, size, false));
-        vbo_->SetLayout(layout);
-        vbo_->Unbind();
-        ibo_.reset(moci::RenderFactory::MakeIndexBuffer(nullptr, 1, true));
-        ibo_->Unbind();
-        vao_ = moci::RenderFactory::MakeVertexArray();
-        vao_->AddVertexBuffer(vbo_);
-        vao_->SetIndexBuffer(ibo_);
-        vao_->Unbind();
-    }
+    moci::BufferLayout layout = {
+        {moci::ShaderDataType::Float3, "a_Position"},   //
+        {moci::ShaderDataType::Float3, "a_Normal"},     //
+        {moci::ShaderDataType::Float4, "a_Color"},      //
+        {moci::ShaderDataType::Float2, "a_TexCoords"},  //
+    };
+    auto* data      = reinterpret_cast<float*>(vertices_.data());
+    auto const size = static_cast<std::uint32_t>(vertices_.size() * sizeof(moci::Mesh::Vertex));
+    vbo_.reset(moci::RenderFactory::MakeVertexBuffer(data, size, false));
+    vbo_->SetLayout(layout);
+    vbo_->Unbind();
+    ibo_.reset(moci::RenderFactory::MakeIndexBuffer(nullptr, 1, true));
+    ibo_->Unbind();
+    vao_ = moci::RenderFactory::MakeVertexArray();
+    vao_->AddVertexBuffer(vbo_);
+    vao_->SetIndexBuffer(ibo_);
+    vao_->Unbind();
 
     // light
     light = moci::MakeScope<moci::Light>();
 
-    {
-        MOCI_PROFILE_SCOPE("OnAttach::Textures");
-        textureSolid_  = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/white_10x10.png");
-        textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/4color.png");
-#if defined(MOCI_API_OPENGL_ES)
-        textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/cerberus_A_1024x1024.png");
-#else
-        textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
-#endif
-    }
+    textureSolid_  = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/white_10x10.png");
+    textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/4color.png");
+    textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
 
     fpsHistory_.reserve(10'000);
 }
@@ -201,11 +176,11 @@ void DemoLayer::OnUpdate(moci::Timestep ts)
     moci::RenderCommand::Clear();
 
     // Camera matrix
-    glm::mat4 const projection = glm::perspective(glm::radians(cameraFOV_), width_ / height_, 0.1f, 100.0f);
-    glm::mat4 const view       = glm::lookAt(  //
-        cameraPos_,                      // Camera is at (x,y,z), in World Space
-        cameraPos_ + cameraFront_,       // and looks at
-        cameraUp_                        // Head is up (set to 0,-1,0 to look upside-down)
+    auto const projection = glm::perspective(glm::radians(cameraFOV_), width_ / height_, 0.1f, 100.0f);
+    auto const view       = glm::lookAt(  //
+        cameraPos_,                 // Camera is at (x,y,z), in World Space
+        cameraPos_ + cameraFront_,  // and looks at
+        cameraUp_                   // Head is up (set to 0,-1,0 to look upside-down)
     );
 
     {
@@ -306,7 +281,6 @@ bool DemoLayer::OnMouseScrolled(moci::MouseScrolledEvent& e)
 
 bool DemoLayer::OnMousePressed(moci::MouseButtonPressedEvent& e)
 {
-    MOCI_INFO("Code: {}", static_cast<int>(e.GetMouseButton()));
     if (e.GetMouseButton() == moci::MouseCode::ButtonMiddle)
     {
         isMouseDragging_ = true;
@@ -315,6 +289,7 @@ bool DemoLayer::OnMousePressed(moci::MouseButtonPressedEvent& e)
 
     return false;
 }
+
 bool DemoLayer::OnMouseReleased(moci::MouseButtonReleasedEvent& e)
 {
     if (e.GetMouseButton() == moci::MouseCode::ButtonMiddle)

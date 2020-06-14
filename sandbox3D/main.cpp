@@ -6,7 +6,7 @@
 class Sandbox : public moci::Application
 {
 public:
-    Sandbox() : moci::Application {moci::WindowSpecs {"Sandbox 2D", 1920, 1080}}
+    Sandbox() : moci::Application {moci::WindowSpecs {"Sandbox 3D", 1920, 1080}}
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox-3d", "moci-sandbox-3d.json");
         GetWindow().SetFullscreen(true);

@@ -22,6 +22,11 @@ Application::Application(WindowSpecs windowSpecs)
     m_Window->SetEventCallback(MOCI_EVENT_METHOD(OnEvent));
 
     Renderer::Init();
+    MOCI_CORE_INFO("Max vertex attributes: {}", RenderCommand::MaxVertexAttributes());
+    MOCI_CORE_INFO("Max texture size: {}", RenderCommand::MaxTextureSize());
+    MOCI_CORE_INFO("Max texture units: {}", RenderCommand::MaxTextureUnits());
+    MOCI_CORE_INFO("Max uniform vectors: {}", RenderCommand::MaxUniformVectors());
+
     PushOverlay(MakeScope<ImGuiLayer>());
 }
 
