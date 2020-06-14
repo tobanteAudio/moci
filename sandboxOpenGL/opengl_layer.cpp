@@ -1,19 +1,6 @@
 #include "opengl_layer.hpp"
 
-#if defined(MOCI_API_OPENGL_LEGACY)
-constexpr auto shaderSuffix = "es2";
-#else
-constexpr auto shaderSuffix = "gl4";
-#endif
-
-namespace
-{
-auto vertices = std::array {
-    -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,  //
-    0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,  //
-    0.0f,  0.5f,  0.0f, 0.0f, 0.0f, 1.0f, 1.0f,  //
-};
-}  // namespace
+#include "assets.hpp"
 
 void OpenGLLayer::OnAttach()
 {
@@ -21,16 +8,15 @@ void OpenGLLayer::OnAttach()
     shader_         = moci::RenderFactory::MakeShader(path);
     shader_->Bind();
 
-    auto* data      = reinterpret_cast<float*>(vertices.data());
-    auto const size = static_cast<std::uint32_t>(vertices.size() * sizeof(float));
-    auto layout     = moci::BufferLayout {
+    auto const verticesSize = static_cast<std::uint32_t>(assets::QuadVertices.size() * sizeof(float));
+    auto layout             = moci::BufferLayout {
         {moci::ShaderDataType::Float3, "position"},  //
         {moci::ShaderDataType::Float4, "color"},     //
     };
-    vbo_.reset(moci::RenderFactory::MakeVertexBuffer(data, size));
+    vbo_.reset(moci::RenderFactory::MakeVertexBuffer(assets::QuadVertices.data(), verticesSize));
     vbo_->SetLayout(layout);
     vbo_->Unbind();
-    ibo_.reset(moci::RenderFactory::MakeIndexBuffer(nullptr, 1, true));
+    ibo_.reset(moci::RenderFactory::MakeIndexBuffer(assets::QuadIndices.data(), assets::QuadIndices.size()));
     ibo_->Unbind();
     vao_ = moci::RenderFactory::MakeVertexArray();
     vao_->AddVertexBuffer(vbo_);
@@ -46,8 +32,7 @@ void OpenGLLayer::OnUpdate(moci::Timestep ts)
     moci::RenderCommand::Clear();
 
     vao_->Bind();
-    auto const count = static_cast<std::uint32_t>(vertices.size());
-    moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, count);
+    moci::RenderCommand::DrawIndexed(vao_);
 }
 
 void OpenGLLayer::OnImGuiRender() { }
