@@ -4,7 +4,7 @@
 #include "moci_render_base/moci_render_base.hpp"
 
 #include "moci_core/core/memory.hpp"
-#include "moci_graphics/color.hpp"
+#include "moci_graphics_base/moci_graphics_base.hpp"
 #include "moci_math/geometry/rectangle.hpp"
 
 #include <glm/glm.hpp>

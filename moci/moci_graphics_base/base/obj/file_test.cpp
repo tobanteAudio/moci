@@ -4,7 +4,7 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci_graphics/obj/file.hpp"
+#include "file.hpp"
 
 #include "moci_core/core/preprocessor.hpp"
 

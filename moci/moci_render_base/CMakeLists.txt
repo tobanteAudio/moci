@@ -22,12 +22,9 @@ add_library(Moci::RenderApiBase ALIAS moci_render_base_lib)
 target_include_directories(moci_render_base_lib PUBLIC ${CMAKE_SOURCE_DIR}/3rd_party/glfw/include)
 target_link_libraries(moci_render_base_lib 
     PUBLIC 
-        Moci::Math 
+        Moci::GraphicsBase 
         glfw 
         ${GLFW_LIBRARIES}
-        Moci::StbImage
-        Moci::StbImageWrite
-        Moci::StbImageResize
     PRIVATE
         Moci::CodeCoverage
 

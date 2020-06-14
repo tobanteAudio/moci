@@ -1,4 +1,4 @@
-#include "moci_graphics/font.hpp"
+#include "font.hpp"
 
 #include "moci_math/geometry/point.hpp"
 
