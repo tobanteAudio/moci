@@ -73,3 +73,30 @@ TEST_CASE("moci_widget: ButtonSetState", "[ui]")
     button.SetState(moci::ButtonState::Down);
     REQUIRE(button.GetState() == moci::ButtonState::Down);
 }
+
+TEST_CASE("moci_widget: ButtonCallbackStateChanged", "[ui]")
+{
+    auto wasCalled                = false;
+    auto specs                    = moci::ButtonSpecs {};
+    specs.callbacks.onStateChange = [&](auto state) {
+        REQUIRE(state == moci::ButtonState::Down);
+        wasCalled = true;
+    };
+
+    auto slider = moci::Button {"test", specs};
+    REQUIRE(slider.GetState() == moci::ButtonState::Normal);
+    slider.SetState(moci::ButtonState::Down);
+    REQUIRE(slider.GetState() == moci::ButtonState::Down);
+    REQUIRE(wasCalled == true);
+}
+
+TEST_CASE("moci_widget: ButtonCallbackStateChangedCallbackNotSet", "[ui]")
+{
+    auto wasCalled = false;
+    auto specs     = moci::ButtonSpecs {};
+    auto slider    = moci::Button {"test", specs};
+    REQUIRE(slider.GetState() == moci::ButtonState::Normal);
+    slider.SetState(moci::ButtonState::Down);
+    REQUIRE(slider.GetState() == moci::ButtonState::Down);
+    REQUIRE(wasCalled == false);
+}
