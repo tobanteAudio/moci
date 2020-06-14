@@ -11,8 +11,8 @@ var searchData=
   ['drawcircle',['DrawCircle',['../classmoci_1_1RenderQueue.html#a2c8797fe61e47c81934d81a9d4145177',1,'moci::RenderQueue']]],
   ['drawelements',['DrawElements',['../classmoci_1_1RenderCommand.html#af72160e309c4d0e03bd12aedab053000',1,'moci::RenderCommand::DrawElements()'],['../classmoci_1_1RendererAPI.html#a10c2c2aedcdee01cbc2f4ef03b7a96a3',1,'moci::RendererAPI::DrawElements()'],['../classmoci_1_1OpenGLESRendererAPI.html#a77ecd83a90eb1984c3f1983050086e90',1,'moci::OpenGLESRendererAPI::DrawElements()']]],
   ['drawindexed',['DrawIndexed',['../classmoci_1_1RenderCommand.html#ad130bf70c7e69c35bad28d43d736debb',1,'moci::RenderCommand::DrawIndexed()'],['../classmoci_1_1RendererAPI.html#a6aca4c145be95fe04304bb3e79d2323f',1,'moci::RendererAPI::DrawIndexed()'],['../classmoci_1_1OpenGLESRendererAPI.html#a31a8c6b8727a3aa69c71c028799d88c9',1,'moci::OpenGLESRendererAPI::DrawIndexed()']]],
-  ['drawlabel',['DrawLabel',['../classmoci_1_1Label_1_1StyleMethods.html#a810a6fc27d198e3e914fdda29a6c162d',1,'moci::Label::StyleMethods::DrawLabel()'],['../classmoci_1_1Style.html#a27f21352439d2ef59198c2f4b622d908',1,'moci::Style::DrawLabel()']]],
+  ['drawlabel',['DrawLabel',['../classmoci_1_1LabelStyleMethods.html#a5a1a78edfa169a34a7e3e3a5d9887740',1,'moci::LabelStyleMethods::DrawLabel()'],['../classmoci_1_1Style.html#a27f21352439d2ef59198c2f4b622d908',1,'moci::Style::DrawLabel()']]],
   ['drawquad',['DrawQuad',['../classmoci_1_1RenderQueue.html#a7c37a02d7c27eb3e8d6a93b736ae8f7a',1,'moci::RenderQueue']]],
-  ['drawslider',['DrawSlider',['../classmoci_1_1Slider_1_1StyleMethods.html#acd3306544c1773c33119cd211ae2e061',1,'moci::Slider::StyleMethods::DrawSlider()'],['../classmoci_1_1Style.html#a641cd3c940d9f064191844da06e35693',1,'moci::Style::DrawSlider()']]],
+  ['drawslider',['DrawSlider',['../classmoci_1_1SliderStyleMethods.html#a77bda23affa1a0e985a838ed576a1e6b',1,'moci::SliderStyleMethods::DrawSlider()'],['../classmoci_1_1Style.html#a641cd3c940d9f064191844da06e35693',1,'moci::Style::DrawSlider()']]],
   ['drawtext',['DrawText',['../classmoci_1_1RenderQueue.html#a4ffd80800a9cefa84f259f2e1683a707',1,'moci::RenderQueue']]]
 ];
