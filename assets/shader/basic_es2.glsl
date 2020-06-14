@@ -10,6 +10,8 @@ void main() { gl_Position = u_MVP * vec4(position, 1.0); }
 
 #ifdef GL_ES
 precision mediump float;
+#elif
+layout(location = 0) out vec4 gl_FragColor;
 #endif
 
 uniform vec4 u_Color;
