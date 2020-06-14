@@ -14,7 +14,10 @@ public:
 public:
     ObjectPool()
     {
-        for (auto i = 1; i < Size; ++i) mPool[i - 1].mNext = &mPool[i];
+        for (std::size_t i = 1; i < Size; ++i)
+        {
+            mPool[i - 1].mNext = &mPool[i];
+        }
 
         mNextFree = &mPool[0];
     }
@@ -78,7 +81,8 @@ private:
     const static std::size_t Size = 100000;
 
 private:
-    union Item {
+    union Item
+    {
         std::aligned_storage_t<sizeof(value_type), alignof(value_type)> mStorage;
         Item* mNext;
     };
@@ -86,7 +90,6 @@ private:
     std::unique_ptr<Item[]> mPool = std::make_unique<Item[]>(Size);
     Item* mNextFree               = nullptr;
 };
-
 
 struct S
 {
@@ -96,7 +99,7 @@ struct S
     float w;
 };
 
-int main(int,char**)
+int main(int, char**)
 {
     moci::Log::Init();
 

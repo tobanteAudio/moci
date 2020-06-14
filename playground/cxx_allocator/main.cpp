@@ -3,6 +3,10 @@
 #include <memory>
 #include <vector>
 
+template<typename... Types>
+auto IgnoreUnused(Types... /*types*/) -> void
+{
+}
 template<class T>
 class TrackingAllocator
 {
@@ -19,6 +23,7 @@ public:
     template<class U>
     TrackingAllocator(const TrackingAllocator<U>& other)
     {
+        IgnoreUnused(other);
     }
 
     ~TrackingAllocator() = default;
@@ -29,7 +34,11 @@ public:
         return static_cast<pointer>(operator new(sizeof(T) * numObjects));
     }
 
-    void deallocate(pointer p, size_type numObjects) { operator delete(p); }
+    void deallocate(pointer p, size_type numObjects)
+    {
+        IgnoreUnused(numObjects);
+        operator delete(p);
+    }
 
     size_type get_allocations() const { return mAllocations; }
 
