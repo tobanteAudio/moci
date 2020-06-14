@@ -17,6 +17,8 @@ struct SliderCallbacks
 class SliderStyleMethods
 {
 public:
+    virtual ~SliderStyleMethods() = default;
+
     virtual void DrawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider) = 0;
 };
 

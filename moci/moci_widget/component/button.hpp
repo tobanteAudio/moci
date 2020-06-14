@@ -19,6 +19,8 @@ enum class ButtonState
 class ButtonStyleMethods
 {
 public:
+    virtual ~ButtonStyleMethods() = default;
+
     virtual void DrawButton(Painter& painter, Rectangle<int> bounds, Button const& Button) = 0;
 };
 

@@ -12,7 +12,8 @@ class Style
     , public SliderStyleMethods
 {
 public:
-    Style() = default;
+    Style()           = default;
+    ~Style() override = default;
 
 public:
     void DrawButton(Painter& painter, Rectangle<int> bounds, Button const& button) override;

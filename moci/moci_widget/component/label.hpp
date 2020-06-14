@@ -10,6 +10,8 @@ class Label;
 class LabelStyleMethods
 {
 public:
+    virtual ~LabelStyleMethods() = default;
+
     virtual void DrawLabel(Painter& painter, Rectangle<int> bounds, Label const& label) = 0;
 };
 
