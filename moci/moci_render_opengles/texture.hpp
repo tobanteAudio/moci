@@ -16,18 +16,20 @@ public:
     OpenGLESTexture2D(const OpenGLESTexture2D&) = delete;
     auto operator=(const OpenGLESTexture2D&) -> OpenGLESTexture2D& = delete;
 
-    [[nodiscard]] auto GetWidth() const -> std::uint32_t override { return m_Width; }
-    [[nodiscard]] auto GetHeight() const -> std::uint32_t override { return m_Height; }
-    [[nodiscard]] auto GetID() const -> std::uint32_t override { return m_RendererID; }
+    [[nodiscard]] auto GetWidth() const -> std::uint32_t override { return width_; }
+    [[nodiscard]] auto GetHeight() const -> std::uint32_t override { return height_; }
+    [[nodiscard]] auto GetID() const -> std::uint32_t override { return renderID_; }
 
     void Bind(std::uint32_t slot = 0) const override;
     void Unbind() const override;
 
 private:
-    std::string m_Path;
-    std::int32_t m_Width {}, m_Height {}, m_BPP {};
-    std::uint32_t m_RendererID {};
-    std::uint8_t* m_LocalBuffer = nullptr;
+    std::uint32_t renderID_ = {};
+    std::int32_t width_     = {};
+    std::int32_t height_    = {};
+    std::int32_t bpp_       = {};
+    std::uint8_t* data_     = nullptr;
+    std::string path_       = {};
 };
 
 class OpenGLESTextureCube : public TextureCube
