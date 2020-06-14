@@ -13,7 +13,7 @@ class OpenGLTexture2D : public Texture2D
 {
 public:
     OpenGLTexture2D(uint32_t width, uint32_t height);
-    OpenGLTexture2D(const std::string& path);
+    OpenGLTexture2D(std::string path);
     OpenGLTexture2D(Texture::Format format, std::uint32_t width, std::uint32_t height, void* data);
 
     ~OpenGLTexture2D() override;
