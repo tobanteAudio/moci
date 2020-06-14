@@ -34,10 +34,6 @@ public:
     virtual void SetMat4(std::string const& name, glm::mat4 const& value)   = 0;
 
     [[nodiscard]] virtual auto GetName() const -> std::string const& = 0;
-
-    static auto Create(std::string const& filepath) -> Ref<Shader>;
-    static auto Create(std::string const& name, std::string const& vertexSrc, std::string const& fragmentSrc)
-        -> Ref<Shader>;
 };
 
 }  // namespace moci

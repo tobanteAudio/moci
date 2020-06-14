@@ -41,9 +41,9 @@ public:
     Light()
     {
 #if defined(MOCI_API_OPENGL_LEGACY)
-        shader = moci::Shader::Create("sandbox3D/assets/shader/es2_light_source.glsl");
+        shader = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/es2_light_source.glsl");
 #else
-        shader = moci::Shader::Create("sandbox3D/assets/shader/gl4_light_source.glsl");
+        shader = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/gl4_light_source.glsl");
 #endif
         shader->Bind();
         moci::BufferLayout lightLayout = {

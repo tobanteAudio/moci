@@ -79,9 +79,9 @@ void DemoLayer::OnAttach()
     {
         MOCI_PROFILE_SCOPE("OnAttach::Shader");
 #if defined(MOCI_API_OPENGL_LEGACY)
-        shader_ = moci::Shader::Create("sandbox3D/assets/shader/es2_general.glsl");
+        shader_ = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/es2_general.glsl");
 #else
-        shader_        = moci::Shader::Create("sandbox3D/assets/shader/gl4_general.glsl");
+        shader_        = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/gl4_general.glsl");
 #endif
         shader_->Bind();
     }
@@ -123,9 +123,9 @@ void DemoLayer::OnAttach()
     // Skybox buffer
     {
 #if defined(MOCI_API_OPENGL_LEGACY)
-        skyboxShader_ = moci::Shader::Create("sandbox3D/assets/shader/es2_skybox.glsl");
+        skyboxShader_ = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/es2_skybox.glsl");
 #else
-        skyboxShader_  = moci::Shader::Create("sandbox3D/assets/shader/gl4_skybox.glsl");
+        skyboxShader_  = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/gl4_skybox.glsl");
 #endif
         skyboxShader_->Bind();
         skyboxShader_->SetInt("u_Skybox", 0);

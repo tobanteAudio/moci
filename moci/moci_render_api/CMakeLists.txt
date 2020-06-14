@@ -9,7 +9,6 @@ set(moci_render_api_sources
     render/renderer_api.cpp
     render/renderer.hpp
     render/renderer.cpp
-    render/shader.cpp
     render/texture.cpp
     render/vertex_array.cpp
 

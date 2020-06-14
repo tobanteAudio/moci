@@ -15,9 +15,9 @@ namespace moci
 RenderQueue::RenderQueue()
 {
 #if defined(MOCI_API_OPENGL_LEGACY)
-    data_.shader = moci::Shader::Create("assets/es2_batch_render.glsl");
+    data_.shader = moci::RenderFactory::MakeShader("assets/es2_batch_render.glsl");
 #else
-    data_.shader = moci::Shader::Create("assets/gl4_batch_render.glsl");
+    data_.shader = moci::RenderFactory::MakeShader("assets/gl4_batch_render.glsl");
 #endif
     data_.shader->Bind();
 
