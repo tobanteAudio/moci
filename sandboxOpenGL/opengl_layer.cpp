@@ -6,11 +6,36 @@ constexpr auto shaderSuffix = "es2";
 constexpr auto shaderSuffix = "gl4";
 #endif
 
+namespace
+{
+auto vertices = std::array {
+    -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,  //
+    0.5f,  -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,  //
+    0.0f,  0.5f,  0.0f, 1.0f, 0.0f, 0.0f, 1.0f,  //
+};
+}  // namespace
+
 void OpenGLLayer::OnAttach()
 {
     auto const path = fmt::format("assets/shader/basic_{}.glsl", shaderSuffix);
     shader_         = moci::RenderFactory::MakeShader(path);
     shader_->Bind();
+
+    auto* data      = reinterpret_cast<float*>(vertices.data());
+    auto const size = static_cast<std::uint32_t>(vertices.size() * sizeof(float));
+    auto layout     = moci::BufferLayout {
+        {moci::ShaderDataType::Float3, "position"},  //
+        {moci::ShaderDataType::Float4, "color"},     //
+    };
+    vbo_.reset(moci::RenderFactory::MakeVertexBuffer(data, size));
+    vbo_->SetLayout(layout);
+    vbo_->Unbind();
+    ibo_.reset(moci::RenderFactory::MakeIndexBuffer(nullptr, 1, true));
+    ibo_->Unbind();
+    vao_ = moci::RenderFactory::MakeVertexArray();
+    vao_->AddVertexBuffer(vbo_);
+    vao_->SetIndexBuffer(ibo_);
+    vao_->Unbind();
 }
 
 void OpenGLLayer::OnUpdate(moci::Timestep ts)
@@ -19,6 +44,10 @@ void OpenGLLayer::OnUpdate(moci::Timestep ts)
 
     moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
     moci::RenderCommand::Clear();
+
+    vao_->Bind();
+    auto const count = static_cast<std::uint32_t>(vertices.size());
+    moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, count);
 }
 
 void OpenGLLayer::OnImGuiRender() { }
