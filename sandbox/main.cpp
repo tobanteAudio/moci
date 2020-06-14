@@ -82,8 +82,8 @@ public:
 
         for (auto i = 0; i < 20; i++)
         {
-            auto specs                    = moci::ButtonSpecs {};
-            specs.callbacks.onStateChange = [](auto state) { moci::IgnoreUnused(state); };
+            auto specs                   = moci::ButtonSpecs {};
+            specs.callbacks.stateChanged = [](auto state) { moci::IgnoreUnused(state); };
 
             auto button = moci::MakeScope<moci::Button>(fmt::format("Test: {}", i), specs);
             button->SetTextColor(moci::Color {0.2f * static_cast<float>(i), 0.8f, 0.2f, 1.0f});

@@ -23,9 +23,9 @@ auto Button::GetSpecs() const noexcept -> ButtonSpecs const& { return specs_; }
 auto Button::SetState(ButtonState newState) -> void
 {
     state_ = newState;
-    if (specs_.callbacks.onStateChange)
+    if (specs_.callbacks.stateChanged)
     {
-        specs_.callbacks.onStateChange(newState);
+        specs_.callbacks.stateChanged(newState);
     }
 }
 auto Button::GetState() const noexcept -> ButtonState { return state_; }

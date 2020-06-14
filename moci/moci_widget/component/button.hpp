@@ -24,8 +24,8 @@ public:
 
 struct ButtonCallbacks
 {
-    std::function<void(ButtonState)> onClick       = {};
-    std::function<void(ButtonState)> onStateChange = {};
+    std::function<void(ButtonState)> clicked      = {};
+    std::function<void(ButtonState)> stateChanged = {};
 };
 
 struct ButtonSpecs

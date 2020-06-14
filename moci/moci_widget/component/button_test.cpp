@@ -49,18 +49,18 @@ TEST_CASE("moci_widget: ButtonSetSpecs", "[ui]")
 
     {
         auto specs = button.GetSpecs();
-        REQUIRE(specs.callbacks.onClick == nullptr);
+        REQUIRE(specs.callbacks.clicked == nullptr);
         REQUIRE(specs.isToggle == false);
     }
 
     auto newSpecs              = moci::ButtonSpecs {};
-    newSpecs.callbacks.onClick = [](auto state) { moci::IgnoreUnused(state); };
+    newSpecs.callbacks.clicked = [](auto state) { moci::IgnoreUnused(state); };
     newSpecs.isToggle          = true;
     button.SetSpecs(newSpecs);
 
     {
         auto specs = button.GetSpecs();
-        REQUIRE(specs.callbacks.onClick != nullptr);
+        REQUIRE(specs.callbacks.clicked != nullptr);
         REQUIRE(specs.isToggle == true);
     }
 }
@@ -76,9 +76,9 @@ TEST_CASE("moci_widget: ButtonSetState", "[ui]")
 
 TEST_CASE("moci_widget: ButtonCallbackStateChanged", "[ui]")
 {
-    auto wasCalled                = false;
-    auto specs                    = moci::ButtonSpecs {};
-    specs.callbacks.onStateChange = [&](auto state) {
+    auto wasCalled               = false;
+    auto specs                   = moci::ButtonSpecs {};
+    specs.callbacks.stateChanged = [&](auto state) {
         REQUIRE(state == moci::ButtonState::Down);
         wasCalled = true;
     };
