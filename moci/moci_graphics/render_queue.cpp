@@ -34,10 +34,10 @@ RenderQueue::RenderQueue()
         {moci::ShaderDataType::Float, "textureIndex"},         //
         {moci::ShaderDataType::Float, "textureIsMonochrome"},  //
     };
-    data_.vbo.reset(moci::VertexBuffer::Create(nullptr, sizeof(Vertex) * MaxVertexCount, true));
+    data_.vbo.reset(moci::RenderFactory::MakeVertexBuffer(nullptr, sizeof(Vertex) * MaxVertexCount, true));
     data_.vbo->SetLayout(layout);
     data_.vbo->Unbind();
-    data_.ibo.reset(moci::IndexBuffer::Create(nullptr, MaxIndexCount, true));
+    data_.ibo.reset(moci::RenderFactory::MakeIndexBuffer(nullptr, MaxIndexCount, true));
     data_.ibo->Unbind();
     data_.vao = moci::RenderFactory::MakeVertexArray();
     data_.vao->AddVertexBuffer(data_.vbo);

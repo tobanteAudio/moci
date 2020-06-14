@@ -204,7 +204,7 @@ Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
     // }
     // else
     // {
-    //     auto vb = VertexBuffer::Create(staticVertices_.data(), staticVertices_.size() * sizeof(Vertex));
+    //     auto vb = RenderFactory::MakeVertexBuffer(staticVertices_.data(), staticVertices_.size() * sizeof(Vertex));
     //     vb->SetLayout({
     //         {ShaderDataType::Float3, "a_Position"},
     //         {ShaderDataType::Float3, "a_Normal"},
@@ -215,7 +215,7 @@ Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
     //     m_VertexArray->AddVertexBuffer(vb);
     // }
 
-    // auto ib = IndexBuffer::Create(indices_.data(), indices_.size() * sizeof(Index));
+    // auto ib = RenderFactory::MakeIndexBuffer(indices_.data(), indices_.size() * sizeof(Index));
     // m_VertexArray->SetIndexBuffer(ib);
     // m_Scene = scene;
 }

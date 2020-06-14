@@ -127,8 +127,6 @@ public:
     [[nodiscard]] virtual auto GetLayout() const -> BufferLayout const&                               = 0;
     virtual auto SetLayout(BufferLayout const& layout) -> void                                        = 0;
     virtual auto UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void = 0;
-
-    static auto Create(float* vertices, std::uint32_t size, bool dynamic = false) -> VertexBuffer*;
 };
 
 class IndexBuffer
@@ -140,8 +138,6 @@ public:
     virtual void Unbind() const                                                                       = 0;
     [[nodiscard]] virtual auto GetCount() const -> std::uint32_t                                      = 0;
     virtual auto UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void = 0;
-
-    static auto Create(std::uint32_t* indices, std::uint32_t size, bool dynamic = false) -> IndexBuffer*;
 };
 
 }  // namespace moci

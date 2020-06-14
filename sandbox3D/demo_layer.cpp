@@ -132,10 +132,10 @@ void DemoLayer::OnAttach()
         moci::BufferLayout layout = {{moci::ShaderDataType::Float3, "a_Position"}};
         auto* data                = reinterpret_cast<float*>(skyboxVertices.data());
         auto const size           = static_cast<std::uint32_t>(skyboxVertices.size() * sizeof(float));
-        skyboxVbo_.reset(moci::VertexBuffer::Create(data, size, false));
+        skyboxVbo_.reset(moci::RenderFactory::MakeVertexBuffer(data, size, false));
         skyboxVbo_->SetLayout(layout);
         skyboxVbo_->Unbind();
-        skyboxIbo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
+        skyboxIbo_.reset(moci::RenderFactory::MakeIndexBuffer(nullptr, 1, true));
         skyboxIbo_->Unbind();
         skyboxVao_ = moci::RenderFactory::MakeVertexArray();
         skyboxVao_->AddVertexBuffer(skyboxVbo_);
@@ -164,10 +164,10 @@ void DemoLayer::OnAttach()
         };
         auto* data      = reinterpret_cast<float*>(vertices_.data());
         auto const size = static_cast<std::uint32_t>(vertices_.size() * sizeof(moci::Mesh::Vertex));
-        vbo_.reset(moci::VertexBuffer::Create(data, size, false));
+        vbo_.reset(moci::RenderFactory::MakeVertexBuffer(data, size, false));
         vbo_->SetLayout(layout);
         vbo_->Unbind();
-        ibo_.reset(moci::IndexBuffer::Create(nullptr, 1, true));
+        ibo_.reset(moci::RenderFactory::MakeIndexBuffer(nullptr, 1, true));
         ibo_->Unbind();
         vao_ = moci::RenderFactory::MakeVertexArray();
         vao_->AddVertexBuffer(vbo_);

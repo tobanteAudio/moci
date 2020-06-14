@@ -52,10 +52,10 @@ public:
         };
 
         auto const size = static_cast<uint32_t>(lightMesh_.GetVertices().size() * sizeof(Light::Vertex));
-        vbo.reset(moci::VertexBuffer::Create(nullptr, size, true));
+        vbo.reset(moci::RenderFactory::MakeVertexBuffer(nullptr, size, true));
         vbo->SetLayout(lightLayout);
         vbo->Unbind();
-        ibo.reset(moci::IndexBuffer::Create(nullptr, 1, true));
+        ibo.reset(moci::RenderFactory::MakeIndexBuffer(nullptr, 1, true));
         ibo->Unbind();
         vao = moci::RenderFactory::MakeVertexArray();
         vao->AddVertexBuffer(vbo);
