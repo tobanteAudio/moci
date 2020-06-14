@@ -54,7 +54,7 @@ Ref<Framebuffer> RenderFactory::MakeFramebuffer(FramebufferSpecs spec)
     return nullptr;
 }
 
-auto RenderFactory::MakeShader(std::string const& filepath) -> Ref<Shader>
+auto RenderFactory::MakeShader(std::string filepath) -> Ref<Shader>
 {
     MOCI_CORE_INFO("Creating shader from: {}", filepath);
     switch (Renderer::GetAPI())
@@ -63,10 +63,10 @@ auto RenderFactory::MakeShader(std::string const& filepath) -> Ref<Shader>
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return MakeRef<OpenGLShader>(filepath);
+        case RendererAPI::API::OpenGL: return MakeRef<OpenGLShader>(std::move(filepath));
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES: return MakeRef<OpenGLESShader>(filepath);
+        case RendererAPI::API::OpenGLES: return MakeRef<OpenGLESShader>(std::move(filepath));
 #endif
         default: break;
     }
