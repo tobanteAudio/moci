@@ -16,9 +16,8 @@ enum class MouseCode : std::uint8_t
     Button7 = 6,
     Button8 = 7,
 
-    ButtonLast   = 8,
-    ButtonLeft   = 1,
-    ButtonRight  = 2,
-    ButtonMiddle = 3,
+    ButtonLeft   = 0,
+    ButtonRight  = 1,
+    ButtonMiddle = 2,
 };
 }

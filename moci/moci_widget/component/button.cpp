@@ -39,6 +39,7 @@ Color Button::GetTextColor() const noexcept { return color_; }
 
 bool Button::MouseClicked(moci::MouseCallback::Click click)
 {
+    IgnoreUnused(click);
     auto const isNormal = GetState() == ButtonState::Normal;
     auto const newState = isNormal ? ButtonState::Down : ButtonState::Normal;
     SetState(newState);
