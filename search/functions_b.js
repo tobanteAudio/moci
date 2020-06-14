@@ -1,11 +1,17 @@
 var searchData=
 [
-  ['make',['Make',['../structmoci_1_1FrameBufferFactory.html#af43cdf477ddec20b764ce59d79b66fe3',1,'moci::FrameBufferFactory']]],
+  ['makeframebuffer',['MakeFramebuffer',['../structmoci_1_1RenderFactory.html#ae273c655ab5beefff1d2973ca5fd00a1',1,'moci::RenderFactory']]],
+  ['makeindexbuffer',['MakeIndexBuffer',['../structmoci_1_1RenderFactory.html#a524b2446b2fcfb298f594b6cd1172afd',1,'moci::RenderFactory']]],
   ['makeref',['MakeRef',['../namespacemoci.html#a949b07c0da5bcbfe927563d477f3af29',1,'moci']]],
   ['makescope',['MakeScope',['../namespacemoci.html#aebad0b2258569bb3093624b229bfb915',1,'moci']]],
   ['makescopeguard',['MakeScopeGuard',['../namespacemoci.html#ac9393ca79f3e24f9ca7e40b8b4800bd4',1,'moci']]],
   ['makescopeguardthatdoesnotrollbackifadquirethrows',['MakeScopeGuardThatDoesNOTRollbackIfAdquireThrows',['../namespacemoci.html#a7ccee1e564cdb80112c1a1097254ec5b',1,'moci']]],
   ['makescopeguardthatdoesrollbackifadquirethrows',['MakeScopeGuardThatDoesRollbackIfAdquireThrows',['../namespacemoci.html#abf33dd42553e28973afd088259fb567c',1,'moci']]],
+  ['makeshader',['MakeShader',['../structmoci_1_1RenderFactory.html#a3f6cbaaf8dacc8d71e270a8d131af0fc',1,'moci::RenderFactory::MakeShader(std::string const &amp;filepath)'],['../structmoci_1_1RenderFactory.html#ab2c6eba3fe4698731f1d8543b4488e21',1,'moci::RenderFactory::MakeShader(std::string const &amp;name, std::string const &amp;vertexSrc, std::string const &amp;fragmentSrc)']]],
+  ['maketexture2d',['MakeTexture2D',['../structmoci_1_1RenderFactory.html#a3a4c750da444d07d1b5dc5edae29699e',1,'moci::RenderFactory::MakeTexture2D(std::string const &amp;path)'],['../structmoci_1_1RenderFactory.html#a15df5a36c61b91da16eee9ef3787e16c',1,'moci::RenderFactory::MakeTexture2D(Texture::Format format, uint32_t width, uint32_t height, void *data)']]],
+  ['maketexturecube',['MakeTextureCube',['../structmoci_1_1RenderFactory.html#a417539ad2e18540cccc2654ffc3a9722',1,'moci::RenderFactory']]],
+  ['makevertexarray',['MakeVertexArray',['../structmoci_1_1RenderFactory.html#a5bc99603d4be50d270dcf9ec48eada21',1,'moci::RenderFactory']]],
+  ['makevertexbuffer',['MakeVertexBuffer',['../structmoci_1_1RenderFactory.html#ab42b0f974b7db2354f96ba8dd530e982',1,'moci::RenderFactory']]],
   ['maxtexturesize',['MaxTextureSize',['../classmoci_1_1RenderCommand.html#ad0d017839b2c901b650e595746745684',1,'moci::RenderCommand::MaxTextureSize()'],['../classmoci_1_1RendererAPI.html#abdc3a5eb1e74d838bece1b81743cefb6',1,'moci::RendererAPI::MaxTextureSize()'],['../classmoci_1_1OpenGLESRendererAPI.html#a487ce2fd9525b5e0d485e21841fce71a',1,'moci::OpenGLESRendererAPI::MaxTextureSize()']]],
   ['maxtextureunits',['MaxTextureUnits',['../classmoci_1_1RenderCommand.html#a3fe125ffa1546c52df58e679638b1319',1,'moci::RenderCommand::MaxTextureUnits()'],['../classmoci_1_1RendererAPI.html#a4f9fae3ecb6ba0ff425e4f0d7a2d4811',1,'moci::RendererAPI::MaxTextureUnits()'],['../classmoci_1_1OpenGLESRendererAPI.html#a7c7e4b2f3437a1ceb8c79b197aa1e986',1,'moci::OpenGLESRendererAPI::MaxTextureUnits()']]],
   ['maxuniformvectors',['MaxUniformVectors',['../classmoci_1_1RenderCommand.html#a9c7898aa5057ccd947c823170cbf3538',1,'moci::RenderCommand::MaxUniformVectors()'],['../classmoci_1_1RendererAPI.html#af8c87d856873bfba9007cb5f80c217a8',1,'moci::RendererAPI::MaxUniformVectors()'],['../classmoci_1_1OpenGLESRendererAPI.html#a857fe60de7d65e0f1f9356198e6967b1',1,'moci::OpenGLESRendererAPI::MaxUniformVectors()']]],

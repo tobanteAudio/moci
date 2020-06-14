@@ -15,6 +15,7 @@ var searchData=
   ['rendercommand',['RenderCommand',['../classmoci_1_1RenderCommand.html',1,'moci']]],
   ['renderer',['Renderer',['../classmoci_1_1Renderer.html',1,'moci']]],
   ['rendererapi',['RendererAPI',['../classmoci_1_1RendererAPI.html',1,'moci']]],
+  ['renderfactory',['RenderFactory',['../structmoci_1_1RenderFactory.html',1,'moci']]],
   ['renderqueue',['RenderQueue',['../classmoci_1_1RenderQueue.html',1,'moci::RenderQueue'],['../classmoci_1_1RenderQueue.html#af755a7505ae5fc0b80231830c1ef71ee',1,'moci::RenderQueue::RenderQueue()'],['../classmoci_1_1RenderQueue.html#a5e069abc1c7efb0e581c90a328e74fb3',1,'moci::RenderQueue::RenderQueue(const RenderQueue &amp;)=delete']]],
   ['resize',['Resize',['../classmoci_1_1Component.html#a6570667b82b524442d39f4b08797e84f',1,'moci::Component']]],
   ['rgb',['RGB',['../classmoci_1_1Texture.html#a57db5936f0b54c47f796062e080bdde9a889574aebacda6bfd3e534e2b49b8028',1,'moci::Texture']]],

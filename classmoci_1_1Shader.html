@@ -65,7 +65,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classmoci_1_1Shader-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">moci::Shader Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -108,13 +107,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a623031addb0445919dcfd35487bfed5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15d1a35be2662a3c2868c4f529ca50b9"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Shader.html#a15d1a35be2662a3c2868c4f529ca50b9">GetName</a> () const -&gt; std::string const &amp;=0</td></tr>
 <tr class="separator:a15d1a35be2662a3c2868c4f529ca50b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a30f3630e1a899c3e50b3a18cae0c390c"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Shader.html#a30f3630e1a899c3e50b3a18cae0c390c">Create</a> (std::string const &amp;filepath) -&gt; <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt; <a class="el" href="classmoci_1_1Shader.html">Shader</a> &gt;</td></tr>
-<tr class="separator:a30f3630e1a899c3e50b3a18cae0c390c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a2b2bb0b970c5b841d2ab576582b6bf"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Shader.html#a9a2b2bb0b970c5b841d2ab576582b6bf">Create</a> (std::string const &amp;name, std::string const &amp;vertexSrc, std::string const &amp;fragmentSrc) -&gt; <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt; <a class="el" href="classmoci_1_1Shader.html">Shader</a> &gt;</td></tr>
-<tr class="separator:a9a2b2bb0b970c5b841d2ab576582b6bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af3b9799c07dc75558b38c663a91b6729"></a>
@@ -167,74 +159,6 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classmoci_1_1OpenGLESShader.html#a507ec917aa3fe836b363e2d8f20d4e0e">moci::OpenGLESShader</a>.</p>
-
-</div>
-</div>
-<a id="a30f3630e1a899c3e50b3a18cae0c390c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30f3630e1a899c3e50b3a18cae0c390c">&#9670;&nbsp;</a></span>Create() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static auto moci::Shader::Create </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>filepath</em></td><td>)</td>
-          <td> -&gt;  <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt; <a class="el" href="classmoci_1_1Shader.html">Shader</a> &gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9a2b2bb0b970c5b841d2ab576582b6bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a2b2bb0b970c5b841d2ab576582b6bf">&#9670;&nbsp;</a></span>Create() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static auto moci::Shader::Create </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>vertexSrc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>fragmentSrc</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt;  <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt; <a class="el" href="classmoci_1_1Shader.html">Shader</a> &gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>

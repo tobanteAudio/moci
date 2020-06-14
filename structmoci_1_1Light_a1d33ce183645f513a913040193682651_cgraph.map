@@ -1,7 +1,7 @@
 <map id="moci::Light::Light" name="moci::Light::Light">
-<area shape="rect" id="node2" href="$classmoci_1_1Shader.html#a30f3630e1a899c3e50b3a18cae0c390c" title="moci::Shader::Create" alt="" coords="198,5,357,32"/>
-<area shape="rect" id="node3" href="$classmoci_1_1Mesh.html#a85d2a7409f7d5b21d74a252056708e28" title="moci::Mesh::GetVertices" alt="" coords="188,56,367,83"/>
-<area shape="rect" id="node4" href="$classmoci_1_1VertexBuffer.html#ae514acff4f398fc1a4a413a934c97d9f" title="moci::VertexBuffer\l::Create" alt="" coords="206,107,349,149"/>
-<area shape="rect" id="node5" href="$classmoci_1_1IndexBuffer.html#a509994ce893c891d1d121a7aa4e6e37d" title="moci::IndexBuffer::\lCreate" alt="" coords="205,173,350,214"/>
-<area shape="rect" id="node6" href="$classmoci_1_1VertexArray.html#a69d5813def4d61637e010aac213b00aa" title="moci::VertexArray::\lCreate" alt="" coords="204,238,351,279"/>
+<area shape="rect" id="node2" href="$structmoci_1_1RenderFactory.html#a3f6cbaaf8dacc8d71e270a8d131af0fc" title="moci::RenderFactory\l::MakeShader" alt="" coords="200,5,355,47"/>
+<area shape="rect" id="node3" href="$classmoci_1_1Mesh.html#a85d2a7409f7d5b21d74a252056708e28" title="moci::Mesh::GetVertices" alt="" coords="188,71,367,98"/>
+<area shape="rect" id="node4" href="$structmoci_1_1RenderFactory.html#ab42b0f974b7db2354f96ba8dd530e982" title="moci::RenderFactory\l::MakeVertexBuffer" alt="" coords="200,123,355,164"/>
+<area shape="rect" id="node5" href="$structmoci_1_1RenderFactory.html#a524b2446b2fcfb298f594b6cd1172afd" title="moci::RenderFactory\l::MakeIndexBuffer" alt="" coords="200,188,355,229"/>
+<area shape="rect" id="node6" href="$structmoci_1_1RenderFactory.html#a5bc99603d4be50d270dcf9ec48eada21" title="moci::RenderFactory\l::MakeVertexArray" alt="" coords="200,253,355,295"/>
 </map>

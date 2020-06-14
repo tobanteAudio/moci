@@ -65,7 +65,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classmoci_1_1Texture2D-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">moci::Texture2D Class Reference</div>  </div>
@@ -114,13 +113,6 @@ Public Types</h2></td></tr>
  }</td></tr>
 <tr class="separator:a57db5936f0b54c47f796062e080bdde9 inherit pub_types_classmoci_1_1Texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aa9ae48ed601fd24a4928d9135c5956f9"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Texture2D.html#aa9ae48ed601fd24a4928d9135c5956f9">Create</a> (std::string const &amp;path) -&gt; <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt; <a class="el" href="classmoci_1_1Texture2D.html">Texture2D</a> &gt;</td></tr>
-<tr class="separator:aa9ae48ed601fd24a4928d9135c5956f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed5d7ece7540d38d37601a6cd7c900dd"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Texture2D.html#aed5d7ece7540d38d37601a6cd7c900dd">Create</a> (<a class="el" href="classmoci_1_1Texture.html#a57db5936f0b54c47f796062e080bdde9">Texture::Format</a> format, uint32_t width, uint32_t height, void *data) -&gt; <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt; <a class="el" href="classmoci_1_1Texture2D.html">Texture2D</a> &gt;</td></tr>
-<tr class="separator:aed5d7ece7540d38d37601a6cd7c900dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_methods_classmoci_1_1Texture"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmoci_1_1Texture')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmoci_1_1Texture.html">moci::Texture</a></td></tr>
@@ -162,81 +154,6 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">using <a class="el" href="classmoci_1_1Texture2D.html#a39faaf17575869261bf461bab9ef58cb">moci::Texture2D::Ptr</a> =  <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt;<a class="el" href="classmoci_1_1Texture2D.html">Texture2D</a>&gt;</td>
         </tr>
       </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa9ae48ed601fd24a4928d9135c5956f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9ae48ed601fd24a4928d9135c5956f9">&#9670;&nbsp;</a></span>Create() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static auto moci::Texture2D::Create </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>path</em></td><td>)</td>
-          <td> -&gt;  <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt; <a class="el" href="classmoci_1_1Texture2D.html">Texture2D</a> &gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aed5d7ece7540d38d37601a6cd7c900dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed5d7ece7540d38d37601a6cd7c900dd">&#9670;&nbsp;</a></span>Create() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static auto moci::Texture2D::Create </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classmoci_1_1Texture.html#a57db5936f0b54c47f796062e080bdde9">Texture::Format</a>&#160;</td>
-          <td class="paramname"><em>format</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt;  <a class="el" href="namespacemoci.html#a3dc87f967df15767eb2bbac78fab1a31">Ref</a>&lt; <a class="el" href="classmoci_1_1Texture2D.html">Texture2D</a> &gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
