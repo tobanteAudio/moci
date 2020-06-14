@@ -1,4 +1,4 @@
-#include "moci_graphics/camera.hpp"
+#include "camera.hpp"
 
 #include "moci_core/core/preprocessor.hpp"
 #include "moci_events/moci_events.hpp"

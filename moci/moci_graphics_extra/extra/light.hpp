@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_graphics/mesh.hpp"
+#include "mesh.hpp"
 
 #include "moci_render_api/moci_render_api.hpp"
 #include "moci_render_base/moci_render_base.hpp"

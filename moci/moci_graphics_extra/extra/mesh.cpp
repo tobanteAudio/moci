@@ -1,4 +1,4 @@
-#include "moci_graphics/mesh.hpp"
+#include "mesh.hpp"
 
 #include "assimp/DefaultLogger.hpp"
 #include "assimp/LogStream.hpp"

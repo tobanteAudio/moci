@@ -9,7 +9,7 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Math
         Moci::Network
         Moci::System
-        Moci::Graphics
+        Moci::GraphicsExtra
         Moci::Application
         Moci::Widget
     PRIVATE

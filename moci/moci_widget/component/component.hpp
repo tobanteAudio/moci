@@ -1,7 +1,7 @@
 #pragma once
 
 #include "moci_events/moci_events.hpp"
-#include "moci_graphics/moci_graphics.hpp"
+#include "moci_graphics_extra/moci_graphics_extra.hpp"
 #include "moci_math/moci_math.hpp"
 
 #include "moci_core/core/vector.hpp"
