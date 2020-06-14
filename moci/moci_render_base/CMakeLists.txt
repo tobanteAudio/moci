@@ -28,6 +28,9 @@ target_link_libraries(moci_render_base_lib
         Moci::StbImage
         Moci::StbImageWrite
         Moci::StbImageResize
+    PRIVATE
+        Moci::CodeCoverage
+
 )
 
 if (${MOCI_API_OPENGL_MODERN})
@@ -41,6 +44,11 @@ endif()
 
 set (moci_render_base_test_src main_test.cpp render/buffer_test.cpp)
 add_executable(moci_render_base_tests ${moci_render_base_test_src})
-target_link_libraries(moci_render_base_tests PRIVATE Moci::RenderApiBase Catch2::Catch2)
+target_link_libraries(moci_render_base_tests 
+    PRIVATE 
+        Moci::RenderApiBase 
+        Moci::CodeCoverage
+        Catch2::Catch2
+)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_base_test_src})
 catch_discover_tests(moci_render_base_tests)

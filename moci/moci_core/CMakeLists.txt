@@ -26,11 +26,12 @@ target_compile_definitions(moci_core_lib PUBLIC NDEBUG=1)
 target_link_libraries(moci_core_lib 
     PUBLIC 
         Moci::IncludePath
-        Moci::CodeCoverage
         Moci::CompilerOptions
         Moci::CompilerWarnings
         spdlog::spdlog
         GSL
+    PRIVATE
+        Moci::CodeCoverage
 )
 
 
@@ -43,7 +44,12 @@ set (moci_core_test_src
     core/strings_test.cpp
 )
 add_executable(moci_core_tests ${moci_core_test_src})
-target_link_libraries(moci_core_tests PRIVATE Moci::Core Catch2::Catch2)
+target_link_libraries(moci_core_tests 
+    PRIVATE 
+        Moci::Core 
+        Moci::CodeCoverage
+        Catch2::Catch2
+)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_core_test_src})
 catch_discover_tests(moci_core_tests)
 

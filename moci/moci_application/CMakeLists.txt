@@ -18,4 +18,9 @@ set(moci_application_sources
 
 add_library(moci_application_lib STATIC ${moci_application_sources})
 add_library(Moci::Application ALIAS moci_application_lib)
-target_link_libraries(moci_application_lib PUBLIC Moci::RenderApi)
+target_link_libraries(moci_application_lib 
+    PUBLIC 
+        Moci::RenderApi
+    PRIVATE
+        Moci::CodeCoverage
+)

@@ -14,7 +14,12 @@ set(moci_events_sources
 
 add_library(moci_events_lib STATIC ${moci_events_sources})
 add_library(Moci::Events ALIAS moci_events_lib)
-target_link_libraries(moci_events_lib PUBLIC Moci::Core)
+target_link_libraries(moci_events_lib 
+    PUBLIC 
+        Moci::Core
+    PRIVATE
+        Moci::CodeCoverage
+)
 
 
 set (moci_events_test_src
@@ -25,6 +30,11 @@ set (moci_events_test_src
     events/mouse_event_test.cpp
 )
 add_executable(moci_events_tests ${moci_events_test_src})
-target_link_libraries(moci_events_tests PRIVATE Moci::Events Catch2::Catch2)
+target_link_libraries(moci_events_tests 
+    PRIVATE 
+        Moci::Events 
+        Moci::CodeCoverage
+        Catch2::Catch2
+)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_events_test_src})
 catch_discover_tests(moci_events_tests)

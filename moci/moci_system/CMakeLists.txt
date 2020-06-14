@@ -14,7 +14,13 @@ set(moci_system_sources
 
 add_library(moci_system_lib STATIC ${moci_system_sources})
 add_library(Moci::System ALIAS moci_system_lib)
-target_link_libraries(moci_system_lib PUBLIC Moci::Core Moci::Threads)
+target_link_libraries(moci_system_lib 
+    PUBLIC 
+        Moci::Core 
+        Moci::Threads
+    PRIVATE
+        Moci::CodeCoverage
+)
 
 
 set (moci_system_test_src
@@ -23,6 +29,11 @@ set (moci_system_test_src
     system/info_test.cpp
 )
 add_executable(moci_system_tests ${moci_system_test_src})
-target_link_libraries(moci_system_tests PRIVATE Moci::System Catch2::Catch2)
+target_link_libraries(moci_system_tests 
+    PRIVATE 
+        Moci::System 
+        Moci::CodeCoverage
+        Catch2::Catch2
+)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_system_test_src})
 catch_discover_tests(moci_system_tests)

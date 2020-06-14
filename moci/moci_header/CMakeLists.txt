@@ -12,5 +12,7 @@ target_link_libraries(${PROJECT_NAME}
         Moci::Graphics
         Moci::Application
         Moci::Widget
+    PRIVATE
+        Moci::CodeCoverage
 )
 

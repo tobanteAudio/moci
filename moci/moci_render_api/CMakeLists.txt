@@ -22,11 +22,24 @@ set(moci_render_api_sources
 
 add_library(moci_render_api_lib STATIC ${moci_render_api_sources})
 add_library(Moci::RenderApi ALIAS moci_render_api_lib)
-target_link_libraries(moci_render_api_lib PUBLIC Moci::RenderOpenGL Moci::RenderOpenGLES Moci::Events Moci::ImGui)
+target_link_libraries(moci_render_api_lib 
+    PUBLIC 
+        Moci::RenderOpenGL 
+        Moci::RenderOpenGLES 
+        Moci::Events 
+        Moci::ImGui
+    PRIVATE
+        Moci::CodeCoverage
+)
 
 set (moci_render_api_test_src main_test.cpp layer/layer_stack_test.cpp)
 add_executable(moci_render_api_tests ${moci_render_api_test_src})
-target_link_libraries(moci_render_api_tests PRIVATE Moci::RenderApi Catch2::Catch2)
+target_link_libraries(moci_render_api_tests 
+    PRIVATE 
+        Moci::RenderApi 
+        Moci::CodeCoverage
+        Catch2::Catch2
+)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_api_test_src})
 catch_discover_tests(moci_render_api_tests)
 
