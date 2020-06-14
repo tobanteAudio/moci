@@ -19,7 +19,8 @@ package "MoCi" {
     [Application]
     [Core]
     [Events]
-    [Graphics]
+    [Graphics Base]
+    [Graphics Extra]
     [Headers (Moci::Moci)]
     [Math]
     [Network]
@@ -54,12 +55,14 @@ package "External" {
 
 [Core] --> [Math]
 [glm] --> [Math]
-[Math] --> [Render Base]
 
+[Math] --> [Graphics Base]
+[stb image] --> [Graphics Base]
+[freetype] --> [Graphics Base]
+
+[Graphics Base] --> [Render Base]
 [glfw] --> [Render Base]
 [glew] --> [Render Base]
-[stb image] --> [Render Base]
-[freetype] --> [Render Base]
 [Render Base] --> [Render OpenGL]
 [Render Base] --> [Render OpenGLES]
 
@@ -70,10 +73,10 @@ package "External" {
 
 [Render API] --> [Application]
 
-[Application] --> [Graphics]
-[assimp] --> [Graphics]
+[Application] --> [Graphics Extra]
+[assimp] --> [Graphics Extra]
 
-[Graphics] --> [Widget]
+[Graphics Extra] --> [Widget]
 
 [Widget] --> [Headers (Moci::Moci)]
 
