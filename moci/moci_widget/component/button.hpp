@@ -43,7 +43,7 @@ public:
     auto OnDraw(Painter& painter) -> void override;
 
     auto SetSpecs(ButtonSpecs newSpecs) -> void;
-    [[nodiscard]] auto GetSpecs() const noexcept -> ButtonSpecs const&;
+    [[nodiscard]] auto GetSpecs() const noexcept -> ButtonSpecs;
 
     auto SetState(ButtonState newState) -> void;
     [[nodiscard]] auto GetState() const noexcept -> ButtonState;

@@ -66,3 +66,19 @@ TEST_CASE("moci_widget: SliderCallbackValueChangedCallbackNotSet", "[ui]")
     REQUIRE(slider.GetValue() == 143.0f);
     REQUIRE(wasCalled == false);
 }
+
+TEST_CASE("moci_widget: SliderMouseScrolled", "[ui]")
+{
+    auto callbacks = moci::SliderCallbacks {};
+    auto slider    = moci::Slider {moci::Colors::Black, callbacks};
+
+    slider.SetValue(0.5f);
+    REQUIRE(slider.GetValue() == 0.5f);
+    slider.MouseScrolled(moci::MouseScrolledEvent {0.0f, 1.0f});
+    REQUIRE(slider.GetValue() == Approx(0.55f));
+
+    slider.SetValue(1.0f);
+    REQUIRE(slider.GetValue() == 1.0f);
+    slider.MouseScrolled(moci::MouseScrolledEvent {0.0f, -1.0f});
+    REQUIRE(slider.GetValue() == Approx(0.95f));
+}

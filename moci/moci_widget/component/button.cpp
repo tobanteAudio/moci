@@ -18,7 +18,7 @@ void Button::OnDraw(Painter& painter)
 }
 
 auto Button::SetSpecs(ButtonSpecs newSpecs) -> void { specs_ = std::move(newSpecs); }
-auto Button::GetSpecs() const noexcept -> ButtonSpecs const& { return specs_; }
+auto Button::GetSpecs() const noexcept -> ButtonSpecs { return specs_; }
 
 auto Button::SetState(ButtonState newState) -> void
 {
