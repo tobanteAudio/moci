@@ -6,16 +6,15 @@
 
 namespace moci
 {
+class Label;
+class LabelStyleMethods
+{
+public:
+    virtual void DrawLabel(Painter& painter, Rectangle<int> bounds, Label const& label) = 0;
+};
 
 class Label : public Component
 {
-public:
-    class StyleMethods
-    {
-    public:
-        virtual void DrawLabel(Painter& painter, Rectangle<int> bounds, Label const& label) = 0;
-    };
-
 public:
     Label(std::string text, Color col);
     ~Label() override = default;

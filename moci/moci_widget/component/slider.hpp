@@ -8,20 +8,20 @@
 namespace moci
 {
 
+class Slider;
 struct SliderCallbacks
 {
     std::function<void(float)> valueChanged = {};
 };
 
-class Slider : public Component
+class SliderStyleMethods
 {
 public:
-    class StyleMethods
-    {
-    public:
-        virtual void DrawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider) = 0;
-    };
+    virtual void DrawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider) = 0;
+};
 
+class Slider : public Component
+{
 public:
     Slider(Color col, SliderCallbacks callbacks = SliderCallbacks {});
     ~Slider() override = default;

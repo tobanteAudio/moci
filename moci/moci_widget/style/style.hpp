@@ -8,8 +8,8 @@ namespace moci
 {
 class Style
     : public ButtonStyleMethods
-    , public Label::StyleMethods
-    , public Slider::StyleMethods
+    , public LabelStyleMethods
+    , public SliderStyleMethods
 {
 public:
     Style() = default;
