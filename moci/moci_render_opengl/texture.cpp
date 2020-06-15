@@ -10,86 +10,81 @@
 namespace moci
 {
 
-OpenGLTexture2D::OpenGLTexture2D(std::uint32_t width, std::uint32_t height) : m_Width(width), m_Height(height)
+OpenGLTexture2D::OpenGLTexture2D(std::uint32_t width, std::uint32_t height) : width_(width), height_(height)
 {
-    m_InternalFormat = GL_RGBA8;
-    m_DataFormat     = GL_RGBA;
+    internalFormat_ = GL_RGBA8;
+    dataFormat_     = GL_RGBA;
 
     createTexture();
     setFilters();
 }
 
-OpenGLTexture2D::OpenGLTexture2D(std::string path) : m_Path(std::move(path))
+OpenGLTexture2D::OpenGLTexture2D(std::string path) : path_(std::move(path))
 {
 
-    int width, height, channels;
     stbi_set_flip_vertically_on_load(1);
-    auto* data = stbi_load(m_Path.c_str(), &width, &height, &channels, 4);
-    MOCI_CORE_ASSERT(data, "Failed to load image!");
-    m_Width  = width;
-    m_Height = height;
 
-    GLenum internalFormat = 0, dataFormat = 0;
+    auto width    = 0;
+    auto height   = 0;
+    auto channels = 0;
+    auto* data    = stbi_load(path_.c_str(), &width, &height, &channels, 4);
+    MOCI_CORE_ASSERT(data, "Failed to load image!");
+
+    width_    = static_cast<std::uint32_t>(width);
+    height_   = static_cast<std::uint32_t>(height);
+    channels_ = static_cast<std::uint32_t>(height);
+
     if (channels == 4)
     {
-        internalFormat = GL_RGBA8;
-        dataFormat     = GL_RGBA;
+        internalFormat_ = GL_RGBA8;
+        dataFormat_     = GL_RGBA;
     }
     else if (channels == 3)
     {
-        internalFormat = GL_RGB8;
-        dataFormat     = GL_RGB;
+        internalFormat_ = GL_RGB8;
+        dataFormat_     = GL_RGB;
     }
-
-    m_InternalFormat = internalFormat;
-    m_DataFormat     = dataFormat;
-
-    MOCI_CORE_ASSERT(internalFormat & dataFormat, "Format not supported!");
+    MOCI_CORE_ASSERT(internalFormat_ & dataFormat_, "Format not supported!");
 
     createTexture();
-
-    uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
     setFilters();
-    SetData(data, m_Width * m_Height * bpp);
+    SetData(data, width_ * height_ * channels_);
 
     stbi_image_free(data);
 }
 
 OpenGLTexture2D::OpenGLTexture2D(Texture::Format format, std::uint32_t width, std::uint32_t height, void* data)
-    : m_Width(width), m_Height(height)
+    : width_(width), height_(height)
 {
     IgnoreUnused(format);
     createTexture();
-
-    uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
     setFilters();
-    SetData(data, m_Width * m_Height * bpp);
+    SetData(data, width_ * height_ * channels_);
 }
 
-OpenGLTexture2D::~OpenGLTexture2D() { glDeleteTextures(1, &m_RendererID); }
+OpenGLTexture2D::~OpenGLTexture2D() { glDeleteTextures(1, &renderID_); }
 
 void OpenGLTexture2D::SetData(void* data, uint32_t size)
 {
-    uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
-    MOCI_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture!");
-    glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
+    MOCI_CORE_ASSERT(size == width_ * height_ * channels_, "Data must be entire texture!");
+    glTextureSubImage2D(renderID_, 0, 0, 0, width_, height_, dataFormat_, GL_UNSIGNED_BYTE, data);
 }
 
-void OpenGLTexture2D::Bind(uint32_t slot) const { glBindTextureUnit(slot, m_RendererID); }
+void OpenGLTexture2D::Bind(uint32_t slot) const { glBindTextureUnit(slot, renderID_); }
 
 void OpenGLTexture2D::createTexture()
 {
-    glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
-    glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);
+    glCreateTextures(GL_TEXTURE_2D, 1, &renderID_);
+    glTextureStorage2D(renderID_, 1, internalFormat_, width_, height_);
 }
 
 void OpenGLTexture2D::setFilters()
 {
-    glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTextureParameteri(renderID_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTextureParameteri(renderID_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTextureParameteri(renderID_, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTextureParameteri(renderID_, GL_TEXTURE_WRAP_T, GL_REPEAT);
 }
 
 OpenGLTextureCube::OpenGLTextureCube(Vector<std::string> paths) : paths_(std::move(paths))

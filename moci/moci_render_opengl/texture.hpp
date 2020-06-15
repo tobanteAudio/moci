@@ -18,9 +18,9 @@ public:
 
     ~OpenGLTexture2D() override;
 
-    [[nodiscard]] uint32_t GetWidth() const override { return m_Width; }
-    [[nodiscard]] uint32_t GetHeight() const override { return m_Height; }
-    [[nodiscard]] uint32_t GetID() const override { return m_RendererID; }
+    [[nodiscard]] uint32_t GetWidth() const override { return width_; }
+    [[nodiscard]] uint32_t GetHeight() const override { return height_; }
+    [[nodiscard]] uint32_t GetID() const override { return renderID_; }
 
     void SetData(void* data, uint32_t size);
 
@@ -31,10 +31,13 @@ private:
     void createTexture();
     void setFilters();
 
-    std::string m_Path;
-    uint32_t m_Width, m_Height;
-    uint32_t m_RendererID;
-    GLenum m_InternalFormat, m_DataFormat;
+    std::string path_;
+    std::uint32_t width_;
+    std::uint32_t height_;
+    std::uint32_t channels_;
+    std::uint32_t renderID_;
+    GLenum internalFormat_;
+    GLenum dataFormat_;
 };
 
 class OpenGLTextureCube : public TextureCube
