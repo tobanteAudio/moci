@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Moci: moci_core.hpp Source File</title>
+<title>Moci: span.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -59,15 +59,17 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_af46cb8f061bb74aa3af6df4385537e4.html">moci</a></li><li class="navelem"><a class="el" href="dir_c898a008a71ea95cf41c91eb97c277b1.html">moci_core</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_af46cb8f061bb74aa3af6df4385537e4.html">moci</a></li><li class="navelem"><a class="el" href="dir_c898a008a71ea95cf41c91eb97c277b1.html">moci_core</a></li><li class="navelem"><a class="el" href="dir_6774b9a34c7971c7bc6082d13fbd48d5.html">core</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">moci_core.hpp</div>  </div>
+<div class="title">span.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;moci_core/core/preprocessor.hpp&quot;</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;moci_core/benchmark/benchmark.hpp&quot;</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;moci_core/benchmark/profile.hpp&quot;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;moci_core/core/algorithm.hpp&quot;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;moci_core/core/logging.hpp&quot;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;moci_core/core/memory.hpp&quot;</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;moci_core/core/property_map.hpp&quot;</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;moci_core/core/scope_guard.hpp&quot;</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;moci_core/core/span.hpp&quot;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;moci_core/core/strings.hpp&quot;</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;moci_core/core/vector.hpp&quot;</span></div></div><!-- fragment --></div><!-- contents -->
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;gsl/gsl&gt;</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacemoci.html">moci</a></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Type&gt;</div><div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="namespacemoci.html#adabf64373fa831872795e9ee55c0379c">    8</a></span>&#160;<span class="keyword">using</span> <a class="code" href="namespacemoci.html#adabf64373fa831872795e9ee55c0379c">Span</a> = gsl::span&lt;Type&gt;;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;}  <span class="comment">// namespace moci</span></div><div class="ttc" id="namespacemoci_html_adabf64373fa831872795e9ee55c0379c"><div class="ttname"><a href="namespacemoci.html#adabf64373fa831872795e9ee55c0379c">moci::Span</a></div><div class="ttdeci">gsl::span&lt; Type &gt; Span</div><div class="ttdef"><b>Definition:</b> span.hpp:8</div></div>
+<div class="ttc" id="namespacemoci_html"><div class="ttname"><a href="namespacemoci.html">moci</a></div><div class="ttdef"><b>Definition:</b> application.hpp:13</div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

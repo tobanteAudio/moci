@@ -11,7 +11,7 @@ var searchData=
   ['d7',['D7',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fda94f5a64e61ba849a9213f6b6f62b151d',1,'moci']]],
   ['d8',['D8',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdab1522194d726a396729c3148c2b3a0bd',1,'moci']]],
   ['d9',['D9',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdaadb7bf1cff0c81595de38f51cd60c62c',1,'moci']]],
-  ['data',['Data',['../classmoci_1_1Image.html#aee8d87c447beedbdab261252cb27a3cf',1,'moci::Image']]],
+  ['data',['Data',['../classmoci_1_1Image.html#ac1d536939d66f085c476d3a3f1e31010',1,'moci::Image']]],
   ['datagramsocket',['DatagramSocket',['../classmoci_1_1DatagramSocket.html',1,'moci::DatagramSocket'],['../classmoci_1_1DatagramSocket.html#a988e7fbe656ab61cbfa4d4886af65df6',1,'moci::DatagramSocket::DatagramSocket()']]],
   ['delete',['Delete',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdaf2a6c498fb90ee345d997f888fce3b18',1,'moci']]],
   ['deleteproperty',['DeleteProperty',['../classmoci_1_1PropertyMap.html#a65695d3916fbdb0d03a92a8d6be409cc',1,'moci::PropertyMap']]],

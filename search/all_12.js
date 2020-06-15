@@ -59,6 +59,7 @@ var searchData=
   ['slidercallbacks',['SliderCallbacks',['../structmoci_1_1SliderCallbacks.html',1,'moci']]],
   ['sliderstylemethods',['SliderStyleMethods',['../classmoci_1_1SliderStyleMethods.html',1,'moci']]],
   ['space',['Space',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdad511f8439ecde36647437fbba67a4394',1,'moci']]],
+  ['span',['Span',['../namespacemoci.html#adabf64373fa831872795e9ee55c0379c',1,'moci']]],
   ['split',['Split',['../classmoci_1_1Strings.html#a385b495e2a7ee1fc7e780d98cab79dcb',1,'moci::Strings']]],
   ['start',['Start',['../structmoci_1_1ProfileResult.html#a7adffce7011d2e2da92e42e65753e291',1,'moci::ProfileResult']]],
   ['startframe',['StartFrame',['../classmoci_1_1RenderQueue.html#a3b85ace79947f24ad044582f4af8f4a0',1,'moci::RenderQueue']]],
