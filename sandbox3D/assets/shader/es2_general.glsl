@@ -161,8 +161,8 @@ void main()
 
     // ambient light
     vec3 ambient = u_Ambient * lightColor;
-    // vec3 light   = ambient + diffuse + specular;
-    vec3 light = ambient + diffuse;
+    vec3 light   = ambient + diffuse + specular;
+    // vec3 light = ambient + diffuse;
 
     // texture
     vec4 texture = texture2D(u_Texture, v_TexCoords);
