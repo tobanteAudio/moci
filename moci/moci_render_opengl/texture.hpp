@@ -28,6 +28,9 @@ public:
     void Unbind() const override { }
 
 private:
+    void createTexture();
+    void setFilters();
+
     std::string m_Path;
     uint32_t m_Width, m_Height;
     uint32_t m_RendererID;
