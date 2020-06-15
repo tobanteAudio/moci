@@ -22,23 +22,8 @@ OpenGLESTexture2D::OpenGLESTexture2D(std::string path) : path_(std::move(path))
         MOCI_CORE_ERROR("stbi error");
     }
 
-    // Use tightly packed data
-    GLCall(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));
-
-    // Generate a texture object
-    GLCall(glGenTextures(1, &renderID_));
-
-    // Bind the texture object
-    GLCall(glBindTexture(GL_TEXTURE_2D, renderID_));
-
-    // Set the filtering mode1
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-
-    // Load the texture
+    createTexture();
+    setFilterModes();
     GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_UNSIGNED_BYTE, data_));
 
     if (data_ != nullptr)
@@ -50,11 +35,8 @@ OpenGLESTexture2D::OpenGLESTexture2D(std::string path) : path_(std::move(path))
 OpenGLESTexture2D::OpenGLESTexture2D(Texture::Format format, uint32_t width, uint32_t height, void* data)
 {
     IgnoreUnused(format);
-
-    GLCall(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));  // Disable byte-alignment restriction
-
-    GLCall(glGenTextures(1, &renderID_));
-    GLCall(glBindTexture(GL_TEXTURE_2D, renderID_));
+    createTexture();
+    setFilterModes();
 
     // GL_LUMINANCE: Was GL_RED, but thats not available on RPi3
     GLCall(                    //
@@ -70,12 +52,6 @@ OpenGLESTexture2D::OpenGLESTexture2D(Texture::Format format, uint32_t width, uin
             data               //
             )                  //
     );
-
-    // Set texture options
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 }
 
 OpenGLESTexture2D::~OpenGLESTexture2D() { GLCall(glDeleteTextures(1, &renderID_)); }
@@ -90,6 +66,22 @@ void OpenGLESTexture2D::Unbind() const
 {
     GLCall(glActiveTexture(GL_TEXTURE0));
     GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+}
+
+void OpenGLESTexture2D::createTexture()
+{
+    // Disable byte-alignment restriction
+    GLCall(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));
+    GLCall(glGenTextures(1, &renderID_));
+    GLCall(glBindTexture(GL_TEXTURE_2D, renderID_));
+}
+void OpenGLESTexture2D::setFilterModes()
+{
+    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+
+    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 }
 
 OpenGLESTextureCube::OpenGLESTextureCube(Vector<std::string> paths) : paths_(std::move(paths))

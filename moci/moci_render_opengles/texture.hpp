@@ -12,7 +12,6 @@ public:
     OpenGLESTexture2D(Texture::Format format, std::uint32_t width, std::uint32_t height, void* data);
     ~OpenGLESTexture2D() override;
 
-    // Delete the copy constructor/assignment.
     OpenGLESTexture2D(const OpenGLESTexture2D&) = delete;
     auto operator=(const OpenGLESTexture2D&) -> OpenGLESTexture2D& = delete;
 
@@ -24,6 +23,9 @@ public:
     void Unbind() const override;
 
 private:
+    void createTexture();
+    void setFilterModes();
+
     std::uint32_t renderID_ = {};
     std::int32_t width_     = {};
     std::int32_t height_    = {};
