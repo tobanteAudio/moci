@@ -4,7 +4,7 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci_events/events/key_event.hpp"
+#include "moci_events/moci_events.hpp"
 
 using Catch::Matchers::Contains;
 

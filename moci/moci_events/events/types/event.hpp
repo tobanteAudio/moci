@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_core/core/preprocessor.hpp"
+#include "moci_core/moci_core.hpp"
 
 #include <iostream>
 #include <sstream>

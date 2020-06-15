@@ -1,15 +1,15 @@
 project(moci_events)
 
 set(moci_events_sources
-    events/application_event.hpp
-    events/event.hpp
-    events/key_event.hpp
-    events/mouse_event.hpp
-    input.hpp
-    input.cpp
-    key_codes.hpp
-    mouse_button_codes.hpp
-    timestep.hpp
+    events/types/application_event.hpp
+    events/types/event.hpp
+    events/types/key_event.hpp
+    events/types/mouse_event.hpp
+    events/input.hpp
+    events/input.cpp
+    events/key_codes.hpp
+    events/mouse_button_codes.hpp
+    events/timestep.hpp
 )
 
 add_library(moci_events_lib STATIC ${moci_events_sources})
@@ -25,9 +25,9 @@ target_link_libraries(moci_events_lib
 set (moci_events_test_src
     main_test.cpp
     
-    events/application_event_test.cpp
-    events/key_event_test.cpp
-    events/mouse_event_test.cpp
+    events/types/application_event_test.cpp
+    events/types/key_event_test.cpp
+    events/types/mouse_event_test.cpp
 )
 add_executable(moci_events_tests ${moci_events_test_src})
 target_link_libraries(moci_events_tests 

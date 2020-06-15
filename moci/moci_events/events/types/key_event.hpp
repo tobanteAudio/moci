@@ -1,7 +1,7 @@
 #pragma once
 
 #include "event.hpp"
-#include "moci_events/key_codes.hpp"
+#include "moci_events/events/key_codes.hpp"
 
 namespace moci
 {

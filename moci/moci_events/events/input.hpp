@@ -3,7 +3,7 @@
 #include "key_codes.hpp"
 #include "mouse_button_codes.hpp"
 
-#include "moci_core/core/memory.hpp"
+#include "moci_core/moci_core.hpp"
 
 #include <tuple>
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "event.hpp"
-#include "moci_events/mouse_button_codes.hpp"
+#include "moci_events/events/mouse_button_codes.hpp"
 
 #include <sstream>
 

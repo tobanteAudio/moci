@@ -4,11 +4,11 @@
  */
 #include "catch2/catch.hpp"
 
-#include "moci_events/events/application_event.hpp"
+#include "moci_events/moci_events.hpp"
 
 using Catch::Matchers::Contains;
 
-TEST_CASE("moci_events/events: WindowResizeEvent", "[app][events]")
+TEST_CASE("moci_events/types: WindowResizeEvent", "[types][events]")
 {
     auto const event = moci::WindowResizeEvent(10, 20);
     REQUIRE(event.GetStaticType() == moci::EventType::WindowResize);
@@ -23,7 +23,7 @@ TEST_CASE("moci_events/events: WindowResizeEvent", "[app][events]")
     REQUIRE_THAT(event.ToString(), Contains("WindowResize"));
 }
 
-TEST_CASE("moci_events/events: WindowCloseEvent", "[app][events]")
+TEST_CASE("moci_events/types: WindowCloseEvent", "[types][events]")
 {
     auto const event = moci::WindowCloseEvent();
     REQUIRE(event.GetStaticType() == moci::EventType::WindowClose);
@@ -36,7 +36,7 @@ TEST_CASE("moci_events/events: WindowCloseEvent", "[app][events]")
     REQUIRE_THAT(event.ToString(), Contains("WindowClose"));
 }
 
-TEST_CASE("moci_events/events: AppRenderEvent", "[app][events]")
+TEST_CASE("moci_events/types: AppRenderEvent", "[types][events]")
 {
     auto const event = moci::AppRenderEvent();
     REQUIRE(event.GetStaticType() == moci::EventType::AppRender);
@@ -49,7 +49,7 @@ TEST_CASE("moci_events/events: AppRenderEvent", "[app][events]")
     REQUIRE_THAT(event.ToString(), Contains("AppRender"));
 }
 
-TEST_CASE("moci_events/events: AppUpdateEvent", "[app][events]")
+TEST_CASE("moci_events/types: AppUpdateEvent", "[types][events]")
 {
     auto const event = moci::AppUpdateEvent();
     REQUIRE(event.GetStaticType() == moci::EventType::AppUpdate);
@@ -62,7 +62,7 @@ TEST_CASE("moci_events/events: AppUpdateEvent", "[app][events]")
     REQUIRE_THAT(event.ToString(), Contains("AppUpdate"));
 }
 
-TEST_CASE("moci_events/events: AppTickEvent", "[app][events]")
+TEST_CASE("moci_events/types: AppTickEvent", "[types][events]")
 {
     auto const event = moci::AppTickEvent();
     REQUIRE(event.GetStaticType() == moci::EventType::AppTick);
