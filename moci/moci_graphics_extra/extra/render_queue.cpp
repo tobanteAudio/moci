@@ -162,8 +162,7 @@ auto RenderQueue::EndBatch() -> void
     data_.vao->Bind();
     auto const verticesSize = static_cast<std::uint32_t>(data_.vertices.size() * sizeof(Vertex));
     data_.vbo->UploadData(0, verticesSize, data_.vertices.data());
-    auto const indicesSize = static_cast<std::uint32_t>(data_.indices.size() * sizeof(unsigned short));
-    data_.ibo->UploadData(0, indicesSize, data_.indices.data());
+    data_.ibo->UploadData(0, data_.indices);
     data_.vao->Unbind();
 }
 
@@ -247,7 +246,7 @@ auto RenderQueue::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Option
 
     for (auto const i : {0, 1, 2, 2, 3, 0})
     {
-        data_.indices.push_back(static_cast<unsigned short>(data_.indexOffset + i));
+        data_.indices.push_back(static_cast<uint32_t>(data_.indexOffset + i));
     }
     data_.indexOffset += 4;
 
@@ -272,9 +271,9 @@ auto RenderQueue::DrawCircle(float x, float y, float radius, int numSides, Color
     auto const origin = data_.indexOffset;
     for (auto i = 0; i < numSides; i++)
     {
-        data_.indices.push_back(static_cast<unsigned short>(origin));
-        data_.indices.push_back(static_cast<unsigned short>(origin + (1 + i)));
-        data_.indices.push_back(static_cast<unsigned short>(origin + (2 + i)));
+        data_.indices.push_back(static_cast<uint32_t>(origin));
+        data_.indices.push_back(static_cast<uint32_t>(origin + (1 + i)));
+        data_.indices.push_back(static_cast<uint32_t>(origin + (2 + i)));
     }
     data_.indexOffset += numVertices;
 

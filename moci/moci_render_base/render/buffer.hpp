@@ -134,10 +134,10 @@ class IndexBuffer
 public:
     virtual ~IndexBuffer() = default;
 
-    virtual void Bind() const                                                                         = 0;
-    virtual void Unbind() const                                                                       = 0;
-    [[nodiscard]] virtual auto GetCount() const -> std::uint32_t                                      = 0;
-    virtual auto UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void = 0;
+    virtual void Bind() const                                                             = 0;
+    virtual void Unbind() const                                                           = 0;
+    [[nodiscard]] virtual auto GetCount() const -> std::uint32_t                          = 0;
+    virtual auto UploadData(std::uint32_t offset, Span<std::uint32_t> data) const -> void = 0;
 };
 
 }  // namespace moci

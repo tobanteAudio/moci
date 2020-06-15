@@ -63,8 +63,15 @@ void OpenGLESIndexBuffer::Bind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BU
 
 void OpenGLESIndexBuffer::Unbind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)); }
 
-auto OpenGLESIndexBuffer::UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void
+auto OpenGLESIndexBuffer::UploadData(std::uint32_t offset, Span<std::uint32_t> data) const -> void
 {
-    GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, data));
+    std::vector<std::uint16_t> indices {};
+    indices.reserve(data.size());
+    for (auto const index : data)
+    {
+        indices.push_back(gsl::narrow<std::uint16_t>(index));
+    }
+    auto const size = indices.size() * sizeof(std::uint16_t);
+    GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, indices.data()));
 }
 }  // namespace moci

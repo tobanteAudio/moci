@@ -35,7 +35,7 @@ public:
     void Unbind() const override;
 
     uint32_t GetCount() const override { return m_Count; }
-    void UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override;
+    void UploadData(std::uint32_t offset, Span<std::uint32_t> data) const override;
 
 private:
     uint32_t m_RendererID;

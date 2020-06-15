@@ -69,7 +69,7 @@ private:
         Ref<Shader> shader;
 
         Vector<Vertex> vertices;
-        Vector<unsigned short> indices;
+        Vector<uint32_t> indices;
         std::uint32_t indexOffset;
 
         Texture2D::Ptr defaultTexture;

@@ -32,7 +32,7 @@ public:
 
     void Bind() const override;
     void Unbind() const override;
-    auto UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void override;
+    auto UploadData(std::uint32_t offset, Span<std::uint32_t> data) const -> void override;
     [[nodiscard]] auto GetCount() const -> uint32_t override { return m_Count; }
 
 private:

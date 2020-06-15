@@ -65,8 +65,10 @@ void OpenGLIndexBuffer::Bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_R
 
 void OpenGLIndexBuffer::Unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
-auto OpenGLIndexBuffer::UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void
+auto OpenGLIndexBuffer::UploadData(std::uint32_t offset, Span<std::uint32_t> indices) const -> void
 {
+    auto const size = indices.size() * sizeof(std::uint32_t);
+    auto* data      = indices.data();
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, data);
 }
 }  // namespace moci
