@@ -178,9 +178,8 @@ auto RenderQueue::Flush() -> void
     {
         MOCI_PROFILE_SCOPE("RenderQueue::Flush::Draw");
         auto const mode       = RendererAPI::DrawMode::Triangles;
-        auto const type       = RendererAPI::ElementType::UnsignedShort;
         auto const numIndices = static_cast<std::uint32_t>(data_.indices.size());
-        RenderCommand::DrawIndexed(mode, numIndices, type, nullptr);
+        RenderCommand::DrawIndexed(mode, numIndices, nullptr);
     }
     data_.vao->Unbind();
     for (auto const& tex : data_.textures)

@@ -86,11 +86,9 @@ void OpenGLESRendererAPI::DrawArrays(RendererAPI::DrawMode const mode, uint32_t 
     GLCall(glDrawArrays(openGLMode, first, count));
 }
 
-void OpenGLESRendererAPI::DrawIndexed(RendererAPI::DrawMode const mode, uint32_t count, RendererAPI::ElementType type,
-                                      void* indices)
+void OpenGLESRendererAPI::DrawIndexed(RendererAPI::DrawMode const mode, uint32_t count, void* indices)
 {
     auto const openGLMode = MociToOpenGLDrawMode(mode);
-    IgnoreUnused(type);
     GLCall(glDrawElements(openGLMode, count, GL_UNSIGNED_SHORT, indices));
 }
 

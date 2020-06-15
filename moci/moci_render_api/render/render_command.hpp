@@ -23,10 +23,9 @@ public:
         s_RendererAPI->DrawArrays(mode, first, count);
     }
 
-    inline static void DrawIndexed(RendererAPI::DrawMode mode, uint32_t count, RendererAPI::ElementType type,
-                                   void* indices)
+    inline static void DrawIndexed(RendererAPI::DrawMode mode, uint32_t count, void* indices)
     {
-        s_RendererAPI->DrawIndexed(mode, count, type, indices);
+        s_RendererAPI->DrawIndexed(mode, count, indices);
     }
 
     inline static void DrawIndexed(RendererAPI::DrawMode mode, Ref<VertexArray> const& vertexArray)
