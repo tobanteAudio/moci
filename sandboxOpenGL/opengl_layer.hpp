@@ -2,7 +2,7 @@
 
 #include "moci/moci.hpp"
 
-class OpenGLLayer : public moci::Layer
+class OpenGLLayer final : public moci::Layer
 {
 public:
     OpenGLLayer()           = default;
@@ -24,9 +24,9 @@ private:
     float width_  = 1920.0f;
     float height_ = 1080.0f;
 
-    moci::Ref<moci::Shader> shader_          = nullptr;
-    moci::Ref<moci::VertexBuffer> vbo_       = nullptr;
-    moci::Ref<moci::IndexBuffer> ibo_        = nullptr;
-    moci::Ref<moci::VertexArray> vao_        = nullptr;
-    moci::Ref<moci::Texture2D> textureSolid_ = {};
+    moci::Ref<moci::Shader> shader_     = nullptr;
+    moci::Ref<moci::VertexBuffer> vbo_  = nullptr;
+    moci::Ref<moci::IndexBuffer> ibo_   = nullptr;
+    moci::Ref<moci::VertexArray> vao_   = nullptr;
+    moci::Ref<moci::Texture2D> texture_ = nullptr;
 };

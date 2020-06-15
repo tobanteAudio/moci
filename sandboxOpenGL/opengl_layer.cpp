@@ -5,8 +5,10 @@
 void OpenGLLayer::OnAttach()
 {
     auto const path = fmt::format("assets/shader/basic_{}.glsl", shaderSuffix);
+    auto samplers   = std::array {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     shader_         = moci::RenderFactory::MakeShader(path);
     shader_->Bind();
+    shader_->SetInts("u_Textures", samplers.size(), samplers.data());
 
     auto const verticesSize = static_cast<std::uint32_t>(assets::QuadVertices.size() * sizeof(float));
     auto layout             = moci::BufferLayout {
@@ -22,6 +24,8 @@ void OpenGLLayer::OnAttach()
     vao_->AddVertexBuffer(vbo_);
     vao_->SetIndexBuffer(ibo_);
     vao_->Unbind();
+
+    texture_ = moci::RenderFactory::MakeTexture2D("assets/white_10x10.png");
 }
 
 void OpenGLLayer::OnUpdate(moci::Timestep ts)
@@ -32,6 +36,7 @@ void OpenGLLayer::OnUpdate(moci::Timestep ts)
     moci::RenderCommand::Clear();
 
     vao_->Bind();
+    texture_->Bind(0);
     moci::RenderCommand::DrawIndexed(vao_);
 }
 
