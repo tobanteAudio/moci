@@ -1,8 +1,6 @@
 #include "window.hpp"
 
-#include "moci_core/core/logging.hpp"
-#include "moci_core/core/preprocessor.hpp"
-
+#include "moci_core/moci_core.hpp"
 #include "moci_events/moci_events.hpp"
 
 namespace moci
@@ -27,8 +25,6 @@ void GlfwWindow::Init(WindowSpecs props)
     m_Data.Width  = props.Width;
     m_Data.Height = props.Height;
 
-    MOCI_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
-
     if (s_GLFWWindowCount == 0)
     {
         MOCI_CORE_INFO("Initializing GLFW");
@@ -37,25 +33,23 @@ void GlfwWindow::Init(WindowSpecs props)
         glfwSetErrorCallback(GLFWErrorCallback);
     }
 
-    // msaa
-    // glfwWindowHint(GLFW_SAMPLES, 4);
-
 #if defined(MOCI_API_OPENGL_ES)
     glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-    m_Window
-        = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), glfwGetPrimaryMonitor(), nullptr);
 #else
-#if !defined(MOCI_MAC)
+#if not defined(MOCI_MAC)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 #endif
-    m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 #endif
 
+    auto const width  = static_cast<int>(m_Data.Width);
+    auto const height = static_cast<int>(m_Data.Height);
+    m_Window          = glfwCreateWindow(width, height, m_Data.Title.c_str(), nullptr, nullptr);
     ++s_GLFWWindowCount;
+    MOCI_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
     m_Context = Scope<GraphicsContext>(GraphicsContext::Create(m_Window));
     m_Context->Init();
