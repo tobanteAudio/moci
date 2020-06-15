@@ -13,6 +13,7 @@ var searchData=
   ['removefromtop',['RemoveFromTop',['../classmoci_1_1Rectangle.html#a734ba6f7f8c445aa5484339ee2148cf9',1,'moci::Rectangle']]],
   ['render',['Render',['../structmoci_1_1Light.html#a1d0af200c358fe74d2cd9f4ffc005eee',1,'moci::Light']]],
   ['rendercommand',['RenderCommand',['../classmoci_1_1RenderCommand.html',1,'moci']]],
+  ['renderdrawmode',['RenderDrawMode',['../namespacemoci.html#a8b8b235ecc7208f9f869fe3891e89e01',1,'moci']]],
   ['renderer',['Renderer',['../classmoci_1_1Renderer.html',1,'moci']]],
   ['rendererapi',['RendererAPI',['../classmoci_1_1RendererAPI.html',1,'moci']]],
   ['renderfactory',['RenderFactory',['../structmoci_1_1RenderFactory.html',1,'moci']]],

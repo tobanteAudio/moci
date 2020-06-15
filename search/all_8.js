@@ -1,7 +1,7 @@
 var searchData=
 [
   ['i',['I',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdadd7536794b63bf90eccfd37f9b147d7f',1,'moci']]],
-  ['ibo',['ibo',['../structmoci_1_1Light.html#ad9b5937af4d5f2442fe195e8b399de22',1,'moci::Light']]],
+  ['ibo',['ibo',['../structmoci_1_1Light.html#afd4a51e497716aa5aa5b51167e5594b6',1,'moci::Light']]],
   ['ignoreunused',['IgnoreUnused',['../namespacemoci.html#ad1589c274d25902230a26f6466088839',1,'moci']]],
   ['image',['Image',['../classmoci_1_1Image.html',1,'moci::Image'],['../classmoci_1_1Image.html#a02f5c3c38bc344db4c8060760fb6a190',1,'moci::Image::Image()=default'],['../classmoci_1_1Image.html#ab06dc0498526b857e995c92258c585a3',1,'moci::Image::Image(std::string const &amp;path)']]],
   ['imguilayer',['ImGuiLayer',['../classmoci_1_1ImGuiLayer.html',1,'moci::ImGuiLayer'],['../classmoci_1_1ImGuiLayer.html#a646dc010366918b93e8d449e62d92ff2',1,'moci::ImGuiLayer::ImGuiLayer()'],['../classmoci_1_1ImGuiLayer.html#a68fb062aa7024f0b2fa1145931782bda',1,'moci::ImGuiLayer::ImGuiLayer(std::string const &amp;name)']]],

@@ -10,7 +10,7 @@ var searchData=
   ['point',['Point',['../classmoci_1_1Point.html',1,'moci::Point&lt; Type &gt;'],['../classmoci_1_1Point.html#ad0be554f82688105d643a199f5061387',1,'moci::Point::Point() noexcept'],['../classmoci_1_1Point.html#a0bf6d9ec64878ac014d442610fa3012c',1,'moci::Point::Point(Type x, Type y) noexcept'],['../classmoci_1_1Point.html#aa45e296f649eb6e868d2d0a365472672',1,'moci::Point::Point(Point const &amp;)=default'],['../classmoci_1_1Point.html#af6dd48938df004faa8806b546c03480f',1,'moci::Point::Point(Point &amp;&amp;)=default']]],
   ['point_3c_20int_20_3e',['Point&lt; int &gt;',['../classmoci_1_1Point.html',1,'moci']]],
   ['point_3c_20std_3a_3auint32_5ft_20_3e',['Point&lt; std::uint32_t &gt;',['../classmoci_1_1Point.html',1,'moci']]],
-  ['points',['Points',['../classmoci_1_1RendererAPI.html#a861d075e7f082191f022ab2c77519184a75dd5f1160a3f02b6fae89c54361a1b3',1,'moci::RendererAPI']]],
+  ['points',['Points',['../namespacemoci.html#a8b8b235ecc7208f9f869fe3891e89e01a75dd5f1160a3f02b6fae89c54361a1b3',1,'moci']]],
   ['position',['position',['../structmoci_1_1OBJFile_1_1VertexData.html#ad1689592128da1693c541f8d65d0c03d',1,'moci::OBJFile::VertexData::position()'],['../structmoci_1_1Light_1_1Vertex.html#a2e46ad456178ab9d475483bc8d96781d',1,'moci::Light::Vertex::position()'],['../structmoci_1_1Light.html#aaaefbd365023a2a9f78b0c285eccee84',1,'moci::Light::position()'],['../structmoci_1_1Mesh_1_1Vertex.html#ae9fe1f0a94754444599adf6a94463c55',1,'moci::Mesh::Vertex::position()']]],
   ['printformular',['PrintFormular',['../classmoci_1_1Line.html#a7a8c74045e7846b571ee4396e61932bd',1,'moci::Line']]],
   ['printscreen',['PrintScreen',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdabf54024481cd2ad6bbb9ae44b7312472',1,'moci']]],
