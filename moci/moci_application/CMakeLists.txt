@@ -4,16 +4,16 @@ set(moci_application_sources
     moci_application.hpp
     moci_application.cpp
 
-    src/application.hpp
-    src/application.cpp
-    src/entry_point.hpp
-    src/window.hpp
-    src/window.cpp
+    app/application.hpp
+    app/application.cpp
+    app/entry_point.hpp
+    app/window.hpp
+    app/window.cpp
     
-    src/glfw/input.hpp
-    src/glfw/input.cpp
-    src/glfw/window.hpp
-    src/glfw/window.cpp
+    app/glfw/input.hpp
+    app/glfw/input.cpp
+    app/glfw/window.hpp
+    app/glfw/window.cpp
 )
 
 add_library(moci_application_lib STATIC ${moci_application_sources})
