@@ -12,19 +12,19 @@ namespace moci
 class OpenGLTexture2D : public Texture2D
 {
 public:
-    OpenGLTexture2D(uint32_t width, uint32_t height);
+    OpenGLTexture2D(std::uint32_t width, std::uint32_t height);
     OpenGLTexture2D(std::string path);
     OpenGLTexture2D(Texture::Format format, std::uint32_t width, std::uint32_t height, void* data);
 
     ~OpenGLTexture2D() override;
 
-    [[nodiscard]] uint32_t GetWidth() const override { return width_; }
-    [[nodiscard]] uint32_t GetHeight() const override { return height_; }
-    [[nodiscard]] uint32_t GetID() const override { return renderID_; }
+    [[nodiscard]] std::uint32_t GetWidth() const override { return width_; }
+    [[nodiscard]] std::uint32_t GetHeight() const override { return height_; }
+    [[nodiscard]] std::uint32_t GetID() const override { return renderID_; }
 
-    void SetData(void* data, uint32_t size);
+    void SetData(Span<std::uint8_t> data);
 
-    void Bind(uint32_t slot = 0) const override;
+    void Bind(std::uint32_t slot = 0) const override;
     void Unbind() const override { }
 
 private:
