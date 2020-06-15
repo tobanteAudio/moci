@@ -51,7 +51,14 @@ OpenGLESIndexBuffer::OpenGLESIndexBuffer(uint32_t* indices, uint32_t count, bool
     }
     else
     {
-        GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW));
+        auto const indicesSpan = Span<std::uint32_t> {indices, count};
+        auto indicesShort      = std::vector<std::uint16_t> {};
+        indicesShort.reserve(indicesSpan.size());
+        for (auto const index : indicesSpan)
+        {
+            indicesShort.push_back(gsl::narrow<std::uint16_t>(index));
+        }
+        GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indicesShort.data(), GL_STATIC_DRAW));
     }
 
     Unbind();
@@ -63,15 +70,16 @@ void OpenGLESIndexBuffer::Bind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BU
 
 void OpenGLESIndexBuffer::Unbind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)); }
 
-auto OpenGLESIndexBuffer::UploadData(std::uint32_t offset, Span<std::uint32_t> data) const -> void
+auto OpenGLESIndexBuffer::UploadData(std::uint32_t offset, Span<std::uint32_t> indices) const -> void
 {
-    std::vector<std::uint16_t> indices {};
-    indices.reserve(data.size());
-    for (auto const index : data)
+    std::vector<std::uint16_t> indicesShort = {};
+    indicesShort.reserve(indices.size());
+    for (auto const index : indices)
     {
-        indices.push_back(gsl::narrow<std::uint16_t>(index));
+        indicesShort.push_back(gsl::narrow<std::uint16_t>(index));
     }
-    auto const size = indices.size() * sizeof(std::uint16_t);
-    GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, indices.data()));
+    auto const size = indicesShort.size() * sizeof(std::uint16_t);
+    GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, indicesShort.data()));
 }
+
 }  // namespace moci
