@@ -28,20 +28,23 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path) : path_(std::move(path))
     auto* data    = stbi_load(path_.c_str(), &width, &height, &channels, 4);
     MOCI_CORE_ASSERT(data, "Failed to load image!");
 
-    width_    = static_cast<std::uint32_t>(width);
-    height_   = static_cast<std::uint32_t>(height);
-    channels_ = static_cast<std::uint32_t>(channels);
+    width_          = static_cast<std::uint32_t>(width);
+    height_         = static_cast<std::uint32_t>(height);
+    channels_       = static_cast<std::uint32_t>(channels);
+    internalFormat_ = GL_RGBA8;
+    dataFormat_     = GL_RGBA;
 
-    if (channels == 4)
-    {
-        internalFormat_ = GL_RGBA8;
-        dataFormat_     = GL_RGBA;
-    }
-    else if (channels == 3)
-    {
-        internalFormat_ = GL_RGB8;
-        dataFormat_     = GL_RGB;
-    }
+    // if (channels == 4)
+    // {
+    //     internalFormat_ = GL_RGBA8;
+    //     dataFormat_     = GL_RGBA;
+    // }
+    // else if (channels == 3)
+    // {
+    //     internalFormat_ = GL_RGB8;
+    //     dataFormat_     = GL_RGB;
+    // }
+
     MOCI_CORE_ASSERT(internalFormat_ & dataFormat_, "Format not supported!");
 
     createTexture();
