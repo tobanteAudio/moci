@@ -8,6 +8,56 @@
 namespace moci
 {
 
+namespace
+{
+auto MociToOpenGLDrawMode(RendererAPI::DrawMode const mode) noexcept -> int
+{
+
+    switch (mode)
+    {
+        case RendererAPI::DrawMode::None:
+        {
+            MOCI_CORE_ERROR("draw mode 'None' not supported");
+            break;
+        }
+        case RendererAPI::DrawMode::Points:
+        {
+            return GL_POINTS;
+        }
+        case RendererAPI::DrawMode::LineStrip:
+        {
+            return GL_LINE_STRIP;
+        }
+        case RendererAPI::DrawMode::LineLoop:
+        {
+            return GL_LINE_LOOP;
+        }
+        case RendererAPI::DrawMode::Lines:
+        {
+            return GL_LINES;
+        }
+        case RendererAPI::DrawMode::TriangleStrips:
+        {
+            return GL_TRIANGLE_STRIP;
+        }
+        case RendererAPI::DrawMode::TriangleFan:
+        {
+            return GL_TRIANGLE_FAN;
+        }
+        case RendererAPI::DrawMode::Triangles:
+        {
+            return GL_TRIANGLES;
+        }
+        default:
+        {
+            break;
+        }
+    }
+    return 0;
+}
+
+}  // namespace
+
 void OpenGLMessageCallback(unsigned source, unsigned type, unsigned id, unsigned severity, int length,
                            const char* message, const void* userParam)
 {
@@ -62,18 +112,18 @@ void OpenGLRendererAPI::SetClearColor(Color color)
 
 void OpenGLRendererAPI::Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 
-void OpenGLRendererAPI::DrawArrays(RendererAPI::DrawMode mode, uint32_t first, uint32_t count)
+void OpenGLRendererAPI::DrawArrays(RendererAPI::DrawMode const mode, uint32_t first, uint32_t count)
 {
-    IgnoreUnused(mode);
-    glDrawArrays(GL_TRIANGLES, first, count);
+    auto const glDrawMode = MociToOpenGLDrawMode(mode);
+    glDrawArrays(glDrawMode, first, count);
 }
 
-void OpenGLRendererAPI::DrawElements(RendererAPI::DrawMode mode, uint32_t count, RendererAPI::ElementType type,
+void OpenGLRendererAPI::DrawElements(RendererAPI::DrawMode const mode, uint32_t count, RendererAPI::ElementType type,
                                      void* indices)
 {
-    IgnoreUnused(mode);
+    auto const glDrawMode = MociToOpenGLDrawMode(mode);
     IgnoreUnused(type);
-    glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, indices);
+    glDrawElements(glDrawMode, count, GL_UNSIGNED_INT, indices);
 }
 
 void OpenGLRendererAPI::DrawIndexed(Ref<VertexArray> const& vertexArray)
@@ -106,12 +156,6 @@ auto OpenGLRendererAPI::MaxUniformVectors() -> std::uint32_t
     glGetIntegerv(GL_MAX_FRAGMENT_UNIFORM_VECTORS, &maxUniformVectors);
     return static_cast<std::uint32_t>(maxUniformVectors);
 }
-
-// void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertexArray)
-// {
-//     glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
-//     glBindTexture(GL_TEXTURE_2D, 0);
-// }
 
 }  // namespace moci
 

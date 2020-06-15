@@ -4,6 +4,55 @@
 
 namespace moci
 {
+namespace
+{
+auto MociToOpenGLDrawMode(RendererAPI::DrawMode const mode) noexcept -> int
+{
+
+    switch (mode)
+    {
+        case RendererAPI::DrawMode::None:
+        {
+            MOCI_CORE_ERROR("draw mode 'None' not supported");
+            break;
+        }
+        case RendererAPI::DrawMode::Points:
+        {
+            return GL_POINTS;
+        }
+        case RendererAPI::DrawMode::LineStrip:
+        {
+            return GL_LINE_STRIP;
+        }
+        case RendererAPI::DrawMode::LineLoop:
+        {
+            return GL_LINE_LOOP;
+        }
+        case RendererAPI::DrawMode::Lines:
+        {
+            return GL_LINES;
+        }
+        case RendererAPI::DrawMode::TriangleStrips:
+        {
+            return GL_TRIANGLE_STRIP;
+        }
+        case RendererAPI::DrawMode::TriangleFan:
+        {
+            return GL_TRIANGLE_FAN;
+        }
+        case RendererAPI::DrawMode::Triangles:
+        {
+            return GL_TRIANGLES;
+        }
+        default:
+        {
+            break;
+        }
+    }
+    return 0;
+}
+
+}  // namespace
 
 void OpenGLESRendererAPI::Init()
 {
@@ -31,18 +80,18 @@ void OpenGLESRendererAPI::SetClearColor(Color color)
 
 void OpenGLESRendererAPI::Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 
-void OpenGLESRendererAPI::DrawArrays(RendererAPI::DrawMode mode, uint32_t first, uint32_t count)
+void OpenGLESRendererAPI::DrawArrays(RendererAPI::DrawMode const mode, uint32_t first, uint32_t count)
 {
-    IgnoreUnused(mode);
-    GLCall(glDrawArrays(GL_TRIANGLES, first, count));
+    auto const openGLMode = MociToOpenGLDrawMode(mode);
+    GLCall(glDrawArrays(openGLMode, first, count));
 }
 
-void OpenGLESRendererAPI::DrawElements(RendererAPI::DrawMode mode, uint32_t count, RendererAPI::ElementType type,
+void OpenGLESRendererAPI::DrawElements(RendererAPI::DrawMode const mode, uint32_t count, RendererAPI::ElementType type,
                                        void* indices)
 {
-    IgnoreUnused(mode);
+    auto const openGLMode = MociToOpenGLDrawMode(mode);
     IgnoreUnused(type);
-    GLCall(glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, indices));
+    GLCall(glDrawElements(openGLMode, count, GL_UNSIGNED_SHORT, indices));
 }
 
 void OpenGLESRendererAPI::DrawIndexed(Ref<VertexArray> const& vertexArray)
