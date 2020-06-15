@@ -4,20 +4,20 @@ set(moci_render_opengles_sources
     moci_render_opengles.hpp
     moci_render_opengles.cpp
 
-    buffer.hpp
-    buffer.cpp
-    graphics_context.hpp
-    graphics_context.cpp
-    es2.hpp
-    es2.cpp
-    renderer_api.hpp
-    renderer_api.cpp
-    shader.hpp
-    shader.cpp
-    texture.hpp
-    texture.cpp
-    vertex_array.hpp
-    vertex_array.cpp
+    es2/buffer.hpp
+    es2/buffer.cpp
+    es2/graphics_context.hpp
+    es2/graphics_context.cpp
+    es2/es2.hpp
+    es2/es2.cpp
+    es2/renderer_api.hpp
+    es2/renderer_api.cpp
+    es2/shader.hpp
+    es2/shader.cpp
+    es2/texture.hpp
+    es2/texture.cpp
+    es2/vertex_array.hpp
+    es2/vertex_array.cpp
 
 )
 

@@ -1,6 +1,6 @@
-#include "moci_render_opengles/buffer.hpp"
+#include "moci_render_opengles/es2/buffer.hpp"
 
-#include "moci_render_opengles/es2.hpp"
+#include "moci_render_opengles/es2/es2.hpp"
 
 namespace moci
 {

@@ -1,4 +1,4 @@
-#include "moci_render_opengles/texture.hpp"
+#include "moci_render_opengles/es2/texture.hpp"
 
 #include <utility>
 
@@ -8,7 +8,7 @@
 #include "moci_core/core/logging.hpp"
 #include "moci_core/core/preprocessor.hpp"
 
-#include "moci_render_opengles/es2.hpp"
+#include "moci_render_opengles/es2/es2.hpp"
 
 namespace moci
 {
