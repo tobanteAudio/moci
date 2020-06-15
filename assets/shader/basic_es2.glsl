@@ -99,6 +99,6 @@ vec4 get_texture2D(const int index)
 
 void main()
 {
-    int textureIndex = int(1);
+    int textureIndex = int(0);
     gl_FragColor     = get_texture2D(textureIndex) * v_Color;
 }
