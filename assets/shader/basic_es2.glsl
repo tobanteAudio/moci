@@ -20,6 +20,8 @@ void main()
 precision mediump float;
 #endif
 
+uniform sampler2D u_Textures[16];
+
 varying vec4 v_Color;
 varying vec2 v_TexCoord;
 
@@ -97,6 +99,6 @@ vec4 get_texture2D(const int index)
 
 void main()
 {
-    int textureIndex = int(floor(v_TexIndex));
+    int textureIndex = int(1);
     gl_FragColor     = get_texture2D(textureIndex) * v_Color;
 }

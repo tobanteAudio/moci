@@ -2,6 +2,7 @@
 
 #include "moci_render_opengles/es2.hpp"
 
+#include <gsl/gsl>
 namespace moci
 {
 
@@ -40,16 +41,18 @@ auto OpenGLESVertexBuffer::UploadData(std::uint32_t offset, std::uint32_t size, 
 
 OpenGLESIndexBuffer::OpenGLESIndexBuffer(uint32_t* indices, uint32_t count, bool dynamic) : m_Count(count)
 {
+
     GLCall(glGenBuffers(1, &m_RendererID));
     GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID));
 
+    auto const size = m_Count * sizeof(std::uint16_t);
     if (dynamic)
     {
-        GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_Count * sizeof(GLushort), nullptr, GL_DYNAMIC_DRAW));
+        GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW));
     }
     else
     {
-        GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_Count * sizeof(GLushort), indices, GL_STATIC_DRAW));
+        GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW));
     }
 
     Unbind();
