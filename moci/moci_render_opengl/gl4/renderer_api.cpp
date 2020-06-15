@@ -51,7 +51,14 @@ void OpenGLRendererAPI::SetViewport(Rectangle<uint32_t> viewport)
     glViewport(viewport.GetX(), viewport.GetY(), viewport.GetWidth(), viewport.GetHeight());
 }
 
-void OpenGLRendererAPI::SetClearColor(const glm::vec4& color) { glClearColor(color.r, color.g, color.b, color.a); }
+void OpenGLRendererAPI::SetClearColor(Color color)
+{
+    auto const red   = color.GetRed();
+    auto const green = color.GetGreen();
+    auto const blue  = color.GetBlue();
+    auto const alpha = color.GetAlpha();
+    glClearColor(red, green, blue, alpha);
+}
 
 void OpenGLRendererAPI::Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 

@@ -1,6 +1,7 @@
 #pragma once
 
-#include "moci_core/core/memory.hpp"
+#include "moci_core/moci_core.hpp"
+#include "moci_graphics_base/moci_graphics_base.hpp"
 #include "moci_render_base/moci_render_base.hpp"
 
 namespace moci
@@ -13,7 +14,7 @@ public:
 
     inline static void SetViewport(Rectangle<uint32_t> viewport) { s_RendererAPI->SetViewport(viewport); }
 
-    inline static void SetClearColor(const glm::vec4& color) { s_RendererAPI->SetClearColor(color); }
+    inline static void SetClearColor(Color const& color) { s_RendererAPI->SetClearColor(color); }
 
     inline static void Clear() { s_RendererAPI->Clear(); }
 

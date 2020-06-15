@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moci_graphics_base/moci_graphics_base.hpp"
 #include "moci_math/moci_math.hpp"
 #include "moci_render_base/render/vertex_array.hpp"
 
@@ -40,7 +41,7 @@ public:
     virtual ~RendererAPI()                                                                    = default;
     virtual void Init()                                                                       = 0;
     virtual void SetViewport(Rectangle<uint32_t> viewport)                                    = 0;
-    virtual void SetClearColor(const glm::vec4& color)                                        = 0;
+    virtual void SetClearColor(Color color)                                                   = 0;
     virtual void Clear()                                                                      = 0;
     virtual void DrawArrays(DrawMode mode, uint32_t first, uint32_t count)                    = 0;
     virtual void DrawElements(DrawMode mode, uint32_t count, ElementType type, void* indices) = 0;

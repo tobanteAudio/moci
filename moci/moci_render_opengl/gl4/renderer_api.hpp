@@ -14,7 +14,7 @@ public:
     void Init() override;
     void SetViewport(Rectangle<uint32_t> viewport) override;
 
-    void SetClearColor(const glm::vec4& color) override;
+    void SetClearColor(Color color) override;
     void Clear() override;
 
     void DrawArrays(RendererAPI::DrawMode mode, uint32_t first, uint32_t count) override;
