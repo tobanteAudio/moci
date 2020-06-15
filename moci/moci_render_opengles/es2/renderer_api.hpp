@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moci_math/moci_math.hpp"
 #include "moci_render_base/moci_render_base.hpp"
 
 #include <glm/glm.hpp>
@@ -11,7 +12,7 @@ class OpenGLESRendererAPI : public RendererAPI
 public:
     ~OpenGLESRendererAPI() override = default;
     void Init() override;
-    void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) override;
+    void SetViewport(Rectangle<uint32_t> viewport) override;
 
     void SetClearColor(const glm::vec4& color) override;
     void Clear() override;

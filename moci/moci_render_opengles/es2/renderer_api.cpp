@@ -15,9 +15,9 @@ void OpenGLESRendererAPI::Init()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void OpenGLESRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
+void OpenGLESRendererAPI::SetViewport(Rectangle<uint32_t> viewport)
 {
-    glViewport(x, y, width, height);
+    glViewport(viewport.GetX(), viewport.GetY(), viewport.GetWidth(), viewport.GetHeight());
 }
 
 void OpenGLESRendererAPI::SetClearColor(const glm::vec4& color) { glClearColor(color.r, color.g, color.b, color.a); }
