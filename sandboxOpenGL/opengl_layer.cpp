@@ -12,8 +12,9 @@ void OpenGLLayer::OnAttach()
 
     auto const verticesSize = static_cast<std::uint32_t>(assets::QuadVertices.size() * sizeof(float));
     auto layout             = moci::BufferLayout {
-        {moci::ShaderDataType::Float3, "position"},  //
-        {moci::ShaderDataType::Float4, "color"},     //
+        {moci::ShaderDataType::Float3, "position"},      //
+        {moci::ShaderDataType::Float4, "color"},         //
+        {moci::ShaderDataType::Float2, "textureCoord"},  //
     };
     vbo_.reset(moci::RenderFactory::MakeVertexBuffer(assets::QuadVertices.data(), verticesSize));
     vbo_->SetLayout(layout);
@@ -25,14 +26,14 @@ void OpenGLLayer::OnAttach()
     vao_->SetIndexBuffer(ibo_);
     vao_->Unbind();
 
-    texture_ = moci::RenderFactory::MakeTexture2D("assets/white_10x10.png");
+    texture_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/skybox/back.jpg");
 }
 
 void OpenGLLayer::OnUpdate(moci::Timestep ts)
 {
     moci::IgnoreUnused(ts);
 
-    moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+    moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
     moci::RenderCommand::Clear();
 
     vao_->Bind();

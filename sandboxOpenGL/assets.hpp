@@ -12,10 +12,10 @@ constexpr auto shaderSuffix = "gl4";
 namespace assets
 {
 inline auto QuadVertices = std::array {
-    -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,  //
-    0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,  //
-    0.5f,  0.5f,  0.0f, 0.0f, 0.0f, 1.0f, 1.0f,  //
-    -0.5f, 0.5f,  0.0f, 0.0f, 1.0f, 1.0f, 1.0f,  //
+    -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,  //
+    0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f,  //
+    0.5f,  0.5f,  0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,  //
+    -0.5f, 0.5f,  0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,  //
 };
 inline auto QuadIndices = std::array {
     std::uint32_t {0},  //

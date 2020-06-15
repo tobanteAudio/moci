@@ -10,7 +10,7 @@ public:
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox-opengl", "moci-sandbox-opengl.json");
         GetWindow().SetFullscreen(true);
-        GetWindow().SetVSync(false);
+        GetWindow().SetVSync(true);
         PushLayer(moci::MakeScope<OpenGLLayer>());
     }
 

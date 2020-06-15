@@ -29,5 +29,5 @@ void main()
 {
     int index    = int(0);
     vec4 texture = texture2D(u_Textures[index], v_TexCoord);
-    color        = texture;
+    color        = texture * v_Color;
 }
