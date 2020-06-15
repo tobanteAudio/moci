@@ -10,11 +10,9 @@
 namespace moci
 {
 
-OpenGLTexture2D::OpenGLTexture2D(std::uint32_t width, std::uint32_t height) : width_(width), height_(height)
+OpenGLTexture2D::OpenGLTexture2D(std::uint32_t width, std::uint32_t height)
+    : width_ {width}, height_ {height}, channels_ {4}, internalFormat_ {GL_RGBA8}, dataFormat_ {GL_RGBA}
 {
-    internalFormat_ = GL_RGBA8;
-    dataFormat_     = GL_RGBA;
-
     createTexture();
     setFilters();
 }
@@ -32,7 +30,7 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path) : path_(std::move(path))
 
     width_    = static_cast<std::uint32_t>(width);
     height_   = static_cast<std::uint32_t>(height);
-    channels_ = static_cast<std::uint32_t>(height);
+    channels_ = static_cast<std::uint32_t>(channels);
 
     if (channels == 4)
     {
