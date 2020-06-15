@@ -30,34 +30,34 @@ struct Light
     glm::vec4 color    = {1.0f, 1.0f, 1.0f, 1.0f};
     float scale        = 0.5f;
 
-    moci::Ref<moci::Shader> shader    = nullptr;
-    moci::Ref<moci::VertexBuffer> vbo = nullptr;
-    moci::Ref<moci::IndexBuffer> ibo  = nullptr;
-    moci::Ref<moci::VertexArray> vao  = nullptr;
-    moci::Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
+    Ref<Shader> shader    = nullptr;
+    Ref<VertexBuffer> vbo = nullptr;
+    Ref<IndexBuffer> ibo  = nullptr;
+    Ref<VertexArray> vao  = nullptr;
+    Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
     Vector<Light::Vertex> vertices = {};
 
 public:
     Light()
     {
 #if defined(MOCI_API_OPENGL_LEGACY)
-        shader = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/es2_light_source.glsl");
+        shader = RenderFactory::MakeShader("sandbox3D/assets/shader/es2_light_source.glsl");
 #else
-        shader = moci::RenderFactory::MakeShader("sandbox3D/assets/shader/gl4_light_source.glsl");
+        shader = RenderFactory::MakeShader("sandbox3D/assets/shader/gl4_light_source.glsl");
 #endif
         shader->Bind();
-        moci::BufferLayout lightLayout = {
-            {moci::ShaderDataType::Float3, "a_Position"},  //
-            {moci::ShaderDataType::Float4, "a_Color"},     //
+        BufferLayout lightLayout = {
+            {ShaderDataType::Float3, "a_Position"},  //
+            {ShaderDataType::Float4, "a_Color"},     //
         };
 
         auto const size = static_cast<uint32_t>(lightMesh_.GetVertices().size() * sizeof(Light::Vertex));
-        vbo.reset(moci::RenderFactory::MakeVertexBuffer(nullptr, size, true));
+        vbo.reset(RenderFactory::MakeVertexBuffer(nullptr, size, true));
         vbo->SetLayout(lightLayout);
         vbo->Unbind();
-        ibo.reset(moci::RenderFactory::MakeIndexBuffer(nullptr, 1, true));
+        ibo.reset(RenderFactory::MakeIndexBuffer(nullptr, 1, true));
         ibo->Unbind();
-        vao = moci::RenderFactory::MakeVertexArray();
+        vao = RenderFactory::MakeVertexArray();
         vao->AddVertexBuffer(vbo);
         vao->SetIndexBuffer(ibo);
         vao->Unbind();
@@ -80,8 +80,7 @@ public:
         vao->Bind();
         auto const sizeInBytes = static_cast<std::uint32_t>(vertices.size() * sizeof(Light::Vertex));
         vbo->UploadData(0, sizeInBytes, vertices.data());
-        moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0,
-                                        static_cast<std::uint32_t>(vertices.size()));
+        RenderCommand::DrawArrays(RenderDrawMode::Triangles, 0, static_cast<std::uint32_t>(vertices.size()));
         // drawStats_.numVertices += vertices.size();
         vertices.clear();
         vao->Unbind();

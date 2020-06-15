@@ -18,17 +18,17 @@ public:
 
     inline static void Clear() { s_RendererAPI->Clear(); }
 
-    inline static void DrawArrays(RendererAPI::DrawMode mode, uint32_t first, uint32_t count)
+    inline static void DrawArrays(RenderDrawMode mode, uint32_t first, uint32_t count)
     {
         s_RendererAPI->DrawArrays(mode, first, count);
     }
 
-    inline static void DrawIndexed(RendererAPI::DrawMode mode, uint32_t count, void* indices)
+    inline static void DrawIndexed(RenderDrawMode mode, uint32_t count, void* indices)
     {
         s_RendererAPI->DrawIndexed(mode, count, indices);
     }
 
-    inline static void DrawIndexed(RendererAPI::DrawMode mode, Ref<VertexArray> const& vertexArray)
+    inline static void DrawIndexed(RenderDrawMode mode, Ref<VertexArray> const& vertexArray)
     {
         s_RendererAPI->DrawIndexed(mode, vertexArray);
     }

@@ -177,7 +177,7 @@ auto RenderQueue::Flush() -> void
     data_.vao->Bind();
     {
         MOCI_PROFILE_SCOPE("RenderQueue::Flush::Draw");
-        auto const mode       = RendererAPI::DrawMode::Triangles;
+        auto const mode       = RenderDrawMode::Triangles;
         auto const numIndices = static_cast<std::uint32_t>(data_.indices.size());
         RenderCommand::DrawIndexed(mode, numIndices, nullptr);
     }

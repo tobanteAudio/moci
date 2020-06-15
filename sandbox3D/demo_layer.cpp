@@ -195,7 +195,7 @@ void DemoLayer::OnUpdate(moci::Timestep ts)
 
         vao_->Bind();
         textureColors_->Bind(0);
-        moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0,
+        moci::RenderCommand::DrawArrays(moci::RenderDrawMode::Triangles, 0,
                                         static_cast<std::uint32_t>(vertices_.size()));
         drawStats_.numVertices += static_cast<std::uint32_t>(vertices_.size());
         textureColors_->Unbind();
@@ -217,7 +217,7 @@ void DemoLayer::OnUpdate(moci::Timestep ts)
     // skybox cube
     skyboxVao_->Bind();
     skyBoxTexture_->Bind(0);
-    moci::RenderCommand::DrawArrays(moci::RendererAPI::DrawMode::Triangles, 0, 36);
+    moci::RenderCommand::DrawArrays(moci::RenderDrawMode::Triangles, 0, 36);
     skyboxVao_->Unbind();
     GLCall(glDepthFunc(GL_LESS));  // set depth function back to default
 }

@@ -38,7 +38,7 @@ void OpenGLLayer::OnUpdate(moci::Timestep ts)
 
     vao_->Bind();
     texture_->Bind(0);
-    moci::RenderCommand::DrawIndexed(moci::RendererAPI::DrawMode::Triangles, vao_);
+    moci::RenderCommand::DrawIndexed(moci::RenderDrawMode::Triangles, vao_);
 }
 
 void OpenGLLayer::OnImGuiRender() { }
