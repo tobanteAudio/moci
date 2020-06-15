@@ -27,6 +27,11 @@ void OpenGLLayer::OnAttach()
     vao_->Unbind();
 
     texture_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/skybox/back.jpg");
+
+    auto fbSpec   = moci::FramebufferSpecs {};
+    fbSpec.width  = 1920;
+    fbSpec.height = 1080;
+    framebuffer_  = moci::RenderFactory::MakeFramebuffer(fbSpec);
 }
 
 void OpenGLLayer::OnUpdate(moci::Timestep ts)
@@ -36,12 +41,23 @@ void OpenGLLayer::OnUpdate(moci::Timestep ts)
     moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
     moci::RenderCommand::Clear();
 
+    framebuffer_->Bind();
+    moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
+    moci::RenderCommand::Clear();
+
     vao_->Bind();
     texture_->Bind(0);
     moci::RenderCommand::DrawIndexed(moci::RenderDrawMode::Triangles, vao_);
+    framebuffer_->Unbind();
 }
 
-void OpenGLLayer::OnImGuiRender() { }
+void OpenGLLayer::OnImGuiRender()
+{
+    ImGui::Begin("Settings");
+    auto const textureID = framebuffer_->GetColorAttachmentRendererID();
+    ImGui::ImageButton((void*)textureID, ImVec2 {360, 180});
+    ImGui::End();
+}
 
 void OpenGLLayer::OnEvent(moci::Event& e)
 {
