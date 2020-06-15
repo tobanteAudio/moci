@@ -27,9 +27,7 @@ public:
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
-        std::stringstream ss;
-        ss << "KeyPressedEvent: " << GetKeyCode() << " (" << m_RepeatCount << " repeats)";
-        return ss.str();
+        return fmt::format("KeyPressedEvent: {} ({} repeats)", GetKeyCode(), m_RepeatCount);
     }
 
     EVENT_CLASS_TYPE(KeyPressed)
@@ -44,9 +42,7 @@ public:
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
-        std::stringstream ss;
-        ss << "KeyReleasedEvent: " << GetKeyCode();
-        return ss.str();
+        return fmt::format("KeyReleasedEvent: {}", GetKeyCode());
     }
 
     EVENT_CLASS_TYPE(KeyReleased)
@@ -59,9 +55,7 @@ public:
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
-        std::stringstream ss;
-        ss << "KeyTypedEvent: " << GetKeyCode();
-        return ss.str();
+        return fmt::format("KeyTypedEvent: {}", GetKeyCode());
     }
 
     EVENT_CLASS_TYPE(KeyTyped)

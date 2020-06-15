@@ -3,7 +3,7 @@
 #include "event.hpp"
 #include "moci_events/events/mouse_button_codes.hpp"
 
-#include <sstream>
+#include "moci_core/moci_core.hpp"
 
 namespace moci
 {
@@ -18,9 +18,7 @@ public:
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
-        std::stringstream ss;
-        ss << "MouseMovedEvent: " << m_MouseX << ", " << m_MouseY;
-        return ss.str();
+        return fmt::format("MouseMovedEvent: {}, {}", m_MouseX, m_MouseY);
     }
 
     EVENT_CLASS_TYPE(MouseMoved)
@@ -39,9 +37,7 @@ public:
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
-        std::stringstream ss;
-        ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
-        return ss.str();
+        return fmt::format("MouseScrolledEvent: {}, {}", GetXOffset(), GetYOffset());
     }
 
     EVENT_CLASS_TYPE(MouseScrolled)
@@ -68,9 +64,7 @@ public:
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
-        std::stringstream ss;
-        ss << "MouseButtonPressedEvent: " << static_cast<int>(GetMouseButton());
-        return ss.str();
+        return fmt::format("MouseButtonPressedEvent: {}", static_cast<int>(GetMouseButton()));
     }
 
     EVENT_CLASS_TYPE(MouseButtonPressed)
@@ -83,9 +77,7 @@ public:
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
-        std::stringstream ss;
-        ss << "MouseButtonReleasedEvent: " << static_cast<int>(GetMouseButton());
-        return ss.str();
+        return fmt::format("MouseButtonReleasedEvent: {}", static_cast<int>(GetMouseButton()));
     }
 
     EVENT_CLASS_TYPE(MouseButtonReleased)
