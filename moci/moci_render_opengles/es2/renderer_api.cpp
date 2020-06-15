@@ -86,8 +86,8 @@ void OpenGLESRendererAPI::DrawArrays(RendererAPI::DrawMode const mode, uint32_t 
     GLCall(glDrawArrays(openGLMode, first, count));
 }
 
-void OpenGLESRendererAPI::DrawElements(RendererAPI::DrawMode const mode, uint32_t count, RendererAPI::ElementType type,
-                                       void* indices)
+void OpenGLESRendererAPI::DrawIndexed(RendererAPI::DrawMode const mode, uint32_t count, RendererAPI::ElementType type,
+                                      void* indices)
 {
     auto const openGLMode = MociToOpenGLDrawMode(mode);
     IgnoreUnused(type);
@@ -96,7 +96,7 @@ void OpenGLESRendererAPI::DrawElements(RendererAPI::DrawMode const mode, uint32_
 
 void OpenGLESRendererAPI::DrawIndexed(Ref<VertexArray> const& vertexArray)
 {
-    glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_SHORT, nullptr);
+    GLCall(glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_SHORT, nullptr));
 }
 
 auto OpenGLESRendererAPI::MaxTextureSize() -> std::uint32_t

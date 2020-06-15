@@ -23,10 +23,10 @@ public:
         s_RendererAPI->DrawArrays(mode, first, count);
     }
 
-    inline static void DrawElements(RendererAPI::DrawMode mode, uint32_t count, RendererAPI::ElementType type,
-                                    void* indices)
+    inline static void DrawIndexed(RendererAPI::DrawMode mode, uint32_t count, RendererAPI::ElementType type,
+                                   void* indices)
     {
-        s_RendererAPI->DrawElements(mode, count, type, indices);
+        s_RendererAPI->DrawIndexed(mode, count, type, indices);
     }
 
     inline static void DrawIndexed(Ref<VertexArray> const& vertexArray) { s_RendererAPI->DrawIndexed(vertexArray); }

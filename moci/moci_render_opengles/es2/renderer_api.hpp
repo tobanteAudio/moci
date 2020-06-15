@@ -18,8 +18,7 @@ public:
     void Clear() override;
 
     void DrawArrays(RendererAPI::DrawMode mode, uint32_t first, uint32_t count) override;
-    void DrawElements(RendererAPI::DrawMode mode, uint32_t count, RendererAPI::ElementType type,
-                      void* indices) override;
+    void DrawIndexed(RendererAPI::DrawMode mode, uint32_t count, RendererAPI::ElementType type, void* indices) override;
     void DrawIndexed(Ref<VertexArray> const& vertexArray) override;
 
     auto MaxTextureSize() -> std::uint32_t override;

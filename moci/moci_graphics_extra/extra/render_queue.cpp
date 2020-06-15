@@ -180,7 +180,7 @@ auto RenderQueue::Flush() -> void
         auto const mode       = RendererAPI::DrawMode::Triangles;
         auto const type       = RendererAPI::ElementType::UnsignedShort;
         auto const numIndices = static_cast<std::uint32_t>(data_.indices.size());
-        RenderCommand::DrawElements(mode, numIndices, type, nullptr);
+        RenderCommand::DrawIndexed(mode, numIndices, type, nullptr);
     }
     data_.vao->Unbind();
     for (auto const& tex : data_.textures)
