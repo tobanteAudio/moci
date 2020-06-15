@@ -16,6 +16,7 @@ set(moci_core_sources
     core/property_map.cpp
     core/scope_guard.hpp
     core/scope_guard.cpp
+    core/span.hpp
     core/strings.hpp
     core/vector.hpp
 )

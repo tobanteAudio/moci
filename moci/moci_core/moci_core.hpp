@@ -8,5 +8,6 @@
 #include "moci_core/core/memory.hpp"
 #include "moci_core/core/property_map.hpp"
 #include "moci_core/core/scope_guard.hpp"
+#include "moci_core/core/span.hpp"
 #include "moci_core/core/strings.hpp"
 #include "moci_core/core/vector.hpp"

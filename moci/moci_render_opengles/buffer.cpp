@@ -2,7 +2,6 @@
 
 #include "moci_render_opengles/es2.hpp"
 
-#include <gsl/gsl>
 namespace moci
 {
 
