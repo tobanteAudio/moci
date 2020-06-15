@@ -1,6 +1,6 @@
 #include "render_command.hpp"
 
-#include "moci_render_opengl/renderer_api.hpp"
+#include "moci_render_opengl/moci_render_opengl.hpp"
 #include "moci_render_opengles/moci_render_opengles.hpp"
 
 namespace moci

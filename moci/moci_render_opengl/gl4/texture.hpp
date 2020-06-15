@@ -4,7 +4,7 @@
 
 #include "moci_render_base/moci_render_base.hpp"
 
-#include "moci_render_opengl/gl4.hpp"
+#include "gl4.hpp"
 
 namespace moci
 {

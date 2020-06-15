@@ -4,20 +4,20 @@ set(moci_render_opengl_sources
     moci_render_opengl.hpp
     moci_render_opengl.cpp
 
-    buffer.hpp
-    buffer.cpp
-    graphics_context.hpp
-    graphics_context.cpp
-    gl4.hpp
-    gl4.cpp
-    renderer_api.hpp
-    renderer_api.cpp
-    shader.hpp
-    shader.cpp
-    texture.hpp
-    texture.cpp
-    vertex_array.hpp
-    vertex_array.cpp
+    gl4/buffer.hpp
+    gl4/buffer.cpp
+    gl4/graphics_context.hpp
+    gl4/graphics_context.cpp
+    gl4/gl4.hpp
+    gl4/gl4.cpp
+    gl4/renderer_api.hpp
+    gl4/renderer_api.cpp
+    gl4/shader.hpp
+    gl4/shader.cpp
+    gl4/texture.hpp
+    gl4/texture.cpp
+    gl4/vertex_array.hpp
+    gl4/vertex_array.cpp
 
 )
 

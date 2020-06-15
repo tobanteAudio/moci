@@ -1,8 +1,8 @@
-#include "moci_render_opengl/shader.hpp"
+#include "shader.hpp"
 
 #if defined(MOCI_API_OPENGL_MODERN)
-#include "moci_core/benchmark/profile.hpp"
-#include "moci_render_opengl/gl4.hpp"
+#include "gl4.hpp"
+#include "moci_core/moci_core.hpp"
 
 #include <array>
 #include <fstream>
