@@ -6,6 +6,8 @@ set(moci_render_opengles_sources
 
     es2/buffer.hpp
     es2/buffer.cpp
+    es2/frame_buffer.hpp
+    es2/frame_buffer.cpp
     es2/graphics_context.hpp
     es2/graphics_context.cpp
     es2/es2.hpp

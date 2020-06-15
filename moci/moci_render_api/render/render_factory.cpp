@@ -50,7 +50,21 @@ auto RenderFactory::MakeIndexBuffer(uint32_t* indices, uint32_t size, bool dynam
 
 Ref<Framebuffer> RenderFactory::MakeFramebuffer(FramebufferSpecs spec)
 {
-    IgnoreUnused(spec);
+    switch (Renderer::GetAPI())
+    {
+        case RendererAPI::API::None:
+            MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
+            return nullptr;
+#if defined(MOCI_API_OPENGL_MODERN)
+        case RendererAPI::API::OpenGL: return MakeRef<OpenGLFramebuffer>(std::move(spec));
+#endif
+#if defined(MOCI_API_OPENGL_LEGACY)
+        case RendererAPI::API::OpenGLES: return MakeRef<OpenGLESFramebuffer>(std::move(spec));
+#endif
+        default: break;
+    }
+
+    MOCI_CORE_ASSERT(false, "Unknown RendererAPI!");
     return nullptr;
 }
 
