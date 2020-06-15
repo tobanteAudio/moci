@@ -19,13 +19,11 @@ public:
 
     void DrawArrays(RendererAPI::DrawMode mode, uint32_t first, uint32_t count) override;
     void DrawIndexed(RendererAPI::DrawMode mode, uint32_t count, RendererAPI::ElementType type, void* indices) override;
-    void DrawIndexed(Ref<VertexArray> const& vertexArray) override;
+    void DrawIndexed(RendererAPI::DrawMode mode, Ref<VertexArray> const& vertexArray) override;
     auto MaxTextureSize() -> std::uint32_t override;
     auto MaxTextureUnits() -> std::uint32_t override;
     auto MaxVertexAttributes() -> std::uint32_t override;
     auto MaxUniformVectors() -> std::uint32_t override;
-
-    // void DrawIndexed(const Ref<VertexArray>& vertexArray) override;
 };
 
 }  // namespace moci

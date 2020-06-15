@@ -94,9 +94,10 @@ void OpenGLESRendererAPI::DrawIndexed(RendererAPI::DrawMode const mode, uint32_t
     GLCall(glDrawElements(openGLMode, count, GL_UNSIGNED_SHORT, indices));
 }
 
-void OpenGLESRendererAPI::DrawIndexed(Ref<VertexArray> const& vertexArray)
+void OpenGLESRendererAPI::DrawIndexed(RendererAPI::DrawMode const mode, Ref<VertexArray> const& vertexArray)
 {
-    GLCall(glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_SHORT, nullptr));
+    auto const openGLMode = MociToOpenGLDrawMode(mode);
+    GLCall(glDrawElements(openGLMode, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_SHORT, nullptr));
 }
 
 auto OpenGLESRendererAPI::MaxTextureSize() -> std::uint32_t

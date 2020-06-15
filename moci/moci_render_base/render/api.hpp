@@ -45,7 +45,7 @@ public:
     virtual void Clear()                                                                     = 0;
     virtual void DrawArrays(DrawMode mode, uint32_t first, uint32_t count)                   = 0;
     virtual void DrawIndexed(DrawMode mode, uint32_t count, ElementType type, void* indices) = 0;
-    virtual void DrawIndexed(Ref<VertexArray> const& vertexArray)                            = 0;
+    virtual void DrawIndexed(DrawMode mode, Ref<VertexArray> const& vertexArray)             = 0;
     virtual auto MaxTextureSize() -> std::uint32_t                                           = 0;
     virtual auto MaxTextureUnits() -> std::uint32_t                                          = 0;
     virtual auto MaxVertexAttributes() -> std::uint32_t                                      = 0;

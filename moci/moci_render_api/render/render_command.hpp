@@ -29,7 +29,10 @@ public:
         s_RendererAPI->DrawIndexed(mode, count, type, indices);
     }
 
-    inline static void DrawIndexed(Ref<VertexArray> const& vertexArray) { s_RendererAPI->DrawIndexed(vertexArray); }
+    inline static void DrawIndexed(RendererAPI::DrawMode mode, Ref<VertexArray> const& vertexArray)
+    {
+        s_RendererAPI->DrawIndexed(mode, vertexArray);
+    }
 
     inline static auto MaxTextureSize() -> std::uint32_t { return s_RendererAPI->MaxTextureSize(); }
     inline static auto MaxTextureUnits() -> std::uint32_t { return s_RendererAPI->MaxTextureUnits(); }
