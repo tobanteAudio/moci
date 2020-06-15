@@ -52,7 +52,7 @@ OpenGLESIndexBuffer::OpenGLESIndexBuffer(uint32_t* indices, uint32_t count, bool
     else
     {
         auto const indicesSpan = Span<std::uint32_t> {indices, count};
-        auto indicesShort      = std::vector<std::uint16_t> {};
+        auto indicesShort      = Vector<std::uint16_t> {};
         indicesShort.reserve(indicesSpan.size());
         for (auto const index : indicesSpan)
         {
@@ -72,7 +72,7 @@ void OpenGLESIndexBuffer::Unbind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_
 
 auto OpenGLESIndexBuffer::UploadData(std::uint32_t offset, Span<std::uint32_t> indices) const -> void
 {
-    std::vector<std::uint16_t> indicesShort = {};
+    Vector<std::uint16_t> indicesShort = {};
     indicesShort.reserve(indices.size());
     for (auto const index : indices)
     {
