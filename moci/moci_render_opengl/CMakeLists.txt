@@ -6,6 +6,8 @@ set(moci_render_opengl_sources
 
     gl4/buffer.hpp
     gl4/buffer.cpp
+    gl4/frame_buffer.hpp
+    gl4/frame_buffer.cpp
     gl4/graphics_context.hpp
     gl4/graphics_context.cpp
     gl4/gl4.hpp
