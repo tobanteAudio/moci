@@ -4,7 +4,7 @@
 
 #include <cstdint>
 
-#include "moci_core/core/vector.hpp"
+#include "moci_core/moci_core.hpp"
 
 namespace moci
 {
@@ -22,7 +22,7 @@ public:
     [[nodiscard]] int GetHeight() const noexcept { return height_; }
     [[nodiscard]] int GetNumChannels() const noexcept { return numChannels_; }
 
-    [[nodiscard]] gsl::span<std::uint8_t> Data() noexcept { return data_; }
+    [[nodiscard]] Span<std::uint8_t> Data() noexcept { return data_; }
 
 private:
     Vector<std::uint8_t> data_ = {};

@@ -2,7 +2,7 @@
 
 #if defined(MOCI_WINDOWS)
 
-#include "moci_core/core/logging.hpp"
+#include "moci_core/moci_core.hpp"
 
 #include <cassert>
 #include <cstdio>
@@ -22,7 +22,7 @@ namespace moci
 {
 DatagramSocket::Pimpl::~Pimpl() { }
 
-bool DatagramSocket::Pimpl::Write(std::string const& host, int port, gsl::span<std::uint8_t> buffer)
+bool DatagramSocket::Pimpl::Write(std::string const& host, int port, Span<std::uint8_t> buffer)
 {
     return Write(host, port, buffer.data(), buffer.size());
 }

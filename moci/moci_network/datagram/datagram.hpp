@@ -2,11 +2,7 @@
 
 #include <cstddef>
 
-#include "moci_core/core/memory.hpp"
-
-#include "moci_core/core/vector.hpp"
-
-#include <gsl/gsl>
+#include "moci_core/moci_core.hpp"
 
 namespace moci
 {
@@ -21,7 +17,7 @@ public:
 
     bool Bind(std::string ip, int port);
 
-    bool Write(std::string const& host, int port, gsl::span<std::uint8_t> buffer);
+    bool Write(std::string const& host, int port, Span<std::uint8_t> buffer);
     bool Write(std::string const& host, int port, Buffer const& buffer);
     bool Write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes);
 

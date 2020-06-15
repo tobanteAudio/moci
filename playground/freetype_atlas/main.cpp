@@ -19,7 +19,7 @@ struct glyph_info
 
 int main(int argc, char** argv)
 {
-    auto const arguments = gsl::span<char*>(argv, argc);
+    auto const arguments = moci::Span<char*>(argv, argc);
     if (argc < 3)
     {
         printf("usage: %s <font> <size>\n", arguments[0]);
@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 
     // quick and dirty max texture size estimate
 
-    int max_dim   = (1 + (face->size->metrics.height >> 6)) * static_cast<int> (ceilf(sqrtf(NUM_GLYPHS)));
+    int max_dim   = (1 + (face->size->metrics.height >> 6)) * static_cast<int>(ceilf(sqrtf(NUM_GLYPHS)));
     int tex_width = 1;
     while (tex_width < max_dim)
     {

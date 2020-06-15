@@ -1,11 +1,10 @@
 #pragma once
 
+#include <string>
+
 #include "glm/glm.hpp"
 
-#include <gsl/gsl>
-
-#include "moci_core/core/vector.hpp"
-#include <string>
+#include "moci_core/moci_core.hpp"
 
 namespace moci
 {
@@ -36,17 +35,17 @@ public:
     /**
      * @brief Returns a span of the vertex positions.
      */
-    [[nodiscard]] gsl::span<glm::vec3> GetVertices() { return vertices_; }
+    [[nodiscard]] Span<glm::vec3> GetVertices() { return vertices_; }
 
     /**
      * @brief Returns a span of the vertex normals.
      */
-    [[nodiscard]] gsl::span<glm::vec3> GetNormals() { return normals_; }
+    [[nodiscard]] Span<glm::vec3> GetNormals() { return normals_; }
 
     /**
      * @brief Returns a span of the faces.
      */
-    [[nodiscard]] gsl::span<VertexData> GetVertexData() { return model_; }
+    [[nodiscard]] Span<VertexData> GetVertexData() { return model_; }
 
 private:
     static glm::vec3 parseLineToVec3(std::string& line);

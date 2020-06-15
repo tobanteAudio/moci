@@ -1,6 +1,6 @@
 #include "moci_network/datagram/datagram.hpp"
 
-#include "moci_core/core/preprocessor.hpp"
+#include "moci_core/moci_core.hpp"
 #if defined(MOCI_MAC) || defined(MOCI_LINUX)
 #include "moci_network/datagram/unix/datagram.hpp"
 #elif defined(MOCI_WINDOWS)
@@ -15,7 +15,7 @@ DatagramSocket::~DatagramSocket() { pimpl_.reset(nullptr); }
 
 bool DatagramSocket::Bind(std::string ip, int port) { return pimpl_->Bind(ip, port); }
 
-bool DatagramSocket::Write(std::string const& host, int port, gsl::span<std::uint8_t> buffer)
+bool DatagramSocket::Write(std::string const& host, int port, Span<std::uint8_t> buffer)
 {
     return pimpl_->Write(host, port, buffer);
 }

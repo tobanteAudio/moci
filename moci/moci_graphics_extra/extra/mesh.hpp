@@ -41,7 +41,7 @@ public:
 
 public:
     Mesh(std::string filePath);
-    gsl::span<Vertex const> GetVertices() const noexcept { return staticVertices_; }
+    Span<Vertex const> GetVertices() const noexcept { return staticVertices_; }
 
 private:
     std::string filePath_ {};
