@@ -108,17 +108,10 @@ void main()
     // Model transform should already be applied to the vertex on the host side.
     mat4 model = mat4(1.0);
 
-    mat4 tmp = Transpose(Inverse(model));
-    v_Normal = mat3(tmp[0].xyz, tmp[1].xyz, tmp[2].xyz) * a_Normal;
-    // Simpler version, No need for custom inverse & transpose functions on ES2.0.
-    // v_Normal = a_Normal;
-
+    mat4 tmp    = Transpose(Inverse(model));
+    v_Normal    = mat3(tmp[0].xyz, tmp[1].xyz, tmp[2].xyz) * a_Normal;
     v_Color     = a_Color;
     v_TexCoords = a_TexCoords;
-
-    // v_FragPos = vec3(model * vec4(a_Position, 1.0));
-    // gl_Position = u_Projection * u_View * model * vec4(a_Position, 1.0);
-    // Unnecessary vector multplication if model matrix is the identity matrix.
     v_FragPos   = a_Position;
     gl_Position = u_Projection * u_View * vec4(a_Position, 1.0);
 }
@@ -162,7 +155,6 @@ void main()
     // ambient light
     vec3 ambient = u_Ambient * lightColor;
     vec3 light   = ambient + diffuse + specular;
-    // vec3 light = ambient + diffuse;
 
     // texture
     vec4 texture = texture2D(u_Texture, v_TexCoords);
