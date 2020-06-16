@@ -36,16 +36,16 @@ public:
     void SetMat3(std::string const& name, glm::mat3 const& value) override;
     void SetMat4(std::string const& name, glm::mat4 const& value) override;
 
-    void UploadUniformInt(std::string const& name, int value);
-    void UploadUniformInts(std::string const& name, int count, int* values);
-    void UploadUniformFloat(std::string const& name, float value);
-    void UploadUniformFloat2(std::string const& name, const glm::vec2& value);
-    void UploadUniformFloat3(std::string const& name, const glm::vec3& value);
-    void UploadUniformFloat4(std::string const& name, const glm::vec4& value);
-    void UploadUniformMat3(std::string const& name, const glm::mat3& matrix);
-    void UploadUniformMat4(std::string const& name, const glm::mat4& matrix);
-
 private:
+    void uploadUniformInt(std::string const& name, int value);
+    void uploadUniformInts(std::string const& name, int count, int* values);
+    void uploadUniformFloat(std::string const& name, float value);
+    void uploadUniformFloat2(std::string const& name, const glm::vec2& value);
+    void uploadUniformFloat3(std::string const& name, const glm::vec3& value);
+    void uploadUniformFloat4(std::string const& name, const glm::vec4& value);
+    void uploadUniformMat3(std::string const& name, const glm::mat3& matrix);
+    void uploadUniformMat4(std::string const& name, const glm::mat4& matrix);
+
     std::string ReadFile(std::string const& filepath);
     std::unordered_map<GLenum, std::string> PreProcess(std::string const& source);
     void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
