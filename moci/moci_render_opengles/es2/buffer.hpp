@@ -27,17 +27,19 @@ private:
 class OpenGLESIndexBuffer : public IndexBuffer
 {
 public:
-    OpenGLESIndexBuffer(uint32_t* indices, uint32_t count, bool dynamic);
+    OpenGLESIndexBuffer(IndexBufferSpecs specs);
     ~OpenGLESIndexBuffer() override;
 
     void Bind() const override;
     void Unbind() const override;
     auto UploadData(std::uint32_t offset, Span<std::uint32_t> indices) const -> void override;
-    [[nodiscard]] auto GetCount() const -> uint32_t override { return m_Count; }
+    [[nodiscard]] auto GetCount() const -> uint32_t override { return specs_.count; }
 
 private:
-    uint32_t m_RendererID = {};
-    uint32_t m_Count      = {};
+    Vector<std::uint16_t> convertToUnsignedShorts(Span<std::uint32_t> indices) const;
+
+    IndexBufferSpecs specs_ = {};
+    uint32_t m_RendererID   = {};
 };
 
 }  // namespace moci

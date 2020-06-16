@@ -7,7 +7,7 @@ namespace moci
 struct RenderFactory
 {
     static VertexBuffer* MakeVertexBuffer(float* vertices, std::uint32_t size, bool dynamic = false);
-    static IndexBuffer* MakeIndexBuffer(std::uint32_t* indices, std::uint32_t size, bool dynamic = false);
+    static IndexBuffer* MakeIndexBuffer(IndexBufferSpecs specs);
     static Ref<Framebuffer> MakeFramebuffer(FramebufferSpecs spec);
     static Ref<Shader> MakeShader(std::string filepath);
     static Ref<Shader> MakeShader(std::string const& name, std::string const& vertexSrc,

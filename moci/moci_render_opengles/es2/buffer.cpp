@@ -38,26 +38,21 @@ auto OpenGLESVertexBuffer::UploadData(std::uint32_t offset, std::uint32_t size, 
 // IndexBuffer //////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-OpenGLESIndexBuffer::OpenGLESIndexBuffer(uint32_t* indices, uint32_t count, bool dynamic) : m_Count(count)
+OpenGLESIndexBuffer::OpenGLESIndexBuffer(IndexBufferSpecs specs) : specs_(std::move(specs))
 {
 
     GLCall(glGenBuffers(1, &m_RendererID));
     GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID));
 
-    auto const size = m_Count * sizeof(std::uint16_t);
-    if (dynamic)
+    auto const size = specs_.count * sizeof(std::uint16_t);
+    if (specs_.isDynamic)
     {
         GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW));
     }
     else
     {
-        auto const indicesSpan = Span<std::uint32_t> {indices, count};
-        auto indicesShort      = Vector<std::uint16_t> {};
-        indicesShort.reserve(indicesSpan.size());
-        for (auto const index : indicesSpan)
-        {
-            indicesShort.push_back(gsl::narrow<std::uint16_t>(index));
-        }
+        auto indicesShort = convertToUnsignedShorts(specs_.indices);
+        MOCI_CORE_ASSERT(size == indicesShort.size(), "Index span size & given size don't match");
         GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indicesShort.data(), GL_STATIC_DRAW));
     }
 
@@ -72,14 +67,21 @@ void OpenGLESIndexBuffer::Unbind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_
 
 auto OpenGLESIndexBuffer::UploadData(std::uint32_t offset, Span<std::uint32_t> indices) const -> void
 {
-    Vector<std::uint16_t> indicesShort = {};
-    indicesShort.reserve(indices.size());
+    auto indicesShort = convertToUnsignedShorts(indices);
+    auto const size   = indicesShort.size() * sizeof(std::uint16_t);
+    GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, indicesShort.data()));
+}
+
+Vector<std::uint16_t> OpenGLESIndexBuffer::convertToUnsignedShorts(Span<std::uint32_t> indices) const
+{
+    auto newIndices = Vector<std::uint16_t> {};
+    newIndices.reserve(indices.size());
     for (auto const index : indices)
     {
-        indicesShort.push_back(gsl::narrow<std::uint16_t>(index));
+        newIndices.push_back(gsl::narrow<std::uint16_t>(index));
     }
-    auto const size = indicesShort.size() * sizeof(std::uint16_t);
-    GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, indicesShort.data()));
+
+    return newIndices;
 }
 
 }  // namespace moci

@@ -28,18 +28,18 @@ private:
 class OpenGLIndexBuffer : public IndexBuffer
 {
 public:
-    OpenGLIndexBuffer(uint32_t* indices, uint32_t count, bool dynamic = false);
+    OpenGLIndexBuffer(IndexBufferSpecs specs);
     ~OpenGLIndexBuffer() override;
 
     void Bind() const override;
     void Unbind() const override;
 
-    uint32_t GetCount() const override { return m_Count; }
-    void UploadData(std::uint32_t offset, Span<std::uint32_t> data) const override;
+    uint32_t GetCount() const override { return specs_.count; }
+    void UploadData(std::uint32_t offset, Span<std::uint32_t> indices) const override;
 
 private:
-    uint32_t m_RendererID;
-    uint32_t m_Count;
+    IndexBufferSpecs specs_;
+    std::uint32_t m_RendererID;
 };
 
 }  // namespace moci

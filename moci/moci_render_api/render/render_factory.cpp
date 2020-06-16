@@ -28,7 +28,7 @@ auto RenderFactory::MakeVertexBuffer(float* vertices, uint32_t size, bool dynami
     return nullptr;
 }
 
-auto RenderFactory::MakeIndexBuffer(uint32_t* indices, uint32_t size, bool dynamic) -> IndexBuffer*
+auto RenderFactory::MakeIndexBuffer(IndexBufferSpecs specs) -> IndexBuffer*
 {
     switch (Renderer::GetAPI())
     {
@@ -36,10 +36,10 @@ auto RenderFactory::MakeIndexBuffer(uint32_t* indices, uint32_t size, bool dynam
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(indices, size, dynamic);
+        case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(std::move(specs));
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES: return new OpenGLESIndexBuffer(indices, size, dynamic);
+        case RendererAPI::API::OpenGLES: return new OpenGLESIndexBuffer(std::move(specs));
 #endif
         default: break;
     }

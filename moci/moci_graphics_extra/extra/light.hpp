@@ -55,7 +55,10 @@ public:
         vbo.reset(RenderFactory::MakeVertexBuffer(nullptr, size, true));
         vbo->SetLayout(lightLayout);
         vbo->Unbind();
-        ibo.reset(RenderFactory::MakeIndexBuffer(nullptr, 1, true));
+        auto indexBufferSpecs      = IndexBufferSpecs {};
+        indexBufferSpecs.count     = 1;
+        indexBufferSpecs.isDynamic = true;
+        ibo.reset(RenderFactory::MakeIndexBuffer(indexBufferSpecs));
         ibo->Unbind();
         vao = RenderFactory::MakeVertexArray();
         vao->AddVertexBuffer(vbo);

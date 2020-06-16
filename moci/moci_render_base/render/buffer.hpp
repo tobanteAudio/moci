@@ -129,6 +129,13 @@ public:
     virtual auto UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void = 0;
 };
 
+struct IndexBufferSpecs
+{
+    Span<std::uint32_t> indices = {};
+    std::uint32_t count         = 0;
+    bool isDynamic              = false;
+};
+
 class IndexBuffer
 {
 public:

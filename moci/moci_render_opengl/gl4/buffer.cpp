@@ -40,20 +40,21 @@ auto OpenGLVertexBuffer::UploadData(std::uint32_t offset, std::uint32_t size, co
 // IndexBuffer //////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count, bool dynamic) : m_Count(count)
+OpenGLIndexBuffer::OpenGLIndexBuffer(IndexBufferSpecs specs) : specs_(std::move(specs))
 {
     MOCI_PROFILE_FUNCTION();
 
     glGenBuffers(1, &m_RendererID);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
 
-    if (dynamic)
+    auto const size = specs_.count * sizeof(uint32_t);
+    if (specs_.isDynamic)
     {
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_Count * sizeof(uint32_t), nullptr, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
     }
     else
     {
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_Count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, specs_.indices.data(), GL_STATIC_DRAW);
     }
 
     Unbind();
