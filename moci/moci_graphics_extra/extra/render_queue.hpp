@@ -23,11 +23,11 @@ class RenderQueue
 public:
     struct Stats
     {
-        std::uint32_t drawCount {0};
-        std::uint32_t textureCount {0};
-        std::uint32_t vertexCount {0};
-        std::uint32_t quadCount {0};
-        std::uint32_t circleCount {0};
+        std::uint32_t drawCount    = 0;
+        std::uint32_t textureCount = 0;
+        std::uint32_t vertexCount  = 0;
+        std::uint32_t quadCount    = 0;
+        std::uint32_t circleCount  = 0;
     };
 
     RenderQueue();
@@ -54,36 +54,33 @@ private:
 
     struct Vertex
     {
-        glm::vec3 position;
-        Color color;
-        glm::vec2 texture;
-        float textureIndex;
-        float textureIsMonochrome {0.0f};
+        glm::vec3 position        = {};
+        Color color               = {};
+        glm::vec2 texture         = {};
+        float textureIndex        = 0.0f;
+        float textureIsMonochrome = 0.0f;
     };
 
     struct RenderData
     {
-        Ref<VertexBuffer> vbo;
-        Ref<IndexBuffer> ibo;
-        Ref<VertexArray> vao;
-        Ref<Shader> shader;
-
-        Vector<Vertex> vertices;
-        Vector<uint32_t> indices;
-        std::uint32_t indexOffset;
-
-        Texture2D::Ptr defaultTexture;
-        Vector<Texture2D::Ptr> textures;
-
-        RenderQueue::Stats renderStats;
+        Ref<VertexBuffer> vbo           = nullptr;
+        Ref<IndexBuffer> ibo            = nullptr;
+        Ref<VertexArray> vao            = nullptr;
+        Ref<Shader> shader              = nullptr;
+        Vector<Vertex> vertices         = {};
+        Vector<uint32_t> indices        = {};
+        std::uint32_t indexOffset       = 0;
+        Texture2D::Ptr defaultTexture   = nullptr;
+        Vector<Texture2D::Ptr> textures = {};
+        RenderQueue::Stats renderStats  = {};
     };
 
     struct Character
     {
-        Texture2D::Ptr TextureID {};  // ID handle of the glyph texture
-        glm::ivec2 Size {};           // Size of glyph
-        glm::ivec2 Bearing {};        // Offset from baseline to left/top of glyph
-        std::uint32_t Advance {};     // Offset to advance to next glyph
+        Texture2D::Ptr TextureID = {};  // ID handle of the glyph texture
+        glm::ivec2 Size          = {};  // Size of glyph
+        glm::ivec2 Bearing       = {};  // Offset from baseline to left/top of glyph
+        std::uint32_t Advance    = {};  // Offset to advance to next glyph
     };
 
     auto FontInit(std::string const& fontPath) -> void;
