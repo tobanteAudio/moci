@@ -6,7 +6,6 @@ var searchData=
   ['slider',['Slider',['../classmoci_1_1Slider.html',1,'moci']]],
   ['slidercallbacks',['SliderCallbacks',['../structmoci_1_1SliderCallbacks.html',1,'moci']]],
   ['sliderstylemethods',['SliderStyleMethods',['../classmoci_1_1SliderStyleMethods.html',1,'moci']]],
-  ['stats',['Stats',['../structmoci_1_1RenderQueue_1_1Stats.html',1,'moci::RenderQueue']]],
   ['strings',['Strings',['../classmoci_1_1Strings.html',1,'moci']]],
   ['style',['Style',['../classmoci_1_1Style.html',1,'moci']]],
   ['submesh',['Submesh',['../classmoci_1_1Mesh_1_1Submesh.html',1,'moci::Mesh']]],

@@ -6,7 +6,7 @@ var searchData=
   ['texcoord',['texCoord',['../structmoci_1_1Mesh_1_1Vertex.html#a8c907440ebeb662962bb3e177c8832c2',1,'moci::Mesh::Vertex']]],
   ['texture',['Texture',['../classmoci_1_1Texture.html',1,'moci']]],
   ['texture2d',['Texture2D',['../classmoci_1_1Texture2D.html',1,'moci']]],
-  ['texturecount',['textureCount',['../structmoci_1_1RenderQueue_1_1Stats.html#a5d1713034e0a26a5e29d062cf73fc937',1,'moci::RenderQueue::Stats']]],
+  ['texturecount',['textureCount',['../structmoci_1_1BatchRender2D_1_1FrameStats.html#a4ea310819ebe9b612fb8b69bf1920439',1,'moci::BatchRender2D::FrameStats']]],
   ['texturecube',['TextureCube',['../classmoci_1_1TextureCube.html',1,'moci']]],
   ['threadid',['ThreadID',['../structmoci_1_1ProfileResult.html#ae9b0acee260ac06dde7c9f4f78b2a267',1,'moci::ProfileResult']]],
   ['timestep',['Timestep',['../classmoci_1_1Timestep.html',1,'moci::Timestep'],['../classmoci_1_1Timestep.html#a820538ae7fd82ca3fa1d35fe59159425',1,'moci::Timestep::Timestep()']]],

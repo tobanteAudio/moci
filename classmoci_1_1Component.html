@@ -106,13 +106,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8b2989ccaa2db6f4dbb0c06f24dd15ca"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a8b2989ccaa2db6f4dbb0c06f24dd15ca">~Component</a> ()=default</td></tr>
 <tr class="memdesc:a8b2989ccaa2db6f4dbb0c06f24dd15ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <a href="#a8b2989ccaa2db6f4dbb0c06f24dd15ca">More...</a><br /></td></tr>
 <tr class="separator:a8b2989ccaa2db6f4dbb0c06f24dd15ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa1d2ad7d0b263a3ef9bbba1c3bd534a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#aaa1d2ad7d0b263a3ef9bbba1c3bd534a">OnDraw</a> (<a class="el" href="namespacemoci.html#a4da30554d09225e6456073f8c2392b90">Painter</a> &amp;painter)</td></tr>
+<tr class="memitem:aaa1d2ad7d0b263a3ef9bbba1c3bd534a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#aaa1d2ad7d0b263a3ef9bbba1c3bd534a">OnDraw</a> (<a class="el" href="namespacemoci.html#a4d703f480955882f2b4b4da1c8d912cd">Painter</a> &amp;painter)</td></tr>
 <tr class="memdesc:aaa1d2ad7d0b263a3ef9bbba1c3bd534a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for drawing.  <a href="#aaa1d2ad7d0b263a3ef9bbba1c3bd534a">More...</a><br /></td></tr>
 <tr class="separator:aaa1d2ad7d0b263a3ef9bbba1c3bd534a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d58d5d8f8f8b80ad7971ab3be293b04"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a8d58d5d8f8f8b80ad7971ab3be293b04">OnResize</a> ()</td></tr>
 <tr class="memdesc:a8d58d5d8f8f8b80ad7971ab3be293b04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for layout changes.  <a href="#a8d58d5d8f8f8b80ad7971ab3be293b04">More...</a><br /></td></tr>
 <tr class="separator:a8d58d5d8f8f8b80ad7971ab3be293b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e32e08143ca34be57bcbf99dab862b8"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a3e32e08143ca34be57bcbf99dab862b8">Draw</a> (<a class="el" href="namespacemoci.html#a4da30554d09225e6456073f8c2392b90">Painter</a> &amp;painter) -&gt; void</td></tr>
+<tr class="memitem:a3e32e08143ca34be57bcbf99dab862b8"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a3e32e08143ca34be57bcbf99dab862b8">Draw</a> (<a class="el" href="namespacemoci.html#a4d703f480955882f2b4b4da1c8d912cd">Painter</a> &amp;painter) -&gt; void</td></tr>
 <tr class="memdesc:a3e32e08143ca34be57bcbf99dab862b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw should only be called on the root component. It calls the <a class="el" href="classmoci_1_1Component.html#aaa1d2ad7d0b263a3ef9bbba1c3bd534a" title="Callback for drawing. ">OnDraw()</a> callback on all children.  <a href="#a3e32e08143ca34be57bcbf99dab862b8">More...</a><br /></td></tr>
 <tr class="separator:a3e32e08143ca34be57bcbf99dab862b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6570667b82b524442d39f4b08797e84f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1Component.html#a6570667b82b524442d39f4b08797e84f">Resize</a> () -&gt; void</td></tr>
@@ -321,7 +321,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">auto moci::Component::Draw </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacemoci.html#a4da30554d09225e6456073f8c2392b90">Painter</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacemoci.html#a4d703f480955882f2b4b4da1c8d912cd">Painter</a> &amp;&#160;</td>
           <td class="paramname"><em>painter</em></td><td>)</td>
           <td> -&gt;  void</td>
         </tr>
@@ -626,7 +626,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void moci::Component::OnDraw </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacemoci.html#a4da30554d09225e6456073f8c2392b90">Painter</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacemoci.html#a4d703f480955882f2b4b4da1c8d912cd">Painter</a> &amp;&#160;</td>
           <td class="paramname"><em>painter</em></td><td>)</td>
           <td></td>
         </tr>

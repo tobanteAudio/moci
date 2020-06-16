@@ -1,7 +1,7 @@
 var searchData=
 [
   ['texcoord',['texCoord',['../structmoci_1_1Mesh_1_1Vertex.html#a8c907440ebeb662962bb3e177c8832c2',1,'moci::Mesh::Vertex']]],
-  ['texturecount',['textureCount',['../structmoci_1_1RenderQueue_1_1Stats.html#a5d1713034e0a26a5e29d062cf73fc937',1,'moci::RenderQueue::Stats']]],
+  ['texturecount',['textureCount',['../structmoci_1_1BatchRender2D_1_1FrameStats.html#a4ea310819ebe9b612fb8b69bf1920439',1,'moci::BatchRender2D::FrameStats']]],
   ['threadid',['ThreadID',['../structmoci_1_1ProfileResult.html#ae9b0acee260ac06dde7c9f4f78b2a267',1,'moci::ProfileResult']]],
   ['title',['Title',['../structmoci_1_1WindowSpecs.html#aeaab0fe9d573b88995bd305081a0df2a',1,'moci::WindowSpecs']]],
   ['topleft',['topLeft',['../structmoci_1_1Typeface_1_1Character.html#aea048c5444c95845c09fe438c4f93227',1,'moci::Typeface::Character']]],

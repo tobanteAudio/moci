@@ -4,7 +4,7 @@ var searchData=
   ['elapsedtime',['ElapsedTime',['../structmoci_1_1ProfileResult.html#a8d7742bef1f5742d91e7a070dc001713',1,'moci::ProfileResult']]],
   ['empty',['Empty',['../classmoci_1_1Image.html#a9630a5e3792016c036d44df197df3967',1,'moci::Image']]],
   ['end',['End',['../classmoci_1_1ImGuiLayer.html#a720e9d7d14c80372ed4f7caf50a27fb4',1,'moci::ImGuiLayer::End()'],['../classmoci_1_1LayerStack.html#aa8502c4412089719f98c9633b3ad928d',1,'moci::LayerStack::end()'],['../classmoci_1_1BufferLayout.html#a9f08effbd4170682d192420cd217ed0f',1,'moci::BufferLayout::end() -&gt; Vector&lt; BufferElement &gt;::iterator'],['../classmoci_1_1BufferLayout.html#acdaf5de574a7de606f749630eb7e8a54',1,'moci::BufferLayout::end() const -&gt; Vector&lt; BufferElement &gt;::const_iterator'],['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fda87557f11575c0ad78e4e28abedc13b6e',1,'moci::End()']]],
-  ['endframe',['EndFrame',['../classmoci_1_1RenderQueue.html#ac67c5ae42057be8f9a4c0cd4e7b1313e',1,'moci::RenderQueue']]],
+  ['endframe',['EndFrame',['../classmoci_1_1BatchRender2D.html#aba368bd809c61c23cbd7b2861d5bfbef',1,'moci::BatchRender2D']]],
   ['endsession',['EndSession',['../classmoci_1_1Instrumentor.html#a87ad9e762fc161cb5a1b014930cc7ec5',1,'moci::Instrumentor']]],
   ['enter',['Enter',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdaf1851d5600eae616ee802a31ac74701b',1,'moci']]],
   ['equal',['Equal',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdaf5f286e73bda105e538310b3190f75c5',1,'moci']]],

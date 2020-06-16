@@ -4,7 +4,7 @@ var searchData=
   ['callbacks',['callbacks',['../structmoci_1_1ButtonSpecs.html#aaf4c8d79d78e904c1af19d3e9413bd7d',1,'moci::ButtonSpecs']]],
   ['capslock',['CapsLock',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fda8d0f4171170104d094d8b6d4f8bf49e6',1,'moci']]],
   ['character',['Character',['../structmoci_1_1Typeface_1_1Character.html',1,'moci::Typeface']]],
-  ['circlecount',['circleCount',['../structmoci_1_1RenderQueue_1_1Stats.html#ab8ea1d35f31dd79e215a460ebf59ce12',1,'moci::RenderQueue::Stats']]],
+  ['circlecount',['circleCount',['../structmoci_1_1BatchRender2D_1_1FrameStats.html#ada9d1f2a49df380bc11dad07a9e747b2',1,'moci::BatchRender2D::FrameStats']]],
   ['clear',['Clear',['../classmoci_1_1RenderCommand.html#a02a096848b31bed79a2b6b1365532dbc',1,'moci::RenderCommand::Clear()'],['../classmoci_1_1RendererAPI.html#a08548a545daef2597e698ae9225d6989',1,'moci::RendererAPI::Clear()'],['../classmoci_1_1OpenGLESRendererAPI.html#a28a2f25583e6df0fe84442b20bab4625',1,'moci::OpenGLESRendererAPI::Clear()']]],
   ['click',['Click',['../structmoci_1_1MouseCallback_1_1Click.html',1,'moci::MouseCallback']]],
   ['clicked',['clicked',['../structmoci_1_1ButtonCallbacks.html#adaece7dd9d954aaeee0741af1ec0c31b',1,'moci::ButtonCallbacks']]],

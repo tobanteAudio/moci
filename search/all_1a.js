@@ -1,6 +1,7 @@
 var searchData=
 [
   ['_7eapplication',['~Application',['../classmoci_1_1Application.html#ae0024b2cc5b280d35d5c9935e6ac591e',1,'moci::Application']]],
+  ['_7ebatchrender2d',['~BatchRender2D',['../classmoci_1_1BatchRender2D.html#a841580688ebd146f3ca420a9c7f64fea',1,'moci::BatchRender2D']]],
   ['_7ebutton',['~Button',['../classmoci_1_1Button.html#aa0c309b21bf37f630eb1c8e380d00f3b',1,'moci::Button']]],
   ['_7ebuttonstylemethods',['~ButtonStyleMethods',['../classmoci_1_1ButtonStyleMethods.html#a9d04917a9892ad3637f957454d57a81d',1,'moci::ButtonStyleMethods']]],
   ['_7ecomponent',['~Component',['../classmoci_1_1Component.html#a8b2989ccaa2db6f4dbb0c06f24dd15ca',1,'moci::Component']]],
@@ -30,7 +31,6 @@ var searchData=
   ['_7eopenglesvertexbuffer',['~OpenGLESVertexBuffer',['../classmoci_1_1OpenGLESVertexBuffer.html#a27aebabb7fe129d19b6bd97005f51d6c',1,'moci::OpenGLESVertexBuffer']]],
   ['_7epoint',['~Point',['../classmoci_1_1Point.html#a557781a9ed9305a14ff5856abcb7581e',1,'moci::Point']]],
   ['_7erendererapi',['~RendererAPI',['../classmoci_1_1RendererAPI.html#a910959090dfefdda2f253ac295e97cb5',1,'moci::RendererAPI']]],
-  ['_7erenderqueue',['~RenderQueue',['../classmoci_1_1RenderQueue.html#a0d749c69e9ceb8edef0e8725c586aa57',1,'moci::RenderQueue']]],
   ['_7escopeguard',['~ScopeGuard',['../classmoci_1_1ScopeGuard.html#a3d59527e5201ad4b4a07e976fb68b18c',1,'moci::ScopeGuard']]],
   ['_7eshader',['~Shader',['../classmoci_1_1Shader.html#af3b9799c07dc75558b38c663a91b6729',1,'moci::Shader']]],
   ['_7eslider',['~Slider',['../classmoci_1_1Slider.html#a78ce10f57d7968bd1997018cb63615bf',1,'moci::Slider']]],

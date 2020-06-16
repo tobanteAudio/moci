@@ -5,6 +5,5 @@ var searchData=
   ['rendercommand',['RenderCommand',['../classmoci_1_1RenderCommand.html',1,'moci']]],
   ['renderer',['Renderer',['../classmoci_1_1Renderer.html',1,'moci']]],
   ['rendererapi',['RendererAPI',['../classmoci_1_1RendererAPI.html',1,'moci']]],
-  ['renderfactory',['RenderFactory',['../structmoci_1_1RenderFactory.html',1,'moci']]],
-  ['renderqueue',['RenderQueue',['../classmoci_1_1RenderQueue.html',1,'moci']]]
+  ['renderfactory',['RenderFactory',['../structmoci_1_1RenderFactory.html',1,'moci']]]
 ];
