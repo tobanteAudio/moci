@@ -55,7 +55,7 @@ void OpenGLLayer::OnImGuiRender()
 {
     ImGui::Begin("Settings");
     auto const textureID = framebuffer_->GetColorAttachmentRendererID();
-    ImGui::ImageButton((void*)textureID, ImVec2 {360, 180});
+    ImGui::ImageButton((void*)textureID, ImVec2 {220, 135}, ImVec2(1, 1), ImVec2(0, 0));
     ImGui::End();
 }
 
