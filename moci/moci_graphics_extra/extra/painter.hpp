@@ -4,5 +4,5 @@
 
 namespace moci
 {
-using Painter = RenderQueue;
+using Painter = BatchRender2D;
 }  // namespace moci

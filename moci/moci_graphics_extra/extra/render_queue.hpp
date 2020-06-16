@@ -18,10 +18,10 @@
 namespace moci
 {
 
-class RenderQueue
+class BatchRender2D
 {
 public:
-    struct Stats
+    struct FrameStats
     {
         std::uint32_t drawCount    = 0;
         std::uint32_t textureCount = 0;
@@ -30,12 +30,12 @@ public:
         std::uint32_t circleCount  = 0;
     };
 
-    RenderQueue();
-    ~RenderQueue();
+    BatchRender2D();
+    ~BatchRender2D();
 
-    // RenderQueue is not copyable.
-    RenderQueue(const RenderQueue&) = delete;
-    auto operator=(const RenderQueue&) -> RenderQueue& = delete;
+    // BatchRender2D is not copyable.
+    BatchRender2D(const BatchRender2D&) = delete;
+    auto operator=(const BatchRender2D&) -> BatchRender2D& = delete;
 
     auto StartFrame(float width, float height) -> void;
     auto EndFrame() -> void;
@@ -44,7 +44,7 @@ public:
     auto DrawQuad(Rectangle<float> rect, Color color, Texture2D::Optional texture = std::nullopt) -> void;
     auto DrawCircle(float x, float y, float radius, int numSides, Color color) -> void;
 
-    [[nodiscard]] auto GetStats() const -> Stats;
+    [[nodiscard]] auto GetFrameStats() const -> FrameStats;
 
 private:
     static constexpr std::size_t MaxQuadCount    = 10000;
@@ -63,16 +63,16 @@ private:
 
     struct RenderData
     {
-        Ref<VertexBuffer> vbo           = nullptr;
-        Ref<IndexBuffer> ibo            = nullptr;
-        Ref<VertexArray> vao            = nullptr;
-        Ref<Shader> shader              = nullptr;
-        Vector<Vertex> vertices         = {};
-        Vector<uint32_t> indices        = {};
-        std::uint32_t indexOffset       = 0;
-        Texture2D::Ptr defaultTexture   = nullptr;
-        Vector<Texture2D::Ptr> textures = {};
-        RenderQueue::Stats renderStats  = {};
+        Ref<VertexBuffer> vbo                      = nullptr;
+        Ref<IndexBuffer> ibo                       = nullptr;
+        Ref<VertexArray> vao                       = nullptr;
+        Ref<Shader> shader                         = nullptr;
+        Vector<Vertex> vertices                    = {};
+        Vector<uint32_t> indices                   = {};
+        std::uint32_t indexOffset                  = 0;
+        Texture2D::Ptr defaultTexture              = nullptr;
+        Vector<Texture2D::Ptr> textures            = {};
+        BatchRender2D::FrameStats renderFrameStats = {};
     };
 
     struct Character
@@ -88,7 +88,7 @@ private:
     auto Flush() -> void;
     auto FlushIf(bool shouldFlush) -> void;
     auto EndBatch() -> void;
-    auto ResetStats() -> void;
+    auto ResetFrameStats() -> void;
 
     RenderData data_ {};
     std::map<char, Character> characters_;

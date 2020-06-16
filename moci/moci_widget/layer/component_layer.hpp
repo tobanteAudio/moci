@@ -54,7 +54,7 @@ private:
     float width_  = 1280.0f;
     float height_ = 1024.0f;
 
-    Scope<RenderQueue> renderQueue_ {};
+    Scope<BatchRender2D> renderQueue_ {};
     Style defaultStyle_ {};
     Scope<Component> rootComponent_;
 };

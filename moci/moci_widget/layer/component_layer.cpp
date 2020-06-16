@@ -4,7 +4,7 @@ namespace moci
 {
 void ComponentLayer::OnAttach()
 {
-    renderQueue_ = MakeScope<RenderQueue>();
+    renderQueue_ = MakeScope<BatchRender2D>();
     rootComponent_->SetStyle(&defaultStyle_);
     rootComponent_->SetSize(static_cast<int>(width_), static_cast<int>(height_));
 }
@@ -27,11 +27,11 @@ void ComponentLayer::OnUpdate(Timestep ts)
 void ComponentLayer::OnImGuiRender()
 {
     ImGui::Begin("Settings");
-    ImGui::Text("Draws: %d", renderQueue_->GetStats().drawCount);
-    ImGui::Text("Textures: %d", renderQueue_->GetStats().textureCount);
-    ImGui::Text("Vertics: %d", renderQueue_->GetStats().vertexCount);
-    ImGui::Text("Quads: %d", renderQueue_->GetStats().quadCount);
-    ImGui::Text("Circles: %d", renderQueue_->GetStats().circleCount);
+    ImGui::Text("Draws: %d", renderQueue_->GetFrameStats().drawCount);
+    ImGui::Text("Textures: %d", renderQueue_->GetFrameStats().textureCount);
+    ImGui::Text("Vertics: %d", renderQueue_->GetFrameStats().vertexCount);
+    ImGui::Text("Quads: %d", renderQueue_->GetFrameStats().quadCount);
+    ImGui::Text("Circles: %d", renderQueue_->GetFrameStats().circleCount);
     ImGui::End();
 }
 

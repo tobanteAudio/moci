@@ -12,7 +12,7 @@
 namespace moci
 {
 
-RenderQueue::RenderQueue()
+BatchRender2D::BatchRender2D()
 {
 #if defined(MOCI_API_OPENGL_LEGACY)
     data_.shader = moci::RenderFactory::MakeShader("assets/es2_batch_render.glsl");
@@ -47,7 +47,7 @@ RenderQueue::RenderQueue()
     FontInit("assets/fonts/open-sans/OpenSans-Bold.ttf");
 }
 
-RenderQueue::~RenderQueue()
+BatchRender2D::~BatchRender2D()
 {
     data_.vbo.reset();
     data_.ibo.reset();
@@ -57,26 +57,26 @@ RenderQueue::~RenderQueue()
     data_.textures.clear();
 }
 
-auto RenderQueue::StartFrame(float width, float height) -> void
+auto BatchRender2D::StartFrame(float width, float height) -> void
 {
     data_.shader->Bind();
-    glm::mat4 proj = glm::ortho(0.0f, width, height, 0.0f, -1.0f, 1.0f);
+    auto const proj = glm::ortho(0.0f, width, height, 0.0f, -1.0f, 1.0f);
     data_.shader->SetMat4("u_MVP", proj);
     auto samplers = std::array<int, 16> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     data_.shader->SetInts("u_Textures", samplers.size(), samplers.data());
 
-    ResetStats();
+    ResetFrameStats();
     BeginBatch();
 }
 
-auto RenderQueue::EndFrame() -> void
+auto BatchRender2D::EndFrame() -> void
 {
     EndBatch();
     Flush();
     data_.shader->Unbind();
 }
 
-auto RenderQueue::DrawText(std::string text, glm::vec2 position, float scale, Color color) -> void
+auto BatchRender2D::DrawText(std::string text, glm::vec2 position, float scale, Color color) -> void
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -96,7 +96,7 @@ auto RenderQueue::DrawText(std::string text, glm::vec2 position, float scale, Co
     }
 }
 
-auto RenderQueue::FontInit(std::string const& fontPath) -> void
+auto BatchRender2D::FontInit(std::string const& fontPath) -> void
 {
     FT_Library ft = nullptr;
     if (FT_Init_FreeType(&ft) != 0)
@@ -142,7 +142,7 @@ auto RenderQueue::FontInit(std::string const& fontPath) -> void
     FT_Done_FreeType(ft);
 }
 
-auto RenderQueue::BeginBatch() -> void
+auto BatchRender2D::BeginBatch() -> void
 {
     data_.vertices.clear();
 
@@ -153,10 +153,10 @@ auto RenderQueue::BeginBatch() -> void
     MOCI_CORE_ASSERT(data_.textures.empty(), "");
 
     data_.textures.push_back(data_.defaultTexture);
-    data_.renderStats.textureCount++;
+    data_.renderFrameStats.textureCount++;
 }
 
-auto RenderQueue::EndBatch() -> void
+auto BatchRender2D::EndBatch() -> void
 {
     MOCI_PROFILE_FUNCTION();
     data_.vao->Bind();
@@ -166,7 +166,7 @@ auto RenderQueue::EndBatch() -> void
     data_.vao->Unbind();
 }
 
-auto RenderQueue::Flush() -> void
+auto BatchRender2D::Flush() -> void
 {
     MOCI_PROFILE_FUNCTION();
     for (size_t i = 0; i < data_.textures.size(); i++)
@@ -176,7 +176,7 @@ auto RenderQueue::Flush() -> void
 
     data_.vao->Bind();
     {
-        MOCI_PROFILE_SCOPE("RenderQueue::Flush::Draw");
+        MOCI_PROFILE_SCOPE("BatchRender2D::Flush::Draw");
         auto const mode       = RenderDrawMode::Triangles;
         auto const numIndices = static_cast<std::uint32_t>(data_.indices.size());
         RenderCommand::DrawIndexed(mode, numIndices, nullptr);
@@ -187,10 +187,10 @@ auto RenderQueue::Flush() -> void
         tex->Unbind();
     }
 
-    data_.renderStats.drawCount++;
+    data_.renderFrameStats.drawCount++;
 }
 
-auto RenderQueue::FlushIf(bool shouldFlush) -> void
+auto BatchRender2D::FlushIf(bool shouldFlush) -> void
 {
     if (shouldFlush)
     {
@@ -199,7 +199,7 @@ auto RenderQueue::FlushIf(bool shouldFlush) -> void
         BeginBatch();
     }
 }
-auto RenderQueue::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Optional texture) -> void
+auto BatchRender2D::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Optional texture) -> void
 {
     FlushIf(data_.indices.size() + 6 >= MaxIndexCount);
 
@@ -223,7 +223,7 @@ auto RenderQueue::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Option
 
             texID = static_cast<uint32_t>(data_.textures.size());
             data_.textures.push_back(texture.value());
-            data_.renderStats.textureCount++;
+            data_.renderFrameStats.textureCount++;
         }
     }
     else
@@ -249,11 +249,11 @@ auto RenderQueue::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Option
     }
     data_.indexOffset += 4;
 
-    data_.renderStats.vertexCount += 4;
-    data_.renderStats.quadCount += 1;
+    data_.renderFrameStats.vertexCount += 4;
+    data_.renderFrameStats.quadCount += 1;
 }
 
-auto RenderQueue::DrawCircle(float x, float y, float radius, int numSides, Color color) -> void
+auto BatchRender2D::DrawCircle(float x, float y, float radius, int numSides, Color color) -> void
 {
     FlushIf(data_.indices.size() + (static_cast<size_t>(3) * static_cast<size_t>(numSides)) >= MaxIndexCount);
 
@@ -276,11 +276,11 @@ auto RenderQueue::DrawCircle(float x, float y, float radius, int numSides, Color
     }
     data_.indexOffset += numVertices;
 
-    data_.renderStats.vertexCount += numVertices;
-    data_.renderStats.circleCount += 1;
+    data_.renderFrameStats.vertexCount += numVertices;
+    data_.renderFrameStats.circleCount += 1;
 }
-auto RenderQueue::GetStats() const -> RenderQueue::Stats { return data_.renderStats; }
+auto BatchRender2D::GetFrameStats() const -> BatchRender2D::FrameStats { return data_.renderFrameStats; }
 
-auto RenderQueue::ResetStats() -> void { data_.renderStats = {}; }
+auto BatchRender2D::ResetFrameStats() -> void { data_.renderFrameStats = {}; }
 
 }  // namespace moci
