@@ -3,6 +3,7 @@
 #if defined(MOCI_API_OPENGL_MODERN)
 #include "gl4.hpp"
 #include "moci_core/moci_core.hpp"
+#include "moci_render_opengl_common/moci_render_opengl_common.hpp"
 
 #include <array>
 #include <fstream>
@@ -12,10 +13,16 @@
 namespace moci
 {
 
-static GLenum OpenGLShaderTypeFromString(std::string const& type)
+static GLenum OpenGLShaderTypeFromShaderType(ShaderType type)
 {
-    if (type == "vertex") return GL_VERTEX_SHADER;
-    if (type == "fragment" || type == "pixel") return GL_FRAGMENT_SHADER;
+    if (type == ShaderType::Vertex)
+    {
+        return GL_VERTEX_SHADER;
+    }
+    if (type == ShaderType::Fragment)
+    {
+        return GL_FRAGMENT_SHADER;
+    }
 
     MOCI_CORE_ASSERT(false, "Unknown shader type!");
     return 0;
@@ -89,26 +96,12 @@ std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(std::string con
 {
     MOCI_PROFILE_FUNCTION();
 
-    std::unordered_map<GLenum, std::string> shaderSources;
-
-    const char* typeToken  = "#type";
-    size_t typeTokenLength = strlen(typeToken);
-    size_t pos             = source.find(typeToken, 0);  // Start of shader type declaration line
-    while (pos != std::string::npos)
+    auto shaderSources = std::unordered_map<GLenum, std::string> {};
+    auto const program = ShaderParser::SplitSource(source);
+    for (auto const& shader : program.sources)
     {
-        size_t eol = source.find_first_of("\r\n", pos);  // End of shader type declaration line
-        MOCI_CORE_ASSERT(eol != std::string::npos, "Syntax error");
-        size_t begin     = pos + typeTokenLength + 1;  // Start of shader type name (after "#type " keyword)
-        std::string type = source.substr(begin, eol - begin);
-        MOCI_CORE_ASSERT(OpenGLShaderTypeFromString(type), "Invalid shader type specified");
-
-        size_t nextLinePos
-            = source.find_first_not_of("\r\n", eol);  // Start of shader code after shader type declaration line
-        MOCI_CORE_ASSERT(nextLinePos != std::string::npos, "Syntax error");
-        pos = source.find(typeToken, nextLinePos);  // Start of next shader type declaration line
-
-        shaderSources[OpenGLShaderTypeFromString(type)]
-            = (pos == std::string::npos) ? source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos);
+        auto const type     = OpenGLShaderTypeFromShaderType(shader.type);
+        shaderSources[type] = shader.source;
     }
 
     return shaderSources;
