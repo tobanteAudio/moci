@@ -12,7 +12,7 @@
 namespace moci
 {
 
-static GLenum ShaderTypeFromString(std::string const& type)
+static GLenum OpenGLShaderTypeFromString(std::string const& type)
 {
     if (type == "vertex") return GL_VERTEX_SHADER;
     if (type == "fragment" || type == "pixel") return GL_FRAGMENT_SHADER;
@@ -100,14 +100,14 @@ std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(std::string con
         MOCI_CORE_ASSERT(eol != std::string::npos, "Syntax error");
         size_t begin     = pos + typeTokenLength + 1;  // Start of shader type name (after "#type " keyword)
         std::string type = source.substr(begin, eol - begin);
-        MOCI_CORE_ASSERT(ShaderTypeFromString(type), "Invalid shader type specified");
+        MOCI_CORE_ASSERT(OpenGLShaderTypeFromString(type), "Invalid shader type specified");
 
         size_t nextLinePos
             = source.find_first_not_of("\r\n", eol);  // Start of shader code after shader type declaration line
         MOCI_CORE_ASSERT(nextLinePos != std::string::npos, "Syntax error");
         pos = source.find(typeToken, nextLinePos);  // Start of next shader type declaration line
 
-        shaderSources[ShaderTypeFromString(type)]
+        shaderSources[OpenGLShaderTypeFromString(type)]
             = (pos == std::string::npos) ? source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos);
     }
 

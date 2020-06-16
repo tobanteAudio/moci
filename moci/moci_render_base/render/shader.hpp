@@ -9,6 +9,14 @@
 
 namespace moci
 {
+enum class ShaderType
+{
+    Unknown = 0,
+    Vertex,
+    Geometry,
+    Tesselation,
+    Fragment,
+};
 
 struct ShaderProgramSource
 {
