@@ -54,8 +54,8 @@ void OpenGLLayer::OnUpdate(moci::Timestep ts)
 void OpenGLLayer::OnImGuiRender()
 {
     ImGui::Begin("Settings");
-    auto const textureID = framebuffer_->GetColorAttachmentRendererID();
-    ImGui::ImageButton((void*)textureID, ImVec2 {220, 135}, ImVec2(1, 1), ImVec2(0, 0));
+    auto const textureID = reinterpret_cast<void*>(framebuffer_->GetColorAttachmentRendererID());
+    ImGui::ImageButton(textureID, ImVec2 {220, 135}, ImVec2(1, 1), ImVec2(0, 0));
     ImGui::End();
 }
 
