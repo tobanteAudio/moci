@@ -49,8 +49,10 @@ auto GetAttributeLayout(std::string src) -> Vector<ShaderAttribute>
 
 OpenGLESShader::OpenGLESShader(std::string const& filepath)
 {
-    auto [vertexSource, fragmentSource] = parseShader(filepath);
-    m_RendererID                        = createShader(vertexSource.c_str(), fragmentSource.c_str());
+    auto const program  = parseShader(filepath);
+    auto const vertex   = program.sources[0];
+    auto const fragment = program.sources[1];
+    m_RendererID        = createShader(vertex.source.c_str(), fragment.source.c_str());
 }
 
 OpenGLESShader::OpenGLESShader(std::string name, std::string const& vertexSrc, std::string const& fragmentSrc)
@@ -65,7 +67,7 @@ auto OpenGLESShader::parseShader(std::string const& filepath) -> ShaderProgramSo
 {
     std::ifstream stream(filepath);
 
-    enum class ShaderType
+    enum class GLShaderType
     {
         NONE     = -1,
         VERTEX   = 0,
@@ -74,18 +76,18 @@ auto OpenGLESShader::parseShader(std::string const& filepath) -> ShaderProgramSo
 
     std::string line;
     std::stringstream ss[2];
-    ShaderType type = ShaderType::NONE;
+    GLShaderType type = GLShaderType::NONE;
     while (getline(stream, line))
     {
         if (line.find("#shader") != std::string::npos)
         {
             if (line.find("vertex") != std::string::npos)
             {
-                type = ShaderType::VERTEX;
+                type = GLShaderType::VERTEX;
             }
             else if (line.find("fragment") != std::string::npos)
             {
-                type = ShaderType::FRAGMENT;
+                type = GLShaderType::FRAGMENT;
             }
         }
         else
@@ -94,7 +96,9 @@ auto OpenGLESShader::parseShader(std::string const& filepath) -> ShaderProgramSo
         }
     }
 
-    return {ss[0].str(), ss[1].str()};
+    auto const vertex   = ShaderSource {ShaderType::Vertex, ss[0].str()};
+    auto const fragment = ShaderSource {ShaderType::Fragment, ss[1].str()};
+    return {{vertex, fragment}};
 }
 
 auto OpenGLESShader::createShader(const char* vertexSource, const char* fragmentSource) -> GLint

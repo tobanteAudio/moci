@@ -17,7 +17,7 @@ ShaderType ShaderTypeFromString(std::string_view type)
 }
 }  // namespace
 
-ShaderProgramSource ShaderParser::SplitSource(std::string sources)
+ShaderProgramSource ShaderParser::SplitSource(std::string const& sources)
 {
     constexpr char const* typeToken = "#type";
     auto const typeTokenLength      = strlen(typeToken);
@@ -46,24 +46,7 @@ ShaderProgramSource ShaderParser::SplitSource(std::string sources)
         auto const source = (pos == std::string::npos) ? sources.substr(nextLinePos)  //
                                                        : sources.substr(nextLinePos, pos - nextLinePos);
 
-        switch (ShaderTypeFromString(type))
-        {
-            case ShaderType::Vertex:
-            {
-                shaderSources.VertexSource = source;
-                break;
-            }
-            case ShaderType::Fragment:
-            {
-                shaderSources.FragmentSource = source;
-                break;
-            }
-            default:
-            {
-                MOCI_CORE_ASSERT(false, "Shader type not implemented");
-                break;
-            }
-        }
+        shaderSources.sources.push_back(ShaderSource {ShaderTypeFromString(type), source});
     }
 
     return shaderSources;
