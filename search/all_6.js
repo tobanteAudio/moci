@@ -1,6 +1,7 @@
 var searchData=
 [
   ['g',['G',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fdadfcf28d0734569a6a693bc8194de62bf',1,'moci']]],
+  ['geometry',['Geometry',['../namespacemoci.html#aa798a6dc44594eb98b26ebaaf4e79ffaad9c6333623e6357515fcbf17be806273',1,'moci']]],
   ['get',['Get',['../classmoci_1_1Application.html#afc855821e81be9105d9d7461d64ef130',1,'moci::Application::Get()'],['../classmoci_1_1Instrumentor.html#ad9638cb5d1171717bb52a137c125695f',1,'moci::Instrumentor::Get()']]],
   ['getalpha',['GetAlpha',['../classmoci_1_1Color.html#a97f5415ef64833143bf1ac7ae51e8696',1,'moci::Color']]],
   ['getangledegrees',['GetAngleDegrees',['../classmoci_1_1Line.html#a52d49db6803c3f46b46ed879daca4369',1,'moci::Line']]],

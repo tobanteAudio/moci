@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['handled',['Handled',['../classmoci_1_1Event.html#a4dfebf3fefecdab7ce300a77c149ea86',1,'moci::Event']]],
-  ['height',['Height',['../structmoci_1_1WindowSpecs.html#a2ff04807f1e0e8f2bcb33b8f228cc30c',1,'moci::WindowSpecs::Height()'],['../structmoci_1_1Typeface_1_1Character.html#a146391bc0ae04ae636f0b4bf921acfbf',1,'moci::Typeface::Character::height()'],['../structmoci_1_1FramebufferSpecs.html#a3273800a90905362e7fdb66173aace82',1,'moci::FramebufferSpecs::height()']]]
+  ['ibo',['ibo',['../structmoci_1_1Light.html#afd4a51e497716aa5aa5b51167e5594b6',1,'moci::Light']]],
+  ['indexcount',['IndexCount',['../classmoci_1_1Mesh_1_1Submesh.html#a2fc15790a6afc8fd5ee55f0ee6bb7899',1,'moci::Mesh::Submesh']]],
+  ['isswapchaintarget',['isSwapChainTarget',['../structmoci_1_1FramebufferSpecs.html#a9a07c645e1417e2532fbf1d903d72b5d',1,'moci::FramebufferSpecs']]],
+  ['istoggle',['isToggle',['../structmoci_1_1ButtonSpecs.html#a4771dc34ede285a04131d58b2b369cf5',1,'moci::ButtonSpecs']]]
 ];

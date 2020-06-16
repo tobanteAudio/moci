@@ -1,4 +1,11 @@
 var searchData=
 [
-  ['red',['Red',['../classmoci_1_1Colors.html#a80697327ce989eaea700cc9272de2f0d',1,'moci::Colors']]]
+  ['samples',['samples',['../structmoci_1_1FramebufferSpecs.html#ac03a649aa418b08539d196c832912d32',1,'moci::FramebufferSpecs']]],
+  ['scale',['scale',['../structmoci_1_1Light.html#a88145eeeaa90131af8a30ebd5984ac9b',1,'moci::Light']]],
+  ['shader',['shader',['../structmoci_1_1Light.html#a18ec9b6448cf31b871087712b52e959d',1,'moci::Light']]],
+  ['size',['Size',['../structmoci_1_1BufferElement.html#ac96229ec4c055e04575ae611cf71a4f2',1,'moci::BufferElement']]],
+  ['source',['source',['../structmoci_1_1ShaderSource.html#a210e319689ebac2c01e585b526e8c473',1,'moci::ShaderSource']]],
+  ['sources',['sources',['../structmoci_1_1ShaderProgramSource.html#ae4fce37d79dbb185e1ad402d763436ff',1,'moci::ShaderProgramSource']]],
+  ['start',['Start',['../structmoci_1_1ProfileResult.html#a7adffce7011d2e2da92e42e65753e291',1,'moci::ProfileResult']]],
+  ['statechanged',['stateChanged',['../structmoci_1_1ButtonCallbacks.html#aaad46370e35c3dc0ec3e022d364e8a97',1,'moci::ButtonCallbacks']]]
 ];

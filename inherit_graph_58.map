@@ -1,7 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classmoci_1_1Texture.html" title="moci::Texture" alt="" coords="5,31,116,57"/>
-<area shape="rect" id="node2" href="$classmoci_1_1Texture2D.html" title="moci::Texture2D" alt="" coords="171,5,299,32"/>
-<area shape="rect" id="node4" href="$classmoci_1_1TextureCube.html" title="moci::TextureCube" alt="" coords="164,56,307,83"/>
-<area shape="rect" id="node3" href="$classmoci_1_1OpenGLESTexture2D.html" title="moci::OpenGLESTexture2D" alt="" coords="363,5,557,32"/>
-<area shape="rect" id="node5" href="$classmoci_1_1OpenGLESTextureCube.html" title="moci::OpenGLESTextureCube" alt="" coords="355,56,565,83"/>
+<area shape="rect" id="node1" href="$classmoci_1_1Strings.html" title="Collection of string helper functions. " alt="" coords="5,5,112,32"/>
 </map>

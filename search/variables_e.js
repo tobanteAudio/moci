@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quadcount',['quadCount',['../structmoci_1_1BatchRender2D_1_1FrameStats.html#a75c8bfb1f3520aa6bc26663071115614',1,'moci::BatchRender2D::FrameStats']]]
+  ['red',['Red',['../classmoci_1_1Colors.html#a80697327ce989eaea700cc9272de2f0d',1,'moci::Colors']]]
 ];

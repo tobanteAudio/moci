@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lightmesh_5f',['lightMesh_',['../structmoci_1_1Light.html#a09176e52e0cc02dc39fd0472fd3f9bff',1,'moci::Light']]]
+  ['materialindex',['MaterialIndex',['../classmoci_1_1Mesh_1_1Submesh.html#a738cf9f0de2bf6fb8193be2380e04533',1,'moci::Mesh::Submesh']]]
 ];
