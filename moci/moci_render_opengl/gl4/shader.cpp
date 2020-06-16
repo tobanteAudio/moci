@@ -98,7 +98,7 @@ std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(std::string con
 
     auto shaderSources = std::unordered_map<GLenum, std::string> {};
     auto const program = ShaderParser::SplitSource(source);
-    for (auto const& shader : program.sources)
+    for (auto const& shader : program.shaders)
     {
         auto const type     = OpenGLShaderTypeFromShaderType(shader.type);
         shaderSources[type] = shader.source;

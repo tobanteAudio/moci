@@ -26,7 +26,7 @@ struct ShaderSource
 
 struct ShaderProgramSource
 {
-    Vector<ShaderSource> sources = {};
+    Vector<ShaderSource> shaders = {};
 };
 
 class Shader

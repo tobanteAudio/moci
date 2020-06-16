@@ -50,8 +50,8 @@ auto GetAttributeLayout(std::string src) -> Vector<ShaderAttribute>
 OpenGLESShader::OpenGLESShader(std::string const& filepath)
 {
     auto const program  = parseShader(filepath);
-    auto const vertex   = program.sources[0];
-    auto const fragment = program.sources[1];
+    auto const vertex   = program.shaders[0];
+    auto const fragment = program.shaders[1];
     m_RendererID        = createShader(vertex.source.c_str(), fragment.source.c_str());
 }
 

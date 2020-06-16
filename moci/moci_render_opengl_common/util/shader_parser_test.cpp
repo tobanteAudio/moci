@@ -11,7 +11,7 @@ TEST_CASE("moci_render_opengl_common: ShaderParserSplitSource", "[opengl][common
     SECTION("Empty source")
     {
         auto const program = moci::ShaderParser::SplitSource("");
-        REQUIRE(program.sources.size() == 0);
+        REQUIRE(program.shaders.size() == 0);
     }
 
     SECTION("Inline source")
@@ -23,9 +23,9 @@ TEST_CASE("moci_render_opengl_common: ShaderParserSplitSource", "[opengl][common
             foo
             
         )");
-        REQUIRE(!program.sources[0].source.empty());
-        REQUIRE(program.sources[0].type == moci::ShaderType::Vertex);
-        REQUIRE(!program.sources[1].source.empty());
-        REQUIRE(program.sources[1].type == moci::ShaderType::Fragment);
+        REQUIRE(!program.shaders[0].source.empty());
+        REQUIRE(program.shaders[0].type == moci::ShaderType::Vertex);
+        REQUIRE(!program.shaders[1].source.empty());
+        REQUIRE(program.shaders[1].type == moci::ShaderType::Fragment);
     }
 }
