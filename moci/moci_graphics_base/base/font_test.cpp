@@ -7,23 +7,23 @@
 #include "font.hpp"
 #include "freetype/library.hpp"
 
-TEST_CASE("moci_graphics_base: TypefaceConstruct", "[graphics]")
+TEST_CASE("moci_graphics_base: TypefaceConstruct", "[font][graphics]")
 {
     moci::Typeface face {"comic-sans"};
     REQUIRE(face.GetName() == "comic-sans");
 }
 
-// TEST_CASE("moci_graphics_base: TypefaceGetWidthForString", "[graphics]")
-// {
-//     auto const path = "moci_test_data/OpenSans-Bold.ttf";
-//     auto const opt  = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
-//     REQUIRE(opt.has_value() == true);
+TEST_CASE("moci_graphics_base: TypefaceGetWidthForString", "[font][graphics]")
+{
+    auto const path = "moci_test_data/OpenSans-Bold.ttf";
+    auto const opt  = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
+    REQUIRE(opt.has_value() == true);
 
-//     auto typeface = opt.value();
-//     REQUIRE(typeface.GetWidthForString("") == 0);
-//     REQUIRE(typeface.GetWidthForString("t") == 21);
-//     REQUIRE(typeface.GetWidthForString("tt") == 42);
+    auto typeface = opt.value();
+    REQUIRE(typeface.GetWidthForString("") == 0);
+    REQUIRE(typeface.GetWidthForString("t") == 21);
+    REQUIRE(typeface.GetWidthForString("tt") == 42);
 
-//     REQUIRE(typeface.GetWidthForString("t", 0.5f) == 10);
-//     REQUIRE(typeface.GetWidthForString("tt", 0.5f) == 21);
-// }
+    REQUIRE(typeface.GetWidthForString("t", 0.5f) == 10);
+    REQUIRE(typeface.GetWidthForString("tt", 0.5f) == 21);
+}
