@@ -1,4 +1,4 @@
-#shader vertex
+#type vertex
 
 attribute vec3 position;
 attribute vec4 color;
@@ -14,7 +14,7 @@ void main()
     gl_Position = vec4(position, 1.0);
 }
 
-#shader fragment
+#type fragment
 
 #ifdef GL_ES
 precision mediump float;

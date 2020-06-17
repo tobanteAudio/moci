@@ -1,9 +1,7 @@
 #include "moci_render_opengles/es2/shader.hpp"
 
-#include "moci_core/benchmark/profile.hpp"
-#include "moci_core/core/logging.hpp"
-#include "moci_core/core/strings.hpp"
-#include "moci_core/core/vector.hpp"
+#include "moci_core/moci_core.hpp"
+#include "moci_render_opengl_common/moci_render_opengl_common.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -65,40 +63,16 @@ OpenGLESShader::~OpenGLESShader() { GLCall(glDeleteProgram(m_RendererID)); }
 
 auto OpenGLESShader::parseShader(std::string const& filepath) -> ShaderProgramSource
 {
-    std::ifstream stream(filepath);
-
-    enum class GLShaderType
+    std::ifstream file(filepath);
+    if (file)
     {
-        NONE     = -1,
-        VERTEX   = 0,
-        FRAGMENT = 1
-    };
-
-    std::string line;
-    std::stringstream ss[2];
-    GLShaderType type = GLShaderType::NONE;
-    while (getline(stream, line))
-    {
-        if (line.find("#shader") != std::string::npos)
-        {
-            if (line.find("vertex") != std::string::npos)
-            {
-                type = GLShaderType::VERTEX;
-            }
-            else if (line.find("fragment") != std::string::npos)
-            {
-                type = GLShaderType::FRAGMENT;
-            }
-        }
-        else
-        {
-            ss[(int)type] << line << '\n';
-        }
+        auto ss = std::ostringstream {};
+        ss << file.rdbuf();
+        auto program = ShaderParser::SplitSource(ss.str());
+        return program;
     }
 
-    auto const vertex   = ShaderSource {ShaderType::Vertex, ss[0].str()};
-    auto const fragment = ShaderSource {ShaderType::Fragment, ss[1].str()};
-    return {{vertex, fragment}};
+    return {};
 }
 
 auto OpenGLESShader::createShader(const char* vertexSource, const char* fragmentSource) -> GLint

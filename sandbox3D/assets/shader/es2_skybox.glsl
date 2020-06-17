@@ -1,4 +1,4 @@
-#shader vertex
+#type vertex
 attribute vec3 a_Position;
 
 uniform mat4 u_Projection;
@@ -13,7 +13,7 @@ void main()
     gl_Position = pos.xyww;
 }
 
-#shader fragment
+#type fragment
 #ifdef GL_ES
 precision mediump float;
 #endif
