@@ -17,14 +17,13 @@ public:
     void Bind() override;
     void Unbind() override;
 
-    uint32_t GetColorAttachmentRendererID() const override { return colorAttachment_; }
+    std::uint32_t GetColorAttachmentRendererID() const override { return colorAttachment_; }
     const FramebufferSpecs& GetSpecification() const override { return specs_; }
 
 private:
-    uint32_t renderID_        = 0;
-    uint32_t colorAttachment_ = 0;
-    uint32_t depthAttachment_ = 0;
-    FramebufferSpecs specs_   = {};
+    std::uint32_t renderID_        = 0;
+    std::uint32_t colorAttachment_ = 0;
+    FramebufferSpecs specs_        = {};
 };
 
 }  // namespace moci
