@@ -73,7 +73,7 @@ CONFIG=Release make config-vs build test
   - Native sound APIs.
   - Audio Plugins. (VST3, AudioUnit)
 - Rendering
-  - Metal, DirectX & Vulkan. (Priority as listed)
+  - Vulkan, DirectX & Metal. (Priority as listed)
 
 ## Development
 
