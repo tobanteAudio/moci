@@ -6,15 +6,15 @@
 
 #include "library.hpp"
 
-// TEST_CASE("moci_graphics_base: FreetypeCreateTypeface", "[render]")
-// {
-//     auto const path     = "moci_test_data/OpenSans-Bold.ttf";
-//     auto const typeface = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
-//     REQUIRE(typeface.has_value() == true);
-//     REQUIRE(typeface.value().GetNumCharacters() == 128);
-// }
+TEST_CASE("moci_graphics_base: FreetypeCreateTypeface", "[font]")
+{
+    auto const path     = "moci_test_data/OpenSans-Bold.ttf";
+    auto const typeface = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
+    REQUIRE(typeface.has_value() == true);
+    REQUIRE(typeface.value().GetNumCharacters() == 128);
+}
 
-TEST_CASE("moci_graphics_base: FreetypeCreateTypefaceNoPath", "[render]")
+TEST_CASE("moci_graphics_base: FreetypeCreateTypefaceNoPath", "[font]")
 {
     {
         auto typeface = moci::FreetypeLibrary::CreateTypefaceFromFont("");
