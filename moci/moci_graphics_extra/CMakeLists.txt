@@ -26,6 +26,7 @@ target_link_libraries(moci_graphics_extra_lib
 set (moci_graphics_extra_test_src
     main_test.cpp
     extra/camera_test.cpp
+    extra/mesh_test.cpp
 )
 add_executable(moci_graphics_extra_tests ${moci_graphics_extra_test_src})
 target_link_libraries(moci_graphics_extra_tests 
@@ -36,3 +37,14 @@ target_link_libraries(moci_graphics_extra_tests
 )
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_graphics_extra_test_src})
 catch_discover_tests(moci_graphics_extra_tests)
+
+# COPY TESTFILES
+foreach(_target cube.obj teapot.obj)
+execute_process(
+    COMMAND 
+        ${CMAKE_COMMAND} -E 
+        copy_if_different 
+        ${CMAKE_CURRENT_SOURCE_DIR}/test_data/${_target}
+        ${CMAKE_CURRENT_BINARY_DIR}/moci_test_data/${_target}
+)
+endforeach()
