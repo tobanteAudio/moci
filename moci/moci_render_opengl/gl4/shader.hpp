@@ -37,6 +37,8 @@ public:
     void SetMat4(std::string const& name, glm::mat4 const& value) override;
 
 private:
+    std::int32_t getLocation(std::string const& name) const;
+
     void uploadUniformInt(std::string const& name, int value);
     void uploadUniformInts(std::string const& name, int count, int* values);
     void uploadUniformFloat(std::string const& name, float value);

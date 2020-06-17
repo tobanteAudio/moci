@@ -156,52 +156,49 @@ void OpenGLESShader::SetMat3(std::string const& name, const glm::mat3& value) { 
 
 void OpenGLESShader::SetMat4(std::string const& name, const glm::mat4& value) { uploadUniformMat4(name, value); }
 
+std::int32_t OpenGLESShader::getLocation(std::string const& name) const
+{
+    return glGetUniformLocation(m_RendererID, name.c_str());
+}
+
 void OpenGLESShader::uploadUniformInt(std::string const& name, int value) const
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    GLCall(glUniform1i(location, value));
+    GLCall(glUniform1i(getLocation(name), value));
 }
 
 void OpenGLESShader::uploadUniformInts(std::string const& name, int count, int* values) const
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    GLCall(glUniform1iv(location, count, values));
+    GLCall(glUniform1iv(getLocation(name), count, values));
 }
 
 void OpenGLESShader::uploadUniformFloat(std::string const& name, float value) const
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    GLCall(glUniform1f(location, value));
+    GLCall(glUniform1f(getLocation(name), value));
 }
 
 void OpenGLESShader::uploadUniformFloat2(std::string const& name, const glm::vec2& value) const
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    GLCall(glUniform2f(location, value.x, value.y));
+    GLCall(glUniform2f(getLocation(name), value.x, value.y));
 }
 
 void OpenGLESShader::uploadUniformFloat3(std::string const& name, const glm::vec3& value) const
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    GLCall(glUniform3f(location, value.x, value.y, value.z));
+    GLCall(glUniform3f(getLocation(name), value.x, value.y, value.z));
 }
 
 void OpenGLESShader::uploadUniformFloat4(std::string const& name, const glm::vec4& value) const
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    GLCall(glUniform4f(location, value.x, value.y, value.z, value.w));
+    GLCall(glUniform4f(getLocation(name), value.x, value.y, value.z, value.w));
 }
 
 void OpenGLESShader::uploadUniformMat3(std::string const& name, const glm::mat3& matrix) const
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    GLCall(glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix)));
+    GLCall(glUniformMatrix3fv(getLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
 }
 
 void OpenGLESShader::uploadUniformMat4(std::string const& name, const glm::mat4& matrix) const
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    GLCall(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix)));
+    GLCall(glUniformMatrix4fv(getLocation(name), 1, GL_FALSE, glm::value_ptr(matrix)));
 }
 
 }  // namespace moci

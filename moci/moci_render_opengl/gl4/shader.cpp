@@ -203,52 +203,43 @@ void OpenGLShader::SetFloat4(std::string const& name, const glm::vec4& value) { 
 void OpenGLShader::SetMat3(std::string const& name, glm::mat3 const& value) { uploadUniformMat3(name, value); }
 void OpenGLShader::SetMat4(std::string const& name, const glm::mat4& value) { uploadUniformMat4(name, value); }
 
-void OpenGLShader::uploadUniformInt(std::string const& name, int value)
+std::int32_t OpenGLShader::getLocation(std::string const& name) const
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    glUniform1i(location, value);
+    return glGetUniformLocation(m_RendererID, name.c_str());
 }
+
+void OpenGLShader::uploadUniformInt(std::string const& name, int value) { glUniform1i(getLocation(name), value); }
 
 void OpenGLShader::uploadUniformInts(std::string const& name, int count, int* values)
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    glUniform1iv(location, count, values);
+    glUniform1iv(getLocation(name), count, values);
 }
 
-void OpenGLShader::uploadUniformFloat(std::string const& name, float value)
-{
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    glUniform1f(location, value);
-}
+void OpenGLShader::uploadUniformFloat(std::string const& name, float value) { glUniform1f(getLocation(name), value); }
 
 void OpenGLShader::uploadUniformFloat2(std::string const& name, const glm::vec2& value)
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    glUniform2f(location, value.x, value.y);
+    glUniform2f(getLocation(name), value.x, value.y);
 }
 
 void OpenGLShader::uploadUniformFloat3(std::string const& name, const glm::vec3& value)
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    glUniform3f(location, value.x, value.y, value.z);
+    glUniform3f(getLocation(name), value.x, value.y, value.z);
 }
 
 void OpenGLShader::uploadUniformFloat4(std::string const& name, const glm::vec4& value)
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    glUniform4f(location, value.x, value.y, value.z, value.w);
+    glUniform4f(getLocation(name), value.x, value.y, value.z, value.w);
 }
 
 void OpenGLShader::uploadUniformMat3(std::string const& name, const glm::mat3& matrix)
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+    glUniformMatrix3fv(getLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 void OpenGLShader::uploadUniformMat4(std::string const& name, const glm::mat4& matrix)
 {
-    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-    glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+    glUniformMatrix4fv(getLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 }  // namespace moci
