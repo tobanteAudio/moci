@@ -21,19 +21,19 @@ public:
 };
 }  // namespace
 
-TEST_CASE("moci_application: Layer", "[app]")
+TEST_CASE("moci_render_api: Layer", "[render]")
 {
     moci::Scope<moci::Layer> layer(new TestLayer("test"));
     REQUIRE(layer->GetName() == "test");
 }
 
-TEST_CASE("moci_application: LayerStackConstructor", "[app]")
+TEST_CASE("moci_render_api: LayerStackConstructor", "[render]")
 {
     auto stack = moci::LayerStack();
     REQUIRE(std::distance(stack.begin(), stack.end()) == 0);
 }
 
-TEST_CASE("moci_application: LayerStackPushLayer", "[app]")
+TEST_CASE("moci_render_api: LayerStackPushLayer", "[render]")
 {
     auto stack = moci::LayerStack();
     REQUIRE(stack.begin() == stack.end());

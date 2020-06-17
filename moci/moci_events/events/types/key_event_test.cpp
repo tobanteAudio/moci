@@ -8,7 +8,7 @@
 
 using Catch::Matchers::Contains;
 
-TEST_CASE("moci_events/events: KeyPressedEvent", "[app][events]")
+TEST_CASE("moci_events/events: KeyPressedEvent", "[key][events]")
 {
     auto const event = moci::KeyPressedEvent(moci::Key::Escape, 1);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyPressed);
@@ -23,7 +23,7 @@ TEST_CASE("moci_events/events: KeyPressedEvent", "[app][events]")
     REQUIRE_THAT(event.ToString(), Contains("KeyPressed"));
 }
 
-TEST_CASE("moci_events/events: KeyReleasedEvent", "[app][events]")
+TEST_CASE("moci_events/events: KeyReleasedEvent", "[key][events]")
 {
     auto const event = moci::KeyReleasedEvent(moci::Key::A);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyReleased);
@@ -37,7 +37,7 @@ TEST_CASE("moci_events/events: KeyReleasedEvent", "[app][events]")
     REQUIRE_THAT(event.ToString(), Contains("KeyReleased"));
 }
 
-TEST_CASE("moci_events/events: KeyTypedEvent", "[app][events]")
+TEST_CASE("moci_events/events: KeyTypedEvent", "[key][events]")
 {
     auto const event = moci::KeyTypedEvent(moci::Key::Y);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyTyped);

@@ -8,7 +8,7 @@
 
 using Catch::Matchers::Contains;
 
-TEST_CASE("moci_events/events: MouseMovedEvent", "[app][events]")
+TEST_CASE("moci_events/events: MouseMovedEvent", "[mouse][events]")
 {
     auto const event = moci::MouseMovedEvent(10.0f, 20.0f);
     REQUIRE(event.GetStaticType() == moci::EventType::MouseMoved);
@@ -20,7 +20,7 @@ TEST_CASE("moci_events/events: MouseMovedEvent", "[app][events]")
     REQUIRE_THAT(event.ToString(), Contains("MouseMoved"));
 }
 
-TEST_CASE("moci_events/events: MouseScrolledEvent", "[app][events]")
+TEST_CASE("moci_events/events: MouseScrolledEvent", "[mouse][events]")
 {
     auto const event = moci::MouseScrolledEvent(10.0f, 20.0f);
     REQUIRE(event.GetStaticType() == moci::EventType::MouseScrolled);
@@ -32,7 +32,7 @@ TEST_CASE("moci_events/events: MouseScrolledEvent", "[app][events]")
     REQUIRE_THAT(event.ToString(), Contains("MouseScrolled"));
 }
 
-TEST_CASE("moci_events/events: MouseButtonPressedEvent", "[app][events]")
+TEST_CASE("moci_events/events: MouseButtonPressedEvent", "[mouse][events]")
 {
     auto const event = moci::MouseButtonPressedEvent(moci::MouseCode::Button2);
     REQUIRE(event.GetStaticType() == moci::EventType::MouseButtonPressed);
@@ -43,7 +43,7 @@ TEST_CASE("moci_events/events: MouseButtonPressedEvent", "[app][events]")
     REQUIRE_THAT(event.ToString(), Contains("MouseButtonPressed"));
 }
 
-TEST_CASE("moci_events/events: MouseButtonReleasedEvent", "[app][events]")
+TEST_CASE("moci_events/events: MouseButtonReleasedEvent", "[mouse][events]")
 {
     auto const event = moci::MouseButtonReleasedEvent(moci::MouseCode::ButtonLeft);
     REQUIRE(event.GetStaticType() == moci::EventType::MouseButtonReleased);

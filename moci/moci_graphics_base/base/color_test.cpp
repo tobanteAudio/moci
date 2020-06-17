@@ -6,7 +6,7 @@
 
 #include "color.hpp"
 
-TEST_CASE("moci_graphics_base: ColorDefaultConstructor", "[render]")
+TEST_CASE("moci_graphics_base: ColorDefaultConstructor", "[graphics]")
 {
     moci::Color color {};
     REQUIRE(color.GetRed() == 0.0f);
@@ -15,7 +15,7 @@ TEST_CASE("moci_graphics_base: ColorDefaultConstructor", "[render]")
     REQUIRE(color.GetAlpha() == 0.0f);
 }
 
-TEST_CASE("moci_graphics_base: ColorRGBConstructor", "[render]")
+TEST_CASE("moci_graphics_base: ColorRGBConstructor", "[graphics]")
 {
     moci::Color color {1.0f, 1.0f, 1.0f};
 
@@ -25,7 +25,7 @@ TEST_CASE("moci_graphics_base: ColorRGBConstructor", "[render]")
     REQUIRE(color.GetAlpha() == 1.0f);
 }
 
-TEST_CASE("moci_graphics_base: ColorRGBAConstructor", "[render]")
+TEST_CASE("moci_graphics_base: ColorRGBAConstructor", "[graphics]")
 {
     moci::Color color {1.0f, 1.0f, 1.0f, 0.5f};
 
@@ -35,7 +35,7 @@ TEST_CASE("moci_graphics_base: ColorRGBAConstructor", "[render]")
     REQUIRE(color.GetAlpha() == 0.5f);
 }
 
-TEST_CASE("moci_graphics_base: ColorGetData", "[render]")
+TEST_CASE("moci_graphics_base: ColorGetData", "[graphics]")
 {
     constexpr moci::Color color {};
     auto const data = color.GetData();
@@ -46,7 +46,7 @@ TEST_CASE("moci_graphics_base: ColorGetData", "[render]")
     REQUIRE(data.a == 0.0f);
 }
 
-TEST_CASE("moci_graphics_base: ColorSetRGBA", "[render]")
+TEST_CASE("moci_graphics_base: ColorSetRGBA", "[graphics]")
 {
     moci::Color color {};
     color.SetRed(1.0f);
