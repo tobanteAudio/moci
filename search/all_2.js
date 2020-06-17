@@ -16,6 +16,7 @@ var searchData=
   ['component',['Component',['../classmoci_1_1Component.html',1,'moci::Component'],['../classmoci_1_1Component.html#aadee0bf9c5123a7618150e2e4477b158',1,'moci::Component::Component()=default'],['../classmoci_1_1Component.html#a363f1656d5bf729ce3352c42ffdf87e5',1,'moci::Component::Component(std::string id)']]],
   ['componentlayer',['ComponentLayer',['../classmoci_1_1ComponentLayer.html',1,'moci::ComponentLayer'],['../classmoci_1_1ComponentLayer.html#a248d6f5de45a3d148911670c313f0720',1,'moci::ComponentLayer::ComponentLayer()']]],
   ['contains',['Contains',['../classmoci_1_1Component.html#a0d72379b17a3200c2eb0d77c237acf15',1,'moci::Component']]],
+  ['count',['count',['../structmoci_1_1IndexBufferSpecs.html#a194265c4a77aafb93e21ec30fe02d8f5',1,'moci::IndexBufferSpecs']]],
   ['create',['Create',['../classmoci_1_1Window.html#a0b31f20655020d1a24f674425c546431',1,'moci::Window::Create()'],['../classmoci_1_1GraphicsContext.html#a65ec0bc11d2151dfc8564c64b538f2b1',1,'moci::GraphicsContext::Create()']]],
   ['createapplication',['CreateApplication',['../namespacemoci.html#a4db23f853b9476f63ea9574d29f589ae',1,'moci']]],
   ['createtypefacefromfont',['CreateTypefaceFromFont',['../classmoci_1_1FreetypeLibrary.html#a3476695b059654e026c16aea86d32a08',1,'moci::FreetypeLibrary']]]

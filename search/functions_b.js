@@ -1,7 +1,7 @@
 var searchData=
 [
   ['makeframebuffer',['MakeFramebuffer',['../structmoci_1_1RenderFactory.html#ae273c655ab5beefff1d2973ca5fd00a1',1,'moci::RenderFactory']]],
-  ['makeindexbuffer',['MakeIndexBuffer',['../structmoci_1_1RenderFactory.html#a524b2446b2fcfb298f594b6cd1172afd',1,'moci::RenderFactory']]],
+  ['makeindexbuffer',['MakeIndexBuffer',['../structmoci_1_1RenderFactory.html#a7fdc106d77ae88c940ba193fb91844bc',1,'moci::RenderFactory']]],
   ['makeref',['MakeRef',['../namespacemoci.html#a949b07c0da5bcbfe927563d477f3af29',1,'moci']]],
   ['makescope',['MakeScope',['../namespacemoci.html#aebad0b2258569bb3093624b229bfb915',1,'moci']]],
   ['makescopeguard',['MakeScopeGuard',['../namespacemoci.html#ac9393ca79f3e24f9ca7e40b8b4800bd4',1,'moci']]],
