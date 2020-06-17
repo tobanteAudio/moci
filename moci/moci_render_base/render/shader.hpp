@@ -18,7 +18,7 @@ enum class ShaderType
     Fragment,
 };
 
-struct ShaderSource
+struct ShaderStageSource
 {
     ShaderType type    = ShaderType::Unknown;
     std::string source = {};
@@ -26,7 +26,7 @@ struct ShaderSource
 
 struct ShaderProgramSource
 {
-    Vector<ShaderSource> shaders = {};
+    Vector<ShaderStageSource> shaders = {};
 };
 
 class Shader

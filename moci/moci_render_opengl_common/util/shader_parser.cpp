@@ -46,7 +46,7 @@ ShaderProgramSource ShaderParser::SplitSource(std::string const& sources)
         auto const source = (pos == std::string::npos) ? sources.substr(nextLinePos)  //
                                                        : sources.substr(nextLinePos, pos - nextLinePos);
 
-        shaderSources.shaders.push_back(ShaderSource {ShaderTypeFromString(type), source});
+        shaderSources.shaders.push_back(ShaderStageSource {ShaderTypeFromString(type), source});
     }
 
     return shaderSources;
