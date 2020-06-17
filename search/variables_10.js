@@ -6,5 +6,5 @@ var searchData=
   ['title',['Title',['../structmoci_1_1WindowSpecs.html#aeaab0fe9d573b88995bd305081a0df2a',1,'moci::WindowSpecs']]],
   ['topleft',['topLeft',['../structmoci_1_1Typeface_1_1Character.html#aea048c5444c95845c09fe438c4f93227',1,'moci::Typeface::Character']]],
   ['transform',['Transform',['../classmoci_1_1Mesh_1_1Submesh.html#ae0b97f4ec43464ade41d2fe8f0355ccd',1,'moci::Mesh::Submesh']]],
-  ['type',['type',['../structmoci_1_1ShaderSource.html#a6ed3c6aa44fc0313fdcfdf46fc94d715',1,'moci::ShaderSource::type()'],['../structmoci_1_1BufferElement.html#ada8782dcc210d16281f72a2f5cbb602d',1,'moci::BufferElement::Type()']]]
+  ['type',['type',['../structmoci_1_1ShaderStageSource.html#a69ea7378f8017dfc341b9e9d88e6a7eb',1,'moci::ShaderStageSource::type()'],['../structmoci_1_1BufferElement.html#ada8782dcc210d16281f72a2f5cbb602d',1,'moci::BufferElement::Type()']]]
 ];
