@@ -14,19 +14,21 @@ public:
     OpenGLFramebuffer(FramebufferSpecs spec);
     ~OpenGLFramebuffer() override;
 
-    void Invalidate();
-
     void Bind() override;
     void Unbind() override;
 
-    uint32_t GetColorAttachmentRendererID() const override { return colorAttachment_; }
+    void Resize(std::uint32_t width, std::uint32_t height) override;
+
+    std::uint32_t GetColorAttachmentRendererID() const override { return colorAttachment_; }
     const FramebufferSpecs& GetSpecification() const override { return specs_; }
 
 private:
-    uint32_t renderID_        = 0;
-    uint32_t colorAttachment_ = 0;
-    uint32_t depthAttachment_ = 0;
-    FramebufferSpecs specs_   = {};
+    void invalidate();
+
+    std::uint32_t renderID_        = 0;
+    std::uint32_t colorAttachment_ = 0;
+    std::uint32_t depthAttachment_ = 0;
+    FramebufferSpecs specs_        = {};
 };
 
 }  // namespace moci

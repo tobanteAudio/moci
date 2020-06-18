@@ -8,11 +8,22 @@
 namespace moci
 {
 
-OpenGLFramebuffer::OpenGLFramebuffer(FramebufferSpecs spec) : specs_(std::move(spec)) { Invalidate(); }
+OpenGLFramebuffer::OpenGLFramebuffer(FramebufferSpecs spec) : specs_(std::move(spec)) { invalidate(); }
 
-OpenGLFramebuffer::~OpenGLFramebuffer() { glDeleteFramebuffers(1, &renderID_); }
+OpenGLFramebuffer::~OpenGLFramebuffer()
+{
+    glDeleteFramebuffers(1, &renderID_);
+    glDeleteTextures(1, &colorAttachment_);
+    glDeleteTextures(1, &depthAttachment_);
+}
 
-void OpenGLFramebuffer::Invalidate()
+void OpenGLFramebuffer::Bind() { glBindFramebuffer(GL_FRAMEBUFFER, renderID_); }
+
+void OpenGLFramebuffer::Unbind() { glBindFramebuffer(GL_FRAMEBUFFER, 0); }
+
+void OpenGLFramebuffer::Resize(std::uint32_t width, std::uint32_t height) { }
+
+void OpenGLFramebuffer::invalidate()
 {
     glCreateFramebuffers(1, &renderID_);
     glBindFramebuffer(GL_FRAMEBUFFER, renderID_);
@@ -34,11 +45,6 @@ void OpenGLFramebuffer::Invalidate()
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
-
-void OpenGLFramebuffer::Bind() { glBindFramebuffer(GL_FRAMEBUFFER, renderID_); }
-
-void OpenGLFramebuffer::Unbind() { glBindFramebuffer(GL_FRAMEBUFFER, 0); }
-
 }  // namespace moci
 
 #endif
