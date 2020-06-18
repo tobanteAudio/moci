@@ -21,10 +21,22 @@ void OpenGLFramebuffer::Bind() { glBindFramebuffer(GL_FRAMEBUFFER, renderID_); }
 
 void OpenGLFramebuffer::Unbind() { glBindFramebuffer(GL_FRAMEBUFFER, 0); }
 
-void OpenGLFramebuffer::Resize(std::uint32_t width, std::uint32_t height) { }
+void OpenGLFramebuffer::Resize(std::uint32_t width, std::uint32_t height)
+{
+    specs_.width  = width;
+    specs_.height = height;
+    invalidate();
+}
 
 void OpenGLFramebuffer::invalidate()
 {
+    if (renderID_ != 0)
+    {
+        glDeleteFramebuffers(1, &renderID_);
+        glDeleteTextures(1, &colorAttachment_);
+        glDeleteTextures(1, &depthAttachment_);
+    }
+
     glCreateFramebuffers(1, &renderID_);
     glBindFramebuffer(GL_FRAMEBUFFER, renderID_);
 
