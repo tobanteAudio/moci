@@ -16,6 +16,7 @@ private:
     void initGLFW();
     void createGLFWWindow();
     void createVulkanInstance();
+    void createVulkanDevice();
 
     // Native window handle
     GLFWwindow* nativeWindow_ = nullptr;
@@ -23,6 +24,10 @@ private:
     // Vulkan instance, stores all per-application states
     VkInstance instance_ = VK_NULL_HANDLE;
 
+    // Window surface to render to
     VkSurfaceKHR surface_ = VK_NULL_HANDLE;
+
+    // Selected GPU
+    VkPhysicalDevice physicalDevice_ = VK_NULL_HANDLE;
 };
 }  // namespace mvk

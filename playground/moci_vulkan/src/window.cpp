@@ -13,11 +13,12 @@ Window::Window()
 
 Window::~Window()
 {
-    glfwDestroyWindow(nativeWindow_);
-    glfwTerminate();
 
     vkDestroySurfaceKHR(instance_, surface_, nullptr);
     vkDestroyInstance(instance_, nullptr);
+
+    glfwDestroyWindow(nativeWindow_);
+    glfwTerminate();
 }
 
 void Window::initGLFW()
@@ -83,4 +84,35 @@ void Window::createVulkanInstance()
     VULKAN_CALL(vkCreateInstance(&instanceInfo, nullptr, &instance_));
 }
 
+void Window::createVulkanDevice()
+{
+    auto gpuCount = uint32_t {0};
+    VULKAN_CALL(vkEnumeratePhysicalDevices(instance_, &gpuCount, nullptr));
+    auto physicalDevices = std::vector<VkPhysicalDevice> {gpuCount};
+    VULKAN_CALL(vkEnumeratePhysicalDevices(instance_, &gpuCount, physicalDevices.data()));
+
+    for (auto const& device : physicalDevices) { mvk::PrintVulkanDeviceStats(device); }
+
+    // Select default GPU, aka index 0.
+    physicalDevice_ = physicalDevices.at(0);
+
+    // auto queueFamilyCount = uint32_t {0};
+    // vkGetPhysicalDeviceQueueFamilyProperties(physicalDevices[0], &queueFamilyCount, nullptr);
+    // auto familyProperties = std::vector<VkQueueFamilyProperties> {};
+    // familyProperties.resize(queueFamilyCount);
+    // vkGetPhysicalDeviceQueueFamilyProperties(physicalDevices[0], &queueFamilyCount, familyProperties.data());
+
+    // for (uint32_t i = 0; i < queueFamilyCount; ++i)
+    // {
+    //     if (familyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) { queueFamilyIdx = i; }
+    // }
+
+    // if (queueFamilyIdx == UINT32_MAX)
+    // {
+    //     // queue family not found
+    //     vkDestroyInstance(instance_, nullptr);
+    //     glfwTerminate();
+    //     throw std::runtime_error("Device queue family not found");
+    // }
+}
 }  // namespace mvk

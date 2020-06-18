@@ -3,5 +3,6 @@
 int main()
 {
     auto app = mvk::Application {};
-    return 0;
+    app.Run();
+    return EXIT_SUCCESS;
 }

@@ -13,6 +13,7 @@ public:
     void Run();
 
 private:
-    std::unique_ptr<Window> window_;
+    std::unique_ptr<Window> window_ = nullptr;
+    bool isRunning_                 = true;
 };
 }  // namespace mvk
