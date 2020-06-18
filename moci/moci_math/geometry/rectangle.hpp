@@ -109,10 +109,7 @@ public:
      */
     [[nodiscard]] constexpr auto GetAspectRatio() const noexcept -> Type
     {
-        if (GetWidth() != Type {})
-        {
-            return GetWidth() / GetHeight();
-        }
+        if (GetWidth() != Type {}) { return GetWidth() / GetHeight(); }
 
         return Type {};
     }

@@ -25,10 +25,7 @@ std::string SystemInfo::Pimpl::GetVendor()
 {
     char buffer[512];
     size_t size = sizeof(buffer);
-    if (sysctlbyname("machdep.cpu.vendor", &buffer, &size, nullptr, 0) < 0)
-    {
-        perror("sysctl");
-    }
+    if (sysctlbyname("machdep.cpu.vendor", &buffer, &size, nullptr, 0) < 0) { perror("sysctl"); }
     return std::string(buffer, size);
 }
 
@@ -36,10 +33,7 @@ std::string SystemInfo::Pimpl::GetCPUModel()
 {
     char buffer[512];
     size_t size = sizeof(buffer);
-    if (sysctlbyname("machdep.cpu.brand_string", &buffer, &size, nullptr, 0) < 0)
-    {
-        perror("sysctl");
-    }
+    if (sysctlbyname("machdep.cpu.brand_string", &buffer, &size, nullptr, 0) < 0) { perror("sysctl"); }
     return std::string(buffer, size);
 }
 
@@ -47,10 +41,7 @@ int SystemInfo::Pimpl::GetCPUCoreCount()
 {
     int buffer;
     size_t size = sizeof(buffer);
-    if (sysctlbyname("machdep.cpu.core_count", &buffer, &size, nullptr, 0) < 0)
-    {
-        perror("sysctl");
-    }
+    if (sysctlbyname("machdep.cpu.core_count", &buffer, &size, nullptr, 0) < 0) { perror("sysctl"); }
 
     auto const coreCountStr = std::to_string(buffer);
     int coreCount {-1};
@@ -72,10 +63,7 @@ int SystemInfo::Pimpl::GetCPUThreadCount()
 {
     int buffer;
     size_t size = sizeof(buffer);
-    if (sysctlbyname("machdep.cpu.thread_count", &buffer, &size, nullptr, 0) < 0)
-    {
-        perror("sysctl");
-    }
+    if (sysctlbyname("machdep.cpu.thread_count", &buffer, &size, nullptr, 0) < 0) { perror("sysctl"); }
 
     auto const coreCountStr = std::to_string(buffer);
     int coreCount {-1};
@@ -97,10 +85,7 @@ std::string SystemInfo::Pimpl::GetCPUFeatures()
 {
     char buffer[512];
     size_t size = sizeof(buffer);
-    if (sysctlbyname("machdep.cpu.features", &buffer, &size, nullptr, 0) < 0)
-    {
-        perror("sysctl");
-    }
+    if (sysctlbyname("machdep.cpu.features", &buffer, &size, nullptr, 0) < 0) { perror("sysctl"); }
     return std::string(buffer, size);
 }
 

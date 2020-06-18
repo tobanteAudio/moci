@@ -98,10 +98,7 @@ public:
         );
 
         std::lock_guard<std::mutex> lock(mutex_);
-        if (currentSession_ != nullptr)
-        {
-            buffer_.push_back(json);
-        }
+        if (currentSession_ != nullptr) { buffer_.push_back(json); }
     }
 
     static auto Get() -> Instrumentor&
@@ -130,10 +127,7 @@ private:
 
         if (currentSession_ != nullptr)
         {
-            for (auto const& item : buffer_)
-            {
-                outputStream_ << item;
-            }
+            for (auto const& item : buffer_) { outputStream_ << item; }
 
             outputStream_.flush();
             WriteFooter();
@@ -154,10 +148,7 @@ public:
 
     ~InstrumentationTimer()
     {
-        if (!stopped_)
-        {
-            Stop();
-        }
+        if (!stopped_) { Stop(); }
     }
 
     void Stop()

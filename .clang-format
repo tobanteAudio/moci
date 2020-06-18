@@ -7,7 +7,7 @@ AlignConsecutiveDeclarations: "false"
 AlignEscapedNewlines: Right
 AlignOperands: "true"
 AlignTrailingComments: "true"
-AllowShortBlocksOnASingleLine: "false"
+AllowShortBlocksOnASingleLine: "true"
 AllowShortCaseLabelsOnASingleLine: "true"
 AllowShortFunctionsOnASingleLine: All
 AllowShortIfStatementsOnASingleLine: "true"
@@ -56,4 +56,3 @@ Language: Proto
 Language: ObjC
 BasedOnStyle: WebKit
 ColumnLimit: "120"
-

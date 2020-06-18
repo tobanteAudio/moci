@@ -99,16 +99,10 @@ auto BatchRender2D::DrawText(std::string text, glm::vec2 position, float scale, 
 auto BatchRender2D::FontInit(std::string const& fontPath) -> void
 {
     FT_Library ft = nullptr;
-    if (FT_Init_FreeType(&ft) != 0)
-    {
-        MOCI_CORE_ERROR("freetype: Could not init FreeType Library");
-    }
+    if (FT_Init_FreeType(&ft) != 0) { MOCI_CORE_ERROR("freetype: Could not init FreeType Library"); }
 
     FT_Face face = nullptr;
-    if (FT_New_Face(ft, fontPath.c_str(), 0, &face) != 0)
-    {
-        MOCI_CORE_ERROR("freetype: Failed to load font");
-    }
+    if (FT_New_Face(ft, fontPath.c_str(), 0, &face) != 0) { MOCI_CORE_ERROR("freetype: Failed to load font"); }
 
     FT_Set_Pixel_Sizes(face, 0, 48);
 
@@ -169,10 +163,7 @@ auto BatchRender2D::EndBatch() -> void
 auto BatchRender2D::Flush() -> void
 {
     MOCI_PROFILE_FUNCTION();
-    for (size_t i = 0; i < data_.textures.size(); i++)
-    {
-        data_.textures[i]->Bind(static_cast<std::uint32_t>(i));
-    }
+    for (size_t i = 0; i < data_.textures.size(); i++) { data_.textures[i]->Bind(static_cast<std::uint32_t>(i)); }
 
     data_.vao->Bind();
     {
@@ -182,10 +173,7 @@ auto BatchRender2D::Flush() -> void
         RenderCommand::DrawIndexed(mode, numIndices, nullptr);
     }
     data_.vao->Unbind();
-    for (auto const& tex : data_.textures)
-    {
-        tex->Unbind();
-    }
+    for (auto const& tex : data_.textures) { tex->Unbind(); }
 
     data_.renderFrameStats.drawCount++;
 }
@@ -243,10 +231,7 @@ auto BatchRender2D::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Opti
         Vertex {{x + width, y + height, 0.0f}, color, {1.0f, 1.0f}, static_cast<float>(texID), 1.0f});
     data_.vertices.push_back(Vertex {{x, y + height, 0.0f}, color, {0.0f, 1.0f}, static_cast<float>(texID), 1.0f});
 
-    for (auto const i : {0, 1, 2, 2, 3, 0})
-    {
-        data_.indices.push_back(static_cast<uint32_t>(data_.indexOffset + i));
-    }
+    for (auto const i : {0, 1, 2, 2, 3, 0}) { data_.indices.push_back(static_cast<uint32_t>(data_.indexOffset + i)); }
     data_.indexOffset += 4;
 
     data_.renderFrameStats.vertexCount += 4;

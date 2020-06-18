@@ -87,10 +87,7 @@ public:
         Vector<std::string> tokens;
         std::string token;
         std::istringstream tokenStream(s);
-        while (std::getline(tokenStream, token, delimiter))
-        {
-            tokens.push_back(token);
-        }
+        while (std::getline(tokenStream, token, delimiter)) { tokens.push_back(token); }
         return tokens;
     }
 

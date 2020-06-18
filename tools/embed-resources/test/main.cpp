@@ -8,10 +8,7 @@ int main()
     auto line               = std::string {};
     auto input              = std::istringstream {shaderSource};
 
-    while (getline(input, line))
-    {
-        std::printf("%s\n", line.c_str());
-    }
+    while (getline(input, line)) { std::printf("%s\n", line.c_str()); }
 
     return 0;
 }

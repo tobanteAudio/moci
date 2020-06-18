@@ -2,10 +2,7 @@
 
 void GLClearError()
 {
-    while (glGetError() != GL_NO_ERROR)
-    {
-        ;
-    }
+    while (glGetError() != GL_NO_ERROR) { ; }
 }
 
 auto GLLogCall(const char* function, const char* file, int line) -> bool

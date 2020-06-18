@@ -17,14 +17,8 @@ namespace
 {
 GLenum OpenGLShaderTypeFromShaderType(ShaderType type)
 {
-    if (type == ShaderType::Vertex)
-    {
-        return GL_VERTEX_SHADER;
-    }
-    if (type == ShaderType::Fragment)
-    {
-        return GL_FRAGMENT_SHADER;
-    }
+    if (type == ShaderType::Vertex) { return GL_VERTEX_SHADER; }
+    if (type == ShaderType::Fragment) { return GL_FRAGMENT_SHADER; }
 
     MOCI_CORE_ASSERT(false, "Unknown shader type!");
     return 0;

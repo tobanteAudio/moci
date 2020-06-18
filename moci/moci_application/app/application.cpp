@@ -53,10 +53,7 @@ void Application::OnEvent(Event& e)
     for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
     {
         (*--it)->OnEvent(e);
-        if (e.Handled)
-        {
-            break;
-        }
+        if (e.Handled) { break; }
     }
 }
 
@@ -74,19 +71,13 @@ void Application::Run()
 
         if (!m_Minimized)
         {
-            for (auto& layer : m_LayerStack)
-            {
-                layer->OnUpdate(timestep);
-            }
+            for (auto& layer : m_LayerStack) { layer->OnUpdate(timestep); }
         }
 
         {
             MOCI_PROFILE_SCOPE("App::Run::Loop::ImGui");
             moci::ImGuiLayer::Begin();
-            for (auto& layer : m_LayerStack)
-            {
-                layer->OnImGuiRender();
-            }
+            for (auto& layer : m_LayerStack) { layer->OnImGuiRender(); }
             moci::ImGuiLayer::End();
         }
 

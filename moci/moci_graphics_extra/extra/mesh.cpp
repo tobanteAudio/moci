@@ -55,10 +55,7 @@ Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
     importer_ = moci::MakeScope<Assimp::Importer>();
 
     const aiScene* scene = importer_->ReadFile(filePath_, s_MeshImportFlags);
-    if ((scene == nullptr) || !scene->HasMeshes())
-    {
-        MOCI_CORE_ERROR("Failed to load mesh file: {0}", filePath_);
-    }
+    if ((scene == nullptr) || !scene->HasMeshes()) { MOCI_CORE_ERROR("Failed to load mesh file: {0}", filePath_); }
 
     isAnimated_ = scene->mAnimations != nullptr;
     // m_MeshShader = isAnimated_ ? Renderer::GetShaderLibrary()->Get("HazelPBR_Anim")
@@ -124,9 +121,7 @@ Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
                 // }
 
                 if (mesh->HasTextureCoords(0))
-                {
-                    vertex.texCoord = {mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y};
-                }
+                { vertex.texCoord = {mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y}; }
 
                 staticVertices_.push_back(vertex);
             }

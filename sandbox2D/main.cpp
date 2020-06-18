@@ -37,10 +37,7 @@ private:
 
 float LinearToDecibel(float linear)
 {
-    if (linear != 0.0f)
-    {
-        return 20.0f * log10f(linear);
-    }
+    if (linear != 0.0f) { return 20.0f * log10f(linear); }
     return -144.0f;  // effectively minus infinity
 }
 
@@ -107,20 +104,11 @@ public:
         auto const buttonHeight = static_cast<int>(buttonArea.GetHeight() / buttons_.size());
         auto const channelWidth = static_cast<int>(area.GetWidth() / channels_.size());
 
-        for (auto& channel : channels_)
-        {
-            channel->SetBounds(area.RemoveFromLeft(channelWidth).Reduced(5, 25));
-        }
+        for (auto& channel : channels_) { channel->SetBounds(area.RemoveFromLeft(channelWidth).Reduced(5, 25)); }
 
-        for (auto& slider : sliders_)
-        {
-            slider->SetBounds(sliderArea.RemoveFromTop(sliderHeight).Reduced(5, 25));
-        }
+        for (auto& slider : sliders_) { slider->SetBounds(sliderArea.RemoveFromTop(sliderHeight).Reduced(5, 25)); }
 
-        for (auto& button : buttons_)
-        {
-            button->SetBounds(buttonArea.RemoveFromTop(buttonHeight).Reduced(5, 5));
-        }
+        for (auto& button : buttons_) { button->SetBounds(buttonArea.RemoveFromTop(buttonHeight).Reduced(5, 5)); }
     }
 
 private:

@@ -53,10 +53,7 @@ public:
         {
             auto const x = end_.GetX() - start_.GetX();
             auto const y = end_.GetY() - start_.GetY();
-            if (x == Type(0))
-            {
-                return std::nullopt;
-            }
+            if (x == Type(0)) { return std::nullopt; }
             return (y / x);
         }
         return std::nullopt;
@@ -112,10 +109,7 @@ public:
         auto const b = start_.GetX() - end_.GetX();
         auto const c = a * (start_.GetX()) + b * (start_.GetY());
 
-        if (b < 0)
-        {
-            fmt::print("The line passing through points P and Q is: {0}x {1}y = {2}\n", a, b, c);
-        }
+        if (b < 0) { fmt::print("The line passing through points P and Q is: {0}x {1}y = {2}\n", a, b, c); }
         else
         {
             fmt::print("The line passing through points P and Q is: {0}x + {1}y = {2}\n", a, b, c);

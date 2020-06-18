@@ -94,16 +94,10 @@ void DatagramSocket::Pimpl::Listen()
         {
             auto const rc = recvfrom(socketDescriptor_, reinterpret_cast<char*>(buffer_.data()),
                                      static_cast<int>(buffer_.size()), 0, (SOCKADDR*)&remoteAddr, &remoteAddrLen);
-            if (rc == SOCKET_ERROR)
-            {
-                MOCI_CORE_ERROR("recvfrom, error code: {}", WSAGetLastError());
-            }
+            if (rc == SOCKET_ERROR) { MOCI_CORE_ERROR("recvfrom, error code: {}", WSAGetLastError()); }
             else
             {
-                if (messageCallback_)
-                {
-                    messageCallback_(buffer_, buffer_.size());
-                }
+                if (messageCallback_) { messageCallback_(buffer_, buffer_.size()); }
             }
         }
     });
@@ -113,10 +107,7 @@ void DatagramSocket::Pimpl::Shutdown()
 {
     MOCI_CORE_INFO("Stop udp listen");
     isRunning_.store(false);
-    if (listenerThread_.joinable())
-    {
-        listenerThread_.join();
-    }
+    if (listenerThread_.joinable()) { listenerThread_.join(); }
 }
 
 }  // namespace moci

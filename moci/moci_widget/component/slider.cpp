@@ -39,10 +39,7 @@ auto Slider::GetValue() const noexcept -> float { return value_; }
 auto Slider::SetValue(float newValue) noexcept -> void
 {
     value_ = newValue;
-    if (callbacks_.valueChanged)
-    {
-        callbacks_.valueChanged(newValue);
-    }
+    if (callbacks_.valueChanged) { callbacks_.valueChanged(newValue); }
 }
 
 Color Slider::GetColor() const noexcept { return color_; }

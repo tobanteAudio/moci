@@ -258,22 +258,12 @@ bool DemoLayer::OnWindowResized(moci::WindowResizeEvent& e)
 bool DemoLayer::OnKeyPressed(moci::KeyPressedEvent& e)
 {
     auto const cameraSpeed = 0.15f * lastTimestep_;
-    if (e.GetKeyCode() == moci::Key::Up)
-    {
-        cameraPos_ += cameraSpeed * cameraFront_;
-    }
-    if (e.GetKeyCode() == moci::Key::Down)
-    {
-        cameraPos_ -= cameraSpeed * cameraFront_;
-    }
+    if (e.GetKeyCode() == moci::Key::Up) { cameraPos_ += cameraSpeed * cameraFront_; }
+    if (e.GetKeyCode() == moci::Key::Down) { cameraPos_ -= cameraSpeed * cameraFront_; }
     if (e.GetKeyCode() == moci::Key::Left)
-    {
-        cameraPos_ -= glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed;
-    }
+    { cameraPos_ -= glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed; }
     if (e.GetKeyCode() == moci::Key::Right)
-    {
-        cameraPos_ += glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed;
-    }
+    { cameraPos_ += glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed; }
 
     return true;
 }
@@ -283,14 +273,8 @@ bool DemoLayer::OnMouseScrolled(moci::MouseScrolledEvent& e)
     cameraFOV_ -= e.GetYOffset();
     constexpr auto minFOV = 1.0f;
     constexpr auto maxFOV = 75.0f;
-    if (cameraFOV_ < minFOV)
-    {
-        cameraFOV_ = minFOV;
-    }
-    if (cameraFOV_ > maxFOV)
-    {
-        cameraFOV_ = maxFOV;
-    }
+    if (cameraFOV_ < minFOV) { cameraFOV_ = minFOV; }
+    if (cameraFOV_ > maxFOV) { cameraFOV_ = maxFOV; }
     return true;
 }
 
@@ -340,15 +324,9 @@ bool DemoLayer::OnMouseMoved(moci::MouseMovedEvent& e)
         cameraYaw_ += xOffset;
         cameraPitch_ += yOffset;
 
-        if (cameraPitch_ > 89.0f)
-        {
-            cameraPitch_ = 89.0f;
-        }
+        if (cameraPitch_ > 89.0f) { cameraPitch_ = 89.0f; }
 
-        if (cameraPitch_ < -89.0f)
-        {
-            cameraPitch_ = -89.0f;
-        }
+        if (cameraPitch_ < -89.0f) { cameraPitch_ = -89.0f; }
 
         auto front   = glm::vec3 {};
         front.x      = glm::cos(glm::radians(cameraYaw_)) * glm::cos(glm::radians(cameraPitch_));
@@ -366,14 +344,8 @@ void DemoLayer::OnImGuiRender()
     auto const frameCount = moci::Application::Get().GetWindow().GetFrameCount();
     if (frameCount >= 100)
     {
-        if (fps < drawStats_.minFPS)
-        {
-            drawStats_.minFPS = fps;
-        }
-        if (fps > drawStats_.maxFPS)
-        {
-            drawStats_.maxFPS = fps;
-        }
+        if (fps < drawStats_.minFPS) { drawStats_.minFPS = fps; }
+        if (fps > drawStats_.maxFPS) { drawStats_.maxFPS = fps; }
     }
 
     auto const fpsStr    = fmt::format("FPS: {0:0.1f}", fps);
@@ -435,10 +407,7 @@ void DemoLayer::OnImGuiRender()
             ImGui::SliderFloat("Light Scale", &light->scale, 0.1f, 1.0f);
         }
 
-        if (ImGui::CollapsingHeader("Model"))
-        {
-            ImGui::SliderFloat("Scale", &modelScale_, 0.01f, 20.0f);
-        }
+        if (ImGui::CollapsingHeader("Model")) { ImGui::SliderFloat("Scale", &modelScale_, 0.01f, 20.0f); }
 
         if (ImGui::CollapsingHeader("Stats"))
         {
@@ -464,8 +433,5 @@ void DemoLayer::OnImGuiRender()
     }
 
     // ImGui Demo
-    if (imguiDemo_)
-    {
-        ImGui::ShowDemoWindow(&imguiDemo_);
-    }
+    if (imguiDemo_) { ImGui::ShowDemoWindow(&imguiDemo_); }
 }

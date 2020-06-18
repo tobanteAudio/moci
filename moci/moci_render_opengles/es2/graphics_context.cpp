@@ -24,10 +24,7 @@ void OpenGLESContext::Init()
 #if defined(MOCI_API_OPENGL_ES) || defined(MOCI_MAC)
 #else
     // Initialize OpenGL loader
-    if (auto err = glewInit() != GLEW_OK; err)
-    {
-        MOCI_CORE_ASSERT(err, "Failed to initialize glew!");
-    }
+    if (auto err = glewInit() != GLEW_OK; err) { MOCI_CORE_ASSERT(err, "Failed to initialize glew!"); }
 #endif
 
     // msaa

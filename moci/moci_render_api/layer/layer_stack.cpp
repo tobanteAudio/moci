@@ -10,10 +10,7 @@ LayerStack::LayerStack() = default;
 
 LayerStack::~LayerStack()
 {
-    for (Layer::Ptr& layer : m_Layers)
-    {
-        layer->OnDetach();
-    }
+    for (Layer::Ptr& layer : m_Layers) { layer->OnDetach(); }
 }
 
 void LayerStack::PushLayer(Layer::Ptr&& layer)

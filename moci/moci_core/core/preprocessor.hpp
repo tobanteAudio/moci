@@ -166,17 +166,11 @@
 #ifdef MOCI_ENABLE_ASSERTIONS
 #define MOCI_ASSERT(x, ...)                                                                                            \
     {                                                                                                                  \
-        if (!(x))                                                                                                      \
-        {                                                                                                              \
-            MOCI_CRITICAL("Assertion Failed: {0}:{1}: {2}", __FILE__, __LINE__, __VA_ARGS__);                          \
-        }                                                                                                              \
+        if (!(x)) { MOCI_CRITICAL("Assertion Failed: {0}:{1}: {2}", __FILE__, __LINE__, __VA_ARGS__); }                \
     }
 #define MOCI_CORE_ASSERT(x, ...)                                                                                       \
     {                                                                                                                  \
-        if (!(x))                                                                                                      \
-        {                                                                                                              \
-            MOCI_CORE_CRITICAL("Assertion Failed: {0}:{1}: {2}", __FILE__, __LINE__, __VA_ARGS__);                     \
-        }                                                                                                              \
+        if (!(x)) { MOCI_CORE_CRITICAL("Assertion Failed: {0}:{1}: {2}", __FILE__, __LINE__, __VA_ARGS__); }           \
     }
 #else
 #define MOCI_ASSERT(x, ...)

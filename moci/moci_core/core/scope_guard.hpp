@@ -14,10 +14,7 @@ public:
 
     ScopeGuard(const ScopeGuard& _sc) : committed(false), rollbackLambda(_sc.rollbackLambda)
     {
-        if (_sc.committed)
-        {
-            committed = true;
-        }
+        if (_sc.committed) { committed = true; }
         else
         {
             _sc.commit();
@@ -26,10 +23,7 @@ public:
 
     ScopeGuard(ScopeGuard&& _sc) noexcept : committed(false), rollbackLambda(_sc.rollbackLambda)
     {
-        if (_sc.committed)
-        {
-            committed = true;
-        }
+        if (_sc.committed) { committed = true; }
         else
         {
             _sc.commit();
@@ -54,10 +48,7 @@ public:
 
     ~ScopeGuard()
     {
-        if (!committed)
-        {
-            rollbackLambda();
-        }
+        if (!committed) { rollbackLambda(); }
     }
 
     inline void commit() { committed = true; }

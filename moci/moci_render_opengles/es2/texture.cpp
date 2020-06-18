@@ -17,19 +17,13 @@ OpenGLESTexture2D::OpenGLESTexture2D(std::string path) : path_(std::move(path))
 {
     stbi_set_flip_vertically_on_load(1);
     data_ = stbi_load(path_.c_str(), &width_, &height_, &bpp_, 4);
-    if (data_ == nullptr)
-    {
-        MOCI_CORE_ERROR("stbi error");
-    }
+    if (data_ == nullptr) { MOCI_CORE_ERROR("stbi error"); }
 
     createTexture();
     setFilterModes();
     GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_UNSIGNED_BYTE, data_));
 
-    if (data_ != nullptr)
-    {
-        stbi_image_free(data_);
-    }
+    if (data_ != nullptr) { stbi_image_free(data_); }
 }
 
 OpenGLESTexture2D::OpenGLESTexture2D(Texture::Format format, uint32_t width, uint32_t height, void* data)
@@ -119,9 +113,7 @@ OpenGLESTextureCube::OpenGLESTextureCube(Vector<std::string> paths) : paths_(std
                 Vector<stbi_uc> outBuffer {};
                 outBuffer.resize(newSize * newSize * numChannels);
                 if (stbir_resize_uint8(data, width, height, 0, outBuffer.data(), newSize, newSize, 0, numChannels) == 0)
-                {
-                    MOCI_ERROR("    stbi resize error");
-                }
+                { MOCI_ERROR("    stbi resize error"); }
 
                 GLCall(glTexImage2D(pos, 0, GL_RGB, newSize, newSize, 0, GL_RGB, GL_UNSIGNED_BYTE, outBuffer.data()));
             }

@@ -37,28 +37,19 @@ bool DatagramSocket::Pimpl::Write(std::string const& host, int port, std::uint8_
 {
     // Creating socket file descriptor
     int sockDescriptor = 0;
-    if ((sockDescriptor = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
-    {
-        return false;
-    }
+    if ((sockDescriptor = socket(AF_INET, SOCK_DGRAM, 0)) < 0) { return false; }
 
     // Client
     sockaddr_in client {};
     memset(&client, 0, sizeof(client));
     client.sin_family = AF_INET;
     client.sin_port   = htons(static_cast<std::uint16_t>(port));
-    if (inet_aton(host.c_str(), &client.sin_addr) == 0)
-    {
-        return false;
-    }
+    if (inet_aton(host.c_str(), &client.sin_addr) == 0) { return false; }
 
     auto const bytesSend
         = sendto(sockDescriptor, buffer, numBytes, 0, reinterpret_cast<sockaddr*>(&client), sizeof(client));
 
-    if (bytesSend == -1)
-    {
-        return false;
-    }
+    if (bytesSend == -1) { return false; }
     close(sockDescriptor);
 
     return true;
@@ -67,10 +58,7 @@ bool DatagramSocket::Pimpl::Bind(std::string ip, int port)
 {
     moci::IgnoreUnused(ip);
     // Creating socket file descriptor
-    if ((socketDescriptor_ = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
-    {
-        return false;
-    }
+    if ((socketDescriptor_ = socket(AF_INET, SOCK_DGRAM, 0)) < 0) { return false; }
 
     sockaddr_in servaddr {};
     std::memset(&servaddr, 0, sizeof(servaddr));
@@ -108,10 +96,7 @@ void DatagramSocket::Pimpl::Listen()
 
             if (numBytesRecv > 0)
             {
-                if (messageCallback_)
-                {
-                    messageCallback_(buffer_, buffer_.size());
-                }
+                if (messageCallback_) { messageCallback_(buffer_, buffer_.size()); }
             }
         }
     });
@@ -121,10 +106,7 @@ void DatagramSocket::Pimpl::Shutdown()
 {
     MOCI_CORE_INFO("Stop udp listen");
     isRunning_.store(false);
-    if (listenerThread_.joinable())
-    {
-        listenerThread_.join();
-    }
+    if (listenerThread_.joinable()) { listenerThread_.join(); }
 }
 
 }  // namespace moci

@@ -42,10 +42,7 @@ private:
         while (!handler(comp))
         {
             comp = comp->GetParent();
-            if (comp == nullptr)
-            {
-                return false;
-            }
+            if (comp == nullptr) { return false; }
         }
 
         return true;

@@ -14,19 +14,13 @@ void Component::OnResize() { }
 void Component::Draw(Painter& painter)
 {
     OnDraw(painter);
-    for (auto* child : children_)
-    {
-        child->Draw(painter);
-    }
+    for (auto* child : children_) { child->Draw(painter); }
 }
 
 void Component::Resize()
 {
     OnResize();
-    for (auto* child : children_)
-    {
-        child->OnResize();
-    }
+    for (auto* child : children_) { child->OnResize(); }
 }
 
 void Component::SetID(std::string id) { id_ = std::move(id); }
@@ -39,10 +33,7 @@ auto Component::GetParent() -> Component* { return parent_; }
 
 auto Component::GetRootComponent() -> Component*
 {
-    if (parent_ != nullptr)
-    {
-        return parent_->GetRootComponent();
-    }
+    if (parent_ != nullptr) { return parent_->GetRootComponent(); }
     return this;
 }
 
@@ -93,10 +84,7 @@ auto Component::Contains(Point<int> position) const noexcept -> bool
 {
     if (position.GetX() >= GetX() && position.GetX() <= GetX() + GetWidth())
     {
-        if (position.GetY() >= GetY() && position.GetY() <= GetY() + GetHeight())
-        {
-            return true;
-        }
+        if (position.GetY() >= GetY() && position.GetY() <= GetY() + GetHeight()) { return true; }
     }
 
     return false;
@@ -104,19 +92,13 @@ auto Component::Contains(Point<int> position) const noexcept -> bool
 
 auto Component::FindComponentAt(Point<int> position) noexcept -> Component*
 {
-    if (!Contains(position))
-    {
-        return nullptr;
-    }
+    if (!Contains(position)) { return nullptr; }
 
     for (auto* comp : GetChildren())
     {
         if (comp->Contains(position))
         {
-            if (comp->GetChildren().empty())
-            {
-                return comp;
-            }
+            if (comp->GetChildren().empty()) { return comp; }
 
             return comp->FindComponentAt(position);
         }
@@ -130,18 +112,12 @@ void Component::SetStyle(Style* newStyle) noexcept { style_ = newStyle; }
 Style* Component::GetStyle() const noexcept
 {
     // If style is set local
-    if (style_ != nullptr)
-    {
-        return style_;
-    }
+    if (style_ != nullptr) { return style_; }
 
     // Style set on any parent
     if (parent_ != nullptr)
     {
-        if (auto* parentStyle = parent_->GetStyle(); parentStyle != nullptr)
-        {
-            return parentStyle;
-        }
+        if (auto* parentStyle = parent_->GetStyle(); parentStyle != nullptr) { return parentStyle; }
     }
 
     // No style set

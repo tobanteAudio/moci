@@ -19,10 +19,7 @@ void OpenGLContext::Init()
 
     glfwMakeContextCurrent(m_WindowHandle);
     // Initialize OpenGL loader
-    if (auto err = glewInit() != GLEW_OK; err)
-    {
-        MOCI_CORE_ASSERT(err, "Failed to initialize glew!");
-    }
+    if (auto err = glewInit() != GLEW_OK; err) { MOCI_CORE_ASSERT(err, "Failed to initialize glew!"); }
 
     MOCI_CORE_INFO("OpenGL Info:");
     MOCI_CORE_INFO("  Vendor: {0}", glGetString(GL_VENDOR));

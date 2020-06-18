@@ -14,10 +14,7 @@ OpenGLESVertexBuffer::OpenGLESVertexBuffer(float* vertices, uint32_t size, bool 
     GLCall(glGenBuffers(1, &m_RendererID));
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_RendererID));
 
-    if (dynamic)
-    {
-        GLCall(glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW));
-    }
+    if (dynamic) { GLCall(glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW)); }
     else
     {
         GLCall(glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW));
@@ -45,10 +42,7 @@ OpenGLESIndexBuffer::OpenGLESIndexBuffer(IndexBufferSpecs specs) : specs_(std::m
     GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID));
 
     auto const size = specs_.count * sizeof(std::uint16_t);
-    if (specs_.isDynamic)
-    {
-        GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW));
-    }
+    if (specs_.isDynamic) { GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW)); }
     else
     {
         auto indicesShort = convertToUnsignedShorts(specs_.indices);
@@ -76,10 +70,7 @@ Span<std::uint16_t> OpenGLESIndexBuffer::convertToUnsignedShorts(Span<std::uint3
 {
     indicesShort_->clear();
     indicesShort_->reserve(indices.size());
-    for (auto const index : indices)
-    {
-        indicesShort_->push_back(gsl::narrow<std::uint16_t>(index));
-    }
+    for (auto const index : indices) { indicesShort_->push_back(gsl::narrow<std::uint16_t>(index)); }
 
     return *indicesShort_;
 }

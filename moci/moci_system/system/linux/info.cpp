@@ -17,10 +17,7 @@ std::unordered_map<std::string, std::string> SystemInfoLinuxReadProcInfo()
 {
     std::string line;
     std::ifstream cpuinfo("/proc/cpuinfo");
-    if (!cpuinfo.is_open())
-    {
-        return {};
-    }
+    if (!cpuinfo.is_open()) { return {}; }
 
     std::unordered_map<std::string, std::string> result {};
     while (getline(cpuinfo, line))
@@ -52,10 +49,7 @@ std::string SystemInfo::Pimpl::GetVendor()
 {
     auto const procInfo = SystemInfoLinuxReadProcInfo();
     auto const vendorID = procInfo.find(std::string("vendor_id"));
-    if (vendorID != std::end(procInfo))
-    {
-        return vendorID->second;
-    }
+    if (vendorID != std::end(procInfo)) { return vendorID->second; }
     return "";
 }
 
@@ -63,10 +57,7 @@ std::string SystemInfo::Pimpl::GetCPUModel()
 {
     auto const procInfo = SystemInfoLinuxReadProcInfo();
     auto const vendorID = procInfo.find(std::string("model name"));
-    if (vendorID != std::end(procInfo))
-    {
-        return vendorID->second;
-    }
+    if (vendorID != std::end(procInfo)) { return vendorID->second; }
     return "";
 }
 
@@ -120,10 +111,7 @@ std::string SystemInfo::Pimpl::GetCPUFeatures()
 {
     auto const procInfo = SystemInfoLinuxReadProcInfo();
     auto const vendorID = procInfo.find(std::string("flags"));
-    if (vendorID != std::end(procInfo))
-    {
-        return vendorID->second;
-    }
+    if (vendorID != std::end(procInfo)) { return vendorID->second; }
     return "";
 }
 }  // namespace moci

@@ -62,14 +62,8 @@ public:
         auto const fps = ImGui::GetIO().Framerate;
         if (drawStats_.frameCounter++ >= 100)
         {
-            if (fps < drawStats_.minFPS)
-            {
-                drawStats_.minFPS = fps;
-            }
-            if (fps > drawStats_.maxFPS)
-            {
-                drawStats_.maxFPS = fps;
-            }
+            if (fps < drawStats_.minFPS) { drawStats_.minFPS = fps; }
+            if (fps > drawStats_.maxFPS) { drawStats_.maxFPS = fps; }
         }
 
         auto const fpsStr    = fmt::format("FPS: {0:0.1f}", fps);
@@ -122,10 +116,7 @@ public:
         }
 
         // ImGui Demo
-        if (imguiDemo_)
-        {
-            ImGui::ShowDemoWindow(&imguiDemo_);
-        }
+        if (imguiDemo_) { ImGui::ShowDemoWindow(&imguiDemo_); }
     }
 
 public:

@@ -54,10 +54,7 @@ public:
     [[nodiscard]] auto GetProperty(KeyType const& key) const noexcept -> std::optional<Property>
     {
         auto const search = data_.find(key);
-        if (search != data_.end())
-        {
-            return search->second;
-        }
+        if (search != data_.end()) { return search->second; }
 
         return std::nullopt;
     }

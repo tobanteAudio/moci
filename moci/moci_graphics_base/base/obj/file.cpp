@@ -16,10 +16,7 @@ bool OBJFile::Parse()
 {
     std::string line;
     std::ifstream objFile(path_);
-    if (!objFile.is_open())
-    {
-        return false;
-    }
+    if (!objFile.is_open()) { return false; }
     auto guard = MakeScopeGuard([&]() { objFile.close(); });
 
     while (getline(objFile, line))
@@ -28,22 +25,13 @@ bool OBJFile::Parse()
         Strings::Trim(line);
 
         // Ignore empty lines
-        if (line.empty())
-        {
-            continue;
-        }
+        if (line.empty()) { continue; }
 
         // Ignore comments
-        if (line[0] == '#')
-        {
-            continue;
-        }
+        if (line[0] == '#') { continue; }
 
         // Ignore g
-        if (line[0] == 'g')
-        {
-            continue;
-        }
+        if (line[0] == 'g') { continue; }
 
         // Vertex position 'v'
         if (line[0] == 'v' && line[1] == ' ')
