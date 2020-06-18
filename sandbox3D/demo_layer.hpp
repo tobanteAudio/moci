@@ -30,6 +30,9 @@ private:
     float lastTimestep_ = 0.0f;
     bool fullscreen_    = false;
 
+    moci::Ref<moci::Framebuffer> framebuffer_ = nullptr;
+    glm::vec2 viewportSize_                   = {};
+
     glm::vec3 cameraPos_   = {15.0f, 8.70f, 50.0f};
     glm::vec3 cameraFront_ = {0.0f, 0.0f, -1.0f};
     glm::vec3 cameraUp_    = {0.0f, 1.0f, 0.0f};

@@ -65,6 +65,9 @@ auto skyboxVertices = std::array {
     -1.0f, -1.0f, 1.0f,   //
     1.0f,  -1.0f, 1.0f    //
 };
+
+glm::vec2 ImGuiToGlmVec(ImVec2 const& input) { return {input.x, input.y}; }
+
 }  // namespace
 
 void DemoLayer::OnAttach()
@@ -164,6 +167,11 @@ void DemoLayer::OnAttach()
     textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/4color.png");
     textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
 
+    auto fbSpec   = moci::FramebufferSpecs {};
+    fbSpec.width  = 1920;
+    fbSpec.height = 1080;
+    framebuffer_  = moci::RenderFactory::MakeFramebuffer(fbSpec);
+
     fpsHistory_.reserve(10'000);
 }
 
@@ -175,9 +183,14 @@ void DemoLayer::OnUpdate(moci::Timestep ts)
     moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
     moci::RenderCommand::Clear();
 
+    framebuffer_->Bind();
+    moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
+    moci::RenderCommand::Clear();
+
     // Camera matrix
-    auto const projection = glm::perspective(glm::radians(cameraFOV_), width_ / height_, 0.1f, 100.0f);
-    auto const view       = glm::lookAt(  //
+    auto const aspectRatio = viewportSize_.x / viewportSize_.y;
+    auto const projection  = glm::perspective(glm::radians(cameraFOV_), aspectRatio, 0.1f, 100.0f);
+    auto const view        = glm::lookAt(  //
         cameraPos_,                 // Camera is at (x,y,z), in World Space
         cameraPos_ + cameraFront_,  // and looks at
         cameraUp_                   // Head is up (set to 0,-1,0 to look upside-down)
@@ -220,6 +233,8 @@ void DemoLayer::OnUpdate(moci::Timestep ts)
     moci::RenderCommand::DrawArrays(moci::RenderDrawMode::Triangles, 0, 36);
     skyboxVao_->Unbind();
     GLCall(glDepthFunc(GL_LESS));  // set depth function back to default
+
+    framebuffer_->Unbind();
 }
 
 void DemoLayer::OnEvent(moci::Event& e)
@@ -384,6 +399,22 @@ void DemoLayer::OnImGuiRender()
         ImGui::TextUnformatted(ts.c_str());
         ImGui::EndMenuBar();
     }
+
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2 {0, 0});
+    ImGui::Begin("Viewport");
+    auto const viewportRegion = ImGuiToGlmVec(ImGui::GetContentRegionAvail());
+    if (viewportSize_ != viewportRegion)
+    {
+        viewportSize_        = viewportRegion;
+        auto const newWidth  = static_cast<std::uint32_t>(viewportSize_.x);
+        auto const newHeight = static_cast<std::uint32_t>(viewportSize_.y);
+        framebuffer_->Resize(newWidth, newHeight);
+    }
+
+    auto const textureID = reinterpret_cast<void*>(framebuffer_->GetColorAttachmentRendererID());
+    ImGui::Image(textureID, {viewportRegion.x, viewportRegion.y}, ImVec2(0, 1), ImVec2(1, 0));
+    ImGui::End();
+    ImGui::PopStyleVar();
 
     if (imguiWindow_)
     {
