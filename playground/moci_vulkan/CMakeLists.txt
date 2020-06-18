@@ -29,6 +29,9 @@ if(MOCI_API_VULKAN)
     add_executable(${PROJECT_NAME} 
         src/main.cpp
 
+        src/vk/vk.hpp
+        src/vk/vk.cpp
+
         src/application.hpp
         src/application.cpp
         src/window.hpp
