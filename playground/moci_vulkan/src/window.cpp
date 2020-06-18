@@ -9,6 +9,7 @@ Window::Window()
     initGLFW();
     createVulkanInstance();
     createGLFWWindow();
+    createVulkanPhysicalDevice();
 }
 
 Window::~Window()
@@ -20,6 +21,9 @@ Window::~Window()
     glfwDestroyWindow(nativeWindow_);
     glfwTerminate();
 }
+
+void Window::PollEvents() { glfwPollEvents(); }
+bool Window::ShouldClose() { return glfwWindowShouldClose(nativeWindow_); }
 
 void Window::initGLFW()
 {
@@ -84,23 +88,24 @@ void Window::createVulkanInstance()
     VULKAN_CALL(vkCreateInstance(&instanceInfo, nullptr, &instance_));
 }
 
-void Window::createVulkanDevice()
+void Window::createVulkanPhysicalDevice()
 {
     auto gpuCount = uint32_t {0};
     VULKAN_CALL(vkEnumeratePhysicalDevices(instance_, &gpuCount, nullptr));
-    auto physicalDevices = std::vector<VkPhysicalDevice> {gpuCount};
-    VULKAN_CALL(vkEnumeratePhysicalDevices(instance_, &gpuCount, physicalDevices.data()));
-
-    for (auto const& device : physicalDevices) { mvk::PrintVulkanDeviceStats(device); }
+    physicalDevices_.resize(gpuCount);
+    VULKAN_CALL(vkEnumeratePhysicalDevices(instance_, &gpuCount, physicalDevices_.data()));
 
     // Select default GPU, aka index 0.
-    physicalDevice_ = physicalDevices.at(0);
+    selectedDevice_ = physicalDevices_.at(0);
+
+    queryDeviceProperties();
+    printVulkanDeviceStats();
 
     // auto queueFamilyCount = uint32_t {0};
-    // vkGetPhysicalDeviceQueueFamilyProperties(physicalDevices[0], &queueFamilyCount, nullptr);
+    // vkGetPhysicalDeviceQueueFamilyProperties(physicalDevices_[0], &queueFamilyCount, nullptr);
     // auto familyProperties = std::vector<VkQueueFamilyProperties> {};
     // familyProperties.resize(queueFamilyCount);
-    // vkGetPhysicalDeviceQueueFamilyProperties(physicalDevices[0], &queueFamilyCount, familyProperties.data());
+    // vkGetPhysicalDeviceQueueFamilyProperties(physicalDevices_[0], &queueFamilyCount, familyProperties.data());
 
     // for (uint32_t i = 0; i < queueFamilyCount; ++i)
     // {
@@ -114,5 +119,28 @@ void Window::createVulkanDevice()
     //     glfwTerminate();
     //     throw std::runtime_error("Device queue family not found");
     // }
+}
+
+void Window::queryDeviceProperties()
+{
+    // Store properties (including limits), features and memory properties of the phyiscal device (so that examples can
+    // check against them)
+    vkGetPhysicalDeviceProperties(selectedDevice_, &selectedDeviceProperties_);
+    vkGetPhysicalDeviceFeatures(selectedDevice_, &selectedDeviceFeatures_);
+    vkGetPhysicalDeviceMemoryProperties(selectedDevice_, &selectedDeviceMemoryProperties_);
+}
+void Window::printVulkanDeviceStats()
+{
+    std::printf("Name: %s\n", selectedDeviceProperties_.deviceName);
+    auto const version = selectedDeviceProperties_.apiVersion;
+    std::printf("API: %d.%d.%d\n", VK_VERSION_MAJOR(version), VK_VERSION_MINOR(version), VK_VERSION_PATCH(version));
+    std::printf("Type: %d\n", selectedDeviceProperties_.deviceType);
+    std::printf("Discrete Queue Prios: %d\n", selectedDeviceProperties_.limits.discreteQueuePriorities);
+
+    std::printf("Geometry Shader: %d\n", selectedDeviceFeatures_.geometryShader);
+    std::printf("Tessellation Shader: %d\n", selectedDeviceFeatures_.tessellationShader);
+
+    std::printf("Heap Count: %d\n", selectedDeviceMemoryProperties_.memoryHeapCount);
+    std::puts("\n");
 }
 }  // namespace mvk
