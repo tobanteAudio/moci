@@ -72,16 +72,16 @@ auto OpenGLESIndexBuffer::UploadData(std::uint32_t offset, Span<std::uint32_t> i
     GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, indicesShort.data()));
 }
 
-Vector<std::uint16_t> OpenGLESIndexBuffer::convertToUnsignedShorts(Span<std::uint32_t> indices) const
+Span<std::uint16_t> OpenGLESIndexBuffer::convertToUnsignedShorts(Span<std::uint32_t> indices) const
 {
-    auto newIndices = Vector<std::uint16_t> {};
-    newIndices.reserve(indices.size());
+    indicesShort_->clear();
+    indicesShort_->reserve(indices.size());
     for (auto const index : indices)
     {
-        newIndices.push_back(gsl::narrow<std::uint16_t>(index));
+        indicesShort_->push_back(gsl::narrow<std::uint16_t>(index));
     }
 
-    return newIndices;
+    return *indicesShort_;
 }
 
 }  // namespace moci

@@ -36,10 +36,11 @@ public:
     [[nodiscard]] auto GetCount() const -> uint32_t override { return specs_.count; }
 
 private:
-    Vector<std::uint16_t> convertToUnsignedShorts(Span<std::uint32_t> indices) const;
+    Span<std::uint16_t> convertToUnsignedShorts(Span<std::uint32_t> indices) const;
 
-    IndexBufferSpecs specs_ = {};
-    uint32_t m_RendererID   = {};
+    IndexBufferSpecs specs_                    = {};
+    uint32_t m_RendererID                      = {};
+    Scope<Vector<std::uint16_t>> indicesShort_ = MakeScope<Vector<std::uint16_t>>();
 };
 
 }  // namespace moci
