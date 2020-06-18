@@ -2,6 +2,11 @@
 
 #include "assets.hpp"
 
+namespace
+{
+glm::vec2 ImGuiToGlmVec(ImVec2 const& input) { return {input.x, input.y}; }
+
+}  // namespace
 void OpenGLLayer::OnAttach()
 {
     auto const path = fmt::format("assets/shader/basic_{}.glsl", shaderSuffix);
@@ -58,9 +63,23 @@ void OpenGLLayer::OnUpdate(moci::Timestep ts)
 void OpenGLLayer::OnImGuiRender()
 {
     ImGui::Begin("Settings");
-    auto const textureID = reinterpret_cast<void*>(framebuffer_->GetColorAttachmentRendererID());
-    ImGui::ImageButton(textureID, ImVec2 {220, 135}, ImVec2(1, 1), ImVec2(0, 0));
     ImGui::End();
+
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2 {0, 0});
+    ImGui::Begin("Viewport");
+    auto const viewportRegion = ImGuiToGlmVec(ImGui::GetContentRegionAvail());
+    if (viewportSize_ != viewportRegion)
+    {
+        viewportSize_        = viewportRegion;
+        auto const newWidth  = static_cast<std::uint32_t>(viewportSize_.x);
+        auto const newHeight = static_cast<std::uint32_t>(viewportSize_.y);
+        framebuffer_->Resize(newWidth, newHeight);
+    }
+
+    auto const textureID = reinterpret_cast<void*>(framebuffer_->GetColorAttachmentRendererID());
+    ImGui::Image(textureID, {viewportRegion.x, viewportRegion.y}, ImVec2(0, 1), ImVec2(1, 0));
+    ImGui::End();
+    ImGui::PopStyleVar();
 }
 
 void OpenGLLayer::OnEvent(moci::Event& e)
