@@ -52,7 +52,7 @@ OpenGLESIndexBuffer::OpenGLESIndexBuffer(IndexBufferSpecs specs) : specs_(std::m
     else
     {
         auto indicesShort = convertToUnsignedShorts(specs_.indices);
-        MOCI_CORE_ASSERT(size == indicesShort.size(), "Index span size & given size don't match");
+        MOCI_CORE_ASSERT(size == indicesShort.size_bytes(), "Index span size & given size don't match");
         GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indicesShort.data(), GL_STATIC_DRAW));
     }
 
