@@ -95,12 +95,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aabb8e58803b2339b593b9df6f3b0d455"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a828db27457497b79d5492e3b6f3614ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1OpenGLESFramebuffer.html#a828db27457497b79d5492e3b6f3614ef">~OpenGLESFramebuffer</a> () override</td></tr>
 <tr class="separator:a828db27457497b79d5492e3b6f3614ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae20da9afff679210155761240596154f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1OpenGLESFramebuffer.html#ae20da9afff679210155761240596154f">Invalidate</a> ()</td></tr>
-<tr class="separator:ae20da9afff679210155761240596154f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a119dc273c78b4da1e380449ca7515dc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1OpenGLESFramebuffer.html#a119dc273c78b4da1e380449ca7515dc0">Bind</a> () override</td></tr>
 <tr class="separator:a119dc273c78b4da1e380449ca7515dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cbd44e88f2760d8823f966b69455ea7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1OpenGLESFramebuffer.html#a8cbd44e88f2760d8823f966b69455ea7">Unbind</a> () override</td></tr>
 <tr class="separator:a8cbd44e88f2760d8823f966b69455ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a6ec42b9f281ff723c1c8e362252ba1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1OpenGLESFramebuffer.html#a2a6ec42b9f281ff723c1c8e362252ba1">Resize</a> (std::uint32_t width, std::uint32_t height) override</td></tr>
+<tr class="separator:a2a6ec42b9f281ff723c1c8e362252ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af336c0e0a9f23237668cab16e09ff910"><td class="memItemLeft" align="right" valign="top">std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1OpenGLESFramebuffer.html#af336c0e0a9f23237668cab16e09ff910">GetColorAttachmentRendererID</a> () const override</td></tr>
 <tr class="separator:af336c0e0a9f23237668cab16e09ff910"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9564480c7eb9c28fc5ada784c3ae552"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structmoci_1_1FramebufferSpecs.html">FramebufferSpecs</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoci_1_1OpenGLESFramebuffer.html#ac9564480c7eb9c28fc5ada784c3ae552">GetSpecification</a> () const override</td></tr>
@@ -235,20 +235,41 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae20da9afff679210155761240596154f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae20da9afff679210155761240596154f">&#9670;&nbsp;</a></span>Invalidate()</h2>
+<a id="a2a6ec42b9f281ff723c1c8e362252ba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a6ec42b9f281ff723c1c8e362252ba1">&#9670;&nbsp;</a></span>Resize()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void moci::OpenGLESFramebuffer::Invalidate </td>
+          <td class="memname">void moci::OpenGLESFramebuffer::Resize </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">std::uint32_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::uint32_t&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+<p>Implements <a class="el" href="classmoci_1_1Framebuffer.html#a989bf3960a3cff8843cfc9b705dc487c">moci::Framebuffer</a>.</p>
 
 </div>
 </div>

@@ -17,7 +17,7 @@ var searchData=
   ['renderer',['Renderer',['../classmoci_1_1Renderer.html',1,'moci']]],
   ['rendererapi',['RendererAPI',['../classmoci_1_1RendererAPI.html',1,'moci']]],
   ['renderfactory',['RenderFactory',['../structmoci_1_1RenderFactory.html',1,'moci']]],
-  ['resize',['Resize',['../classmoci_1_1Component.html#a6570667b82b524442d39f4b08797e84f',1,'moci::Component']]],
+  ['resize',['Resize',['../classmoci_1_1Framebuffer.html#a989bf3960a3cff8843cfc9b705dc487c',1,'moci::Framebuffer::Resize()'],['../classmoci_1_1OpenGLESFramebuffer.html#a2a6ec42b9f281ff723c1c8e362252ba1',1,'moci::OpenGLESFramebuffer::Resize()'],['../classmoci_1_1Component.html#a6570667b82b524442d39f4b08797e84f',1,'moci::Component::Resize()']]],
   ['rgb',['RGB',['../classmoci_1_1Texture.html#a57db5936f0b54c47f796062e080bdde9a889574aebacda6bfd3e534e2b49b8028',1,'moci::Texture']]],
   ['rgba',['RGBA',['../classmoci_1_1Texture.html#a57db5936f0b54c47f796062e080bdde9aea3495a278957dc58165e48a8945469f',1,'moci::Texture']]],
   ['right',['Right',['../namespacemoci.html#aeb9babb14b4ec4f1b162243bab4e42fda92b09c7c48c520c3c55e497875da437c',1,'moci']]],

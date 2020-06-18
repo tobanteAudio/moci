@@ -7,7 +7,7 @@ var searchData=
   ['removefromright',['RemoveFromRight',['../classmoci_1_1Rectangle.html#a19e52fd6d0e2b1c26e0c140f424dbb28',1,'moci::Rectangle']]],
   ['removefromtop',['RemoveFromTop',['../classmoci_1_1Rectangle.html#a734ba6f7f8c445aa5484339ee2148cf9',1,'moci::Rectangle']]],
   ['render',['Render',['../structmoci_1_1Light.html#a1d0af200c358fe74d2cd9f4ffc005eee',1,'moci::Light']]],
-  ['resize',['Resize',['../classmoci_1_1Component.html#a6570667b82b524442d39f4b08797e84f',1,'moci::Component']]],
+  ['resize',['Resize',['../classmoci_1_1Framebuffer.html#a989bf3960a3cff8843cfc9b705dc487c',1,'moci::Framebuffer::Resize()'],['../classmoci_1_1OpenGLESFramebuffer.html#a2a6ec42b9f281ff723c1c8e362252ba1',1,'moci::OpenGLESFramebuffer::Resize()'],['../classmoci_1_1Component.html#a6570667b82b524442d39f4b08797e84f',1,'moci::Component::Resize()']]],
   ['righttrim',['RightTrim',['../classmoci_1_1Strings.html#a8dc2163fcc5ff7c71c49e2bd939961fe',1,'moci::Strings']]],
   ['righttrimcopy',['RightTrimCopy',['../classmoci_1_1Strings.html#a5b692900a4e00eba63fe110ed72c9e03',1,'moci::Strings']]]
 ];
