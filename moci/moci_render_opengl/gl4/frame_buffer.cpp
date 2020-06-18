@@ -10,12 +10,7 @@ namespace moci
 
 OpenGLFramebuffer::OpenGLFramebuffer(FramebufferSpecs spec) : specs_(std::move(spec)) { invalidate(); }
 
-OpenGLFramebuffer::~OpenGLFramebuffer()
-{
-    glDeleteFramebuffers(1, &renderID_);
-    glDeleteTextures(1, &colorAttachment_);
-    glDeleteTextures(1, &depthAttachment_);
-}
+OpenGLFramebuffer::~OpenGLFramebuffer() { deallocate(); }
 
 void OpenGLFramebuffer::Bind()
 {
@@ -34,12 +29,7 @@ void OpenGLFramebuffer::Resize(std::uint32_t width, std::uint32_t height)
 
 void OpenGLFramebuffer::invalidate()
 {
-    if (renderID_ != 0)
-    {
-        glDeleteFramebuffers(1, &renderID_);
-        glDeleteTextures(1, &colorAttachment_);
-        glDeleteTextures(1, &depthAttachment_);
-    }
+    if (renderID_ != 0) { deallocate(); }
 
     glCreateFramebuffers(1, &renderID_);
     glBindFramebuffer(GL_FRAMEBUFFER, renderID_);
@@ -60,6 +50,12 @@ void OpenGLFramebuffer::invalidate()
     MOCI_CORE_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "Framebuffer is incomplete!");
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+void OpenGLFramebuffer::deallocate()
+{
+    glDeleteFramebuffers(1, &renderID_);
+    glDeleteTextures(1, &colorAttachment_);
+    glDeleteTextures(1, &depthAttachment_);
 }
 }  // namespace moci
 

@@ -24,6 +24,7 @@ public:
 
 private:
     void invalidate();
+    void deallocate();
 
     std::uint32_t renderID_        = 0;
     std::uint32_t colorAttachment_ = 0;
