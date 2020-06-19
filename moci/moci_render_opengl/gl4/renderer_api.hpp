@@ -24,6 +24,8 @@ public:
     auto MaxTextureUnits() -> std::uint32_t override;
     auto MaxVertexAttributes() -> std::uint32_t override;
     auto MaxUniformVectors() -> std::uint32_t override;
+
+    auto GetCurrentDevice() -> std::any override { return {}; }
 };
 
 }  // namespace moci
