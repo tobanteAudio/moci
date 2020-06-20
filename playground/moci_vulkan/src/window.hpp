@@ -22,8 +22,16 @@ private:
     void createVulkanInstance();
     void createVulkanPhysicalDevice();
     void createVulkanLogicalDevice();
+    void createVulkanQueue();
+    void createVulkanSemaphores();
     void queryDeviceProperties();
     void printVulkanDeviceStats();
+
+    struct Semaphores
+    {
+        VkSemaphore imageAvailable = VK_NULL_HANDLE;
+        VkSemaphore renderDone     = VK_NULL_HANDLE;
+    };
 
     // Native window handle
     GLFWwindow* nativeWindow_ = nullptr;
@@ -45,5 +53,17 @@ private:
 
     // LogicalDevice
     std::unique_ptr<mvk::VulkanDevice> vulkanDevice_ = nullptr;
+    VkDevice logicalDevice_                          = VK_NULL_HANDLE;
+
+    // Handle to the device graphics queue that command buffers are submitted to
+    VkQueue queue_;
+
+    Semaphores semaphores_ = {};
+
+    // Depth buffer format (selected during Vulkan initialization)
+    VkFormat depthFormat_;
+
+    // Command buffer pool
+    VkCommandPool cmdPool_;
 };
 }  // namespace mvk

@@ -7,17 +7,20 @@ namespace mvk
 class VulkanDevice
 {
 public:
-    /**  @brief Typecast to VkDevice */
-    [[nodiscard]] operator VkDevice() const noexcept { return logicalDevice_; };
+    /** @brief Contains queue family indices */
+    struct QueueFamilyIndex
+    {
+        std::uint32_t graphics;
+        std::uint32_t compute;
+        std::uint32_t transfer;
+    };
 
     VulkanDevice(VkPhysicalDevice device);
 
-    /**
-     * Default destructor
-     *
-     * @note Frees the logical device
-     */
     ~VulkanDevice();
+
+    /**  @brief Typecast to VkDevice */
+    [[nodiscard]] operator VkDevice() const noexcept { return logicalDevice_; };
 
     /**
      * Create the logical device based on the assigned physical device, also gets default queue family indices
@@ -32,6 +35,8 @@ public:
     VkResult CreateLogicalDevice(VkPhysicalDeviceFeatures enabledFeatures, std::vector<const char*> enabledExtensions,
                                  void* pNextChain, bool useSwapChain = true,
                                  VkQueueFlags requestedQueueTypes = VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT);
+
+    QueueFamilyIndex const& GetQueueFamilyIndex() { return queueFamilyIndices_; }
 
     /**
      * Create a command pool for allocation command buffers from
@@ -149,14 +154,6 @@ private:
 
     /** @brief Set to true when the debug marker extension is detected */
     bool enableDebugMarkers_ = false;
-
-    /** @brief Contains queue family indices */
-    struct QueueFamilyIndex
-    {
-        std::uint32_t graphics;
-        std::uint32_t compute;
-        std::uint32_t transfer;
-    };
 
     QueueFamilyIndex queueFamilyIndices_ = {};
 };

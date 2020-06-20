@@ -11,10 +11,15 @@ Window::Window()
     createGLFWWindow();
     createVulkanPhysicalDevice();
     createVulkanLogicalDevice();
+    createVulkanQueue();
+    createVulkanSemaphores();
 }
 
 Window::~Window()
 {
+    vkDestroySemaphore(logicalDevice_, semaphores_.imageAvailable, nullptr);
+    vkDestroySemaphore(logicalDevice_, semaphores_.renderDone, nullptr);
+
     // Needs to be explicit, since the order matters.
     vulkanDevice_.reset(nullptr);
 
@@ -112,6 +117,29 @@ void Window::createVulkanLogicalDevice()
     // and encapsulates functions related to a device
     vulkanDevice_ = std::make_unique<mvk::VulkanDevice>(selectedDevice_);
     VULKAN_CALL(vulkanDevice_->CreateLogicalDevice(selectedDeviceFeatures_, {}, nullptr));
+    logicalDevice_ = static_cast<VkDevice>(*vulkanDevice_);
+}
+
+void Window::createVulkanQueue()
+{
+    // Get a graphics queue from the device
+    auto const& index = vulkanDevice_->GetQueueFamilyIndex();
+    vkGetDeviceQueue(logicalDevice_, index.graphics, 0, &queue_);
+}
+
+void Window::createVulkanSemaphores()
+{
+    auto semaphoreInfo  = VkSemaphoreCreateInfo {};
+    semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+    semaphoreInfo.pNext = nullptr;
+    semaphoreInfo.flags = 0;
+
+    // Create a semaphore used to synchronize image presentation
+    // Ensures that the image is displayed before we start submitting new commands to the queu
+    VULKAN_CALL(vkCreateSemaphore(logicalDevice_, &semaphoreInfo, nullptr, &semaphores_.imageAvailable));
+    // Create a semaphore used to synchronize command submission
+    // Ensures that the image is not presented until all commands have been sumbitted and executed
+    VULKAN_CALL(vkCreateSemaphore(logicalDevice_, &semaphoreInfo, nullptr, &semaphores_.renderDone));
 }
 
 void Window::queryDeviceProperties()
