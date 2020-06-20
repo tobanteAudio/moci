@@ -31,6 +31,8 @@ if(MOCI_API_VULKAN)
 
         src/vk/vk.hpp
         src/vk/vk.cpp
+        src/vk/vk_device.hpp
+        src/vk/vk_device.cpp
 
         src/application.hpp
         src/application.cpp
