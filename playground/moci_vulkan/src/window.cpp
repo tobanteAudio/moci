@@ -10,10 +10,13 @@ Window::Window()
     createVulkanInstance();
     createGLFWWindow();
     createVulkanPhysicalDevice();
+    createVulkanLogicalDevice();
 }
 
 Window::~Window()
 {
+    // Needs to be explicit, since the order matters.
+    vulkanDevice_.reset(nullptr);
 
     vkDestroySurfaceKHR(instance_, surface_, nullptr);
     vkDestroyInstance(instance_, nullptr);
@@ -100,25 +103,15 @@ void Window::createVulkanPhysicalDevice()
 
     queryDeviceProperties();
     printVulkanDeviceStats();
+}
 
-    // auto queueFamilyCount = uint32_t {0};
-    // vkGetPhysicalDeviceQueueFamilyProperties(physicalDevices_[0], &queueFamilyCount, nullptr);
-    // auto familyProperties = std::vector<VkQueueFamilyProperties> {};
-    // familyProperties.resize(queueFamilyCount);
-    // vkGetPhysicalDeviceQueueFamilyProperties(physicalDevices_[0], &queueFamilyCount, familyProperties.data());
-
-    // for (uint32_t i = 0; i < queueFamilyCount; ++i)
-    // {
-    //     if (familyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) { queueFamilyIdx = i; }
-    // }
-
-    // if (queueFamilyIdx == UINT32_MAX)
-    // {
-    //     // queue family not found
-    //     vkDestroyInstance(instance_, nullptr);
-    //     glfwTerminate();
-    //     throw std::runtime_error("Device queue family not found");
-    // }
+void Window::createVulkanLogicalDevice()
+{
+    // Vulkan device creation
+    // This is handled by a separate class that gets a logical device representation
+    // and encapsulates functions related to a device
+    vulkanDevice_ = std::make_unique<mvk::VulkanDevice>(selectedDevice_);
+    VULKAN_CALL(vulkanDevice_->CreateLogicalDevice(selectedDeviceFeatures_, {}, nullptr));
 }
 
 void Window::queryDeviceProperties()

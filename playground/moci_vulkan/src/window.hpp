@@ -1,6 +1,7 @@
 #pragma once
 
 #include "vk/vk.hpp"
+#include "vk/vk_device.hpp"
 
 namespace mvk
 {
@@ -20,6 +21,7 @@ private:
     void createGLFWWindow();
     void createVulkanInstance();
     void createVulkanPhysicalDevice();
+    void createVulkanLogicalDevice();
     void queryDeviceProperties();
     void printVulkanDeviceStats();
 
@@ -40,5 +42,8 @@ private:
     VkPhysicalDeviceProperties selectedDeviceProperties_             = {};
     VkPhysicalDeviceFeatures selectedDeviceFeatures_                 = {};
     VkPhysicalDeviceMemoryProperties selectedDeviceMemoryProperties_ = {};
+
+    // LogicalDevice
+    std::unique_ptr<mvk::VulkanDevice> vulkanDevice_ = nullptr;
 };
 }  // namespace mvk
