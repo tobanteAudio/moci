@@ -2,6 +2,7 @@
 
 #include "vk/vk.hpp"
 #include "vk/vk_device.hpp"
+#include "vk/vk_swap_chain.hpp"
 
 namespace mvk
 {
@@ -11,12 +12,15 @@ public:
     explicit Window();
     ~Window();
 
+    void Prepare();
+
     void PollEvents();
     bool ShouldClose();
 
 private:
     constexpr static std::string_view APP_NAME = "Moci: Vulkan";
 
+    // Init
     void initGLFW();
     void createGLFWWindow();
     void createVulkanInstance();
@@ -24,6 +28,8 @@ private:
     void createVulkanLogicalDevice();
     void createVulkanQueue();
     void createVulkanSemaphores();
+    void createVulkanSubmitInfo();
+    void createVulkanCommandPool();
     void queryDeviceProperties();
     void printVulkanDeviceStats();
 
@@ -38,9 +44,6 @@ private:
 
     // Vulkan instance, stores all per-application states
     VkInstance instance_ = VK_NULL_HANDLE;
-
-    // Window surface to render to
-    VkSurfaceKHR surface_ = VK_NULL_HANDLE;
 
     // Available devices
     std::vector<VkPhysicalDevice> physicalDevices_ {};
@@ -58,12 +61,20 @@ private:
     // Handle to the device graphics queue that command buffers are submitted to
     VkQueue queue_;
 
-    Semaphores semaphores_ = {};
+    // Swap Chain
+    std::unique_ptr<VulkanSwapChain> swapChain_ = {};
 
     // Depth buffer format (selected during Vulkan initialization)
     VkFormat depthFormat_;
 
     // Command buffer pool
     VkCommandPool cmdPool_;
+
+    Semaphores semaphores_ = {};
+
+    /** @brief Pipeline stages used to wait at for graphics queue submissions */
+    VkPipelineStageFlags submitPipelineStages_ = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    // Contains command buffers and semaphores to be presented to the queue
+    VkSubmitInfo submitInfo_;
 };
 }  // namespace mvk

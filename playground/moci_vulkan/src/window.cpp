@@ -4,7 +4,7 @@
 
 namespace mvk
 {
-Window::Window()
+Window::Window():swapChain_{std::make_unique<VulkanSwapChain>()}
 {
     initGLFW();
     createVulkanInstance();
@@ -12,22 +12,32 @@ Window::Window()
     createVulkanPhysicalDevice();
     createVulkanLogicalDevice();
     createVulkanQueue();
+    swapChain_->Connect(instance_, selectedDevice_, logicalDevice_);
     createVulkanSemaphores();
+    createVulkanSubmitInfo();
 }
 
 Window::~Window()
 {
+    vkDestroyCommandPool(logicalDevice_, cmdPool_, nullptr);
+
     vkDestroySemaphore(logicalDevice_, semaphores_.imageAvailable, nullptr);
     vkDestroySemaphore(logicalDevice_, semaphores_.renderDone, nullptr);
 
     // Needs to be explicit, since the order matters.
+    swapChain_.reset(nullptr);
     vulkanDevice_.reset(nullptr);
 
-    vkDestroySurfaceKHR(instance_, surface_, nullptr);
     vkDestroyInstance(instance_, nullptr);
 
     glfwDestroyWindow(nativeWindow_);
     glfwTerminate();
+}
+
+void Window::Prepare()
+{
+    swapChain_->InitSurface(nativeWindow_);
+    createVulkanCommandPool();
 }
 
 void Window::PollEvents() { glfwPollEvents(); }
@@ -53,17 +63,6 @@ void Window::createGLFWWindow()
     // glfwSetWindowUserPointer(nativeWindow_, this);
     // glfwSetWindowSizeCallback(nativeWindow_, [](GLFWwindow* window, int width, int height) {});
     // glfwGetFramebufferSize(nativeWindow_, &windowData_.width, &windowData_.height);
-
-    // Create window surface, looks a lot like a Vulkan function ( and not GLFW
-    // function ) This is a one function solution for all operating systems. No
-    // need to hassle with the OS specifics. For windows this would be
-    // vkCreateWin32SurfaceKHR() or on linux XCB window library this would be
-    // vkCreateXcbSurfaceKHR()
-    if (VK_SUCCESS != glfwCreateWindowSurface(instance_, nativeWindow_, nullptr, &surface_))
-    {
-        glfwTerminate();
-        throw std::runtime_error("couldn't create surface, exit");
-    }
 }
 void Window::createVulkanInstance()
 {
@@ -140,6 +139,28 @@ void Window::createVulkanSemaphores()
     // Create a semaphore used to synchronize command submission
     // Ensures that the image is not presented until all commands have been sumbitted and executed
     VULKAN_CALL(vkCreateSemaphore(logicalDevice_, &semaphoreInfo, nullptr, &semaphores_.renderDone));
+}
+
+void Window::createVulkanSubmitInfo()
+{
+    // Set up submit info structure
+    // Semaphores will stay the same during application lifetime
+    // Command buffer submission info is set by each example
+    submitInfo_.sType                = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+    submitInfo_.pWaitDstStageMask    = &submitPipelineStages_;
+    submitInfo_.waitSemaphoreCount   = 1;
+    submitInfo_.pWaitSemaphores      = &semaphores_.imageAvailable;
+    submitInfo_.signalSemaphoreCount = 1;
+    submitInfo_.pSignalSemaphores    = &semaphores_.renderDone;
+}
+
+void Window::createVulkanCommandPool()
+{
+    VkCommandPoolCreateInfo cmdPoolInfo = {};
+    cmdPoolInfo.sType                   = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+    cmdPoolInfo.queueFamilyIndex        = swapChain_->GetQueueNodeIndex();
+    cmdPoolInfo.flags                   = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+    VULKAN_CALL(vkCreateCommandPool(logicalDevice_, &cmdPoolInfo, nullptr, &cmdPool_));
 }
 
 void Window::queryDeviceProperties()
