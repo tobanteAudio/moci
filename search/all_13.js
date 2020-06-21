@@ -25,6 +25,6 @@ var searchData=
   ['trianglestrips',['TriangleStrips',['../namespacemoci.html#a8b8b235ecc7208f9f869fe3891e89e01ae6d0d2fdd0c5b200112e07e15b3cb2f0',1,'moci']]],
   ['trim',['Trim',['../classmoci_1_1Strings.html#afbf65e2781720b06f8c6a8cc1e485504',1,'moci::Strings']]],
   ['trimcopy',['TrimCopy',['../classmoci_1_1Strings.html#a3be8f44a29fd8908446a34c7bcdf07d4',1,'moci::Strings']]],
-  ['type',['Type',['../structmoci_1_1BufferElement.html#ada8782dcc210d16281f72a2f5cbb602d',1,'moci::BufferElement::Type()'],['../structmoci_1_1ShaderStageSource.html#a69ea7378f8017dfc341b9e9d88e6a7eb',1,'moci::ShaderStageSource::type()']]],
+  ['type',['type',['../structmoci_1_1ShaderStageSource.html#a69ea7378f8017dfc341b9e9d88e6a7eb',1,'moci::ShaderStageSource::type()'],['../structmoci_1_1BufferElement.html#ada8782dcc210d16281f72a2f5cbb602d',1,'moci::BufferElement::Type()']]],
   ['typeface',['Typeface',['../classmoci_1_1Typeface.html',1,'moci::Typeface'],['../classmoci_1_1Typeface.html#acb0e1a56aec1aefc70e6a1d091250655',1,'moci::Typeface::Typeface()']]]
 ];

@@ -25,6 +25,7 @@ var searchData=
   ['getcpufeatures',['GetCPUFeatures',['../classmoci_1_1SystemInfo.html#a83a3dd847834fafbebc1c0ddf0458f60',1,'moci::SystemInfo']]],
   ['getcpumodel',['GetCPUModel',['../classmoci_1_1SystemInfo.html#a5542cb956625a63ff693394327144cf3',1,'moci::SystemInfo']]],
   ['getcputhreadcount',['GetCPUThreadCount',['../classmoci_1_1SystemInfo.html#af05eb35dbe7db1e8ee2ea7b922b9ef09',1,'moci::SystemInfo']]],
+  ['getcurrentdevice',['GetCurrentDevice',['../classmoci_1_1RendererAPI.html#a10a7f1c3a20fc7f4f537402e69b96287',1,'moci::RendererAPI::GetCurrentDevice()'],['../classmoci_1_1OpenGLESRendererAPI.html#a8ff94f415382dcfb859e62d1d438797b',1,'moci::OpenGLESRendererAPI::GetCurrentDevice()']]],
   ['getdata',['GetData',['../classmoci_1_1Color.html#a63d001f06b653cfbc81f0f1187b4c10d',1,'moci::Color']]],
   ['getelements',['GetElements',['../classmoci_1_1BufferLayout.html#ac6787397b5c7c65dd3a7f848a0a4080b',1,'moci::BufferLayout']]],
   ['getend',['GetEnd',['../classmoci_1_1Line.html#afe5a2571330bbdcc89ae8aed0b26752c',1,'moci::Line']]],
