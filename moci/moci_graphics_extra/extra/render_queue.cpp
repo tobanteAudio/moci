@@ -59,6 +59,7 @@ BatchRender2D::~BatchRender2D()
 
 auto BatchRender2D::StartFrame(float width, float height) -> void
 {
+    MOCI_PROFILE_FUNCTION();
     data_.shader->Bind();
     auto const proj = glm::ortho(0.0f, width, height, 0.0f, -1.0f, 1.0f);
     data_.shader->SetMat4("u_MVP", proj);
@@ -71,6 +72,7 @@ auto BatchRender2D::StartFrame(float width, float height) -> void
 
 auto BatchRender2D::EndFrame() -> void
 {
+    MOCI_PROFILE_FUNCTION();
     EndBatch();
     Flush();
     data_.shader->Unbind();

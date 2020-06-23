@@ -13,6 +13,7 @@ void ComponentLayer::OnDetach() { }
 
 void ComponentLayer::OnUpdate(Timestep ts)
 {
+    MOCI_PROFILE_FUNCTION();
     IgnoreUnused(ts);
     // MOCI_CORE_ASSERT(rootComponent_ != nullptr);
     RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
@@ -26,6 +27,7 @@ void ComponentLayer::OnUpdate(Timestep ts)
 
 void ComponentLayer::OnImGuiRender()
 {
+    MOCI_PROFILE_FUNCTION();
     ImGui::Begin("Settings");
     ImGui::Text("Draws: %d", renderQueue_->GetFrameStats().drawCount);
     ImGui::Text("Textures: %d", renderQueue_->GetFrameStats().textureCount);
@@ -37,6 +39,7 @@ void ComponentLayer::OnImGuiRender()
 
 void ComponentLayer::OnEvent(Event& e)
 {
+    MOCI_PROFILE_FUNCTION();
     auto dispatcher = EventDispatcher {e};
     dispatcher.Dispatch<WindowResizeEvent>([self = this](auto& e) { return self->onWindowResized(e); });
     dispatcher.Dispatch<MouseMovedEvent>([self = this](auto& e) { return self->onMouseMoved(e); });

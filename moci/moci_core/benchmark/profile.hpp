@@ -171,7 +171,7 @@ private:
 };
 }  // namespace moci
 
-//#define MOCI_PROFILE 1
+#define MOCI_PROFILE 1
 #if MOCI_PROFILE
 #define MOCI_PROFILE_BEGIN_SESSION(name, filepath) ::moci::Instrumentor::Get().BeginSession(name, filepath)
 #define MOCI_PROFILE_END_SESSION() ::moci::Instrumentor::Get().EndSession()
