@@ -50,6 +50,13 @@ void OpenGLLayer::OnUpdate(moci::Timestep ts)
     moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
     moci::RenderCommand::Clear();
 
+    if (framebufferNeedsResize_)
+    {
+        auto const newWidth  = static_cast<std::uint32_t>(viewportSize_.x);
+        auto const newHeight = static_cast<std::uint32_t>(viewportSize_.y);
+        framebuffer_->Resize(newWidth, newHeight);
+        framebufferNeedsResize_ = false;
+    }
     framebuffer_->Bind();
     moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
     moci::RenderCommand::Clear();
@@ -70,14 +77,12 @@ void OpenGLLayer::OnImGuiRender()
     auto const viewportRegion = ImGuiToGlmVec(ImGui::GetContentRegionAvail());
     if (viewportSize_ != viewportRegion)
     {
-        viewportSize_        = viewportRegion;
-        auto const newWidth  = static_cast<std::uint32_t>(viewportSize_.x);
-        auto const newHeight = static_cast<std::uint32_t>(viewportSize_.y);
-        framebuffer_->Resize(newWidth, newHeight);
+        viewportSize_           = viewportRegion;
+        framebufferNeedsResize_ = true;
     }
 
     auto const textureID = reinterpret_cast<void*>(framebuffer_->GetColorAttachmentRendererID());
-    ImGui::Image(textureID, {viewportRegion.x, viewportRegion.y}, ImVec2(0, 1), ImVec2(1, 0));
+    ImGui::Image(textureID, {viewportSize_.x, viewportSize_.y}, ImVec2(0, 1), ImVec2(1, 0));
     ImGui::End();
     ImGui::PopStyleVar();
 }

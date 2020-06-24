@@ -24,7 +24,8 @@ private:
     float width_  = 1920.0f;
     float height_ = 1080.0f;
 
-    glm::vec2 viewportSize_ = {};
+    bool framebufferNeedsResize_ = false;
+    glm::vec2 viewportSize_      = {};
 
     moci::Ref<moci::Shader> shader_           = nullptr;
     moci::Ref<moci::VertexBuffer> vbo_        = nullptr;

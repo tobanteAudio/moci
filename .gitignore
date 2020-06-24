@@ -22,6 +22,7 @@ imgui.ini
 
 # Profile
 moci-sandbox.json
+moci-sandbox-opengl.json
 moci-sandbox-3d.json
 moci-sandbox-3d-rpi.json
 moci-model-viewer.json
