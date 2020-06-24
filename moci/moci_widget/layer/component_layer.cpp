@@ -4,12 +4,13 @@ namespace moci
 {
 void ComponentLayer::OnAttach()
 {
+    MOCI_PROFILE_FUNCTION();
     renderQueue_ = MakeScope<BatchRender2D>();
     rootComponent_->SetStyle(&defaultStyle_);
     rootComponent_->SetSize(static_cast<int>(width_), static_cast<int>(height_));
 }
 
-void ComponentLayer::OnDetach() { }
+void ComponentLayer::OnDetach() { MOCI_PROFILE_FUNCTION(); }
 
 void ComponentLayer::OnUpdate(Timestep ts)
 {
@@ -58,17 +59,18 @@ bool ComponentLayer::onWindowResized(WindowResizeEvent& e)
 bool ComponentLayer::onMouseMoved(MouseMovedEvent& e)
 {
     IgnoreUnused(e);
-    // MOCI_CORE_INFO("Mouse: {}, {}", e.GetX(), e.GetY());
     return true;
 }
 
 bool ComponentLayer::onMouseScrolled(MouseScrolledEvent& e)
 {
+    MOCI_PROFILE_FUNCTION();
     return handleEvent([&](Component* comp) { return comp->MouseScrolled(e); });
 }
 
 bool ComponentLayer::onMousePressed(MouseButtonPressedEvent& e)
 {
+    MOCI_PROFILE_FUNCTION();
     IgnoreUnused(e);
     auto const x = static_cast<int>(Input::GetMouseX());
     auto const y = static_cast<int>(Input::GetMouseY());

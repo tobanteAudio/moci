@@ -19,6 +19,7 @@ public:
 
     auto OnDraw(moci::Painter& painter) -> void override
     {
+        MOCI_PROFILE_FUNCTION();
         auto area            = GetBounds();
         auto const ledHeight = area.GetHeight() / (numLEDs);
 
@@ -46,6 +47,7 @@ class MultiChannel : public moci::Component
 public:
     MultiChannel() : Component("multi-channel")
     {
+        MOCI_PROFILE_FUNCTION();
         listener_.Bind("", 8080);
         listener_.SetMessageCallback([](auto const& buffer, auto const size) {
             moci::IgnoreUnused(size);
@@ -96,6 +98,7 @@ public:
 
     auto OnResize() -> void override
     {
+        MOCI_PROFILE_FUNCTION();
         auto area               = GetBounds();
         auto const width        = area.GetWidth();
         auto buttonArea         = area.RemoveFromRight(width / 3).Reduced(20);

@@ -54,14 +54,16 @@ void ImGuiLayer::Begin()
 {
     MOCI_PROFILE_FUNCTION();
 
+    {
+        MOCI_PROFILE_SCOPE("ImGuiLayer::Begin::NewFrame");
 #if !defined(MOCI_MAC)
-    ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplOpenGL3_NewFrame();
 #else
-    ImGui_ImplOpenGL2_NewFrame();
+        ImGui_ImplOpenGL2_NewFrame();
 #endif
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
-
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+    }
     // Docking
     ImGuiWindowFlags window_flags {};
     static bool opt_fullscreen_persistant     = true;
@@ -117,15 +119,18 @@ void ImGuiLayer::End()
     ImGui::End();
 
     ImGui::Render();
+    {
+        MOCI_PROFILE_SCOPE("ImGuiLayer::End::RenderDrawData");
 #if !defined(MOCI_MAC)
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 #else
-    GLint last_program;
-    glGetIntegerv(GL_CURRENT_PROGRAM, &last_program);
-    glUseProgram(0);
-    ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
-    glUseProgram(last_program);
+        GLint last_program;
+        glGetIntegerv(GL_CURRENT_PROGRAM, &last_program);
+        glUseProgram(0);
+        ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+        glUseProgram(last_program);
 #endif
+    }
 }
 
 void ImGuiLayer::OnImGuiRender() { }

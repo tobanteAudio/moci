@@ -34,9 +34,14 @@ private:
     template<typename Handler>
     bool handleEvent(Handler handler)
     {
-        auto const x = static_cast<int>(Input::GetMouseX());
-        auto const y = static_cast<int>(Input::GetMouseY());
-        auto* comp   = rootComponent_->FindComponentAt({x, y});
+        MOCI_PROFILE_FUNCTION();
+        Component* comp = nullptr;
+        {
+            MOCI_PROFILE_SCOPE("ComponentLayer::handleEvent::FindComponent");
+            auto const x = static_cast<int>(Input::GetMouseX());
+            auto const y = static_cast<int>(Input::GetMouseY());
+            comp   = rootComponent_->FindComponentAt({x, y});
+        }
 
         MOCI_CORE_ASSERT(comp, "Should never be null");
         while (!handler(comp))
