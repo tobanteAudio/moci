@@ -4,9 +4,13 @@
 
 #include "moci_render_base/moci_render_base.hpp"
 
-// glew is not needed for opengl es 2.0 or on macOS
-#if not defined(MOCI_API_OPENGL_ES)
-#if not defined(MOCI_MAC)
+// glew is not needed for opengl es 2.0
+#if defined(MOCI_API_OPENGL_ES)
+#define GLFW_INCLUDE_ES2
+#else
+#if defined(MOCI_MAC)
+#define GL_SILENCE_DEPRECATION
+#else
 #include <GL/glew.h>
 #endif
 #endif
