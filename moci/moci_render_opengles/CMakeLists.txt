@@ -35,7 +35,7 @@ if (${MOCI_LINK_OPENGL_ES})
     # target_link_libraries(moci_render_opengles_lib PUBLIC /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2)
     # desktop linux
     target_link_libraries(moci_render_opengles_lib PUBLIC /usr/lib/x86_64-linux-gnu/libGLESv2.so)
-    target_compile_definitions(moci_render_opengles_lib PUBLIC MOCI_API_OPENGL_ES=1)
+    target_compile_definitions(moci_render_opengles_lib PUBLIC MOCI_API_OPENGL_ES=1 MOCI_API_OPENGL_LEGACY=1)
 else()
     target_link_libraries(moci_render_opengles_lib PUBLIC libglew_static)
 endif()
