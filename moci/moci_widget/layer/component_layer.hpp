@@ -40,7 +40,7 @@ private:
             MOCI_PROFILE_SCOPE("ComponentLayer::handleEvent::FindComponent");
             auto const x = static_cast<int>(Input::GetMouseX());
             auto const y = static_cast<int>(Input::GetMouseY());
-            comp   = rootComponent_->FindComponentAt({x, y});
+            comp         = rootComponent_->FindComponentAt({x, y});
         }
 
         MOCI_CORE_ASSERT(comp, "Should never be null");
