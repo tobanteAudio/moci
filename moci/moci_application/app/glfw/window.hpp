@@ -4,13 +4,18 @@
 
 #include "moci_render_base/moci_render_base.hpp"
 
-// glew is not needed for opengl es 2.0
-#if defined(MOCI_API_OPENGL_ES)
+#include "moci_core/moci_core.hpp"
+
+#if MOCI_API_OPENGL_ES
 #define GLFW_INCLUDE_ES2
+#define IMGUI_IMPL_OPENGL_ES2
+#define IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #else
-#if defined(MOCI_MAC)
+#if MOCI_MAC
 #define GL_SILENCE_DEPRECATION
+#define IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #else
+#define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #include <GL/glew.h>
 #endif
 #endif
