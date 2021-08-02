@@ -19,12 +19,10 @@ set(moci_render_base_sources
 add_library(moci_render_base_lib STATIC ${moci_render_base_sources})
 add_library(Moci::RenderApiBase ALIAS moci_render_base_lib)
 
-target_include_directories(moci_render_base_lib PUBLIC ${CMAKE_SOURCE_DIR}/3rd_party/glfw/include)
 target_link_libraries(moci_render_base_lib 
     PUBLIC 
         Moci::GraphicsBase 
-        glfw 
-        ${GLFW_LIBRARIES}
+        glfw
     PRIVATE
         Moci::CodeCoverage
 

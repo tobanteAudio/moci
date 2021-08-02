@@ -3,6 +3,7 @@ assimp/5.0.1
 boost/1.76.0
 freetype/2.10.4
 glew/2.2.0
+glfw/3.3.4
 
 [generators]
 cmake_find_package
