@@ -2,10 +2,10 @@
 
 #include "moci_render_api/imgui/imgui.hpp"
 
-#include "examples/imgui_impl_glfw.cpp"
+#include "backends/imgui_impl_glfw.cpp"
 
 #if !defined(MOCI_MAC)
-#include "examples/imgui_impl_opengl3.cpp"
+#include "backends/imgui_impl_opengl3.cpp"
 #else
-#include "examples/imgui_impl_opengl2.cpp"
+#include "backends/imgui_impl_opengl2.cpp"
 #endif
