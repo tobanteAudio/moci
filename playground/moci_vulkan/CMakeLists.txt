@@ -42,5 +42,5 @@ if(MOCI_API_VULKAN)
         src/window.cpp
     )
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/3rd_party/glfw/include ${Vulkan_INCLUDE_DIR})
-    target_link_libraries(${PROJECT_NAME} PRIVATE glfw ${GLFW_LIBRARIES} ${Vulkan_LIBRARIES} glm::glm GSL)
+    target_link_libraries(${PROJECT_NAME} PRIVATE glfw ${GLFW_LIBRARIES} ${Vulkan_LIBRARIES} glm::glm Microsoft.GSL::GSL)
 endif()

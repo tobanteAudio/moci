@@ -98,9 +98,9 @@ include(MociConan)
 find_package(assimp REQUIRED)
 find_package(Freetype REQUIRED)
 find_package(glfw3 REQUIRED)
+find_package(glm REQUIRED)
+find_package(Microsoft.GSL REQUIRED)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glm        EXCLUDE_FROM_ALL)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/GSL        EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/spdlog     EXCLUDE_FROM_ALL)
 
 # Only include glew on desktop

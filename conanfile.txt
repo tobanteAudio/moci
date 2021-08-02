@@ -4,6 +4,8 @@ boost/1.76.0
 freetype/2.10.4
 glew/2.2.0
 glfw/3.3.4
+glm/0.9.9.8
+ms-gsl/3.1.0
 
 [generators]
 cmake_find_package
