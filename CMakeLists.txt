@@ -97,6 +97,7 @@ find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(Microsoft.GSL REQUIRED)
 find_package(spdlog REQUIRED)
+find_package(stb REQUIRED)
 
 # Only include glew on desktop
 if (NOT ${MOCI_LINK_OPENGL_ES})
