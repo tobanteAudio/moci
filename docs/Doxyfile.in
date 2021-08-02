@@ -30,7 +30,16 @@ FORMULA_FONTSIZE       = 14
 CALL_GRAPH             = YES
 INTERACTIVE_SVG        = YES
 
+HAVE_DOT = YES
+DOT_IMAGE_FORMAT = svg
+DOT_TRANSPARENT = YES
+
 # Set output directory
 OUTPUT_DIRECTORY       = documentation
 
 ENUM_VALUES_PER_LINE   = 1
+
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css
+
+#GENERATE_TREEVIEW      = YES # required!
+#HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css doxygen-awesome-css/doxygen-awesome-sidebar-only.css
