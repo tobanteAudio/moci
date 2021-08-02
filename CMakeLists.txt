@@ -11,7 +11,6 @@ set(CMAKE_POLICY_DEFAULT_CMP0069 NEW)
 cmake_policy(SET CMP0072 NEW)
 set(CMAKE_POLICY_DEFAULT_CMP0072 NEW)
 
-option(MOCI_GIT_SUBMODULE        "Check submodules during build"                ON)
 option(MOCI_BUILD_NATIVE         "Build optimized for native platform"          ON)
 option(MOCI_BUILD_LTO            "Build with link time optimization"            ON)
 option(MOCI_BUILD_FAST_MATH      "Build with fast math optimizations"           OFF)
@@ -82,17 +81,14 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   endif(MOCI_BUILD_LTO)
 endif()
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR})
+list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR})
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(MociCodeCoverage)
 include(MociCompilerOptions)
 include(MociCompilerWarnings)
-include(MociGitSubmodules)
-include(MociThreading)
-
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR})
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR})
 include(MociConan)
-
+include(MociThreading)
 
 # other
 find_package(assimp REQUIRED)
@@ -100,8 +96,7 @@ find_package(Freetype REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(Microsoft.GSL REQUIRED)
-
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/spdlog     EXCLUDE_FROM_ALL)
+find_package(spdlog REQUIRED)
 
 # Only include glew on desktop
 if (NOT ${MOCI_LINK_OPENGL_ES})
