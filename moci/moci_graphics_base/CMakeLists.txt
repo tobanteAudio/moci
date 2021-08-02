@@ -21,7 +21,7 @@ add_library(Moci::GraphicsBase ALIAS moci_graphics_base_lib)
 target_link_libraries(moci_graphics_base_lib 
     PUBLIC 
         Moci::Math 
-        freetype
+        Freetype::Freetype
         Moci::StbImage
         Moci::StbImageWrite
         Moci::StbImageResize

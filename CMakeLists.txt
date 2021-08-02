@@ -1,4 +1,6 @@
-cmake_minimum_required(VERSION 3.13...3.17)
+cmake_minimum_required(VERSION 3.17)
+cmake_policy(VERSION 3.17)
+
 project(MociLibrary LANGUAGES CXX)
 
 # LTO
@@ -87,22 +89,27 @@ include(MociCompilerWarnings)
 include(MociGitSubmodules)
 include(MociThreading)
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR})
+list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR})
+include(MociConan)
+
 # 3rd party libraries
 # assimp
 if(NOT APPLE)
-  set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared library")
+  #set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared library")
 endif()
 
-set(ASSIMP_BUILD_OBJ_IMPORTER ON CACHE BOOL "")
-set(ASSIMP_BUILD_FBX_IMPORTER ON CACHE BOOL "")
-set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE BOOL "")
-set(ASSIMP_BUILD_ALL_EXPORTERS_BY_DEFAULT OFF CACHE BOOL "")
-set(ASSIMP_BUILD_ASSBIN_EXPORTER ON CACHE BOOL "")
-set(ASSIMP_BUILD_ASSXML_EXPORTER ON CACHE BOOL "")
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/assimp     EXCLUDE_FROM_ALL)
+#set(ASSIMP_BUILD_OBJ_IMPORTER ON CACHE BOOL "")
+#set(ASSIMP_BUILD_FBX_IMPORTER ON CACHE BOOL "")
+#set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE BOOL "")
+#set(ASSIMP_BUILD_ALL_EXPORTERS_BY_DEFAULT OFF CACHE BOOL "")
+#set(ASSIMP_BUILD_ASSBIN_EXPORTER ON CACHE BOOL "")
+#set(ASSIMP_BUILD_ASSXML_EXPORTER ON CACHE BOOL "")
+#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/assimp     EXCLUDE_FROM_ALL)
+find_package(assimp REQUIRED)
 
 # other
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/freetype   EXCLUDE_FROM_ALL)
+find_package(Freetype REQUIRED)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glm        EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glfw       EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/GSL        EXCLUDE_FROM_ALL)
@@ -110,7 +117,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/spdlog     EXCLUDE_FROM_A
 
 # Only include glew on desktop
 if (NOT ${MOCI_LINK_OPENGL_ES})
-  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/glew   EXCLUDE_FROM_ALL)
+    find_package(GLEW REQUIRED)
 endif()
 
 # Testing
