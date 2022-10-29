@@ -16,7 +16,7 @@
 #include <map>
 #include <thread>
 
-static std::atomic<float> Level {0.5f};
+static std::atomic<float> Level {0.5F};
 
 class LevelMeterView : public moci::Component
 {
@@ -45,8 +45,8 @@ private:
 
 float LinearToDecibel(float linear)
 {
-    if (linear != 0.0f) { return 20.0f * log10f(linear); }
-    return -144.0f;  // effectively minus infinity
+    if (linear != 0.0F) { return 20.0F * log10f(linear); }
+    return -144.0F;  // effectively minus infinity
 }
 
 class MultiChannel : public moci::Component
@@ -62,7 +62,7 @@ public:
                 moci::IgnoreUnused(size);
                 auto data = float {};
                 std::memcpy(&data, buffer.data(), sizeof(data));
-                Level.store((144.0f - std::abs(LinearToDecibel(data))) / 144.0f);
+                Level.store((144.0F - std::abs(LinearToDecibel(data))) / 144.0F);
 
                 // auto data = Data{};
                 // std::memcpy(&data, buffer.data(), sizeof(data));
@@ -73,7 +73,7 @@ public:
 
         for (auto i = 0; i < 5; i++)
         {
-            auto col     = moci::Color {0.2f * static_cast<float>(i), 0.8f, 0.2f, 1.0f};
+            auto col     = moci::Color {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F};
             auto channel = moci::MakeScope<LevelMeterView>(col, fmt::format("{}", i));
             AddChild(channel.get());
             channels_.push_back(std::move(channel));
@@ -81,9 +81,9 @@ public:
 
         for (auto i = 0; i < 10; i++)
         {
-            auto col    = moci::Color {0.2f * static_cast<float>(i), 0.8f, 0.2f, 1.0f};
+            auto col    = moci::Color {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F};
             auto slider = moci::MakeScope<moci::Slider>(col);
-            slider->SetValue(i / 10.0f);
+            slider->SetValue(i / 10.0F);
             AddChild(slider.get());
             sliders_.push_back(std::move(slider));
         }
@@ -94,7 +94,7 @@ public:
             specs.callbacks.stateChanged = [](auto state) { moci::IgnoreUnused(state); };
 
             auto button = moci::MakeScope<moci::Button>(fmt::format("Test: {}", i), specs);
-            button->SetTextColor(moci::Color {0.2f * static_cast<float>(i), 0.8f, 0.2f, 1.0f});
+            button->SetTextColor(moci::Color {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F});
 
             AddChild(button.get());
             buttons_.push_back(std::move(button));

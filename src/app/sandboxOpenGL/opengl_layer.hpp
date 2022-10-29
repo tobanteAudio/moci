@@ -21,14 +21,14 @@ public:
 
 private:
     bool handleWindowResized(moci::WindowResizeEvent& e);
-    bool handleKeyPressed(moci::KeyPressedEvent& e);
-    bool handleMouseScrolled(moci::MouseScrolledEvent& e);
-    bool handleMouseMoved(moci::MouseMovedEvent& e);
-    bool handleMousePressed(moci::MouseButtonPressedEvent& e);
-    bool handleMouseReleased(moci::MouseButtonReleasedEvent& e);
+    static bool handleKeyPressed(moci::KeyPressedEvent& e);
+    static bool handleMouseScrolled(moci::MouseScrolledEvent& e);
+    static bool handleMouseMoved(moci::MouseMovedEvent& e);
+    static bool handleMousePressed(moci::MouseButtonPressedEvent& e);
+    static bool handleMouseReleased(moci::MouseButtonReleasedEvent& e);
 
-    float width_  = 1920.0f;
-    float height_ = 1080.0f;
+    float width_  = 1920.0F;
+    float height_ = 1080.0F;
 
     bool framebufferNeedsResize_ = false;
     glm::vec2 viewportSize_      = {};

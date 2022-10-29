@@ -28,47 +28,47 @@ constexpr auto shaderPrefix = "gl4";
 
 auto skyboxVertices = std::array {
     // positions
-    -1.0f, 1.0f,  -1.0f,  //
-    -1.0f, -1.0f, -1.0f,  //
-    1.0f,  -1.0f, -1.0f,  //
-    1.0f,  -1.0f, -1.0f,  //
-    1.0f,  1.0f,  -1.0f,  //
-    -1.0f, 1.0f,  -1.0f,  //
+    -1.0F, 1.0F,  -1.0F,  //
+    -1.0F, -1.0F, -1.0F,  //
+    1.0F,  -1.0F, -1.0F,  //
+    1.0F,  -1.0F, -1.0F,  //
+    1.0F,  1.0F,  -1.0F,  //
+    -1.0F, 1.0F,  -1.0F,  //
 
-    -1.0f, -1.0f, 1.0f,   //
-    -1.0f, -1.0f, -1.0f,  //
-    -1.0f, 1.0f,  -1.0f,  //
-    -1.0f, 1.0f,  -1.0f,  //
-    -1.0f, 1.0f,  1.0f,   //
-    -1.0f, -1.0f, 1.0f,   //
+    -1.0F, -1.0F, 1.0F,   //
+    -1.0F, -1.0F, -1.0F,  //
+    -1.0F, 1.0F,  -1.0F,  //
+    -1.0F, 1.0F,  -1.0F,  //
+    -1.0F, 1.0F,  1.0F,   //
+    -1.0F, -1.0F, 1.0F,   //
 
-    1.0f,  -1.0f, -1.0f,  //
-    1.0f,  -1.0f, 1.0f,   //
-    1.0f,  1.0f,  1.0f,   //
-    1.0f,  1.0f,  1.0f,   //
-    1.0f,  1.0f,  -1.0f,  //
-    1.0f,  -1.0f, -1.0f,  //
+    1.0F,  -1.0F, -1.0F,  //
+    1.0F,  -1.0F, 1.0F,   //
+    1.0F,  1.0F,  1.0F,   //
+    1.0F,  1.0F,  1.0F,   //
+    1.0F,  1.0F,  -1.0F,  //
+    1.0F,  -1.0F, -1.0F,  //
 
-    -1.0f, -1.0f, 1.0f,  //
-    -1.0f, 1.0f,  1.0f,  //
-    1.0f,  1.0f,  1.0f,  //
-    1.0f,  1.0f,  1.0f,  //
-    1.0f,  -1.0f, 1.0f,  //
-    -1.0f, -1.0f, 1.0f,  //
+    -1.0F, -1.0F, 1.0F,  //
+    -1.0F, 1.0F,  1.0F,  //
+    1.0F,  1.0F,  1.0F,  //
+    1.0F,  1.0F,  1.0F,  //
+    1.0F,  -1.0F, 1.0F,  //
+    -1.0F, -1.0F, 1.0F,  //
 
-    -1.0f, 1.0f,  -1.0f,  //
-    1.0f,  1.0f,  -1.0f,  //
-    1.0f,  1.0f,  1.0f,   //
-    1.0f,  1.0f,  1.0f,   //
-    -1.0f, 1.0f,  1.0f,   //
-    -1.0f, 1.0f,  -1.0f,  //
+    -1.0F, 1.0F,  -1.0F,  //
+    1.0F,  1.0F,  -1.0F,  //
+    1.0F,  1.0F,  1.0F,   //
+    1.0F,  1.0F,  1.0F,   //
+    -1.0F, 1.0F,  1.0F,   //
+    -1.0F, 1.0F,  -1.0F,  //
 
-    -1.0f, -1.0f, -1.0f,  //
-    -1.0f, -1.0f, 1.0f,   //
-    1.0f,  -1.0f, -1.0f,  //
-    1.0f,  -1.0f, -1.0f,  //
-    -1.0f, -1.0f, 1.0f,   //
-    1.0f,  -1.0f, 1.0f    //
+    -1.0F, -1.0F, -1.0F,  //
+    -1.0F, -1.0F, 1.0F,   //
+    1.0F,  -1.0F, -1.0F,  //
+    1.0F,  -1.0F, -1.0F,  //
+    -1.0F, -1.0F, 1.0F,   //
+    1.0F,  -1.0F, 1.0F    //
 };
 
 glm::vec2 ImGuiToGlmVec(ImVec2 const& input) { return {input.x, input.y}; }
@@ -90,31 +90,31 @@ void DemoLayer::OnAttach()
         MOCI_PROFILE_SCOPE("Translate");
         for (auto const& vertex : mesh_.GetVertices())
         {
-            auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
-            auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {modelScale_, modelScale_, modelScale_});
-            auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+            auto const model       = glm::translate(glm::mat4(1.0F), glm::vec3(1.0F));
+            auto const scaleMatrix = glm::scale(glm::mat4(1.0F), {modelScale_, modelScale_, modelScale_});
+            auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0F);
             vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
         }
 
         for (auto x = 1; x <= 5; x++)
         {
-            auto const modelScale = modelScale_ / 2.0f;
-            auto const rotate     = glm::rotate(glm::mat4(1.0f), glm::radians(-90.0f), {1.0f, 0.0f, 0.0f});
-            auto const scale      = glm::scale(glm::mat4(1.0f), {modelScale, modelScale, modelScale});
-            auto const model      = glm::translate(glm::mat4(1.0f), glm::vec3((3.0f * x), 5.0f, 1.0f));
+            auto const modelScale = modelScale_ / 2.0F;
+            auto const rotate     = glm::rotate(glm::mat4(1.0F), glm::radians(-90.0F), {1.0F, 0.0F, 0.0F});
+            auto const scale      = glm::scale(glm::mat4(1.0F), {modelScale, modelScale, modelScale});
+            auto const model      = glm::translate(glm::mat4(1.0F), glm::vec3((3.0F * x), 5.0F, 1.0F));
             for (auto const& vertex : mesh_.GetVertices())
             {
-                auto const position = model * scale * rotate * glm::vec4(vertex.position, 1.0f);
+                auto const position = model * scale * rotate * glm::vec4(vertex.position, 1.0F);
                 vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
             }
         }
 
         for (auto const& vertex : floor_.GetVertices())
         {
-            auto const model       = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
-            auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {5.0f, 5.0f, 5.0f});
-            auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
-            vertices_.push_back({glm::vec3(position), vertex.normal, {1.0f, 1.0f, 0.5f, 1.0f}, vertex.texCoord});
+            auto const model       = glm::translate(glm::mat4(1.0F), glm::vec3(1.0F));
+            auto const scaleMatrix = glm::scale(glm::mat4(1.0F), {5.0F, 5.0F, 5.0F});
+            auto const position    = model * scaleMatrix * glm::vec4(vertex.position, 1.0F);
+            vertices_.push_back({glm::vec3(position), vertex.normal, {1.0F, 1.0F, 0.5F, 1.0F}, vertex.texCoord});
         }
 
         numVertices_ = vertices_.size();
@@ -185,16 +185,16 @@ void DemoLayer::OnUpdate(moci::Timestep ts)
     MOCI_PROFILE_FUNCTION();
     lastTimestep_          = ts.GetMilliseconds();
     drawStats_.numVertices = 0;
-    moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+    moci::RenderCommand::SetClearColor({0.1F, 0.1F, 0.1F, 1});
     moci::RenderCommand::Clear();
 
     framebuffer_->Bind();
-    moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
+    moci::RenderCommand::SetClearColor({0.1F, 0.1F, 0.1F, 1.0F});
     moci::RenderCommand::Clear();
 
     // Camera matrix
     auto const aspectRatio = viewportSize_.x / viewportSize_.y;
-    auto const projection  = glm::perspective(glm::radians(cameraFOV_), aspectRatio, 0.1f, 100.0f);
+    auto const projection  = glm::perspective(glm::radians(cameraFOV_), aspectRatio, 0.1F, 100.0F);
     auto const view        = glm::lookAt(  //
         cameraPos_,                 // Camera is at (x,y,z), in World Space
         cameraPos_ + cameraFront_,  // and looks at
@@ -262,7 +262,7 @@ bool DemoLayer::OnWindowResized(moci::WindowResizeEvent& e)
 
 bool DemoLayer::OnKeyPressed(moci::KeyPressedEvent& e)
 {
-    auto const cameraSpeed = 0.15f * lastTimestep_;
+    auto const cameraSpeed = 0.15F * lastTimestep_;
     if (e.GetKeyCode() == moci::Key::Up) { cameraPos_ += cameraSpeed * cameraFront_; }
     if (e.GetKeyCode() == moci::Key::Down) { cameraPos_ -= cameraSpeed * cameraFront_; }
     if (e.GetKeyCode() == moci::Key::Left)
@@ -280,8 +280,8 @@ bool DemoLayer::OnKeyPressed(moci::KeyPressedEvent& e)
 bool DemoLayer::OnMouseScrolled(moci::MouseScrolledEvent& e)
 {
     cameraFOV_ -= e.GetYOffset();
-    constexpr auto minFOV = 1.0f;
-    constexpr auto maxFOV = 75.0f;
+    constexpr auto minFOV = 1.0F;
+    constexpr auto maxFOV = 75.0F;
     if (cameraFOV_ < minFOV) { cameraFOV_ = minFOV; }
     if (cameraFOV_ > maxFOV) { cameraFOV_ = maxFOV; }
     return true;
@@ -326,16 +326,16 @@ bool DemoLayer::OnMouseMoved(moci::MouseMovedEvent& e)
         cameraLastX_ = e.GetX();
         cameraLastY_ = e.GetY();
 
-        auto const sensitifity = 0.1f;
+        auto const sensitifity = 0.1F;
         xOffset *= sensitifity;
         yOffset *= sensitifity;
 
         cameraYaw_ += xOffset;
         cameraPitch_ += yOffset;
 
-        if (cameraPitch_ > 89.0f) { cameraPitch_ = 89.0f; }
+        if (cameraPitch_ > 89.0F) { cameraPitch_ = 89.0F; }
 
-        if (cameraPitch_ < -89.0f) { cameraPitch_ = -89.0f; }
+        if (cameraPitch_ < -89.0F) { cameraPitch_ = -89.0F; }
 
         auto front   = glm::vec3 {};
         front.x      = glm::cos(glm::radians(cameraYaw_)) * glm::cos(glm::radians(cameraPitch_));
@@ -392,7 +392,7 @@ void DemoLayer::OnImGuiRender()
         framebuffer_->Resize(newWidth, newHeight);
     }
 
-    auto const textureID = reinterpret_cast<void*>((size_t)framebuffer_->GetColorAttachmentRendererID());
+    auto* const textureID = reinterpret_cast<void*>((size_t)framebuffer_->GetColorAttachmentRendererID());
     ImGui::Image(textureID, {viewportRegion.x, viewportRegion.y}, ImVec2(0, 1), ImVec2(1, 0));
     ImGui::End();
     ImGui::PopStyleVar();
@@ -402,21 +402,21 @@ void DemoLayer::OnImGuiRender()
         ImGui::Begin("Sandbox 3D", &imguiWindow_);
         if (ImGui::CollapsingHeader("Camera"))
         {
-            ImGui::SliderFloat3("Position", glm::value_ptr(cameraPos_), -100.0f, 100.0f);
-            ImGui::SliderFloat3("Look At", glm::value_ptr(cameraLookAt_), -10.0f, 10.0f);
-            ImGui::SliderFloat("FOV", &cameraFOV_, 5.0f, 85.0f);
+            ImGui::SliderFloat3("Position", glm::value_ptr(cameraPos_), -100.0F, 100.0F);
+            ImGui::SliderFloat3("Look At", glm::value_ptr(cameraLookAt_), -10.0F, 10.0F);
+            ImGui::SliderFloat("FOV", &cameraFOV_, 5.0F, 85.0F);
         }
 
         if (ImGui::CollapsingHeader("Light"))
         {
 
-            ImGui::SliderFloat("Ambient", &ambientLight_, 0.0f, 0.4f);
-            ImGui::SliderFloat3("Light Position", glm::value_ptr(light->position), -20.0f, 20.0f);
+            ImGui::SliderFloat("Ambient", &ambientLight_, 0.0F, 0.4F);
+            ImGui::SliderFloat3("Light Position", glm::value_ptr(light->position), -20.0F, 20.0F);
             ImGui::ColorEdit4("Light Color", glm::value_ptr(light->color), 0);
-            ImGui::SliderFloat("Light Scale", &light->scale, 0.1f, 1.0f);
+            ImGui::SliderFloat("Light Scale", &light->scale, 0.1F, 1.0F);
         }
 
-        if (ImGui::CollapsingHeader("Model")) { ImGui::SliderFloat("Scale", &modelScale_, 0.01f, 20.0f); }
+        if (ImGui::CollapsingHeader("Model")) { ImGui::SliderFloat("Scale", &modelScale_, 0.01F, 20.0F); }
 
         if (ImGui::CollapsingHeader("Stats"))
         {
@@ -424,7 +424,7 @@ void DemoLayer::OnImGuiRender()
             auto const frameCounter = fmt::format("{} Frames", frameCount);
             auto const vertices     = fmt::format("{} Vertices", drawStats_.numVertices);
             auto const triangles    = fmt::format("{} Triangles", drawStats_.numVertices / 3);
-            auto const mb           = drawStats_.numVertices * sizeof(moci::Mesh::Vertex) / 1'000'000.0f;
+            auto const mb           = drawStats_.numVertices * sizeof(moci::Mesh::Vertex) / 1'000'000.0F;
             auto const megabyte     = fmt::format("{0:0.1f} Mbytes", mb);
             ImGui::TextUnformatted(frameCounter.c_str());
             ImGui::TextUnformatted(fpsStr.c_str());
@@ -436,7 +436,7 @@ void DemoLayer::OnImGuiRender()
             // auto const lightStr = fmt::format("Light vertices: {}", lightMesh_.GetVertices().size());
             // ImGui::TextUnformatted(lightStr.c_str());
             auto const size = static_cast<int>(fpsHistory_.size());
-            ImGui::PlotLines("FPS", fpsHistory_.data(), size, 0, "", 50.0f, 75.0f, ImVec2(0, 80));
+            ImGui::PlotLines("FPS", fpsHistory_.data(), size, 0, "", 50.0F, 75.0F, ImVec2(0, 80));
         }
         ImGui::End();
     }

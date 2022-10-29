@@ -30,29 +30,28 @@ private:
     bool OnMousePressed(moci::MouseButtonPressedEvent& e);
     bool OnMouseReleased(moci::MouseButtonReleasedEvent& e);
 
-private:
-    float width_        = 1280.0f;
-    float height_       = 1024.0f;
-    float lastTimestep_ = 0.0f;
+    float width_        = 1280.0F;
+    float height_       = 1024.0F;
+    float lastTimestep_ = 0.0F;
     bool fullscreen_    = false;
 
     moci::Ref<moci::Framebuffer> framebuffer_ = nullptr;
     glm::vec2 viewportSize_                   = {};
 
-    glm::vec3 cameraPos_   = {15.0f, 8.70f, 50.0f};
-    glm::vec3 cameraFront_ = {0.0f, 0.0f, -1.0f};
-    glm::vec3 cameraUp_    = {0.0f, 1.0f, 0.0f};
-    float cameraYaw_       = -90.0f;
-    float cameraPitch_     = 0.0f;
-    float cameraFOV_       = 45.0f;
+    glm::vec3 cameraPos_   = {15.0F, 8.70F, 50.0F};
+    glm::vec3 cameraFront_ = {0.0F, 0.0F, -1.0F};
+    glm::vec3 cameraUp_    = {0.0F, 1.0F, 0.0F};
+    float cameraYaw_       = -90.0F;
+    float cameraPitch_     = 0.0F;
+    float cameraFOV_       = 45.0F;
     bool firstMouse_       = true;
-    float cameraLastX_     = {width_ / 2.0f};
-    float cameraLastY_     = {height_ / 2.0f};
+    float cameraLastX_     = {width_ / 2.0F};
+    float cameraLastY_     = {height_ / 2.0F};
     bool isMouseDragging_  = false;
 
-    glm::vec3 cameraLookAt_        = {0.0f, 0.0f, 0.0f};
-    float ambientLight_            = 0.1f;
-    float modelScale_              = 0.15f;
+    glm::vec3 cameraLookAt_        = {0.0F, 0.0F, 0.0F};
+    float ambientLight_            = 0.1F;
+    float modelScale_              = 0.15F;
     moci::Scope<moci::Light> light = {};
 
     moci::Ref<moci::Shader> shader_    = nullptr;
@@ -79,8 +78,8 @@ private:
     struct DrawStats
     {
         std::uint32_t numVertices {};
-        float minFPS = 9999.0f;
-        float maxFPS = 0.0f;
+        float minFPS = 9999.0F;
+        float maxFPS = 0.0F;
     };
 
     DrawStats drawStats_            = {};

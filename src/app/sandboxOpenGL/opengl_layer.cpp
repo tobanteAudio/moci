@@ -19,9 +19,9 @@ void OpenGLLayer::OnAttach()
 
     auto const verticesSize = static_cast<std::uint32_t>(assets::QuadVertices.size() * sizeof(float));
     auto layout             = moci::BufferLayout {
-                    {moci::ShaderDataType::Float3, "position"},      //
-                    {moci::ShaderDataType::Float4, "color"},         //
-                    {moci::ShaderDataType::Float2, "textureCoord"},  //
+        {moci::ShaderDataType::Float3, "position"},      //
+        {moci::ShaderDataType::Float4, "color"},         //
+        {moci::ShaderDataType::Float2, "textureCoord"},  //
     };
     vbo_.reset(moci::RenderFactory::MakeVertexBuffer(assets::QuadVertices.data(), verticesSize));
     vbo_->SetLayout(layout);
@@ -49,7 +49,7 @@ void OpenGLLayer::OnUpdate(moci::Timestep ts)
 {
     moci::IgnoreUnused(ts);
 
-    moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
+    moci::RenderCommand::SetClearColor({0.1F, 0.1F, 0.1F, 1.0F});
     moci::RenderCommand::Clear();
 
     if (framebufferNeedsResize_)
@@ -60,7 +60,7 @@ void OpenGLLayer::OnUpdate(moci::Timestep ts)
         framebufferNeedsResize_ = false;
     }
     framebuffer_->Bind();
-    moci::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
+    moci::RenderCommand::SetClearColor({0.1F, 0.1F, 0.1F, 1.0F});
     moci::RenderCommand::Clear();
 
     vao_->Bind();
@@ -83,7 +83,7 @@ void OpenGLLayer::OnImGuiRender()
         framebufferNeedsResize_ = true;
     }
 
-    auto const textureID = reinterpret_cast<void*>((size_t)framebuffer_->GetColorAttachmentRendererID());
+    auto* const textureID = reinterpret_cast<void*>((size_t)framebuffer_->GetColorAttachmentRendererID());
     ImGui::Image(textureID, {viewportSize_.x, viewportSize_.y}, ImVec2(0, 1), ImVec2(1, 0));
     ImGui::End();
     ImGui::PopStyleVar();
