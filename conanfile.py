@@ -23,12 +23,7 @@ class Moci(ConanFile):
     def configure(self):
         self.options["glfw"].shared = False
         self.options["glew"].shared = False
-
         self.options["freetype"].shared = False
-        self.options["freetype"].with_png = False
-        self.options["freetype"].with_zlib = True
-        self.options["freetype"].with_bzip2 = False
-        self.options["freetype"].with_brotli = False
 
         self.options["assimp"].with_fbx = True
         self.options["assimp"].with_obj = True
