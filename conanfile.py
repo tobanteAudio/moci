@@ -18,6 +18,7 @@ class Moci(ConanFile):
         self.requires("ms-gsl/4.0.0")
         self.requires("spdlog/1.10.0")
         self.requires("stb/cci.20210910")
+        self.requires("zlib/1.2.13", override=True)
 
     def configure(self):
         self.options["glfw"].shared = False
