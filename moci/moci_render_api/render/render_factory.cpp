@@ -80,7 +80,7 @@ auto RenderFactory::MakeShader(const std::string& filepath) -> Ref<Shader>
         case RendererAPI::API::OpenGL: return MakeRef<OpenGLShader>(filepath);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES: return MakeRef<OpenGLESShader>(std::move(filepath));
+        case RendererAPI::API::OpenGLES: return MakeRef<OpenGLESShader>(filepath);
 #endif
         default: break;
     }
