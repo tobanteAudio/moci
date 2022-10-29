@@ -2,8 +2,8 @@
 
 #include "moci/benchmark/profile.hpp"
 #include "moci/core/logging.hpp"
+#include "moci/graphics/color.hpp"
 
-#include "moci_graphics_base/moci_graphics_base.hpp"
 #include "moci_render_base/moci_render_base.hpp"
 
 namespace moci

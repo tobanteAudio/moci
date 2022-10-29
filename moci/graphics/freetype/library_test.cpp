@@ -6,7 +6,7 @@
 
 #include "library.hpp"
 
-TEST_CASE("moci_graphics_base: FreetypeCreateTypeface", "[graphics][font]")
+TEST_CASE("graphics/freetype: FreetypeCreateTypeface", "[graphics][font]")
 {
     const auto* const path = "moci_test_data/OpenSans-Bold.ttf";
     auto const typeface    = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
@@ -14,7 +14,7 @@ TEST_CASE("moci_graphics_base: FreetypeCreateTypeface", "[graphics][font]")
     REQUIRE(typeface.value().GetNumCharacters() == 128);
 }
 
-TEST_CASE("moci_graphics_base: FreetypeCreateTypefaceNoPath", "[graphics][font]")
+TEST_CASE("graphics/freetype: FreetypeCreateTypefaceNoPath", "[graphics][font]")
 {
     {
         auto typeface = moci::FreetypeLibrary::CreateTypefaceFromFont("");

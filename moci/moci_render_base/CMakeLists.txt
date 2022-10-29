@@ -22,7 +22,7 @@ set_target_properties(moci_render_base_lib PROPERTIES UNITY_BUILD ON)
 
 target_link_libraries(moci_render_base_lib
     PUBLIC
-        Moci::GraphicsBase
+        Moci::Graphics
         glfw
     PRIVATE
         Moci::CodeCoverage

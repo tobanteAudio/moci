@@ -5,8 +5,8 @@
 
 #include "moci/core/memory.hpp"
 #include "moci/core/vector.hpp"
+#include "moci/graphics/color.hpp"
 #include "moci/math/geometry/rectangle.hpp"
-#include "moci_graphics_base/moci_graphics_base.hpp"
 
 #include <glm/glm.hpp>
 

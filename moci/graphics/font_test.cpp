@@ -7,13 +7,13 @@
 #include "font.hpp"
 #include "freetype/library.hpp"
 
-TEST_CASE("moci_graphics_base: TypefaceConstruct", "[font][graphics]")
+TEST_CASE("graphics: TypefaceConstruct", "[font][graphics]")
 {
     moci::Typeface face {"comic-sans"};
     REQUIRE(face.GetName() == "comic-sans");
 }
 
-TEST_CASE("moci_graphics_base: TypefaceGetWidthForString", "[font][graphics]")
+TEST_CASE("graphics: TypefaceGetWidthForString", "[font][graphics]")
 {
     const auto* const path = "moci_test_data/OpenSans-Bold.ttf";
     auto const opt         = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
