@@ -77,8 +77,11 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(MociCodeCoverage)
 include(MociCompilerOptions)
 include(MociCompilerWarnings)
-include(MociConan)
 include(MociThreading)
+
+if(NOT EMSCRIPTEN)
+    include(MociConan)
+endif()
 
 # other
 find_package(assimp REQUIRED)
