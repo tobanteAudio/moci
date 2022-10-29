@@ -11,25 +11,25 @@ TEST_CASE("moci_math/geometry: RectangleConstructionEmpty", "[geometry]")
 {
     moci::Rectangle<float> r {};
     REQUIRE(r.IsEmpty() == true);
-    REQUIRE(r.GetX() == 0.0f);
-    REQUIRE(r.GetY() == 0.0f);
-    REQUIRE(r.GetWidth() == 0.0f);
-    REQUIRE(r.GetHeight() == 0.0f);
+    REQUIRE(r.GetX() == 0.0F);
+    REQUIRE(r.GetY() == 0.0F);
+    REQUIRE(r.GetWidth() == 0.0F);
+    REQUIRE(r.GetHeight() == 0.0F);
 }
 
 TEST_CASE("moci_math/geometry: RectangleConstructionWithValues", "[geometry]")
 {
-    constexpr moci::Rectangle<float> r(1.0f, 2.0f, 10.0f, 10.0f);
+    constexpr moci::Rectangle<float> r(1.0F, 2.0F, 10.0F, 10.0F);
     REQUIRE(r.IsEmpty() == false);
-    REQUIRE(r.GetX() == 1.0f);
-    REQUIRE(r.GetY() == 2.0f);
-    REQUIRE(r.GetWidth() == 10.0f);
-    REQUIRE(r.GetHeight() == 10.0f);
+    REQUIRE(r.GetX() == 1.0F);
+    REQUIRE(r.GetY() == 2.0F);
+    REQUIRE(r.GetWidth() == 10.0F);
+    REQUIRE(r.GetHeight() == 10.0F);
 }
 
 TEST_CASE("moci_math/geometry: RectangleCopyConstruction", "[geometry]")
 {
-    auto r = moci::Rectangle<float>(1.0f, 2.0f, 10.0f, 10.0f);
+    auto r = moci::Rectangle<float>(1.0F, 2.0F, 10.0F, 10.0F);
     moci::Rectangle<float> const r2(r);
     REQUIRE(r.GetX() == r2.GetX());
     REQUIRE(r.GetY() == r2.GetY());
@@ -39,7 +39,7 @@ TEST_CASE("moci_math/geometry: RectangleCopyConstruction", "[geometry]")
 
 TEST_CASE("moci_math/geometry: RectangleCopyAssignment", "[geometry]")
 {
-    auto r1 = moci::Rectangle<float>(1.0f, 2.0f, 10.0f, 10.0f);
+    auto r1 = moci::Rectangle<float>(1.0F, 2.0F, 10.0F, 10.0F);
     auto r2 = r1;
     REQUIRE(r1.GetX() == r2.GetX());
     REQUIRE(r1.GetY() == r2.GetY());
@@ -116,8 +116,8 @@ TEST_CASE("moci_math/geometry: RectangleGetAspectRatio", "[geometry]")
     auto square = moci::Rectangle<int> {0, 0, 100, 100};
     REQUIRE(square.GetAspectRatio() == 1);
 
-    auto display = moci::Rectangle<float> {0.0f, 0.0f, 1920.0f, 1080.0f};
-    REQUIRE(display.GetAspectRatio() == Catch::Approx(16.0f / 9.0f));
+    auto display = moci::Rectangle<float> {0.0F, 0.0F, 1920.0F, 1080.0F};
+    REQUIRE(display.GetAspectRatio() == Catch::Approx(16.0F / 9.0F));
 }
 
 TEST_CASE("moci_math/geometry: RectangleRemoveFromTop", "[geometry]")
@@ -233,12 +233,12 @@ TEST_CASE("moci_math/geometry: RectangleToInt", "[geometry]")
 
 TEST_CASE("moci_math/geometry: RectangleToFloat", "[geometry]")
 {
-    auto p = moci::Rectangle<float>(0.0f, 0.0f, 50.5f, 100.1f);
+    auto p = moci::Rectangle<float>(0.0F, 0.0F, 50.5F, 100.1F);
     auto n = p.ToFloat();
-    REQUIRE(n.GetX() == 0.0f);
-    REQUIRE(n.GetY() == 0.0f);
-    REQUIRE(n.GetWidth() == 50.5f);
-    REQUIRE(n.GetHeight() == 100.1f);
+    REQUIRE(n.GetX() == 0.0F);
+    REQUIRE(n.GetY() == 0.0F);
+    REQUIRE(n.GetWidth() == 50.5F);
+    REQUIRE(n.GetHeight() == 100.1F);
 }
 
 TEST_CASE("moci_math/geometry: RectangleOperatorEqual", "[geometry]")

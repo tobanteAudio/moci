@@ -9,7 +9,7 @@ namespace moci
 class OpenGLESContext : public GraphicsContext
 {
 public:
-    OpenGLESContext(GLFWwindow* windowHandle);
+    explicit OpenGLESContext(GLFWwindow* windowHandle);
 
     void Init() override;
     void SwapBuffers() override;

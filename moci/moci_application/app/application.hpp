@@ -17,7 +17,7 @@ class Application
 {
 public:
     Application();
-    Application(WindowSpecs windowSpecs);
+    explicit Application(WindowSpecs windowSpecs);
 
     virtual ~Application() = default;
 
@@ -40,7 +40,7 @@ private:
     bool m_Running                                                          = true;
     bool m_Minimized                                                        = false;
     LayerStack m_LayerStack                                                 = {};
-    float m_LastFrameTime                                                   = 0.0f;
+    float m_LastFrameTime                                                   = 0.0F;
     std::chrono::time_point<std::chrono::steady_clock> m_LastFrameTimepoint = {};
 
     static Application* s_Instance;

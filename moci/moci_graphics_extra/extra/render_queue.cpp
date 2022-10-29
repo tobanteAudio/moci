@@ -61,7 +61,7 @@ auto BatchRender2D::StartFrame(float width, float height) -> void
 {
     MOCI_PROFILE_FUNCTION();
     data_.shader->Bind();
-    auto const proj = glm::ortho(0.0f, width, height, 0.0f, -1.0f, 1.0f);
+    auto const proj = glm::ortho(0.0F, width, height, 0.0F, -1.0F, 1.0F);
     data_.shader->SetMat4("u_MVP", proj);
     auto samplers = std::array<int, 16> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     data_.shader->SetInts("u_Textures", samplers.size(), samplers.data());
@@ -78,7 +78,7 @@ auto BatchRender2D::EndFrame() -> void
     data_.shader->Unbind();
 }
 
-auto BatchRender2D::DrawText(std::string text, glm::vec2 position, float scale, Color color) -> void
+auto BatchRender2D::DrawText(const std::string& text, glm::vec2 position, float scale, Color color) -> void
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -224,11 +224,11 @@ auto BatchRender2D::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Opti
     auto const y      = rect.GetY();
     auto const width  = rect.GetWidth();
     auto const height = rect.GetHeight();
-    data_.vertices.push_back(Vertex {{x, y, 0.0f}, color, {0.0f, 0.0f}, static_cast<float>(texID), 1.0f});
-    data_.vertices.push_back(Vertex {{x + width, y, 0.0f}, color, {1.0f, 0.0f}, static_cast<float>(texID), 1.0f});
+    data_.vertices.push_back(Vertex {{x, y, 0.0F}, color, {0.0F, 0.0F}, static_cast<float>(texID), 1.0F});
+    data_.vertices.push_back(Vertex {{x + width, y, 0.0F}, color, {1.0F, 0.0F}, static_cast<float>(texID), 1.0F});
     data_.vertices.push_back(
-        Vertex {{x + width, y + height, 0.0f}, color, {1.0f, 1.0f}, static_cast<float>(texID), 1.0f});
-    data_.vertices.push_back(Vertex {{x, y + height, 0.0f}, color, {0.0f, 1.0f}, static_cast<float>(texID), 1.0f});
+        Vertex {{x + width, y + height, 0.0F}, color, {1.0F, 1.0F}, static_cast<float>(texID), 1.0F});
+    data_.vertices.push_back(Vertex {{x, y + height, 0.0F}, color, {0.0F, 1.0F}, static_cast<float>(texID), 1.0F});
 
     for (auto const i : {0, 1, 2, 2, 3, 0}) { data_.indices.push_back(static_cast<uint32_t>(data_.indexOffset + i)); }
     data_.indexOffset += 4;
@@ -242,13 +242,13 @@ auto BatchRender2D::DrawCircle(float x, float y, float radius, int numSides, Col
     FlushIf(data_.indices.size() + (static_cast<size_t>(3) * static_cast<size_t>(numSides)) >= MaxIndexCount);
 
     auto const numVertices = numSides + 2;
-    auto const doublePI    = 3.141f * 2.0f;
-    data_.vertices.push_back(Vertex {{x, y, 0.0f}, color, {0.0f, 0.0f}, 0.0f});
+    auto const doublePI    = 3.141F * 2.0F;
+    data_.vertices.push_back(Vertex {{x, y, 0.0F}, color, {0.0F, 0.0F}, 0.0F});
     for (auto i = 1; i < numVertices; i++)
     {
         auto const newX = x + (radius * glm::cos(i * doublePI / static_cast<float>(numSides)));
         auto const newY = y + (radius * glm::sin(i * doublePI / static_cast<float>(numSides)));
-        data_.vertices.push_back(Vertex {{newX, newY, 0.0f}, color, {0.0f, 0.0f}, 1.0f});
+        data_.vertices.push_back(Vertex {{newX, newY, 0.0F}, color, {0.0F, 0.0F}, 1.0F});
     }
 
     auto const origin = data_.indexOffset;

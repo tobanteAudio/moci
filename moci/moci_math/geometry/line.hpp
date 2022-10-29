@@ -66,8 +66,8 @@ public:
      */
     [[nodiscard]] constexpr Point<Type> GetMidPoint() const noexcept
     {
-        auto const x = (start_.GetX() + end_.GetX()) / 2.0f;
-        auto const y = (start_.GetY() + end_.GetY()) / 2.0f;
+        auto const x = (start_.GetX() + end_.GetX()) / 2.0F;
+        auto const y = (start_.GetY() + end_.GetY()) / 2.0F;
         return Point<Type> {x, y};
     }
 

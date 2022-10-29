@@ -18,7 +18,7 @@ namespace moci
 class OpenGLESShader : public Shader
 {
 public:
-    OpenGLESShader(std::string const& filepath);
+    explicit OpenGLESShader(std::string const& filepath);
     OpenGLESShader(std::string name, std::string const& vertexSrc, std::string const& fragmentSrc);
     ~OpenGLESShader() override;
 

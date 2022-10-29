@@ -14,8 +14,8 @@ public:
     Point(Point const&)                    = default;
     auto operator=(Point const&) -> Point& = default;
 
-    Point(Point&&)                    = default;
-    auto operator=(Point&&) -> Point& = default;
+    Point(Point&&) noexcept                    = default;
+    auto operator=(Point&&) noexcept -> Point& = default;
 
     [[nodiscard]] constexpr auto IsOrigin() const noexcept -> bool { return x_ == Type(0) && y_ == Type(0); }
 

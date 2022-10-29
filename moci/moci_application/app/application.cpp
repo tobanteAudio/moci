@@ -66,7 +66,7 @@ void Application::Run()
         auto const now         = steady_clock::now();
         auto const elapsedTime = time_point_cast<microseconds>(now).time_since_epoch()
                                  - time_point_cast<microseconds>(m_LastFrameTimepoint).time_since_epoch();
-        auto const timestep  = Timestep {static_cast<float>(elapsedTime.count()) / 1'000.0f / 1'000.0f};
+        auto const timestep  = Timestep {static_cast<float>(elapsedTime.count()) / 1'000.0F / 1'000.0F};
         m_LastFrameTimepoint = now;
 
         if (!m_Minimized)

@@ -141,7 +141,10 @@ private:
 class InstrumentationTimer
 {
 public:
-    InstrumentationTimer(const char* name) : name_(name) { startTimepoint_ = std::chrono::steady_clock::now(); }
+    explicit InstrumentationTimer(const char* name) : name_(name)
+    {
+        startTimepoint_ = std::chrono::steady_clock::now();
+    }
 
     ~InstrumentationTimer()
     {

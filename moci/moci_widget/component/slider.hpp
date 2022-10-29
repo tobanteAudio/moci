@@ -25,7 +25,7 @@ public:
 class Slider : public Component
 {
 public:
-    Slider(Color col, SliderCallbacks callbacks = SliderCallbacks {});
+    explicit Slider(Color col, SliderCallbacks callbacks = SliderCallbacks {});
     ~Slider() override = default;
 
     auto OnDraw(Painter& painter) -> void override;

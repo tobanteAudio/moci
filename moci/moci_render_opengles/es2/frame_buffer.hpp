@@ -9,7 +9,7 @@ namespace moci
 class OpenGLESFramebuffer : public Framebuffer
 {
 public:
-    OpenGLESFramebuffer(FramebufferSpecs spec);
+    explicit OpenGLESFramebuffer(FramebufferSpecs spec);
     ~OpenGLESFramebuffer() override;
 
     void Bind() override;

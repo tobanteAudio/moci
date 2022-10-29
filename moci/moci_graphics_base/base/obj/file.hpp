@@ -24,7 +24,7 @@ public:
     /**
      * @brief Constructor. Takes the file path.
      */
-    OBJFile(std::string path);
+    explicit OBJFile(std::string path);
 
     /**
      * @brief Parse the model data into memory.

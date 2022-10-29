@@ -39,7 +39,7 @@ struct ButtonSpecs
 class Button : public Component
 {
 public:
-    Button(std::string text, ButtonSpecs specs = ButtonSpecs {});
+    explicit Button(std::string text, ButtonSpecs specs = ButtonSpecs {});
     ~Button() override = default;
 
     auto OnDraw(Painter& painter) -> void override;

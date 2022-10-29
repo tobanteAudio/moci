@@ -16,7 +16,7 @@ namespace
 class TestLayer : public moci::Layer
 {
 public:
-    TestLayer(std::string n) : moci::Layer(std::move(n)) { }
+    explicit TestLayer(std::string n) : moci::Layer(std::move(n)) { }
     ~TestLayer() override = default;
 };
 }  // namespace

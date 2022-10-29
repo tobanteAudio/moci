@@ -27,7 +27,7 @@ private:
 class OpenGLESIndexBuffer : public IndexBuffer
 {
 public:
-    OpenGLESIndexBuffer(IndexBufferSpecs specs);
+    explicit OpenGLESIndexBuffer(IndexBufferSpecs specs);
     ~OpenGLESIndexBuffer() override;
 
     void Bind() const override;

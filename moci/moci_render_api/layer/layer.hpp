@@ -14,7 +14,7 @@ class Layer
 public:
     using Ptr = Scope<Layer>;
 
-    Layer(std::string name = "Layer");
+    explicit Layer(std::string name = "Layer");
     virtual ~Layer() = default;
 
     virtual void OnAttach() { }

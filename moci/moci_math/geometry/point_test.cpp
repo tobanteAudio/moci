@@ -9,20 +9,20 @@
 TEST_CASE("moci_math/geometry: PointConstructionEmpty", "[geometry]")
 {
     auto p = moci::Point<float>();
-    REQUIRE(p.GetX() == 0.0f);
-    REQUIRE(p.GetY() == 0.0f);
+    REQUIRE(p.GetX() == 0.0F);
+    REQUIRE(p.GetY() == 0.0F);
 }
 
 TEST_CASE("moci_math/geometry: PointConstructionWithValues", "[geometry]")
 {
-    constexpr auto p = moci::Point<float>(1.0f, 2.0f);
-    REQUIRE(p.GetX() == 1.0f);
-    REQUIRE(p.GetY() == 2.0f);
+    constexpr auto p = moci::Point<float>(1.0F, 2.0F);
+    REQUIRE(p.GetX() == 1.0F);
+    REQUIRE(p.GetY() == 2.0F);
 }
 
 TEST_CASE("moci_math/geometry: PointCopyConstruction", "[geometry]")
 {
-    constexpr auto p1 = moci::Point<float>(1.0f, 2.0f);
+    constexpr auto p1 = moci::Point<float>(1.0F, 2.0F);
     moci::Point<float> const p2(p1);
     REQUIRE(p1.GetX() == p2.GetX());
     REQUIRE(p1.GetY() == p2.GetY());
@@ -30,7 +30,7 @@ TEST_CASE("moci_math/geometry: PointCopyConstruction", "[geometry]")
 
 TEST_CASE("moci_math/geometry: PointCopyAssignment", "[geometry]")
 {
-    auto p1 = moci::Point<float>(1.0f, 2.0f);
+    auto p1 = moci::Point<float>(1.0F, 2.0F);
     auto p2 = p1;
     REQUIRE(p1.GetX() == p2.GetX());
     REQUIRE(p1.GetY() == p2.GetY());

@@ -13,7 +13,7 @@ class ImGuiLayer : public Layer
 {
 public:
     ImGuiLayer();
-    ImGuiLayer(std::string const& name);
+    explicit ImGuiLayer(std::string const& name);
     ~ImGuiLayer() override;
 
     static void Begin();

@@ -6,7 +6,7 @@
 namespace moci
 {
 
-OpenGLESFramebuffer::OpenGLESFramebuffer(FramebufferSpecs spec) : specs_(std::move(spec)) { invalidate(); }
+OpenGLESFramebuffer::OpenGLESFramebuffer(FramebufferSpecs spec) : specs_(spec) { invalidate(); }
 
 OpenGLESFramebuffer::~OpenGLESFramebuffer() { deallocate(); }
 

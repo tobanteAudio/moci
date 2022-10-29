@@ -31,7 +31,7 @@ namespace moci
 class GlfwWindow : public Window
 {
 public:
-    GlfwWindow(WindowSpecs props);
+    explicit GlfwWindow(WindowSpecs props);
     ~GlfwWindow() override;
 
     void OnUpdate() override;

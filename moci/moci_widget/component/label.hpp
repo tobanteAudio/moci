@@ -27,7 +27,7 @@ public:
     [[nodiscard]] auto GetText() const noexcept -> std::string const& { return text_; }
     [[nodiscard]] auto GetTextView() const noexcept -> std::string_view { return text_; }
 
-    void SetTextColor(Color col) noexcept { color_ = std::move(col); }
+    void SetTextColor(Color col) noexcept { color_ = col; }
     [[nodiscard]] Color GetTextColor() const noexcept { return color_; }
 
 private:

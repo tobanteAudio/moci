@@ -6,8 +6,8 @@ namespace moci
 class Color
 {
 public:
-    constexpr Color() noexcept : data_({0.0f, 0.0f, 0.0f, 0.0f}) { }
-    constexpr Color(float r, float g, float b) noexcept : data_({r, g, b, 1.0f}) { }
+    constexpr Color() noexcept : data_({0.0F, 0.0F, 0.0F, 0.0F}) { }
+    constexpr Color(float r, float g, float b) noexcept : data_({r, g, b, 1.0F}) { }
     constexpr Color(float r, float g, float b, float alpha) noexcept : data_({r, g, b, alpha}) { }
 
     [[nodiscard]] constexpr auto GetData() const noexcept -> glm::vec4 { return data_; }
@@ -29,10 +29,10 @@ private:
 class Colors
 {
 public:
-    static constexpr Color Black = {0.0f, 0.0f, 0.0f, 1.0f};
-    static constexpr Color White = {1.0f, 1.0f, 1.0f, 1.0f};
-    static constexpr Color Red   = {1.0f, 0.0f, 0.0f, 1.0f};
-    static constexpr Color Green = {0.0f, 1.0f, 0.0f, 1.0f};
-    static constexpr Color Blue  = {0.0f, 0.0f, 1.0f, 1.0f};
+    static constexpr Color Black = {0.0F, 0.0F, 0.0F, 1.0F};
+    static constexpr Color White = {1.0F, 1.0F, 1.0F, 1.0F};
+    static constexpr Color Red   = {1.0F, 0.0F, 0.0F, 1.0F};
+    static constexpr Color Green = {0.0F, 1.0F, 0.0F, 1.0F};
+    static constexpr Color Blue  = {0.0F, 0.0F, 1.0F, 1.0F};
 };
 }  // namespace moci

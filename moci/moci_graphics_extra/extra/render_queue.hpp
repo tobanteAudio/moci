@@ -40,7 +40,7 @@ public:
     auto StartFrame(float width, float height) -> void;
     auto EndFrame() -> void;
 
-    auto DrawText(std::string text, glm::vec2 position, float scale, Color color) -> void;
+    auto DrawText(const std::string& text, glm::vec2 position, float scale, Color color) -> void;
     auto DrawQuad(Rectangle<float> rect, Color color, Texture2D::Optional texture = std::nullopt) -> void;
     auto DrawCircle(float x, float y, float radius, int numSides, Color color) -> void;
 
@@ -57,8 +57,8 @@ private:
         glm::vec3 position        = {};
         Color color               = {};
         glm::vec2 texture         = {};
-        float textureIndex        = 0.0f;
-        float textureIsMonochrome = 0.0f;
+        float textureIndex        = 0.0F;
+        float textureIsMonochrome = 0.0F;
     };
 
     struct RenderData

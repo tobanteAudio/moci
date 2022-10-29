@@ -39,7 +39,7 @@ auto RenderFactory::MakeIndexBuffer(IndexBufferSpecs specs) -> IndexBuffer*
         case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(std::move(specs));
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES: return new OpenGLESIndexBuffer(std::move(specs));
+        case RendererAPI::API::OpenGLES: return new OpenGLESIndexBuffer(specs);
 #endif
         default: break;
     }
@@ -59,7 +59,7 @@ Ref<Framebuffer> RenderFactory::MakeFramebuffer(FramebufferSpecs spec)
         case RendererAPI::API::OpenGL: return MakeRef<OpenGLFramebuffer>(std::move(spec));
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES: return MakeRef<OpenGLESFramebuffer>(std::move(spec));
+        case RendererAPI::API::OpenGLES: return MakeRef<OpenGLESFramebuffer>(spec);
 #endif
         default: break;
     }
@@ -68,7 +68,7 @@ Ref<Framebuffer> RenderFactory::MakeFramebuffer(FramebufferSpecs spec)
     return nullptr;
 }
 
-auto RenderFactory::MakeShader(std::string filepath) -> Ref<Shader>
+auto RenderFactory::MakeShader(const std::string& filepath) -> Ref<Shader>
 {
     MOCI_CORE_INFO("Creating shader from: {}", filepath);
     switch (Renderer::GetAPI())
@@ -150,7 +150,7 @@ auto RenderFactory::MakeTexture2D(Texture::Format format, uint32_t width, uint32
     return nullptr;
 }
 
-auto RenderFactory::MakeTextureCube(Vector<std::string> paths) -> Ref<TextureCube>
+auto RenderFactory::MakeTextureCube(const Vector<std::string>& paths) -> Ref<TextureCube>
 {
     switch (Renderer::GetAPI())
     {

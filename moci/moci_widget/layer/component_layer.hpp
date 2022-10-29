@@ -16,7 +16,7 @@ namespace moci
 class ComponentLayer : public Layer
 {
 public:
-    ComponentLayer(Scope<Component>&& root) : Layer("component-layer"), rootComponent_(std::move(root)) { }
+    explicit ComponentLayer(Scope<Component>&& root) : Layer("component-layer"), rootComponent_(std::move(root)) { }
     ~ComponentLayer() override = default;
 
     void OnAttach() override;
@@ -27,7 +27,7 @@ public:
 
 private:
     bool onWindowResized(WindowResizeEvent& e);
-    bool onMouseMoved(MouseMovedEvent& e);
+    static bool onMouseMoved(MouseMovedEvent& e);
     bool onMouseScrolled(MouseScrolledEvent& e);
     bool onMousePressed(MouseButtonPressedEvent& e);
 
@@ -53,8 +53,8 @@ private:
         return true;
     }
 
-    float width_  = 1280.0f;
-    float height_ = 1024.0f;
+    float width_  = 1280.0F;
+    float height_ = 1024.0F;
 
     Scope<BatchRender2D> renderQueue_ {};
     Style defaultStyle_ {};

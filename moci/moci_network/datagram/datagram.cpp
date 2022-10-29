@@ -1,5 +1,7 @@
 #include "moci_network/datagram/datagram.hpp"
 
+#include <utility>
+
 #include "moci_core/moci_core.hpp"
 #if defined(MOCI_MAC) || defined(MOCI_LINUX)
 #include "moci_network/datagram/unix/datagram.hpp"
@@ -13,7 +15,7 @@ DatagramSocket::DatagramSocket() { pimpl_ = MakeScope<Pimpl>(); }
 
 DatagramSocket::~DatagramSocket() { pimpl_.reset(nullptr); }
 
-bool DatagramSocket::Bind(std::string ip, int port) { return pimpl_->Bind(ip, port); }
+bool DatagramSocket::Bind(std::string ip, int port) { return pimpl_->Bind(std::move(ip), port); }
 
 bool DatagramSocket::Write(std::string const& host, int port, Span<std::uint8_t> buffer)
 {
@@ -36,6 +38,6 @@ void DatagramSocket::Shutdown() { pimpl_->Shutdown(); }
 
 void DatagramSocket::SetMessageCallback(std::function<void(Buffer const&, size_t)> callback)
 {
-    pimpl_->SetMessageCallback(callback);
+    pimpl_->SetMessageCallback(std::move(callback));
 }
 }  // namespace moci

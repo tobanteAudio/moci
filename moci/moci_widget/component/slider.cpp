@@ -27,9 +27,9 @@ bool Slider::MouseClicked(moci::MouseCallback::Click click)
 
 bool Slider::MouseScrolled(MouseScrolledEvent scroll)
 {
-    auto newValue = GetValue() + scroll.GetYOffset() * 0.05f;
-    newValue      = std::max(0.0f, newValue);
-    newValue      = std::min(1.0f, newValue);
+    auto newValue = GetValue() + scroll.GetYOffset() * 0.05F;
+    newValue      = std::max(0.0F, newValue);
+    newValue      = std::min(1.0F, newValue);
     SetValue(newValue);
     return true;
 }
@@ -43,6 +43,6 @@ auto Slider::SetValue(float newValue) noexcept -> void
 }
 
 Color Slider::GetColor() const noexcept { return color_; }
-void Slider::SetColor(Color col) noexcept { color_ = std::move(col); }
+void Slider::SetColor(Color col) noexcept { color_ = col; }
 
 }  // namespace moci

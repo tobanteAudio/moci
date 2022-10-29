@@ -29,7 +29,7 @@ public:
     /**
      * @brief Default construct and set id.
      */
-    Component(std::string id);
+    explicit Component(std::string id);
 
     /**
      * @brief Virtual destructor.

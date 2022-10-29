@@ -30,7 +30,7 @@ public:
     /**
      * @brief Constructor. Sets the name.
      */
-    PropertyMap(std::string name) : name_(std::move(name)) { }
+    explicit PropertyMap(std::string name) : name_(std::move(name)) { }
 
     /**
      * @brief Sets the name.

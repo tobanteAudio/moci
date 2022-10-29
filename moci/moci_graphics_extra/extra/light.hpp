@@ -26,9 +26,9 @@ struct Light
         glm::vec4 color    = {};
     };
 
-    glm::vec3 position = {8.4f, 4.0f, 3.0f};
-    glm::vec4 color    = {1.0f, 1.0f, 1.0f, 1.0f};
-    float scale        = 0.5f;
+    glm::vec3 position = {8.4F, 4.0F, 3.0F};
+    glm::vec4 color    = {1.0F, 1.0F, 1.0F, 1.0F};
+    float scale        = 0.5F;
 
     Ref<Shader> shader    = nullptr;
     Ref<VertexBuffer> vbo = nullptr;
@@ -68,11 +68,11 @@ public:
 
     void Render(glm::mat4 const& view, glm::mat4 const& projection)
     {
-        auto const model       = glm::translate(glm::mat4(1.0f), position);
-        auto const scaleMatrix = glm::scale(glm::mat4(1.0f), {scale, scale, scale});
+        auto const model       = glm::translate(glm::mat4(1.0F), position);
+        auto const scaleMatrix = glm::scale(glm::mat4(1.0F), {scale, scale, scale});
         for (auto const& vertex : lightMesh_.GetVertices())
         {
-            auto const transformedPos = model * scaleMatrix * glm::vec4(vertex.position, 1.0f);
+            auto const transformedPos = model * scaleMatrix * glm::vec4(vertex.position, 1.0F);
             vertices.push_back({glm::vec3(transformedPos), color});
         }
 

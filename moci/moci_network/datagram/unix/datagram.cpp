@@ -54,7 +54,7 @@ bool DatagramSocket::Pimpl::Write(std::string const& host, int port, std::uint8_
 
     return true;
 }
-bool DatagramSocket::Pimpl::Bind(std::string ip, int port)
+bool DatagramSocket::Pimpl::Bind(const std::string& ip, int port)
 {
     moci::IgnoreUnused(ip);
     // Creating socket file descriptor

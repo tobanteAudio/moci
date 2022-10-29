@@ -26,7 +26,7 @@ public:
         Buffer buffer {};
     };
 
-    Typeface(std::string name);
+    explicit Typeface(std::string name);
     void AddCharacter(char c, std::uint32_t height, std::uint32_t width, Point<std::uint32_t> topLeft,
                       std::uint32_t advance, Buffer buffer);
     void AddCharacter(char c, Character const& character);
@@ -35,7 +35,7 @@ public:
     [[nodiscard]] std::size_t GetNumCharacters() const noexcept { return characters_.size(); }
     [[nodiscard]] Character const& GetCharacter(char c) const noexcept { return (*characters_.find(c)).second; }
 
-    [[nodiscard]] std::uint32_t GetWidthForString(std::string const& text, float scale = 1.0f);
+    [[nodiscard]] std::uint32_t GetWidthForString(std::string const& text, float scale = 1.0F);
 
 private:
     std::string name_ {};
@@ -45,7 +45,7 @@ private:
 class Font
 {
 public:
-    Font(float height);
+    explicit Font(float height);
     Font(std::string typefaceName, float height);
 };
 }  // namespace moci

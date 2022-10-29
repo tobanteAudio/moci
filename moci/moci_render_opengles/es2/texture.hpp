@@ -8,7 +8,7 @@ namespace moci
 class OpenGLESTexture2D : public Texture2D
 {
 public:
-    OpenGLESTexture2D(std::string path);
+    explicit OpenGLESTexture2D(std::string path);
     OpenGLESTexture2D(Texture::Format format, std::uint32_t width, std::uint32_t height, void* data);
     ~OpenGLESTexture2D() override;
 
@@ -24,7 +24,7 @@ public:
 
 private:
     void createTexture();
-    void setFilterModes();
+    static void setFilterModes();
 
     std::uint32_t renderID_ = {};
     std::int32_t width_     = {};
@@ -37,7 +37,7 @@ private:
 class OpenGLESTextureCube : public TextureCube
 {
 public:
-    OpenGLESTextureCube(Vector<std::string> paths);
+    explicit OpenGLESTextureCube(Vector<std::string> paths);
 
     OpenGLESTextureCube(const OpenGLESTextureCube&)            = delete;
     OpenGLESTextureCube& operator=(const OpenGLESTextureCube&) = delete;

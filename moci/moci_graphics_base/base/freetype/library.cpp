@@ -5,9 +5,11 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+#include <cstddef>
+
 namespace moci
 {
-std::optional<Typeface> FreetypeLibrary::CreateTypefaceFromFont(std::string fontPath)
+std::optional<Typeface> FreetypeLibrary::CreateTypefaceFromFont(const std::string& fontPath)
 {
     if (fontPath.empty()) { return std::nullopt; }
 
@@ -27,8 +29,8 @@ std::optional<Typeface> FreetypeLibrary::CreateTypefaceFromFont(std::string font
         if (FT_Load_Char(face, c, FT_LOAD_RENDER) != 0) { continue; }
 
         auto buffer = Vector<std::uint8_t>(
-            face->glyph->bitmap.buffer,                                                          //
-            face->glyph->bitmap.buffer + (face->glyph->bitmap.width * face->glyph->bitmap.rows)  //
+            face->glyph->bitmap.buffer,                                                                               //
+            face->glyph->bitmap.buffer + (static_cast<size_t>(face->glyph->bitmap.width * face->glyph->bitmap.rows))  //
         );
 
         result.AddCharacter(                                        //

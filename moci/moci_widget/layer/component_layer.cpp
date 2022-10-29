@@ -17,7 +17,7 @@ void ComponentLayer::OnUpdate(Timestep ts)
     MOCI_PROFILE_FUNCTION();
     IgnoreUnused(ts);
     // MOCI_CORE_ASSERT(rootComponent_ != nullptr);
-    RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+    RenderCommand::SetClearColor({0.1F, 0.1F, 0.1F, 1});
     RenderCommand::Clear();
 
     renderQueue_->StartFrame(width_, height_);

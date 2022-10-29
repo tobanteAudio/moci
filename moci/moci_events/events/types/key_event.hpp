@@ -10,7 +10,7 @@ class KeyEvent : public Event
 {
 public:
     ~KeyEvent() override = default;
-    KeyEvent(Key keycode) : m_KeyCode(keycode) { }
+    explicit KeyEvent(Key keycode) : m_KeyCode(keycode) { }
     [[nodiscard]] inline auto GetKeyCode() const -> Key { return m_KeyCode; }
 
     EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
@@ -41,7 +41,7 @@ class KeyReleasedEvent : public KeyEvent
 {
 public:
     ~KeyReleasedEvent() override = default;
-    KeyReleasedEvent(Key keycode) : KeyEvent(keycode) { }
+    explicit KeyReleasedEvent(Key keycode) : KeyEvent(keycode) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
@@ -55,7 +55,7 @@ class KeyTypedEvent : public KeyEvent
 {
 public:
     ~KeyTypedEvent() override = default;
-    KeyTypedEvent(Key keycode) : KeyEvent(keycode) { }
+    explicit KeyTypedEvent(Key keycode) : KeyEvent(keycode) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
     {

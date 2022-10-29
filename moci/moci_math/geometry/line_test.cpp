@@ -12,37 +12,37 @@ TEST_CASE("moci_math/geometry: LineConstructDefault", "[geometry]")
     constexpr auto line = moci::Line<float>();
     REQUIRE(line.IsEmpty() == true);
 
-    REQUIRE(line.GetMidPoint().GetX() == 0.0f);
-    REQUIRE(line.GetMidPoint().GetY() == 0.0f);
+    REQUIRE(line.GetMidPoint().GetX() == 0.0F);
+    REQUIRE(line.GetMidPoint().GetY() == 0.0F);
 
-    REQUIRE(line.GetStart().GetX() == 0.0f);
-    REQUIRE(line.GetStart().GetY() == 0.0f);
+    REQUIRE(line.GetStart().GetX() == 0.0F);
+    REQUIRE(line.GetStart().GetY() == 0.0F);
 
-    REQUIRE(line.GetEnd().GetX() == 0.0f);
-    REQUIRE(line.GetEnd().GetY() == 0.0f);
+    REQUIRE(line.GetEnd().GetX() == 0.0F);
+    REQUIRE(line.GetEnd().GetY() == 0.0F);
 }
 
 TEST_CASE("moci_math/geometry: LineConstructFromPoints", "[geometry]")
 {
-    constexpr auto line = moci::Line<float>({0.0f, 0.0f}, {1.0f, 0.0f});
+    constexpr auto line = moci::Line<float>({0.0F, 0.0F}, {1.0F, 0.0F});
     REQUIRE(line.IsEmpty() == false);
 
-    REQUIRE(line.GetMidPoint().GetX() == 0.5f);
-    REQUIRE(line.GetMidPoint().GetY() == 0.0f);
+    REQUIRE(line.GetMidPoint().GetX() == 0.5F);
+    REQUIRE(line.GetMidPoint().GetY() == 0.0F);
 
-    REQUIRE(line.GetStart().GetX() == 0.0f);
-    REQUIRE(line.GetStart().GetY() == 0.0f);
+    REQUIRE(line.GetStart().GetX() == 0.0F);
+    REQUIRE(line.GetStart().GetY() == 0.0F);
 
-    REQUIRE(line.GetEnd().GetX() == 1.0f);
-    REQUIRE(line.GetEnd().GetY() == 0.0f);
+    REQUIRE(line.GetEnd().GetX() == 1.0F);
+    REQUIRE(line.GetEnd().GetY() == 0.0F);
 }
 
 TEST_CASE("moci_math/geometry: LineGetMidPoint", "[geometry]")
 {
-    constexpr auto line = moci::Line<float>({-1.0f, 2.0f}, {3.0f, -6.0f});
+    constexpr auto line = moci::Line<float>({-1.0F, 2.0F}, {3.0F, -6.0F});
 
-    REQUIRE(line.GetMidPoint().GetX() == 1.0f);
-    REQUIRE(line.GetMidPoint().GetY() == -2.0f);
+    REQUIRE(line.GetMidPoint().GetX() == 1.0F);
+    REQUIRE(line.GetMidPoint().GetY() == -2.0F);
 }
 
 TEST_CASE("moci_math/geometry: LineGetSlope", "[geometry]")
@@ -51,24 +51,24 @@ TEST_CASE("moci_math/geometry: LineGetSlope", "[geometry]")
     constexpr auto l0 = moci::Line<float>();
     REQUIRE(l0.GetSlope().has_value() == false);
 
-    constexpr auto l1 = moci::Line<float>({0.0f, 0.0f}, {1.0f, 0.0f});
+    constexpr auto l1 = moci::Line<float>({0.0F, 0.0F}, {1.0F, 0.0F});
     REQUIRE(l1.GetSlope().has_value() == true);
-    REQUIRE(l1.GetSlope().value() == 0.0f);
+    REQUIRE(l1.GetSlope().value() == 0.0F);
 
-    constexpr auto l2 = moci::Line<float>({0.0f, 0.0f}, {1.0f, 1.0f});
+    constexpr auto l2 = moci::Line<float>({0.0F, 0.0F}, {1.0F, 1.0F});
     REQUIRE(l2.GetSlope().has_value() == true);
-    REQUIRE(l2.GetSlope().value() == 1.0f);
+    REQUIRE(l2.GetSlope().value() == 1.0F);
 
-    constexpr auto l3 = moci::Line<float>({0.0f, 0.0f}, {-0.5f, -0.5f});
+    constexpr auto l3 = moci::Line<float>({0.0F, 0.0F}, {-0.5F, -0.5F});
     REQUIRE(l3.GetSlope().has_value() == true);
-    REQUIRE(l3.GetSlope().value() == 1.0f);
+    REQUIRE(l3.GetSlope().value() == 1.0F);
 
-    constexpr auto l4 = moci::Line<float>({0.0f, 0.0f}, {0.5f, -0.5f});
+    constexpr auto l4 = moci::Line<float>({0.0F, 0.0F}, {0.5F, -0.5F});
     REQUIRE(l4.GetSlope().has_value() == true);
-    REQUIRE(l4.GetSlope().value() == -1.0f);
+    REQUIRE(l4.GetSlope().value() == -1.0F);
 
     // slope would be inf
-    constexpr auto l5 = moci::Line<float>({0.0f, 0.0f}, {0.0f, 1.0f});
+    constexpr auto l5 = moci::Line<float>({0.0F, 0.0F}, {0.0F, 1.0F});
     REQUIRE(l5.GetSlope().has_value() == false);
 }
 
@@ -77,11 +77,11 @@ TEST_CASE("moci_math/geometry: LineGetAngleRadians", "[geometry]")
     constexpr auto l1 = moci::Line<int> {};
     REQUIRE(l1.GetAngleRadians() == 0);
 
-    constexpr auto l2 = moci::Line<float> {{0.0f, 0.0f}, {1.0f, 1.0f}};
-    REQUIRE(l2.GetAngleRadians() == Catch::Approx(0.7854f));
+    constexpr auto l2 = moci::Line<float> {{0.0F, 0.0F}, {1.0F, 1.0F}};
+    REQUIRE(l2.GetAngleRadians() == Catch::Approx(0.7854F));
 
-    constexpr auto l3 = moci::Line<float> {{0.0f, 0.0f}, {1.0f, -1.0f}};
-    REQUIRE(l3.GetAngleRadians() == Catch::Approx(-0.7854f));
+    constexpr auto l3 = moci::Line<float> {{0.0F, 0.0F}, {1.0F, -1.0F}};
+    REQUIRE(l3.GetAngleRadians() == Catch::Approx(-0.7854F));
 }
 
 TEST_CASE("moci_math/geometry: LineGetAngleDegrees", "[geometry]")
@@ -89,11 +89,11 @@ TEST_CASE("moci_math/geometry: LineGetAngleDegrees", "[geometry]")
     constexpr auto l1 = moci::Line<int> {};
     REQUIRE(l1.GetAngleDegrees() == 0);
 
-    constexpr auto l2 = moci::Line<float> {{0.0f, 0.0f}, {1.0f, 1.0f}};
-    REQUIRE(l2.GetAngleDegrees() == Catch::Approx(45.0f));
+    constexpr auto l2 = moci::Line<float> {{0.0F, 0.0F}, {1.0F, 1.0F}};
+    REQUIRE(l2.GetAngleDegrees() == Catch::Approx(45.0F));
 
-    constexpr auto l3 = moci::Line<float> {{0.0f, 0.0f}, {1.0f, -1.0f}};
-    REQUIRE(l3.GetAngleDegrees() == Catch::Approx(-45.0f));
+    constexpr auto l3 = moci::Line<float> {{0.0F, 0.0F}, {1.0F, -1.0F}};
+    REQUIRE(l3.GetAngleDegrees() == Catch::Approx(-45.0F));
 }
 
 TEST_CASE("moci_math/geometry: LineGetLength", "[geometry]")
@@ -101,14 +101,14 @@ TEST_CASE("moci_math/geometry: LineGetLength", "[geometry]")
     constexpr auto l1 = moci::Line<int> {};
     REQUIRE(l1.GetLength() == 0);
 
-    constexpr auto l2 = moci::Line<float> {{0.0f, 0.0f}, {1.0f, 0.0f}};
-    REQUIRE(l2.GetLength() == Catch::Approx(1.0f));
+    constexpr auto l2 = moci::Line<float> {{0.0F, 0.0F}, {1.0F, 0.0F}};
+    REQUIRE(l2.GetLength() == Catch::Approx(1.0F));
 
-    constexpr auto l3 = moci::Line<float> {{0.0f, 0.0f}, {0.0f, -1.0f}};
-    REQUIRE(l3.GetLength() == Catch::Approx(1.0f));
+    constexpr auto l3 = moci::Line<float> {{0.0F, 0.0F}, {0.0F, -1.0F}};
+    REQUIRE(l3.GetLength() == Catch::Approx(1.0F));
 
-    constexpr auto l4 = moci::Line<float> {{0.0f, 0.0f}, {10.0f, 0.0f}};
-    REQUIRE(l4.GetLength() == Catch::Approx(10.0f));
+    constexpr auto l4 = moci::Line<float> {{0.0F, 0.0F}, {10.0F, 0.0F}};
+    REQUIRE(l4.GetLength() == Catch::Approx(10.0F));
 }
 
 TEST_CASE("moci_math/geometry: LineOperatorEqual", "[geometry]")

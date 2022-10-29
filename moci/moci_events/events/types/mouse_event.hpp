@@ -52,7 +52,7 @@ class MouseButtonEvent : public Event
 {
 public:
     ~MouseButtonEvent() override = default;
-    MouseButtonEvent(MouseCode button) : m_Button(button) { }
+    explicit MouseButtonEvent(MouseCode button) : m_Button(button) { }
     [[nodiscard]] inline auto GetMouseButton() const -> MouseCode { return m_Button; }
 
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
@@ -64,7 +64,7 @@ class MouseButtonPressedEvent : public MouseButtonEvent
 {
 public:
     ~MouseButtonPressedEvent() override = default;
-    MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) { }
+    explicit MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
     {
@@ -78,7 +78,7 @@ class MouseButtonReleasedEvent : public MouseButtonEvent
 {
 public:
     ~MouseButtonReleasedEvent() override = default;
-    MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) { }
+    explicit MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
     {

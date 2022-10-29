@@ -32,7 +32,7 @@ auto OpenGLESVertexBuffer::UploadData(std::uint32_t offset, std::uint32_t size, 
 // IndexBuffer //////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-OpenGLESIndexBuffer::OpenGLESIndexBuffer(IndexBufferSpecs specs) : specs_(std::move(specs))
+OpenGLESIndexBuffer::OpenGLESIndexBuffer(IndexBufferSpecs specs) : specs_(specs)
 {
 
     GLCall(glGenBuffers(1, &m_RendererID));

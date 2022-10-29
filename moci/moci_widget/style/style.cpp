@@ -36,13 +36,13 @@ void Style::DrawButton(Painter& painter, Rectangle<int> bounds, Button const& bu
     painter.DrawQuad(topEdge.ToFloat(), color);
 
     // text
-    painter.DrawText(button.GetText(), {bounds.GetX() + width / 2, bounds.GetY() + height}, 0.5f, color);
+    painter.DrawText(button.GetText(), {bounds.GetX() + width / 2, bounds.GetY() + height}, 0.5F, color);
 }
 
 void Style::DrawLabel(Painter& painter, Rectangle<int> bounds, Label const& label)
 {
     auto area = bounds;
-    painter.DrawText(label.GetText(), {area.GetX(), area.GetY()}, 0.5f, label.GetTextColor());
+    painter.DrawText(label.GetText(), {area.GetX(), area.GetY()}, 0.5F, label.GetTextColor());
 }
 
 void Style::DrawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider)
@@ -80,7 +80,7 @@ void Style::DrawSlider(Painter& painter, Rectangle<int> bounds, Slider const& sl
 
     // infill
     auto const inFillWidth
-        = static_cast<int>(static_cast<float>(width - border * 4) * std::min(slider.GetValue(), 1.0f));
+        = static_cast<int>(static_cast<float>(width - border * 4) * std::min(slider.GetValue(), 1.0F));
     auto const inFill = Rectangle<int> {
         {bottomLeftCorner.GetX() + (border * 2), bottomLeftCorner.GetY() + (border * 2)},  //
         inFillWidth,                                                                       //

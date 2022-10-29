@@ -11,11 +11,11 @@
 
 TEST_CASE("moci_events/events: MouseMovedEvent", "[mouse][events]")
 {
-    auto const event = moci::MouseMovedEvent(10.0f, 20.0f);
+    auto const event = moci::MouseMovedEvent(10.0F, 20.0F);
     REQUIRE(event.GetStaticType() == moci::EventType::MouseMoved);
     REQUIRE(event.GetName() == std::string_view("MouseMoved"));
-    REQUIRE(event.GetX() == 10.0f);
-    REQUIRE(event.GetY() == 20.0f);
+    REQUIRE(event.GetX() == 10.0F);
+    REQUIRE(event.GetY() == 20.0F);
     REQUIRE(event.IsInCategory(moci::EventCategoryInput) == true);
     REQUIRE(event.IsInCategory(moci::EventCategoryMouse) == true);
     // REQUIRE_THAT(event.ToString(), Contains("MouseMoved"));
@@ -23,11 +23,11 @@ TEST_CASE("moci_events/events: MouseMovedEvent", "[mouse][events]")
 
 TEST_CASE("moci_events/events: MouseScrolledEvent", "[mouse][events]")
 {
-    auto const event = moci::MouseScrolledEvent(10.0f, 20.0f);
+    auto const event = moci::MouseScrolledEvent(10.0F, 20.0F);
     REQUIRE(event.GetStaticType() == moci::EventType::MouseScrolled);
     REQUIRE(event.GetName() == std::string_view("MouseScrolled"));
-    REQUIRE(event.GetXOffset() == 10.0f);
-    REQUIRE(event.GetYOffset() == 20.0f);
+    REQUIRE(event.GetXOffset() == 10.0F);
+    REQUIRE(event.GetYOffset() == 20.0F);
     REQUIRE(event.IsInCategory(moci::EventCategoryInput) == true);
     REQUIRE(event.IsInCategory(moci::EventCategoryMouse) == true);
     // REQUIRE_THAT(event.ToString(), Contains("MouseScrolled"));

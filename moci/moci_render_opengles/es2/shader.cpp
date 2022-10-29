@@ -20,7 +20,7 @@ struct ShaderAttribute
     std::string type;
 };
 
-auto GetAttributeLayout(std::string src) -> Vector<ShaderAttribute>
+auto GetAttributeLayout(const std::string& src) -> Vector<ShaderAttribute>
 {
     std::istringstream f(src);
     auto result = Vector<ShaderAttribute>();

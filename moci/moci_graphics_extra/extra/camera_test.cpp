@@ -10,9 +10,9 @@
 
 TEST_CASE("moci_graphics_extra: OrthographicCamera", "[render]")
 {
-    moci::OrthographicCamera camera {0.0f, 100.0f, 100.0f, 0.0f};
+    moci::OrthographicCamera camera {0.0F, 100.0F, 100.0F, 0.0F};
     REQUIRE(camera.GetPosition() == glm::vec3 {});
-    REQUIRE(camera.GetRotation() == 0.0f);
-    REQUIRE(camera.GetViewMatrix() == glm::mat4 {1.0f});
-    REQUIRE(camera.GetViewProjectionMatrix() == glm::ortho(0.0f, 100.0f, 100.0f, 0.0f, -1.0f, 1.0f));
+    REQUIRE(camera.GetRotation() == 0.0F);
+    REQUIRE(camera.GetViewMatrix() == glm::mat4 {1.0F});
+    REQUIRE(camera.GetViewProjectionMatrix() == glm::ortho(0.0F, 100.0F, 100.0F, 0.0F, -1.0F, 1.0F));
 }

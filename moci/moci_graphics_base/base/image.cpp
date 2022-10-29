@@ -1,5 +1,7 @@
 #include "image.hpp"
 
+#include <cstddef>
+
 #include "moci_core/core/logging.hpp"
 
 #include "stb_image.h"
@@ -20,7 +22,7 @@ bool Image::LoadFromFile(std::string const& path)
     }
 
     auto* start = reinterpret_cast<std::uint8_t*>(data);
-    auto* end   = reinterpret_cast<std::uint8_t*>(data) + width_ * height_ * numChannels_;
+    auto* end   = reinterpret_cast<std::uint8_t*>(data) + static_cast<ptrdiff_t>(width_ * height_ * numChannels_);
     data_       = Vector<std::uint8_t>(start, end);
 
     stbi_image_free(data);

@@ -24,6 +24,6 @@ TEST_CASE("moci_graphics_base: TypefaceGetWidthForString", "[font][graphics]")
     REQUIRE(typeface.GetWidthForString("t") == 21);
     REQUIRE(typeface.GetWidthForString("tt") == 42);
 
-    REQUIRE(typeface.GetWidthForString("t", 0.5f) == 10);
-    REQUIRE(typeface.GetWidthForString("tt", 0.5f) == 21);
+    REQUIRE(typeface.GetWidthForString("t", 0.5F) == 10);
+    REQUIRE(typeface.GetWidthForString("tt", 0.5F) == 21);
 }

@@ -15,7 +15,7 @@ struct WindowSpecs
     unsigned int Width;
     unsigned int Height;
 
-    WindowSpecs(std::string title = "moci engine", unsigned int width = 1280, unsigned int height = 1024)
+    explicit WindowSpecs(std::string title = "moci engine", unsigned int width = 1280, unsigned int height = 1024)
         : Title(std::move(title)), Width(width), Height(height)
     {
     }

@@ -10,7 +10,7 @@ class ScopeGuard
     Lambda rollbackLambda;
 
 public:
-    ScopeGuard(const Lambda& _l) : rollbackLambda(_l) { }
+    explicit ScopeGuard(const Lambda& _l) : rollbackLambda(_l) { }
 
     ScopeGuard(const ScopeGuard& _sc) : rollbackLambda(_sc.rollbackLambda)
     {
