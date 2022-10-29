@@ -10,12 +10,12 @@
 namespace moci
 {
 
-OBJFile::OBJFile(std::string path) : path_(std::move(path)) { }
+OBJFile::OBJFile(std::string path) : _path(std::move(path)) { }
 
 auto OBJFile::parse() -> bool
 {
     std::string line;
-    std::ifstream objFile(path_);
+    std::ifstream objFile(_path);
     if (!objFile.is_open()) { return false; }
     auto guard = makeScopeGuard([&]() { objFile.close(); });
 
@@ -37,7 +37,7 @@ auto OBJFile::parse() -> bool
         if (line[0] == 'v' && line[1] == ' ')
         {
             line = line.substr(2);
-            vertices_.push_back(parseLineToVec3(line));
+            _vertices.push_back(parseLineToVec3(line));
             continue;
         }
 
@@ -45,7 +45,7 @@ auto OBJFile::parse() -> bool
         if (line[0] == 'v' && line[1] == 'n')
         {
             line = line.substr(3);
-            normals_.push_back(parseLineToVec3(line));
+            _normals.push_back(parseLineToVec3(line));
             continue;
         }
 
@@ -116,11 +116,11 @@ void OBJFile::parseLineToFace(std::string& line)
             auto const normalIdx = Strings::toInt(indices[2]);
             MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
 
-            auto const vertex  = vertices_.at(vertexIdx.value() - 1);
-            auto const normal  = normals_.at(normalIdx.value() - 1);
+            auto const vertex  = _vertices.at(vertexIdx.value() - 1);
+            auto const normal  = _normals.at(normalIdx.value() - 1);
             auto const texture = glm::vec2 {};
 
-            model_.push_back({vertex, normal, texture});
+            _model.push_back({vertex, normal, texture});
         }
 
         if (indices.size() == 2)
@@ -129,11 +129,11 @@ void OBJFile::parseLineToFace(std::string& line)
             // auto const textureIdx = Strings::ToInt(indices[1]);
             MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
 
-            auto const vertex  = vertices_.at(vertexIdx.value() - 1);
+            auto const vertex  = _vertices.at(vertexIdx.value() - 1);
             auto const normal  = glm::vec3 {};
             auto const texture = glm::vec2 {};
 
-            model_.push_back({vertex, normal, texture});
+            _model.push_back({vertex, normal, texture});
         }
 
         if (indices.size() == 1)
@@ -141,11 +141,11 @@ void OBJFile::parseLineToFace(std::string& line)
             auto const vertexIdx = Strings::toInt(indices[0]);
             MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
 
-            auto const vertex  = vertices_.at(vertexIdx.value() - 1);
+            auto const vertex  = _vertices.at(vertexIdx.value() - 1);
             auto const normal  = glm::vec3 {};
             auto const texture = glm::vec2 {};
 
-            model_.push_back({vertex, normal, texture});
+            _model.push_back({vertex, normal, texture});
         }
     }
 }

@@ -36,27 +36,27 @@ public:
 
     void onUpdate() override;
 
-    [[nodiscard]] inline auto getWidth() const -> unsigned int override { return m_Data.Width; }
-    [[nodiscard]] inline auto getHeight() const -> unsigned int override { return m_Data.Height; }
+    [[nodiscard]] inline auto getWidth() const -> unsigned int override { return _m_Data.Width; }
+    [[nodiscard]] inline auto getHeight() const -> unsigned int override { return _m_Data.Height; }
 
     // Window attributes
-    inline void setEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
+    inline void setEventCallback(const EventCallbackFn& callback) override { _m_Data.EventCallback = callback; }
     void setVSync(bool enabled) override;
     [[nodiscard]] auto isVSync() const -> bool override;
 
     void setFullscreen(bool enabled) override;
     [[nodiscard]] auto isFullscreen() const -> bool override;
 
-    [[nodiscard]] auto getFrameCount() const noexcept -> std::uint32_t override { return frameCounter_; }
+    [[nodiscard]] auto getFrameCount() const noexcept -> std::uint32_t override { return _frameCounter; }
 
-    [[nodiscard]] inline auto getNativeWindow() const -> void* override { return m_Window; }
+    [[nodiscard]] inline auto getNativeWindow() const -> void* override { return _m_Window; }
 
 private:
     virtual void init(WindowSpecs props);
     virtual void shutdown();
 
-    GLFWwindow* m_Window {};
-    Scope<GraphicsContext> m_Context;
+    GLFWwindow* _m_Window {};
+    Scope<GraphicsContext> _m_Context;
 
     struct WindowData
     {
@@ -69,8 +69,8 @@ private:
         EventCallbackFn EventCallback;
     };
 
-    WindowData m_Data;
-    std::uint32_t frameCounter_ {};
+    WindowData _m_Data;
+    std::uint32_t _frameCounter {};
 };
 
 }  // namespace moci

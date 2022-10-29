@@ -40,15 +40,15 @@ public:
     };
 
     explicit Mesh(std::string filePath);
-    [[nodiscard]] auto getVertices() const noexcept -> Span<Vertex const> { return staticVertices_; }
+    [[nodiscard]] auto getVertices() const noexcept -> Span<Vertex const> { return _staticVertices; }
 
 private:
-    std::string filePath_ {};
-    moci::Scope<Assimp::Importer> importer_ {};
-    glm::mat4 inverseTransform_ {};
-    Vector<Submesh> submeshes_ {};
-    Vector<Vertex> staticVertices_ {};
-    bool isAnimated_ = false;
-    Vector<Index> indices_ {};
+    std::string _filePath {};
+    moci::Scope<Assimp::Importer> _importer {};
+    glm::mat4 _inverseTransform {};
+    Vector<Submesh> _submeshes {};
+    Vector<Vertex> _staticVertices {};
+    bool _isAnimated = false;
+    Vector<Index> _indices {};
 };
 }  // namespace moci

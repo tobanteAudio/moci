@@ -7,24 +7,24 @@ namespace moci
 class Color
 {
 public:
-    constexpr Color() noexcept : data_({0.0F, 0.0F, 0.0F, 0.0F}) { }
-    constexpr Color(float r, float g, float b) noexcept : data_({r, g, b, 1.0F}) { }
-    constexpr Color(float r, float g, float b, float alpha) noexcept : data_({r, g, b, alpha}) { }
+    constexpr Color() noexcept : _data({0.0F, 0.0F, 0.0F, 0.0F}) { }
+    constexpr Color(float r, float g, float b) noexcept : _data({r, g, b, 1.0F}) { }
+    constexpr Color(float r, float g, float b, float alpha) noexcept : _data({r, g, b, alpha}) { }
 
-    [[nodiscard]] constexpr auto getData() const noexcept -> glm::vec4 { return data_; }
+    [[nodiscard]] constexpr auto getData() const noexcept -> glm::vec4 { return _data; }
 
-    [[nodiscard]] constexpr auto getRed() const noexcept -> float { return data_.r; }
-    [[nodiscard]] constexpr auto getGreen() const noexcept -> float { return data_.g; }
-    [[nodiscard]] constexpr auto getBlue() const noexcept -> float { return data_.b; }
-    [[nodiscard]] constexpr auto getAlpha() const noexcept -> float { return data_.a; }
+    [[nodiscard]] constexpr auto getRed() const noexcept -> float { return _data.r; }
+    [[nodiscard]] constexpr auto getGreen() const noexcept -> float { return _data.g; }
+    [[nodiscard]] constexpr auto getBlue() const noexcept -> float { return _data.b; }
+    [[nodiscard]] constexpr auto getAlpha() const noexcept -> float { return _data.a; }
 
-    auto setRed(float r) noexcept -> void { data_.r = r; }
-    auto setGreen(float g) noexcept -> void { data_.g = g; }
-    auto setBlue(float b) noexcept -> void { data_.b = b; }
-    auto setAlpha(float a) noexcept -> void { data_.a = a; }
+    auto setRed(float r) noexcept -> void { _data.r = r; }
+    auto setGreen(float g) noexcept -> void { _data.g = g; }
+    auto setBlue(float b) noexcept -> void { _data.b = b; }
+    auto setAlpha(float a) noexcept -> void { _data.a = a; }
 
 private:
-    glm::vec4 data_ {};
+    glm::vec4 _data {};
 };
 
 class Colors

@@ -40,8 +40,8 @@ public:
     auto mouseScrolled(MouseScrolledEvent scroll) -> bool override;
 
 private:
-    float value_               = {};
-    SliderCallbacks callbacks_ = {};
-    Color color_               = {};
+    float _value               = {};
+    SliderCallbacks _callbacks = {};
+    Color _color               = {};
 };
 }  // namespace moci

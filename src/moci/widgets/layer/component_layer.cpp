@@ -5,9 +5,9 @@ namespace moci
 void ComponentLayer::onAttach()
 {
     MOCI_PROFILE_FUNCTION();
-    renderQueue_ = makeScope<BatchRender2D>();
-    rootComponent_->setStyle(&defaultStyle_);
-    rootComponent_->setSize(static_cast<int>(width_), static_cast<int>(height_));
+    _renderQueue = makeScope<BatchRender2D>();
+    _rootComponent->setStyle(&_defaultStyle);
+    _rootComponent->setSize(static_cast<int>(_width), static_cast<int>(_height));
 }
 
 void ComponentLayer::onDetach() { MOCI_PROFILE_FUNCTION(); }
@@ -20,21 +20,21 @@ void ComponentLayer::onUpdate(Timestep ts)
     RenderCommand::setClearColor({0.1F, 0.1F, 0.1F, 1});
     RenderCommand::clear();
 
-    renderQueue_->startFrame(width_, height_);
-    rootComponent_->setPosition(0, 0);
-    rootComponent_->draw(*renderQueue_);
-    renderQueue_->endFrame();
+    _renderQueue->startFrame(_width, _height);
+    _rootComponent->setPosition(0, 0);
+    _rootComponent->draw(*_renderQueue);
+    _renderQueue->endFrame();
 }
 
 void ComponentLayer::onImGuiRender()
 {
     MOCI_PROFILE_FUNCTION();
     ImGui::Begin("Settings");
-    ImGui::Text("Draws: %d", renderQueue_->getFrameStats().drawCount);
-    ImGui::Text("Textures: %d", renderQueue_->getFrameStats().textureCount);
-    ImGui::Text("Vertics: %d", renderQueue_->getFrameStats().vertexCount);
-    ImGui::Text("Quads: %d", renderQueue_->getFrameStats().quadCount);
-    ImGui::Text("Circles: %d", renderQueue_->getFrameStats().circleCount);
+    ImGui::Text("Draws: %d", _renderQueue->getFrameStats().drawCount);
+    ImGui::Text("Textures: %d", _renderQueue->getFrameStats().textureCount);
+    ImGui::Text("Vertics: %d", _renderQueue->getFrameStats().vertexCount);
+    ImGui::Text("Quads: %d", _renderQueue->getFrameStats().quadCount);
+    ImGui::Text("Circles: %d", _renderQueue->getFrameStats().circleCount);
     ImGui::End();
 }
 
@@ -50,9 +50,9 @@ void ComponentLayer::onEvent(Event& e)
 
 auto ComponentLayer::onWindowResized(WindowResizeEvent& e) -> bool
 {
-    width_  = static_cast<float>(e.getWidth());
-    height_ = static_cast<float>(e.getHeight());
-    rootComponent_->setSize(static_cast<int>(width_), static_cast<int>(height_));
+    _width  = static_cast<float>(e.getWidth());
+    _height = static_cast<float>(e.getHeight());
+    _rootComponent->setSize(static_cast<int>(_width), static_cast<int>(_height));
     return false;
 }
 

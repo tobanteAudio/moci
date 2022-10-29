@@ -27,16 +27,16 @@ private:
     static bool handleMousePressed(moci::MouseButtonPressedEvent& e);
     static bool handleMouseReleased(moci::MouseButtonReleasedEvent& e);
 
-    float width_  = 1920.0F;
-    float height_ = 1080.0F;
+    float _width  = 1920.0F;
+    float _height = 1080.0F;
 
-    bool framebufferNeedsResize_ = false;
-    glm::vec2 viewportSize_      = {};
+    bool _framebufferNeedsResize = false;
+    glm::vec2 _viewportSize      = {};
 
-    moci::Ref<moci::Shader> shader_           = nullptr;
-    moci::Ref<moci::VertexBuffer> vbo_        = nullptr;
-    moci::Ref<moci::IndexBuffer> ibo_         = nullptr;
-    moci::Ref<moci::VertexArray> vao_         = nullptr;
-    moci::Ref<moci::Texture2D> texture_       = nullptr;
-    moci::Ref<moci::Framebuffer> framebuffer_ = nullptr;
+    moci::Ref<moci::Shader> _shader           = nullptr;
+    moci::Ref<moci::VertexBuffer> _vbo        = nullptr;
+    moci::Ref<moci::IndexBuffer> _ibo         = nullptr;
+    moci::Ref<moci::VertexArray> _vao         = nullptr;
+    moci::Ref<moci::Texture2D> _texture       = nullptr;
+    moci::Ref<moci::Framebuffer> _framebuffer = nullptr;
 };

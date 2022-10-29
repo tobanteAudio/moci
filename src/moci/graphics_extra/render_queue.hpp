@@ -9,7 +9,6 @@
 #include "moci/render/shader.hpp"
 #include "moci/render/texture.hpp"
 
-
 #include <glm/glm.hpp>
 
 #include <cstddef>
@@ -91,8 +90,8 @@ private:
     auto endBatch() -> void;
     auto resetFrameStats() -> void;
 
-    RenderData data_ {};
-    std::map<char, Character> characters_;
+    RenderData _data {};
+    std::map<char, Character> _characters;
 };
 
 }  // namespace moci

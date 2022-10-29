@@ -12,30 +12,30 @@ namespace moci
 {
 
 OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
-    : m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0F, 1.0F)), m_ViewMatrix(1.0F)
+    : _m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0F, 1.0F)), _m_ViewMatrix(1.0F)
 {
-    m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+    _m_ViewProjectionMatrix = _m_ProjectionMatrix * _m_ViewMatrix;
 }
 
 void OrthographicCamera::setProjection(float left, float right, float bottom, float top)
 {
-    m_ProjectionMatrix     = glm::ortho(left, right, bottom, top, -1.0F, 1.0F);
-    m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+    _m_ProjectionMatrix     = glm::ortho(left, right, bottom, top, -1.0F, 1.0F);
+    _m_ViewProjectionMatrix = _m_ProjectionMatrix * _m_ViewMatrix;
 }
 
 void OrthographicCamera::recalculateViewMatrix()
 {
-    glm::mat4 transform = glm::translate(glm::mat4(1.0F), m_Position)
-                          * glm::rotate(glm::mat4(1.0F), glm::radians(m_Rotation), glm::vec3(0, 0, 1));
+    glm::mat4 transform = glm::translate(glm::mat4(1.0F), _m_Position)
+                          * glm::rotate(glm::mat4(1.0F), glm::radians(_m_Rotation), glm::vec3(0, 0, 1));
 
-    m_ViewMatrix           = glm::inverse(transform);
-    m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+    _m_ViewMatrix           = glm::inverse(transform);
+    _m_ViewProjectionMatrix = _m_ProjectionMatrix * _m_ViewMatrix;
 }
 
 OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
-    : m_AspectRatio(aspectRatio)
-    , m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel)
-    , m_Rotation(rotation)
+    : _m_AspectRatio(aspectRatio)
+    , _m_Camera(-_m_AspectRatio * _m_ZoomLevel, _m_AspectRatio * _m_ZoomLevel, -_m_ZoomLevel, _m_ZoomLevel)
+    , _m_Rotation(rotation)
 {
 }
 
@@ -43,40 +43,40 @@ void OrthographicCameraController::onUpdate(Timestep ts)
 {
     if (Input::isKeyPressed(moci::Key::A))
     {
-        m_CameraPosition.x -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-        m_CameraPosition.y -= sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+        _m_CameraPosition.x -= cos(glm::radians(_m_CameraRotation)) * _m_CameraTranslationSpeed * ts;
+        _m_CameraPosition.y -= sin(glm::radians(_m_CameraRotation)) * _m_CameraTranslationSpeed * ts;
     }
     else if (Input::isKeyPressed(moci::Key::D))
     {
-        m_CameraPosition.x += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-        m_CameraPosition.y += sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+        _m_CameraPosition.x += cos(glm::radians(_m_CameraRotation)) * _m_CameraTranslationSpeed * ts;
+        _m_CameraPosition.y += sin(glm::radians(_m_CameraRotation)) * _m_CameraTranslationSpeed * ts;
     }
 
     if (Input::isKeyPressed(moci::Key::W))
     {
-        m_CameraPosition.x += -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-        m_CameraPosition.y += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+        _m_CameraPosition.x += -sin(glm::radians(_m_CameraRotation)) * _m_CameraTranslationSpeed * ts;
+        _m_CameraPosition.y += cos(glm::radians(_m_CameraRotation)) * _m_CameraTranslationSpeed * ts;
     }
     else if (Input::isKeyPressed(moci::Key::S))
     {
-        m_CameraPosition.x -= -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-        m_CameraPosition.y -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+        _m_CameraPosition.x -= -sin(glm::radians(_m_CameraRotation)) * _m_CameraTranslationSpeed * ts;
+        _m_CameraPosition.y -= cos(glm::radians(_m_CameraRotation)) * _m_CameraTranslationSpeed * ts;
     }
 
-    if (m_Rotation)
+    if (_m_Rotation)
     {
-        if (Input::isKeyPressed(moci::Key::Q)) { m_CameraRotation += m_CameraRotationSpeed * ts; }
-        if (Input::isKeyPressed(moci::Key::E)) { m_CameraRotation -= m_CameraRotationSpeed * ts; }
+        if (Input::isKeyPressed(moci::Key::Q)) { _m_CameraRotation += _m_CameraRotationSpeed * ts; }
+        if (Input::isKeyPressed(moci::Key::E)) { _m_CameraRotation -= _m_CameraRotationSpeed * ts; }
 
-        if (m_CameraRotation > 180.0F) { m_CameraRotation -= 360.0F; }
-        else if (m_CameraRotation <= -180.0F) { m_CameraRotation += 360.0F; }
+        if (_m_CameraRotation > 180.0F) { _m_CameraRotation -= 360.0F; }
+        else if (_m_CameraRotation <= -180.0F) { _m_CameraRotation += 360.0F; }
 
-        m_Camera.setRotation(m_CameraRotation);
+        _m_Camera.setRotation(_m_CameraRotation);
     }
 
-    m_Camera.setPosition(m_CameraPosition);
+    _m_Camera.setPosition(_m_CameraPosition);
 
-    m_CameraTranslationSpeed = m_ZoomLevel;
+    _m_CameraTranslationSpeed = _m_ZoomLevel;
 }
 
 void OrthographicCameraController::onEvent(Event& e)
@@ -88,16 +88,16 @@ void OrthographicCameraController::onEvent(Event& e)
 
 auto OrthographicCameraController::onMouseScrolled(MouseScrolledEvent& e) -> bool
 {
-    m_ZoomLevel -= e.getYOffset() * 0.25F;
-    m_ZoomLevel = std::max(m_ZoomLevel, 0.25F);
-    m_Camera.setProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+    _m_ZoomLevel -= e.getYOffset() * 0.25F;
+    _m_ZoomLevel = std::max(_m_ZoomLevel, 0.25F);
+    _m_Camera.setProjection(-_m_AspectRatio * _m_ZoomLevel, _m_AspectRatio * _m_ZoomLevel, -_m_ZoomLevel, _m_ZoomLevel);
     return false;
 }
 
 auto OrthographicCameraController::onWindowResized(WindowResizeEvent& e) -> bool
 {
-    m_AspectRatio = (float)e.getWidth() / (float)e.getHeight();
-    m_Camera.setProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+    _m_AspectRatio = (float)e.getWidth() / (float)e.getHeight();
+    _m_Camera.setProjection(-_m_AspectRatio * _m_ZoomLevel, _m_AspectRatio * _m_ZoomLevel, -_m_ZoomLevel, _m_ZoomLevel);
     return false;
 }
 }  // namespace moci

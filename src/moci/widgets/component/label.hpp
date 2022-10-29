@@ -23,15 +23,15 @@ public:
 
     auto onDraw(Painter& painter) -> void override;
 
-    auto setText(std::string newText) -> void { text_ = std::move(newText); }
-    [[nodiscard]] auto getText() const noexcept -> std::string const& { return text_; }
-    [[nodiscard]] auto getTextView() const noexcept -> std::string_view { return text_; }
+    auto setText(std::string newText) -> void { _text = std::move(newText); }
+    [[nodiscard]] auto getText() const noexcept -> std::string const& { return _text; }
+    [[nodiscard]] auto getTextView() const noexcept -> std::string_view { return _text; }
 
-    void setTextColor(Color col) noexcept { color_ = col; }
-    [[nodiscard]] auto getTextColor() const noexcept -> Color { return color_; }
+    void setTextColor(Color col) noexcept { _color = col; }
+    [[nodiscard]] auto getTextColor() const noexcept -> Color { return _color; }
 
 private:
-    std::string text_ {};
-    Color color_ {};
+    std::string _text {};
+    Color _color {};
 };
 }  // namespace moci

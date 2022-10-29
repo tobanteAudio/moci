@@ -15,9 +15,9 @@ public:
     OpenGLESTexture2D(const OpenGLESTexture2D&)                    = delete;
     auto operator=(const OpenGLESTexture2D&) -> OpenGLESTexture2D& = delete;
 
-    [[nodiscard]] auto getWidth() const -> std::uint32_t override { return width_; }
-    [[nodiscard]] auto getHeight() const -> std::uint32_t override { return height_; }
-    [[nodiscard]] auto getId() const -> std::uint32_t override { return renderID_; }
+    [[nodiscard]] auto getWidth() const -> std::uint32_t override { return _width; }
+    [[nodiscard]] auto getHeight() const -> std::uint32_t override { return _height; }
+    [[nodiscard]] auto getId() const -> std::uint32_t override { return _renderID; }
 
     void bind(std::uint32_t slot = 0) const override;
     void unbind() const override;
@@ -26,12 +26,12 @@ private:
     void createTexture();
     static void setFilterModes();
 
-    std::uint32_t renderID_ = {};
-    std::int32_t width_     = {};
-    std::int32_t height_    = {};
-    std::int32_t bpp_       = {};
-    std::uint8_t* data_     = nullptr;
-    std::string path_       = {};
+    std::uint32_t _renderID = {};
+    std::int32_t _width     = {};
+    std::int32_t _height    = {};
+    std::int32_t _bpp       = {};
+    std::uint8_t* _data     = nullptr;
+    std::string _path       = {};
 };
 
 class OpenGLESTextureCube : public TextureCube
@@ -46,13 +46,13 @@ public:
 
     [[nodiscard]] auto getWidth() const -> std::uint32_t override { return 0; }
     [[nodiscard]] auto getHeight() const -> std::uint32_t override { return 0; }
-    [[nodiscard]] auto getId() const -> std::uint32_t override { return renderID_; }
+    [[nodiscard]] auto getId() const -> std::uint32_t override { return _renderID; }
 
     void bind(std::uint32_t slot = 0) const override;
     void unbind() const override;
 
 private:
-    Vector<std::string> paths_;
-    std::uint32_t renderID_ {};
+    Vector<std::string> _paths;
+    std::uint32_t _renderID {};
 };
 }  // namespace moci

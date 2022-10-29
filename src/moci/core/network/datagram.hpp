@@ -30,7 +30,7 @@ public:
 
 private:
     class Pimpl;
-    Scope<Pimpl> pimpl_;
+    Scope<Pimpl> _pimpl;
 };
 
 }  // namespace moci

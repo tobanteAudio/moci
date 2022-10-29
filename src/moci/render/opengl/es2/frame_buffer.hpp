@@ -17,16 +17,16 @@ public:
 
     void resize(std::uint32_t width, std::uint32_t height) override;
 
-    [[nodiscard]] auto getColorAttachmentRendererId() const -> std::uint32_t override { return colorAttachment_; }
-    [[nodiscard]] auto getSpecification() const -> const FramebufferSpecs& override { return specs_; }
+    [[nodiscard]] auto getColorAttachmentRendererId() const -> std::uint32_t override { return _colorAttachment; }
+    [[nodiscard]] auto getSpecification() const -> const FramebufferSpecs& override { return _specs; }
 
 private:
     void invalidate();
     void deallocate();
 
-    std::uint32_t renderID_        = 0;
-    std::uint32_t colorAttachment_ = 0;
-    FramebufferSpecs specs_        = {};
+    std::uint32_t _renderID        = 0;
+    std::uint32_t _colorAttachment = 0;
+    FramebufferSpecs _specs        = {};
 };
 
 }  // namespace moci

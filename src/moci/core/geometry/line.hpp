@@ -3,7 +3,6 @@
 #include "moci/core/geometry/point.hpp"
 #include "moci/core/logging.hpp"
 
-
 // #include <cmath>
 
 #include <optional>
@@ -20,30 +19,30 @@ public:
     /**
      * @brief Construct empty line. Start and end at (0,0)
      */
-    explicit constexpr Line() noexcept : start_({0, 0}), end_({0, 0}) { }
+    explicit constexpr Line() noexcept : _start({0, 0}), _end({0, 0}) { }
 
     /**
      * @brief Construct line from two points.
      */
-    constexpr Line(Point<Type> start, Point<Type> end) noexcept : start_(start), end_(end) { }
+    constexpr Line(Point<Type> start, Point<Type> end) noexcept : _start(start), _end(end) { }
 
     /**
      * @brief Returns true if start & end are equal.
      */
     [[nodiscard]] constexpr auto isEmpty() const noexcept -> bool
     {
-        return (start_.getX() == end_.getX()) && (start_.getY() == end_.getY());
+        return (_start.getX() == _end.getX()) && (_start.getY() == _end.getY());
     }
 
     /**
      * @brief Returns the start point.
      */
-    [[nodiscard]] constexpr auto getStart() const noexcept -> Point<Type> { return start_; }
+    [[nodiscard]] constexpr auto getStart() const noexcept -> Point<Type> { return _start; }
 
     /**
      * @brief Returns the end point.
      */
-    [[nodiscard]] constexpr auto getEnd() const noexcept -> Point<Type> { return end_; }
+    [[nodiscard]] constexpr auto getEnd() const noexcept -> Point<Type> { return _end; }
 
     /**
      * @brief Returns the slope. If the line is empty 0 will be returned.
@@ -52,8 +51,8 @@ public:
     {
         if (!isEmpty())
         {
-            auto const x = end_.getX() - start_.getX();
-            auto const y = end_.getY() - start_.getY();
+            auto const x = _end.getX() - _start.getX();
+            auto const y = _end.getY() - _start.getY();
             if (x == Type(0)) { return std::nullopt; }
             return (y / x);
         }
@@ -67,8 +66,8 @@ public:
      */
     [[nodiscard]] constexpr auto getMidPoint() const noexcept -> Point<Type>
     {
-        auto const x = (start_.getX() + end_.getX()) / 2.0F;
-        auto const y = (start_.getY() + end_.getY()) / 2.0F;
+        auto const x = (_start.getX() + _end.getX()) / 2.0F;
+        auto const y = (_start.getY() + _end.getY()) / 2.0F;
         return Point<Type> {x, y};
     }
 
@@ -77,7 +76,7 @@ public:
      */
     [[nodiscard]] auto getAngleRadians() const noexcept -> Type
     {
-        auto const angle = std::atan2(end_.getY() - start_.getY(), end_.getX() - start_.getX());
+        auto const angle = std::atan2(_end.getY() - _start.getY(), _end.getX() - _start.getX());
         return static_cast<Type>(angle);
     }
 
@@ -96,8 +95,8 @@ public:
      */
     [[nodiscard]] auto getLength() const noexcept -> Type
     {
-        auto const x = std::pow(end_.getX() - start_.getX(), 2.0);
-        auto const y = std::pow(end_.getY() - start_.getY(), 2.0);
+        auto const x = std::pow(_end.getX() - _start.getX(), 2.0);
+        auto const y = std::pow(_end.getY() - _start.getY(), 2.0);
         return Type(std::sqrt(x + y));
     }
 
@@ -106,17 +105,17 @@ public:
      */
     void printFormular() const
     {
-        auto const a = end_.getY() - start_.getY();
-        auto const b = start_.getX() - end_.getX();
-        auto const c = a * (start_.getX()) + b * (start_.getY());
+        auto const a = _end.getY() - _start.getY();
+        auto const b = _start.getX() - _end.getX();
+        auto const c = a * (_start.getX()) + b * (_start.getY());
 
         if (b < 0) { fmt::print("The line passing through points P and Q is: {0}x {1}y = {2}\n", a, b, c); }
         else { fmt::print("The line passing through points P and Q is: {0}x + {1}y = {2}\n", a, b, c); }
     }
 
 private:
-    Point<Type> start_ {};
-    Point<Type> end_ {};
+    Point<Type> _start {};
+    Point<Type> _end {};
 };
 
 template<typename Type>

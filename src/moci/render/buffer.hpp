@@ -92,31 +92,31 @@ class BufferLayout
 {
 public:
     BufferLayout() = default;
-    BufferLayout(std::initializer_list<BufferElement> elements) : m_Elements(elements) { calculateOffsetsAndStride(); }
+    BufferLayout(std::initializer_list<BufferElement> elements) : _m_Elements(elements) { calculateOffsetsAndStride(); }
 
-    [[nodiscard]] inline auto getStride() const -> std::uint32_t { return m_Stride; }
-    [[nodiscard]] inline auto getElements() const -> Vector<BufferElement> const& { return m_Elements; }
+    [[nodiscard]] inline auto getStride() const -> std::uint32_t { return _m_Stride; }
+    [[nodiscard]] inline auto getElements() const -> Vector<BufferElement> const& { return _m_Elements; }
 
-    auto begin() -> Vector<BufferElement>::iterator { return m_Elements.begin(); }
-    auto end() -> Vector<BufferElement>::iterator { return m_Elements.end(); }
-    [[nodiscard]] auto begin() const -> Vector<BufferElement>::const_iterator { return m_Elements.begin(); }
-    [[nodiscard]] auto end() const -> Vector<BufferElement>::const_iterator { return m_Elements.end(); }
+    auto begin() -> Vector<BufferElement>::iterator { return _m_Elements.begin(); }
+    auto end() -> Vector<BufferElement>::iterator { return _m_Elements.end(); }
+    [[nodiscard]] auto begin() const -> Vector<BufferElement>::const_iterator { return _m_Elements.begin(); }
+    [[nodiscard]] auto end() const -> Vector<BufferElement>::const_iterator { return _m_Elements.end(); }
 
 private:
     void calculateOffsetsAndStride()
     {
         size_t offset = 0;
-        m_Stride      = 0;
-        for (auto& element : m_Elements)
+        _m_Stride     = 0;
+        for (auto& element : _m_Elements)
         {
             element.Offset = offset;
             offset += element.Size;
-            m_Stride += element.Size;
+            _m_Stride += element.Size;
         }
     }
 
-    Vector<BufferElement> m_Elements;
-    uint32_t m_Stride = 0;
+    Vector<BufferElement> _m_Elements;
+    uint32_t _m_Stride = 0;
 };
 
 class VertexBuffer

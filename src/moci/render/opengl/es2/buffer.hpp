@@ -17,12 +17,12 @@ public:
     void bind() const override;
     void unbind() const override;
     auto uploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void override;
-    [[nodiscard]] auto getLayout() const -> const BufferLayout& override { return m_Layout; }
-    void setLayout(const BufferLayout& layout) override { m_Layout = layout; }
+    [[nodiscard]] auto getLayout() const -> const BufferLayout& override { return _m_Layout; }
+    void setLayout(const BufferLayout& layout) override { _m_Layout = layout; }
 
 private:
-    uint32_t m_RendererID {};
-    BufferLayout m_Layout;
+    uint32_t _m_RendererID {};
+    BufferLayout _m_Layout;
 };
 
 class OpenGLESIndexBuffer : public IndexBuffer
@@ -34,14 +34,14 @@ public:
     void bind() const override;
     void unbind() const override;
     auto uploadData(std::uint32_t offset, Span<std::uint32_t> indices) const -> void override;
-    [[nodiscard]] auto getCount() const -> uint32_t override { return specs_.count; }
+    [[nodiscard]] auto getCount() const -> uint32_t override { return _specs.count; }
 
 private:
     [[nodiscard]] auto convertToUnsignedShorts(Span<std::uint32_t> indices) const -> Span<std::uint16_t>;
 
-    IndexBufferSpecs specs_                    = {};
-    uint32_t m_RendererID                      = {};
-    Scope<Vector<std::uint16_t>> indicesShort_ = makeScope<Vector<std::uint16_t>>();
+    IndexBufferSpecs _specs                    = {};
+    uint32_t _m_RendererID                     = {};
+    Scope<Vector<std::uint16_t>> _indicesShort = makeScope<Vector<std::uint16_t>>();
 };
 
 }  // namespace moci

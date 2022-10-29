@@ -6,7 +6,7 @@
 
 namespace moci
 {
-Typeface::Typeface(std::string name) : name_(std::move(name)) { }
+Typeface::Typeface(std::string name) : _name(std::move(name)) { }
 
 void Typeface::addCharacter(char c, std::uint32_t height, std::uint32_t width, Point<std::uint32_t> topLeft,
                             std::uint32_t advance, Buffer buffer)
@@ -16,7 +16,7 @@ void Typeface::addCharacter(char c, std::uint32_t height, std::uint32_t width, P
 
 void Typeface::addCharacter(char c, Character const& character)
 {
-    characters_.insert(std::pair<char, Character>(c, character));
+    _characters.insert(std::pair<char, Character>(c, character));
 }
 
 auto Typeface::getWidthForString(std::string const& text, float scale) -> std::uint32_t
@@ -24,7 +24,7 @@ auto Typeface::getWidthForString(std::string const& text, float scale) -> std::u
     auto position = Point<float> {};
     for (auto const c : text)
     {
-        auto const& ch = characters_[c];
+        auto const& ch = _characters[c];
 
         // float const xpos = position.getX() + ch.topLeft.getX() * scale;
         // float const ypos = position.getY() - (ch.width - ch.topLeft.getY()) * scale;

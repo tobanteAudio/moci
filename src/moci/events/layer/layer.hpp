@@ -23,10 +23,10 @@ public:
     virtual void onImGuiRender() { }
     virtual void onEvent(Event& event) { ignoreUnused(event); }
 
-    [[nodiscard]] inline auto getName() const -> std::string const& { return m_DebugName; }
+    [[nodiscard]] inline auto getName() const -> std::string const& { return _m_DebugName; }
 
 private:
-    std::string m_DebugName;
+    std::string _m_DebugName;
 };
 
 }  // namespace moci

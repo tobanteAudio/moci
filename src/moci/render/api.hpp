@@ -4,7 +4,6 @@
 #include "moci/graphics/color.hpp"
 #include "moci/render/vertex_array.hpp"
 
-
 #include <any>
 
 namespace moci

@@ -6,28 +6,28 @@ namespace moci
 template<typename Lambda>
 class ScopeGuard
 {
-    bool committed {false};
-    Lambda rollbackLambda;
+    bool _committed {false};
+    Lambda _rollbackLambda;
 
 public:
-    explicit ScopeGuard(const Lambda& l) : rollbackLambda(l) { }
+    explicit ScopeGuard(const Lambda& l) : _rollbackLambda(l) { }
 
-    ScopeGuard(const ScopeGuard& sc) : rollbackLambda(sc.rollbackLambda)
+    ScopeGuard(const ScopeGuard& sc) : _rollbackLambda(sc._rollbackLambda)
     {
-        if (sc.committed) { committed = true; }
+        if (sc._committed) { _committed = true; }
         else { sc.commit(); }
     }
 
-    ScopeGuard(ScopeGuard&& sc) noexcept : rollbackLambda(sc.rollbackLambda)
+    ScopeGuard(ScopeGuard&& sc) noexcept : _rollbackLambda(sc._rollbackLambda)
     {
-        if (sc.committed) { committed = true; }
+        if (sc._committed) { _committed = true; }
         else { sc.commit(); }
     }
 
     // WARNING: only safe if adquire lambda does not throw, otherwise release lambda is never invoked, because the scope
     // guard never finished initialistion..
     template<typename AdquireLambda>
-    ScopeGuard(const AdquireLambda& al, const Lambda& l) : rollbackLambda(l)
+    ScopeGuard(const AdquireLambda& al, const Lambda& l) : _rollbackLambda(l)
     {
         std::forward<AdquireLambda>(al)();
     }
@@ -35,17 +35,17 @@ public:
     // WARNING: only safe if adquire lambda does not throw, otherwise release lambda is never invoked, because the scope
     // guard never finished initialistion..
     template<typename AdquireLambda, typename L>
-    ScopeGuard(AdquireLambda&& al, L&& l) : rollbackLambda(std::forward<L>(l))
+    ScopeGuard(AdquireLambda&& al, L&& l) : _rollbackLambda(std::forward<L>(l))
     {
         std::forward<AdquireLambda>(al)();  // just in case the functor has &&-qualified operator()
     }
 
     ~ScopeGuard()
     {
-        if (!committed) { rollbackLambda(); }
+        if (!_committed) { _rollbackLambda(); }
     }
 
-    inline void commit() { committed = true; }
+    inline void commit() { _committed = true; }
 };
 
 // WARNING: only safe if adquire lambda does not throw, otherwise release lambda is never invoked, because the scope

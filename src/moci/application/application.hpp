@@ -29,7 +29,7 @@ public:
     void pushLayer(Layer::Ptr&& layer);
     void pushOverlay(Layer::Ptr&& layer);
 
-    inline auto getWindow() -> Window& { return *m_Window; }
+    inline auto getWindow() -> Window& { return *_m_Window; }
 
     inline static auto get() -> Application& { return *sInstance; }
 
@@ -39,12 +39,12 @@ private:
     auto onWindowClose(WindowCloseEvent& e) -> bool;
     auto onWindowResize(WindowResizeEvent& e) -> bool;
 
-    Scope<Window> m_Window                                                  = nullptr;
-    bool m_Running                                                          = true;
-    bool m_Minimized                                                        = false;
-    LayerStack m_LayerStack                                                 = {};
-    float m_LastFrameTime                                                   = 0.0F;
-    std::chrono::time_point<std::chrono::steady_clock> m_LastFrameTimepoint = {};
+    Scope<Window> _m_Window                                                  = nullptr;
+    bool _m_Running                                                          = true;
+    bool _m_Minimized                                                        = false;
+    LayerStack _m_LayerStack                                                 = {};
+    float _m_LastFrameTime                                                   = 0.0F;
+    std::chrono::time_point<std::chrono::steady_clock> _m_LastFrameTimepoint = {};
 
     static Application* sInstance;
     friend auto ::main(int argc, char** argv) -> int;

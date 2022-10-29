@@ -3,7 +3,6 @@
 #include "moci/core/geometry/point.hpp"
 #include "moci/core/vector.hpp"
 
-
 #include <cstdint>
 #include <map>
 #include <string>
@@ -31,15 +30,15 @@ public:
                       std::uint32_t advance, Buffer buffer);
     void addCharacter(char c, Character const& character);
 
-    [[nodiscard]] auto getName() const noexcept -> std::string_view { return std::string_view(name_); }
-    [[nodiscard]] auto getNumCharacters() const noexcept -> std::size_t { return characters_.size(); }
-    [[nodiscard]] auto getCharacter(char c) const noexcept -> Character const& { return (*characters_.find(c)).second; }
+    [[nodiscard]] auto getName() const noexcept -> std::string_view { return std::string_view(_name); }
+    [[nodiscard]] auto getNumCharacters() const noexcept -> std::size_t { return _characters.size(); }
+    [[nodiscard]] auto getCharacter(char c) const noexcept -> Character const& { return (*_characters.find(c)).second; }
 
     [[nodiscard]] auto getWidthForString(std::string const& text, float scale = 1.0F) -> std::uint32_t;
 
 private:
-    std::string name_ {};
-    std::map<char, Character> characters_ {};
+    std::string _name {};
+    std::map<char, Character> _characters {};
 };
 
 class Font

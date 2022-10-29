@@ -18,8 +18,8 @@ Application::Application(WindowSpecs windowSpecs)
     sInstance = this;
     MOCI_CORE_INFO("Initializing App...");
 
-    m_Window = Scope<Window>(Window::create(std::move(windowSpecs)));
-    m_Window->setEventCallback(MOCI_EVENT_METHOD(onEvent));
+    _m_Window = Scope<Window>(Window::create(std::move(windowSpecs)));
+    _m_Window->setEventCallback(MOCI_EVENT_METHOD(onEvent));
 
     Renderer::init();
     MOCI_CORE_INFO("Max vertex attributes: {}", RenderCommand::maxVertexAttributes());
@@ -30,9 +30,9 @@ Application::Application(WindowSpecs windowSpecs)
     pushOverlay(makeScope<ImGuiLayer>());
 }
 
-void Application::pushLayer(Layer::Ptr&& layer) { m_LayerStack.pushLayer(std::move(layer)); }
+void Application::pushLayer(Layer::Ptr&& layer) { _m_LayerStack.pushLayer(std::move(layer)); }
 
-void Application::pushOverlay(Layer::Ptr&& layer) { m_LayerStack.pushOverlay(std::move(layer)); }
+void Application::pushOverlay(Layer::Ptr&& layer) { _m_LayerStack.pushOverlay(std::move(layer)); }
 
 void Application::onEvent(Event& e)
 {
@@ -50,7 +50,7 @@ void Application::onEvent(Event& e)
     dispatcher.dispatch<WindowCloseEvent>(MOCI_EVENT_METHOD(onWindowClose));
     dispatcher.dispatch<WindowResizeEvent>(MOCI_EVENT_METHOD(onWindowResize));
 
-    for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
+    for (auto it = _m_LayerStack.end(); it != _m_LayerStack.begin();)
     {
         (*--it)->onEvent(e);
         if (e.Handled) { break; }
@@ -60,30 +60,30 @@ void Application::onEvent(Event& e)
 void Application::run()
 {
     using namespace std::chrono;
-    while (m_Running)
+    while (_m_Running)
     {
         MOCI_PROFILE_SCOPE("App::Run::Loop");
         auto const now         = steady_clock::now();
         auto const elapsedTime = time_point_cast<microseconds>(now).time_since_epoch()
-                                 - time_point_cast<microseconds>(m_LastFrameTimepoint).time_since_epoch();
-        auto const timestep  = Timestep {static_cast<float>(elapsedTime.count()) / 1'000.0F / 1'000.0F};
-        m_LastFrameTimepoint = now;
+                                 - time_point_cast<microseconds>(_m_LastFrameTimepoint).time_since_epoch();
+        auto const timestep   = Timestep {static_cast<float>(elapsedTime.count()) / 1'000.0F / 1'000.0F};
+        _m_LastFrameTimepoint = now;
 
-        if (!m_Minimized)
+        if (!_m_Minimized)
         {
-            for (auto& layer : m_LayerStack) { layer->onUpdate(timestep); }
+            for (auto& layer : _m_LayerStack) { layer->onUpdate(timestep); }
         }
 
         {
             MOCI_PROFILE_SCOPE("App::Run::Loop::ImGui");
             moci::ImGuiLayer::begin();
-            for (auto& layer : m_LayerStack) { layer->onImGuiRender(); }
+            for (auto& layer : _m_LayerStack) { layer->onImGuiRender(); }
             moci::ImGuiLayer::end();
         }
 
         {
             MOCI_PROFILE_SCOPE("App::Run::Loop::WindowUpdate");
-            m_Window->onUpdate();
+            _m_Window->onUpdate();
         }
     }
 }
@@ -91,7 +91,7 @@ void Application::run()
 auto Application::onWindowClose(WindowCloseEvent& e) -> bool
 {
     ignoreUnused(e);
-    m_Running = false;
+    _m_Running = false;
     return true;
 }
 
@@ -99,11 +99,11 @@ auto Application::onWindowResize(WindowResizeEvent& e) -> bool
 {
     if (e.getWidth() == 0 || e.getHeight() == 0)
     {
-        m_Minimized = true;
+        _m_Minimized = true;
         return false;
     }
 
-    m_Minimized = false;
+    _m_Minimized = false;
     Renderer::onWindowResize(e.getWidth(), e.getHeight());
 
     return false;

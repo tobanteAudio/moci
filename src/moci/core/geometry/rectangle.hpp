@@ -11,13 +11,13 @@ public:
     /**
      * @brief Default construct. Top left at (0,0), no size.
      */
-    explicit constexpr Rectangle() noexcept : position_(Type(0), Type(0)), width_(Type(0)), height_(Type(0)) { }
+    explicit constexpr Rectangle() noexcept : _position(Type(0), Type(0)), _width(Type(0)), _height(Type(0)) { }
 
     /**
      * @brief Construct at (x, y), with width & height.
      */
     constexpr Rectangle(Type x, Type y, Type width, Type height) noexcept
-        : position_(x, y), width_(width), height_(height)
+        : _position(x, y), _width(width), _height(height)
     {
     }
 
@@ -25,7 +25,7 @@ public:
      * @brief Construct at position, with width & height.
      */
     constexpr Rectangle(Point<Type> position, Type width, Type height) noexcept
-        : position_(position), width_(width), height_(height)
+        : _position(position), _width(width), _height(height)
     {
     }
 
@@ -42,67 +42,67 @@ public:
     /**
      * @brief Returns true if the rectangle has no width & no height.
      */
-    [[nodiscard]] constexpr auto isEmpty() const noexcept -> bool { return width_ <= Type(0) && height_ <= Type(0); }
+    [[nodiscard]] constexpr auto isEmpty() const noexcept -> bool { return _width <= Type(0) && _height <= Type(0); }
 
     /**
      * @brief Set Top left to (x, y).
      */
-    auto setPosition(Type x, Type y) noexcept -> void { position_ = Point<Type>(x, y); }
+    auto setPosition(Type x, Type y) noexcept -> void { _position = Point<Type>(x, y); }
 
     /**
      * @brief Set Top left to position.
      */
-    auto setPosition(Point<Type> position) noexcept -> void { position_ = position; }
+    auto setPosition(Point<Type> position) noexcept -> void { _position = position; }
 
     /**
      * @brief Set the x for the Top left corner.
      */
-    auto setX(Type x) noexcept -> void { position_.setX(x); }
+    auto setX(Type x) noexcept -> void { _position.setX(x); }
 
     /**
      * @brief Returns x off the left-hand side.
      */
-    [[nodiscard]] constexpr auto getX() const noexcept -> Type { return position_.getX(); }
+    [[nodiscard]] constexpr auto getX() const noexcept -> Type { return _position.getX(); }
 
     /**
      * @brief Set the y for the Top left corner.
      */
-    auto setY(Type y) noexcept -> void { position_.setY(y); }
+    auto setY(Type y) noexcept -> void { _position.setY(y); }
 
     /**
      * @brief Returns x off the bottom side.
      */
-    [[nodiscard]] constexpr auto getY() const noexcept -> Type { return position_.getY(); }
+    [[nodiscard]] constexpr auto getY() const noexcept -> Type { return _position.getY(); }
 
     /**
      * @brief Set the width.
      */
-    auto setWidth(Type width) noexcept -> void { width_ = width; }
+    auto setWidth(Type width) noexcept -> void { _width = width; }
 
     /**
      * @brief Returns the width.
      */
-    [[nodiscard]] constexpr auto getWidth() const noexcept -> Type { return width_; }
+    [[nodiscard]] constexpr auto getWidth() const noexcept -> Type { return _width; }
 
     /**
      * @brief Set the height.
      */
-    auto setHeight(Type height) noexcept -> void { height_ = height; }
+    auto setHeight(Type height) noexcept -> void { _height = height; }
 
     /**
      * @brief Returns the height.
      */
-    [[nodiscard]] constexpr auto getHeight() const noexcept -> Type { return height_; }
+    [[nodiscard]] constexpr auto getHeight() const noexcept -> Type { return _height; }
 
     /**
      * @brief Returns the x coordinate of the rectangle's right-side.
      */
-    [[nodiscard]] constexpr auto getRight() const noexcept -> Type { return position_.getX() + width_; }
+    [[nodiscard]] constexpr auto getRight() const noexcept -> Type { return _position.getX() + _width; }
 
     /**
      * @brief Returns the y coordinate of the rectangle's bottom edge.
      */
-    [[nodiscard]] constexpr auto getBottom() const noexcept -> Type { return position_.getY() + height_; }
+    [[nodiscard]] constexpr auto getBottom() const noexcept -> Type { return _position.getY() + _height; }
 
     /**
      * @brief Returns the aspect ratio width / height.
@@ -220,8 +220,8 @@ public:
     }
 
 private:
-    Point<Type> position_;
-    Type width_, height_;
+    Point<Type> _position;
+    Type _width, _height;
 };
 
 template<typename Type>

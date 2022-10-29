@@ -35,15 +35,15 @@ public:
 
     void setMessageCallback(const std::function<void(DatagramSocket::Buffer const&, size_t)>& callback)
     {
-        messageCallback_ = callback;
+        _messageCallback = callback;
     }
 
 private:
-    std::atomic<bool> isRunning_ {false};
-    int socketDescriptor_ {};
-    DatagramSocket::Buffer buffer_ {};
-    std::thread listenerThread_;
-    std::function<void(DatagramSocket::Buffer, size_t)> messageCallback_ = nullptr;
+    std::atomic<bool> _isRunning {false};
+    int _socketDescriptor {};
+    DatagramSocket::Buffer _buffer {};
+    std::thread _listenerThread;
+    std::function<void(DatagramSocket::Buffer, size_t)> _messageCallback = nullptr;
 };
 }  // namespace moci
 

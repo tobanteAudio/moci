@@ -11,38 +11,38 @@ glm::vec2 imGuiToGlmVec(ImVec2 const& input) { return {input.x, input.y}; }
 }  // namespace
 void OpenGLLayer::onAttach()
 {
-    auto const path = fmt::format("assets/shader/basic_{}.glsl", shaderSuffix);
+    auto const path = fmt::format("assets/shader/basic_{}.glsl", ShaderSuffix);
     auto samplers   = std::array {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-    shader_         = moci::RenderFactory::makeShader(path);
-    shader_->bind();
-    shader_->setInts("u_Textures", (int)samplers.size(), samplers.data());
+    _shader         = moci::RenderFactory::makeShader(path);
+    _shader->bind();
+    _shader->setInts("u_Textures", (int)samplers.size(), samplers.data());
 
     auto const verticesSize = static_cast<std::uint32_t>(assets::quadVertices.size() * sizeof(float));
     auto layout             = moci::BufferLayout {
-                    {moci::ShaderDataType::Float3, "position"},      //
-                    {moci::ShaderDataType::Float4, "color"},         //
-                    {moci::ShaderDataType::Float2, "textureCoord"},  //
+        {moci::ShaderDataType::Float3, "position"},      //
+        {moci::ShaderDataType::Float4, "color"},         //
+        {moci::ShaderDataType::Float2, "textureCoord"},  //
     };
-    vbo_.reset(moci::RenderFactory::makeVertexBuffer(assets::quadVertices.data(), verticesSize));
-    vbo_->setLayout(layout);
-    vbo_->unbind();
+    _vbo.reset(moci::RenderFactory::makeVertexBuffer(assets::quadVertices.data(), verticesSize));
+    _vbo->setLayout(layout);
+    _vbo->unbind();
     auto indices  = moci::Span<std::uint32_t> {assets::quadIndices.data(), assets::quadIndices.size()};
     auto specs    = moci::IndexBufferSpecs {};
     specs.indices = indices;
     specs.count   = static_cast<std::uint32_t>(indices.size());
-    ibo_.reset(moci::RenderFactory::makeIndexBuffer(specs));
-    ibo_->unbind();
-    vao_ = moci::RenderFactory::makeVertexArray();
-    vao_->addVertexBuffer(vbo_);
-    vao_->setIndexBuffer(ibo_);
-    vao_->unbind();
+    _ibo.reset(moci::RenderFactory::makeIndexBuffer(specs));
+    _ibo->unbind();
+    _vao = moci::RenderFactory::makeVertexArray();
+    _vao->addVertexBuffer(_vbo);
+    _vao->setIndexBuffer(_ibo);
+    _vao->unbind();
 
-    texture_ = moci::RenderFactory::makeTexture2D("src/app/sandbox3D/assets/textures/skybox/back.jpg");
+    _texture = moci::RenderFactory::makeTexture2D("src/app/sandbox3D/assets/textures/skybox/back.jpg");
 
     auto fbSpec   = moci::FramebufferSpecs {};
     fbSpec.width  = 1920;
     fbSpec.height = 1080;
-    framebuffer_  = moci::RenderFactory::makeFramebuffer(fbSpec);
+    _framebuffer  = moci::RenderFactory::makeFramebuffer(fbSpec);
 }
 
 void OpenGLLayer::onUpdate(moci::Timestep ts)
@@ -52,21 +52,21 @@ void OpenGLLayer::onUpdate(moci::Timestep ts)
     moci::RenderCommand::setClearColor({0.1F, 0.1F, 0.1F, 1.0F});
     moci::RenderCommand::clear();
 
-    if (framebufferNeedsResize_)
+    if (_framebufferNeedsResize)
     {
-        auto const newWidth  = static_cast<std::uint32_t>(viewportSize_.x);
-        auto const newHeight = static_cast<std::uint32_t>(viewportSize_.y);
-        framebuffer_->resize(newWidth, newHeight);
-        framebufferNeedsResize_ = false;
+        auto const newWidth  = static_cast<std::uint32_t>(_viewportSize.x);
+        auto const newHeight = static_cast<std::uint32_t>(_viewportSize.y);
+        _framebuffer->resize(newWidth, newHeight);
+        _framebufferNeedsResize = false;
     }
-    framebuffer_->bind();
+    _framebuffer->bind();
     moci::RenderCommand::setClearColor({0.1F, 0.1F, 0.1F, 1.0F});
     moci::RenderCommand::clear();
 
-    vao_->bind();
-    texture_->bind(0);
-    moci::RenderCommand::drawIndexed(moci::RenderDrawMode::Triangles, vao_);
-    framebuffer_->unbind();
+    _vao->bind();
+    _texture->bind(0);
+    moci::RenderCommand::drawIndexed(moci::RenderDrawMode::Triangles, _vao);
+    _framebuffer->unbind();
 }
 
 void OpenGLLayer::onImGuiRender()
@@ -77,14 +77,14 @@ void OpenGLLayer::onImGuiRender()
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2 {0, 0});
     ImGui::Begin("Viewport");
     auto const viewportRegion = imGuiToGlmVec(ImGui::GetContentRegionAvail());
-    if (viewportSize_ != viewportRegion)
+    if (_viewportSize != viewportRegion)
     {
-        viewportSize_           = viewportRegion;
-        framebufferNeedsResize_ = true;
+        _viewportSize           = viewportRegion;
+        _framebufferNeedsResize = true;
     }
 
-    auto* const textureID = reinterpret_cast<void*>((size_t)framebuffer_->getColorAttachmentRendererId());
-    ImGui::Image(textureID, {viewportSize_.x, viewportSize_.y}, ImVec2(0, 1), ImVec2(1, 0));
+    auto* const textureID = reinterpret_cast<void*>((size_t)_framebuffer->getColorAttachmentRendererId());
+    ImGui::Image(textureID, {_viewportSize.x, _viewportSize.y}, ImVec2(0, 1), ImVec2(1, 0));
     ImGui::End();
     ImGui::PopStyleVar();
 }
@@ -102,8 +102,8 @@ void OpenGLLayer::onEvent(moci::Event& e)
 
 bool OpenGLLayer::handleWindowResized(moci::WindowResizeEvent& e)
 {
-    width_  = static_cast<float>(e.getWidth());
-    height_ = static_cast<float>(e.getHeight());
+    _width  = static_cast<float>(e.getWidth());
+    _height = static_cast<float>(e.getHeight());
     return false;
 }
 

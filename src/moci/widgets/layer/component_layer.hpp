@@ -17,7 +17,7 @@ namespace moci
 class ComponentLayer : public Layer
 {
 public:
-    explicit ComponentLayer(Scope<Component>&& root) : Layer("component-layer"), rootComponent_(std::move(root)) { }
+    explicit ComponentLayer(Scope<Component>&& root) : Layer("component-layer"), _rootComponent(std::move(root)) { }
     ~ComponentLayer() override = default;
 
     void onAttach() override;
@@ -41,7 +41,7 @@ private:
             MOCI_PROFILE_SCOPE("ComponentLayer::handleEvent::FindComponent");
             auto const x = static_cast<int>(Input::getMouseX());
             auto const y = static_cast<int>(Input::getMouseY());
-            comp         = rootComponent_->findComponentAt({x, y});
+            comp         = _rootComponent->findComponentAt({x, y});
         }
 
         MOCI_CORE_ASSERT(comp, "Should never be null");
@@ -54,11 +54,11 @@ private:
         return true;
     }
 
-    float width_  = 1280.0F;
-    float height_ = 1024.0F;
+    float _width  = 1280.0F;
+    float _height = 1024.0F;
 
-    Scope<BatchRender2D> renderQueue_ {};
-    Style defaultStyle_ {};
-    Scope<Component> rootComponent_;
+    Scope<BatchRender2D> _renderQueue {};
+    Style _defaultStyle {};
+    Scope<Component> _rootComponent;
 };
 }  // namespace moci

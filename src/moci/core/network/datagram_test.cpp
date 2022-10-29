@@ -7,7 +7,6 @@
 #include "moci/core/network/datagram.hpp"
 #include "moci/core/preprocessor.hpp"
 
-
 #if defined(MOCI_LINUX) || defined(MOCI_MAC)
 
 TEST_CASE("network: UDPBindToPort", "[network]")

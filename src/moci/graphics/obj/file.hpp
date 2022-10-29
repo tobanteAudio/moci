@@ -36,26 +36,26 @@ public:
     /**
      * @brief Returns a span of the vertex positions.
      */
-    [[nodiscard]] auto getVertices() -> Span<glm::vec3> { return vertices_; }
+    [[nodiscard]] auto getVertices() -> Span<glm::vec3> { return _vertices; }
 
     /**
      * @brief Returns a span of the vertex normals.
      */
-    [[nodiscard]] auto getNormals() -> Span<glm::vec3> { return normals_; }
+    [[nodiscard]] auto getNormals() -> Span<glm::vec3> { return _normals; }
 
     /**
      * @brief Returns a span of the faces.
      */
-    [[nodiscard]] auto getVertexData() -> Span<VertexData> { return model_; }
+    [[nodiscard]] auto getVertexData() -> Span<VertexData> { return _model; }
 
 private:
     static auto parseLineToVec3(std::string& line) -> glm::vec3;
     void parseLineToFace(std::string& line);
 
-    std::string path_;
-    Vector<glm::vec3> vertices_;
-    Vector<glm::vec3> normals_;
-    Vector<glm::vec2> uvs_;
-    Vector<VertexData> model_;
+    std::string _path;
+    Vector<glm::vec3> _vertices;
+    Vector<glm::vec3> _normals;
+    Vector<glm::vec2> _uvs;
+    Vector<VertexData> _model;
 };
 }  // namespace moci

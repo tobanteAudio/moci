@@ -11,30 +11,30 @@ class MouseMovedEvent : public Event
 {
 public:
     ~MouseMovedEvent() override = default;
-    MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) { }
+    MouseMovedEvent(float x, float y) : _m_MouseX(x), _m_MouseY(y) { }
 
-    [[nodiscard]] inline auto getX() const -> float { return m_MouseX; }
-    [[nodiscard]] inline auto getY() const -> float { return m_MouseY; }
+    [[nodiscard]] inline auto getX() const -> float { return _m_MouseX; }
+    [[nodiscard]] inline auto getY() const -> float { return _m_MouseY; }
 
     [[nodiscard]] auto toString() const -> std::string override
     {
-        return fmt::format("MouseMovedEvent: {}, {}", m_MouseX, m_MouseY);
+        return fmt::format("MouseMovedEvent: {}, {}", _m_MouseX, _m_MouseY);
     }
 
     EVENT_CLASS_TYPE(MouseMoved)
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 private:
-    float m_MouseX, m_MouseY;
+    float _m_MouseX, _m_MouseY;
 };
 
 class MouseScrolledEvent : public Event
 {
 public:
     ~MouseScrolledEvent() override = default;
-    MouseScrolledEvent(float xOffset, float yOffset) : m_XOffset(xOffset), m_YOffset(yOffset) { }
+    MouseScrolledEvent(float xOffset, float yOffset) : _m_XOffset(xOffset), _m_YOffset(yOffset) { }
 
-    [[nodiscard]] inline auto getXOffset() const -> float { return m_XOffset; }
-    [[nodiscard]] inline auto getYOffset() const -> float { return m_YOffset; }
+    [[nodiscard]] inline auto getXOffset() const -> float { return _m_XOffset; }
+    [[nodiscard]] inline auto getYOffset() const -> float { return _m_YOffset; }
 
     [[nodiscard]] auto toString() const -> std::string override
     {
@@ -44,19 +44,19 @@ public:
     EVENT_CLASS_TYPE(MouseScrolled)
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 private:
-    float m_XOffset, m_YOffset;
+    float _m_XOffset, _m_YOffset;
 };
 
 class MouseButtonEvent : public Event
 {
 public:
     ~MouseButtonEvent() override = default;
-    explicit MouseButtonEvent(MouseCode button) : m_Button(button) { }
-    [[nodiscard]] inline auto getMouseButton() const -> MouseCode { return m_Button; }
+    explicit MouseButtonEvent(MouseCode button) : _m_Button(button) { }
+    [[nodiscard]] inline auto getMouseButton() const -> MouseCode { return _m_Button; }
 
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 private:
-    MouseCode m_Button;
+    MouseCode _m_Button;
 };
 
 class MouseButtonPressedEvent : public MouseButtonEvent

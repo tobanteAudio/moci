@@ -6,7 +6,7 @@
 
 namespace moci
 {
-Button::Button(std::string text, ButtonSpecs specs) : Component(text), text_(std::move(text)), specs_(std::move(specs))
+Button::Button(std::string text, ButtonSpecs specs) : Component(text), _text(std::move(text)), _specs(std::move(specs))
 {
 }
 
@@ -19,22 +19,22 @@ void Button::onDraw(Painter& painter)
     style->drawButton(painter, getBounds(), *this);
 }
 
-auto Button::setSpecs(ButtonSpecs newSpecs) -> void { specs_ = std::move(newSpecs); }
-auto Button::getSpecs() const noexcept -> ButtonSpecs { return specs_; }
+auto Button::setSpecs(ButtonSpecs newSpecs) -> void { _specs = std::move(newSpecs); }
+auto Button::getSpecs() const noexcept -> ButtonSpecs { return _specs; }
 
 auto Button::setState(ButtonState newState) -> void
 {
-    state_ = newState;
-    if (specs_.callbacks.stateChanged) { specs_.callbacks.stateChanged(newState); }
+    _state = newState;
+    if (_specs.callbacks.stateChanged) { _specs.callbacks.stateChanged(newState); }
 }
-auto Button::getState() const noexcept -> ButtonState { return state_; }
+auto Button::getState() const noexcept -> ButtonState { return _state; }
 
-auto Button::setText(std::string newText) -> void { text_ = std::move(newText); }
-auto Button::getText() const noexcept -> std::string const& { return text_; }
-auto Button::getTextView() const noexcept -> std::string_view { return text_; }
+auto Button::setText(std::string newText) -> void { _text = std::move(newText); }
+auto Button::getText() const noexcept -> std::string const& { return _text; }
+auto Button::getTextView() const noexcept -> std::string_view { return _text; }
 
-void Button::setTextColor(Color col) noexcept { color_ = col; }
-auto Button::getTextColor() const noexcept -> Color { return color_; }
+void Button::setTextColor(Color col) noexcept { _color = col; }
+auto Button::getTextColor() const noexcept -> Color { return _color; }
 
 auto Button::mouseClicked(moci::MouseCallback::Click click) -> bool
 {

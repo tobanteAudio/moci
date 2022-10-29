@@ -12,17 +12,17 @@
 namespace moci
 {
 
-OpenGLESTexture2D::OpenGLESTexture2D(std::string path) : path_(std::move(path))
+OpenGLESTexture2D::OpenGLESTexture2D(std::string path) : _path(std::move(path))
 {
     stbi_set_flip_vertically_on_load(1);
-    data_ = stbi_load(path_.c_str(), &width_, &height_, &bpp_, 4);
-    if (data_ == nullptr) { MOCI_CORE_ERROR("stbi error"); }
+    _data = stbi_load(_path.c_str(), &_width, &_height, &_bpp, 4);
+    if (_data == nullptr) { MOCI_CORE_ERROR("stbi error"); }
 
     createTexture();
     setFilterModes();
-    GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_UNSIGNED_BYTE, data_));
+    GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, _data));
 
-    if (data_ != nullptr) { stbi_image_free(data_); }
+    if (_data != nullptr) { stbi_image_free(_data); }
 }
 
 OpenGLESTexture2D::OpenGLESTexture2D(Texture::Format format, uint32_t width, uint32_t height, void* data)
@@ -47,12 +47,12 @@ OpenGLESTexture2D::OpenGLESTexture2D(Texture::Format format, uint32_t width, uin
     );
 }
 
-OpenGLESTexture2D::~OpenGLESTexture2D() { GLCall(glDeleteTextures(1, &renderID_)); }
+OpenGLESTexture2D::~OpenGLESTexture2D() { GLCall(glDeleteTextures(1, &_renderID)); }
 
 void OpenGLESTexture2D::bind(uint32_t slot) const
 {
     GLCall(glActiveTexture(GL_TEXTURE0 + slot));
-    GLCall(glBindTexture(GL_TEXTURE_2D, renderID_));
+    GLCall(glBindTexture(GL_TEXTURE_2D, _renderID));
 }
 
 void OpenGLESTexture2D::unbind() const
@@ -65,8 +65,8 @@ void OpenGLESTexture2D::createTexture()
 {
     // Disable byte-alignment restriction
     GLCall(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));
-    GLCall(glGenTextures(1, &renderID_));
-    GLCall(glBindTexture(GL_TEXTURE_2D, renderID_));
+    GLCall(glGenTextures(1, &_renderID));
+    GLCall(glBindTexture(GL_TEXTURE_2D, _renderID));
 }
 void OpenGLESTexture2D::setFilterModes()
 {
@@ -77,14 +77,14 @@ void OpenGLESTexture2D::setFilterModes()
     GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 }
 
-OpenGLESTextureCube::OpenGLESTextureCube(Vector<std::string> paths) : paths_(std::move(paths))
+OpenGLESTextureCube::OpenGLESTextureCube(Vector<std::string> paths) : _paths(std::move(paths))
 {
 
     // Generate a texture object
-    GLCall(glGenTextures(1, &renderID_));
+    GLCall(glGenTextures(1, &_renderID));
 
     // Bind the texture object
-    GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, renderID_));
+    GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, _renderID));
 
     // Set the filtering mode1
     GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
@@ -92,15 +92,15 @@ OpenGLESTextureCube::OpenGLESTextureCube(Vector<std::string> paths) : paths_(std
     GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
     GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
-    for (GLuint i = 0; i < paths_.size(); i++)
+    for (GLuint i = 0; i < _paths.size(); i++)
     {
         int width       = 0;
         int height      = 0;
         int numChannels = 0;
-        auto* data      = stbi_load(paths_[i].c_str(), &width, &height, &numChannels, 0);
+        auto* data      = stbi_load(_paths[i].c_str(), &width, &height, &numChannels, 0);
         if (data != nullptr)
         {
-            MOCI_CORE_INFO("stbi loaded: {} {}x{}", paths_[i].c_str(), width, height);
+            MOCI_CORE_INFO("stbi loaded: {} {}x{}", _paths[i].c_str(), width, height);
             auto const pos = GL_TEXTURE_CUBE_MAP_POSITIVE_X + i;
 
             // Resize on ARM devices with little VRAM. (RPi3 for example)
@@ -124,18 +124,18 @@ OpenGLESTextureCube::OpenGLESTextureCube(Vector<std::string> paths) : paths_(std
             GLCall(glTexImage2D(pos, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data));
 #endif
         }
-        else { MOCI_CORE_ERROR("stbi error: {}", paths_[i]); }
+        else { MOCI_CORE_ERROR("stbi error: {}", _paths[i]); }
 
         stbi_image_free(data);
     }
 }
 
-OpenGLESTextureCube::~OpenGLESTextureCube() { GLCall(glDeleteTextures(1, &renderID_)); }
+OpenGLESTextureCube::~OpenGLESTextureCube() { GLCall(glDeleteTextures(1, &_renderID)); }
 
 void OpenGLESTextureCube::bind(uint32_t slot) const
 {
     GLCall(glActiveTexture(GL_TEXTURE0 + slot));
-    GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, renderID_));
+    GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, _renderID));
 }
 
 void OpenGLESTextureCube::unbind() const

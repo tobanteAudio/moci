@@ -6,8 +6,8 @@ template<typename Type>
 class Point
 {
 public:
-    explicit constexpr Point() noexcept : x_(Type(0)), y_(Type(0)) { }
-    constexpr Point(Type x, Type y) noexcept : x_(x), y_(y) { }
+    explicit constexpr Point() noexcept : _x(Type(0)), _y(Type(0)) { }
+    constexpr Point(Type x, Type y) noexcept : _x(x), _y(y) { }
 
     ~Point() = default;
 
@@ -17,16 +17,16 @@ public:
     Point(Point&&) noexcept                    = default;
     auto operator=(Point&&) noexcept -> Point& = default;
 
-    [[nodiscard]] constexpr auto isOrigin() const noexcept -> bool { return x_ == Type(0) && y_ == Type(0); }
+    [[nodiscard]] constexpr auto isOrigin() const noexcept -> bool { return _x == Type(0) && _y == Type(0); }
 
-    [[nodiscard]] constexpr auto getX() const noexcept -> Type { return x_; }
-    [[nodiscard]] constexpr auto getY() const noexcept -> Type { return y_; }
+    [[nodiscard]] constexpr auto getX() const noexcept -> Type { return _x; }
+    [[nodiscard]] constexpr auto getY() const noexcept -> Type { return _y; }
 
-    auto setX(Type x) noexcept -> void { x_ = x; }
-    auto setY(Type y) noexcept -> void { y_ = y; }
+    auto setX(Type x) noexcept -> void { _x = x; }
+    auto setY(Type y) noexcept -> void { _y = y; }
 
 private:
-    Type x_, y_;
+    Type _x, _y;
 };
 
 template<typename Type>

@@ -15,7 +15,7 @@ public:
     void swapBuffers() override;
 
 private:
-    GLFWwindow* m_WindowHandle;
+    GLFWwindow* _m_WindowHandle;
 };
 
 }  // namespace moci

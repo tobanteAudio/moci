@@ -21,7 +21,7 @@ static std::atomic<float> level {0.5F};
 class LevelMeterView : public moci::Component
 {
 public:
-    LevelMeterView(moci::Color col, std::string id) : Component(std::move(id)), color_(col) { }
+    LevelMeterView(moci::Color col, std::string id) : Component(std::move(id)), _color(col) { }
     ~LevelMeterView() override = default;
 
     auto onDraw(moci::Painter& painter) -> void override
@@ -33,14 +33,14 @@ public:
         for (auto i = 0; i < (numLEDs * level.load()); i++)
         {
             auto const ledBounds = area.removeFromBottom(ledHeight).reduced(1);
-            painter.drawQuad(ledBounds.toFloat(), color_);
+            painter.drawQuad(ledBounds.toFloat(), _color);
         }
     }
 
 private:
     constexpr static int numLEDs = 100;
 
-    moci::Color color_ {};
+    moci::Color _color {};
 };
 
 float linearToDecibel(float linear)
@@ -55,8 +55,8 @@ public:
     MultiChannel() : Component("multi-channel")
     {
         MOCI_PROFILE_FUNCTION();
-        listener_.bind("", 8080);
-        listener_.setMessageCallback(
+        _listener.bind("", 8080);
+        _listener.setMessageCallback(
             [](auto const& buffer, auto const size)
             {
                 moci::ignoreUnused(size);
@@ -69,14 +69,14 @@ public:
                 // std::printf("Data: %u - %u, %f\n", data.type, data.id, data.value);
             });
 
-        listener_.listen();
+        _listener.listen();
 
         for (auto i = 0; i < 5; i++)
         {
             auto col     = moci::Color {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F};
             auto channel = moci::makeScope<LevelMeterView>(col, fmt::format("{}", i));
             addChild(channel.get());
-            channels_.push_back(std::move(channel));
+            _channels.push_back(std::move(channel));
         }
 
         for (auto i = 0; i < 10; i++)
@@ -85,7 +85,7 @@ public:
             auto slider = moci::makeScope<moci::Slider>(col);
             slider->setValue(i / 10.0F);
             addChild(slider.get());
-            sliders_.push_back(std::move(slider));
+            _sliders.push_back(std::move(slider));
         }
 
         for (auto i = 0; i < 20; i++)
@@ -97,11 +97,11 @@ public:
             button->setTextColor(moci::Color {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F});
 
             addChild(button.get());
-            buttons_.push_back(std::move(button));
+            _buttons.push_back(std::move(button));
         }
     }
 
-    ~MultiChannel() override { listener_.shutdown(); };
+    ~MultiChannel() override { _listener.shutdown(); };
 
     auto onDraw(moci::Painter& painter) -> void override { moci::ignoreUnused(painter); }
 
@@ -112,20 +112,20 @@ public:
         auto const width        = area.getWidth();
         auto buttonArea         = area.removeFromRight(width / 3).reduced(20);
         auto sliderArea         = area.removeFromRight(width / 3).reduced(20);
-        auto const sliderHeight = static_cast<int>(sliderArea.getHeight() / sliders_.size());
-        auto const buttonHeight = static_cast<int>(buttonArea.getHeight() / buttons_.size());
-        auto const channelWidth = static_cast<int>(area.getWidth() / channels_.size());
+        auto const sliderHeight = static_cast<int>(sliderArea.getHeight() / _sliders.size());
+        auto const buttonHeight = static_cast<int>(buttonArea.getHeight() / _buttons.size());
+        auto const channelWidth = static_cast<int>(area.getWidth() / _channels.size());
 
-        for (auto& channel : channels_) { channel->setBounds(area.removeFromLeft(channelWidth).reduced(5, 25)); }
-        for (auto& slider : sliders_) { slider->setBounds(sliderArea.removeFromTop(sliderHeight).reduced(5, 25)); }
-        for (auto& button : buttons_) { button->setBounds(buttonArea.removeFromTop(buttonHeight).reduced(5, 5)); }
+        for (auto& channel : _channels) { channel->setBounds(area.removeFromLeft(channelWidth).reduced(5, 25)); }
+        for (auto& slider : _sliders) { slider->setBounds(sliderArea.removeFromTop(sliderHeight).reduced(5, 25)); }
+        for (auto& button : _buttons) { button->setBounds(buttonArea.removeFromTop(buttonHeight).reduced(5, 5)); }
     }
 
 private:
-    moci::DatagramSocket listener_ {};
-    moci::Vector<moci::Scope<LevelMeterView>> channels_;
-    moci::Vector<moci::Scope<moci::Slider>> sliders_;
-    moci::Vector<moci::Scope<moci::Button>> buttons_;
+    moci::DatagramSocket _listener {};
+    moci::Vector<moci::Scope<LevelMeterView>> _channels;
+    moci::Vector<moci::Scope<moci::Slider>> _sliders;
+    moci::Vector<moci::Scope<moci::Button>> _buttons;
 };
 
 class Sandbox : public moci::Application

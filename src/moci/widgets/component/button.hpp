@@ -60,9 +60,9 @@ public:
     auto mouseClicked(moci::MouseCallback::Click click) -> bool override;
 
 private:
-    std::string text_  = {};
-    Color color_       = {};
-    ButtonSpecs specs_ = {};
-    ButtonState state_ = ButtonState::Normal;
+    std::string _text  = {};
+    Color _color       = {};
+    ButtonSpecs _specs = {};
+    ButtonState _state = ButtonState::Normal;
 };
 }  // namespace moci

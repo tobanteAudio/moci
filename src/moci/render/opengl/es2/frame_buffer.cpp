@@ -5,45 +5,45 @@
 namespace moci
 {
 
-OpenGLESFramebuffer::OpenGLESFramebuffer(FramebufferSpecs spec) : specs_(spec) { invalidate(); }
+OpenGLESFramebuffer::OpenGLESFramebuffer(FramebufferSpecs spec) : _specs(spec) { invalidate(); }
 
 OpenGLESFramebuffer::~OpenGLESFramebuffer() { deallocate(); }
 
 void OpenGLESFramebuffer::bind()
 {
-    GLCall(glBindFramebuffer(GL_FRAMEBUFFER, renderID_));
-    GLCall(glViewport(0, 0, specs_.width, specs_.height));
+    GLCall(glBindFramebuffer(GL_FRAMEBUFFER, _renderID));
+    GLCall(glViewport(0, 0, _specs.width, _specs.height));
 }
 
 void OpenGLESFramebuffer::unbind() { GLCall(glBindFramebuffer(GL_FRAMEBUFFER, 0)); }
 
 void OpenGLESFramebuffer::resize(std::uint32_t width, std::uint32_t height)
 {
-    specs_.width  = width;
-    specs_.height = height;
+    _specs.width  = width;
+    _specs.height = height;
     invalidate();
 }
 
 void OpenGLESFramebuffer::invalidate()
 {
-    if (renderID_ != 0) { deallocate(); }
+    if (_renderID != 0) { deallocate(); }
 
-    GLCall(glGenFramebuffers(1, &renderID_));
-    GLCall(glBindFramebuffer(GL_FRAMEBUFFER, renderID_));
+    GLCall(glGenFramebuffers(1, &_renderID));
+    GLCall(glBindFramebuffer(GL_FRAMEBUFFER, _renderID));
 
-    GLCall(glGenTextures(1, &colorAttachment_));
-    GLCall(glBindTexture(GL_TEXTURE_2D, colorAttachment_));
-    GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, specs_.width, specs_.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr));
+    GLCall(glGenTextures(1, &_colorAttachment));
+    GLCall(glBindTexture(GL_TEXTURE_2D, _colorAttachment));
+    GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _specs.width, _specs.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr));
     GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
     GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-    GLCall(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorAttachment_, 0));
+    GLCall(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _colorAttachment, 0));
 
     MOCI_CORE_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "Framebuffer is incomplete!");
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 void OpenGLESFramebuffer::deallocate()
 {
-    GLCall(glDeleteFramebuffers(1, &renderID_));
-    GLCall(glDeleteTextures(1, &colorAttachment_));
+    GLCall(glDeleteFramebuffers(1, &_renderID));
+    GLCall(glDeleteTextures(1, &_colorAttachment));
 }
 }  // namespace moci

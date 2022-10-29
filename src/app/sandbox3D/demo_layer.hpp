@@ -30,49 +30,49 @@ private:
     bool onMousePressed(moci::MouseButtonPressedEvent& e);
     bool onMouseReleased(moci::MouseButtonReleasedEvent& e);
 
-    float width_        = 1280.0F;
-    float height_       = 1024.0F;
-    float lastTimestep_ = 0.0F;
-    bool fullscreen_    = false;
+    float _width        = 1280.0F;
+    float _height       = 1024.0F;
+    float _lastTimestep = 0.0F;
+    bool _fullscreen    = false;
 
-    moci::Ref<moci::Framebuffer> framebuffer_ = nullptr;
-    glm::vec2 viewportSize_                   = {};
+    moci::Ref<moci::Framebuffer> _framebuffer = nullptr;
+    glm::vec2 _viewportSize                   = {};
 
-    glm::vec3 cameraPos_   = {15.0F, 8.70F, 50.0F};
-    glm::vec3 cameraFront_ = {0.0F, 0.0F, -1.0F};
-    glm::vec3 cameraUp_    = {0.0F, 1.0F, 0.0F};
-    float cameraYaw_       = -90.0F;
-    float cameraPitch_     = 0.0F;
-    float cameraFOV_       = 45.0F;
-    bool firstMouse_       = true;
-    float cameraLastX_     = {width_ / 2.0F};
-    float cameraLastY_     = {height_ / 2.0F};
-    bool isMouseDragging_  = false;
+    glm::vec3 _cameraPos   = {15.0F, 8.70F, 50.0F};
+    glm::vec3 _cameraFront = {0.0F, 0.0F, -1.0F};
+    glm::vec3 _cameraUp    = {0.0F, 1.0F, 0.0F};
+    float _cameraYaw       = -90.0F;
+    float _cameraPitch     = 0.0F;
+    float _cameraFOV       = 45.0F;
+    bool _firstMouse       = true;
+    float _cameraLastX     = {_width / 2.0F};
+    float _cameraLastY     = {_height / 2.0F};
+    bool _isMouseDragging  = false;
 
-    glm::vec3 cameraLookAt_        = {0.0F, 0.0F, 0.0F};
-    float ambientLight_            = 0.1F;
-    float modelScale_              = 0.15F;
-    moci::Scope<moci::Light> light = {};
+    glm::vec3 _cameraLookAt         = {0.0F, 0.0F, 0.0F};
+    float _ambientLight             = 0.1F;
+    float _modelScale               = 0.15F;
+    moci::Scope<moci::Light> _light = {};
 
-    moci::Ref<moci::Shader> shader_    = nullptr;
-    moci::Ref<moci::VertexBuffer> vbo_ = nullptr;
-    moci::Ref<moci::IndexBuffer> ibo_  = nullptr;
-    moci::Ref<moci::VertexArray> vao_  = nullptr;
+    moci::Ref<moci::Shader> _shader    = nullptr;
+    moci::Ref<moci::VertexBuffer> _vbo = nullptr;
+    moci::Ref<moci::IndexBuffer> _ibo  = nullptr;
+    moci::Ref<moci::VertexArray> _vao  = nullptr;
 
-    std::size_t numVertices_ = {};
-    moci::Mesh mesh_ {"src/app/sandbox3D/assets/models/cerberus.fbx"};
-    moci::Mesh floor_ {"src/app/sandbox3D/assets/models/plane.obj"};
+    std::size_t _numVertices = {};
+    moci::Mesh _mesh {"src/app/sandbox3D/assets/models/cerberus.fbx"};
+    moci::Mesh _floor {"src/app/sandbox3D/assets/models/plane.obj"};
 
-    moci::Ref<moci::Texture2D> textureSolid_  = {};
-    moci::Ref<moci::Texture2D> textureColors_ = {};
+    moci::Ref<moci::Texture2D> _textureSolid  = {};
+    moci::Ref<moci::Texture2D> _textureColors = {};
 
-    moci::Ref<moci::Shader> skyboxShader_       = nullptr;
-    moci::Ref<moci::VertexBuffer> skyboxVbo_    = nullptr;
-    moci::Ref<moci::IndexBuffer> skyboxIbo_     = nullptr;
-    moci::Ref<moci::VertexArray> skyboxVao_     = nullptr;
-    moci::Ref<moci::TextureCube> skyBoxTexture_ = {};
+    moci::Ref<moci::Shader> _skyboxShader       = nullptr;
+    moci::Ref<moci::VertexBuffer> _skyboxVbo    = nullptr;
+    moci::Ref<moci::IndexBuffer> _skyboxIbo     = nullptr;
+    moci::Ref<moci::VertexArray> _skyboxVao     = nullptr;
+    moci::Ref<moci::TextureCube> _skyBoxTexture = {};
 
-    moci::Vector<moci::Mesh::Vertex> vertices_ = {};
+    moci::Vector<moci::Mesh::Vertex> _vertices = {};
 
     // imgui
     struct DrawStats
@@ -82,8 +82,8 @@ private:
         float maxFPS = 0.0F;
     };
 
-    DrawStats drawStats_            = {};
-    moci::Vector<float> fpsHistory_ = {};
-    bool imguiWindow_               = true;
-    bool imguiDemo_                 = false;
+    DrawStats _drawStats            = {};
+    moci::Vector<float> _fpsHistory = {};
+    bool _imguiWindow               = true;
+    bool _imguiDemo                 = false;
 };

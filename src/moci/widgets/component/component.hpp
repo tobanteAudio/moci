@@ -6,7 +6,6 @@
 #include "moci/events/types/mouse_event.hpp"
 #include "moci/graphics_extra/painter.hpp"
 
-
 #include <memory>
 #include <string>
 #include <string_view>
@@ -161,11 +160,11 @@ public:
     [[nodiscard]] auto getStyle() const noexcept -> Style*;
 
 private:
-    std::string id_ {};
-    Component* parent_ {nullptr};
-    Vector<Component*> children_ {};
-    Rectangle<int> bounds_ {};
-    Style* style_ {nullptr};
+    std::string _id {};
+    Component* _parent {nullptr};
+    Vector<Component*> _children {};
+    Rectangle<int> _bounds {};
+    Style* _style {nullptr};
 };
 
 }  // namespace moci

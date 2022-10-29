@@ -10,20 +10,20 @@ LayerStack::LayerStack() = default;
 
 LayerStack::~LayerStack()
 {
-    for (Layer::Ptr& layer : m_Layers) { layer->onDetach(); }
+    for (Layer::Ptr& layer : _m_Layers) { layer->onDetach(); }
 }
 
 void LayerStack::pushLayer(Layer::Ptr&& layer)
 {
-    auto& item = *m_Layers.insert(m_Layers.begin() + m_LayerInsertIndex, std::move(layer));
-    m_LayerInsertIndex++;
+    auto& item = *_m_Layers.insert(_m_Layers.begin() + _m_LayerInsertIndex, std::move(layer));
+    _m_LayerInsertIndex++;
     item->onAttach();
 }
 
 void LayerStack::pushOverlay(Layer::Ptr&& overlay)
 {
     overlay->onAttach();
-    m_Layers.push_back(std::move(overlay));
+    _m_Layers.push_back(std::move(overlay));
 }
 
 // void LayerStack::PopLayer(Layer::Ptr&& layer)

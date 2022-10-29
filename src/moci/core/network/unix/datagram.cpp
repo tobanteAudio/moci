@@ -20,7 +20,7 @@ namespace moci
 DatagramSocket::Pimpl::~Pimpl()
 {
     shutdown();
-    close(socketDescriptor_);
+    close(_socketDescriptor);
 }
 
 auto DatagramSocket::Pimpl::write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool
@@ -59,7 +59,7 @@ auto DatagramSocket::Pimpl::bind(const std::string& ip, int port) -> bool
 {
     moci::ignoreUnused(ip);
     // Creating socket file descriptor
-    if ((socketDescriptor_ = socket(AF_INET, SOCK_DGRAM, 0)) < 0) { return false; }
+    if ((_socketDescriptor = socket(AF_INET, SOCK_DGRAM, 0)) < 0) { return false; }
 
     sockaddr_in servaddr {};
     std::memset(&servaddr, 0, sizeof(servaddr));
@@ -72,34 +72,34 @@ auto DatagramSocket::Pimpl::bind(const std::string& ip, int port) -> bool
     timeval tv {};
     tv.tv_sec  = 0;
     tv.tv_usec = 20'000;
-    setsockopt(socketDescriptor_, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
+    setsockopt(_socketDescriptor, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
 
     // Bind the socket with the server address
-    return ::bind(socketDescriptor_, reinterpret_cast<sockaddr const*>(&servaddr), sizeof(servaddr)) >= 0;
+    return ::bind(_socketDescriptor, reinterpret_cast<sockaddr const*>(&servaddr), sizeof(servaddr)) >= 0;
 }
 
 void DatagramSocket::Pimpl::listen()
 {
-    listenerThread_ = std::thread(
+    _listenerThread = std::thread(
         [&]()
         {
             sockaddr_in cliaddr {};
             std::memset(&cliaddr, 0, sizeof(cliaddr));
 
             auto const maxMsgSize = 1024;
-            buffer_.resize(1024);
+            _buffer.resize(1024);
 
             MOCI_CORE_INFO("Start udp listen");
-            isRunning_.store(true);
-            while (isRunning_.load())
+            _isRunning.store(true);
+            while (_isRunning.load())
             {
                 unsigned int len        = 0;
-                auto const numBytesRecv = recvfrom(socketDescriptor_, buffer_.data(), maxMsgSize, MSG_WAITALL,
+                auto const numBytesRecv = recvfrom(_socketDescriptor, _buffer.data(), maxMsgSize, MSG_WAITALL,
                                                    reinterpret_cast<sockaddr*>(&cliaddr), &len);
 
                 if (numBytesRecv > 0)
                 {
-                    if (messageCallback_) { messageCallback_(buffer_, buffer_.size()); }
+                    if (_messageCallback) { _messageCallback(_buffer, _buffer.size()); }
                 }
             }
         });
@@ -108,8 +108,8 @@ void DatagramSocket::Pimpl::listen()
 void DatagramSocket::Pimpl::shutdown()
 {
     MOCI_CORE_INFO("Stop udp listen");
-    isRunning_.store(false);
-    if (listenerThread_.joinable()) { listenerThread_.join(); }
+    _isRunning.store(false);
+    if (_listenerThread.joinable()) { _listenerThread.join(); }
 }
 
 }  // namespace moci
