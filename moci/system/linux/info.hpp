@@ -3,7 +3,7 @@
 
 #if defined(MOCI_LINUX)
 
-#include "moci_system/system/info.hpp"
+#include "moci/system/info.hpp"
 
 #include <string>
 #include <unordered_map>
