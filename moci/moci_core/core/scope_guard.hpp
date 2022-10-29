@@ -12,13 +12,13 @@ class ScopeGuard
 public:
     ScopeGuard(const Lambda& _l) : rollbackLambda(_l) { }
 
-    ScopeGuard(const ScopeGuard& _sc) : committed(false), rollbackLambda(_sc.rollbackLambda)
+    ScopeGuard(const ScopeGuard& _sc) : rollbackLambda(_sc.rollbackLambda)
     {
         if (_sc.committed) { committed = true; }
         else { _sc.commit(); }
     }
 
-    ScopeGuard(ScopeGuard&& _sc) noexcept : committed(false), rollbackLambda(_sc.rollbackLambda)
+    ScopeGuard(ScopeGuard&& _sc) noexcept : rollbackLambda(_sc.rollbackLambda)
     {
         if (_sc.committed) { committed = true; }
         else { _sc.commit(); }
@@ -27,7 +27,7 @@ public:
     // WARNING: only safe if adquire lambda does not throw, otherwise release lambda is never invoked, because the scope
     // guard never finished initialistion..
     template<typename AdquireLambda>
-    ScopeGuard(const AdquireLambda& _al, const Lambda& _l) : committed(false), rollbackLambda(_l)
+    ScopeGuard(const AdquireLambda& _al, const Lambda& _l) : rollbackLambda(_l)
     {
         std::forward<AdquireLambda>(_al)();
     }
@@ -35,7 +35,7 @@ public:
     // WARNING: only safe if adquire lambda does not throw, otherwise release lambda is never invoked, because the scope
     // guard never finished initialistion..
     template<typename AdquireLambda, typename L>
-    ScopeGuard(AdquireLambda&& _al, L&& _l) : committed(false), rollbackLambda(std::forward<L>(_l))
+    ScopeGuard(AdquireLambda&& _al, L&& _l) : rollbackLambda(std::forward<L>(_l))
     {
         std::forward<AdquireLambda>(_al)();  // just in case the functor has &&-qualified operator()
     }

@@ -10,7 +10,7 @@ namespace moci
 class WindowResizeEvent : public Event
 {
 public:
-    virtual ~WindowResizeEvent() = default;
+    ~WindowResizeEvent() override = default;
     WindowResizeEvent(unsigned int width, unsigned int height) : m_Width(width), m_Height(height) { }
 
     [[nodiscard]] inline auto GetWidth() const -> unsigned int { return m_Width; }
@@ -32,8 +32,8 @@ private:
 class WindowCloseEvent : public Event
 {
 public:
-    virtual ~WindowCloseEvent() = default;
-    WindowCloseEvent()          = default;
+    ~WindowCloseEvent() override = default;
+    WindowCloseEvent()           = default;
 
     EVENT_CLASS_TYPE(WindowClose)
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
@@ -42,8 +42,8 @@ public:
 class AppTickEvent : public Event
 {
 public:
-    virtual ~AppTickEvent() = default;
-    AppTickEvent()          = default;
+    ~AppTickEvent() override = default;
+    AppTickEvent()           = default;
 
     EVENT_CLASS_TYPE(AppTick)
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
@@ -52,8 +52,8 @@ public:
 class AppUpdateEvent : public Event
 {
 public:
-    virtual ~AppUpdateEvent() = default;
-    AppUpdateEvent()          = default;
+    ~AppUpdateEvent() override = default;
+    AppUpdateEvent()           = default;
 
     EVENT_CLASS_TYPE(AppUpdate)
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
@@ -62,8 +62,8 @@ public:
 class AppRenderEvent : public Event
 {
 public:
-    virtual ~AppRenderEvent() = default;
-    AppRenderEvent()          = default;
+    ~AppRenderEvent() override = default;
+    AppRenderEvent()           = default;
 
     EVENT_CLASS_TYPE(AppRender)
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
