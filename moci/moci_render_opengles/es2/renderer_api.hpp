@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_math/moci_math.hpp"
+#include "moci/math/geometry/rectangle.hpp"
 #include "moci_render_base/moci_render_base.hpp"
 
 #include <glm/glm.hpp>

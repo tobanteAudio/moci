@@ -1,8 +1,8 @@
 #pragma once
 
+#include "moci/math/geometry/rectangle.hpp"
 #include "moci_events/moci_events.hpp"
 #include "moci_graphics_extra/moci_graphics_extra.hpp"
-#include "moci_math/moci_math.hpp"
 
 #include "moci/core/vector.hpp"
 #include <memory>

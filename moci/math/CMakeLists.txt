@@ -8,17 +8,17 @@ set(moci_math_sources
     geometry/point.hpp
 )
 
-add_library(moci_math_lib STATIC ${moci_math_sources})
-add_library(Moci::Math ALIAS moci_math_lib)
-set_target_properties(moci_math_lib PROPERTIES UNITY_BUILD ON)
-target_link_libraries(moci_math_lib
+add_library(moci_math STATIC ${moci_math_sources})
+add_library(Moci::Math ALIAS moci_math)
+set_target_properties(moci_math PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_math
     PUBLIC
         Moci::Core
         glm::glm
     PRIVATE
         Moci::CodeCoverage
 )
-target_include_directories(moci_math_lib PUBLIC ${CMAKE_SOURCE_DIR}/3rd_party/glm)
+target_include_directories(moci_math PUBLIC ${CMAKE_SOURCE_DIR}/3rd_party/glm)
 
 set (moci_math_test_src
     main_test.cpp

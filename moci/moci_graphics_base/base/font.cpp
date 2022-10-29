@@ -1,6 +1,6 @@
 #include "font.hpp"
 
-#include "moci_math/geometry/point.hpp"
+#include "moci/math/geometry/point.hpp"
 
 #include <utility>
 

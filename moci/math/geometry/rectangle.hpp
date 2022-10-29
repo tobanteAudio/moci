@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_math/geometry/point.hpp"
+#include "moci/math/geometry/point.hpp"
 
 namespace moci
 {

@@ -7,7 +7,8 @@ target_include_directories(moci_include_path INTERFACE ${PROJECT_SOURCE_DIR} ${C
 add_subdirectory(moci_external)
 
 add_subdirectory("core")
-add_subdirectory(moci_math)
+add_subdirectory("math")
+
 add_subdirectory(moci_network)
 add_subdirectory(moci_system)
 add_subdirectory(moci_events)

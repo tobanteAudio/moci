@@ -4,15 +4,14 @@
 #include "moci_render_base/moci_render_base.hpp"
 
 #include "moci/core/memory.hpp"
+#include "moci/core/vector.hpp"
+#include "moci/math/geometry/rectangle.hpp"
 #include "moci_graphics_base/moci_graphics_base.hpp"
-#include "moci_math/geometry/rectangle.hpp"
 
 #include <glm/glm.hpp>
 
 #include <cstddef>
 #include <cstdint>
-
-#include "moci/core/vector.hpp"
 #include <map>
 
 namespace moci

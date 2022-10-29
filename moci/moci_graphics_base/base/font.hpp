@@ -1,10 +1,9 @@
 #pragma once
 
-#include "moci_math/geometry/point.hpp"
+#include "moci/core/vector.hpp"
+#include "moci/math/geometry/point.hpp"
 
 #include <cstdint>
-
-#include "moci/core/vector.hpp"
 #include <map>
 #include <string>
 #include <string_view>
