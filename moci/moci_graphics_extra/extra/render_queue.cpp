@@ -64,7 +64,7 @@ auto BatchRender2D::StartFrame(float width, float height) -> void
     auto const proj = glm::ortho(0.0F, width, height, 0.0F, -1.0F, 1.0F);
     data_.shader->SetMat4("u_MVP", proj);
     auto samplers = std::array<int, 16> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-    data_.shader->SetInts("u_Textures", samplers.size(), samplers.data());
+    data_.shader->SetInts("u_Textures", (int)samplers.size(), samplers.data());
 
     ResetFrameStats();
     BeginBatch();

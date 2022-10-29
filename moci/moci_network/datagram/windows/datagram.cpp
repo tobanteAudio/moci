@@ -87,7 +87,6 @@ void DatagramSocket::Pimpl::Listen()
             int remoteAddrLen = sizeof(SOCKADDR_IN);
             std::memset(&remoteAddr, 0, sizeof(remoteAddr));
 
-            auto const maxMsgSize = 1024;
             buffer_.resize(1024);
 
             MOCI_CORE_INFO("Start udp listen");

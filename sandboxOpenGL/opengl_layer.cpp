@@ -13,13 +13,13 @@ void OpenGLLayer::OnAttach()
     auto samplers   = std::array {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     shader_         = moci::RenderFactory::MakeShader(path);
     shader_->Bind();
-    shader_->SetInts("u_Textures", samplers.size(), samplers.data());
+    shader_->SetInts("u_Textures", (int)samplers.size(), samplers.data());
 
     auto const verticesSize = static_cast<std::uint32_t>(assets::QuadVertices.size() * sizeof(float));
     auto layout             = moci::BufferLayout {
-        {moci::ShaderDataType::Float3, "position"},      //
-        {moci::ShaderDataType::Float4, "color"},         //
-        {moci::ShaderDataType::Float2, "textureCoord"},  //
+                    {moci::ShaderDataType::Float3, "position"},      //
+                    {moci::ShaderDataType::Float4, "color"},         //
+                    {moci::ShaderDataType::Float2, "textureCoord"},  //
     };
     vbo_.reset(moci::RenderFactory::MakeVertexBuffer(assets::QuadVertices.data(), verticesSize));
     vbo_->SetLayout(layout);
@@ -81,7 +81,7 @@ void OpenGLLayer::OnImGuiRender()
         framebufferNeedsResize_ = true;
     }
 
-    auto const textureID = reinterpret_cast<void*>(framebuffer_->GetColorAttachmentRendererID());
+    auto const textureID = reinterpret_cast<void*>((size_t)framebuffer_->GetColorAttachmentRendererID());
     ImGui::Image(textureID, {viewportSize_.x, viewportSize_.y}, ImVec2(0, 1), ImVec2(1, 0));
     ImGui::End();
     ImGui::PopStyleVar();

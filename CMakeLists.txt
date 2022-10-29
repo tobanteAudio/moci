@@ -15,6 +15,12 @@ option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"                
 option(MOCI_LINK_OPENGL_ES       "Link against OpenGL ES 2.0"                   OFF)
 
 
+find_program(CCACHE ccache)
+if(CCACHE)
+    set(CMAKE_C_COMPILER_LAUNCHER ${CCACHE})
+    set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE})
+endif()
+
 # Let's nicely support folders in IDE's
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 

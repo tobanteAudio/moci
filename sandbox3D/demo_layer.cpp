@@ -387,7 +387,7 @@ void DemoLayer::OnImGuiRender()
         framebuffer_->Resize(newWidth, newHeight);
     }
 
-    auto const textureID = reinterpret_cast<void*>(framebuffer_->GetColorAttachmentRendererID());
+    auto const textureID = reinterpret_cast<void*>((size_t)framebuffer_->GetColorAttachmentRendererID());
     ImGui::Image(textureID, {viewportRegion.x, viewportRegion.y}, ImVec2(0, 1), ImVec2(1, 0));
     ImGui::End();
     ImGui::PopStyleVar();

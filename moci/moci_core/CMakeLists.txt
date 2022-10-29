@@ -7,7 +7,6 @@ set(moci_core_sources
     benchmark/benchmark.hpp
     benchmark/profile.hpp
 
-    core/algorithm.hpp
     core/logging.hpp
     core/logging.cpp
     core/memory.hpp
@@ -39,7 +38,6 @@ target_link_libraries(moci_core_lib
 set (moci_core_test_src
     main_test.cpp
 
-    core/algorithm_test.cpp
     core/property_map_test.cpp
     core/scope_guard_test.cpp
     core/strings_test.cpp

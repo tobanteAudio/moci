@@ -40,7 +40,7 @@ public:
 
 private:
     std::atomic<bool> isRunning_ {false};
-    unsigned int socketDescriptor_ {};
+    unsigned long long socketDescriptor_ {};
     DatagramSocket::Buffer buffer_ {};
     std::thread listenerThread_;
     std::function<void(DatagramSocket::Buffer, size_t)> messageCallback_ = nullptr;

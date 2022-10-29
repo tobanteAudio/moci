@@ -21,6 +21,9 @@ class Moci(ConanFile):
             self.requires("glew/2.2.0")
             self.requires("glfw/3.3.8")
 
+        if self.settings.os == "Windows":
+            self.requires("sdl/2.24.0")
+
     def configure(self):
         self.options["freetype"].shared = False
 
@@ -95,4 +98,3 @@ class Moci(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
-

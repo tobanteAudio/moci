@@ -31,16 +31,3 @@ inline auto operator<<(std::ostream& out, MouseCode mouseCode) -> std::ostream&
     return out;
 }
 }  // namespace moci
-
-#define MOCI_MOUSE_BUTTON_0 ::moci::Mouse::Button0
-#define MOCI_MOUSE_BUTTON_1 ::moci::Mouse::Button1
-#define MOCI_MOUSE_BUTTON_2 ::moci::Mouse::Button2
-#define MOCI_MOUSE_BUTTON_3 ::moci::Mouse::Button3
-#define MOCI_MOUSE_BUTTON_4 ::moci::Mouse::Button4
-#define MOCI_MOUSE_BUTTON_5 ::moci::Mouse::Button5
-#define MOCI_MOUSE_BUTTON_6 ::moci::Mouse::Button6
-#define MOCI_MOUSE_BUTTON_7 ::moci::Mouse::Button7
-#define MOCI_MOUSE_BUTTON_LAST ::moci::Mouse::ButtonLast
-#define MOCI_MOUSE_BUTTON_LEFT ::moci::Mouse::ButtonLeft
-#define MOCI_MOUSE_BUTTON_RIGHT ::moci::Mouse::ButtonRight
-#define MOCI_MOUSE_BUTTON_MIDDLE ::moci::Mouse::ButtonMiddle
