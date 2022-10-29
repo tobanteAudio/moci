@@ -30,15 +30,15 @@ private:
 };
 
 template<typename Type>
-constexpr bool operator==(Point<Type> p1, Point<Type> p2)
+constexpr bool operator==(Point<Type> lhs, Point<Type> rhs)
 {
-    return (p1.GetX() == p2.GetX()) && (p1.GetY() == p2.GetY());
+    return (lhs.GetX() == rhs.GetX()) && (lhs.GetY() == rhs.GetY());
 }
 
 template<typename Type>
-constexpr bool operator!=(Point<Type> p1, Point<Type> p2)
+constexpr bool operator!=(Point<Type> lhs, Point<Type> rhs)
 {
-    return !(p1 == p2);
+    return !(lhs == rhs);
 }
 
 }  // namespace moci

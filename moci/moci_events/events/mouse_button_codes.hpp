@@ -25,10 +25,10 @@ enum class MouseCode : uint16_t
 
 using Mouse = MouseCode;
 
-inline std::ostream& operator<<(std::ostream& os, MouseCode mouseCode)
+inline std::ostream& operator<<(std::ostream& out, MouseCode mouseCode)
 {
-    os << static_cast<int32_t>(mouseCode);
-    return os;
+    out << static_cast<int32_t>(mouseCode);
+    return out;
 }
 }  // namespace moci
 

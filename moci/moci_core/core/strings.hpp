@@ -30,63 +30,65 @@ public:
     /**
      * @brief Remove all leading spaces on the given string in place.
      */
-    static inline auto LeftTrim(std::string& s) -> void
+    static inline auto LeftTrim(std::string& str) -> void
     {
-        s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) { return std::isspace(ch) == 0; }));
+        str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) { return std::isspace(ch) == 0; }));
     }
 
     /**
      * @brief Remove all leading spaces on the given string copied.
      */
-    static inline auto LeftTrimCopy(std::string s) -> std::string
+    static inline auto LeftTrimCopy(std::string str) -> std::string
     {
-        LeftTrim(s);
-        return s;
+        LeftTrim(str);
+        return str;
     }
 
     /**
      * @brief Remove all trailing spaces on the given string in place
      */
-    static inline auto RightTrim(std::string& s) -> void
+    static inline auto RightTrim(std::string& str) -> void
     {
-        s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) { return std::isspace(ch) == 0; }).base(), s.end());
+        str.erase(
+            std::find_if(str.rbegin(), str.rend(), [](int character) { return std::isspace(character) == 0; }).base(),
+            str.end());
     }
 
     /**
      * @brief Remove all trailing spaces on the given string copied.
      */
-    static inline auto RightTrimCopy(std::string s) -> std::string
+    static inline auto RightTrimCopy(std::string str) -> std::string
     {
-        RightTrim(s);
-        return s;
+        RightTrim(str);
+        return str;
     }
 
     /**
      * @brief Remove all leading & trailing spaces on the given string in place.
      */
-    static inline auto Trim(std::string& s) -> void
+    static inline auto Trim(std::string& str) -> void
     {
-        LeftTrim(s);
-        RightTrim(s);
+        LeftTrim(str);
+        RightTrim(str);
     }
 
     /**
      * @brief Remove all leading & trailing spaces on the given string copied.
      */
-    static inline auto TrimCopy(std::string s) -> std::string
+    static inline auto TrimCopy(std::string str) -> std::string
     {
-        Trim(s);
-        return s;
+        Trim(str);
+        return str;
     }
 
     /**
      * @brief Returns a vector of string splits. Split by the delimiter.
      */
-    static inline auto Split(std::string const& s, char delimiter) -> Vector<std::string>
+    static inline auto Split(std::string const& str, char delimiter) -> Vector<std::string>
     {
         Vector<std::string> tokens;
         std::string token;
-        std::istringstream tokenStream(s);
+        std::istringstream tokenStream(str);
         while (std::getline(tokenStream, token, delimiter)) { tokens.push_back(token); }
         return tokens;
     }

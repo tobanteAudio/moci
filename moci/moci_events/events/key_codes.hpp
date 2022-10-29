@@ -143,10 +143,10 @@ enum class KeyCode : uint16_t
 
 using Key = KeyCode;
 
-inline std::ostream& operator<<(std::ostream& os, KeyCode keyCode)
+inline std::ostream& operator<<(std::ostream& out, KeyCode keyCode)
 {
-    os << static_cast<int32_t>(keyCode);
-    return os;
+    out << static_cast<int32_t>(keyCode);
+    return out;
 }
 }  // namespace moci
 
