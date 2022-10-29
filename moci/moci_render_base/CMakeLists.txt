@@ -18,7 +18,7 @@ set(moci_render_base_sources
 
 add_library(moci_render_base_lib STATIC ${moci_render_base_sources})
 add_library(Moci::RenderApiBase ALIAS moci_render_base_lib)
-set_target_properties(moci_render_base_lib PROPERTIES UNITY_BUILD OFF)
+set_target_properties(moci_render_base_lib PROPERTIES UNITY_BUILD ON)
 
 target_link_libraries(moci_render_base_lib
     PUBLIC
@@ -40,7 +40,7 @@ endif()
 
 set (moci_render_base_test_src main_test.cpp render/buffer_test.cpp)
 add_executable(moci_render_base_tests ${moci_render_base_test_src})
-set_target_properties(moci_render_base_tests PROPERTIES UNITY_BUILD OFF)
+set_target_properties(moci_render_base_tests PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_render_base_tests
     PRIVATE
         Moci::RenderApiBase

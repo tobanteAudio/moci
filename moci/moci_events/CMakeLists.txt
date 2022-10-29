@@ -14,7 +14,7 @@ set(moci_events_sources
 
 add_library(moci_events_lib STATIC ${moci_events_sources})
 add_library(Moci::Events ALIAS moci_events_lib)
-set_target_properties(moci_events_lib PROPERTIES UNITY_BUILD OFF)
+set_target_properties(moci_events_lib PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_events_lib
     PUBLIC
         Moci::Core
@@ -31,7 +31,7 @@ set (moci_events_test_src
     events/types/mouse_event_test.cpp
 )
 add_executable(moci_events_tests ${moci_events_test_src})
-set_target_properties(moci_events_tests PROPERTIES UNITY_BUILD OFF)
+set_target_properties(moci_events_tests PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_events_tests
     PRIVATE
         Moci::Events

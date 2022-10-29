@@ -10,7 +10,7 @@ set(moci_math_sources
 
 add_library(moci_math_lib STATIC ${moci_math_sources})
 add_library(Moci::Math ALIAS moci_math_lib)
-set_target_properties(moci_math_lib PROPERTIES UNITY_BUILD OFF)
+set_target_properties(moci_math_lib PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_math_lib
     PUBLIC
         Moci::Core
@@ -28,7 +28,7 @@ set (moci_math_test_src
     geometry/point_test.cpp
 )
 add_executable(moci_math_tests ${moci_math_test_src})
-set_target_properties(moci_math_tests PROPERTIES UNITY_BUILD OFF)
+set_target_properties(moci_math_tests PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_math_tests
     PRIVATE
         Moci::Math
