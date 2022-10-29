@@ -1,0 +1,42 @@
+name: Windows
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  cl:
+    name: CL
+    runs-on: windows-2022
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install ninja
+        run: choco install ninja
+
+      - name: Install conan
+        run: |
+          pip install --upgrade conan
+          conan config init
+
+      - name: Set up Visual Studio shell
+        uses: egor-tensin/vs-shell@v2
+        with:
+          arch: x64
+
+      - name: Configure - Release
+        run: >
+          cmake -S.
+          -B build
+          -G "Visual Studio 17 2022"
+          -D CMAKE_BUILD_TYPE=Release
+          -D MOCI_API_OPENGL_MODERN=ON
+          -D MOCI_API_OPENGL_LEGACY=OFF
+
+      - name: Build - Release
+        run: cmake --build build --config Release
