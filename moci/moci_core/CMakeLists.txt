@@ -23,7 +23,7 @@ set(moci_core_sources
 
 add_library(moci_core_lib STATIC ${moci_core_sources})
 add_library(Moci::Core ALIAS moci_core_lib)
-set_target_properties(moci_core_lib PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_core_lib PROPERTIES UNITY_BUILD OFF)
 target_compile_definitions(moci_core_lib PUBLIC NDEBUG=1)
 target_link_libraries(moci_core_lib
     PUBLIC
@@ -45,7 +45,7 @@ set (moci_core_test_src
     core/strings_test.cpp
 )
 add_executable(moci_core_tests ${moci_core_test_src})
-set_target_properties(moci_core_tests PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_core_tests PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_core_tests
     PRIVATE
         Moci::Core

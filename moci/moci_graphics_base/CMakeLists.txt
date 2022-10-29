@@ -18,7 +18,7 @@ set(moci_graphics_base_sources
 
 add_library(moci_graphics_base_lib STATIC ${moci_graphics_base_sources})
 add_library(Moci::GraphicsBase ALIAS moci_graphics_base_lib)
-# set_target_properties(moci_graphics_base_lib PROPERTIES UNITY_BUILD ON)
+# set_target_properties(moci_graphics_base_lib PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_graphics_base_lib
     PUBLIC
         Moci::Math
@@ -42,7 +42,7 @@ set (moci_graphics_base_test_src
     base/obj/file_test.cpp
 )
 add_executable(moci_graphics_base_tests ${moci_graphics_base_test_src})
-set_target_properties(moci_graphics_base_tests PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_graphics_base_tests PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_graphics_base_tests
     PRIVATE
         Moci::GraphicsBase

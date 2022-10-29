@@ -11,7 +11,7 @@ set(moci_render_opengl_common_sources
 
 add_library(moci_render_opengl_common_lib STATIC ${moci_render_opengl_common_sources})
 add_library(Moci::RenderOpenGLCommon ALIAS moci_render_opengl_common_lib)
-set_target_properties(moci_render_opengl_common_lib PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_render_opengl_common_lib PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_render_opengl_common_lib
     PUBLIC
         Moci::RenderApiBase
@@ -25,7 +25,7 @@ set (moci_render_opengl_common_test_src
     util/shader_parser_test.cpp
 )
 add_executable(moci_render_opengl_common_tests ${moci_render_opengl_common_test_src})
-set_target_properties(moci_render_opengl_common_tests PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_render_opengl_common_tests PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_render_opengl_common_tests
     PRIVATE
         Moci::RenderOpenGLCommon
