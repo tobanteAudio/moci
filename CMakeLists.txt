@@ -54,7 +54,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
         endif()
       endif()
     endif(MOCI_BUILD_NATIVE)
-    
+
     if(MOCI_BUILD_FRAMEPOINTER)
       CHECK_CXX_COMPILER_FLAG("-fno-omit-frame-pointer" COMPILER_NO_OMIT_FRAMEPOINTER_SUPPORTED)
       if (COMPILER_NO_OMIT_FRAMEPOINTER_SUPPORTED)
@@ -66,7 +66,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
       CHECK_CXX_COMPILER_FLAG("-ffast-math" COMPILER_OPT_FAST_MATH_SUPPORTED)
       if (COMPILER_OPT_FAST_MATH_SUPPORTED)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffast-math")
-      endif() 
+      endif()
     endif(MOCI_BUILD_FAST_MATH)
 
     if(MOCI_BUILD_LTO)
@@ -106,10 +106,9 @@ endif()
 
 # Testing
 if(MOCI_BUILD_TESTS)
-  list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/Catch2/contrib")
   enable_testing()
-  add_subdirectory(3rd_party/Catch2 EXCLUDE_FROM_ALL)
   include(CTest)
+  find_package(Catch2 REQUIRED)
   include(Catch)
 endif(MOCI_BUILD_TESTS)
 

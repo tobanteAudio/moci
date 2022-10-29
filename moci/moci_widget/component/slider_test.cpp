@@ -2,7 +2,8 @@
  * @file slider_test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
-#include "catch2/catch.hpp"
+#include <catch2/catch_all.hpp>
+#include <catch2/catch_approx.hpp>
 
 #include "moci_widget/component/slider.hpp"
 #include "moci_widget/style/style.hpp"
@@ -44,7 +45,8 @@ TEST_CASE("moci_widget: SliderCallbackValueChanged", "[ui]")
 {
     auto wasCalled         = false;
     auto callbacks         = moci::SliderCallbacks {};
-    callbacks.valueChanged = [&](auto val) {
+    callbacks.valueChanged = [&](auto val)
+    {
         REQUIRE(val == 143.0f);
         wasCalled = true;
     };
@@ -75,10 +77,10 @@ TEST_CASE("moci_widget: SliderMouseScrolled", "[ui]")
     slider.SetValue(0.5f);
     REQUIRE(slider.GetValue() == 0.5f);
     slider.MouseScrolled(moci::MouseScrolledEvent {0.0f, 1.0f});
-    REQUIRE(slider.GetValue() == Approx(0.55f));
+    REQUIRE(slider.GetValue() == Catch::Approx(0.55f));
 
     slider.SetValue(1.0f);
     REQUIRE(slider.GetValue() == 1.0f);
     slider.MouseScrolled(moci::MouseScrolledEvent {0.0f, -1.0f});
-    REQUIRE(slider.GetValue() == Approx(0.95f));
+    REQUIRE(slider.GetValue() == Catch::Approx(0.95f));
 }

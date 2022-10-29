@@ -2,7 +2,7 @@
  * @file buffer_test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
-#include "catch2/catch.hpp"
+#include <catch2/catch_all.hpp>
 
 #include "moci_render_base/moci_render_base.hpp"
 

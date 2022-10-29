@@ -2,7 +2,7 @@
  * @file button_test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
-#include "catch2/catch.hpp"
+#include <catch2/catch_all.hpp>
 
 #include "moci_widget/component/button.hpp"
 #include "moci_widget/style/style.hpp"
@@ -78,7 +78,8 @@ TEST_CASE("moci_widget: ButtonCallbackStateChanged", "[ui]")
 {
     auto wasCalled               = false;
     auto specs                   = moci::ButtonSpecs {};
-    specs.callbacks.stateChanged = [&](auto state) {
+    specs.callbacks.stateChanged = [&](auto state)
+    {
         REQUIRE(state == moci::ButtonState::Down);
         wasCalled = true;
     };

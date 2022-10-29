@@ -2,7 +2,8 @@
  * @file line_test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
-#include "catch2/catch.hpp"
+#include <catch2/catch_approx.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 
 #include "moci_math/geometry/line.hpp"
 
@@ -77,10 +78,10 @@ TEST_CASE("moci_math/geometry: LineGetAngleRadians", "[geometry]")
     REQUIRE(l1.GetAngleRadians() == 0);
 
     constexpr auto l2 = moci::Line<float> {{0.0f, 0.0f}, {1.0f, 1.0f}};
-    REQUIRE(l2.GetAngleRadians() == Approx(0.7854f));
+    REQUIRE(l2.GetAngleRadians() == Catch::Approx(0.7854f));
 
     constexpr auto l3 = moci::Line<float> {{0.0f, 0.0f}, {1.0f, -1.0f}};
-    REQUIRE(l3.GetAngleRadians() == Approx(-0.7854f));
+    REQUIRE(l3.GetAngleRadians() == Catch::Approx(-0.7854f));
 }
 
 TEST_CASE("moci_math/geometry: LineGetAngleDegrees", "[geometry]")
@@ -89,10 +90,10 @@ TEST_CASE("moci_math/geometry: LineGetAngleDegrees", "[geometry]")
     REQUIRE(l1.GetAngleDegrees() == 0);
 
     constexpr auto l2 = moci::Line<float> {{0.0f, 0.0f}, {1.0f, 1.0f}};
-    REQUIRE(l2.GetAngleDegrees() == Approx(45.0f));
+    REQUIRE(l2.GetAngleDegrees() == Catch::Approx(45.0f));
 
     constexpr auto l3 = moci::Line<float> {{0.0f, 0.0f}, {1.0f, -1.0f}};
-    REQUIRE(l3.GetAngleDegrees() == Approx(-45.0f));
+    REQUIRE(l3.GetAngleDegrees() == Catch::Approx(-45.0f));
 }
 
 TEST_CASE("moci_math/geometry: LineGetLength", "[geometry]")
@@ -101,13 +102,13 @@ TEST_CASE("moci_math/geometry: LineGetLength", "[geometry]")
     REQUIRE(l1.GetLength() == 0);
 
     constexpr auto l2 = moci::Line<float> {{0.0f, 0.0f}, {1.0f, 0.0f}};
-    REQUIRE(l2.GetLength() == Approx(1.0f));
+    REQUIRE(l2.GetLength() == Catch::Approx(1.0f));
 
     constexpr auto l3 = moci::Line<float> {{0.0f, 0.0f}, {0.0f, -1.0f}};
-    REQUIRE(l3.GetLength() == Approx(1.0f));
+    REQUIRE(l3.GetLength() == Catch::Approx(1.0f));
 
     constexpr auto l4 = moci::Line<float> {{0.0f, 0.0f}, {10.0f, 0.0f}};
-    REQUIRE(l4.GetLength() == Approx(10.0f));
+    REQUIRE(l4.GetLength() == Catch::Approx(10.0f));
 }
 
 TEST_CASE("moci_math/geometry: LineOperatorEqual", "[geometry]")

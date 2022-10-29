@@ -2,7 +2,7 @@
  * @file layer_stack_test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
-#include "catch2/catch.hpp"
+#include <catch2/catch_all.hpp>
 
 #include "moci_render_api/moci_render_api.hpp"
 

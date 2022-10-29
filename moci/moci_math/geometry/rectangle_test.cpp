@@ -2,7 +2,8 @@
  * @file rectangle_test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
-#include "catch2/catch.hpp"
+#include <catch2/catch_approx.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 
 #include "moci_math/geometry/rectangle.hpp"
 
@@ -116,7 +117,7 @@ TEST_CASE("moci_math/geometry: RectangleGetAspectRatio", "[geometry]")
     REQUIRE(square.GetAspectRatio() == 1);
 
     auto display = moci::Rectangle<float> {0.0f, 0.0f, 1920.0f, 1080.0f};
-    REQUIRE(display.GetAspectRatio() == Approx(16.0f / 9.0f));
+    REQUIRE(display.GetAspectRatio() == Catch::Approx(16.0f / 9.0f));
 }
 
 TEST_CASE("moci_math/geometry: RectangleRemoveFromTop", "[geometry]")
