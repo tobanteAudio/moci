@@ -8,8 +8,8 @@ option(MOCI_BUILD_TESTS          "Build the unit tests with Catch2"             
 option(MOCI_BUILD_COVERAGE       "Build with coverage enabled"                  OFF)
 option(MOCI_BUILD_SANDBOX        "Build sandbox applications"                   ON)
 option(MOCI_BUILD_TOOLS          "Build tools"                                  OFF)
-option(MOCI_BUILD_PLAYGROUND     "Build playground examples"                    OFF)
-option(MOCI_API_VULKAN           "Use Vulkan API"                               ON)
+option(MOCI_BUILD_PLAYGROUND     "Build playground examples"                    ON)
+option(MOCI_API_VULKAN           "Use Vulkan API"                               OFF)
 option(MOCI_API_OPENGL_LEGACY    "Use OpenGL Legacy implementation"             ON)
 option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"                OFF)
 option(MOCI_LINK_OPENGL_ES       "Link against OpenGL ES 2.0"                   OFF)
@@ -85,6 +85,10 @@ find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(stb REQUIRED)
+
+if(WIN32)
+  find_package(SDL2 REQUIRED)
+endif()
 
 # Only include glew on desktop
 if (NOT ${MOCI_LINK_OPENGL_ES})

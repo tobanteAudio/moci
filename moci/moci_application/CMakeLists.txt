@@ -22,6 +22,7 @@ set_target_properties(moci_application_lib PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_application_lib
     PUBLIC
         Moci::RenderApi
+        SDL2::SDL2
     PRIVATE
         Moci::CodeCoverage
 )

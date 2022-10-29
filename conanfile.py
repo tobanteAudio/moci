@@ -13,6 +13,7 @@ class Moci(ConanFile):
         self.requires("catch2/3.1.0")
         self.requires("freetype/2.12.1")
         self.requires("glm/0.9.9.8")
+        self.requires("imgui/cci.20220621+1.88.docking")
         self.requires("spdlog/1.10.0")
         self.requires("stb/cci.20210910")
         self.requires("zlib/1.2.13", override=True)
@@ -26,6 +27,7 @@ class Moci(ConanFile):
 
     def configure(self):
         self.options["freetype"].shared = False
+        self.options["imgui"].shared = False
 
         self.options["assimp"].with_fbx = True
         self.options["assimp"].with_obj = True
@@ -93,6 +95,21 @@ class Moci(ConanFile):
         if self.settings.os != "Emscripten":
             self.options["glfw"].shared = False
             self.options["glew"].shared = False
+
+    def imports(self):
+        src = "res/bindings"
+        dest = "bindings"
+
+        self.copy("imgui_impl_opengl3.h", dst=dest, src=src)
+        self.copy("imgui_impl_opengl3.cpp", dst=dest, src=src)
+        self.copy("imgui_impl_opengl3_loader.h", dst=dest, src=src)
+
+        if self.settings.os == "Emscripten":
+            self.copy("imgui_impl_sdl.h", dst=dest, src=src)
+            self.copy("imgui_impl_sdl.cpp", dst=dest, src=src)
+        else:
+            self.copy("imgui_impl_glfw.h", dst=dest, src=src)
+            self.copy("imgui_impl_glfw.cpp", dst=dest, src=src)
 
     def build(self):
         cmake = CMake(self)
