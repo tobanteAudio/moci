@@ -16,9 +16,10 @@ set(moci_network_sources
 
 add_library(moci_network_lib STATIC ${moci_network_sources})
 add_library(Moci::Network ALIAS moci_network_lib)
-target_link_libraries(moci_network_lib 
-    PUBLIC 
-        Moci::Core 
+set_target_properties(moci_network_lib PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_network_lib
+    PUBLIC
+        Moci::Core
         Moci::Threads
     PRIVATE
         Moci::CodeCoverage
@@ -26,9 +27,10 @@ target_link_libraries(moci_network_lib
 
 set (moci_network_test_src main_test.cpp datagram/datagram_test.cpp)
 add_executable(moci_network_tests ${moci_network_test_src})
-target_link_libraries(moci_network_tests 
-    PRIVATE 
-        Moci::Network 
+set_target_properties(moci_network_tests PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_network_tests
+    PRIVATE
+        Moci::Network
         Moci::CodeCoverage
         Catch2::Catch2
 )

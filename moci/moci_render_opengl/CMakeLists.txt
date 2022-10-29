@@ -25,6 +25,7 @@ set(moci_render_opengl_sources
 
 add_library(moci_render_opengl_lib STATIC ${moci_render_opengl_sources})
 add_library(Moci::RenderOpenGL ALIAS moci_render_opengl_lib)
+set_target_properties(moci_render_opengl_lib PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_render_opengl_lib PUBLIC Moci::RenderOpenGLCommon)
 
 if (NOT ${MOCI_LINK_OPENGL_ES})

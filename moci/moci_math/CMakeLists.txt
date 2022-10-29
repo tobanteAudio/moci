@@ -10,9 +10,10 @@ set(moci_math_sources
 
 add_library(moci_math_lib STATIC ${moci_math_sources})
 add_library(Moci::Math ALIAS moci_math_lib)
-target_link_libraries(moci_math_lib 
-    PUBLIC 
-        Moci::Core 
+set_target_properties(moci_math_lib PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_math_lib
+    PUBLIC
+        Moci::Core
         glm::glm
     PRIVATE
         Moci::CodeCoverage
@@ -21,15 +22,16 @@ target_include_directories(moci_math_lib PUBLIC ${CMAKE_SOURCE_DIR}/3rd_party/gl
 
 set (moci_math_test_src
     main_test.cpp
-    
+
     geometry/line_test.cpp
     geometry/rectangle_test.cpp
     geometry/point_test.cpp
 )
 add_executable(moci_math_tests ${moci_math_test_src})
-target_link_libraries(moci_math_tests 
-    PRIVATE 
-        Moci::Math 
+set_target_properties(moci_math_tests PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_math_tests
+    PRIVATE
+        Moci::Math
         Moci::CodeCoverage
         Catch2::Catch2
 )

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "moci_render_base/moci_render_base.hpp"
 
 namespace moci

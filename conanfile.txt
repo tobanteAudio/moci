@@ -12,6 +12,7 @@ stb/cci.20210910
 
 [generators]
 cmake_find_package
+markdown
 
 [options]
 assimp:with_fbx=True
@@ -79,10 +80,6 @@ assimp:with_x3d_exporter=False
 assimp:with_xgl=False
 boost:header_only=True
 freetype:shared=False
-freetype:with_png=False
-freetype:with_zlib=False
-freetype:with_bzip2=False
-freetype:with_brotli=False
 glew:shared=False
 
 [imports]

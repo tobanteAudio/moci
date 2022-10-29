@@ -1,18 +1,8 @@
-cmake_minimum_required(VERSION 3.17)
-cmake_policy(VERSION 3.17)
-
+cmake_minimum_required(VERSION 3.21)
 project(MociLibrary LANGUAGES CXX)
 
-# LTO
-cmake_policy(SET CMP0069 NEW)
-set(CMAKE_POLICY_DEFAULT_CMP0069 NEW)
-
-# OpenGL
-cmake_policy(SET CMP0072 NEW)
-set(CMAKE_POLICY_DEFAULT_CMP0072 NEW)
-
-option(MOCI_BUILD_NATIVE         "Build optimized for native platform"          ON)
-option(MOCI_BUILD_LTO            "Build with link time optimization"            ON)
+option(MOCI_BUILD_NATIVE         "Build optimized for native platform"          OFF)
+option(MOCI_BUILD_LTO            "Build with link time optimization"            OFF)
 option(MOCI_BUILD_FAST_MATH      "Build with fast math optimizations"           OFF)
 option(MOCI_BUILD_FRAMEPOINTER   "Build with frame pointer. For profiles"       OFF)
 option(MOCI_BUILD_TESTS          "Build the unit tests with Catch2"             ON)

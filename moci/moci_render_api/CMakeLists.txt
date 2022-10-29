@@ -22,11 +22,12 @@ set(moci_render_api_sources
 
 add_library(moci_render_api_lib STATIC ${moci_render_api_sources})
 add_library(Moci::RenderApi ALIAS moci_render_api_lib)
-target_link_libraries(moci_render_api_lib 
-    PUBLIC 
-        Moci::RenderOpenGL 
-        Moci::RenderOpenGLES 
-        Moci::Events 
+# set_target_properties(moci_render_api_lib PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_render_api_lib
+    PUBLIC
+        Moci::RenderOpenGL
+        Moci::RenderOpenGLES
+        Moci::Events
         Moci::ImGui
     PRIVATE
         Moci::CodeCoverage
@@ -34,9 +35,10 @@ target_link_libraries(moci_render_api_lib
 
 set (moci_render_api_test_src main_test.cpp layer/layer_stack_test.cpp)
 add_executable(moci_render_api_tests ${moci_render_api_test_src})
-target_link_libraries(moci_render_api_tests 
-    PRIVATE 
-        Moci::RenderApi 
+set_target_properties(moci_render_api_tests PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_render_api_tests
+    PRIVATE
+        Moci::RenderApi
         Moci::CodeCoverage
         Catch2::Catch2
 )

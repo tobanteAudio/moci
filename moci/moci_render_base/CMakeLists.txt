@@ -3,7 +3,7 @@ project(moci_render_base)
 set(moci_render_base_sources
     moci_render_base.hpp
     moci_render_base.cpp
-    
+
     render/api.hpp
     render/buffer.hpp
     render/buffer.cpp
@@ -18,10 +18,11 @@ set(moci_render_base_sources
 
 add_library(moci_render_base_lib STATIC ${moci_render_base_sources})
 add_library(Moci::RenderApiBase ALIAS moci_render_base_lib)
+set_target_properties(moci_render_base_lib PROPERTIES UNITY_BUILD ON)
 
-target_link_libraries(moci_render_base_lib 
-    PUBLIC 
-        Moci::GraphicsBase 
+target_link_libraries(moci_render_base_lib
+    PUBLIC
+        Moci::GraphicsBase
         glfw
     PRIVATE
         Moci::CodeCoverage
@@ -39,9 +40,10 @@ endif()
 
 set (moci_render_base_test_src main_test.cpp render/buffer_test.cpp)
 add_executable(moci_render_base_tests ${moci_render_base_test_src})
-target_link_libraries(moci_render_base_tests 
-    PRIVATE 
-        Moci::RenderApiBase 
+set_target_properties(moci_render_base_tests PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_render_base_tests
+    PRIVATE
+        Moci::RenderApiBase
         Moci::CodeCoverage
         Catch2::Catch2
 )

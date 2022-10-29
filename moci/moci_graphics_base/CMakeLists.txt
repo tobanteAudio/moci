@@ -18,9 +18,10 @@ set(moci_graphics_base_sources
 
 add_library(moci_graphics_base_lib STATIC ${moci_graphics_base_sources})
 add_library(Moci::GraphicsBase ALIAS moci_graphics_base_lib)
-target_link_libraries(moci_graphics_base_lib 
-    PUBLIC 
-        Moci::Math 
+# set_target_properties(moci_graphics_base_lib PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_graphics_base_lib
+    PUBLIC
+        Moci::Math
         Freetype::Freetype
         Moci::StbImage
         Moci::StbImageWrite
@@ -41,9 +42,10 @@ set (moci_graphics_base_test_src
     base/obj/file_test.cpp
 )
 add_executable(moci_graphics_base_tests ${moci_graphics_base_test_src})
-target_link_libraries(moci_graphics_base_tests 
-    PRIVATE 
-        Moci::GraphicsBase 
+set_target_properties(moci_graphics_base_tests PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_graphics_base_tests
+    PRIVATE
+        Moci::GraphicsBase
         Moci::CodeCoverage
         Catch2::Catch2
 )
@@ -53,9 +55,9 @@ catch_discover_tests(moci_graphics_base_tests)
 # COPY TESTFILES
 foreach(_target OpenSans-Bold.ttf cube.obj teapot.obj colors.png)
 execute_process(
-    COMMAND 
-        ${CMAKE_COMMAND} -E 
-        copy_if_different 
+    COMMAND
+        ${CMAKE_COMMAND} -E
+        copy_if_different
         ${CMAKE_CURRENT_SOURCE_DIR}/test_data/${_target}
         ${CMAKE_CURRENT_BINARY_DIR}/moci_test_data/${_target}
 )

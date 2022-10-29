@@ -6,9 +6,9 @@ set(moci_widget_sources
     component/component.hpp
     component/component.cpp
     component/label.hpp
-    component/label.cpp   
+    component/label.cpp
     component/slider.hpp
-    component/slider.cpp   
+    component/slider.cpp
 
     layer/component_layer.hpp
     layer/component_layer.cpp
@@ -19,24 +19,26 @@ set(moci_widget_sources
 
 add_library(moci_widget_lib STATIC ${moci_widget_sources})
 add_library(Moci::Widget ALIAS moci_widget_lib)
-target_link_libraries(moci_widget_lib 
-    PUBLIC 
+set_target_properties(moci_widget_lib PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_widget_lib
+    PUBLIC
         Moci::GraphicsExtra
     PRIVATE
         Moci::CodeCoverage
 )
 
-set (moci_widget_test_src 
-    main_test.cpp 
+set (moci_widget_test_src
+    main_test.cpp
     component/button_test.cpp
     component/component_test.cpp
-    component/label_test.cpp 
+    component/label_test.cpp
     component/slider_test.cpp
 )
 add_executable(moci_widget_tests ${moci_widget_test_src})
-target_link_libraries(moci_widget_tests 
-    PRIVATE 
-        Moci::Widget 
+set_target_properties(moci_widget_tests PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_widget_tests
+    PRIVATE
+        Moci::Widget
         Moci::CodeCoverage
         Catch2::Catch2
 )
