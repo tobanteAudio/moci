@@ -9,40 +9,40 @@
 TEST_CASE("graphics: ImageDefaultConstructor", "[graphics]")
 {
     moci::Image img {};
-    REQUIRE(img.GetWidth() == 0);
-    REQUIRE(img.GetHeight() == 0);
-    REQUIRE(img.Empty() == true);
-    REQUIRE(img.Data().empty());
+    REQUIRE(img.getWidth() == 0);
+    REQUIRE(img.getHeight() == 0);
+    REQUIRE(img.empty() == true);
+    REQUIRE(img.data().empty());
 }
 
 TEST_CASE("graphics: ImagePathConstructor", "[graphics]")
 {
     moci::Image img {"moci_test_data/colors.png"};
-    REQUIRE(img.GetWidth() == 256);
-    REQUIRE(img.GetHeight() == 256);
-    REQUIRE(img.GetNumChannels() == 3);
-    REQUIRE(img.Empty() == false);
-    REQUIRE(img.Data().size() == 196608);
+    REQUIRE(img.getWidth() == 256);
+    REQUIRE(img.getHeight() == 256);
+    REQUIRE(img.getNumChannels() == 3);
+    REQUIRE(img.empty() == false);
+    REQUIRE(img.data().size() == 196608);
 }
 
 TEST_CASE("graphics: ImageLoadFromFileSuccess", "[graphics]")
 {
     moci::Image img {};
-    REQUIRE(img.LoadFromFile("moci_test_data/colors.png") == true);
-    REQUIRE(img.GetWidth() == 256);
-    REQUIRE(img.GetHeight() == 256);
-    REQUIRE(img.GetNumChannels() == 3);
-    REQUIRE(img.Empty() == false);
-    REQUIRE(img.Data().size() == 196608);
+    REQUIRE(img.loadFromFile("moci_test_data/colors.png") == true);
+    REQUIRE(img.getWidth() == 256);
+    REQUIRE(img.getHeight() == 256);
+    REQUIRE(img.getNumChannels() == 3);
+    REQUIRE(img.empty() == false);
+    REQUIRE(img.data().size() == 196608);
 }
 
 TEST_CASE("graphics: ImageLoadFromFileFail", "[graphics]")
 {
     moci::Image img {};
-    REQUIRE(img.LoadFromFile("noexist.png") == false);
-    REQUIRE(img.GetWidth() == 0);
-    REQUIRE(img.GetHeight() == 0);
-    REQUIRE(img.GetNumChannels() == 0);
-    REQUIRE(img.Empty() == true);
-    REQUIRE(img.Data().empty());
+    REQUIRE(img.loadFromFile("noexist.png") == false);
+    REQUIRE(img.getWidth() == 0);
+    REQUIRE(img.getHeight() == 0);
+    REQUIRE(img.getNumChannels() == 0);
+    REQUIRE(img.empty() == true);
+    REQUIRE(img.data().empty());
 }

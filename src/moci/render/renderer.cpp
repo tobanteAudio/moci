@@ -9,15 +9,15 @@ namespace moci
 
 // Scope<Renderer::SceneData> Renderer::s_SceneData = CreateScope<Renderer::SceneData>();
 
-void Renderer::Init()
+void Renderer::init()
 {
-    RenderCommand::Init();
+    RenderCommand::init();
     // Renderer2D::Init();
 }
 
-void Renderer::OnWindowResize(uint32_t width, uint32_t height)
+void Renderer::onWindowResize(uint32_t width, uint32_t height)
 {
-    RenderCommand::SetViewport(Rectangle<uint32_t> {0, 0, width, height});
+    RenderCommand::setViewport(Rectangle<uint32_t> {0, 0, width, height});
 }
 
 // void Renderer::BeginScene(OrthographicCamera& camera)

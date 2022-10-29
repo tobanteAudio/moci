@@ -34,26 +34,26 @@ public:
     explicit GlfwWindow(WindowSpecs props);
     ~GlfwWindow() override;
 
-    void OnUpdate() override;
+    void onUpdate() override;
 
-    [[nodiscard]] inline auto GetWidth() const -> unsigned int override { return m_Data.Width; }
-    [[nodiscard]] inline auto GetHeight() const -> unsigned int override { return m_Data.Height; }
+    [[nodiscard]] inline auto getWidth() const -> unsigned int override { return m_Data.Width; }
+    [[nodiscard]] inline auto getHeight() const -> unsigned int override { return m_Data.Height; }
 
     // Window attributes
-    inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
-    void SetVSync(bool enabled) override;
-    [[nodiscard]] auto IsVSync() const -> bool override;
+    inline void setEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
+    void setVSync(bool enabled) override;
+    [[nodiscard]] auto isVSync() const -> bool override;
 
-    void SetFullscreen(bool enabled) override;
-    [[nodiscard]] auto IsFullscreen() const -> bool override;
+    void setFullscreen(bool enabled) override;
+    [[nodiscard]] auto isFullscreen() const -> bool override;
 
-    [[nodiscard]] auto GetFrameCount() const noexcept -> std::uint32_t override { return frameCounter_; }
+    [[nodiscard]] auto getFrameCount() const noexcept -> std::uint32_t override { return frameCounter_; }
 
-    [[nodiscard]] inline auto GetNativeWindow() const -> void* override { return m_Window; }
+    [[nodiscard]] inline auto getNativeWindow() const -> void* override { return m_Window; }
 
 private:
-    virtual void Init(WindowSpecs props);
-    virtual void Shutdown();
+    virtual void init(WindowSpecs props);
+    virtual void shutdown();
 
     GLFWwindow* m_Window {};
     Scope<GraphicsContext> m_Context;

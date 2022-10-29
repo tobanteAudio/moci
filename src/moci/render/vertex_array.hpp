@@ -11,14 +11,14 @@ class VertexArray
 public:
     virtual ~VertexArray() = default;
 
-    virtual void Bind() const   = 0;
-    virtual void Unbind() const = 0;
+    virtual void bind() const   = 0;
+    virtual void unbind() const = 0;
 
-    virtual void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) = 0;
-    virtual void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)    = 0;
+    virtual void addVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) = 0;
+    virtual void setIndexBuffer(const Ref<IndexBuffer>& indexBuffer)    = 0;
 
-    [[nodiscard]] virtual auto GetVertexBuffer() const -> const Ref<VertexBuffer>& = 0;
-    [[nodiscard]] virtual auto GetIndexBuffer() const -> const Ref<IndexBuffer>&   = 0;
+    [[nodiscard]] virtual auto getVertexBuffer() const -> const Ref<VertexBuffer>& = 0;
+    [[nodiscard]] virtual auto getIndexBuffer() const -> const Ref<IndexBuffer>&   = 0;
 };
 
 }  // namespace moci

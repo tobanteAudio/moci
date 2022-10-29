@@ -9,7 +9,7 @@ namespace moci
 {
 namespace
 {
-auto ShaderTypeFromString(std::string_view type) -> ShaderType
+auto shaderTypeFromString(std::string_view type) -> ShaderType
 {
     if (type == "vertex") { return ShaderType::Vertex; }
     if (type == "fragment" || type == "pixel") { return ShaderType::Fragment; }
@@ -19,7 +19,7 @@ auto ShaderTypeFromString(std::string_view type) -> ShaderType
 }
 }  // namespace
 
-auto ShaderParser::SplitSource(std::string const& sources) -> ShaderProgramSource
+auto ShaderParser::splitSource(std::string const& sources) -> ShaderProgramSource
 {
     constexpr char const* typeToken = "#type";
     auto const typeTokenLength      = strlen(typeToken);
@@ -37,7 +37,7 @@ auto ShaderParser::SplitSource(std::string const& sources) -> ShaderProgramSourc
         // Start of shader type name (after "#type " keyword)
         auto const begin = pos + typeTokenLength + 1;
         std::string type = sources.substr(begin, eol - begin);
-        MOCI_CORE_ASSERT(ShaderTypeFromString(type) != ShaderType::Unknown, "Invalid shader type specified");
+        MOCI_CORE_ASSERT(shaderTypeFromString(type) != ShaderType::Unknown, "Invalid shader type specified");
 
         // Start of shader code after shader type declaration line
         auto nextLinePos = sources.find_first_not_of("\r\n", eol);
@@ -48,7 +48,7 @@ auto ShaderParser::SplitSource(std::string const& sources) -> ShaderProgramSourc
         auto const source = (pos == std::string::npos) ? sources.substr(nextLinePos)  //
                                                        : sources.substr(nextLinePos, pos - nextLinePos);
 
-        shaderSources.shaders.push_back(ShaderStageSource {ShaderTypeFromString(type), source});
+        shaderSources.shaders.push_back(ShaderStageSource {shaderTypeFromString(type), source});
     }
 
     return shaderSources;

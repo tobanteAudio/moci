@@ -9,40 +9,40 @@ Slider::Slider(Color col, SliderCallbacks callbacks)
 {
 }
 
-void Slider::OnDraw(Painter& painter)
+void Slider::onDraw(Painter& painter)
 {
-    auto* style = GetStyle();
+    auto* style = getStyle();
     // If yo hit this assertion, you probably forgot to set the style on the top level component.
     MOCI_CORE_ASSERT(style != nullptr, "Style should not be null");
-    style->DrawSlider(painter, GetBounds(), *this);
+    style->drawSlider(painter, getBounds(), *this);
 }
 
-auto Slider::MouseClicked(moci::MouseCallback::Click click) -> bool
+auto Slider::mouseClicked(moci::MouseCallback::Click click) -> bool
 {
-    auto const bounds    = GetBounds();
-    auto const relativeX = static_cast<float>(click.x - bounds.GetX());
-    SetValue(relativeX / bounds.GetWidth());
+    auto const bounds    = getBounds();
+    auto const relativeX = static_cast<float>(click.x - bounds.getX());
+    setValue(relativeX / bounds.getWidth());
     return true;
 }
 
-auto Slider::MouseScrolled(MouseScrolledEvent scroll) -> bool
+auto Slider::mouseScrolled(MouseScrolledEvent scroll) -> bool
 {
-    auto newValue = GetValue() + scroll.GetYOffset() * 0.05F;
+    auto newValue = getValue() + scroll.getYOffset() * 0.05F;
     newValue      = std::max(0.0F, newValue);
     newValue      = std::min(1.0F, newValue);
-    SetValue(newValue);
+    setValue(newValue);
     return true;
 }
 
-auto Slider::GetValue() const noexcept -> float { return value_; }
+auto Slider::getValue() const noexcept -> float { return value_; }
 
-auto Slider::SetValue(float newValue) noexcept -> void
+auto Slider::setValue(float newValue) noexcept -> void
 {
     value_ = newValue;
     if (callbacks_.valueChanged) { callbacks_.valueChanged(newValue); }
 }
 
-auto Slider::GetColor() const noexcept -> Color { return color_; }
-void Slider::SetColor(Color col) noexcept { color_ = col; }
+auto Slider::getColor() const noexcept -> Color { return color_; }
+void Slider::setColor(Color col) noexcept { color_ = col; }
 
 }  // namespace moci

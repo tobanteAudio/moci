@@ -32,27 +32,27 @@ public:
     };
 
     virtual ~RendererAPI() = default;
-    virtual void Init()    = 0;
+    virtual void init()    = 0;
 
-    virtual void SetViewport(Rectangle<uint32_t> viewport) = 0;
-    virtual void SetClearColor(Color color)                = 0;
-    virtual void Clear()                                   = 0;
+    virtual void setViewport(Rectangle<uint32_t> viewport) = 0;
+    virtual void setClearColor(Color color)                = 0;
+    virtual void clear()                                   = 0;
 
-    virtual void DrawArrays(RenderDrawMode mode, uint32_t first, uint32_t count)       = 0;
-    virtual void DrawIndexed(RenderDrawMode mode, uint32_t count, void* indices)       = 0;
-    virtual void DrawIndexed(RenderDrawMode mode, Ref<VertexArray> const& vertexArray) = 0;
+    virtual void drawArrays(RenderDrawMode mode, uint32_t first, uint32_t count)       = 0;
+    virtual void drawIndexed(RenderDrawMode mode, uint32_t count, void* indices)       = 0;
+    virtual void drawIndexed(RenderDrawMode mode, Ref<VertexArray> const& vertexArray) = 0;
 
-    virtual auto MaxTextureSize() -> std::uint32_t      = 0;
-    virtual auto MaxTextureUnits() -> std::uint32_t     = 0;
-    virtual auto MaxVertexAttributes() -> std::uint32_t = 0;
-    virtual auto MaxUniformVectors() -> std::uint32_t   = 0;
+    virtual auto maxTextureSize() -> std::uint32_t      = 0;
+    virtual auto maxTextureUnits() -> std::uint32_t     = 0;
+    virtual auto maxVertexAttributes() -> std::uint32_t = 0;
+    virtual auto maxUniformVectors() -> std::uint32_t   = 0;
 
-    virtual auto GetCurrentDevice() -> std::any = 0;
+    virtual auto getCurrentDevice() -> std::any = 0;
 
-    inline static auto GetAPI() -> API { return s_API; }
+    inline static auto getApi() -> API { return sApi; }
 
 private:
-    static API s_API;
+    static API sApi;
 };
 
 }  // namespace moci

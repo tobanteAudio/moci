@@ -8,18 +8,18 @@
 
 #include <memory>
 
-extern moci::Application* moci::CreateApplication();
+extern moci::Application* moci::createApplication();
 
 int main(int argc, char** argv)
 {
-    moci::IgnoreUnused(argc);
-    moci::IgnoreUnused(argv);
+    moci::ignoreUnused(argc);
+    moci::ignoreUnused(argv);
 
-    moci::Log::Init();
+    moci::Log::init();
     MOCI_CORE_INFO("Initialized Log!");
 
-    auto app = moci::Scope<moci::Application>(moci::CreateApplication());
-    app->Run();
+    auto app = moci::Scope<moci::Application>(moci::createApplication());
+    app->run();
 
     return EXIT_SUCCESS;
 }

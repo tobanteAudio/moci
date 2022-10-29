@@ -10,35 +10,35 @@
 TEST_CASE("widget: LabelConstruct", "[ui]")
 {
     moci::Label const label {"test", {}};
-    REQUIRE(label.GetText() == "test");
-    REQUIRE(label.GetTextView() == "test");
+    REQUIRE(label.getText() == "test");
+    REQUIRE(label.getTextView() == "test");
 }
 
 TEST_CASE("widget: LabelSetText", "[ui]")
 {
     moci::Label label {"", {}};
-    REQUIRE(label.GetText().empty());
-    REQUIRE(label.GetTextView().empty());
-    label.SetText("test143");
-    REQUIRE(label.GetText() == "test143");
-    REQUIRE(label.GetTextView() == "test143");
+    REQUIRE(label.getText().empty());
+    REQUIRE(label.getTextView().empty());
+    label.setText("test143");
+    REQUIRE(label.getText() == "test143");
+    REQUIRE(label.getTextView() == "test143");
 }
 
 TEST_CASE("widget: LabelSetTextColor", "[ui]")
 {
     moci::Label label {"", {}};
 
-    auto c1 = label.GetTextColor();
-    REQUIRE(c1.GetRed() == 0.0F);
-    REQUIRE(c1.GetGreen() == 0.0F);
-    REQUIRE(c1.GetBlue() == 0.0F);
-    REQUIRE(c1.GetAlpha() == 0.0F);
+    auto c1 = label.getTextColor();
+    REQUIRE(c1.getRed() == 0.0F);
+    REQUIRE(c1.getGreen() == 0.0F);
+    REQUIRE(c1.getBlue() == 0.0F);
+    REQUIRE(c1.getAlpha() == 0.0F);
 
-    label.SetTextColor(moci::Colors::Black);
+    label.setTextColor(moci::Colors::black);
 
-    auto c2 = label.GetTextColor();
-    REQUIRE(c2.GetRed() == 0.0F);
-    REQUIRE(c2.GetGreen() == 0.0F);
-    REQUIRE(c2.GetBlue() == 0.0F);
-    REQUIRE(c2.GetAlpha() == 1.0F);
+    auto c2 = label.getTextColor();
+    REQUIRE(c2.getRed() == 0.0F);
+    REQUIRE(c2.getGreen() == 0.0F);
+    REQUIRE(c2.getBlue() == 0.0F);
+    REQUIRE(c2.getAlpha() == 1.0F);
 }

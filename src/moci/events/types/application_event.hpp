@@ -13,10 +13,10 @@ public:
     ~WindowResizeEvent() override = default;
     WindowResizeEvent(unsigned int width, unsigned int height) : m_Width(width), m_Height(height) { }
 
-    [[nodiscard]] inline auto GetWidth() const -> unsigned int { return m_Width; }
-    [[nodiscard]] inline auto GetHeight() const -> unsigned int { return m_Height; }
+    [[nodiscard]] inline auto getWidth() const -> unsigned int { return m_Width; }
+    [[nodiscard]] inline auto getHeight() const -> unsigned int { return m_Height; }
 
-    [[nodiscard]] auto ToString() const -> std::string override
+    [[nodiscard]] auto toString() const -> std::string override
     {
         std::stringstream ss;
         ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;

@@ -10,20 +10,20 @@
 TEST_CASE("graphics: TypefaceConstruct", "[font][graphics]")
 {
     moci::Typeface face {"comic-sans"};
-    REQUIRE(face.GetName() == "comic-sans");
+    REQUIRE(face.getName() == "comic-sans");
 }
 
 TEST_CASE("graphics: TypefaceGetWidthForString", "[font][graphics]")
 {
     const auto* const path = "moci_test_data/OpenSans-Bold.ttf";
-    auto const opt         = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
+    auto const opt         = moci::FreetypeLibrary::createTypefaceFromFont(path);
     REQUIRE(opt.has_value() == true);
 
     auto typeface = opt.value();
-    REQUIRE(typeface.GetWidthForString("") == 0);
-    REQUIRE(typeface.GetWidthForString("t") == 21);
-    REQUIRE(typeface.GetWidthForString("tt") == 42);
+    REQUIRE(typeface.getWidthForString("") == 0);
+    REQUIRE(typeface.getWidthForString("t") == 21);
+    REQUIRE(typeface.getWidthForString("tt") == 42);
 
-    REQUIRE(typeface.GetWidthForString("t", 0.5F) == 10);
-    REQUIRE(typeface.GetWidthForString("tt", 0.5F) == 21);
+    REQUIRE(typeface.getWidthForString("t", 0.5F) == 10);
+    REQUIRE(typeface.getWidthForString("tt", 0.5F) == 21);
 }

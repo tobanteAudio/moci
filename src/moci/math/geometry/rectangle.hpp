@@ -42,74 +42,74 @@ public:
     /**
      * @brief Returns true if the rectangle has no width & no height.
      */
-    [[nodiscard]] constexpr auto IsEmpty() const noexcept -> bool { return width_ <= Type(0) && height_ <= Type(0); }
+    [[nodiscard]] constexpr auto isEmpty() const noexcept -> bool { return width_ <= Type(0) && height_ <= Type(0); }
 
     /**
      * @brief Set Top left to (x, y).
      */
-    auto SetPosition(Type x, Type y) noexcept -> void { position_ = Point<Type>(x, y); }
+    auto setPosition(Type x, Type y) noexcept -> void { position_ = Point<Type>(x, y); }
 
     /**
      * @brief Set Top left to position.
      */
-    auto SetPosition(Point<Type> position) noexcept -> void { position_ = position; }
+    auto setPosition(Point<Type> position) noexcept -> void { position_ = position; }
 
     /**
      * @brief Set the x for the Top left corner.
      */
-    auto SetX(Type x) noexcept -> void { position_.SetX(x); }
+    auto setX(Type x) noexcept -> void { position_.setX(x); }
 
     /**
      * @brief Returns x off the left-hand side.
      */
-    [[nodiscard]] constexpr auto GetX() const noexcept -> Type { return position_.GetX(); }
+    [[nodiscard]] constexpr auto getX() const noexcept -> Type { return position_.getX(); }
 
     /**
      * @brief Set the y for the Top left corner.
      */
-    auto SetY(Type y) noexcept -> void { position_.SetY(y); }
+    auto setY(Type y) noexcept -> void { position_.setY(y); }
 
     /**
      * @brief Returns x off the bottom side.
      */
-    [[nodiscard]] constexpr auto GetY() const noexcept -> Type { return position_.GetY(); }
+    [[nodiscard]] constexpr auto getY() const noexcept -> Type { return position_.getY(); }
 
     /**
      * @brief Set the width.
      */
-    auto SetWidth(Type width) noexcept -> void { width_ = width; }
+    auto setWidth(Type width) noexcept -> void { width_ = width; }
 
     /**
      * @brief Returns the width.
      */
-    [[nodiscard]] constexpr auto GetWidth() const noexcept -> Type { return width_; }
+    [[nodiscard]] constexpr auto getWidth() const noexcept -> Type { return width_; }
 
     /**
      * @brief Set the height.
      */
-    auto SetHeight(Type height) noexcept -> void { height_ = height; }
+    auto setHeight(Type height) noexcept -> void { height_ = height; }
 
     /**
      * @brief Returns the height.
      */
-    [[nodiscard]] constexpr auto GetHeight() const noexcept -> Type { return height_; }
+    [[nodiscard]] constexpr auto getHeight() const noexcept -> Type { return height_; }
 
     /**
      * @brief Returns the x coordinate of the rectangle's right-side.
      */
-    [[nodiscard]] constexpr auto GetRight() const noexcept -> Type { return position_.GetX() + width_; }
+    [[nodiscard]] constexpr auto getRight() const noexcept -> Type { return position_.getX() + width_; }
 
     /**
      * @brief Returns the y coordinate of the rectangle's bottom edge.
      */
-    [[nodiscard]] constexpr auto GetBottom() const noexcept -> Type { return position_.GetY() + height_; }
+    [[nodiscard]] constexpr auto getBottom() const noexcept -> Type { return position_.getY() + height_; }
 
     /**
      * @brief Returns the aspect ratio width / height.
      */
-    [[nodiscard]] constexpr auto GetAspectRatio() const noexcept -> Type
+    [[nodiscard]] constexpr auto getAspectRatio() const noexcept -> Type
     {
-        if (GetWidth() != Type {}) { return GetWidth() / GetHeight(); }
+        if (getWidth() != Type {}) { return getWidth() / getHeight(); }
 
         return Type {};
     }
@@ -117,44 +117,44 @@ public:
     /**
      * @brief Returns a new rectangle from the top & shrinks the original.
      */
-    [[nodiscard]] auto RemoveFromTop(Type amount) noexcept -> Rectangle<Type>
+    [[nodiscard]] auto removeFromTop(Type amount) noexcept -> Rectangle<Type>
     {
-        auto const oldY = GetY();
-        SetY(oldY + amount);
-        SetHeight(GetHeight() - amount);
-        return Rectangle<Type> {GetX(), oldY, GetWidth(), amount};
+        auto const oldY = getY();
+        setY(oldY + amount);
+        setHeight(getHeight() - amount);
+        return Rectangle<Type> {getX(), oldY, getWidth(), amount};
     }
 
     /**
      * @brief Returns a new rectangle from the bottom & shrinks the original.
      */
-    [[nodiscard]] auto RemoveFromBottom(Type amount) noexcept -> Rectangle<Type>
+    [[nodiscard]] auto removeFromBottom(Type amount) noexcept -> Rectangle<Type>
     {
-        auto const oldHeight = GetHeight();
-        auto const newY      = GetY() + oldHeight - amount;
-        SetHeight(oldHeight - amount);
-        return Rectangle<Type> {GetX(), newY, GetWidth(), amount};
+        auto const oldHeight = getHeight();
+        auto const newY      = getY() + oldHeight - amount;
+        setHeight(oldHeight - amount);
+        return Rectangle<Type> {getX(), newY, getWidth(), amount};
     }
 
     /**
      * @brief Returns a new rectangle from the left & shrinks the original.
      */
-    [[nodiscard]] auto RemoveFromLeft(Type amount) noexcept -> Rectangle<Type>
+    [[nodiscard]] auto removeFromLeft(Type amount) noexcept -> Rectangle<Type>
     {
-        auto const oldX = GetX();
-        SetWidth(GetWidth() - amount);
-        SetX(oldX + amount);
-        return Rectangle<Type> {oldX, GetY(), amount, GetHeight()};
+        auto const oldX = getX();
+        setWidth(getWidth() - amount);
+        setX(oldX + amount);
+        return Rectangle<Type> {oldX, getY(), amount, getHeight()};
     }
 
     /**
      * @brief Returns a new rectangle from the right & shrinks the original.
      */
-    [[nodiscard]] auto RemoveFromRight(Type amount) noexcept -> Rectangle<Type>
+    [[nodiscard]] auto removeFromRight(Type amount) noexcept -> Rectangle<Type>
     {
-        auto const oldWidth = GetWidth();
-        SetWidth(oldWidth - amount);
-        return Rectangle<Type> {GetX() + oldWidth - amount, GetY(), amount, GetHeight()};
+        auto const oldWidth = getWidth();
+        setWidth(oldWidth - amount);
+        return Rectangle<Type> {getX() + oldWidth - amount, getY(), amount, getHeight()};
     }
 
     /**
@@ -162,13 +162,13 @@ public:
      * Effectively, the rectangle returned is:
      * (x + deltaX, y + deltaY, w - deltaX * 2, h - deltaY * 2).
      */
-    [[nodiscard]] auto Reduced(Type deltaX, Type deltaY) const noexcept -> Rectangle<Type>
+    [[nodiscard]] auto reduced(Type deltaX, Type deltaY) const noexcept -> Rectangle<Type>
     {
         return Rectangle<Type> {
-            GetX() + deltaX,          //
-            GetY() + deltaY,          //
-            GetWidth() - deltaX * 2,  //
-            GetHeight() - deltaY * 2  //
+            getX() + deltaX,          //
+            getY() + deltaY,          //
+            getWidth() - deltaX * 2,  //
+            getHeight() - deltaY * 2  //
         };
     }
 
@@ -177,45 +177,45 @@ public:
      * Effectively, the rectangle returned is:
      * (x + delta, y + delta, w - delta * 2, h - delta * 2).
      */
-    [[nodiscard]] auto Reduced(Type delta) const noexcept -> Rectangle<Type> { return Reduced(delta, delta); }
+    [[nodiscard]] auto reduced(Type delta) const noexcept -> Rectangle<Type> { return reduced(delta, delta); }
 
     /**
      * @brief Converts the rectangle to a rectangle based on the given type.
      */
     template<typename ConvertType>
-    [[nodiscard]] auto To() const noexcept -> Rectangle<ConvertType>
+    [[nodiscard]] auto to() const noexcept -> Rectangle<ConvertType>
     {
         return {
-            static_cast<ConvertType>(GetX()),       //
-            static_cast<ConvertType>(GetY()),       //
-            static_cast<ConvertType>(GetWidth()),   //
-            static_cast<ConvertType>(GetHeight()),  //
+            static_cast<ConvertType>(getX()),       //
+            static_cast<ConvertType>(getY()),       //
+            static_cast<ConvertType>(getWidth()),   //
+            static_cast<ConvertType>(getHeight()),  //
         };
     }
 
     /**
      * @brief Converts the rectangle to a float version rectangle.
      */
-    [[nodiscard]] auto ToFloat() const noexcept -> Rectangle<float>
+    [[nodiscard]] auto toFloat() const noexcept -> Rectangle<float>
     {
         return {
-            static_cast<float>(GetX()),       //
-            static_cast<float>(GetY()),       //
-            static_cast<float>(GetWidth()),   //
-            static_cast<float>(GetHeight()),  //
+            static_cast<float>(getX()),       //
+            static_cast<float>(getY()),       //
+            static_cast<float>(getWidth()),   //
+            static_cast<float>(getHeight()),  //
         };
     }
 
     /**
      * @brief Converts the rectangle to a int version rectangle.
      */
-    [[nodiscard]] auto ToInt() const noexcept -> Rectangle<int>
+    [[nodiscard]] auto toInt() const noexcept -> Rectangle<int>
     {
         return {
-            static_cast<int>(GetX()),       //
-            static_cast<int>(GetY()),       //
-            static_cast<int>(GetWidth()),   //
-            static_cast<int>(GetHeight()),  //
+            static_cast<int>(getX()),       //
+            static_cast<int>(getY()),       //
+            static_cast<int>(getWidth()),   //
+            static_cast<int>(getHeight()),  //
         };
     }
 
@@ -227,9 +227,9 @@ private:
 template<typename Type>
 auto operator==(Rectangle<Type> const r1, Rectangle<Type> const r2) -> bool
 {
-    auto const position = (r1.GetX() == r2.GetX()) && (r1.GetY() == r2.GetY());
-    auto const width    = r1.GetWidth() == r2.GetWidth();
-    auto const height   = r1.GetHeight() == r2.GetHeight();
+    auto const position = (r1.getX() == r2.getX()) && (r1.getY() == r2.getY());
+    auto const width    = r1.getWidth() == r2.getWidth();
+    auto const height   = r1.getHeight() == r2.getHeight();
     return (position && width && height);
 }
 

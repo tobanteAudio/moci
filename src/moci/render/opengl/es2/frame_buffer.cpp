@@ -9,15 +9,15 @@ OpenGLESFramebuffer::OpenGLESFramebuffer(FramebufferSpecs spec) : specs_(spec) {
 
 OpenGLESFramebuffer::~OpenGLESFramebuffer() { deallocate(); }
 
-void OpenGLESFramebuffer::Bind()
+void OpenGLESFramebuffer::bind()
 {
     GLCall(glBindFramebuffer(GL_FRAMEBUFFER, renderID_));
     GLCall(glViewport(0, 0, specs_.width, specs_.height));
 }
 
-void OpenGLESFramebuffer::Unbind() { GLCall(glBindFramebuffer(GL_FRAMEBUFFER, 0)); }
+void OpenGLESFramebuffer::unbind() { GLCall(glBindFramebuffer(GL_FRAMEBUFFER, 0)); }
 
-void OpenGLESFramebuffer::Resize(std::uint32_t width, std::uint32_t height)
+void OpenGLESFramebuffer::resize(std::uint32_t width, std::uint32_t height)
 {
     specs_.width  = width;
     specs_.height = height;

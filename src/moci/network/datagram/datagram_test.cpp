@@ -12,7 +12,7 @@
 TEST_CASE("network: UDPBindToPort", "[network]")
 {
     moci::DatagramSocket udp {};
-    REQUIRE(udp.Bind("", 0) == true);
+    REQUIRE(udp.bind("", 0) == true);
 }
 
 #endif

@@ -6,7 +6,7 @@ namespace moci
 {
 namespace
 {
-auto MociToOpenGLDrawMode(RenderDrawMode const mode) noexcept -> int
+auto mociToOpenGlDrawMode(RenderDrawMode const mode) noexcept -> int
 {
 
     switch (mode)
@@ -54,7 +54,7 @@ auto MociToOpenGLDrawMode(RenderDrawMode const mode) noexcept -> int
 
 }  // namespace
 
-void OpenGLESRendererAPI::Init()
+void OpenGLESRendererAPI::init()
 {
     glEnable(GL_BLEND);
     GLCall(glEnable(GL_DEPTH_TEST));
@@ -64,60 +64,60 @@ void OpenGLESRendererAPI::Init()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void OpenGLESRendererAPI::SetViewport(Rectangle<uint32_t> viewport)
+void OpenGLESRendererAPI::setViewport(Rectangle<uint32_t> viewport)
 {
-    glViewport(viewport.GetX(), viewport.GetY(), viewport.GetWidth(), viewport.GetHeight());
+    glViewport(viewport.getX(), viewport.getY(), viewport.getWidth(), viewport.getHeight());
 }
 
-void OpenGLESRendererAPI::SetClearColor(Color color)
+void OpenGLESRendererAPI::setClearColor(Color color)
 {
-    auto const red   = color.GetRed();
-    auto const green = color.GetGreen();
-    auto const blue  = color.GetBlue();
-    auto const alpha = color.GetAlpha();
+    auto const red   = color.getRed();
+    auto const green = color.getGreen();
+    auto const blue  = color.getBlue();
+    auto const alpha = color.getAlpha();
     glClearColor(red, green, blue, alpha);
 }
 
-void OpenGLESRendererAPI::Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
+void OpenGLESRendererAPI::clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 
-void OpenGLESRendererAPI::DrawArrays(RenderDrawMode const mode, uint32_t first, uint32_t count)
+void OpenGLESRendererAPI::drawArrays(RenderDrawMode const mode, uint32_t first, uint32_t count)
 {
-    auto const openGLMode = MociToOpenGLDrawMode(mode);
+    auto const openGLMode = mociToOpenGlDrawMode(mode);
     GLCall(glDrawArrays(openGLMode, first, count));
 }
 
-void OpenGLESRendererAPI::DrawIndexed(RenderDrawMode const mode, uint32_t count, void* indices)
+void OpenGLESRendererAPI::drawIndexed(RenderDrawMode const mode, uint32_t count, void* indices)
 {
-    auto const openGLMode = MociToOpenGLDrawMode(mode);
+    auto const openGLMode = mociToOpenGlDrawMode(mode);
     GLCall(glDrawElements(openGLMode, count, GL_UNSIGNED_SHORT, indices));
 }
 
-void OpenGLESRendererAPI::DrawIndexed(RenderDrawMode const mode, Ref<VertexArray> const& vertexArray)
+void OpenGLESRendererAPI::drawIndexed(RenderDrawMode const mode, Ref<VertexArray> const& vertexArray)
 {
-    auto const openGLMode = MociToOpenGLDrawMode(mode);
-    GLCall(glDrawElements(openGLMode, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_SHORT, nullptr));
+    auto const openGLMode = mociToOpenGlDrawMode(mode);
+    GLCall(glDrawElements(openGLMode, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_SHORT, nullptr));
 }
 
-auto OpenGLESRendererAPI::MaxTextureSize() -> std::uint32_t
+auto OpenGLESRendererAPI::maxTextureSize() -> std::uint32_t
 {
     GLint maxTextureSize = 0;
     GLCall(glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize));
     return static_cast<std::uint32_t>(maxTextureSize);
 }
-auto OpenGLESRendererAPI::MaxTextureUnits() -> std::uint32_t
+auto OpenGLESRendererAPI::maxTextureUnits() -> std::uint32_t
 {
     GLint maxTextureUnits = 0;
     GLCall(glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, &maxTextureUnits));
     return static_cast<std::uint32_t>(maxTextureUnits);
 }
-auto OpenGLESRendererAPI::MaxVertexAttributes() -> std::uint32_t
+auto OpenGLESRendererAPI::maxVertexAttributes() -> std::uint32_t
 {
     GLint maxAttributes = 0;
     GLCall(glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxAttributes));
     return static_cast<std::uint32_t>(maxAttributes);
 }
 
-auto OpenGLESRendererAPI::MaxUniformVectors() -> std::uint32_t
+auto OpenGLESRendererAPI::maxUniformVectors() -> std::uint32_t
 {
     GLint maxUniformVectors = 0;
     // GLCall(glGetIntegerv(GL_MAX_FRAGMENT_UNIFORM_VECTORS, &maxUniformVectors));

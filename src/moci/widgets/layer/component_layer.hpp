@@ -20,11 +20,11 @@ public:
     explicit ComponentLayer(Scope<Component>&& root) : Layer("component-layer"), rootComponent_(std::move(root)) { }
     ~ComponentLayer() override = default;
 
-    void OnAttach() override;
-    void OnDetach() override;
-    void OnUpdate(Timestep ts) override;
-    void OnImGuiRender() override;
-    void OnEvent(Event& e) override;
+    void onAttach() override;
+    void onDetach() override;
+    void onUpdate(Timestep ts) override;
+    void onImGuiRender() override;
+    void onEvent(Event& e) override;
 
 private:
     auto onWindowResized(WindowResizeEvent& e) -> bool;
@@ -39,15 +39,15 @@ private:
         Component* comp = nullptr;
         {
             MOCI_PROFILE_SCOPE("ComponentLayer::handleEvent::FindComponent");
-            auto const x = static_cast<int>(Input::GetMouseX());
-            auto const y = static_cast<int>(Input::GetMouseY());
-            comp         = rootComponent_->FindComponentAt({x, y});
+            auto const x = static_cast<int>(Input::getMouseX());
+            auto const y = static_cast<int>(Input::getMouseY());
+            comp         = rootComponent_->findComponentAt({x, y});
         }
 
         MOCI_CORE_ASSERT(comp, "Should never be null");
         while (!handler(comp))
         {
-            comp = comp->GetParent();
+            comp = comp->getParent();
             if (comp == nullptr) { return false; }
         }
 

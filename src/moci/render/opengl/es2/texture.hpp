@@ -15,12 +15,12 @@ public:
     OpenGLESTexture2D(const OpenGLESTexture2D&)                    = delete;
     auto operator=(const OpenGLESTexture2D&) -> OpenGLESTexture2D& = delete;
 
-    [[nodiscard]] auto GetWidth() const -> std::uint32_t override { return width_; }
-    [[nodiscard]] auto GetHeight() const -> std::uint32_t override { return height_; }
-    [[nodiscard]] auto GetID() const -> std::uint32_t override { return renderID_; }
+    [[nodiscard]] auto getWidth() const -> std::uint32_t override { return width_; }
+    [[nodiscard]] auto getHeight() const -> std::uint32_t override { return height_; }
+    [[nodiscard]] auto getId() const -> std::uint32_t override { return renderID_; }
 
-    void Bind(std::uint32_t slot = 0) const override;
-    void Unbind() const override;
+    void bind(std::uint32_t slot = 0) const override;
+    void unbind() const override;
 
 private:
     void createTexture();
@@ -44,12 +44,12 @@ public:
 
     ~OpenGLESTextureCube() override;
 
-    [[nodiscard]] auto GetWidth() const -> std::uint32_t override { return 0; }
-    [[nodiscard]] auto GetHeight() const -> std::uint32_t override { return 0; }
-    [[nodiscard]] auto GetID() const -> std::uint32_t override { return renderID_; }
+    [[nodiscard]] auto getWidth() const -> std::uint32_t override { return 0; }
+    [[nodiscard]] auto getHeight() const -> std::uint32_t override { return 0; }
+    [[nodiscard]] auto getId() const -> std::uint32_t override { return renderID_; }
 
-    void Bind(std::uint32_t slot = 0) const override;
-    void Unbind() const override;
+    void bind(std::uint32_t slot = 0) const override;
+    void unbind() const override;
 
 private:
     Vector<std::string> paths_;

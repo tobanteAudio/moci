@@ -2,90 +2,90 @@
 
 namespace moci
 {
-void Style::DrawButton(Painter& painter, Rectangle<int> bounds, Button const& button)
+void Style::drawButton(Painter& painter, Rectangle<int> bounds, Button const& button)
 {
     auto area                   = bounds;
-    auto const width            = area.GetWidth();
-    auto const height           = area.GetHeight();
+    auto const width            = area.getWidth();
+    auto const height           = area.getHeight();
     auto const border           = std::max<int>(1, static_cast<int>(height * 0.1));
-    auto const bottomLeftCorner = Point<int> {area.GetX(), area.GetY()};
-    auto const color            = button.GetTextColor();
+    auto const bottomLeftCorner = Point<int> {area.getX(), area.getY()};
+    auto const color            = button.getTextColor();
 
     // left
-    auto const leftEdge = Rectangle<int> {bottomLeftCorner, border, area.GetHeight()};
-    painter.DrawQuad(leftEdge.ToFloat(), color);
+    auto const leftEdge = Rectangle<int> {bottomLeftCorner, border, area.getHeight()};
+    painter.drawQuad(leftEdge.toFloat(), color);
 
     // right
     auto const rightEdge = Rectangle<int> {
-        {bottomLeftCorner.GetX() + width - border, bottomLeftCorner.GetY()},  //
+        {bottomLeftCorner.getX() + width - border, bottomLeftCorner.getY()},  //
         border,                                                               //
-        area.GetHeight()                                                      //
+        area.getHeight()                                                      //
     };
-    painter.DrawQuad(rightEdge.ToFloat(), color);
+    painter.drawQuad(rightEdge.toFloat(), color);
 
     // bottom
-    auto const bottomEdge = Rectangle<int> {bottomLeftCorner, area.GetWidth(), border};
-    painter.DrawQuad(bottomEdge.ToFloat(), color);
+    auto const bottomEdge = Rectangle<int> {bottomLeftCorner, area.getWidth(), border};
+    painter.drawQuad(bottomEdge.toFloat(), color);
 
     // top
     auto const topEdge = Rectangle<int> {
-        {bottomLeftCorner.GetX(), bottomLeftCorner.GetY() + height - border},  //
+        {bottomLeftCorner.getX(), bottomLeftCorner.getY() + height - border},  //
         width,                                                                 //
         border                                                                 //
     };
-    painter.DrawQuad(topEdge.ToFloat(), color);
+    painter.drawQuad(topEdge.toFloat(), color);
 
     // text
-    painter.DrawText(button.GetText(), {bounds.GetX() + width / 2, bounds.GetY() + height}, 0.5F, color);
+    painter.drawText(button.getText(), {bounds.getX() + width / 2, bounds.getY() + height}, 0.5F, color);
 }
 
-void Style::DrawLabel(Painter& painter, Rectangle<int> bounds, Label const& label)
+void Style::drawLabel(Painter& painter, Rectangle<int> bounds, Label const& label)
 {
     auto area = bounds;
-    painter.DrawText(label.GetText(), {area.GetX(), area.GetY()}, 0.5F, label.GetTextColor());
+    painter.drawText(label.getText(), {area.getX(), area.getY()}, 0.5F, label.getTextColor());
 }
 
-void Style::DrawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider)
+void Style::drawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider)
 {
     auto area                   = bounds;
-    auto const width            = area.GetWidth();
-    auto const height           = area.GetHeight();
+    auto const width            = area.getWidth();
+    auto const height           = area.getHeight();
     auto const border           = std::max<int>(1, static_cast<int>(height * 0.1));
-    auto const bottomLeftCorner = Point<int> {area.GetX(), area.GetY()};
-    auto const color_           = slider.GetColor();
+    auto const bottomLeftCorner = Point<int> {area.getX(), area.getY()};
+    auto const color            = slider.getColor();
 
     // left
-    auto const leftEdge = Rectangle<int> {bottomLeftCorner, border, area.GetHeight()};
-    painter.DrawQuad(leftEdge.ToFloat(), color_);
+    auto const leftEdge = Rectangle<int> {bottomLeftCorner, border, area.getHeight()};
+    painter.drawQuad(leftEdge.toFloat(), color);
 
     // right
     auto const rightEdge = Rectangle<int> {
-        {bottomLeftCorner.GetX() + width - border, bottomLeftCorner.GetY()},  //
+        {bottomLeftCorner.getX() + width - border, bottomLeftCorner.getY()},  //
         border,                                                               //
-        area.GetHeight()                                                      //
+        area.getHeight()                                                      //
     };
-    painter.DrawQuad(rightEdge.ToFloat(), color_);
+    painter.drawQuad(rightEdge.toFloat(), color);
 
     // bottom
-    auto const bottomEdge = Rectangle<int> {bottomLeftCorner, area.GetWidth(), border};
-    painter.DrawQuad(bottomEdge.ToFloat(), color_);
+    auto const bottomEdge = Rectangle<int> {bottomLeftCorner, area.getWidth(), border};
+    painter.drawQuad(bottomEdge.toFloat(), color);
 
     // top
     auto const topEdge = Rectangle<int> {
-        {bottomLeftCorner.GetX(), bottomLeftCorner.GetY() + height - border},  //
+        {bottomLeftCorner.getX(), bottomLeftCorner.getY() + height - border},  //
         width,                                                                 //
         border                                                                 //
     };
-    painter.DrawQuad(topEdge.ToFloat(), color_);
+    painter.drawQuad(topEdge.toFloat(), color);
 
     // infill
     auto const inFillWidth
-        = static_cast<int>(static_cast<float>(width - border * 4) * std::min(slider.GetValue(), 1.0F));
+        = static_cast<int>(static_cast<float>(width - border * 4) * std::min(slider.getValue(), 1.0F));
     auto const inFill = Rectangle<int> {
-        {bottomLeftCorner.GetX() + (border * 2), bottomLeftCorner.GetY() + (border * 2)},  //
+        {bottomLeftCorner.getX() + (border * 2), bottomLeftCorner.getY() + (border * 2)},  //
         inFillWidth,                                                                       //
         height - (border * 4)                                                              //
     };
-    painter.DrawQuad(inFill.ToFloat(), color_);
+    painter.drawQuad(inFill.toFloat(), color);
 }
 }  // namespace moci

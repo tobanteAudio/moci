@@ -59,14 +59,14 @@ public:
     virtual ~Event() = default;
     bool Handled     = false;
 
-    [[nodiscard]] virtual auto GetEventType() const -> EventType   = 0;
-    [[nodiscard]] virtual auto GetName() const -> std::string_view = 0;
-    [[nodiscard]] virtual auto GetCategoryFlags() const -> int     = 0;
-    [[nodiscard]] virtual auto ToString() const -> std::string { return std::string(GetName()); }
+    [[nodiscard]] virtual auto getEventType() const -> EventType   = 0;
+    [[nodiscard]] virtual auto getName() const -> std::string_view = 0;
+    [[nodiscard]] virtual auto getCategoryFlags() const -> int     = 0;
+    [[nodiscard]] virtual auto toString() const -> std::string { return std::string(getName()); }
 
-    [[nodiscard]] inline auto IsInCategory(EventCategory category) const noexcept -> bool
+    [[nodiscard]] inline auto isInCategory(EventCategory category) const noexcept -> bool
     {
-        return (GetCategoryFlags() & category) != 0;
+        return (getCategoryFlags() & category) != 0;
     }
 };
 
@@ -79,9 +79,9 @@ public:
 
     // F will be deduced by the compiler
     template<typename T, typename F>
-    auto Dispatch(const F& func) -> bool
+    auto dispatch(const F& func) -> bool
     {
-        if (m_Event.GetEventType() == T::GetStaticType())
+        if (m_Event.getEventType() == T::GetStaticType())
         {
             m_Event.Handled = func(static_cast<T&>(m_Event));
             return true;
@@ -93,6 +93,6 @@ private:
     Event& m_Event;
 };
 
-inline auto operator<<(std::ostream& out, const Event& e) -> std::ostream& { return out << e.ToString(); }
+inline auto operator<<(std::ostream& out, const Event& e) -> std::ostream& { return out << e.toString(); }
 
 }  // namespace moci

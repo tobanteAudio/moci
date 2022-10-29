@@ -12,55 +12,55 @@ namespace moci
 class RenderCommand
 {
 public:
-    inline static void Init()
+    inline static void init()
     {
         MOCI_PROFILE_FUNCTION();
-        s_RendererAPI->Init();
+        sRendererApi->init();
     }
 
-    inline static void SetViewport(Rectangle<uint32_t> viewport)
+    inline static void setViewport(Rectangle<uint32_t> viewport)
     {
         MOCI_PROFILE_FUNCTION();
-        s_RendererAPI->SetViewport(viewport);
+        sRendererApi->setViewport(viewport);
     }
 
-    inline static void SetClearColor(Color const& color)
+    inline static void setClearColor(Color const& color)
     {
         MOCI_PROFILE_FUNCTION();
-        s_RendererAPI->SetClearColor(color);
+        sRendererApi->setClearColor(color);
     }
 
-    inline static void Clear()
+    inline static void clear()
     {
         MOCI_PROFILE_FUNCTION();
-        s_RendererAPI->Clear();
+        sRendererApi->clear();
     }
 
-    inline static void DrawArrays(RenderDrawMode mode, uint32_t first, uint32_t count)
+    inline static void drawArrays(RenderDrawMode mode, uint32_t first, uint32_t count)
     {
         MOCI_PROFILE_FUNCTION();
-        s_RendererAPI->DrawArrays(mode, first, count);
+        sRendererApi->drawArrays(mode, first, count);
     }
 
-    inline static void DrawIndexed(RenderDrawMode mode, uint32_t count, void* indices)
+    inline static void drawIndexed(RenderDrawMode mode, uint32_t count, void* indices)
     {
         MOCI_PROFILE_FUNCTION();
-        s_RendererAPI->DrawIndexed(mode, count, indices);
+        sRendererApi->drawIndexed(mode, count, indices);
     }
 
-    inline static void DrawIndexed(RenderDrawMode mode, Ref<VertexArray> const& vertexArray)
+    inline static void drawIndexed(RenderDrawMode mode, Ref<VertexArray> const& vertexArray)
     {
         MOCI_PROFILE_FUNCTION();
-        s_RendererAPI->DrawIndexed(mode, vertexArray);
+        sRendererApi->drawIndexed(mode, vertexArray);
     }
 
-    inline static auto MaxTextureSize() -> std::uint32_t { return s_RendererAPI->MaxTextureSize(); }
-    inline static auto MaxTextureUnits() -> std::uint32_t { return s_RendererAPI->MaxTextureUnits(); }
-    inline static auto MaxVertexAttributes() -> std::uint32_t { return s_RendererAPI->MaxVertexAttributes(); }
-    inline static auto MaxUniformVectors() -> std::uint32_t { return s_RendererAPI->MaxUniformVectors(); }
+    inline static auto maxTextureSize() -> std::uint32_t { return sRendererApi->maxTextureSize(); }
+    inline static auto maxTextureUnits() -> std::uint32_t { return sRendererApi->maxTextureUnits(); }
+    inline static auto maxVertexAttributes() -> std::uint32_t { return sRendererApi->maxVertexAttributes(); }
+    inline static auto maxUniformVectors() -> std::uint32_t { return sRendererApi->maxUniformVectors(); }
 
 private:
-    static Scope<RendererAPI> s_RendererAPI;
+    static Scope<RendererAPI> sRendererApi;
 };
 
 }  // namespace moci

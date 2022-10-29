@@ -21,7 +21,7 @@
 namespace
 {
 #if defined(MOCI_API_OPENGL_LEGACY)
-constexpr auto shaderPrefix = "es2";
+constexpr auto ShaderPrefix = "es2";
 #else
 constexpr auto shaderPrefix = "gl4";
 #endif
@@ -71,24 +71,24 @@ auto skyboxVertices = std::array {
     1.0F,  -1.0F, 1.0F    //
 };
 
-glm::vec2 ImGuiToGlmVec(ImVec2 const& input) { return {input.x, input.y}; }
+glm::vec2 imGuiToGlmVec(ImVec2 const& input) { return {input.x, input.y}; }
 
 }  // namespace
 
-void DemoLayer::OnAttach()
+void DemoLayer::onAttach()
 {
     MOCI_PROFILE_FUNCTION();
 
-    auto const numVertices = (mesh_.GetVertices().size() * 5) + floor_.GetVertices().size();
+    auto const numVertices = (mesh_.getVertices().size() * 5) + floor_.getVertices().size();
     vertices_.reserve(numVertices);
 
-    auto const path = fmt::format("sandbox3D/assets/shader/{}_general.glsl", shaderPrefix);
-    shader_         = moci::RenderFactory::MakeShader(path);
-    shader_->Bind();
+    auto const path = fmt::format("sandbox3D/assets/shader/{}_general.glsl", ShaderPrefix);
+    shader_         = moci::RenderFactory::makeShader(path);
+    shader_->bind();
 
     {
         MOCI_PROFILE_SCOPE("Translate");
-        for (auto const& vertex : mesh_.GetVertices())
+        for (auto const& vertex : mesh_.getVertices())
         {
             auto const model       = glm::translate(glm::mat4(1.0F), glm::vec3(1.0F));
             auto const scaleMatrix = glm::scale(glm::mat4(1.0F), {modelScale_, modelScale_, modelScale_});
@@ -102,14 +102,14 @@ void DemoLayer::OnAttach()
             auto const rotate     = glm::rotate(glm::mat4(1.0F), glm::radians(-90.0F), {1.0F, 0.0F, 0.0F});
             auto const scale      = glm::scale(glm::mat4(1.0F), {modelScale, modelScale, modelScale});
             auto const model      = glm::translate(glm::mat4(1.0F), glm::vec3((3.0F * x), 5.0F, 1.0F));
-            for (auto const& vertex : mesh_.GetVertices())
+            for (auto const& vertex : mesh_.getVertices())
             {
                 auto const position = model * scale * rotate * glm::vec4(vertex.position, 1.0F);
                 vertices_.push_back({glm::vec3(position), vertex.normal, vertex.color, vertex.texCoord});
             }
         }
 
-        for (auto const& vertex : floor_.GetVertices())
+        for (auto const& vertex : floor_.getVertices())
         {
             auto const model       = glm::translate(glm::mat4(1.0F), glm::vec3(1.0F));
             auto const scaleMatrix = glm::scale(glm::mat4(1.0F), {5.0F, 5.0F, 5.0F});
@@ -120,22 +120,22 @@ void DemoLayer::OnAttach()
         numVertices_ = vertices_.size();
     }
 
-    auto const skyBoxShaderPath = fmt::format("sandbox3D/assets/shader/{}_skybox.glsl", shaderPrefix);
-    skyboxShader_               = moci::RenderFactory::MakeShader(skyBoxShaderPath);
-    skyboxShader_->Bind();
-    skyboxShader_->SetInt("u_Skybox", 0);
+    auto const skyBoxShaderPath = fmt::format("sandbox3D/assets/shader/{}_skybox.glsl", ShaderPrefix);
+    skyboxShader_               = moci::RenderFactory::makeShader(skyBoxShaderPath);
+    skyboxShader_->bind();
+    skyboxShader_->setInt("u_Skybox", 0);
     moci::BufferLayout skyBoxLayout = {{moci::ShaderDataType::Float3, "a_Position"}};
     auto* skyBoxData                = reinterpret_cast<float*>(skyboxVertices.data());
     auto const skyBoxSize           = static_cast<std::uint32_t>(skyboxVertices.size() * sizeof(float));
-    skyboxVbo_.reset(moci::RenderFactory::MakeVertexBuffer(skyBoxData, skyBoxSize, false));
-    skyboxVbo_->SetLayout(skyBoxLayout);
-    skyboxVbo_->Unbind();
-    skyboxIbo_.reset(moci::RenderFactory::MakeIndexBuffer({{}, 1, true}));
-    skyboxIbo_->Unbind();
-    skyboxVao_ = moci::RenderFactory::MakeVertexArray();
-    skyboxVao_->AddVertexBuffer(skyboxVbo_);
-    skyboxVao_->SetIndexBuffer(skyboxIbo_);
-    skyboxVao_->Unbind();
+    skyboxVbo_.reset(moci::RenderFactory::makeVertexBuffer(skyBoxData, skyBoxSize, false));
+    skyboxVbo_->setLayout(skyBoxLayout);
+    skyboxVbo_->unbind();
+    skyboxIbo_.reset(moci::RenderFactory::makeIndexBuffer({{}, 1, true}));
+    skyboxIbo_->unbind();
+    skyboxVao_ = moci::RenderFactory::makeVertexArray();
+    skyboxVao_->addVertexBuffer(skyboxVbo_);
+    skyboxVao_->setIndexBuffer(skyboxIbo_);
+    skyboxVao_->unbind();
     moci::Vector<std::string> faces {
         std::string("sandbox3D/assets/textures/skybox/right.jpg"),   //
         std::string("sandbox3D/assets/textures/skybox/left.jpg"),    //
@@ -145,7 +145,7 @@ void DemoLayer::OnAttach()
         std::string("sandbox3D/assets/textures/skybox/back.jpg")     //
     };
 
-    skyBoxTexture_ = moci::RenderFactory::MakeTextureCube(faces);
+    skyBoxTexture_ = moci::RenderFactory::makeTextureCube(faces);
 
     moci::BufferLayout layout = {
         {moci::ShaderDataType::Float3, "a_Position"},   //
@@ -155,42 +155,42 @@ void DemoLayer::OnAttach()
     };
     auto* data      = reinterpret_cast<float*>(vertices_.data());
     auto const size = static_cast<std::uint32_t>(vertices_.size() * sizeof(moci::Mesh::Vertex));
-    vbo_.reset(moci::RenderFactory::MakeVertexBuffer(data, size, false));
-    vbo_->SetLayout(layout);
-    vbo_->Unbind();
-    ibo_.reset(moci::RenderFactory::MakeIndexBuffer({{}, 1, true}));
-    ibo_->Unbind();
-    vao_ = moci::RenderFactory::MakeVertexArray();
-    vao_->AddVertexBuffer(vbo_);
-    vao_->SetIndexBuffer(ibo_);
-    vao_->Unbind();
+    vbo_.reset(moci::RenderFactory::makeVertexBuffer(data, size, false));
+    vbo_->setLayout(layout);
+    vbo_->unbind();
+    ibo_.reset(moci::RenderFactory::makeIndexBuffer({{}, 1, true}));
+    ibo_->unbind();
+    vao_ = moci::RenderFactory::makeVertexArray();
+    vao_->addVertexBuffer(vbo_);
+    vao_->setIndexBuffer(ibo_);
+    vao_->unbind();
 
     // light
-    light = moci::MakeScope<moci::Light>();
+    light = moci::makeScope<moci::Light>();
 
-    textureSolid_  = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/white_10x10.png");
-    textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/4color.png");
-    textureColors_ = moci::RenderFactory::MakeTexture2D("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
+    textureSolid_  = moci::RenderFactory::makeTexture2D("sandbox3D/assets/textures/white_10x10.png");
+    textureColors_ = moci::RenderFactory::makeTexture2D("sandbox3D/assets/textures/4color.png");
+    textureColors_ = moci::RenderFactory::makeTexture2D("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
 
     auto fbSpec   = moci::FramebufferSpecs {};
     fbSpec.width  = 1920;
     fbSpec.height = 1080;
-    framebuffer_  = moci::RenderFactory::MakeFramebuffer(fbSpec);
+    framebuffer_  = moci::RenderFactory::makeFramebuffer(fbSpec);
 
     fpsHistory_.reserve(10'000);
 }
 
-void DemoLayer::OnUpdate(moci::Timestep ts)
+void DemoLayer::onUpdate(moci::Timestep ts)
 {
     MOCI_PROFILE_FUNCTION();
-    lastTimestep_          = ts.GetMilliseconds();
+    lastTimestep_          = ts.getMilliseconds();
     drawStats_.numVertices = 0;
-    moci::RenderCommand::SetClearColor({0.1F, 0.1F, 0.1F, 1});
-    moci::RenderCommand::Clear();
+    moci::RenderCommand::setClearColor({0.1F, 0.1F, 0.1F, 1});
+    moci::RenderCommand::clear();
 
-    framebuffer_->Bind();
-    moci::RenderCommand::SetClearColor({0.1F, 0.1F, 0.1F, 1.0F});
-    moci::RenderCommand::Clear();
+    framebuffer_->bind();
+    moci::RenderCommand::setClearColor({0.1F, 0.1F, 0.1F, 1.0F});
+    moci::RenderCommand::clear();
 
     // Camera matrix
     auto const aspectRatio = viewportSize_.x / viewportSize_.y;
@@ -203,73 +203,73 @@ void DemoLayer::OnUpdate(moci::Timestep ts)
 
     {
         MOCI_PROFILE_SCOPE("OnUpdate::Mesh");
-        shader_->Bind();
-        shader_->SetMat4("u_View", view);
-        shader_->SetMat4("u_Projection", projection);
-        shader_->SetFloat("u_Ambient", ambientLight_);
-        shader_->SetFloat3("u_LightPos", light->position);
-        shader_->SetFloat3("u_LightColor", glm::vec3(light->color));
-        shader_->SetFloat3("u_ViewPos", cameraPos_);
+        shader_->bind();
+        shader_->setMat4("u_View", view);
+        shader_->setMat4("u_Projection", projection);
+        shader_->setFloat("u_Ambient", ambientLight_);
+        shader_->setFloat3("u_LightPos", light->position);
+        shader_->setFloat3("u_LightColor", glm::vec3(light->color));
+        shader_->setFloat3("u_ViewPos", cameraPos_);
 
-        vao_->Bind();
-        textureColors_->Bind(0);
-        moci::RenderCommand::DrawArrays(moci::RenderDrawMode::Triangles, 0,
+        vao_->bind();
+        textureColors_->bind(0);
+        moci::RenderCommand::drawArrays(moci::RenderDrawMode::Triangles, 0,
                                         static_cast<std::uint32_t>(vertices_.size()));
         drawStats_.numVertices += static_cast<std::uint32_t>(vertices_.size());
-        textureColors_->Unbind();
+        textureColors_->unbind();
     }
 
     {
         MOCI_PROFILE_SCOPE("OnUpdate::Light");
-        light->Render(view, projection);
+        light->render(view, projection);
     }
 
     // skybox
     // change depth function so depth test passes when values are equal to depth buffer's content
     GLCall(glDepthFunc(GL_LEQUAL));
-    skyboxShader_->Bind();
+    skyboxShader_->bind();
     auto const skyboxView = glm::mat4(glm::mat3(view));
-    skyboxShader_->SetMat4("u_View", skyboxView);
-    skyboxShader_->SetMat4("u_Projection", projection);
-    skyboxShader_->SetInt("u_Skybox", 0);
+    skyboxShader_->setMat4("u_View", skyboxView);
+    skyboxShader_->setMat4("u_Projection", projection);
+    skyboxShader_->setInt("u_Skybox", 0);
     // skybox cube
-    skyboxVao_->Bind();
-    skyBoxTexture_->Bind(0);
-    moci::RenderCommand::DrawArrays(moci::RenderDrawMode::Triangles, 0, 36);
-    skyboxVao_->Unbind();
+    skyboxVao_->bind();
+    skyBoxTexture_->bind(0);
+    moci::RenderCommand::drawArrays(moci::RenderDrawMode::Triangles, 0, 36);
+    skyboxVao_->unbind();
     GLCall(glDepthFunc(GL_LESS));  // set depth function back to default
 
-    framebuffer_->Unbind();
+    framebuffer_->unbind();
 }
 
-void DemoLayer::OnEvent(moci::Event& e)
+void DemoLayer::onEvent(moci::Event& e)
 {
     moci::EventDispatcher dispatcher(e);
-    dispatcher.Dispatch<moci::WindowResizeEvent>(MOCI_EVENT_METHOD(DemoLayer::OnWindowResized));
-    dispatcher.Dispatch<moci::KeyPressedEvent>(MOCI_EVENT_METHOD(DemoLayer::OnKeyPressed));
-    dispatcher.Dispatch<moci::MouseScrolledEvent>(MOCI_EVENT_METHOD(DemoLayer::OnMouseScrolled));
-    dispatcher.Dispatch<moci::MouseMovedEvent>(MOCI_EVENT_METHOD(DemoLayer::OnMouseMoved));
-    dispatcher.Dispatch<moci::MouseButtonPressedEvent>(MOCI_EVENT_METHOD(DemoLayer::OnMousePressed));
-    dispatcher.Dispatch<moci::MouseButtonReleasedEvent>(MOCI_EVENT_METHOD(DemoLayer::OnMouseReleased));
+    dispatcher.dispatch<moci::WindowResizeEvent>(MOCI_EVENT_METHOD(DemoLayer::onWindowResized));
+    dispatcher.dispatch<moci::KeyPressedEvent>(MOCI_EVENT_METHOD(DemoLayer::onKeyPressed));
+    dispatcher.dispatch<moci::MouseScrolledEvent>(MOCI_EVENT_METHOD(DemoLayer::onMouseScrolled));
+    dispatcher.dispatch<moci::MouseMovedEvent>(MOCI_EVENT_METHOD(DemoLayer::onMouseMoved));
+    dispatcher.dispatch<moci::MouseButtonPressedEvent>(MOCI_EVENT_METHOD(DemoLayer::onMousePressed));
+    dispatcher.dispatch<moci::MouseButtonReleasedEvent>(MOCI_EVENT_METHOD(DemoLayer::onMouseReleased));
 }
 
-bool DemoLayer::OnWindowResized(moci::WindowResizeEvent& e)
+bool DemoLayer::onWindowResized(moci::WindowResizeEvent& e)
 {
-    width_  = static_cast<float>(e.GetWidth());
-    height_ = static_cast<float>(e.GetHeight());
+    width_  = static_cast<float>(e.getWidth());
+    height_ = static_cast<float>(e.getHeight());
     return false;
 }
 
-bool DemoLayer::OnKeyPressed(moci::KeyPressedEvent& e)
+bool DemoLayer::onKeyPressed(moci::KeyPressedEvent& e)
 {
     auto const cameraSpeed = 0.15F * lastTimestep_;
-    if (e.GetKeyCode() == moci::Key::Up) { cameraPos_ += cameraSpeed * cameraFront_; }
-    if (e.GetKeyCode() == moci::Key::Down) { cameraPos_ -= cameraSpeed * cameraFront_; }
-    if (e.GetKeyCode() == moci::Key::Left)
+    if (e.getKeyCode() == moci::Key::Up) { cameraPos_ += cameraSpeed * cameraFront_; }
+    if (e.getKeyCode() == moci::Key::Down) { cameraPos_ -= cameraSpeed * cameraFront_; }
+    if (e.getKeyCode() == moci::Key::Left)
     {
         cameraPos_ -= glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed;
     }
-    if (e.GetKeyCode() == moci::Key::Right)
+    if (e.getKeyCode() == moci::Key::Right)
     {
         cameraPos_ += glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed;
     }
@@ -277,9 +277,9 @@ bool DemoLayer::OnKeyPressed(moci::KeyPressedEvent& e)
     return true;
 }
 
-bool DemoLayer::OnMouseScrolled(moci::MouseScrolledEvent& e)
+bool DemoLayer::onMouseScrolled(moci::MouseScrolledEvent& e)
 {
-    cameraFOV_ -= e.GetYOffset();
+    cameraFOV_ -= e.getYOffset();
     constexpr auto minFOV = 1.0F;
     constexpr auto maxFOV = 75.0F;
     if (cameraFOV_ < minFOV) { cameraFOV_ = minFOV; }
@@ -287,9 +287,9 @@ bool DemoLayer::OnMouseScrolled(moci::MouseScrolledEvent& e)
     return true;
 }
 
-bool DemoLayer::OnMousePressed(moci::MouseButtonPressedEvent& e)
+bool DemoLayer::onMousePressed(moci::MouseButtonPressedEvent& e)
 {
-    if (e.GetMouseButton() == moci::MouseCode::ButtonMiddle)
+    if (e.getMouseButton() == moci::MouseCode::ButtonMiddle)
     {
         isMouseDragging_ = true;
         return true;
@@ -298,9 +298,9 @@ bool DemoLayer::OnMousePressed(moci::MouseButtonPressedEvent& e)
     return false;
 }
 
-bool DemoLayer::OnMouseReleased(moci::MouseButtonReleasedEvent& e)
+bool DemoLayer::onMouseReleased(moci::MouseButtonReleasedEvent& e)
 {
-    if (e.GetMouseButton() == moci::MouseCode::ButtonMiddle)
+    if (e.getMouseButton() == moci::MouseCode::ButtonMiddle)
     {
         isMouseDragging_ = false;
         firstMouse_      = true;
@@ -310,21 +310,21 @@ bool DemoLayer::OnMouseReleased(moci::MouseButtonReleasedEvent& e)
     return false;
 }
 
-bool DemoLayer::OnMouseMoved(moci::MouseMovedEvent& e)
+bool DemoLayer::onMouseMoved(moci::MouseMovedEvent& e)
 {
     if (isMouseDragging_)
     {
         if (firstMouse_)
         {
-            cameraLastX_ = e.GetX();
-            cameraLastY_ = e.GetY();
+            cameraLastX_ = e.getX();
+            cameraLastY_ = e.getY();
             firstMouse_  = false;
         }
 
-        auto xOffset = e.GetX() - cameraLastX_;
-        auto yOffset = cameraLastY_ - e.GetY();
-        cameraLastX_ = e.GetX();
-        cameraLastY_ = e.GetY();
+        auto xOffset = e.getX() - cameraLastX_;
+        auto yOffset = cameraLastY_ - e.getY();
+        cameraLastX_ = e.getX();
+        cameraLastY_ = e.getY();
 
         auto const sensitifity = 0.1F;
         xOffset *= sensitifity;
@@ -347,10 +347,10 @@ bool DemoLayer::OnMouseMoved(moci::MouseMovedEvent& e)
     return true;
 }
 
-void DemoLayer::OnImGuiRender()
+void DemoLayer::onImGuiRender()
 {
     auto const fps        = ImGui::GetIO().Framerate;
-    auto const frameCount = moci::Application::Get().GetWindow().GetFrameCount();
+    auto const frameCount = moci::Application::get().getWindow().getFrameCount();
     if (frameCount >= 100)
     {
         if (fps < drawStats_.minFPS) { drawStats_.minFPS = fps; }
@@ -369,7 +369,7 @@ void DemoLayer::OnImGuiRender()
             ImGui::Checkbox("Sandbox3D", &imguiWindow_);
             ImGui::Checkbox("Imgui Demo", &imguiDemo_);
             ImGui::Checkbox("Fullscreen", &fullscreen_);
-            moci::Application::Get().GetWindow().SetFullscreen(fullscreen_);
+            moci::Application::get().getWindow().setFullscreen(fullscreen_);
 
             ImGui::EndMenu();
         }
@@ -383,16 +383,16 @@ void DemoLayer::OnImGuiRender()
 
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2 {0, 0});
     ImGui::Begin("Viewport");
-    auto const viewportRegion = ImGuiToGlmVec(ImGui::GetContentRegionAvail());
+    auto const viewportRegion = imGuiToGlmVec(ImGui::GetContentRegionAvail());
     if (viewportSize_ != viewportRegion)
     {
         viewportSize_        = viewportRegion;
         auto const newWidth  = static_cast<std::uint32_t>(viewportSize_.x);
         auto const newHeight = static_cast<std::uint32_t>(viewportSize_.y);
-        framebuffer_->Resize(newWidth, newHeight);
+        framebuffer_->resize(newWidth, newHeight);
     }
 
-    auto* const textureID = reinterpret_cast<void*>((size_t)framebuffer_->GetColorAttachmentRendererID());
+    auto* const textureID = reinterpret_cast<void*>((size_t)framebuffer_->getColorAttachmentRendererId());
     ImGui::Image(textureID, {viewportRegion.x, viewportRegion.y}, ImVec2(0, 1), ImVec2(1, 0));
     ImGui::End();
     ImGui::PopStyleVar();

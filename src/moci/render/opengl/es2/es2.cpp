@@ -1,11 +1,11 @@
 #include "es2.hpp"
 
-void GLClearError()
+void glClearError()
 {
     while (glGetError() != GL_NO_ERROR) { ; }
 }
 
-auto GLLogCall(const char* function, const char* file, int line) -> bool
+auto glLogCall(const char* function, const char* file, int line) -> bool
 {
     while (GLenum error = glGetError())
     {

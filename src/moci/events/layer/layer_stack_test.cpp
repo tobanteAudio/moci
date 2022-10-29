@@ -24,7 +24,7 @@ public:
 TEST_CASE("events/layer: Layer", "[events][layer]")
 {
     moci::Scope<moci::Layer> layer(new TestLayer("test"));
-    REQUIRE(layer->GetName() == "test");
+    REQUIRE(layer->getName() == "test");
 }
 
 TEST_CASE("events/layer: LayerStackConstructor", "[events][layer]")
@@ -37,6 +37,6 @@ TEST_CASE("events/layer: LayerStackPushLayer", "[events][layer]")
 {
     auto stack = moci::LayerStack();
     REQUIRE(stack.begin() == stack.end());
-    stack.PushLayer(moci::MakeScope<TestLayer>("test"));
+    stack.pushLayer(moci::makeScope<TestLayer>("test"));
     // REQUIRE(std::distance(stack.begin(), stack.end()) == 1);
 }

@@ -6,7 +6,7 @@
 namespace moci
 {
 
-auto GraphicsContext::Create(void* win) -> GraphicsContext*
+auto GraphicsContext::create(void* win) -> GraphicsContext*
 {
     return new OpenGLESContext(static_cast<GLFWwindow*>(win));
 }
@@ -16,7 +16,7 @@ OpenGLESContext::OpenGLESContext(GLFWwindow* windowHandle) : m_WindowHandle(wind
     MOCI_CORE_ASSERT(windowHandle, "Window handle is null!")
 }
 
-void OpenGLESContext::Init()
+void OpenGLESContext::init()
 {
     glfwMakeContextCurrent(m_WindowHandle);
 
@@ -40,6 +40,6 @@ void OpenGLESContext::Init()
     MOCI_CORE_INFO("  Version:    {0}", glGetString(GL_VERSION));
 }
 
-void OpenGLESContext::SwapBuffers() { glfwSwapBuffers(m_WindowHandle); }
+void OpenGLESContext::swapBuffers() { glfwSwapBuffers(m_WindowHandle); }
 
 }  // namespace moci

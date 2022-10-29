@@ -34,19 +34,19 @@ class Shader
 public:
     virtual ~Shader() = default;
 
-    virtual void Bind() const   = 0;
-    virtual void Unbind() const = 0;
+    virtual void bind() const   = 0;
+    virtual void unbind() const = 0;
 
-    virtual void SetInt(std::string const& name, int value)                 = 0;
-    virtual void SetInts(std::string const& name, int count, int* value)    = 0;
-    virtual void SetFloat(std::string const& name, float value)             = 0;
-    virtual void SetFloat2(std::string const& name, glm::vec2 const& value) = 0;
-    virtual void SetFloat3(std::string const& name, glm::vec3 const& value) = 0;
-    virtual void SetFloat4(std::string const& name, glm::vec4 const& value) = 0;
-    virtual void SetMat3(std::string const& name, glm::mat3 const& value)   = 0;
-    virtual void SetMat4(std::string const& name, glm::mat4 const& value)   = 0;
+    virtual void setInt(std::string const& name, int value)                 = 0;
+    virtual void setInts(std::string const& name, int count, int* value)    = 0;
+    virtual void setFloat(std::string const& name, float value)             = 0;
+    virtual void setFloat2(std::string const& name, glm::vec2 const& value) = 0;
+    virtual void setFloat3(std::string const& name, glm::vec3 const& value) = 0;
+    virtual void setFloat4(std::string const& name, glm::vec4 const& value) = 0;
+    virtual void setMat3(std::string const& name, glm::mat3 const& value)   = 0;
+    virtual void setMat4(std::string const& name, glm::mat4 const& value)   = 0;
 
-    [[nodiscard]] virtual auto GetName() const -> std::string const& = 0;
+    [[nodiscard]] virtual auto getName() const -> std::string const& = 0;
 };
 
 }  // namespace moci

@@ -8,18 +8,18 @@ namespace moci
 {
 Typeface::Typeface(std::string name) : name_(std::move(name)) { }
 
-void Typeface::AddCharacter(char c, std::uint32_t height, std::uint32_t width, Point<std::uint32_t> topLeft,
+void Typeface::addCharacter(char c, std::uint32_t height, std::uint32_t width, Point<std::uint32_t> topLeft,
                             std::uint32_t advance, Buffer buffer)
 {
-    AddCharacter(c, {height, width, topLeft, advance, std::move(buffer)});
+    addCharacter(c, {height, width, topLeft, advance, std::move(buffer)});
 }
 
-void Typeface::AddCharacter(char c, Character const& character)
+void Typeface::addCharacter(char c, Character const& character)
 {
     characters_.insert(std::pair<char, Character>(c, character));
 }
 
-auto Typeface::GetWidthForString(std::string const& text, float scale) -> std::uint32_t
+auto Typeface::getWidthForString(std::string const& text, float scale) -> std::uint32_t
 {
     auto position = Point<float> {};
     for (auto const c : text)
@@ -32,10 +32,10 @@ auto Typeface::GetWidthForString(std::string const& text, float scale) -> std::u
         // float const h    = ch.height * scale;
 
         // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-        position.SetX(position.GetX() + ((ch.advance >> 6) * scale));
+        position.setX(position.getX() + ((ch.advance >> 6) * scale));
     }
 
-    return static_cast<std::uint32_t>(position.GetX());
+    return static_cast<std::uint32_t>(position.getX());
 }
 
 }  // namespace moci

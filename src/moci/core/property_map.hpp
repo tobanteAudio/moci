@@ -35,22 +35,22 @@ public:
     /**
      * @brief Sets the name.
      */
-    auto SetName(std::string newName) -> void { name_ = std::move(newName); }
+    auto setName(std::string newName) -> void { name_ = std::move(newName); }
 
     /**
      * @brief Returns the name.
      */
-    [[nodiscard]] auto GetName() const noexcept -> std::string_view { return std::string_view(name_); }
+    [[nodiscard]] auto getName() const noexcept -> std::string_view { return std::string_view(name_); }
 
     /**
      * @brief Sets or updates the property at key.
      */
-    auto SetProperty(KeyType const& key, Property&& p) -> void { data_.insert_or_assign(key, p); }
+    auto setProperty(KeyType const& key, Property&& p) -> void { data_.insert_or_assign(key, p); }
 
     /**
      * @brief Returns the property at key.
      */
-    [[nodiscard]] auto GetProperty(KeyType const& key) const noexcept -> std::optional<Property>
+    [[nodiscard]] auto getProperty(KeyType const& key) const noexcept -> std::optional<Property>
     {
         auto const search = data_.find(key);
         if (search != data_.end()) { return search->second; }
@@ -62,12 +62,12 @@ public:
      * @brief Delete the property at key. Returns true if successfully deleted.
      * If the key doesn't exist, false will be returned.
      */
-    auto DeleteProperty(KeyType const& key) -> bool { return data_.erase(key) == 1; }
+    auto deleteProperty(KeyType const& key) -> bool { return data_.erase(key) == 1; }
 
     /**
      * @brief Returns true if the map contains the given key.
      */
-    [[nodiscard]] auto HasKey(KeyType const& key) const -> bool
+    [[nodiscard]] auto hasKey(KeyType const& key) const -> bool
     {
         auto const search = data_.find(key);
         return search != data_.end();

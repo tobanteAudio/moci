@@ -9,19 +9,19 @@
 TEST_CASE("graphics/freetype: FreetypeCreateTypeface", "[graphics][font]")
 {
     const auto* const path = "moci_test_data/OpenSans-Bold.ttf";
-    auto const typeface    = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
+    auto const typeface    = moci::FreetypeLibrary::createTypefaceFromFont(path);
     REQUIRE(typeface.has_value() == true);
-    REQUIRE(typeface.value().GetNumCharacters() == 128);
+    REQUIRE(typeface.value().getNumCharacters() == 128);
 }
 
 TEST_CASE("graphics/freetype: FreetypeCreateTypefaceNoPath", "[graphics][font]")
 {
     {
-        auto typeface = moci::FreetypeLibrary::CreateTypefaceFromFont("");
+        auto typeface = moci::FreetypeLibrary::createTypefaceFromFont("");
         REQUIRE(typeface.has_value() == false);
     }
     {
-        auto typeface = moci::FreetypeLibrary::CreateTypefaceFromFont("noexist");
+        auto typeface = moci::FreetypeLibrary::createTypefaceFromFont("noexist");
         REQUIRE(typeface.has_value() == false);
     }
 }

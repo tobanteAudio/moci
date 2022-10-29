@@ -15,28 +15,28 @@ class OrthographicCamera
 public:
     OrthographicCamera(float left, float right, float bottom, float top);
 
-    void SetProjection(float left, float right, float bottom, float top);
+    void setProjection(float left, float right, float bottom, float top);
 
-    [[nodiscard]] auto GetPosition() const -> const glm::vec3& { return m_Position; }
-    void SetPosition(const glm::vec3& position)
+    [[nodiscard]] auto getPosition() const -> const glm::vec3& { return m_Position; }
+    void setPosition(const glm::vec3& position)
     {
         m_Position = position;
-        RecalculateViewMatrix();
+        recalculateViewMatrix();
     }
 
-    [[nodiscard]] auto GetRotation() const -> float { return m_Rotation; }
-    void SetRotation(float rotation)
+    [[nodiscard]] auto getRotation() const -> float { return m_Rotation; }
+    void setRotation(float rotation)
     {
         m_Rotation = rotation;
-        RecalculateViewMatrix();
+        recalculateViewMatrix();
     }
 
-    [[nodiscard]] auto GetProjectionMatrix() const -> const glm::mat4& { return m_ProjectionMatrix; }
-    [[nodiscard]] auto GetViewMatrix() const -> const glm::mat4& { return m_ViewMatrix; }
-    [[nodiscard]] auto GetViewProjectionMatrix() const -> const glm::mat4& { return m_ViewProjectionMatrix; }
+    [[nodiscard]] auto getProjectionMatrix() const -> const glm::mat4& { return m_ProjectionMatrix; }
+    [[nodiscard]] auto getViewMatrix() const -> const glm::mat4& { return m_ViewMatrix; }
+    [[nodiscard]] auto getViewProjectionMatrix() const -> const glm::mat4& { return m_ViewProjectionMatrix; }
 
 private:
-    void RecalculateViewMatrix();
+    void recalculateViewMatrix();
 
     glm::mat4 m_ProjectionMatrix;
     glm::mat4 m_ViewMatrix;
@@ -51,18 +51,18 @@ class OrthographicCameraController
 public:
     explicit OrthographicCameraController(float aspectRatio, bool rotation = false);
 
-    void OnUpdate(Timestep ts);
-    void OnEvent(Event& e);
+    void onUpdate(Timestep ts);
+    void onEvent(Event& e);
 
-    auto GetCamera() -> OrthographicCamera& { return m_Camera; }
-    [[nodiscard]] auto GetCamera() const -> const OrthographicCamera& { return m_Camera; }
+    auto getCamera() -> OrthographicCamera& { return m_Camera; }
+    [[nodiscard]] auto getCamera() const -> const OrthographicCamera& { return m_Camera; }
 
-    [[nodiscard]] auto GetZoomLevel() const -> float { return m_ZoomLevel; }
-    void SetZoomLevel(float level) { m_ZoomLevel = level; }
+    [[nodiscard]] auto getZoomLevel() const -> float { return m_ZoomLevel; }
+    void setZoomLevel(float level) { m_ZoomLevel = level; }
 
 private:
-    auto OnMouseScrolled(MouseScrolledEvent& e) -> bool;
-    auto OnWindowResized(WindowResizeEvent& e) -> bool;
+    auto onMouseScrolled(MouseScrolledEvent& e) -> bool;
+    auto onWindowResized(WindowResizeEvent& e) -> bool;
 
     float m_AspectRatio;
     float m_ZoomLevel = 1.0F;

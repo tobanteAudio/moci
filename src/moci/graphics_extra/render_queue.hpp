@@ -37,20 +37,20 @@ public:
     BatchRender2D(const BatchRender2D&)                    = delete;
     auto operator=(const BatchRender2D&) -> BatchRender2D& = delete;
 
-    auto StartFrame(float width, float height) -> void;
-    auto EndFrame() -> void;
+    auto startFrame(float width, float height) -> void;
+    auto endFrame() -> void;
 
-    auto DrawText(const std::string& text, glm::vec2 position, float scale, Color color) -> void;
-    auto DrawQuad(Rectangle<float> rect, Color color, Texture2D::Optional texture = std::nullopt) -> void;
-    auto DrawCircle(float x, float y, float radius, int numSides, Color color) -> void;
+    auto drawText(const std::string& text, glm::vec2 position, float scale, Color color) -> void;
+    auto drawQuad(Rectangle<float> rect, Color color, Texture2D::Optional texture = std::nullopt) -> void;
+    auto drawCircle(float x, float y, float radius, int numSides, Color color) -> void;
 
-    [[nodiscard]] auto GetFrameStats() const -> FrameStats;
+    [[nodiscard]] auto getFrameStats() const -> FrameStats;
 
 private:
-    static constexpr std::size_t MaxQuadCount    = 10000;
-    static constexpr std::size_t MaxVertexCount  = MaxQuadCount * 4;
-    static constexpr std::size_t MaxIndexCount   = MaxQuadCount * 6;
-    static constexpr std::size_t MaxTextureUnits = 16;
+    static constexpr std::size_t maxQuadCount    = 10000;
+    static constexpr std::size_t maxVertexCount  = maxQuadCount * 4;
+    static constexpr std::size_t maxIndexCount   = maxQuadCount * 6;
+    static constexpr std::size_t maxTextureUnits = 16;
 
     struct Vertex
     {
@@ -83,12 +83,12 @@ private:
         std::uint32_t Advance    = {};  // Offset to advance to next glyph
     };
 
-    auto FontInit(std::string const& fontPath) -> void;
-    auto BeginBatch() -> void;
-    auto Flush() -> void;
-    auto FlushIf(bool shouldFlush) -> void;
-    auto EndBatch() -> void;
-    auto ResetFrameStats() -> void;
+    auto fontInit(std::string const& fontPath) -> void;
+    auto beginBatch() -> void;
+    auto flush() -> void;
+    auto flushIf(bool shouldFlush) -> void;
+    auto endBatch() -> void;
+    auto resetFrameStats() -> void;
 
     RenderData data_ {};
     std::map<char, Character> characters_;

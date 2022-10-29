@@ -7,27 +7,27 @@
 namespace moci
 {
 
-Ref<spdlog::logger> Log::s_CoreLogger;
-Ref<spdlog::logger> Log::s_ClientLogger;
+Ref<spdlog::logger> Log::sCoreLogger;
+Ref<spdlog::logger> Log::sClientLogger;
 
-void Log::Init()
+void Log::init()
 {
     Vector<spdlog::sink_ptr> logSinks {};
-    logSinks.emplace_back(MakeRef<spdlog::sinks::stdout_color_sink_mt>());
+    logSinks.emplace_back(makeRef<spdlog::sinks::stdout_color_sink_mt>());
     logSinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>("moci.log", true));
 
     logSinks[0]->set_pattern("%^[%T] %n: %v%$");
     logSinks[1]->set_pattern("[%T] [%l] %n: %v");
 
-    s_CoreLogger = MakeRef<spdlog::logger>("MOCI", begin(logSinks), end(logSinks));
-    spdlog::register_logger(s_CoreLogger);
-    s_CoreLogger->set_level(spdlog::level::trace);
-    s_CoreLogger->flush_on(spdlog::level::trace);
+    sCoreLogger = makeRef<spdlog::logger>("MOCI", begin(logSinks), end(logSinks));
+    spdlog::register_logger(sCoreLogger);
+    sCoreLogger->set_level(spdlog::level::trace);
+    sCoreLogger->flush_on(spdlog::level::trace);
 
-    s_ClientLogger = MakeRef<spdlog::logger>("APP", begin(logSinks), end(logSinks));
-    spdlog::register_logger(s_ClientLogger);
-    s_ClientLogger->set_level(spdlog::level::trace);
-    s_ClientLogger->flush_on(spdlog::level::trace);
+    sClientLogger = makeRef<spdlog::logger>("APP", begin(logSinks), end(logSinks));
+    spdlog::register_logger(sClientLogger);
+    sClientLogger->set_level(spdlog::level::trace);
+    sClientLogger->flush_on(spdlog::level::trace);
 }
 
 }  // namespace moci

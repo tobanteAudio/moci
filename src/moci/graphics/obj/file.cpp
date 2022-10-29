@@ -12,17 +12,17 @@ namespace moci
 
 OBJFile::OBJFile(std::string path) : path_(std::move(path)) { }
 
-auto OBJFile::Parse() -> bool
+auto OBJFile::parse() -> bool
 {
     std::string line;
     std::ifstream objFile(path_);
     if (!objFile.is_open()) { return false; }
-    auto guard = MakeScopeGuard([&]() { objFile.close(); });
+    auto guard = makeScopeGuard([&]() { objFile.close(); });
 
     while (getline(objFile, line))
     {
         // Remove whitespace
-        Strings::Trim(line);
+        Strings::trim(line);
 
         // Ignore empty lines
         if (line.empty()) { continue; }
@@ -64,8 +64,8 @@ auto OBJFile::Parse() -> bool
 auto OBJFile::parseLineToVec3(std::string& line) -> glm::vec3
 {
 
-    auto splits = Strings::Split(line, ' ');
-    std::for_each(std::begin(splits), std::end(splits), [](auto& split) { Strings::Trim(split); });
+    auto splits = Strings::split(line, ' ');
+    std::for_each(std::begin(splits), std::end(splits), [](auto& split) { Strings::trim(split); });
     splits.erase(                                                         //
         std::remove_if(splits.begin(),                                    //
                        splits.end(),                                      //
@@ -95,8 +95,8 @@ auto OBJFile::parseLineToVec3(std::string& line) -> glm::vec3
 
 void OBJFile::parseLineToFace(std::string& line)
 {
-    auto splits = Strings::Split(line, ' ');
-    std::for_each(std::begin(splits), std::end(splits), [](auto& split) { Strings::Trim(split); });
+    auto splits = Strings::split(line, ' ');
+    std::for_each(std::begin(splits), std::end(splits), [](auto& split) { Strings::trim(split); });
     splits.erase(                                                         //
         std::remove_if(splits.begin(),                                    //
                        splits.end(),                                      //
@@ -108,12 +108,12 @@ void OBJFile::parseLineToFace(std::string& line)
 
     for (auto& split : splits)
     {
-        auto indices = Strings::Split(split, '/');
+        auto indices = Strings::split(split, '/');
         if (indices.size() == 3)
         {
-            auto const vertexIdx = Strings::ToInt(indices[0]);
+            auto const vertexIdx = Strings::toInt(indices[0]);
             // auto const textureIdx = Strings::ToInt(indices[1]);
-            auto const normalIdx = Strings::ToInt(indices[2]);
+            auto const normalIdx = Strings::toInt(indices[2]);
             MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
 
             auto const vertex  = vertices_.at(vertexIdx.value() - 1);
@@ -125,7 +125,7 @@ void OBJFile::parseLineToFace(std::string& line)
 
         if (indices.size() == 2)
         {
-            auto const vertexIdx = Strings::ToInt(indices[0]);
+            auto const vertexIdx = Strings::toInt(indices[0]);
             // auto const textureIdx = Strings::ToInt(indices[1]);
             MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
 
@@ -138,7 +138,7 @@ void OBJFile::parseLineToFace(std::string& line)
 
         if (indices.size() == 1)
         {
-            auto const vertexIdx = Strings::ToInt(indices[0]);
+            auto const vertexIdx = Strings::toInt(indices[0]);
             MOCI_CORE_ASSERT(vertexIdx.has_value() == true, "The vertex position should never be empty");
 
             auto const vertex  = vertices_.at(vertexIdx.value() - 1);

@@ -14,13 +14,13 @@ TEST_CASE("events: KeyPressedEvent", "[key][events]")
     auto const event = moci::KeyPressedEvent(moci::Key::Escape, 1);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyPressed);
     REQUIRE(event.GetName() == std::string_view("KeyPressed"));
-    REQUIRE(event.GetKeyCode() == moci::Key::Escape);
-    REQUIRE(event.GetRepeatCount() == 1);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryInput) == true);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryKeyboard) == true);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryMouse) == false);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryMouseButton) == false);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryApplication) == false);
+    REQUIRE(event.getKeyCode() == moci::Key::Escape);
+    REQUIRE(event.getRepeatCount() == 1);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryInput) == true);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryKeyboard) == true);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryMouse) == false);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryMouseButton) == false);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryApplication) == false);
     // REQUIRE_THAT(event.ToString(), Contains("KeyPressed"));
 }
 
@@ -29,12 +29,12 @@ TEST_CASE("events: KeyReleasedEvent", "[key][events]")
     auto const event = moci::KeyReleasedEvent(moci::Key::A);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyReleased);
     REQUIRE(event.GetName() == std::string_view("KeyReleased"));
-    REQUIRE(event.GetKeyCode() == moci::Key::A);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryInput) == true);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryKeyboard) == true);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryMouse) == false);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryMouseButton) == false);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryApplication) == false);
+    REQUIRE(event.getKeyCode() == moci::Key::A);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryInput) == true);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryKeyboard) == true);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryMouse) == false);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryMouseButton) == false);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryApplication) == false);
     // REQUIRE_THAT(event.ToString(), Contains("KeyReleased"));
 }
 
@@ -43,11 +43,11 @@ TEST_CASE("events: KeyTypedEvent", "[key][events]")
     auto const event = moci::KeyTypedEvent(moci::Key::Y);
     REQUIRE(event.GetStaticType() == moci::EventType::KeyTyped);
     REQUIRE(event.GetName() == std::string_view("KeyTyped"));
-    REQUIRE(event.GetKeyCode() == moci::Key::Y);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryInput) == true);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryKeyboard) == true);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryMouse) == false);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryMouseButton) == false);
-    REQUIRE(event.IsInCategory(moci::EventCategory::EventCategoryApplication) == false);
+    REQUIRE(event.getKeyCode() == moci::Key::Y);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryInput) == true);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryKeyboard) == true);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryMouse) == false);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryMouseButton) == false);
+    REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryApplication) == false);
     // REQUIRE_THAT(event.ToString(), Contains("KeyTyped"));
 }

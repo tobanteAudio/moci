@@ -12,7 +12,7 @@ class LabelStyleMethods
 public:
     virtual ~LabelStyleMethods() = default;
 
-    virtual void DrawLabel(Painter& painter, Rectangle<int> bounds, Label const& label) = 0;
+    virtual void drawLabel(Painter& painter, Rectangle<int> bounds, Label const& label) = 0;
 };
 
 class Label : public Component
@@ -21,14 +21,14 @@ public:
     Label(std::string text, Color col);
     ~Label() override = default;
 
-    auto OnDraw(Painter& painter) -> void override;
+    auto onDraw(Painter& painter) -> void override;
 
-    auto SetText(std::string newText) -> void { text_ = std::move(newText); }
-    [[nodiscard]] auto GetText() const noexcept -> std::string const& { return text_; }
-    [[nodiscard]] auto GetTextView() const noexcept -> std::string_view { return text_; }
+    auto setText(std::string newText) -> void { text_ = std::move(newText); }
+    [[nodiscard]] auto getText() const noexcept -> std::string const& { return text_; }
+    [[nodiscard]] auto getTextView() const noexcept -> std::string_view { return text_; }
 
-    void SetTextColor(Color col) noexcept { color_ = col; }
-    [[nodiscard]] auto GetTextColor() const noexcept -> Color { return color_; }
+    void setTextColor(Color col) noexcept { color_ = col; }
+    [[nodiscard]] auto getTextColor() const noexcept -> Color { return color_; }
 
 private:
     std::string text_ {};

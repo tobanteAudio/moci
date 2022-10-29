@@ -10,17 +10,17 @@ namespace moci
 
 namespace
 {
-constexpr uint32_t s_MeshImportFlags = aiProcess_CalcTangentSpace |      // Create binormals/tangents just in case
-                                       aiProcess_Triangulate |           // Make sure we're triangles
-                                       aiProcess_SortByPType |           // Split meshes by primitive type
-                                       aiProcess_GenNormals |            // Make sure we have legit normals
-                                       aiProcess_GenUVCoords |           // Convert UVs if required
-                                       aiProcess_OptimizeMeshes |        // Batch draws where possible
-                                       aiProcess_ValidateDataStructure;  // Validation
+constexpr uint32_t SMeshImportFlags = aiProcess_CalcTangentSpace |      // Create binormals/tangents just in case
+                                      aiProcess_Triangulate |           // Make sure we're triangles
+                                      aiProcess_SortByPType |           // Split meshes by primitive type
+                                      aiProcess_GenNormals |            // Make sure we have legit normals
+                                      aiProcess_GenUVCoords |           // Convert UVs if required
+                                      aiProcess_OptimizeMeshes |        // Batch draws where possible
+                                      aiProcess_ValidateDataStructure;  // Validation
 
 struct LogStream : public Assimp::LogStream
 {
-    static void Initialize()
+    static void initialize()
     {
         if (Assimp::DefaultLogger::isNullLogger())
         {
@@ -48,13 +48,13 @@ auto aiMatrix4x4ToGlm(const aiMatrix4x4& from) -> glm::mat4
 
 Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
 {
-    LogStream::Initialize();
+    LogStream::initialize();
 
     MOCI_CORE_INFO("Loading mesh: {0}", filePath_.c_str());
 
-    importer_ = moci::MakeScope<Assimp::Importer>();
+    importer_ = moci::makeScope<Assimp::Importer>();
 
-    const aiScene* scene = importer_->ReadFile(filePath_, s_MeshImportFlags);
+    const aiScene* scene = importer_->ReadFile(filePath_, SMeshImportFlags);
     if ((scene == nullptr) || !scene->HasMeshes()) { MOCI_CORE_ERROR("Failed to load mesh file: {0}", filePath_); }
 
     isAnimated_ = scene->mAnimations != nullptr;
@@ -112,7 +112,7 @@ Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
                 Vertex vertex;
                 vertex.position = {mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z};
                 vertex.normal   = {mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z};
-                vertex.color    = moci::Colors::Blue.GetData();
+                vertex.color    = moci::Colors::blue.getData();
 
                 // if (mesh->HasTangentsAndBitangents())
                 // {

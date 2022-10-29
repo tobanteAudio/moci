@@ -216,7 +216,7 @@
 namespace moci
 {
 template<typename... Types>
-auto IgnoreUnused(Types&&... /*unused*/) -> void
+auto ignoreUnused(Types&&... /*unused*/) -> void
 {
 }
 

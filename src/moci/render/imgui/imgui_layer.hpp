@@ -14,11 +14,11 @@ public:
     explicit ImGuiLayer(std::string const& name);
     ~ImGuiLayer() override;
 
-    static void Begin();
-    static void End();
+    static void begin();
+    static void end();
 
-    void OnAttach() override;
-    void OnDetach() override;
-    void OnImGuiRender() override;
+    void onAttach() override;
+    void onDetach() override;
+    void onImGuiRender() override;
 };
 }  // namespace moci

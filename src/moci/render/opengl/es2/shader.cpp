@@ -20,7 +20,7 @@ struct ShaderAttribute
     std::string type;
 };
 
-auto GetAttributeLayout(const std::string& src) -> Vector<ShaderAttribute>
+auto getAttributeLayout(const std::string& src) -> Vector<ShaderAttribute>
 {
     std::istringstream f(src);
     auto result = Vector<ShaderAttribute>();
@@ -30,8 +30,8 @@ auto GetAttributeLayout(const std::string& src) -> Vector<ShaderAttribute>
         auto const found = line.find("attribute");
         if (found != std::string::npos)
         {
-            moci::Strings::Trim(line);
-            auto splits = moci::Strings::Split(line, ' ');
+            moci::Strings::trim(line);
+            auto splits = moci::Strings::split(line, ' ');
             assert(splits.size() == 3);
 
             auto type = splits[1];
@@ -67,7 +67,7 @@ auto OpenGLESShader::parseShader(std::string const& filepath) -> ShaderProgramSo
     {
         auto ss = std::ostringstream {};
         ss << file.rdbuf();
-        auto program = ShaderParser::SplitSource(ss.str());
+        auto program = ShaderParser::splitSource(ss.str());
         return program;
     }
 
@@ -76,42 +76,42 @@ auto OpenGLESShader::parseShader(std::string const& filepath) -> ShaderProgramSo
 
 auto OpenGLESShader::createShader(const char* vertexSource, const char* fragmentSource) -> GLint
 {
-    constexpr auto INFO_LOG_LENGTH = 512;
-    GLchar infoLog[INFO_LOG_LENGTH];
+    constexpr auto infoLogLength = 512;
+    GLchar infoLog[infoLogLength];
     GLint success = 0;
 
     // Vertex shader
-    GLint vertex_shader = 0;
-    GLCall(vertex_shader = glCreateShader(GL_VERTEX_SHADER));
-    GLCall(glShaderSource(vertex_shader, 1, &vertexSource, nullptr));
-    GLCall(glCompileShader(vertex_shader));
-    GLCall(glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success));
+    GLint vertexShader = 0;
+    GLCall(vertexShader = glCreateShader(GL_VERTEX_SHADER));
+    GLCall(glShaderSource(vertexShader, 1, &vertexSource, nullptr));
+    GLCall(glCompileShader(vertexShader));
+    GLCall(glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success));
     if (success == 0)
     {
-        GLCall(glGetShaderInfoLog(vertex_shader, INFO_LOG_LENGTH, nullptr, infoLog));
+        GLCall(glGetShaderInfoLog(vertexShader, infoLogLength, nullptr, infoLog));
         MOCI_CORE_ERROR("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n{}\n", infoLog);
     }
 
     // Fragment shader
-    GLint fragment_shader = 0;
-    GLCall(fragment_shader = glCreateShader(GL_FRAGMENT_SHADER));
-    GLCall(glShaderSource(fragment_shader, 1, &fragmentSource, nullptr));
-    GLCall(glCompileShader(fragment_shader));
-    GLCall(glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success));
+    GLint fragmentShader = 0;
+    GLCall(fragmentShader = glCreateShader(GL_FRAGMENT_SHADER));
+    GLCall(glShaderSource(fragmentShader, 1, &fragmentSource, nullptr));
+    GLCall(glCompileShader(fragmentShader));
+    GLCall(glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success));
     if (success == 0)
     {
-        GLCall(glGetShaderInfoLog(fragment_shader, INFO_LOG_LENGTH, nullptr, infoLog));
+        GLCall(glGetShaderInfoLog(fragmentShader, infoLogLength, nullptr, infoLog));
         MOCI_CORE_ERROR("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n{}\n", infoLog);
     }
 
     // Link shaders
     GLint shaderProgram = 0;
     GLCall(shaderProgram = glCreateProgram());
-    GLCall(glAttachShader(shaderProgram, vertex_shader));
-    GLCall(glAttachShader(shaderProgram, fragment_shader));
+    GLCall(glAttachShader(shaderProgram, vertexShader));
+    GLCall(glAttachShader(shaderProgram, fragmentShader));
 
     // Bind attributes
-    auto const attributes = GetAttributeLayout(vertexSource);
+    auto const attributes = getAttributeLayout(vertexSource);
     for (auto const& a : attributes)
     {
         GLCall(glBindAttribLocation(shaderProgram, a.index, a.name.c_str()));
@@ -122,38 +122,38 @@ auto OpenGLESShader::createShader(const char* vertexSource, const char* fragment
     GLCall(glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success));
     if (success == 0)
     {
-        GLCall(glGetProgramInfoLog(shaderProgram, INFO_LOG_LENGTH, nullptr, infoLog));
+        GLCall(glGetProgramInfoLog(shaderProgram, infoLogLength, nullptr, infoLog));
         MOCI_CORE_ERROR("ERROR::SHADER::PROGRAM::LINKING_FAILED\n{}\n", infoLog);
     }
 
-    GLCall(glDeleteShader(vertex_shader));
-    GLCall(glDeleteShader(fragment_shader));
+    GLCall(glDeleteShader(vertexShader));
+    GLCall(glDeleteShader(fragmentShader));
     return shaderProgram;
 }
 
-void OpenGLESShader::Bind() const { GLCall(glUseProgram(m_RendererID)); }
+void OpenGLESShader::bind() const { GLCall(glUseProgram(m_RendererID)); }
 
-void OpenGLESShader::Unbind() const { GLCall(glUseProgram(0)); }
+void OpenGLESShader::unbind() const { GLCall(glUseProgram(0)); }
 
-void OpenGLESShader::SetInt(std::string const& name, int value) { uploadUniformInt(name, value); }
+void OpenGLESShader::setInt(std::string const& name, int value) { uploadUniformInt(name, value); }
 
-void OpenGLESShader::SetInts(std::string const& name, int count, int* values)
+void OpenGLESShader::setInts(std::string const& name, int count, int* values)
 {
 
     uploadUniformInts(name, count, values);
 }
 
-void OpenGLESShader::SetFloat(std::string const& name, float const value) { uploadUniformFloat(name, value); }
+void OpenGLESShader::setFloat(std::string const& name, float const value) { uploadUniformFloat(name, value); }
 
-void OpenGLESShader::SetFloat2(std::string const& name, const glm::vec2& value) { uploadUniformFloat2(name, value); }
+void OpenGLESShader::setFloat2(std::string const& name, const glm::vec2& value) { uploadUniformFloat2(name, value); }
 
-void OpenGLESShader::SetFloat3(std::string const& name, const glm::vec3& value) { uploadUniformFloat3(name, value); }
+void OpenGLESShader::setFloat3(std::string const& name, const glm::vec3& value) { uploadUniformFloat3(name, value); }
 
-void OpenGLESShader::SetFloat4(std::string const& name, const glm::vec4& value) { uploadUniformFloat4(name, value); }
+void OpenGLESShader::setFloat4(std::string const& name, const glm::vec4& value) { uploadUniformFloat4(name, value); }
 
-void OpenGLESShader::SetMat3(std::string const& name, const glm::mat3& value) { uploadUniformMat3(name, value); }
+void OpenGLESShader::setMat3(std::string const& name, const glm::mat3& value) { uploadUniformMat3(name, value); }
 
-void OpenGLESShader::SetMat4(std::string const& name, const glm::mat4& value) { uploadUniformMat4(name, value); }
+void OpenGLESShader::setMat4(std::string const& name, const glm::mat4& value) { uploadUniformMat4(name, value); }
 
 auto OpenGLESShader::getLocation(std::string const& name) const -> std::int32_t
 {

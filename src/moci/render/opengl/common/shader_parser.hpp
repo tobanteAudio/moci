@@ -8,7 +8,7 @@ class ShaderParser
 {
 
 public:
-    static auto SplitSource(std::string const& source) -> ShaderProgramSource;
+    static auto splitSource(std::string const& source) -> ShaderProgramSource;
 };
 
 }  // namespace moci

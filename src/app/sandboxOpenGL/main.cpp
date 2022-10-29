@@ -11,8 +11,8 @@ public:
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox-opengl", "moci-sandbox-opengl.json");
         // GetWindow().SetFullscreen(true);
-        GetWindow().SetVSync(true);
-        PushLayer(moci::MakeScope<OpenGLLayer>());
+        getWindow().setVSync(true);
+        pushLayer(moci::makeScope<OpenGLLayer>());
     }
 
     ~Sandbox() override { MOCI_PROFILE_END_SESSION(); }
@@ -20,4 +20,4 @@ public:
 private:
 };
 
-moci::Application* moci::CreateApplication() { return new Sandbox(); }
+moci::Application* moci::createApplication() { return new Sandbox(); }

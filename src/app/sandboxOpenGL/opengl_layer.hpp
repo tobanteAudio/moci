@@ -14,10 +14,10 @@ public:
     OpenGLLayer()           = default;
     ~OpenGLLayer() override = default;
 
-    void OnAttach() override;
-    void OnUpdate(moci::Timestep ts) override;
-    void OnImGuiRender() override;
-    void OnEvent(moci::Event& e) override;
+    void onAttach() override;
+    void onUpdate(moci::Timestep ts) override;
+    void onImGuiRender() override;
+    void onEvent(moci::Event& e) override;
 
 private:
     bool handleWindowResized(moci::WindowResizeEvent& e);

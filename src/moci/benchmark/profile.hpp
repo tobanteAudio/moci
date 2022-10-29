@@ -43,7 +43,7 @@ private:
 public:
     Instrumentor() = default;
 
-    void BeginSession(std::string const& name, std::string const& filepath = "results.json")
+    void beginSession(std::string const& name, std::string const& filepath = "results.json")
     {
         std::lock_guard<std::mutex> lock(mutex_);
         if (currentSession_ != nullptr)
@@ -57,7 +57,7 @@ public:
                 MOCI_CORE_ERROR("Instrumentor::BeginSession('{0}') when session '{1}' already open.", name,
                                 currentSession_->Name);
             }
-            InternalEndSession();
+            internalEndSession();
         }
 
         buffer_.reserve(1'000'000);
@@ -65,9 +65,9 @@ public:
         outputStream_.open(filepath);
         if (outputStream_.is_open())
         {
-            currentSession_       = MakeScope<InstrumentationSession>();
+            currentSession_       = makeScope<InstrumentationSession>();
             currentSession_->Name = name;
-            WriteHeader();
+            writeHeader();
         }
         else
         {
@@ -78,13 +78,13 @@ public:
         }
     }
 
-    void EndSession()
+    void endSession()
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        InternalEndSession();
+        internalEndSession();
     }
 
-    void WriteProfile(const ProfileResult& result)
+    void writeProfile(const ProfileResult& result)
     {
         auto name = result.Name;
         std::replace(name.begin(), name.end(), '"', '\'');
@@ -101,20 +101,20 @@ public:
         if (currentSession_ != nullptr) { buffer_.push_back(json); }
     }
 
-    static auto Get() -> Instrumentor&
+    static auto get() -> Instrumentor&
     {
         static Instrumentor instance;
         return instance;
     }
 
 private:
-    void WriteHeader()
+    void writeHeader()
     {
         outputStream_ << R"({"otherData": {},"traceEvents":[{})";
         outputStream_.flush();
     }
 
-    void WriteFooter()
+    void writeFooter()
     {
         outputStream_ << "]}";
         outputStream_.flush();
@@ -122,7 +122,7 @@ private:
 
     // Note: you must already own lock on mutex_ before
     // calling InternalEndSession()
-    void InternalEndSession()
+    void internalEndSession()
     {
 
         if (currentSession_ != nullptr)
@@ -130,7 +130,7 @@ private:
             for (auto const& item : buffer_) { outputStream_ << item; }
 
             outputStream_.flush();
-            WriteFooter();
+            writeFooter();
             outputStream_.close();
             currentSession_.reset(nullptr);
             currentSession_ = nullptr;
@@ -148,10 +148,10 @@ public:
 
     ~InstrumentationTimer()
     {
-        if (!stopped_) { Stop(); }
+        if (!stopped_) { stop(); }
     }
 
-    void Stop()
+    void stop()
     {
         auto endTimepoint = std::chrono::steady_clock::now();
         auto highResStart = FloatingPointMicroseconds {startTimepoint_.time_since_epoch()};
@@ -159,7 +159,7 @@ public:
             = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch()
               - std::chrono::time_point_cast<std::chrono::microseconds>(startTimepoint_).time_since_epoch();
 
-        Instrumentor::Get().WriteProfile({name_, highResStart, elapsedTime, std::this_thread::get_id()});
+        Instrumentor::get().writeProfile({name_, highResStart, elapsedTime, std::this_thread::get_id()});
 
         stopped_ = true;
     }

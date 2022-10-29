@@ -13,8 +13,8 @@ public:
     LayerStack();
     ~LayerStack();
 
-    void PushLayer(Layer::Ptr&& layer);
-    void PushOverlay(Layer::Ptr&& overlay);
+    void pushLayer(Layer::Ptr&& layer);
+    void pushOverlay(Layer::Ptr&& overlay);
     // void PopLayer(Layer* layer);
     // void PopOverlay(Layer* overlay);
 

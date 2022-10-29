@@ -10,9 +10,9 @@ public:
     Sandbox() : moci::Application {moci::WindowSpecs {"Sandbox 3D", 1920, 1080}}
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox-3d", "moci-sandbox-3d.json");
-        GetWindow().SetFullscreen(true);
-        GetWindow().SetVSync(false);
-        PushLayer(moci::MakeScope<DemoLayer>());
+        getWindow().setFullscreen(true);
+        getWindow().setVSync(false);
+        pushLayer(moci::makeScope<DemoLayer>());
     }
 
     ~Sandbox() override { MOCI_PROFILE_END_SESSION(); }
@@ -20,4 +20,4 @@ public:
 private:
 };
 
-moci::Application* moci::CreateApplication() { return new Sandbox(); }
+moci::Application* moci::createApplication() { return new Sandbox(); }

@@ -26,15 +26,15 @@ public:
     };
 
     explicit Typeface(std::string name);
-    void AddCharacter(char c, std::uint32_t height, std::uint32_t width, Point<std::uint32_t> topLeft,
+    void addCharacter(char c, std::uint32_t height, std::uint32_t width, Point<std::uint32_t> topLeft,
                       std::uint32_t advance, Buffer buffer);
-    void AddCharacter(char c, Character const& character);
+    void addCharacter(char c, Character const& character);
 
-    [[nodiscard]] auto GetName() const noexcept -> std::string_view { return std::string_view(name_); }
-    [[nodiscard]] auto GetNumCharacters() const noexcept -> std::size_t { return characters_.size(); }
-    [[nodiscard]] auto GetCharacter(char c) const noexcept -> Character const& { return (*characters_.find(c)).second; }
+    [[nodiscard]] auto getName() const noexcept -> std::string_view { return std::string_view(name_); }
+    [[nodiscard]] auto getNumCharacters() const noexcept -> std::size_t { return characters_.size(); }
+    [[nodiscard]] auto getCharacter(char c) const noexcept -> Character const& { return (*characters_.find(c)).second; }
 
-    [[nodiscard]] auto GetWidthForString(std::string const& text, float scale = 1.0F) -> std::uint32_t;
+    [[nodiscard]] auto getWidthForString(std::string const& text, float scale = 1.0F) -> std::uint32_t;
 
 private:
     std::string name_ {};

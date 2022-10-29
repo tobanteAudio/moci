@@ -12,33 +12,33 @@
 
 namespace moci
 {
-DatagramSocket::DatagramSocket() { pimpl_ = MakeScope<Pimpl>(); }
+DatagramSocket::DatagramSocket() { pimpl_ = makeScope<Pimpl>(); }
 
 DatagramSocket::~DatagramSocket() { pimpl_.reset(nullptr); }
 
-auto DatagramSocket::Bind(const std::string& ip, int port) -> bool { return pimpl_->Bind(ip, port); }
+auto DatagramSocket::bind(const std::string& ip, int port) -> bool { return pimpl_->bind(ip, port); }
 
-auto DatagramSocket::Write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool
+auto DatagramSocket::write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool
 {
-    return pimpl_->Write(host, port, buffer);
+    return pimpl_->write(host, port, buffer);
 }
 
-auto DatagramSocket::Write(std::string const& host, int port, Buffer const& buffer) -> bool
+auto DatagramSocket::write(std::string const& host, int port, Buffer const& buffer) -> bool
 {
-    return pimpl_->Write(host, port, buffer);
+    return pimpl_->write(host, port, buffer);
 }
 
-auto DatagramSocket::Write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes) -> bool
+auto DatagramSocket::write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes) -> bool
 {
-    return pimpl_->Write(host, port, buffer, numBytes);
+    return pimpl_->write(host, port, buffer, numBytes);
 }
 
-void DatagramSocket::Listen() { pimpl_->Listen(); }
+void DatagramSocket::listen() { pimpl_->listen(); }
 
-void DatagramSocket::Shutdown() { pimpl_->Shutdown(); }
+void DatagramSocket::shutdown() { pimpl_->shutdown(); }
 
-void DatagramSocket::SetMessageCallback(const std::function<void(Buffer const&, size_t)>& callback)
+void DatagramSocket::setMessageCallback(const std::function<void(Buffer const&, size_t)>& callback)
 {
-    pimpl_->SetMessageCallback(callback);
+    pimpl_->setMessageCallback(callback);
 }
 }  // namespace moci

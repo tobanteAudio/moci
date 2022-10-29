@@ -12,19 +12,19 @@
 TEST_CASE("graphics: OBJFileCube", "[graphics][obj]")
 {
     moci::OBJFile model("moci_test_data/cube.obj");
-    REQUIRE(model.Parse() == true);
-    REQUIRE(model.GetVertices().size() == 8);
-    REQUIRE(model.GetNormals().size() == 6);
-    REQUIRE(model.GetVertexData().size() == 36);
+    REQUIRE(model.parse() == true);
+    REQUIRE(model.getVertices().size() == 8);
+    REQUIRE(model.getNormals().size() == 6);
+    REQUIRE(model.getVertexData().size() == 36);
 }
 
 TEST_CASE("graphics: OBJFileTeapot", "[graphics][obj]")
 {
     moci::OBJFile model("moci_test_data/teapot.obj");
-    REQUIRE(model.Parse() == true);
-    REQUIRE(model.GetVertices().size() == 3644);
-    REQUIRE(model.GetNormals().empty());
-    REQUIRE(model.GetVertexData().size() == 18960);
+    REQUIRE(model.parse() == true);
+    REQUIRE(model.getVertices().size() == 3644);
+    REQUIRE(model.getNormals().empty());
+    REQUIRE(model.getVertexData().size() == 18960);
 }
 
 #endif

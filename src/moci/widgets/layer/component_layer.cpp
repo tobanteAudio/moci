@@ -2,63 +2,63 @@
 
 namespace moci
 {
-void ComponentLayer::OnAttach()
+void ComponentLayer::onAttach()
 {
     MOCI_PROFILE_FUNCTION();
-    renderQueue_ = MakeScope<BatchRender2D>();
-    rootComponent_->SetStyle(&defaultStyle_);
-    rootComponent_->SetSize(static_cast<int>(width_), static_cast<int>(height_));
+    renderQueue_ = makeScope<BatchRender2D>();
+    rootComponent_->setStyle(&defaultStyle_);
+    rootComponent_->setSize(static_cast<int>(width_), static_cast<int>(height_));
 }
 
-void ComponentLayer::OnDetach() { MOCI_PROFILE_FUNCTION(); }
+void ComponentLayer::onDetach() { MOCI_PROFILE_FUNCTION(); }
 
-void ComponentLayer::OnUpdate(Timestep ts)
+void ComponentLayer::onUpdate(Timestep ts)
 {
     MOCI_PROFILE_FUNCTION();
-    IgnoreUnused(ts);
+    ignoreUnused(ts);
     // MOCI_CORE_ASSERT(rootComponent_ != nullptr);
-    RenderCommand::SetClearColor({0.1F, 0.1F, 0.1F, 1});
-    RenderCommand::Clear();
+    RenderCommand::setClearColor({0.1F, 0.1F, 0.1F, 1});
+    RenderCommand::clear();
 
-    renderQueue_->StartFrame(width_, height_);
-    rootComponent_->SetPosition(0, 0);
-    rootComponent_->Draw(*renderQueue_);
-    renderQueue_->EndFrame();
+    renderQueue_->startFrame(width_, height_);
+    rootComponent_->setPosition(0, 0);
+    rootComponent_->draw(*renderQueue_);
+    renderQueue_->endFrame();
 }
 
-void ComponentLayer::OnImGuiRender()
+void ComponentLayer::onImGuiRender()
 {
     MOCI_PROFILE_FUNCTION();
     ImGui::Begin("Settings");
-    ImGui::Text("Draws: %d", renderQueue_->GetFrameStats().drawCount);
-    ImGui::Text("Textures: %d", renderQueue_->GetFrameStats().textureCount);
-    ImGui::Text("Vertics: %d", renderQueue_->GetFrameStats().vertexCount);
-    ImGui::Text("Quads: %d", renderQueue_->GetFrameStats().quadCount);
-    ImGui::Text("Circles: %d", renderQueue_->GetFrameStats().circleCount);
+    ImGui::Text("Draws: %d", renderQueue_->getFrameStats().drawCount);
+    ImGui::Text("Textures: %d", renderQueue_->getFrameStats().textureCount);
+    ImGui::Text("Vertics: %d", renderQueue_->getFrameStats().vertexCount);
+    ImGui::Text("Quads: %d", renderQueue_->getFrameStats().quadCount);
+    ImGui::Text("Circles: %d", renderQueue_->getFrameStats().circleCount);
     ImGui::End();
 }
 
-void ComponentLayer::OnEvent(Event& e)
+void ComponentLayer::onEvent(Event& e)
 {
     MOCI_PROFILE_FUNCTION();
     auto dispatcher = EventDispatcher {e};
-    dispatcher.Dispatch<WindowResizeEvent>([this](auto& e) { return onWindowResized(e); });
-    dispatcher.Dispatch<MouseMovedEvent>([this](auto& e) { return onMouseMoved(e); });
-    dispatcher.Dispatch<MouseScrolledEvent>([this](auto& e) { return onMouseScrolled(e); });
-    dispatcher.Dispatch<MouseButtonPressedEvent>([this](auto& e) { return onMousePressed(e); });
+    dispatcher.dispatch<WindowResizeEvent>([this](auto& e) { return onWindowResized(e); });
+    dispatcher.dispatch<MouseMovedEvent>([this](auto& e) { return onMouseMoved(e); });
+    dispatcher.dispatch<MouseScrolledEvent>([this](auto& e) { return onMouseScrolled(e); });
+    dispatcher.dispatch<MouseButtonPressedEvent>([this](auto& e) { return onMousePressed(e); });
 }
 
 auto ComponentLayer::onWindowResized(WindowResizeEvent& e) -> bool
 {
-    width_  = static_cast<float>(e.GetWidth());
-    height_ = static_cast<float>(e.GetHeight());
-    rootComponent_->SetSize(static_cast<int>(width_), static_cast<int>(height_));
+    width_  = static_cast<float>(e.getWidth());
+    height_ = static_cast<float>(e.getHeight());
+    rootComponent_->setSize(static_cast<int>(width_), static_cast<int>(height_));
     return false;
 }
 
 auto ComponentLayer::onMouseMoved(MouseMovedEvent& e) -> bool
 {
-    IgnoreUnused(e);
+    ignoreUnused(e);
     (void)this;
     return true;
 }
@@ -66,16 +66,16 @@ auto ComponentLayer::onMouseMoved(MouseMovedEvent& e) -> bool
 auto ComponentLayer::onMouseScrolled(MouseScrolledEvent& e) -> bool
 {
     MOCI_PROFILE_FUNCTION();
-    return handleEvent([&](Component* comp) { return comp->MouseScrolled(e); });
+    return handleEvent([&](Component* comp) { return comp->mouseScrolled(e); });
 }
 
 auto ComponentLayer::onMousePressed(MouseButtonPressedEvent& e) -> bool
 {
     MOCI_PROFILE_FUNCTION();
-    IgnoreUnused(e);
-    auto const x = static_cast<int>(Input::GetMouseX());
-    auto const y = static_cast<int>(Input::GetMouseY());
-    return handleEvent([&](auto* comp) { return comp->MouseClicked(MouseCallback::Click {x, y}); });
+    ignoreUnused(e);
+    auto const x = static_cast<int>(Input::getMouseX());
+    auto const y = static_cast<int>(Input::getMouseY());
+    return handleEvent([&](auto* comp) { return comp->mouseClicked(MouseCallback::Click {x, y}); });
 }
 
 }  // namespace moci

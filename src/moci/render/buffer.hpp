@@ -28,7 +28,7 @@ enum class ShaderDataType
     Bool
 };
 
-static auto ShaderDataTypeSize(ShaderDataType type) -> std::uint32_t
+static auto shaderDataTypeSize(ShaderDataType type) -> std::uint32_t
 {
     switch (type)
     {
@@ -61,11 +61,11 @@ struct BufferElement
     // BufferElement() = default;
 
     BufferElement(ShaderDataType type, std::string name, bool normalized = false)
-        : Name(std::move(name)), Type(type), Size(ShaderDataTypeSize(type)), Normalized(normalized)
+        : Name(std::move(name)), Type(type), Size(shaderDataTypeSize(type)), Normalized(normalized)
     {
     }
 
-    [[nodiscard]] auto GetComponentCount() const -> std::uint32_t
+    [[nodiscard]] auto getComponentCount() const -> std::uint32_t
     {
         switch (Type)
         {
@@ -92,10 +92,10 @@ class BufferLayout
 {
 public:
     BufferLayout() = default;
-    BufferLayout(std::initializer_list<BufferElement> elements) : m_Elements(elements) { CalculateOffsetsAndStride(); }
+    BufferLayout(std::initializer_list<BufferElement> elements) : m_Elements(elements) { calculateOffsetsAndStride(); }
 
-    [[nodiscard]] inline auto GetStride() const -> std::uint32_t { return m_Stride; }
-    [[nodiscard]] inline auto GetElements() const -> Vector<BufferElement> const& { return m_Elements; }
+    [[nodiscard]] inline auto getStride() const -> std::uint32_t { return m_Stride; }
+    [[nodiscard]] inline auto getElements() const -> Vector<BufferElement> const& { return m_Elements; }
 
     auto begin() -> Vector<BufferElement>::iterator { return m_Elements.begin(); }
     auto end() -> Vector<BufferElement>::iterator { return m_Elements.end(); }
@@ -103,7 +103,7 @@ public:
     [[nodiscard]] auto end() const -> Vector<BufferElement>::const_iterator { return m_Elements.end(); }
 
 private:
-    void CalculateOffsetsAndStride()
+    void calculateOffsetsAndStride()
     {
         size_t offset = 0;
         m_Stride      = 0;
@@ -124,11 +124,11 @@ class VertexBuffer
 public:
     virtual ~VertexBuffer() = default;
 
-    virtual auto Bind() const -> void                                                                 = 0;
-    virtual auto Unbind() const -> void                                                               = 0;
-    [[nodiscard]] virtual auto GetLayout() const -> BufferLayout const&                               = 0;
-    virtual auto SetLayout(BufferLayout const& layout) -> void                                        = 0;
-    virtual auto UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void = 0;
+    virtual auto bind() const -> void                                                                 = 0;
+    virtual auto unbind() const -> void                                                               = 0;
+    [[nodiscard]] virtual auto getLayout() const -> BufferLayout const&                               = 0;
+    virtual auto setLayout(BufferLayout const& layout) -> void                                        = 0;
+    virtual auto uploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void = 0;
 };
 
 struct IndexBufferSpecs
@@ -143,10 +143,10 @@ class IndexBuffer
 public:
     virtual ~IndexBuffer() = default;
 
-    virtual void Bind() const                                                             = 0;
-    virtual void Unbind() const                                                           = 0;
-    [[nodiscard]] virtual auto GetCount() const -> std::uint32_t                          = 0;
-    virtual auto UploadData(std::uint32_t offset, Span<std::uint32_t> data) const -> void = 0;
+    virtual void bind() const                                                             = 0;
+    virtual void unbind() const                                                           = 0;
+    [[nodiscard]] virtual auto getCount() const -> std::uint32_t                          = 0;
+    virtual auto uploadData(std::uint32_t offset, Span<std::uint32_t> data) const -> void = 0;
 };
 
 }  // namespace moci

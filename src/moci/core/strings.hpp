@@ -30,7 +30,7 @@ public:
     /**
      * @brief Remove all leading spaces on the given string in place.
      */
-    static inline auto LeftTrim(std::string& str) -> void
+    static inline auto leftTrim(std::string& str) -> void
     {
         str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) { return std::isspace(ch) == 0; }));
     }
@@ -38,16 +38,16 @@ public:
     /**
      * @brief Remove all leading spaces on the given string copied.
      */
-    static inline auto LeftTrimCopy(std::string str) -> std::string
+    static inline auto leftTrimCopy(std::string str) -> std::string
     {
-        LeftTrim(str);
+        leftTrim(str);
         return str;
     }
 
     /**
      * @brief Remove all trailing spaces on the given string in place
      */
-    static inline auto RightTrim(std::string& str) -> void
+    static inline auto rightTrim(std::string& str) -> void
     {
         str.erase(
             std::find_if(str.rbegin(), str.rend(), [](int character) { return std::isspace(character) == 0; }).base(),
@@ -57,34 +57,34 @@ public:
     /**
      * @brief Remove all trailing spaces on the given string copied.
      */
-    static inline auto RightTrimCopy(std::string str) -> std::string
+    static inline auto rightTrimCopy(std::string str) -> std::string
     {
-        RightTrim(str);
+        rightTrim(str);
         return str;
     }
 
     /**
      * @brief Remove all leading & trailing spaces on the given string in place.
      */
-    static inline auto Trim(std::string& str) -> void
+    static inline auto trim(std::string& str) -> void
     {
-        LeftTrim(str);
-        RightTrim(str);
+        leftTrim(str);
+        rightTrim(str);
     }
 
     /**
      * @brief Remove all leading & trailing spaces on the given string copied.
      */
-    static inline auto TrimCopy(std::string str) -> std::string
+    static inline auto trimCopy(std::string str) -> std::string
     {
-        Trim(str);
+        trim(str);
         return str;
     }
 
     /**
      * @brief Returns a vector of string splits. Split by the delimiter.
      */
-    static inline auto Split(std::string const& str, char delimiter) -> Vector<std::string>
+    static inline auto split(std::string const& str, char delimiter) -> Vector<std::string>
     {
         Vector<std::string> tokens;
         std::string token;
@@ -100,7 +100,7 @@ public:
      *
      * Strings::ToInt("-143abc") = -143
      */
-    static inline auto ToInt(std::string const& input) -> std::optional<int>
+    static inline auto toInt(std::string const& input) -> std::optional<int>
     {
         try
         {
@@ -117,7 +117,7 @@ public:
      * @brief Same as ToInt. First converted to a plain int, then static_cast into the given integer type.
      */
     template<typename IntType>
-    static auto ToInteger(std::string const& input) -> std::optional<IntType>
+    static auto toInteger(std::string const& input) -> std::optional<IntType>
     {
         try
         {

@@ -10,13 +10,13 @@ TEST_CASE("render/opengl/common: ShaderParserSplitSource", "[opengl][common]")
 {
     SECTION("Empty source")
     {
-        auto const program = moci::ShaderParser::SplitSource("");
+        auto const program = moci::ShaderParser::splitSource("");
         REQUIRE(program.shaders.empty());
     }
 
     SECTION("Inline source")
     {
-        auto const program = moci::ShaderParser::SplitSource(R"(
+        auto const program = moci::ShaderParser::splitSource(R"(
             #type vertex
             foo
             #type fragment

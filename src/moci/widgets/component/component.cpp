@@ -7,109 +7,109 @@ namespace moci
 
 Component::Component(std::string id) : id_(std::move(id)) { }
 
-void Component::OnDraw(Painter& painter) { IgnoreUnused(painter); }
+void Component::onDraw(Painter& painter) { ignoreUnused(painter); }
 
-void Component::OnResize() { }
+void Component::onResize() { }
 
-void Component::Draw(Painter& painter)
+void Component::draw(Painter& painter)
 {
-    OnDraw(painter);
-    for (auto* child : children_) { child->Draw(painter); }
+    onDraw(painter);
+    for (auto* child : children_) { child->draw(painter); }
 }
 
-void Component::Resize()
+void Component::resize()
 {
-    OnResize();
-    for (auto* child : children_) { child->OnResize(); }
+    onResize();
+    for (auto* child : children_) { child->onResize(); }
 }
 
-void Component::SetID(std::string id) { id_ = std::move(id); }
+void Component::setId(std::string id) { id_ = std::move(id); }
 
-auto Component::GetID() const noexcept -> std::string_view { return id_; }
+auto Component::getId() const noexcept -> std::string_view { return id_; }
 
-void Component::SetParent(Component* p) { parent_ = p; }
+void Component::setParent(Component* p) { parent_ = p; }
 
-auto Component::GetParent() -> Component* { return parent_; }
+auto Component::getParent() -> Component* { return parent_; }
 
-auto Component::GetRootComponent() -> Component*
+auto Component::getRootComponent() -> Component*
 {
-    if (parent_ != nullptr) { return parent_->GetRootComponent(); }
+    if (parent_ != nullptr) { return parent_->getRootComponent(); }
     return this;
 }
 
-void Component::AddChild(Component* child)
+void Component::addChild(Component* child)
 {
     children_.push_back(child);
-    child->SetParent(this);
+    child->setParent(this);
 }
 
-auto Component::GetChildren() const noexcept -> Vector<Component*> const& { return children_; }
+auto Component::getChildren() const noexcept -> Vector<Component*> const& { return children_; }
 
-void Component::SetPosition(int x, int y) noexcept
+void Component::setPosition(int x, int y) noexcept
 {
-    bounds_.SetPosition(x, y);
-    Resize();
+    bounds_.setPosition(x, y);
+    resize();
 }
 
-void Component::SetPosition(Point<int> position) noexcept
+void Component::setPosition(Point<int> position) noexcept
 {
-    bounds_.SetPosition(position);
-    Resize();
+    bounds_.setPosition(position);
+    resize();
 }
 
-auto Component::GetX() const noexcept -> int { return bounds_.GetX(); }
+auto Component::getX() const noexcept -> int { return bounds_.getX(); }
 
-auto Component::GetY() const noexcept -> int { return bounds_.GetY(); }
+auto Component::getY() const noexcept -> int { return bounds_.getY(); }
 
-void Component::SetSize(int width, int height) noexcept
+void Component::setSize(int width, int height) noexcept
 {
-    bounds_.SetWidth(width);
-    bounds_.SetHeight(height);
-    Resize();
+    bounds_.setWidth(width);
+    bounds_.setHeight(height);
+    resize();
 }
 
-auto Component::GetWidth() const noexcept -> int { return bounds_.GetWidth(); }
+auto Component::getWidth() const noexcept -> int { return bounds_.getWidth(); }
 
-auto Component::GetHeight() const noexcept -> int { return bounds_.GetHeight(); }
+auto Component::getHeight() const noexcept -> int { return bounds_.getHeight(); }
 
-void Component::SetBounds(Rectangle<int> bounds) noexcept
+void Component::setBounds(Rectangle<int> bounds) noexcept
 {
     bounds_ = bounds;
-    Resize();
+    resize();
 }
 
-auto Component::GetBounds() const noexcept -> Rectangle<int> { return bounds_; }
+auto Component::getBounds() const noexcept -> Rectangle<int> { return bounds_; }
 
-auto Component::Contains(Point<int> position) const noexcept -> bool
+auto Component::contains(Point<int> position) const noexcept -> bool
 {
-    if (position.GetX() >= GetX() && position.GetX() <= GetX() + GetWidth())
+    if (position.getX() >= getX() && position.getX() <= getX() + getWidth())
     {
-        if (position.GetY() >= GetY() && position.GetY() <= GetY() + GetHeight()) { return true; }
+        if (position.getY() >= getY() && position.getY() <= getY() + getHeight()) { return true; }
     }
 
     return false;
 }
 
-auto Component::FindComponentAt(Point<int> position) noexcept -> Component*
+auto Component::findComponentAt(Point<int> position) noexcept -> Component*
 {
-    if (!Contains(position)) { return nullptr; }
+    if (!contains(position)) { return nullptr; }
 
-    for (auto* comp : GetChildren())
+    for (auto* comp : getChildren())
     {
-        if (comp->Contains(position))
+        if (comp->contains(position))
         {
-            if (comp->GetChildren().empty()) { return comp; }
+            if (comp->getChildren().empty()) { return comp; }
 
-            return comp->FindComponentAt(position);
+            return comp->findComponentAt(position);
         }
     }
 
     return this;
 }
 
-void Component::SetStyle(Style* newStyle) noexcept { style_ = newStyle; }
+void Component::setStyle(Style* newStyle) noexcept { style_ = newStyle; }
 
-auto Component::GetStyle() const noexcept -> Style*
+auto Component::getStyle() const noexcept -> Style*
 {
     // If style is set local
     if (style_ != nullptr) { return style_; }
@@ -117,7 +117,7 @@ auto Component::GetStyle() const noexcept -> Style*
     // Style set on any parent
     if (parent_ != nullptr)
     {
-        if (auto* parentStyle = parent_->GetStyle(); parentStyle != nullptr) { return parentStyle; }
+        if (auto* parentStyle = parent_->getStyle(); parentStyle != nullptr) { return parentStyle; }
     }
 
     // No style set

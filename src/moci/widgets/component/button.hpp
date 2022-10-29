@@ -21,7 +21,7 @@ class ButtonStyleMethods
 public:
     virtual ~ButtonStyleMethods() = default;
 
-    virtual void DrawButton(Painter& painter, Rectangle<int> bounds, Button const& Button) = 0;
+    virtual void drawButton(Painter& painter, Rectangle<int> bounds, Button const& button) = 0;
 };
 
 struct ButtonCallbacks
@@ -42,22 +42,22 @@ public:
     explicit Button(std::string text, ButtonSpecs specs = ButtonSpecs {});
     ~Button() override = default;
 
-    auto OnDraw(Painter& painter) -> void override;
+    auto onDraw(Painter& painter) -> void override;
 
-    auto SetSpecs(ButtonSpecs newSpecs) -> void;
-    [[nodiscard]] auto GetSpecs() const noexcept -> ButtonSpecs;
+    auto setSpecs(ButtonSpecs newSpecs) -> void;
+    [[nodiscard]] auto getSpecs() const noexcept -> ButtonSpecs;
 
-    auto SetState(ButtonState newState) -> void;
-    [[nodiscard]] auto GetState() const noexcept -> ButtonState;
+    auto setState(ButtonState newState) -> void;
+    [[nodiscard]] auto getState() const noexcept -> ButtonState;
 
-    auto SetText(std::string newText) -> void;
-    [[nodiscard]] auto GetText() const noexcept -> std::string const&;
-    [[nodiscard]] auto GetTextView() const noexcept -> std::string_view;
+    auto setText(std::string newText) -> void;
+    [[nodiscard]] auto getText() const noexcept -> std::string const&;
+    [[nodiscard]] auto getTextView() const noexcept -> std::string_view;
 
-    void SetTextColor(Color col) noexcept;
-    [[nodiscard]] auto GetTextColor() const noexcept -> Color;
+    void setTextColor(Color col) noexcept;
+    [[nodiscard]] auto getTextColor() const noexcept -> Color;
 
-    auto MouseClicked(moci::MouseCallback::Click click) -> bool override;
+    auto mouseClicked(moci::MouseCallback::Click click) -> bool override;
 
 private:
     std::string text_  = {};

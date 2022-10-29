@@ -20,11 +20,11 @@ OpenGLESVertexBuffer::OpenGLESVertexBuffer(float* vertices, uint32_t size, bool 
 
 OpenGLESVertexBuffer::~OpenGLESVertexBuffer() { GLCall(glDeleteBuffers(1, &m_RendererID)); }
 
-void OpenGLESVertexBuffer::Bind() const { GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_RendererID)); }
+void OpenGLESVertexBuffer::bind() const { GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_RendererID)); }
 
-void OpenGLESVertexBuffer::Unbind() const { GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0)); }
+void OpenGLESVertexBuffer::unbind() const { GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0)); }
 
-auto OpenGLESVertexBuffer::UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void
+auto OpenGLESVertexBuffer::uploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void
 {
     GLCall(glBufferSubData(GL_ARRAY_BUFFER, offset, size, data));
 }
@@ -47,16 +47,16 @@ OpenGLESIndexBuffer::OpenGLESIndexBuffer(IndexBufferSpecs specs) : specs_(specs)
         GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indicesShort.data(), GL_STATIC_DRAW));
     }
 
-    Unbind();
+    unbind();
 }
 
 OpenGLESIndexBuffer::~OpenGLESIndexBuffer() { GLCall(glDeleteBuffers(1, &m_RendererID)); }
 
-void OpenGLESIndexBuffer::Bind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID)); }
+void OpenGLESIndexBuffer::bind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID)); }
 
-void OpenGLESIndexBuffer::Unbind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)); }
+void OpenGLESIndexBuffer::unbind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)); }
 
-auto OpenGLESIndexBuffer::UploadData(std::uint32_t offset, Span<std::uint32_t> indices) const -> void
+auto OpenGLESIndexBuffer::uploadData(std::uint32_t offset, Span<std::uint32_t> indices) const -> void
 {
     auto indicesShort = convertToUnsignedShorts(indices);
     auto const size   = indicesShort.size() * sizeof(std::uint16_t);

@@ -24,20 +24,20 @@ public:
 
     virtual ~Application() = default;
 
-    void OnEvent(Event& e);
+    void onEvent(Event& e);
 
-    void PushLayer(Layer::Ptr&& layer);
-    void PushOverlay(Layer::Ptr&& layer);
+    void pushLayer(Layer::Ptr&& layer);
+    void pushOverlay(Layer::Ptr&& layer);
 
-    inline auto GetWindow() -> Window& { return *m_Window; }
+    inline auto getWindow() -> Window& { return *m_Window; }
 
-    inline static auto Get() -> Application& { return *s_Instance; }
+    inline static auto get() -> Application& { return *sInstance; }
 
 private:
-    auto Run() -> void;
+    auto run() -> void;
 
-    auto OnWindowClose(WindowCloseEvent& e) -> bool;
-    auto OnWindowResize(WindowResizeEvent& e) -> bool;
+    auto onWindowClose(WindowCloseEvent& e) -> bool;
+    auto onWindowResize(WindowResizeEvent& e) -> bool;
 
     Scope<Window> m_Window                                                  = nullptr;
     bool m_Running                                                          = true;
@@ -46,11 +46,11 @@ private:
     float m_LastFrameTime                                                   = 0.0F;
     std::chrono::time_point<std::chrono::steady_clock> m_LastFrameTimepoint = {};
 
-    static Application* s_Instance;
+    static Application* sInstance;
     friend auto ::main(int argc, char** argv) -> int;
 };
 
 // To be defined in CLIENT
-auto CreateApplication() -> Application*;
+auto createApplication() -> Application*;
 
 }  // namespace moci

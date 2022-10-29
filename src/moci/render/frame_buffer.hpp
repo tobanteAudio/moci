@@ -17,12 +17,12 @@ class Framebuffer
 public:
     virtual ~Framebuffer() = default;
 
-    virtual void Bind()   = 0;
-    virtual void Unbind() = 0;
+    virtual void bind()   = 0;
+    virtual void unbind() = 0;
 
-    virtual void Resize(std::uint32_t width, std::uint32_t height) = 0;
+    virtual void resize(std::uint32_t width, std::uint32_t height) = 0;
 
-    [[nodiscard]] virtual auto GetColorAttachmentRendererID() const -> uint32_t    = 0;
-    [[nodiscard]] virtual auto GetSpecification() const -> FramebufferSpecs const& = 0;
+    [[nodiscard]] virtual auto getColorAttachmentRendererId() const -> uint32_t    = 0;
+    [[nodiscard]] virtual auto getSpecification() const -> FramebufferSpecs const& = 0;
 };
 }  // namespace moci

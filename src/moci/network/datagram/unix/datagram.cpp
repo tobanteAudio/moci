@@ -19,21 +19,21 @@ namespace moci
 {
 DatagramSocket::Pimpl::~Pimpl()
 {
-    Shutdown();
+    shutdown();
     close(socketDescriptor_);
 }
 
-auto DatagramSocket::Pimpl::Write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool
+auto DatagramSocket::Pimpl::write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool
 {
-    return Write(host, port, buffer.data(), buffer.size());
+    return write(host, port, buffer.data(), buffer.size());
 }
 
-auto DatagramSocket::Pimpl::Write(std::string const& host, int port, DatagramSocket::Buffer const& buffer) -> bool
+auto DatagramSocket::Pimpl::write(std::string const& host, int port, DatagramSocket::Buffer const& buffer) -> bool
 {
-    return Write(host, port, static_cast<std::uint8_t const*>(buffer.data()), buffer.size());
+    return write(host, port, static_cast<std::uint8_t const*>(buffer.data()), buffer.size());
 }
 
-auto DatagramSocket::Pimpl::Write(std::string const& host, int port, std::uint8_t const* const buffer, size_t numBytes)
+auto DatagramSocket::Pimpl::write(std::string const& host, int port, std::uint8_t const* const buffer, size_t numBytes)
     -> bool
 {
     // Creating socket file descriptor
@@ -55,9 +55,9 @@ auto DatagramSocket::Pimpl::Write(std::string const& host, int port, std::uint8_
 
     return true;
 }
-auto DatagramSocket::Pimpl::Bind(const std::string& ip, int port) -> bool
+auto DatagramSocket::Pimpl::bind(const std::string& ip, int port) -> bool
 {
-    moci::IgnoreUnused(ip);
+    moci::ignoreUnused(ip);
     // Creating socket file descriptor
     if ((socketDescriptor_ = socket(AF_INET, SOCK_DGRAM, 0)) < 0) { return false; }
 
@@ -75,10 +75,10 @@ auto DatagramSocket::Pimpl::Bind(const std::string& ip, int port) -> bool
     setsockopt(socketDescriptor_, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
 
     // Bind the socket with the server address
-    return bind(socketDescriptor_, reinterpret_cast<sockaddr const*>(&servaddr), sizeof(servaddr)) >= 0;
+    return ::bind(socketDescriptor_, reinterpret_cast<sockaddr const*>(&servaddr), sizeof(servaddr)) >= 0;
 }
 
-void DatagramSocket::Pimpl::Listen()
+void DatagramSocket::Pimpl::listen()
 {
     listenerThread_ = std::thread(
         [&]()
@@ -105,7 +105,7 @@ void DatagramSocket::Pimpl::Listen()
         });
 }
 
-void DatagramSocket::Pimpl::Shutdown()
+void DatagramSocket::Pimpl::shutdown()
 {
     MOCI_CORE_INFO("Stop udp listen");
     isRunning_.store(false);

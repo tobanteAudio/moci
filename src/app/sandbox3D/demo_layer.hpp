@@ -17,18 +17,18 @@ public:
     DemoLayer()           = default;
     ~DemoLayer() override = default;
 
-    void OnAttach() override;
-    void OnUpdate(moci::Timestep ts) override;
-    void OnImGuiRender() override;
-    void OnEvent(moci::Event& e) override;
+    void onAttach() override;
+    void onUpdate(moci::Timestep ts) override;
+    void onImGuiRender() override;
+    void onEvent(moci::Event& e) override;
 
 private:
-    bool OnWindowResized(moci::WindowResizeEvent& e);
-    bool OnKeyPressed(moci::KeyPressedEvent& e);
-    bool OnMouseScrolled(moci::MouseScrolledEvent& e);
-    bool OnMouseMoved(moci::MouseMovedEvent& e);
-    bool OnMousePressed(moci::MouseButtonPressedEvent& e);
-    bool OnMouseReleased(moci::MouseButtonReleasedEvent& e);
+    bool onWindowResized(moci::WindowResizeEvent& e);
+    bool onKeyPressed(moci::KeyPressedEvent& e);
+    bool onMouseScrolled(moci::MouseScrolledEvent& e);
+    bool onMouseMoved(moci::MouseMovedEvent& e);
+    bool onMousePressed(moci::MouseButtonPressedEvent& e);
+    bool onMouseReleased(moci::MouseButtonReleasedEvent& e);
 
     float width_        = 1280.0F;
     float height_       = 1024.0F;

@@ -28,5 +28,5 @@
     x;                                                                                                                 \
     GLLogCall(#x, __FILE__, __LINE__)
 
-void GLClearError();
-auto GLLogCall(const char* function, const char* file, int line) -> bool;
+void glClearError();
+auto glLogCall(const char* function, const char* file, int line) -> bool;

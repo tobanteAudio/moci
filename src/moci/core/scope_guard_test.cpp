@@ -10,15 +10,15 @@
 TEST_CASE("core: MakeScopeGuard", "[core]")
 {
     auto i     = 0;
-    auto guard = moci::MakeScopeGuard([&i]() { REQUIRE(i == 10); });
+    auto guard = moci::makeScopeGuard([&i]() { REQUIRE(i == 10); });
     i          = 10;
 }
 
 TEST_CASE("core: MakeScopeGuardMultiple", "[core]")
 {
     auto i  = 0;
-    auto g1 = moci::MakeScopeGuard([&i]() { REQUIRE(i == 20); });
-    auto g2 = moci::MakeScopeGuard(
+    auto g1 = moci::makeScopeGuard([&i]() { REQUIRE(i == 20); });
+    auto g2 = moci::makeScopeGuard(
         [&i]() mutable
         {
             REQUIRE(i == 10);
@@ -37,14 +37,14 @@ TEST_CASE("core: MakeScopeGuardNoRolebackOnAquireThrowThrow", "[core]")
         auto doesNOTRollbackIfAdquireThrows = [&]()
         {
             vec1.push_back(42);
-            auto a = moci::MakeScopeGuard(
+            auto a = moci::makeScopeGuard(
                 [&]()
                 {
                     REQUIRE(!vec1.empty());
                     vec1.pop_back();
                 });
 
-            auto b = moci::MakeScopeGuardThatDoesNOTRollbackIfAdquireThrows([&]() { vec2.push_back(42); },
+            auto b = moci::makeScopeGuardThatDoesNotRollbackIfAdquireThrows([&]() { vec2.push_back(42); },
                                                                             [&]()
                                                                             {
                                                                                 REQUIRE(!vec1.empty());
@@ -72,14 +72,14 @@ TEST_CASE("core: MakeScopeGuardNoRolebackOnAquireThrowNoThrow", "[core]")
     auto doesNOTRollbackIfAdquireThrows = [&]()
     {
         vec1.push_back(42);
-        auto a = moci::MakeScopeGuard(
+        auto a = moci::makeScopeGuard(
             [&]()
             {
                 REQUIRE(!vec1.empty());
                 vec1.pop_back();
             });
 
-        auto b = moci::MakeScopeGuardThatDoesNOTRollbackIfAdquireThrows([&]() { vec2.push_back(42); },
+        auto b = moci::makeScopeGuardThatDoesNotRollbackIfAdquireThrows([&]() { vec2.push_back(42); },
                                                                         [&]()
                                                                         {
                                                                             REQUIRE(!vec1.empty());
@@ -103,14 +103,14 @@ TEST_CASE("core: MakeScopeGuardRolebackOnAquireThrow", "[core]")
         auto doesRollbackIfAdquireThrows = [&]()
         {
             vec1.push_back(42);
-            auto a = moci::MakeScopeGuard(
+            auto a = moci::makeScopeGuard(
                 [&]()
                 {
                     REQUIRE(!vec1.empty());
                     vec1.pop_back();
                 });
 
-            auto b = moci::MakeScopeGuardThatDoesRollbackIfAdquireThrows(
+            auto b = moci::makeScopeGuardThatDoesRollbackIfAdquireThrows(
                 [&]()
                 {
                     vec2.push_back(42);

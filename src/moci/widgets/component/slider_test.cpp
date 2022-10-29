@@ -10,35 +10,35 @@
 
 TEST_CASE("widget: SliderConstruct", "[ui]")
 {
-    moci::Slider const slider {moci::Colors::Black};
-    REQUIRE(slider.GetValue() == 0.0F);
+    moci::Slider const slider {moci::Colors::black};
+    REQUIRE(slider.getValue() == 0.0F);
 }
 
 TEST_CASE("widget: SliderSetValue", "[ui]")
 {
-    moci::Slider slider {moci::Colors::Black};
-    REQUIRE(slider.GetValue() == 0.0F);
-    slider.SetValue(143.0F);
-    REQUIRE(slider.GetValue() == 143.0F);
+    moci::Slider slider {moci::Colors::black};
+    REQUIRE(slider.getValue() == 0.0F);
+    slider.setValue(143.0F);
+    REQUIRE(slider.getValue() == 143.0F);
 }
 
 TEST_CASE("widget: SliderSetColor", "[ui]")
 {
     moci::Slider slider {{}};
 
-    auto c1 = slider.GetColor();
-    REQUIRE(c1.GetRed() == 0.0F);
-    REQUIRE(c1.GetGreen() == 0.0F);
-    REQUIRE(c1.GetBlue() == 0.0F);
-    REQUIRE(c1.GetAlpha() == 0.0F);
+    auto c1 = slider.getColor();
+    REQUIRE(c1.getRed() == 0.0F);
+    REQUIRE(c1.getGreen() == 0.0F);
+    REQUIRE(c1.getBlue() == 0.0F);
+    REQUIRE(c1.getAlpha() == 0.0F);
 
-    slider.SetColor(moci::Colors::Black);
+    slider.setColor(moci::Colors::black);
 
-    auto c2 = slider.GetColor();
-    REQUIRE(c2.GetRed() == 0.0F);
-    REQUIRE(c2.GetGreen() == 0.0F);
-    REQUIRE(c2.GetBlue() == 0.0F);
-    REQUIRE(c2.GetAlpha() == 1.0F);
+    auto c2 = slider.getColor();
+    REQUIRE(c2.getRed() == 0.0F);
+    REQUIRE(c2.getGreen() == 0.0F);
+    REQUIRE(c2.getBlue() == 0.0F);
+    REQUIRE(c2.getAlpha() == 1.0F);
 }
 
 TEST_CASE("widget: SliderCallbackValueChanged", "[ui]")
@@ -51,10 +51,10 @@ TEST_CASE("widget: SliderCallbackValueChanged", "[ui]")
         wasCalled = true;
     };
 
-    auto slider = moci::Slider {moci::Colors::Black, callbacks};
-    REQUIRE(slider.GetValue() == 0.0F);
-    slider.SetValue(143.0F);
-    REQUIRE(slider.GetValue() == 143.0F);
+    auto slider = moci::Slider {moci::Colors::black, callbacks};
+    REQUIRE(slider.getValue() == 0.0F);
+    slider.setValue(143.0F);
+    REQUIRE(slider.getValue() == 143.0F);
     REQUIRE(wasCalled == true);
 }
 
@@ -62,25 +62,25 @@ TEST_CASE("widget: SliderCallbackValueChangedCallbackNotSet", "[ui]")
 {
     auto wasCalled = false;
     auto callbacks = moci::SliderCallbacks {};
-    auto slider    = moci::Slider {moci::Colors::Black, callbacks};
-    REQUIRE(slider.GetValue() == 0.0F);
-    slider.SetValue(143.0F);
-    REQUIRE(slider.GetValue() == 143.0F);
+    auto slider    = moci::Slider {moci::Colors::black, callbacks};
+    REQUIRE(slider.getValue() == 0.0F);
+    slider.setValue(143.0F);
+    REQUIRE(slider.getValue() == 143.0F);
     REQUIRE(wasCalled == false);
 }
 
 TEST_CASE("widget: SliderMouseScrolled", "[ui]")
 {
     auto callbacks = moci::SliderCallbacks {};
-    auto slider    = moci::Slider {moci::Colors::Black, callbacks};
+    auto slider    = moci::Slider {moci::Colors::black, callbacks};
 
-    slider.SetValue(0.5F);
-    REQUIRE(slider.GetValue() == 0.5F);
-    slider.MouseScrolled(moci::MouseScrolledEvent {0.0F, 1.0F});
-    REQUIRE(slider.GetValue() == Catch::Approx(0.55F));
+    slider.setValue(0.5F);
+    REQUIRE(slider.getValue() == 0.5F);
+    slider.mouseScrolled(moci::MouseScrolledEvent {0.0F, 1.0F});
+    REQUIRE(slider.getValue() == Catch::Approx(0.55F));
 
-    slider.SetValue(1.0F);
-    REQUIRE(slider.GetValue() == 1.0F);
-    slider.MouseScrolled(moci::MouseScrolledEvent {0.0F, -1.0F});
-    REQUIRE(slider.GetValue() == Catch::Approx(0.95F));
+    slider.setValue(1.0F);
+    REQUIRE(slider.getValue() == 1.0F);
+    slider.mouseScrolled(moci::MouseScrolledEvent {0.0F, -1.0F});
+    REQUIRE(slider.getValue() == Catch::Approx(0.95F));
 }

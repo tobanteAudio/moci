@@ -13,10 +13,10 @@ public:
     ~MouseMovedEvent() override = default;
     MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) { }
 
-    [[nodiscard]] inline auto GetX() const -> float { return m_MouseX; }
-    [[nodiscard]] inline auto GetY() const -> float { return m_MouseY; }
+    [[nodiscard]] inline auto getX() const -> float { return m_MouseX; }
+    [[nodiscard]] inline auto getY() const -> float { return m_MouseY; }
 
-    [[nodiscard]] auto ToString() const -> std::string override
+    [[nodiscard]] auto toString() const -> std::string override
     {
         return fmt::format("MouseMovedEvent: {}, {}", m_MouseX, m_MouseY);
     }
@@ -33,12 +33,12 @@ public:
     ~MouseScrolledEvent() override = default;
     MouseScrolledEvent(float xOffset, float yOffset) : m_XOffset(xOffset), m_YOffset(yOffset) { }
 
-    [[nodiscard]] inline auto GetXOffset() const -> float { return m_XOffset; }
-    [[nodiscard]] inline auto GetYOffset() const -> float { return m_YOffset; }
+    [[nodiscard]] inline auto getXOffset() const -> float { return m_XOffset; }
+    [[nodiscard]] inline auto getYOffset() const -> float { return m_YOffset; }
 
-    [[nodiscard]] auto ToString() const -> std::string override
+    [[nodiscard]] auto toString() const -> std::string override
     {
-        return fmt::format("MouseScrolledEvent: {}, {}", GetXOffset(), GetYOffset());
+        return fmt::format("MouseScrolledEvent: {}, {}", getXOffset(), getYOffset());
     }
 
     EVENT_CLASS_TYPE(MouseScrolled)
@@ -52,7 +52,7 @@ class MouseButtonEvent : public Event
 public:
     ~MouseButtonEvent() override = default;
     explicit MouseButtonEvent(MouseCode button) : m_Button(button) { }
-    [[nodiscard]] inline auto GetMouseButton() const -> MouseCode { return m_Button; }
+    [[nodiscard]] inline auto getMouseButton() const -> MouseCode { return m_Button; }
 
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 private:
@@ -65,9 +65,9 @@ public:
     ~MouseButtonPressedEvent() override = default;
     explicit MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) { }
 
-    [[nodiscard]] auto ToString() const -> std::string override
+    [[nodiscard]] auto toString() const -> std::string override
     {
-        return fmt::format("MouseButtonPressedEvent: {}", static_cast<int>(GetMouseButton()));
+        return fmt::format("MouseButtonPressedEvent: {}", static_cast<int>(getMouseButton()));
     }
 
     EVENT_CLASS_TYPE(MouseButtonPressed)
@@ -79,9 +79,9 @@ public:
     ~MouseButtonReleasedEvent() override = default;
     explicit MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) { }
 
-    [[nodiscard]] auto ToString() const -> std::string override
+    [[nodiscard]] auto toString() const -> std::string override
     {
-        return fmt::format("MouseButtonReleasedEvent: {}", static_cast<int>(GetMouseButton()));
+        return fmt::format("MouseButtonReleasedEvent: {}", static_cast<int>(getMouseButton()));
     }
 
     EVENT_CLASS_TYPE(MouseButtonReleased)
@@ -98,15 +98,15 @@ public:
 
     virtual ~MouseCallback() = default;
 
-    virtual auto MouseClicked(Click click) -> bool
+    virtual auto mouseClicked(Click click) -> bool
     {
-        IgnoreUnused(click);
+        ignoreUnused(click);
         return false;
     }
 
-    virtual auto MouseScrolled(MouseScrolledEvent scroll) -> bool
+    virtual auto mouseScrolled(MouseScrolledEvent scroll) -> bool
     {
-        IgnoreUnused(scroll);
+        ignoreUnused(scroll);
         return false;
     }
 };

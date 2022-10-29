@@ -11,11 +11,11 @@ TEST_CASE("graphics_extra: MeshLoadFromFile", "[graphics]")
     SECTION("Cube")
     {
         auto const mesh = moci::Mesh {"moci_test_data/cube.obj"};
-        REQUIRE(mesh.GetVertices().size() == 36);
+        REQUIRE(mesh.getVertices().size() == 36);
     }
     SECTION("Teapot")
     {
         auto const mesh = moci::Mesh {"moci_test_data/teapot.obj"};
-        REQUIRE(mesh.GetVertices().size() == 18960);
+        REQUIRE(mesh.getVertices().size() == 18960);
     }
 }

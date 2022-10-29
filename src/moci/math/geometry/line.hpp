@@ -29,30 +29,30 @@ public:
     /**
      * @brief Returns true if start & end are equal.
      */
-    [[nodiscard]] constexpr auto IsEmpty() const noexcept -> bool
+    [[nodiscard]] constexpr auto isEmpty() const noexcept -> bool
     {
-        return (start_.GetX() == end_.GetX()) && (start_.GetY() == end_.GetY());
+        return (start_.getX() == end_.getX()) && (start_.getY() == end_.getY());
     }
 
     /**
      * @brief Returns the start point.
      */
-    [[nodiscard]] constexpr auto GetStart() const noexcept -> Point<Type> { return start_; }
+    [[nodiscard]] constexpr auto getStart() const noexcept -> Point<Type> { return start_; }
 
     /**
      * @brief Returns the end point.
      */
-    [[nodiscard]] constexpr auto GetEnd() const noexcept -> Point<Type> { return end_; }
+    [[nodiscard]] constexpr auto getEnd() const noexcept -> Point<Type> { return end_; }
 
     /**
      * @brief Returns the slope. If the line is empty 0 will be returned.
      */
-    [[nodiscard]] constexpr auto GetSlope() const noexcept -> std::optional<Type>
+    [[nodiscard]] constexpr auto getSlope() const noexcept -> std::optional<Type>
     {
-        if (!IsEmpty())
+        if (!isEmpty())
         {
-            auto const x = end_.GetX() - start_.GetX();
-            auto const y = end_.GetY() - start_.GetY();
+            auto const x = end_.getX() - start_.getX();
+            auto const y = end_.getY() - start_.getY();
             if (x == Type(0)) { return std::nullopt; }
             return (y / x);
         }
@@ -64,28 +64,28 @@ public:
      *
      * @details Midpoint = \f$(x_1+x_2)/2\f$, \f$(y_1+y_2)/2\f$
      */
-    [[nodiscard]] constexpr auto GetMidPoint() const noexcept -> Point<Type>
+    [[nodiscard]] constexpr auto getMidPoint() const noexcept -> Point<Type>
     {
-        auto const x = (start_.GetX() + end_.GetX()) / 2.0F;
-        auto const y = (start_.GetY() + end_.GetY()) / 2.0F;
+        auto const x = (start_.getX() + end_.getX()) / 2.0F;
+        auto const y = (start_.getY() + end_.getY()) / 2.0F;
         return Point<Type> {x, y};
     }
 
     /**
      * @brief Returns the angle of the line in radians.
      */
-    [[nodiscard]] auto GetAngleRadians() const noexcept -> Type
+    [[nodiscard]] auto getAngleRadians() const noexcept -> Type
     {
-        auto const angle = std::atan2(end_.GetY() - start_.GetY(), end_.GetX() - start_.GetX());
+        auto const angle = std::atan2(end_.getY() - start_.getY(), end_.getX() - start_.getX());
         return static_cast<Type>(angle);
     }
 
     /**
      * @brief Returns the angle of the line in degrees.
      */
-    [[nodiscard]] auto GetAngleDegrees() const noexcept -> Type
+    [[nodiscard]] auto getAngleDegrees() const noexcept -> Type
     {
-        return Type(GetAngleRadians() * (180.0 / 3.14159265358979323846));
+        return Type(getAngleRadians() * (180.0 / 3.14159265358979323846));
     }
 
     /**
@@ -93,17 +93,17 @@ public:
      *
      * @details The distance between \f$(x_1,y_1)\f$ and \f$(x_2,y_2)\f$ is \f$\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\f$.
      */
-    [[nodiscard]] auto GetLength() const noexcept -> Type
+    [[nodiscard]] auto getLength() const noexcept -> Type
     {
-        auto const x = std::pow(end_.GetX() - start_.GetX(), 2.0);
-        auto const y = std::pow(end_.GetY() - start_.GetY(), 2.0);
+        auto const x = std::pow(end_.getX() - start_.getX(), 2.0);
+        auto const y = std::pow(end_.getY() - start_.getY(), 2.0);
         return Type(std::sqrt(x + y));
     }
 
     /**
      * @brief Prints the line in form of: ax + by = c
      */
-    void PrintFormular() const
+    void printFormular() const
     {
         auto const a = end_.GetY() - start_.GetY();
         auto const b = start_.GetX() - end_.GetX();
@@ -121,8 +121,8 @@ private:
 template<typename Type>
 auto operator==(Line<Type> const lhs, Line<Type> const rhs) -> bool
 {
-    auto const start = lhs.GetStart() == rhs.GetStart();
-    auto const end   = lhs.GetEnd() == rhs.GetEnd();
+    auto const start = lhs.getStart() == rhs.getStart();
+    auto const end   = lhs.getEnd() == rhs.getEnd();
     return (start && end);
 }
 

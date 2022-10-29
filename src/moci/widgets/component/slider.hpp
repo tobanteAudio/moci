@@ -19,7 +19,7 @@ class SliderStyleMethods
 public:
     virtual ~SliderStyleMethods() = default;
 
-    virtual void DrawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider) = 0;
+    virtual void drawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider) = 0;
 };
 
 class Slider : public Component
@@ -28,16 +28,16 @@ public:
     explicit Slider(Color col, SliderCallbacks callbacks = SliderCallbacks {});
     ~Slider() override = default;
 
-    auto OnDraw(Painter& painter) -> void override;
+    auto onDraw(Painter& painter) -> void override;
 
-    auto SetValue(float newValue) noexcept -> void;
-    [[nodiscard]] auto GetValue() const noexcept -> float;
+    auto setValue(float newValue) noexcept -> void;
+    [[nodiscard]] auto getValue() const noexcept -> float;
 
-    void SetColor(Color col) noexcept;
-    [[nodiscard]] auto GetColor() const noexcept -> Color;
+    void setColor(Color col) noexcept;
+    [[nodiscard]] auto getColor() const noexcept -> Color;
 
-    auto MouseClicked(moci::MouseCallback::Click click) -> bool override;
-    auto MouseScrolled(MouseScrolledEvent scroll) -> bool override;
+    auto mouseClicked(moci::MouseCallback::Click click) -> bool override;
+    auto mouseScrolled(MouseScrolledEvent scroll) -> bool override;
 
 private:
     float value_               = {};

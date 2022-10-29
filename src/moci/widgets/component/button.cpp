@@ -10,38 +10,38 @@ Button::Button(std::string text, ButtonSpecs specs) : Component(text), text_(std
 {
 }
 
-void Button::OnDraw(Painter& painter)
+void Button::onDraw(Painter& painter)
 {
-    auto* style = GetStyle();
+    auto* style = getStyle();
     MOCI_CORE_ASSERT(style != nullptr, "If yo hit this assertion, you probably forgot"
                                        "to set the style on the top level component.");
 
-    style->DrawButton(painter, GetBounds(), *this);
+    style->drawButton(painter, getBounds(), *this);
 }
 
-auto Button::SetSpecs(ButtonSpecs newSpecs) -> void { specs_ = std::move(newSpecs); }
-auto Button::GetSpecs() const noexcept -> ButtonSpecs { return specs_; }
+auto Button::setSpecs(ButtonSpecs newSpecs) -> void { specs_ = std::move(newSpecs); }
+auto Button::getSpecs() const noexcept -> ButtonSpecs { return specs_; }
 
-auto Button::SetState(ButtonState newState) -> void
+auto Button::setState(ButtonState newState) -> void
 {
     state_ = newState;
     if (specs_.callbacks.stateChanged) { specs_.callbacks.stateChanged(newState); }
 }
-auto Button::GetState() const noexcept -> ButtonState { return state_; }
+auto Button::getState() const noexcept -> ButtonState { return state_; }
 
-auto Button::SetText(std::string newText) -> void { text_ = std::move(newText); }
-auto Button::GetText() const noexcept -> std::string const& { return text_; }
-auto Button::GetTextView() const noexcept -> std::string_view { return text_; }
+auto Button::setText(std::string newText) -> void { text_ = std::move(newText); }
+auto Button::getText() const noexcept -> std::string const& { return text_; }
+auto Button::getTextView() const noexcept -> std::string_view { return text_; }
 
-void Button::SetTextColor(Color col) noexcept { color_ = col; }
-auto Button::GetTextColor() const noexcept -> Color { return color_; }
+void Button::setTextColor(Color col) noexcept { color_ = col; }
+auto Button::getTextColor() const noexcept -> Color { return color_; }
 
-auto Button::MouseClicked(moci::MouseCallback::Click click) -> bool
+auto Button::mouseClicked(moci::MouseCallback::Click click) -> bool
 {
-    IgnoreUnused(click);
-    auto const isNormal = GetState() == ButtonState::Normal;
+    ignoreUnused(click);
+    auto const isNormal = getState() == ButtonState::Normal;
     auto const newState = isNormal ? ButtonState::Down : ButtonState::Normal;
-    SetState(newState);
+    setState(newState);
     return true;
 }
 }  // namespace moci

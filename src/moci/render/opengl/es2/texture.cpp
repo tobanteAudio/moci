@@ -27,7 +27,7 @@ OpenGLESTexture2D::OpenGLESTexture2D(std::string path) : path_(std::move(path))
 
 OpenGLESTexture2D::OpenGLESTexture2D(Texture::Format format, uint32_t width, uint32_t height, void* data)
 {
-    IgnoreUnused(format);
+    ignoreUnused(format);
     createTexture();
     setFilterModes();
 
@@ -49,13 +49,13 @@ OpenGLESTexture2D::OpenGLESTexture2D(Texture::Format format, uint32_t width, uin
 
 OpenGLESTexture2D::~OpenGLESTexture2D() { GLCall(glDeleteTextures(1, &renderID_)); }
 
-void OpenGLESTexture2D::Bind(uint32_t slot) const
+void OpenGLESTexture2D::bind(uint32_t slot) const
 {
     GLCall(glActiveTexture(GL_TEXTURE0 + slot));
     GLCall(glBindTexture(GL_TEXTURE_2D, renderID_));
 }
 
-void OpenGLESTexture2D::Unbind() const
+void OpenGLESTexture2D::unbind() const
 {
     GLCall(glActiveTexture(GL_TEXTURE0));
     GLCall(glBindTexture(GL_TEXTURE_2D, 0));
@@ -132,13 +132,13 @@ OpenGLESTextureCube::OpenGLESTextureCube(Vector<std::string> paths) : paths_(std
 
 OpenGLESTextureCube::~OpenGLESTextureCube() { GLCall(glDeleteTextures(1, &renderID_)); }
 
-void OpenGLESTextureCube::Bind(uint32_t slot) const
+void OpenGLESTextureCube::bind(uint32_t slot) const
 {
     GLCall(glActiveTexture(GL_TEXTURE0 + slot));
     GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, renderID_));
 }
 
-void OpenGLESTextureCube::Unbind() const
+void OpenGLESTextureCube::unbind() const
 {
     GLCall(glActiveTexture(GL_TEXTURE0));
     GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, 0));

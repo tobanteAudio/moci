@@ -16,25 +16,25 @@
 namespace moci
 {
 
-Scope<Input> Input::s_Instance = MakeScope<GlfwInput>();
+Scope<Input> Input::sInstance = makeScope<GlfwInput>();
 
-auto GlfwInput::IsKeyPressedImpl(Key keycode) -> bool
+auto GlfwInput::isKeyPressedImpl(Key keycode) -> bool
 {
-    auto* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+    auto* window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
     auto state   = glfwGetKey(window, static_cast<int>(keycode));
     return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
-auto GlfwInput::IsMouseButtonPressedImpl(MouseCode button) -> bool
+auto GlfwInput::isMouseButtonPressedImpl(MouseCode button) -> bool
 {
-    auto* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+    auto* window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
     auto state   = glfwGetMouseButton(window, static_cast<int>(button));
     return state == GLFW_PRESS;
 }
 
-auto GlfwInput::GetMousePositionImpl() -> std::pair<float, float>
+auto GlfwInput::getMousePositionImpl() -> std::pair<float, float>
 {
-    auto* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+    auto* window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
     double xpos  = NAN;
 
     double ypos = NAN;
@@ -43,15 +43,15 @@ auto GlfwInput::GetMousePositionImpl() -> std::pair<float, float>
     return {(float)xpos, (float)ypos};
 }
 
-auto GlfwInput::GetMouseXImpl() -> float
+auto GlfwInput::getMouseXImpl() -> float
 {
-    auto [x, y] = GetMousePositionImpl();
+    auto [x, y] = getMousePositionImpl();
     return x;
 }
 
-auto GlfwInput::GetMouseYImpl() -> float
+auto GlfwInput::getMouseYImpl() -> float
 {
-    auto [x, y] = GetMousePositionImpl();
+    auto [x, y] = getMousePositionImpl();
     return y;
 }
 

@@ -43,52 +43,52 @@ public:
     Light()
     {
 #if defined(MOCI_API_OPENGL_LEGACY)
-        shader = RenderFactory::MakeShader("sandbox3D/assets/shader/es2_light_source.glsl");
+        shader = RenderFactory::makeShader("sandbox3D/assets/shader/es2_light_source.glsl");
 #else
         shader = RenderFactory::MakeShader("sandbox3D/assets/shader/gl4_light_source.glsl");
 #endif
-        shader->Bind();
+        shader->bind();
         BufferLayout lightLayout = {
             {ShaderDataType::Float3, "a_Position"},  //
             {ShaderDataType::Float4, "a_Color"},     //
         };
 
-        auto const size = static_cast<uint32_t>(lightMesh_.GetVertices().size() * sizeof(Light::Vertex));
-        vbo.reset(RenderFactory::MakeVertexBuffer(nullptr, size, true));
-        vbo->SetLayout(lightLayout);
-        vbo->Unbind();
+        auto const size = static_cast<uint32_t>(lightMesh_.getVertices().size() * sizeof(Light::Vertex));
+        vbo.reset(RenderFactory::makeVertexBuffer(nullptr, size, true));
+        vbo->setLayout(lightLayout);
+        vbo->unbind();
         auto indexBufferSpecs      = IndexBufferSpecs {};
         indexBufferSpecs.count     = 1;
         indexBufferSpecs.isDynamic = true;
-        ibo.reset(RenderFactory::MakeIndexBuffer(indexBufferSpecs));
-        ibo->Unbind();
-        vao = RenderFactory::MakeVertexArray();
-        vao->AddVertexBuffer(vbo);
-        vao->SetIndexBuffer(ibo);
-        vao->Unbind();
+        ibo.reset(RenderFactory::makeIndexBuffer(indexBufferSpecs));
+        ibo->unbind();
+        vao = RenderFactory::makeVertexArray();
+        vao->addVertexBuffer(vbo);
+        vao->setIndexBuffer(ibo);
+        vao->unbind();
     }
 
-    void Render(glm::mat4 const& view, glm::mat4 const& projection)
+    void render(glm::mat4 const& view, glm::mat4 const& projection)
     {
         auto const model       = glm::translate(glm::mat4(1.0F), position);
         auto const scaleMatrix = glm::scale(glm::mat4(1.0F), {scale, scale, scale});
-        for (auto const& vertex : lightMesh_.GetVertices())
+        for (auto const& vertex : lightMesh_.getVertices())
         {
             auto const transformedPos = model * scaleMatrix * glm::vec4(vertex.position, 1.0F);
             vertices.push_back({glm::vec3(transformedPos), color});
         }
 
-        shader->Bind();
-        shader->SetMat4("u_View", view);
-        shader->SetMat4("u_Projection", projection);
+        shader->bind();
+        shader->setMat4("u_View", view);
+        shader->setMat4("u_Projection", projection);
 
-        vao->Bind();
+        vao->bind();
         auto const sizeInBytes = static_cast<std::uint32_t>(vertices.size() * sizeof(Light::Vertex));
-        vbo->UploadData(0, sizeInBytes, vertices.data());
-        RenderCommand::DrawArrays(RenderDrawMode::Triangles, 0, static_cast<std::uint32_t>(vertices.size()));
+        vbo->uploadData(0, sizeInBytes, vertices.data());
+        RenderCommand::drawArrays(RenderDrawMode::Triangles, 0, static_cast<std::uint32_t>(vertices.size()));
         // drawStats_.numVertices += vertices.size();
         vertices.clear();
-        vao->Unbind();
+        vao->unbind();
     }
 };
 }  // namespace moci

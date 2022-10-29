@@ -8,56 +8,56 @@
 namespace moci
 {
 
-Application* Application::s_Instance = nullptr;
+Application* Application::sInstance = nullptr;
 
 Application::Application() : Application(WindowSpecs {}) { }
 
 Application::Application(WindowSpecs windowSpecs)
 {
-    MOCI_CORE_ASSERT(!s_Instance, "Application already exists!");
-    s_Instance = this;
+    MOCI_CORE_ASSERT(!sInstance, "Application already exists!");
+    sInstance = this;
     MOCI_CORE_INFO("Initializing App...");
 
-    m_Window = Scope<Window>(Window::Create(std::move(windowSpecs)));
-    m_Window->SetEventCallback(MOCI_EVENT_METHOD(OnEvent));
+    m_Window = Scope<Window>(Window::create(std::move(windowSpecs)));
+    m_Window->setEventCallback(MOCI_EVENT_METHOD(onEvent));
 
-    Renderer::Init();
-    MOCI_CORE_INFO("Max vertex attributes: {}", RenderCommand::MaxVertexAttributes());
-    MOCI_CORE_INFO("Max texture size: {}", RenderCommand::MaxTextureSize());
-    MOCI_CORE_INFO("Max texture units: {}", RenderCommand::MaxTextureUnits());
-    MOCI_CORE_INFO("Max uniform vectors: {}", RenderCommand::MaxUniformVectors());
+    Renderer::init();
+    MOCI_CORE_INFO("Max vertex attributes: {}", RenderCommand::maxVertexAttributes());
+    MOCI_CORE_INFO("Max texture size: {}", RenderCommand::maxTextureSize());
+    MOCI_CORE_INFO("Max texture units: {}", RenderCommand::maxTextureUnits());
+    MOCI_CORE_INFO("Max uniform vectors: {}", RenderCommand::maxUniformVectors());
 
-    PushOverlay(MakeScope<ImGuiLayer>());
+    pushOverlay(makeScope<ImGuiLayer>());
 }
 
-void Application::PushLayer(Layer::Ptr&& layer) { m_LayerStack.PushLayer(std::move(layer)); }
+void Application::pushLayer(Layer::Ptr&& layer) { m_LayerStack.pushLayer(std::move(layer)); }
 
-void Application::PushOverlay(Layer::Ptr&& layer) { m_LayerStack.PushOverlay(std::move(layer)); }
+void Application::pushOverlay(Layer::Ptr&& layer) { m_LayerStack.pushOverlay(std::move(layer)); }
 
-void Application::OnEvent(Event& e)
+void Application::onEvent(Event& e)
 {
     if (e.GetEventType() == EventType::KeyPressed)
     {
         auto* keyEvent = dynamic_cast<KeyPressedEvent*>(&e);
-        if (keyEvent->GetKeyCode() == Key::Escape)
+        if (keyEvent->getKeyCode() == Key::Escape)
         {
             auto closeEvent = WindowCloseEvent {};
-            OnWindowClose(closeEvent);
+            onWindowClose(closeEvent);
         }
     }
 
     EventDispatcher dispatcher(e);
-    dispatcher.Dispatch<WindowCloseEvent>(MOCI_EVENT_METHOD(OnWindowClose));
-    dispatcher.Dispatch<WindowResizeEvent>(MOCI_EVENT_METHOD(OnWindowResize));
+    dispatcher.dispatch<WindowCloseEvent>(MOCI_EVENT_METHOD(onWindowClose));
+    dispatcher.dispatch<WindowResizeEvent>(MOCI_EVENT_METHOD(onWindowResize));
 
     for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
     {
-        (*--it)->OnEvent(e);
+        (*--it)->onEvent(e);
         if (e.Handled) { break; }
     }
 }
 
-void Application::Run()
+void Application::run()
 {
     using namespace std::chrono;
     while (m_Running)
@@ -71,40 +71,40 @@ void Application::Run()
 
         if (!m_Minimized)
         {
-            for (auto& layer : m_LayerStack) { layer->OnUpdate(timestep); }
+            for (auto& layer : m_LayerStack) { layer->onUpdate(timestep); }
         }
 
         {
             MOCI_PROFILE_SCOPE("App::Run::Loop::ImGui");
-            moci::ImGuiLayer::Begin();
-            for (auto& layer : m_LayerStack) { layer->OnImGuiRender(); }
-            moci::ImGuiLayer::End();
+            moci::ImGuiLayer::begin();
+            for (auto& layer : m_LayerStack) { layer->onImGuiRender(); }
+            moci::ImGuiLayer::end();
         }
 
         {
             MOCI_PROFILE_SCOPE("App::Run::Loop::WindowUpdate");
-            m_Window->OnUpdate();
+            m_Window->onUpdate();
         }
     }
 }
 
-auto Application::OnWindowClose(WindowCloseEvent& e) -> bool
+auto Application::onWindowClose(WindowCloseEvent& e) -> bool
 {
-    IgnoreUnused(e);
+    ignoreUnused(e);
     m_Running = false;
     return true;
 }
 
-auto Application::OnWindowResize(WindowResizeEvent& e) -> bool
+auto Application::onWindowResize(WindowResizeEvent& e) -> bool
 {
-    if (e.GetWidth() == 0 || e.GetHeight() == 0)
+    if (e.getWidth() == 0 || e.getHeight() == 0)
     {
         m_Minimized = true;
         return false;
     }
 
     m_Minimized = false;
-    Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+    Renderer::onWindowResize(e.getWidth(), e.getHeight());
 
     return false;
 }

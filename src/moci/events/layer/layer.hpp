@@ -17,13 +17,13 @@ public:
     explicit Layer(std::string name = "Layer");
     virtual ~Layer() = default;
 
-    virtual void OnAttach() { }
-    virtual void OnDetach() { }
-    virtual void OnUpdate(Timestep ts) { IgnoreUnused(ts); }
-    virtual void OnImGuiRender() { }
-    virtual void OnEvent(Event& event) { IgnoreUnused(event); }
+    virtual void onAttach() { }
+    virtual void onDetach() { }
+    virtual void onUpdate(Timestep ts) { ignoreUnused(ts); }
+    virtual void onImGuiRender() { }
+    virtual void onEvent(Event& event) { ignoreUnused(event); }
 
-    [[nodiscard]] inline auto GetName() const -> std::string const& { return m_DebugName; }
+    [[nodiscard]] inline auto getName() const -> std::string const& { return m_DebugName; }
 
 private:
     std::string m_DebugName;

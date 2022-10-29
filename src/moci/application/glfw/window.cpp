@@ -8,31 +8,31 @@
 namespace moci
 {
 
-static uint8_t s_GLFWWindowCount = 0;
+static uint8_t sGlfwWindowCount = 0;
 
-static void GLFWErrorCallback(int error, const char* description)
+static void glfwErrorCallback(int error, const char* description)
 {
     MOCI_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 }
 
-auto Window::Create(WindowSpecs props) -> Window* { return new GlfwWindow(std::move(props)); }
+auto Window::create(WindowSpecs props) -> Window* { return new GlfwWindow(std::move(props)); }
 
-GlfwWindow::GlfwWindow(WindowSpecs props) { Init(std::move(props)); }
+GlfwWindow::GlfwWindow(WindowSpecs props) { init(std::move(props)); }
 
-GlfwWindow::~GlfwWindow() { Shutdown(); }
+GlfwWindow::~GlfwWindow() { shutdown(); }
 
-void GlfwWindow::Init(WindowSpecs props)
+void GlfwWindow::init(WindowSpecs props)
 {
     m_Data.Title  = props.Title;
     m_Data.Width  = props.Width;
     m_Data.Height = props.Height;
 
-    if (s_GLFWWindowCount == 0)
+    if (sGlfwWindowCount == 0)
     {
         MOCI_CORE_INFO("Initializing GLFW");
         int success = glfwInit();
         MOCI_CORE_ASSERT(success, "Could not intialize GLFW!");
-        glfwSetErrorCallback(GLFWErrorCallback);
+        glfwSetErrorCallback(glfwErrorCallback);
     }
 
 #if defined(MOCI_API_OPENGL_ES)
@@ -50,14 +50,14 @@ void GlfwWindow::Init(WindowSpecs props)
     auto const width  = static_cast<int>(m_Data.Width);
     auto const height = static_cast<int>(m_Data.Height);
     m_Window          = glfwCreateWindow(width, height, m_Data.Title.c_str(), nullptr, nullptr);
-    ++s_GLFWWindowCount;
+    ++sGlfwWindowCount;
     MOCI_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-    m_Context = Scope<GraphicsContext>(GraphicsContext::Create(m_Window));
-    m_Context->Init();
+    m_Context = Scope<GraphicsContext>(GraphicsContext::create(m_Window));
+    m_Context->init();
 
     glfwSetWindowUserPointer(m_Window, &m_Data);
-    SetVSync(true);
+    setVSync(true);
 
     // Set GLFW callbacks
     glfwSetWindowSizeCallback(m_Window,
@@ -82,8 +82,8 @@ void GlfwWindow::Init(WindowSpecs props)
     glfwSetKeyCallback(m_Window,
                        [](GLFWwindow* window, int glfwKey, int scancode, int action, int mods)
                        {
-                           IgnoreUnused(scancode);
-                           IgnoreUnused(mods);
+                           ignoreUnused(scancode);
+                           ignoreUnused(mods);
 
                            WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
                            auto const key   = static_cast<Key>(glfwKey);
@@ -121,7 +121,7 @@ void GlfwWindow::Init(WindowSpecs props)
     glfwSetMouseButtonCallback(m_Window,
                                [](GLFWwindow* window, int button, int action, int mods)
                                {
-                                   IgnoreUnused(mods);
+                                   ignoreUnused(mods);
                                    auto& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
                                    switch (action)
@@ -160,25 +160,25 @@ void GlfwWindow::Init(WindowSpecs props)
                              });
 }
 
-void GlfwWindow::Shutdown()
+void GlfwWindow::shutdown()
 {
     glfwDestroyWindow(m_Window);
 
-    if (--s_GLFWWindowCount == 0)
+    if (--sGlfwWindowCount == 0)
     {
         MOCI_CORE_INFO("Terminating GLFW");
         glfwTerminate();
     }
 }
 
-void GlfwWindow::OnUpdate()
+void GlfwWindow::onUpdate()
 {
     frameCounter_++;
     glfwPollEvents();
-    m_Context->SwapBuffers();
+    m_Context->swapBuffers();
 }
 
-void GlfwWindow::SetVSync(bool enabled)
+void GlfwWindow::setVSync(bool enabled)
 {
     if (enabled) { glfwSwapInterval(1); }
     else { glfwSwapInterval(0); }
@@ -186,11 +186,11 @@ void GlfwWindow::SetVSync(bool enabled)
     m_Data.VSync = enabled;
 }
 
-auto GlfwWindow::IsVSync() const -> bool { return m_Data.VSync; }
+auto GlfwWindow::isVSync() const -> bool { return m_Data.VSync; }
 
-void GlfwWindow::SetFullscreen(bool enabled)
+void GlfwWindow::setFullscreen(bool enabled)
 {
-    if (IsFullscreen() == enabled) { return; }
+    if (isFullscreen() == enabled) { return; }
     MOCI_CORE_INFO("Setting window fullscreen to {}", enabled);
 
     if (enabled)
@@ -219,6 +219,6 @@ void GlfwWindow::SetFullscreen(bool enabled)
     m_Data.Fullscreen = enabled;
 }
 
-auto GlfwWindow::IsFullscreen() const -> bool { return m_Data.Fullscreen; }
+auto GlfwWindow::isFullscreen() const -> bool { return m_Data.Fullscreen; }
 
 }  // namespace moci

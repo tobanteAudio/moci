@@ -26,12 +26,12 @@ public:
 
     virtual ~Texture() = default;
 
-    [[nodiscard]] virtual auto GetWidth() const -> uint32_t  = 0;
-    [[nodiscard]] virtual auto GetHeight() const -> uint32_t = 0;
-    [[nodiscard]] virtual auto GetID() const -> uint32_t     = 0;
+    [[nodiscard]] virtual auto getWidth() const -> uint32_t  = 0;
+    [[nodiscard]] virtual auto getHeight() const -> uint32_t = 0;
+    [[nodiscard]] virtual auto getId() const -> uint32_t     = 0;
 
-    virtual void Bind(uint32_t slot = 0) const = 0;
-    virtual void Unbind() const                = 0;
+    virtual void bind(uint32_t slot = 0) const = 0;
+    virtual void unbind() const                = 0;
 };
 
 class Texture2D : public Texture

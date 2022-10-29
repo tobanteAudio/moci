@@ -16,17 +16,17 @@ public:
     DatagramSocket();
     ~DatagramSocket();
 
-    auto Bind(const std::string& ip, int port) -> bool;
+    auto bind(const std::string& ip, int port) -> bool;
 
-    auto Write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool;
-    auto Write(std::string const& host, int port, Buffer const& buffer) -> bool;
-    auto Write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes) -> bool;
+    auto write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool;
+    auto write(std::string const& host, int port, Buffer const& buffer) -> bool;
+    auto write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes) -> bool;
 
-    void Listen();
+    void listen();
 
-    void Shutdown();
+    void shutdown();
 
-    void SetMessageCallback(const std::function<void(Buffer const&, size_t)>& callback);
+    void setMessageCallback(const std::function<void(Buffer const&, size_t)>& callback);
 
 private:
     class Pimpl;

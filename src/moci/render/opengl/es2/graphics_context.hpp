@@ -11,8 +11,8 @@ class OpenGLESContext : public GraphicsContext
 public:
     explicit OpenGLESContext(GLFWwindow* windowHandle);
 
-    void Init() override;
-    void SwapBuffers() override;
+    void init() override;
+    void swapBuffers() override;
 
 private:
     GLFWwindow* m_WindowHandle;

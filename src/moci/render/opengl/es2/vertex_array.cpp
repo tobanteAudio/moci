@@ -4,7 +4,7 @@
 
 namespace moci
 {
-static auto ShaderDataTypeToOpenGLESBaseType(ShaderDataType type) -> GLenum
+static auto shaderDataTypeToOpenGlesBaseType(ShaderDataType type) -> GLenum
 {
     switch (type)
     {
@@ -29,33 +29,33 @@ static auto ShaderDataTypeToOpenGLESBaseType(ShaderDataType type) -> GLenum
 OpenGLESVertexArray::OpenGLESVertexArray()  = default;
 OpenGLESVertexArray::~OpenGLESVertexArray() = default;
 
-void OpenGLESVertexArray::Bind() const
+void OpenGLESVertexArray::bind() const
 {
-    m_VertexBuffer->Bind();
+    m_VertexBuffer->bind();
     setLayout();
-    m_IndexBuffer->Bind();
+    m_IndexBuffer->bind();
 }
-void OpenGLESVertexArray::Unbind() const
+void OpenGLESVertexArray::unbind() const
 {
-    m_IndexBuffer->Unbind();
-    m_VertexBuffer->Unbind();
+    m_IndexBuffer->unbind();
+    m_VertexBuffer->unbind();
 }
 
-void OpenGLESVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) { m_VertexBuffer = vertexBuffer; }
-void OpenGLESVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) { m_IndexBuffer = indexBuffer; }
+void OpenGLESVertexArray::addVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) { m_VertexBuffer = vertexBuffer; }
+void OpenGLESVertexArray::setIndexBuffer(const Ref<IndexBuffer>& indexBuffer) { m_IndexBuffer = indexBuffer; }
 void OpenGLESVertexArray::setLayout() const
 {
-    const auto& elements = m_VertexBuffer->GetLayout().GetElements();
+    const auto& elements = m_VertexBuffer->getLayout().getElements();
     for (unsigned int i = 0; i < elements.size(); i++)
     {
         const auto& element = elements[i];
         glEnableVertexAttribArray(i);
         glVertexAttribPointer(                               //
             i,                                               //
-            element.GetComponentCount(),                     //
-            ShaderDataTypeToOpenGLESBaseType(element.Type),  //
+            element.getComponentCount(),                     //
+            shaderDataTypeToOpenGlesBaseType(element.Type),  //
             element.Normalized ? GL_TRUE : GL_FALSE,         //
-            m_VertexBuffer->GetLayout().GetStride(),         //
+            m_VertexBuffer->getLayout().getStride(),         //
             (const void*)element.Offset                      //
         );
     }
