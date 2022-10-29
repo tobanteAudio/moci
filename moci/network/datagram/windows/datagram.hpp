@@ -4,7 +4,7 @@
 
 #if defined(MOCI_WINDOWS)
 
-#include "moci_network/datagram/datagram.hpp"
+#include "moci/network/datagram/datagram.hpp"
 
 #include <cstdint>
 

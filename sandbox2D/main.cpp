@@ -1,6 +1,8 @@
 #define MOCI_ENTRYPOINT
 #include "moci/moci.hpp"
 
+#include <moci/network/datagram/datagram.hpp>
+
 #include "imgui.h"
 
 #include "glm/glm.hpp"

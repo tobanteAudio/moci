@@ -8,8 +8,8 @@ add_subdirectory(moci_external)
 
 add_subdirectory("core")
 add_subdirectory("math")
+add_subdirectory("network")
 
-add_subdirectory(moci_network)
 add_subdirectory(moci_system)
 add_subdirectory(moci_events)
 add_subdirectory(moci_graphics_base)

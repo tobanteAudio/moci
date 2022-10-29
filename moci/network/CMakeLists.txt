@@ -1,9 +1,6 @@
 project(moci_network)
 
 set(moci_network_sources
-    moci_network.hpp
-    moci_network.cpp
-
     datagram/datagram.hpp
     datagram/datagram.cpp
 

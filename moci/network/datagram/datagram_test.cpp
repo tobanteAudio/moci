@@ -5,11 +5,11 @@
 #include <catch2/catch_all.hpp>
 
 #include "moci/core/preprocessor.hpp"
-#include "moci_network/moci_network.hpp"
+#include "moci/network/datagram/datagram.hpp"
 
 #if defined(MOCI_LINUX) || defined(MOCI_MAC)
 
-TEST_CASE("moci_network: UDPBindToPort", "[network]")
+TEST_CASE("network: UDPBindToPort", "[network]")
 {
     moci::DatagramSocket udp {};
     REQUIRE(udp.Bind("", 0) == true);
