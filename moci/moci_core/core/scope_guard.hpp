@@ -51,13 +51,13 @@ public:
 // WARNING: only safe if adquire lambda does not throw, otherwise release lambda is never invoked, because the scope
 // guard never finished initialistion..
 template<typename aLambda, typename rLambda>
-ScopeGuard<rLambda> MakeScopeGuardThatDoesNOTRollbackIfAdquireThrows(aLambda&& _a, rLambda&& _r)
+auto MakeScopeGuardThatDoesNOTRollbackIfAdquireThrows(aLambda&& _a, rLambda&& _r) -> ScopeGuard<rLambda>
 {
     return ScopeGuard<rLambda>(std::forward<aLambda>(_a), std::forward<rLambda>(_r));
 }
 
 template<typename aLambda, typename rLambda>
-ScopeGuard<rLambda> MakeScopeGuardThatDoesRollbackIfAdquireThrows(aLambda&& _a, rLambda&& _r)
+auto MakeScopeGuardThatDoesRollbackIfAdquireThrows(aLambda&& _a, rLambda&& _r) -> ScopeGuard<rLambda>
 {
     auto scope = ScopeGuard<rLambda>(std::forward<rLambda>(_r));
     _a();
@@ -65,7 +65,7 @@ ScopeGuard<rLambda> MakeScopeGuardThatDoesRollbackIfAdquireThrows(aLambda&& _a, 
 }
 
 template<typename Lambda>
-ScopeGuard<Lambda> MakeScopeGuard(Lambda&& _r)
+auto MakeScopeGuard(Lambda&& _r) -> ScopeGuard<Lambda>
 {
     return ScopeGuard<Lambda>(std::forward<Lambda>(_r));
 }

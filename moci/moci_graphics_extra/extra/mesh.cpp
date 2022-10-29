@@ -32,7 +32,7 @@ struct LogStream : public Assimp::LogStream
     void write(const char* message) override { MOCI_CORE_ERROR("Assimp error: {0}", message); }
 };
 
-glm::mat4 aiMatrix4x4ToGlm(const aiMatrix4x4& from)
+auto aiMatrix4x4ToGlm(const aiMatrix4x4& from) -> glm::mat4
 {
     glm::mat4 to;
     // the a,b,c,d in assimp is the row ; the 1,2,3,4 is the column

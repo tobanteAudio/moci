@@ -16,7 +16,7 @@ int : Represents the index of element in vector if its found else -1
 
 */
 template<typename T>
-std::pair<bool, int> FindInVector(const Vector<T>& vec, const T& element)
+auto FindInVector(const Vector<T>& vec, const T& element) -> std::pair<bool, int>
 {
     std::pair<bool, int> result;
 

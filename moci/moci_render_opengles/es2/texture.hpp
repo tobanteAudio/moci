@@ -39,14 +39,14 @@ class OpenGLESTextureCube : public TextureCube
 public:
     explicit OpenGLESTextureCube(Vector<std::string> paths);
 
-    OpenGLESTextureCube(const OpenGLESTextureCube&)            = delete;
-    OpenGLESTextureCube& operator=(const OpenGLESTextureCube&) = delete;
+    OpenGLESTextureCube(const OpenGLESTextureCube&)                    = delete;
+    auto operator=(const OpenGLESTextureCube&) -> OpenGLESTextureCube& = delete;
 
     ~OpenGLESTextureCube() override;
 
-    [[nodiscard]] std::uint32_t GetWidth() const override { return 0; }
-    [[nodiscard]] std::uint32_t GetHeight() const override { return 0; }
-    [[nodiscard]] std::uint32_t GetID() const override { return renderID_; }
+    [[nodiscard]] auto GetWidth() const -> std::uint32_t override { return 0; }
+    [[nodiscard]] auto GetHeight() const -> std::uint32_t override { return 0; }
+    [[nodiscard]] auto GetID() const -> std::uint32_t override { return renderID_; }
 
     void Bind(std::uint32_t slot = 0) const override;
     void Unbind() const override;

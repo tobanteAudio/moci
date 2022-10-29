@@ -9,7 +9,7 @@
 #include "moci_core/moci_core.hpp"
 #include "moci_graphics_base/moci_graphics_base.hpp"
 
-int main(int argc, char* argv[])
+auto main(int argc, char* argv[]) -> int
 {
     // global setup...
     moci::Log::Init();

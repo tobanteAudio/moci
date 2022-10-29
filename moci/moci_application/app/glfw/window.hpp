@@ -45,9 +45,9 @@ public:
     [[nodiscard]] auto IsVSync() const -> bool override;
 
     void SetFullscreen(bool enabled) override;
-    [[nodiscard]] bool IsFullscreen() const override;
+    [[nodiscard]] auto IsFullscreen() const -> bool override;
 
-    [[nodiscard]] std::uint32_t GetFrameCount() const noexcept override { return frameCounter_; }
+    [[nodiscard]] auto GetFrameCount() const noexcept -> std::uint32_t override { return frameCounter_; }
 
     [[nodiscard]] inline auto GetNativeWindow() const -> void* override { return m_Window; }
 

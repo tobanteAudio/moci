@@ -23,11 +23,11 @@ public:
     Pimpl() = default;
     ~Pimpl();
 
-    bool Bind(const std::string& ip, int port);
+    auto Bind(const std::string& ip, int port) -> bool;
 
-    static bool Write(std::string const& host, int port, Span<std::uint8_t> buffer);
-    static bool Write(std::string const& host, int port, DatagramSocket::Buffer const& buffer);
-    static bool Write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes);
+    static auto Write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool;
+    static auto Write(std::string const& host, int port, DatagramSocket::Buffer const& buffer) -> bool;
+    static auto Write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes) -> bool;
 
     void Listen();
 

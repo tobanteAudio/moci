@@ -12,15 +12,15 @@ public:
     explicit Image() = default;
     explicit Image(std::string const& path);
 
-    bool LoadFromFile(std::string const& path);
+    auto LoadFromFile(std::string const& path) -> bool;
 
-    [[nodiscard]] bool Empty() const noexcept { return data_.empty(); }
+    [[nodiscard]] auto Empty() const noexcept -> bool { return data_.empty(); }
 
-    [[nodiscard]] int GetWidth() const noexcept { return width_; }
-    [[nodiscard]] int GetHeight() const noexcept { return height_; }
-    [[nodiscard]] int GetNumChannels() const noexcept { return numChannels_; }
+    [[nodiscard]] auto GetWidth() const noexcept -> int { return width_; }
+    [[nodiscard]] auto GetHeight() const noexcept -> int { return height_; }
+    [[nodiscard]] auto GetNumChannels() const noexcept -> int { return numChannels_; }
 
-    [[nodiscard]] Span<std::uint8_t> Data() noexcept { return data_; }
+    [[nodiscard]] auto Data() noexcept -> Span<std::uint8_t> { return data_; }
 
 private:
     Vector<std::uint8_t> data_ = {};

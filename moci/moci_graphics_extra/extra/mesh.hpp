@@ -38,7 +38,7 @@ public:
     };
 
     explicit Mesh(std::string filePath);
-    [[nodiscard]] Span<Vertex const> GetVertices() const noexcept { return staticVertices_; }
+    [[nodiscard]] auto GetVertices() const noexcept -> Span<Vertex const> { return staticVertices_; }
 
 private:
     std::string filePath_ {};

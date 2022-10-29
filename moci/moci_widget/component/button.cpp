@@ -34,9 +34,9 @@ auto Button::GetText() const noexcept -> std::string const& { return text_; }
 auto Button::GetTextView() const noexcept -> std::string_view { return text_; }
 
 void Button::SetTextColor(Color col) noexcept { color_ = col; }
-Color Button::GetTextColor() const noexcept { return color_; }
+auto Button::GetTextColor() const noexcept -> Color { return color_; }
 
-bool Button::MouseClicked(moci::MouseCallback::Click click)
+auto Button::MouseClicked(moci::MouseCallback::Click click) -> bool
 {
     IgnoreUnused(click);
     auto const isNormal = GetState() == ButtonState::Normal;

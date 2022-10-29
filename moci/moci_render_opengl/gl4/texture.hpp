@@ -18,9 +18,9 @@ public:
 
     ~OpenGLTexture2D() override;
 
-    [[nodiscard]] std::uint32_t GetWidth() const override { return width_; }
-    [[nodiscard]] std::uint32_t GetHeight() const override { return height_; }
-    [[nodiscard]] std::uint32_t GetID() const override { return renderID_; }
+    [[nodiscard]] auto GetWidth() const -> std::uint32_t override { return width_; }
+    [[nodiscard]] auto GetHeight() const -> std::uint32_t override { return height_; }
+    [[nodiscard]] auto GetID() const -> std::uint32_t override { return renderID_; }
 
     void SetData(Span<std::uint8_t> data) const;
 
@@ -45,14 +45,14 @@ class OpenGLTextureCube : public TextureCube
 public:
     explicit OpenGLTextureCube(Vector<std::string> paths);
 
-    OpenGLTextureCube(const OpenGLTextureCube&)            = delete;
-    OpenGLTextureCube& operator=(const OpenGLTextureCube&) = delete;
+    OpenGLTextureCube(const OpenGLTextureCube&)                    = delete;
+    auto operator=(const OpenGLTextureCube&) -> OpenGLTextureCube& = delete;
 
     ~OpenGLTextureCube() override;
 
-    [[nodiscard]] std::uint32_t GetWidth() const override { return 0; }
-    [[nodiscard]] std::uint32_t GetHeight() const override { return 0; }
-    [[nodiscard]] std::uint32_t GetID() const override { return renderID_; }
+    [[nodiscard]] auto GetWidth() const -> std::uint32_t override { return 0; }
+    [[nodiscard]] auto GetHeight() const -> std::uint32_t override { return 0; }
+    [[nodiscard]] auto GetID() const -> std::uint32_t override { return renderID_; }
 
     void Bind(std::uint32_t slot = 0) const override;
     void Unbind() const override;

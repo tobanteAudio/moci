@@ -42,10 +42,10 @@ public:
     virtual void SetVSync(bool enabled)                = 0;
     [[nodiscard]] virtual auto IsVSync() const -> bool = 0;
 
-    virtual void SetFullscreen(bool enabled)        = 0;
-    [[nodiscard]] virtual bool IsFullscreen() const = 0;
+    virtual void SetFullscreen(bool enabled)                = 0;
+    [[nodiscard]] virtual auto IsFullscreen() const -> bool = 0;
 
-    [[nodiscard]] virtual std::uint32_t GetFrameCount() const = 0;
+    [[nodiscard]] virtual auto GetFrameCount() const -> std::uint32_t = 0;
 
     [[nodiscard]] virtual auto GetNativeWindow() const -> void* = 0;
 };

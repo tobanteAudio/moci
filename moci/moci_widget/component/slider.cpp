@@ -17,7 +17,7 @@ void Slider::OnDraw(Painter& painter)
     style->DrawSlider(painter, GetBounds(), *this);
 }
 
-bool Slider::MouseClicked(moci::MouseCallback::Click click)
+auto Slider::MouseClicked(moci::MouseCallback::Click click) -> bool
 {
     auto const bounds    = GetBounds();
     auto const relativeX = static_cast<float>(click.x - bounds.GetX());
@@ -25,7 +25,7 @@ bool Slider::MouseClicked(moci::MouseCallback::Click click)
     return true;
 }
 
-bool Slider::MouseScrolled(MouseScrolledEvent scroll)
+auto Slider::MouseScrolled(MouseScrolledEvent scroll) -> bool
 {
     auto newValue = GetValue() + scroll.GetYOffset() * 0.05F;
     newValue      = std::max(0.0F, newValue);
@@ -42,7 +42,7 @@ auto Slider::SetValue(float newValue) noexcept -> void
     if (callbacks_.valueChanged) { callbacks_.valueChanged(newValue); }
 }
 
-Color Slider::GetColor() const noexcept { return color_; }
+auto Slider::GetColor() const noexcept -> Color { return color_; }
 void Slider::SetColor(Color col) noexcept { color_ = col; }
 
 }  // namespace moci

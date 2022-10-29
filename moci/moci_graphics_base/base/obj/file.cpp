@@ -12,7 +12,7 @@ namespace moci
 
 OBJFile::OBJFile(std::string path) : path_(std::move(path)) { }
 
-bool OBJFile::Parse()
+auto OBJFile::Parse() -> bool
 {
     std::string line;
     std::ifstream objFile(path_);
@@ -61,7 +61,7 @@ bool OBJFile::Parse()
     return true;
 }
 
-glm::vec3 OBJFile::parseLineToVec3(std::string& line)
+auto OBJFile::parseLineToVec3(std::string& line) -> glm::vec3
 {
 
     auto splits = Strings::Split(line, ' ');

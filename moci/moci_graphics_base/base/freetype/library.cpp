@@ -9,7 +9,7 @@
 
 namespace moci
 {
-std::optional<Typeface> FreetypeLibrary::CreateTypefaceFromFont(const std::string& fontPath)
+auto FreetypeLibrary::CreateTypefaceFromFont(const std::string& fontPath) -> std::optional<Typeface>
 {
     if (fontPath.empty()) { return std::nullopt; }
 

@@ -15,19 +15,19 @@ DatagramSocket::DatagramSocket() { pimpl_ = MakeScope<Pimpl>(); }
 
 DatagramSocket::~DatagramSocket() { pimpl_.reset(nullptr); }
 
-bool DatagramSocket::Bind(const std::string& ip, int port) { return pimpl_->Bind(ip, port); }
+auto DatagramSocket::Bind(const std::string& ip, int port) -> bool { return pimpl_->Bind(ip, port); }
 
-bool DatagramSocket::Write(std::string const& host, int port, Span<std::uint8_t> buffer)
+auto DatagramSocket::Write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool
 {
     return pimpl_->Write(host, port, buffer);
 }
 
-bool DatagramSocket::Write(std::string const& host, int port, Buffer const& buffer)
+auto DatagramSocket::Write(std::string const& host, int port, Buffer const& buffer) -> bool
 {
     return pimpl_->Write(host, port, buffer);
 }
 
-bool DatagramSocket::Write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes)
+auto DatagramSocket::Write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes) -> bool
 {
     return pimpl_->Write(host, port, buffer, numBytes);
 }

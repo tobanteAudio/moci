@@ -225,7 +225,7 @@ private:
 };
 
 template<typename Type>
-bool operator==(Rectangle<Type> const r1, Rectangle<Type> const r2)
+auto operator==(Rectangle<Type> const r1, Rectangle<Type> const r2) -> bool
 {
     auto const position = (r1.GetX() == r2.GetX()) && (r1.GetY() == r2.GetY());
     auto const width    = r1.GetWidth() == r2.GetWidth();
@@ -234,7 +234,7 @@ bool operator==(Rectangle<Type> const r1, Rectangle<Type> const r2)
 }
 
 template<typename Type>
-bool operator!=(Rectangle<Type> const r1, Rectangle<Type> const r2)
+auto operator!=(Rectangle<Type> const r1, Rectangle<Type> const r2) -> bool
 {
     return !(r1 == r2);
 }

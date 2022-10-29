@@ -10,17 +10,17 @@
 
 namespace moci
 {
-std::unordered_map<std::string, std::string> SystemInfoLinuxReadProcInfo();
+auto SystemInfoLinuxReadProcInfo() -> std::unordered_map<std::string, std::string>;
 
 class SystemInfo::Pimpl
 {
 public:
-    static std::string GetOSName();
-    static std::string GetVendor();
-    static std::string GetCPUModel();
-    static int GetCPUCoreCount();
-    static int GetCPUThreadCount();
-    static std::string GetCPUFeatures();
+    static auto GetOSName() -> std::string;
+    static auto GetVendor() -> std::string;
+    static auto GetCPUModel() -> std::string;
+    static auto GetCPUCoreCount() -> int;
+    static auto GetCPUThreadCount() -> int;
+    static auto GetCPUFeatures() -> std::string;
 };
 
 }  // namespace moci

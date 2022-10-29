@@ -16,7 +16,7 @@ public:
     void Bind() const override;
     void Unbind() const override;
 
-    [[nodiscard]] const BufferLayout& GetLayout() const override { return m_Layout; }
+    [[nodiscard]] auto GetLayout() const -> const BufferLayout& override { return m_Layout; }
     void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
     void UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override;
 
@@ -34,7 +34,7 @@ public:
     void Bind() const override;
     void Unbind() const override;
 
-    [[nodiscard]] uint32_t GetCount() const override { return specs_.count; }
+    [[nodiscard]] auto GetCount() const -> uint32_t override { return specs_.count; }
     void UploadData(std::uint32_t offset, Span<std::uint32_t> indices) const override;
 
 private:

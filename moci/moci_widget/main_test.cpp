@@ -8,7 +8,7 @@
 
 #include "moci_core/moci_core.hpp"
 
-int main(int argc, char* argv[])
+auto main(int argc, char* argv[]) -> int
 {
     // global setup...
     moci::Log::Init();

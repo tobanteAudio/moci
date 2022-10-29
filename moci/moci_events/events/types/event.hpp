@@ -64,7 +64,7 @@ public:
     [[nodiscard]] virtual auto GetCategoryFlags() const -> int     = 0;
     [[nodiscard]] virtual auto ToString() const -> std::string { return std::string(GetName()); }
 
-    [[nodiscard]] inline bool IsInCategory(EventCategory category) const noexcept
+    [[nodiscard]] inline auto IsInCategory(EventCategory category) const noexcept -> bool
     {
         return (GetCategoryFlags() & category) != 0;
     }

@@ -29,7 +29,7 @@ public:
     /**
      * @brief Returns true if start & end are equal.
      */
-    [[nodiscard]] constexpr bool IsEmpty() const noexcept
+    [[nodiscard]] constexpr auto IsEmpty() const noexcept -> bool
     {
         return (start_.GetX() == end_.GetX()) && (start_.GetY() == end_.GetY());
     }
@@ -37,17 +37,17 @@ public:
     /**
      * @brief Returns the start point.
      */
-    [[nodiscard]] constexpr Point<Type> GetStart() const noexcept { return start_; }
+    [[nodiscard]] constexpr auto GetStart() const noexcept -> Point<Type> { return start_; }
 
     /**
      * @brief Returns the end point.
      */
-    [[nodiscard]] constexpr Point<Type> GetEnd() const noexcept { return end_; }
+    [[nodiscard]] constexpr auto GetEnd() const noexcept -> Point<Type> { return end_; }
 
     /**
      * @brief Returns the slope. If the line is empty 0 will be returned.
      */
-    [[nodiscard]] constexpr std::optional<Type> GetSlope() const noexcept
+    [[nodiscard]] constexpr auto GetSlope() const noexcept -> std::optional<Type>
     {
         if (!IsEmpty())
         {
@@ -64,7 +64,7 @@ public:
      *
      * @details Midpoint = \f$(x_1+x_2)/2\f$, \f$(y_1+y_2)/2\f$
      */
-    [[nodiscard]] constexpr Point<Type> GetMidPoint() const noexcept
+    [[nodiscard]] constexpr auto GetMidPoint() const noexcept -> Point<Type>
     {
         auto const x = (start_.GetX() + end_.GetX()) / 2.0F;
         auto const y = (start_.GetY() + end_.GetY()) / 2.0F;
@@ -74,7 +74,7 @@ public:
     /**
      * @brief Returns the angle of the line in radians.
      */
-    [[nodiscard]] Type GetAngleRadians() const noexcept
+    [[nodiscard]] auto GetAngleRadians() const noexcept -> Type
     {
         auto const angle = std::atan2(end_.GetY() - start_.GetY(), end_.GetX() - start_.GetX());
         return static_cast<Type>(angle);
@@ -83,7 +83,7 @@ public:
     /**
      * @brief Returns the angle of the line in degrees.
      */
-    [[nodiscard]] Type GetAngleDegrees() const noexcept
+    [[nodiscard]] auto GetAngleDegrees() const noexcept -> Type
     {
         return Type(GetAngleRadians() * (180.0 / 3.14159265358979323846));
     }
@@ -93,7 +93,7 @@ public:
      *
      * @details The distance between \f$(x_1,y_1)\f$ and \f$(x_2,y_2)\f$ is \f$\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\f$.
      */
-    [[nodiscard]] Type GetLength() const noexcept
+    [[nodiscard]] auto GetLength() const noexcept -> Type
     {
         auto const x = std::pow(end_.GetX() - start_.GetX(), 2.0);
         auto const y = std::pow(end_.GetY() - start_.GetY(), 2.0);
@@ -119,7 +119,7 @@ private:
 };
 
 template<typename Type>
-bool operator==(Line<Type> const lhs, Line<Type> const rhs)
+auto operator==(Line<Type> const lhs, Line<Type> const rhs) -> bool
 {
     auto const start = lhs.GetStart() == rhs.GetStart();
     auto const end   = lhs.GetEnd() == rhs.GetEnd();
@@ -127,7 +127,7 @@ bool operator==(Line<Type> const lhs, Line<Type> const rhs)
 }
 
 template<typename Type>
-bool operator!=(Line<Type> const lhs, Line<Type> const rhs)
+auto operator!=(Line<Type> const lhs, Line<Type> const rhs) -> bool
 {
     return !(lhs == rhs);
 }

@@ -16,7 +16,7 @@ namespace moci
 
 namespace
 {
-GLenum OpenGLShaderTypeFromShaderType(ShaderType type)
+auto OpenGLShaderTypeFromShaderType(ShaderType type) -> GLenum
 {
     if (type == ShaderType::Vertex) { return GL_VERTEX_SHADER; }
     if (type == ShaderType::Fragment) { return GL_FRAGMENT_SHADER; }
@@ -60,7 +60,7 @@ OpenGLShader::~OpenGLShader()
     glDeleteProgram(m_RendererID);
 }
 
-std::string OpenGLShader::ReadFile(std::string const& filepath)
+auto OpenGLShader::ReadFile(std::string const& filepath) -> std::string
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -76,7 +76,7 @@ std::string OpenGLShader::ReadFile(std::string const& filepath)
     return {};
 }
 
-std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(std::string const& source)
+auto OpenGLShader::PreProcess(std::string const& source) -> std::unordered_map<GLenum, std::string>
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -187,7 +187,7 @@ void OpenGLShader::SetFloat4(std::string const& name, const glm::vec4& value) { 
 void OpenGLShader::SetMat3(std::string const& name, glm::mat3 const& value) { uploadUniformMat3(name, value); }
 void OpenGLShader::SetMat4(std::string const& name, const glm::mat4& value) { uploadUniformMat4(name, value); }
 
-std::int32_t OpenGLShader::getLocation(std::string const& name) const
+auto OpenGLShader::getLocation(std::string const& name) const -> std::int32_t
 {
     return glGetUniformLocation(m_RendererID, name.c_str());
 }

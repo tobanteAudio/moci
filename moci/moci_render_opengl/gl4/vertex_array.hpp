@@ -18,8 +18,8 @@ public:
     void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
     void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
-    [[nodiscard]] const Ref<VertexBuffer>& GetVertexBuffer() const override { return m_VertexBuffer; }
-    [[nodiscard]] const Ref<IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuffer; }
+    [[nodiscard]] auto GetVertexBuffer() const -> const Ref<VertexBuffer>& override { return m_VertexBuffer; }
+    [[nodiscard]] auto GetIndexBuffer() const -> const Ref<IndexBuffer>& override { return m_IndexBuffer; }
 
 private:
     uint32_t m_RendererID {};

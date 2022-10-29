@@ -26,13 +26,13 @@ public:
     void OnEvent(Event& e) override;
 
 private:
-    bool onWindowResized(WindowResizeEvent& e);
-    bool onMouseMoved(MouseMovedEvent& e);
-    bool onMouseScrolled(MouseScrolledEvent& e);
-    bool onMousePressed(MouseButtonPressedEvent& e);
+    auto onWindowResized(WindowResizeEvent& e) -> bool;
+    auto onMouseMoved(MouseMovedEvent& e) -> bool;
+    auto onMouseScrolled(MouseScrolledEvent& e) -> bool;
+    auto onMousePressed(MouseButtonPressedEvent& e) -> bool;
 
     template<typename Handler>
-    bool handleEvent(Handler handler)
+    auto handleEvent(Handler handler) -> bool
     {
         MOCI_PROFILE_FUNCTION();
         Component* comp = nullptr;

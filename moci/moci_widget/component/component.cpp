@@ -109,7 +109,7 @@ auto Component::FindComponentAt(Point<int> position) noexcept -> Component*
 
 void Component::SetStyle(Style* newStyle) noexcept { style_ = newStyle; }
 
-Style* Component::GetStyle() const noexcept
+auto Component::GetStyle() const noexcept -> Style*
 {
     // If style is set local
     if (style_ != nullptr) { return style_; }

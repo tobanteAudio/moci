@@ -23,7 +23,7 @@ public:
 
     virtual void Resize(std::uint32_t width, std::uint32_t height) = 0;
 
-    [[nodiscard]] virtual uint32_t GetColorAttachmentRendererID() const    = 0;
-    [[nodiscard]] virtual FramebufferSpecs const& GetSpecification() const = 0;
+    [[nodiscard]] virtual auto GetColorAttachmentRendererID() const -> uint32_t    = 0;
+    [[nodiscard]] virtual auto GetSpecification() const -> FramebufferSpecs const& = 0;
 };
 }  // namespace moci

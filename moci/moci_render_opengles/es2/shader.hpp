@@ -37,7 +37,7 @@ public:
     [[nodiscard]] auto GetName() const -> std::string const& override { return m_Name; }
 
 private:
-    [[nodiscard]] std::int32_t getLocation(std::string const& name) const;
+    [[nodiscard]] auto getLocation(std::string const& name) const -> std::int32_t;
 
     void uploadUniformInt(std::string const& name, int value) const;
     void uploadUniformInts(std::string const& name, int count, int* values) const;

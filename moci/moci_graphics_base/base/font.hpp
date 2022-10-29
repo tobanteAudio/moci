@@ -31,11 +31,11 @@ public:
                       std::uint32_t advance, Buffer buffer);
     void AddCharacter(char c, Character const& character);
 
-    [[nodiscard]] std::string_view GetName() const noexcept { return std::string_view(name_); }
-    [[nodiscard]] std::size_t GetNumCharacters() const noexcept { return characters_.size(); }
-    [[nodiscard]] Character const& GetCharacter(char c) const noexcept { return (*characters_.find(c)).second; }
+    [[nodiscard]] auto GetName() const noexcept -> std::string_view { return std::string_view(name_); }
+    [[nodiscard]] auto GetNumCharacters() const noexcept -> std::size_t { return characters_.size(); }
+    [[nodiscard]] auto GetCharacter(char c) const noexcept -> Character const& { return (*characters_.find(c)).second; }
 
-    [[nodiscard]] std::uint32_t GetWidthForString(std::string const& text, float scale = 1.0F);
+    [[nodiscard]] auto GetWidthForString(std::string const& text, float scale = 1.0F) -> std::uint32_t;
 
 private:
     std::string name_ {};

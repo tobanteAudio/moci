@@ -29,25 +29,25 @@ public:
     /**
      * @brief Parse the model data into memory.
      */
-    bool Parse();
+    auto Parse() -> bool;
 
     /**
      * @brief Returns a span of the vertex positions.
      */
-    [[nodiscard]] Span<glm::vec3> GetVertices() { return vertices_; }
+    [[nodiscard]] auto GetVertices() -> Span<glm::vec3> { return vertices_; }
 
     /**
      * @brief Returns a span of the vertex normals.
      */
-    [[nodiscard]] Span<glm::vec3> GetNormals() { return normals_; }
+    [[nodiscard]] auto GetNormals() -> Span<glm::vec3> { return normals_; }
 
     /**
      * @brief Returns a span of the faces.
      */
-    [[nodiscard]] Span<VertexData> GetVertexData() { return model_; }
+    [[nodiscard]] auto GetVertexData() -> Span<VertexData> { return model_; }
 
 private:
-    static glm::vec3 parseLineToVec3(std::string& line);
+    static auto parseLineToVec3(std::string& line) -> glm::vec3;
     void parseLineToFace(std::string& line);
 
     std::string path_;

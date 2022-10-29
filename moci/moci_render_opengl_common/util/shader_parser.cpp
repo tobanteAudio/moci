@@ -7,7 +7,7 @@ namespace moci
 {
 namespace
 {
-ShaderType ShaderTypeFromString(std::string_view type)
+auto ShaderTypeFromString(std::string_view type) -> ShaderType
 {
     if (type == "vertex") { return ShaderType::Vertex; }
     if (type == "fragment" || type == "pixel") { return ShaderType::Fragment; }
@@ -17,7 +17,7 @@ ShaderType ShaderTypeFromString(std::string_view type)
 }
 }  // namespace
 
-ShaderProgramSource ShaderParser::SplitSource(std::string const& sources)
+auto ShaderParser::SplitSource(std::string const& sources) -> ShaderProgramSource
 {
     constexpr char const* typeToken = "#type";
     auto const typeTokenLength      = strlen(typeToken);

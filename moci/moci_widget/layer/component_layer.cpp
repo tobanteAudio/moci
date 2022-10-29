@@ -48,7 +48,7 @@ void ComponentLayer::OnEvent(Event& e)
     dispatcher.Dispatch<MouseButtonPressedEvent>([this](auto& e) { return onMousePressed(e); });
 }
 
-bool ComponentLayer::onWindowResized(WindowResizeEvent& e)
+auto ComponentLayer::onWindowResized(WindowResizeEvent& e) -> bool
 {
     width_  = static_cast<float>(e.GetWidth());
     height_ = static_cast<float>(e.GetHeight());
@@ -56,20 +56,20 @@ bool ComponentLayer::onWindowResized(WindowResizeEvent& e)
     return false;
 }
 
-bool ComponentLayer::onMouseMoved(MouseMovedEvent& e)
+auto ComponentLayer::onMouseMoved(MouseMovedEvent& e) -> bool
 {
     IgnoreUnused(e);
     (void)this;
     return true;
 }
 
-bool ComponentLayer::onMouseScrolled(MouseScrolledEvent& e)
+auto ComponentLayer::onMouseScrolled(MouseScrolledEvent& e) -> bool
 {
     MOCI_PROFILE_FUNCTION();
     return handleEvent([&](Component* comp) { return comp->MouseScrolled(e); });
 }
 
-bool ComponentLayer::onMousePressed(MouseButtonPressedEvent& e)
+auto ComponentLayer::onMousePressed(MouseButtonPressedEvent& e) -> bool
 {
     MOCI_PROFILE_FUNCTION();
     IgnoreUnused(e);

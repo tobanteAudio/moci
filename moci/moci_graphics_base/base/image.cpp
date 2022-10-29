@@ -11,7 +11,7 @@ namespace moci
 {
 Image::Image(std::string const& path) { LoadFromFile(path); }
 
-bool Image::LoadFromFile(std::string const& path)
+auto Image::LoadFromFile(std::string const& path) -> bool
 {
     auto* data = stbi_load(path.c_str(), &width_, &height_, &numChannels_, 0);
     if (data == nullptr)

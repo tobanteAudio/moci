@@ -22,7 +22,7 @@ public:
     OpenGLShader(std::string name, std::string const& vertexSrc, std::string const& fragmentSrc);
     ~OpenGLShader() override;
 
-    [[nodiscard]] std::string const& GetName() const override { return m_Name; }
+    [[nodiscard]] auto GetName() const -> std::string const& override { return m_Name; }
 
     void Bind() const override;
     void Unbind() const override;
@@ -37,7 +37,7 @@ public:
     void SetMat4(std::string const& name, glm::mat4 const& value) override;
 
 private:
-    [[nodiscard]] std::int32_t getLocation(std::string const& name) const;
+    [[nodiscard]] auto getLocation(std::string const& name) const -> std::int32_t;
 
     void uploadUniformInt(std::string const& name, int value);
     void uploadUniformInts(std::string const& name, int count, int* values);
@@ -48,8 +48,8 @@ private:
     void uploadUniformMat3(std::string const& name, const glm::mat3& matrix);
     void uploadUniformMat4(std::string const& name, const glm::mat4& matrix);
 
-    static std::string ReadFile(std::string const& filepath);
-    static std::unordered_map<GLenum, std::string> PreProcess(std::string const& source);
+    static auto ReadFile(std::string const& filepath) -> std::string;
+    static auto PreProcess(std::string const& source) -> std::unordered_map<GLenum, std::string>;
     void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 
     uint32_t m_RendererID {};

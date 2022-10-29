@@ -55,9 +55,9 @@ public:
     [[nodiscard]] auto GetTextView() const noexcept -> std::string_view;
 
     void SetTextColor(Color col) noexcept;
-    [[nodiscard]] Color GetTextColor() const noexcept;
+    [[nodiscard]] auto GetTextColor() const noexcept -> Color;
 
-    bool MouseClicked(moci::MouseCallback::Click click) override;
+    auto MouseClicked(moci::MouseCallback::Click click) -> bool override;
 
 private:
     std::string text_  = {};

@@ -18,32 +18,32 @@ public:
     /**
      * @brief Returns the operating system name.
      */
-    static std::string GetOSName();
+    static auto GetOSName() -> std::string;
 
     /**
      * @brief Returns the cpu vendor.
      */
-    static std::string GetVendor();
+    static auto GetVendor() -> std::string;
 
     /**
      * @brief Returns the cpu model name.
      */
-    static std::string GetCPUModel();
+    static auto GetCPUModel() -> std::string;
 
     /**
      * @brief Returns the number of cpu cores.
      */
-    static int GetCPUCoreCount();
+    static auto GetCPUCoreCount() -> int;
 
     /**
      * @brief Returns the number of cpu threads.
      */
-    static int GetCPUThreadCount();
+    static auto GetCPUThreadCount() -> int;
 
     /**
      * @brief Returns a string with all cpu features. Seperated by a literal space.
      */
-    static std::string GetCPUFeatures();
+    static auto GetCPUFeatures() -> std::string;
 
 private:
     class Pimpl;

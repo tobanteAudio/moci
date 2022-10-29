@@ -63,7 +63,7 @@ auto OpenGLESIndexBuffer::UploadData(std::uint32_t offset, Span<std::uint32_t> i
     GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, indicesShort.data()));
 }
 
-Span<std::uint16_t> OpenGLESIndexBuffer::convertToUnsignedShorts(Span<std::uint32_t> indices) const
+auto OpenGLESIndexBuffer::convertToUnsignedShorts(Span<std::uint32_t> indices) const -> Span<std::uint16_t>
 {
     indicesShort_->clear();
     indicesShort_->reserve(indices.size());

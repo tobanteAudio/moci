@@ -48,7 +48,7 @@ auto RenderFactory::MakeIndexBuffer(IndexBufferSpecs specs) -> IndexBuffer*
     return nullptr;
 }
 
-Ref<Framebuffer> RenderFactory::MakeFramebuffer(FramebufferSpecs spec)
+auto RenderFactory::MakeFramebuffer(FramebufferSpecs spec) -> Ref<Framebuffer>
 {
     switch (Renderer::GetAPI())
     {

@@ -14,11 +14,11 @@ public:
     DatagramSocket();
     ~DatagramSocket();
 
-    bool Bind(const std::string& ip, int port);
+    auto Bind(const std::string& ip, int port) -> bool;
 
-    bool Write(std::string const& host, int port, Span<std::uint8_t> buffer);
-    bool Write(std::string const& host, int port, Buffer const& buffer);
-    bool Write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes);
+    auto Write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool;
+    auto Write(std::string const& host, int port, Buffer const& buffer) -> bool;
+    auto Write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes) -> bool;
 
     void Listen();
 

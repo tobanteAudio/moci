@@ -34,10 +34,10 @@ public:
     [[nodiscard]] auto GetValue() const noexcept -> float;
 
     void SetColor(Color col) noexcept;
-    [[nodiscard]] Color GetColor() const noexcept;
+    [[nodiscard]] auto GetColor() const noexcept -> Color;
 
-    bool MouseClicked(moci::MouseCallback::Click click) override;
-    bool MouseScrolled(MouseScrolledEvent scroll) override;
+    auto MouseClicked(moci::MouseCallback::Click click) -> bool override;
+    auto MouseScrolled(MouseScrolledEvent scroll) -> bool override;
 
 private:
     float value_               = {};

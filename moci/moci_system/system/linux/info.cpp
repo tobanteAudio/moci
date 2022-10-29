@@ -13,7 +13,7 @@
 namespace moci
 {
 
-std::unordered_map<std::string, std::string> SystemInfoLinuxReadProcInfo()
+auto SystemInfoLinuxReadProcInfo() -> std::unordered_map<std::string, std::string>
 {
     std::string line;
     std::ifstream cpuinfo("/proc/cpuinfo");
@@ -38,14 +38,14 @@ std::unordered_map<std::string, std::string> SystemInfoLinuxReadProcInfo()
     return result;
 }
 
-std::string SystemInfo::Pimpl::GetOSName()
+auto SystemInfo::Pimpl::GetOSName() -> std::string
 {
     utsname uts {};
     uname(&uts);
     return uts.sysname;
 }
 
-std::string SystemInfo::Pimpl::GetVendor()
+auto SystemInfo::Pimpl::GetVendor() -> std::string
 {
     auto const procInfo = SystemInfoLinuxReadProcInfo();
     auto const vendorID = procInfo.find(std::string("vendor_id"));
@@ -53,7 +53,7 @@ std::string SystemInfo::Pimpl::GetVendor()
     return "";
 }
 
-std::string SystemInfo::Pimpl::GetCPUModel()
+auto SystemInfo::Pimpl::GetCPUModel() -> std::string
 {
     auto const procInfo = SystemInfoLinuxReadProcInfo();
     auto const vendorID = procInfo.find(std::string("model name"));
@@ -61,7 +61,7 @@ std::string SystemInfo::Pimpl::GetCPUModel()
     return "";
 }
 
-int SystemInfo::Pimpl::GetCPUCoreCount()
+auto SystemInfo::Pimpl::GetCPUCoreCount() -> int
 {
     auto const procInfo = SystemInfoLinuxReadProcInfo();
     auto const vendorID = procInfo.find(std::string("cpu cores"));
@@ -84,7 +84,7 @@ int SystemInfo::Pimpl::GetCPUCoreCount()
     return coreCount;
 }
 
-int SystemInfo::Pimpl::GetCPUThreadCount()
+auto SystemInfo::Pimpl::GetCPUThreadCount() -> int
 {
     auto const procInfo = SystemInfoLinuxReadProcInfo();
     auto const vendorID = procInfo.find(std::string("siblings"));
@@ -107,7 +107,7 @@ int SystemInfo::Pimpl::GetCPUThreadCount()
     return threadCount;
 }
 
-std::string SystemInfo::Pimpl::GetCPUFeatures()
+auto SystemInfo::Pimpl::GetCPUFeatures() -> std::string
 {
     auto const procInfo = SystemInfoLinuxReadProcInfo();
     auto const vendorID = procInfo.find(std::string("flags"));

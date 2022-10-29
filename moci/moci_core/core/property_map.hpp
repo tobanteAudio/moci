@@ -62,12 +62,12 @@ public:
      * @brief Delete the property at key. Returns true if successfully deleted.
      * If the key doesn't exist, false will be returned.
      */
-    bool DeleteProperty(KeyType const& key) { return data_.erase(key) == 1; }
+    auto DeleteProperty(KeyType const& key) -> bool { return data_.erase(key) == 1; }
 
     /**
      * @brief Returns true if the map contains the given key.
      */
-    [[nodiscard]] bool HasKey(KeyType const& key) const
+    [[nodiscard]] auto HasKey(KeyType const& key) const -> bool
     {
         auto const search = data_.find(key);
         return search != data_.end();

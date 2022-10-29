@@ -19,7 +19,7 @@ void Typeface::AddCharacter(char c, Character const& character)
     characters_.insert(std::pair<char, Character>(c, character));
 }
 
-std::uint32_t Typeface::GetWidthForString(std::string const& text, float scale)
+auto Typeface::GetWidthForString(std::string const& text, float scale) -> std::uint32_t
 {
     auto position = Point<float> {};
     for (auto const c : text)

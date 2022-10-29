@@ -155,7 +155,7 @@ void OpenGLESShader::SetMat3(std::string const& name, const glm::mat3& value) { 
 
 void OpenGLESShader::SetMat4(std::string const& name, const glm::mat4& value) { uploadUniformMat4(name, value); }
 
-std::int32_t OpenGLESShader::getLocation(std::string const& name) const
+auto OpenGLESShader::getLocation(std::string const& name) const -> std::int32_t
 {
     return glGetUniformLocation(m_RendererID, name.c_str());
 }

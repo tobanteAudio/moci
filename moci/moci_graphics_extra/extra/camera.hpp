@@ -14,23 +14,23 @@ public:
 
     void SetProjection(float left, float right, float bottom, float top);
 
-    [[nodiscard]] const glm::vec3& GetPosition() const { return m_Position; }
+    [[nodiscard]] auto GetPosition() const -> const glm::vec3& { return m_Position; }
     void SetPosition(const glm::vec3& position)
     {
         m_Position = position;
         RecalculateViewMatrix();
     }
 
-    [[nodiscard]] float GetRotation() const { return m_Rotation; }
+    [[nodiscard]] auto GetRotation() const -> float { return m_Rotation; }
     void SetRotation(float rotation)
     {
         m_Rotation = rotation;
         RecalculateViewMatrix();
     }
 
-    [[nodiscard]] const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
-    [[nodiscard]] const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
-    [[nodiscard]] const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
+    [[nodiscard]] auto GetProjectionMatrix() const -> const glm::mat4& { return m_ProjectionMatrix; }
+    [[nodiscard]] auto GetViewMatrix() const -> const glm::mat4& { return m_ViewMatrix; }
+    [[nodiscard]] auto GetViewProjectionMatrix() const -> const glm::mat4& { return m_ViewProjectionMatrix; }
 
 private:
     void RecalculateViewMatrix();
@@ -51,15 +51,15 @@ public:
     void OnUpdate(Timestep ts);
     void OnEvent(Event& e);
 
-    OrthographicCamera& GetCamera() { return m_Camera; }
-    [[nodiscard]] const OrthographicCamera& GetCamera() const { return m_Camera; }
+    auto GetCamera() -> OrthographicCamera& { return m_Camera; }
+    [[nodiscard]] auto GetCamera() const -> const OrthographicCamera& { return m_Camera; }
 
-    [[nodiscard]] float GetZoomLevel() const { return m_ZoomLevel; }
+    [[nodiscard]] auto GetZoomLevel() const -> float { return m_ZoomLevel; }
     void SetZoomLevel(float level) { m_ZoomLevel = level; }
 
 private:
-    bool OnMouseScrolled(MouseScrolledEvent& e);
-    bool OnWindowResized(WindowResizeEvent& e);
+    auto OnMouseScrolled(MouseScrolledEvent& e) -> bool;
+    auto OnWindowResized(WindowResizeEvent& e) -> bool;
 
     float m_AspectRatio;
     float m_ZoomLevel = 1.0F;

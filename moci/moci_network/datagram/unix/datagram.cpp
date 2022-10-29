@@ -23,17 +23,18 @@ DatagramSocket::Pimpl::~Pimpl()
     close(socketDescriptor_);
 }
 
-bool DatagramSocket::Pimpl::Write(std::string const& host, int port, Span<std::uint8_t> buffer)
+auto DatagramSocket::Pimpl::Write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool
 {
     return Write(host, port, buffer.data(), buffer.size());
 }
 
-bool DatagramSocket::Pimpl::Write(std::string const& host, int port, DatagramSocket::Buffer const& buffer)
+auto DatagramSocket::Pimpl::Write(std::string const& host, int port, DatagramSocket::Buffer const& buffer) -> bool
 {
     return Write(host, port, static_cast<std::uint8_t const*>(buffer.data()), buffer.size());
 }
 
-bool DatagramSocket::Pimpl::Write(std::string const& host, int port, std::uint8_t const* const buffer, size_t numBytes)
+auto DatagramSocket::Pimpl::Write(std::string const& host, int port, std::uint8_t const* const buffer, size_t numBytes)
+    -> bool
 {
     // Creating socket file descriptor
     int sockDescriptor = 0;
@@ -54,7 +55,7 @@ bool DatagramSocket::Pimpl::Write(std::string const& host, int port, std::uint8_
 
     return true;
 }
-bool DatagramSocket::Pimpl::Bind(const std::string& ip, int port)
+auto DatagramSocket::Pimpl::Bind(const std::string& ip, int port) -> bool
 {
     moci::IgnoreUnused(ip);
     // Creating socket file descriptor

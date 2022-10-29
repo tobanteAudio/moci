@@ -25,7 +25,7 @@ enum class MouseCode : uint16_t
 
 using Mouse = MouseCode;
 
-inline std::ostream& operator<<(std::ostream& out, MouseCode mouseCode)
+inline auto operator<<(std::ostream& out, MouseCode mouseCode) -> std::ostream&
 {
     out << static_cast<int32_t>(mouseCode);
     return out;

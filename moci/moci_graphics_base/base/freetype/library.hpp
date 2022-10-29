@@ -21,7 +21,7 @@ public:
     /**
      * @brief Create a new typeface from a font file.
      */
-    static std::optional<Typeface> CreateTypefaceFromFont(const std::string& fontPath);
+    static auto CreateTypefaceFromFont(const std::string& fontPath) -> std::optional<Typeface>;
 
 private:
 };

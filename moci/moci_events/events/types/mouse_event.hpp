@@ -99,13 +99,13 @@ public:
 
     virtual ~MouseCallback() = default;
 
-    virtual bool MouseClicked(Click click)
+    virtual auto MouseClicked(Click click) -> bool
     {
         IgnoreUnused(click);
         return false;
     }
 
-    virtual bool MouseScrolled(MouseScrolledEvent scroll)
+    virtual auto MouseScrolled(MouseScrolledEvent scroll) -> bool
     {
         IgnoreUnused(scroll);
         return false;

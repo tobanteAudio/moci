@@ -156,7 +156,7 @@ public:
     /**
      * @brief Returns the current set style.
      */
-    [[nodiscard]] Style* GetStyle() const noexcept;
+    [[nodiscard]] auto GetStyle() const noexcept -> Style*;
 
 private:
     std::string id_ {};

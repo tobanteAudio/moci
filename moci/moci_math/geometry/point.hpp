@@ -30,13 +30,13 @@ private:
 };
 
 template<typename Type>
-constexpr bool operator==(Point<Type> lhs, Point<Type> rhs)
+constexpr auto operator==(Point<Type> lhs, Point<Type> rhs) -> bool
 {
     return (lhs.GetX() == rhs.GetX()) && (lhs.GetY() == rhs.GetY());
 }
 
 template<typename Type>
-constexpr bool operator!=(Point<Type> lhs, Point<Type> rhs)
+constexpr auto operator!=(Point<Type> lhs, Point<Type> rhs) -> bool
 {
     return !(lhs == rhs);
 }

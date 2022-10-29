@@ -217,6 +217,6 @@ void GlfwWindow::SetFullscreen(bool enabled)
     m_Data.Fullscreen = enabled;
 }
 
-bool GlfwWindow::IsFullscreen() const { return m_Data.Fullscreen; }
+auto GlfwWindow::IsFullscreen() const -> bool { return m_Data.Fullscreen; }
 
 }  // namespace moci

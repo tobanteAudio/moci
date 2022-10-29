@@ -13,11 +13,11 @@
 namespace moci
 {
 
-std::string SystemInfo::GetOSName() { return Pimpl::GetOSName(); }
-std::string SystemInfo::GetVendor() { return Pimpl::GetVendor(); }
-std::string SystemInfo::GetCPUModel() { return Pimpl::GetCPUModel(); }
-int SystemInfo::GetCPUCoreCount() { return Pimpl::GetCPUCoreCount(); }
-int SystemInfo::GetCPUThreadCount() { return Pimpl::GetCPUThreadCount(); }
-std::string SystemInfo::GetCPUFeatures() { return Pimpl::GetCPUFeatures(); }
+auto SystemInfo::GetOSName() -> std::string { return Pimpl::GetOSName(); }
+auto SystemInfo::GetVendor() -> std::string { return Pimpl::GetVendor(); }
+auto SystemInfo::GetCPUModel() -> std::string { return Pimpl::GetCPUModel(); }
+auto SystemInfo::GetCPUCoreCount() -> int { return Pimpl::GetCPUCoreCount(); }
+auto SystemInfo::GetCPUThreadCount() -> int { return Pimpl::GetCPUThreadCount(); }
+auto SystemInfo::GetCPUFeatures() -> std::string { return Pimpl::GetCPUFeatures(); }
 
 }  // namespace moci

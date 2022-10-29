@@ -8,7 +8,7 @@
 namespace moci
 {
 
-static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
+static auto ShaderDataTypeToOpenGLBaseType(ShaderDataType type) -> GLenum
 {
     switch (type)
     {

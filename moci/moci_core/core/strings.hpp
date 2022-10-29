@@ -100,7 +100,7 @@ public:
      *
      * Strings::ToInt("-143abc") = -143
      */
-    static inline std::optional<int> ToInt(std::string const& input)
+    static inline auto ToInt(std::string const& input) -> std::optional<int>
     {
         try
         {
@@ -117,7 +117,7 @@ public:
      * @brief Same as ToInt. First converted to a plain int, then static_cast into the given integer type.
      */
     template<typename IntType>
-    static std::optional<IntType> ToInteger(std::string const& input)
+    static auto ToInteger(std::string const& input) -> std::optional<IntType>
     {
         try
         {
