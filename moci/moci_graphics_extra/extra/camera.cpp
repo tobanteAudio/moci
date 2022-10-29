@@ -1,7 +1,8 @@
 #include "camera.hpp"
 
 #include "moci/core/preprocessor.hpp"
-#include "moci_events/moci_events.hpp"
+#include "moci/events/input.hpp"
+#include "moci/events/types/event.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
 

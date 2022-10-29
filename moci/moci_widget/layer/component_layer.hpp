@@ -1,6 +1,8 @@
 #pragma once
 
-#include "moci_events/moci_events.hpp"
+#include "moci/events/input.hpp"
+#include "moci/events/timestep.hpp"
+#include "moci/events/types/event.hpp"
 
 #include "moci_widget/component/component.hpp"
 #include "moci_widget/style/style.hpp"

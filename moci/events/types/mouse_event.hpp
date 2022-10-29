@@ -1,8 +1,8 @@
 #pragma once
 
-#include "event.hpp"
 #include "moci/core/logging.hpp"
-#include "moci_events/events/mouse_button_codes.hpp"
+#include "moci/events/mouse_button_codes.hpp"
+#include "moci/events/types/event.hpp"
 
 namespace moci
 {

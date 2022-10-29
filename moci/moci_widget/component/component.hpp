@@ -1,10 +1,10 @@
 #pragma once
 
+#include "moci/core/vector.hpp"
+#include "moci/events/types/event.hpp"
 #include "moci/math/geometry/rectangle.hpp"
-#include "moci_events/moci_events.hpp"
 #include "moci_graphics_extra/moci_graphics_extra.hpp"
 
-#include "moci/core/vector.hpp"
 #include <memory>
 #include <string>
 #include <string_view>

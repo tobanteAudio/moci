@@ -1,9 +1,9 @@
 #pragma once
 
 #include "moci/core/memory.hpp"
-#include "moci_events/moci_events.hpp"
+#include "moci/events/timestep.hpp"
+#include "moci/events/types/event.hpp"
 
-#include <memory>
 #include <string>
 
 namespace moci

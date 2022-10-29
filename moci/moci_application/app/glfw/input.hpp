@@ -1,6 +1,7 @@
 #pragma once
 
-#include "moci_events/moci_events.hpp"
+#include "moci/events/input.hpp"
+#include "moci/events/types/event.hpp"
 
 #include <tuple>
 

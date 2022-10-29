@@ -5,11 +5,14 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_all.hpp>
 
-#include "moci_events/moci_events.hpp"
+#include "moci/events/types/application_event.hpp"
+#include "moci/events/types/event.hpp"
+#include "moci/events/types/key_event.hpp"
+#include "moci/events/types/mouse_event.hpp"
 
 // using Catch::Matchers::Contains;
 
-TEST_CASE("moci_events/types: WindowResizeEvent", "[types][events]")
+TEST_CASE("events/types: WindowResizeEvent", "[types][events]")
 {
     auto const event = moci::WindowResizeEvent(10, 20);
     REQUIRE(event.GetStaticType() == moci::EventType::WindowResize);
@@ -24,7 +27,7 @@ TEST_CASE("moci_events/types: WindowResizeEvent", "[types][events]")
     // REQUIRE_THAT(event.ToString(), Contains("WindowResize"));
 }
 
-TEST_CASE("moci_events/types: WindowCloseEvent", "[types][events]")
+TEST_CASE("events/types: WindowCloseEvent", "[types][events]")
 {
     auto const event = moci::WindowCloseEvent();
     REQUIRE(event.GetStaticType() == moci::EventType::WindowClose);
@@ -37,7 +40,7 @@ TEST_CASE("moci_events/types: WindowCloseEvent", "[types][events]")
     // REQUIRE_THAT(event.ToString(), Contains("WindowClose"));
 }
 
-TEST_CASE("moci_events/types: AppRenderEvent", "[types][events]")
+TEST_CASE("events/types: AppRenderEvent", "[types][events]")
 {
     auto const event = moci::AppRenderEvent();
     REQUIRE(event.GetStaticType() == moci::EventType::AppRender);
@@ -50,7 +53,7 @@ TEST_CASE("moci_events/types: AppRenderEvent", "[types][events]")
     // REQUIRE_THAT(event.ToString(), Contains("AppRender"));
 }
 
-TEST_CASE("moci_events/types: AppUpdateEvent", "[types][events]")
+TEST_CASE("events/types: AppUpdateEvent", "[types][events]")
 {
     auto const event = moci::AppUpdateEvent();
     REQUIRE(event.GetStaticType() == moci::EventType::AppUpdate);
@@ -63,7 +66,7 @@ TEST_CASE("moci_events/types: AppUpdateEvent", "[types][events]")
     // REQUIRE_THAT(event.ToString(), Contains("AppUpdate"));
 }
 
-TEST_CASE("moci_events/types: AppTickEvent", "[types][events]")
+TEST_CASE("events/types: AppTickEvent", "[types][events]")
 {
     auto const event = moci::AppTickEvent();
     REQUIRE(event.GetStaticType() == moci::EventType::AppTick);

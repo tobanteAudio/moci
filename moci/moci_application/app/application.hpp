@@ -1,6 +1,9 @@
 #pragma once
 
-#include "moci_events/moci_events.hpp"
+#include "moci/events/types/application_event.hpp"
+#include "moci/events/types/key_event.hpp"
+#include "moci/events/types/mouse_event.hpp"
+
 #include "moci_render_api/moci_render_api.hpp"
 
 #include "window.hpp"

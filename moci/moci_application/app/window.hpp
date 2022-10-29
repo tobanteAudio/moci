@@ -4,7 +4,7 @@
 #include <string>
 #include <utility>
 
-#include "moci_events/moci_events.hpp"
+#include "moci/events/types/event.hpp"
 
 namespace moci
 {
