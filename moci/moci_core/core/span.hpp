@@ -1,9 +1,9 @@
 #pragma once
 
-#include <gsl/gsl>
+#include <span>
 
 namespace moci
 {
 template<typename Type>
-using Span = gsl::span<Type>;
+using Span = std::span<Type>;
 }  // namespace moci

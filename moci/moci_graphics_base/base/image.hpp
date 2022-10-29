@@ -1,7 +1,5 @@
 #pragma once
 
-#include <gsl/gsl>
-
 #include <cstdint>
 
 #include "moci_core/moci_core.hpp"

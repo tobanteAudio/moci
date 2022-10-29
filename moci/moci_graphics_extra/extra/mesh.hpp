@@ -5,8 +5,6 @@
 
 #include "glm/glm.hpp"
 
-#include <gsl/gsl>
-
 #include "assimp/Importer.hpp"
 
 namespace moci

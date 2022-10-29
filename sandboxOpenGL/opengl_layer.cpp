@@ -17,9 +17,9 @@ void OpenGLLayer::OnAttach()
 
     auto const verticesSize = static_cast<std::uint32_t>(assets::QuadVertices.size() * sizeof(float));
     auto layout             = moci::BufferLayout {
-        {moci::ShaderDataType::Float3, "position"},      //
-        {moci::ShaderDataType::Float4, "color"},         //
-        {moci::ShaderDataType::Float2, "textureCoord"},  //
+                    {moci::ShaderDataType::Float3, "position"},      //
+                    {moci::ShaderDataType::Float4, "color"},         //
+                    {moci::ShaderDataType::Float2, "textureCoord"},  //
     };
     vbo_.reset(moci::RenderFactory::MakeVertexBuffer(assets::QuadVertices.data(), verticesSize));
     vbo_->SetLayout(layout);
@@ -27,7 +27,7 @@ void OpenGLLayer::OnAttach()
     auto indices  = moci::Span<std::uint32_t> {assets::QuadIndices.data(), assets::QuadIndices.size()};
     auto specs    = moci::IndexBufferSpecs {};
     specs.indices = indices;
-    specs.count   = gsl::narrow<std::uint32_t>(indices.size());
+    specs.count   = static_cast<std::uint32_t>(indices.size());
     ibo_.reset(moci::RenderFactory::MakeIndexBuffer(specs));
     ibo_->Unbind();
     vao_ = moci::RenderFactory::MakeVertexArray();

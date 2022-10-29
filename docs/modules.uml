@@ -36,7 +36,6 @@ package "External" {
     [glm]
     [spdlog]
     [glfw]
-    [GSL]
     [freetype]
     [assimp]
     [glew]
@@ -44,7 +43,6 @@ package "External" {
 }
 
 [spdlog] --> [Core]
-[GSL] --> [Core]
 
 [Core] --> [Network]
 

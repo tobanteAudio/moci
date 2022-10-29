@@ -29,7 +29,7 @@ target_link_libraries(moci_widget_lib
 
 set (moci_widget_test_src
     main_test.cpp
-    component/button_test.cpp
+    # component/button_test.cpp
     component/component_test.cpp
     component/label_test.cpp
     component/slider_test.cpp

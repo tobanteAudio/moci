@@ -15,7 +15,6 @@ class Moci(ConanFile):
         self.requires("glew/2.2.0")
         self.requires("glfw/3.3.8")
         self.requires("glm/0.9.9.8")
-        self.requires("ms-gsl/4.0.0")
         self.requires("spdlog/1.10.0")
         self.requires("stb/cci.20210910")
         self.requires("zlib/1.2.13", override=True)

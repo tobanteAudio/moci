@@ -31,7 +31,6 @@ target_link_libraries(moci_core_lib
         Moci::CompilerOptions
         Moci::CompilerWarnings
         spdlog::spdlog
-        Microsoft.GSL::GSL
     PRIVATE
         Moci::CodeCoverage
 )

@@ -13,8 +13,8 @@ General purpose application library. Currently supports desktop & mobil OpenGL. 
 
 ## Quick Start
 
-- C++17
-- CMake > 3.13
+- C++20
+- CMake >= 3.21
 - Ninja Build
 
 Clone with submodules:
@@ -85,7 +85,6 @@ CONFIG=Release make config-vs build test
 - [glew: OpenGL function loader](http://glew.sourceforge.net/)
 - [glfw: Cross platform window library](https://www.glfw.org/)
 - [glm: Math library](https://glm.g-truc.net/0.9.9/index.html)
-- [GSL: C++ guideline support library](https://github.com/microsoft/GSL)
 - [imgui: GUI library](https://github.com/ocornut/imgui)
 - [spdlog: Logging](https://github.com/gabime/spdlog)
 - [stb: Image file loader](https://github.com/nothings/stb)

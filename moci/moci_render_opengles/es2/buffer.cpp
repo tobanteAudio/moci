@@ -15,10 +15,7 @@ OpenGLESVertexBuffer::OpenGLESVertexBuffer(float* vertices, uint32_t size, bool 
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_RendererID));
 
     if (dynamic) { GLCall(glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW)); }
-    else
-    {
-        GLCall(glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW));
-    }
+    else { GLCall(glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW)); }
 }
 
 OpenGLESVertexBuffer::~OpenGLESVertexBuffer() { GLCall(glDeleteBuffers(1, &m_RendererID)); }
@@ -70,7 +67,7 @@ Span<std::uint16_t> OpenGLESIndexBuffer::convertToUnsignedShorts(Span<std::uint3
 {
     indicesShort_->clear();
     indicesShort_->reserve(indices.size());
-    for (auto const index : indices) { indicesShort_->push_back(gsl::narrow<std::uint16_t>(index)); }
+    for (auto const index : indices) { indicesShort_->push_back(static_cast<std::uint16_t>(index)); }
 
     return *indicesShort_;
 }
