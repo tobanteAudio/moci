@@ -26,8 +26,8 @@ void OpenGLContext::Init()
     MOCI_CORE_INFO("  Renderer: {0}", glGetString(GL_RENDERER));
     MOCI_CORE_INFO("  Version: {0}", glGetString(GL_VERSION));
 
-    int versionMajor;
-    int versionMinor;
+    int versionMajor = 0;
+    int versionMinor = 0;
     glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
     glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
 

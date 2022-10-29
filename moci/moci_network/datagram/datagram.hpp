@@ -14,7 +14,7 @@ public:
     DatagramSocket();
     ~DatagramSocket();
 
-    bool Bind(std::string ip, int port);
+    bool Bind(const std::string& ip, int port);
 
     bool Write(std::string const& host, int port, Span<std::uint8_t> buffer);
     bool Write(std::string const& host, int port, Buffer const& buffer);
@@ -24,7 +24,7 @@ public:
 
     void Shutdown();
 
-    void SetMessageCallback(std::function<void(Buffer const&, size_t)> callback);
+    void SetMessageCallback(const std::function<void(Buffer const&, size_t)>& callback);
 
 private:
     class Pimpl;

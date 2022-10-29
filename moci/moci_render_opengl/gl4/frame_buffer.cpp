@@ -8,7 +8,7 @@
 namespace moci
 {
 
-OpenGLFramebuffer::OpenGLFramebuffer(FramebufferSpecs spec) : specs_(std::move(spec)) { invalidate(); }
+OpenGLFramebuffer::OpenGLFramebuffer(FramebufferSpecs spec) : specs_(spec) { invalidate(); }
 
 OpenGLFramebuffer::~OpenGLFramebuffer() { deallocate(); }
 

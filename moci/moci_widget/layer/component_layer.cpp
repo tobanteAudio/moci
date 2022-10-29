@@ -42,10 +42,10 @@ void ComponentLayer::OnEvent(Event& e)
 {
     MOCI_PROFILE_FUNCTION();
     auto dispatcher = EventDispatcher {e};
-    dispatcher.Dispatch<WindowResizeEvent>([self = this](auto& e) { return self->onWindowResized(e); });
-    dispatcher.Dispatch<MouseMovedEvent>([self = this](auto& e) { return self->onMouseMoved(e); });
-    dispatcher.Dispatch<MouseScrolledEvent>([self = this](auto& e) { return self->onMouseScrolled(e); });
-    dispatcher.Dispatch<MouseButtonPressedEvent>([self = this](auto& e) { return self->onMousePressed(e); });
+    dispatcher.Dispatch<WindowResizeEvent>([this](auto& e) { return onWindowResized(e); });
+    dispatcher.Dispatch<MouseMovedEvent>([this](auto& e) { return onMouseMoved(e); });
+    dispatcher.Dispatch<MouseScrolledEvent>([this](auto& e) { return onMouseScrolled(e); });
+    dispatcher.Dispatch<MouseButtonPressedEvent>([this](auto& e) { return onMousePressed(e); });
 }
 
 bool ComponentLayer::onWindowResized(WindowResizeEvent& e)
@@ -59,6 +59,7 @@ bool ComponentLayer::onWindowResized(WindowResizeEvent& e)
 bool ComponentLayer::onMouseMoved(MouseMovedEvent& e)
 {
     IgnoreUnused(e);
+    (void)this;
     return true;
 }
 

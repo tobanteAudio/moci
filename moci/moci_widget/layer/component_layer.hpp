@@ -27,7 +27,7 @@ public:
 
 private:
     bool onWindowResized(WindowResizeEvent& e);
-    static bool onMouseMoved(MouseMovedEvent& e);
+    bool onMouseMoved(MouseMovedEvent& e);
     bool onMouseScrolled(MouseScrolledEvent& e);
     bool onMousePressed(MouseButtonPressedEvent& e);
 

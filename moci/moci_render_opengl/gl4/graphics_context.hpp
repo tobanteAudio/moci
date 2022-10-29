@@ -12,7 +12,7 @@ namespace moci
 class OpenGLContext : public GraphicsContext
 {
 public:
-    OpenGLContext(GLFWwindow* windowHandle);
+    explicit OpenGLContext(GLFWwindow* windowHandle);
 
     void Init() override;
     void SwapBuffers() override;

@@ -11,35 +11,35 @@ class OpenGLVertexBuffer : public VertexBuffer
 {
 public:
     OpenGLVertexBuffer(float* vertices, uint32_t size, bool dynamic = false);
-    virtual ~OpenGLVertexBuffer();
+    ~OpenGLVertexBuffer() override;
 
     void Bind() const override;
     void Unbind() const override;
 
-    const BufferLayout& GetLayout() const override { return m_Layout; }
+    [[nodiscard]] const BufferLayout& GetLayout() const override { return m_Layout; }
     void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
     void UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override;
 
 private:
-    uint32_t m_RendererID;
+    uint32_t m_RendererID {};
     BufferLayout m_Layout;
 };
 
 class OpenGLIndexBuffer : public IndexBuffer
 {
 public:
-    OpenGLIndexBuffer(IndexBufferSpecs specs);
+    explicit OpenGLIndexBuffer(IndexBufferSpecs specs);
     ~OpenGLIndexBuffer() override;
 
     void Bind() const override;
     void Unbind() const override;
 
-    uint32_t GetCount() const override { return specs_.count; }
+    [[nodiscard]] uint32_t GetCount() const override { return specs_.count; }
     void UploadData(std::uint32_t offset, Span<std::uint32_t> indices) const override;
 
 private:
     IndexBufferSpecs specs_;
-    std::uint32_t m_RendererID;
+    std::uint32_t m_RendererID {};
 };
 
 }  // namespace moci

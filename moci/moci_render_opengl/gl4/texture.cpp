@@ -7,6 +7,8 @@
 
 #include <stb_image.h>
 
+#include <cstddef>
+
 namespace moci
 {
 
@@ -49,7 +51,8 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path) : path_(std::move(path))
 
     createTexture();
     setFilters();
-    SetData(Span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), width_ * height_ * channels_});
+    SetData(
+        Span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), static_cast<size_t>(width_ * height_ * channels_)});
 
     stbi_image_free(data);
 }
@@ -60,14 +63,16 @@ OpenGLTexture2D::OpenGLTexture2D(Texture::Format format, std::uint32_t width, st
     IgnoreUnused(format);
     createTexture();
     setFilters();
-    SetData(Span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), width_ * height_ * channels_});
+    SetData(
+        Span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), static_cast<size_t>(width_ * height_ * channels_)});
 }
 
 OpenGLTexture2D::~OpenGLTexture2D() { glDeleteTextures(1, &renderID_); }
 
-void OpenGLTexture2D::SetData(Span<std::uint8_t> data)
+void OpenGLTexture2D::SetData(Span<std::uint8_t> data) const
 {
-    MOCI_CORE_ASSERT(data.size() == width_ * height_ * channels_, "Data must be entire texture!");
+    MOCI_CORE_ASSERT(data.size() == static_cast<unsigned long>(width_ * height_ * channels_),
+                     "Data must be entire texture!");
     glTextureSubImage2D(renderID_, 0, 0, 0, width_, height_, dataFormat_, GL_UNSIGNED_BYTE, data.data());
 }
 
@@ -79,7 +84,7 @@ void OpenGLTexture2D::createTexture()
     glTextureStorage2D(renderID_, 1, internalFormat_, width_, height_);
 }
 
-void OpenGLTexture2D::setFilters()
+void OpenGLTexture2D::setFilters() const
 {
     glTextureParameteri(renderID_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTextureParameteri(renderID_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

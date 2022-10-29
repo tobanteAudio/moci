@@ -15,7 +15,7 @@ DatagramSocket::DatagramSocket() { pimpl_ = MakeScope<Pimpl>(); }
 
 DatagramSocket::~DatagramSocket() { pimpl_.reset(nullptr); }
 
-bool DatagramSocket::Bind(std::string ip, int port) { return pimpl_->Bind(std::move(ip), port); }
+bool DatagramSocket::Bind(const std::string& ip, int port) { return pimpl_->Bind(ip, port); }
 
 bool DatagramSocket::Write(std::string const& host, int port, Span<std::uint8_t> buffer)
 {
@@ -36,8 +36,8 @@ void DatagramSocket::Listen() { pimpl_->Listen(); }
 
 void DatagramSocket::Shutdown() { pimpl_->Shutdown(); }
 
-void DatagramSocket::SetMessageCallback(std::function<void(Buffer const&, size_t)> callback)
+void DatagramSocket::SetMessageCallback(const std::function<void(Buffer const&, size_t)>& callback)
 {
-    pimpl_->SetMessageCallback(std::move(callback));
+    pimpl_->SetMessageCallback(callback);
 }
 }  // namespace moci

@@ -9,6 +9,7 @@
 #include <fstream>
 
 #include <glm/gtc/type_ptr.hpp>
+#include <utility>
 
 namespace moci
 {
@@ -41,8 +42,8 @@ OpenGLShader::OpenGLShader(std::string const& filepath)
     m_Name         = filepath.substr(lastSlash, count);
 }
 
-OpenGLShader::OpenGLShader(std::string const& name, std::string const& vertexSrc, std::string const& fragmentSrc)
-    : m_Name(name)
+OpenGLShader::OpenGLShader(std::string name, std::string const& vertexSrc, std::string const& fragmentSrc)
+    : m_Name(std::move(name))
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -96,9 +97,9 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
 
     GLuint program = glCreateProgram();
     MOCI_CORE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now");
-    std::array<GLenum, 2> glShaderIDs;
+    std::array<GLenum, 2> glShaderIDs {};
     int glShaderIDIndex = 0;
-    for (auto& kv : shaderSources)
+    for (const auto& kv : shaderSources)
     {
         GLenum type               = kv.first;
         std::string const& source = kv.second;
@@ -106,7 +107,7 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
         GLuint shader = glCreateShader(type);
 
         const GLchar* sourceCStr = source.c_str();
-        glShaderSource(shader, 1, &sourceCStr, 0);
+        glShaderSource(shader, 1, &sourceCStr, nullptr);
 
         glCompileShader(shader);
 
@@ -118,7 +119,7 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
             glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
 
             Vector<GLchar> infoLog(maxLength);
-            glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
+            glGetShaderInfoLog(shader, maxLength, &maxLength, infoLog.data());
 
             glDeleteShader(shader);
 
@@ -146,12 +147,12 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
 
         // The maxLength includes the NULL character
         Vector<GLchar> infoLog(maxLength);
-        glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+        glGetProgramInfoLog(program, maxLength, &maxLength, infoLog.data());
 
         // We don't need the program anymore.
         glDeleteProgram(program);
 
-        for (auto id : glShaderIDs) glDeleteShader(id);
+        for (auto id : glShaderIDs) { glDeleteShader(id); }
 
         MOCI_CORE_ERROR("{0}", infoLog.data());
         MOCI_CORE_ASSERT(false, "Shader link failure!");

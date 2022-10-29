@@ -36,7 +36,7 @@ auto RenderFactory::MakeIndexBuffer(IndexBufferSpecs specs) -> IndexBuffer*
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(std::move(specs));
+        case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(specs);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return new OpenGLESIndexBuffer(specs);
@@ -56,7 +56,7 @@ Ref<Framebuffer> RenderFactory::MakeFramebuffer(FramebufferSpecs spec)
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return MakeRef<OpenGLFramebuffer>(std::move(spec));
+        case RendererAPI::API::OpenGL: return MakeRef<OpenGLFramebuffer>(spec);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return MakeRef<OpenGLESFramebuffer>(spec);
@@ -77,7 +77,7 @@ auto RenderFactory::MakeShader(const std::string& filepath) -> Ref<Shader>
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return MakeRef<OpenGLShader>(std::move(filepath));
+        case RendererAPI::API::OpenGL: return MakeRef<OpenGLShader>(filepath);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return MakeRef<OpenGLESShader>(std::move(filepath));

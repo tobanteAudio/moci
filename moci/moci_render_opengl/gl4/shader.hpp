@@ -10,7 +10,7 @@
 #include <unordered_map>
 
 // TODO: REMOVE!
-typedef unsigned int GLenum;
+using GLenum = unsigned int;
 
 namespace moci
 {
@@ -18,11 +18,11 @@ namespace moci
 class OpenGLShader : public Shader
 {
 public:
-    OpenGLShader(std::string const& filepath);
-    OpenGLShader(std::string const& name, std::string const& vertexSrc, std::string const& fragmentSrc);
+    explicit OpenGLShader(std::string const& filepath);
+    OpenGLShader(std::string name, std::string const& vertexSrc, std::string const& fragmentSrc);
     ~OpenGLShader() override;
 
-    std::string const& GetName() const override { return m_Name; }
+    [[nodiscard]] std::string const& GetName() const override { return m_Name; }
 
     void Bind() const override;
     void Unbind() const override;
@@ -37,7 +37,7 @@ public:
     void SetMat4(std::string const& name, glm::mat4 const& value) override;
 
 private:
-    std::int32_t getLocation(std::string const& name) const;
+    [[nodiscard]] std::int32_t getLocation(std::string const& name) const;
 
     void uploadUniformInt(std::string const& name, int value);
     void uploadUniformInts(std::string const& name, int count, int* values);
@@ -48,12 +48,11 @@ private:
     void uploadUniformMat3(std::string const& name, const glm::mat3& matrix);
     void uploadUniformMat4(std::string const& name, const glm::mat4& matrix);
 
-    std::string ReadFile(std::string const& filepath);
-    std::unordered_map<GLenum, std::string> PreProcess(std::string const& source);
+    static std::string ReadFile(std::string const& filepath);
+    static std::unordered_map<GLenum, std::string> PreProcess(std::string const& source);
     void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 
-private:
-    uint32_t m_RendererID;
+    uint32_t m_RendererID {};
     std::string m_Name;
 };
 

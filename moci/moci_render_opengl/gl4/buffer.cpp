@@ -34,7 +34,7 @@ auto OpenGLVertexBuffer::UploadData(std::uint32_t offset, std::uint32_t size, co
 // IndexBuffer //////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-OpenGLIndexBuffer::OpenGLIndexBuffer(IndexBufferSpecs specs) : specs_(std::move(specs))
+OpenGLIndexBuffer::OpenGLIndexBuffer(IndexBufferSpecs specs) : specs_(specs)
 {
     MOCI_PROFILE_FUNCTION();
 
