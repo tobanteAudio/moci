@@ -1,6 +1,10 @@
 #pragma once
 
-#include "moci_render_base/moci_render_base.hpp"
+#include "moci/render/api.hpp"
+#include "moci/render/buffer.hpp"
+#include "moci/render/frame_buffer.hpp"
+#include "moci/render/shader.hpp"
+#include "moci/render/texture.hpp"
 
 namespace moci
 {

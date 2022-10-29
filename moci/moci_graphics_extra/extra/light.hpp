@@ -2,8 +2,8 @@
 
 #include "mesh.hpp"
 
+#include "moci/render/api.hpp"
 #include "moci_render_api/moci_render_api.hpp"
-#include "moci_render_base/moci_render_base.hpp"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include "glm/glm.hpp"

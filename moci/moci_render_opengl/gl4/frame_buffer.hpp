@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "moci_render_base/moci_render_base.hpp"
+#include "moci/render/frame_buffer.hpp"
 
 #if defined(MOCI_API_OPENGL_MODERN)
 

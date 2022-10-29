@@ -1,0 +1,48 @@
+project(moci_render)
+
+set(moci_render_sources
+    api.hpp
+    buffer.hpp
+    buffer.cpp
+    frame_buffer.hpp
+    graphics_context.hpp
+    graphics_context.cpp
+    shader.hpp
+    texture.hpp
+    vertex_array.hpp
+
+)
+
+add_library(moci_render STATIC ${moci_render_sources})
+add_library(Moci::RenderApiBase ALIAS moci_render)
+set_target_properties(moci_render PROPERTIES UNITY_BUILD ON)
+
+target_link_libraries(moci_render
+    PUBLIC
+        Moci::Graphics
+        glfw
+    PRIVATE
+        Moci::CodeCoverage
+
+)
+
+if (${MOCI_API_OPENGL_MODERN})
+    target_compile_definitions(moci_render PUBLIC MOCI_API_OPENGL_MODERN=1)
+endif()
+
+if (${MOCI_API_OPENGL_LEGACY})
+    target_compile_definitions(moci_render PUBLIC MOCI_API_OPENGL_LEGACY=1)
+endif()
+
+
+set (moci_render_test_src main_test.cpp buffer_test.cpp)
+add_executable(moci_render_tests ${moci_render_test_src})
+set_target_properties(moci_render_tests PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_render_tests
+    PRIVATE
+        Moci::RenderApiBase
+        Moci::CodeCoverage
+        Catch2::Catch2
+)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_test_src})
+catch_discover_tests(moci_render_tests)

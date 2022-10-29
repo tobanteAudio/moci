@@ -2,7 +2,7 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "moci_render_base/moci_render_base.hpp"
+#include "moci/render/shader.hpp"
 
 #include <glm/glm.hpp>
 

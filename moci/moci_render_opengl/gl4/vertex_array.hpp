@@ -1,6 +1,7 @@
 #pragma once
 
-#include "moci_render_base/moci_render_base.hpp"
+#include "moci/render/buffer.hpp"
+#include "moci/render/vertex_array.hpp"
 
 #if defined(MOCI_API_OPENGL_MODERN)
 namespace moci

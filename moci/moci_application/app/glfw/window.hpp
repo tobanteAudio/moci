@@ -2,9 +2,8 @@
 
 #include "moci_application/app/window.hpp"
 
-#include "moci_render_base/moci_render_base.hpp"
-
 #include "moci/core/logging.hpp"
+#include "moci/render/api.hpp"
 
 #if MOCI_API_OPENGL_ES
 #define GLFW_INCLUDE_ES2

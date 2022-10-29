@@ -7,8 +7,8 @@ option(MOCI_BUILD_FRAMEPOINTER   "Build with frame pointer. For profiles"       
 option(MOCI_BUILD_COVERAGE       "Build with coverage enabled"                  OFF)
 option(MOCI_BUILD_TOOLS          "Build tools"                                  OFF)
 option(MOCI_BUILD_PLAYGROUND     "Build playground examples"                    OFF)
-option(MOCI_API_OPENGL_LEGACY    "Use OpenGL Legacy implementation"             OFF)
-option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"                ON)
+option(MOCI_API_OPENGL_LEGACY    "Use OpenGL Legacy implementation"             ON)
+option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"                OFF)
 option(MOCI_LINK_OPENGL_ES       "Link against OpenGL ES 2.0"                   OFF)
 
 

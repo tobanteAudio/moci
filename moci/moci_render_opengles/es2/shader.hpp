@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_render_base/moci_render_base.hpp"
+#include "moci/render/shader.hpp"
 
 #include "moci_render_opengles/es2/es2.hpp"
 

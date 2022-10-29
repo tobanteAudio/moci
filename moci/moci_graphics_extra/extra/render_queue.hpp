@@ -1,12 +1,11 @@
 #pragma once
 
-#include "moci_render_api/moci_render_api.hpp"
-#include "moci_render_base/moci_render_base.hpp"
-
 #include "moci/core/memory.hpp"
 #include "moci/core/vector.hpp"
 #include "moci/graphics/color.hpp"
 #include "moci/math/geometry/rectangle.hpp"
+#include "moci/render/api.hpp"
+#include "moci_render_api/moci_render_api.hpp"
 
 #include <glm/glm.hpp>
 

@@ -4,9 +4,9 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci_render_base/moci_render_base.hpp"
+#include "moci/render/buffer.hpp"
 
-TEST_CASE("moci_render_base: BufferElement", "[render]")
+TEST_CASE("render/buffer: BufferElement", "[render]")
 {
     moci::BufferElement element {moci::ShaderDataType::Float3, "test"};
 
@@ -16,7 +16,7 @@ TEST_CASE("moci_render_base: BufferElement", "[render]")
     REQUIRE(element.GetComponentCount() == 3);
 }
 
-TEST_CASE("moci_render_base: BufferLayout", "[render]")
+TEST_CASE("render/buffer: BufferLayout", "[render]")
 {
     moci::BufferLayout layout = {
         {moci::ShaderDataType::Float3, "position"},  //
