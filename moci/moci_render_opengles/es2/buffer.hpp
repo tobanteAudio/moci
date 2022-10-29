@@ -36,7 +36,7 @@ public:
     [[nodiscard]] auto GetCount() const -> uint32_t override { return specs_.count; }
 
 private:
-    Span<std::uint16_t> convertToUnsignedShorts(Span<std::uint32_t> indices) const;
+    [[nodiscard]] Span<std::uint16_t> convertToUnsignedShorts(Span<std::uint32_t> indices) const;
 
     IndexBufferSpecs specs_                    = {};
     uint32_t m_RendererID                      = {};

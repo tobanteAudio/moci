@@ -16,10 +16,7 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size, bool dyna
     glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
 
     if (dynamic) { glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW); }
-    else
-    {
-        glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
-    }
+    else { glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW); }
 }
 
 OpenGLVertexBuffer::~OpenGLVertexBuffer() { glDeleteBuffers(1, &m_RendererID); }
@@ -46,10 +43,7 @@ OpenGLIndexBuffer::OpenGLIndexBuffer(IndexBufferSpecs specs) : specs_(std::move(
 
     auto const size = specs_.count * sizeof(uint32_t);
     if (specs_.isDynamic) { glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW); }
-    else
-    {
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, specs_.indices.data(), GL_STATIC_DRAW);
-    }
+    else { glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, specs_.indices.data(), GL_STATIC_DRAW); }
 
     Unbind();
 }

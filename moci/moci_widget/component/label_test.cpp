@@ -18,7 +18,7 @@ TEST_CASE("moci_widget: LabelSetText", "[ui]")
 {
     moci::Label label {"", {}};
     REQUIRE(label.GetText().empty());
-    REQUIRE(label.GetTextView() == "");
+    REQUIRE(label.GetTextView().empty());
     label.SetText("test143");
     REQUIRE(label.GetText() == "test143");
     REQUIRE(label.GetTextView() == "test143");

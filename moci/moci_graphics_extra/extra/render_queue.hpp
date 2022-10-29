@@ -34,7 +34,7 @@ public:
     ~BatchRender2D();
 
     // BatchRender2D is not copyable.
-    BatchRender2D(const BatchRender2D&) = delete;
+    BatchRender2D(const BatchRender2D&)                    = delete;
     auto operator=(const BatchRender2D&) -> BatchRender2D& = delete;
 
     auto StartFrame(float width, float height) -> void;

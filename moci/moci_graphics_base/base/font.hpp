@@ -26,7 +26,6 @@ public:
         Buffer buffer {};
     };
 
-public:
     Typeface(std::string name);
     void AddCharacter(char c, std::uint32_t height, std::uint32_t width, Point<std::uint32_t> topLeft,
                       std::uint32_t advance, Buffer buffer);

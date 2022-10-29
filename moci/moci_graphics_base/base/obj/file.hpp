@@ -21,7 +21,6 @@ public:
         glm::vec2 uv;
     };
 
-public:
     /**
      * @brief Constructor. Takes the file path.
      */
@@ -51,7 +50,6 @@ private:
     static glm::vec3 parseLineToVec3(std::string& line);
     void parseLineToFace(std::string& line);
 
-private:
     std::string path_;
     Vector<glm::vec3> vertices_;
     Vector<glm::vec3> normals_;

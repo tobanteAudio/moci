@@ -11,6 +11,7 @@ namespace moci
 class MouseMovedEvent : public Event
 {
 public:
+    virtual ~MouseMovedEvent() = default;
     MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) { }
 
     [[nodiscard]] inline auto GetX() const -> float { return m_MouseX; }
@@ -30,6 +31,7 @@ private:
 class MouseScrolledEvent : public Event
 {
 public:
+    virtual ~MouseScrolledEvent() = default;
     MouseScrolledEvent(float xOffset, float yOffset) : m_XOffset(xOffset), m_YOffset(yOffset) { }
 
     [[nodiscard]] inline auto GetXOffset() const -> float { return m_XOffset; }
@@ -49,6 +51,7 @@ private:
 class MouseButtonEvent : public Event
 {
 public:
+    virtual ~MouseButtonEvent() = default;
     MouseButtonEvent(MouseCode button) : m_Button(button) { }
     [[nodiscard]] inline auto GetMouseButton() const -> MouseCode { return m_Button; }
 
@@ -60,6 +63,7 @@ private:
 class MouseButtonPressedEvent : public MouseButtonEvent
 {
 public:
+    virtual ~MouseButtonPressedEvent() = default;
     MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
@@ -73,6 +77,7 @@ public:
 class MouseButtonReleasedEvent : public MouseButtonEvent
 {
 public:
+    virtual ~MouseButtonReleasedEvent() = default;
     MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) { }
 
     [[nodiscard]] auto ToString() const -> std::string override

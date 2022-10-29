@@ -261,9 +261,13 @@ bool DemoLayer::OnKeyPressed(moci::KeyPressedEvent& e)
     if (e.GetKeyCode() == moci::Key::Up) { cameraPos_ += cameraSpeed * cameraFront_; }
     if (e.GetKeyCode() == moci::Key::Down) { cameraPos_ -= cameraSpeed * cameraFront_; }
     if (e.GetKeyCode() == moci::Key::Left)
-    { cameraPos_ -= glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed; }
+    {
+        cameraPos_ -= glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed;
+    }
     if (e.GetKeyCode() == moci::Key::Right)
-    { cameraPos_ += glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed; }
+    {
+        cameraPos_ += glm::normalize(glm::cross(cameraFront_, cameraUp_)) * cameraSpeed;
+    }
 
     return true;
 }

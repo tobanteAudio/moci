@@ -8,8 +8,8 @@
 
 TEST_CASE("moci_graphics_base: FreetypeCreateTypeface", "[graphics][font]")
 {
-    auto const path     = "moci_test_data/OpenSans-Bold.ttf";
-    auto const typeface = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
+    const auto* const path = "moci_test_data/OpenSans-Bold.ttf";
+    auto const typeface    = moci::FreetypeLibrary::CreateTypefaceFromFont(path);
     REQUIRE(typeface.has_value() == true);
     REQUIRE(typeface.value().GetNumCharacters() == 128);
 }

@@ -45,7 +45,7 @@ class OpenGLTextureCube : public TextureCube
 public:
     OpenGLTextureCube(Vector<std::string> paths);
 
-    OpenGLTextureCube(const OpenGLTextureCube&) = delete;
+    OpenGLTextureCube(const OpenGLTextureCube&)            = delete;
     OpenGLTextureCube& operator=(const OpenGLTextureCube&) = delete;
 
     ~OpenGLTextureCube() override;

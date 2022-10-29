@@ -79,27 +79,29 @@ bool DatagramSocket::Pimpl::Bind(std::string ip, int port)
 
 void DatagramSocket::Pimpl::Listen()
 {
-    listenerThread_ = std::thread([&]() {
-        sockaddr_in cliaddr {};
-        std::memset(&cliaddr, 0, sizeof(cliaddr));
-
-        auto const maxMsgSize = 1024;
-        buffer_.resize(1024);
-
-        MOCI_CORE_INFO("Start udp listen");
-        isRunning_.store(true);
-        while (isRunning_.load())
+    listenerThread_ = std::thread(
+        [&]()
         {
-            unsigned int len        = 0;
-            auto const numBytesRecv = recvfrom(socketDescriptor_, buffer_.data(), maxMsgSize, MSG_WAITALL,
-                                               reinterpret_cast<sockaddr*>(&cliaddr), &len);
+            sockaddr_in cliaddr {};
+            std::memset(&cliaddr, 0, sizeof(cliaddr));
 
-            if (numBytesRecv > 0)
+            auto const maxMsgSize = 1024;
+            buffer_.resize(1024);
+
+            MOCI_CORE_INFO("Start udp listen");
+            isRunning_.store(true);
+            while (isRunning_.load())
             {
-                if (messageCallback_) { messageCallback_(buffer_, buffer_.size()); }
+                unsigned int len        = 0;
+                auto const numBytesRecv = recvfrom(socketDescriptor_, buffer_.data(), maxMsgSize, MSG_WAITALL,
+                                                   reinterpret_cast<sockaddr*>(&cliaddr), &len);
+
+                if (numBytesRecv > 0)
+                {
+                    if (messageCallback_) { messageCallback_(buffer_, buffer_.size()); }
+                }
             }
-        }
-    });
+        });
 }
 
 void DatagramSocket::Pimpl::Shutdown()

@@ -6,28 +6,22 @@ namespace moci
 template<typename Lambda>
 class ScopeGuard
 {
-    bool committed;
+    bool committed {false};
     Lambda rollbackLambda;
 
 public:
-    ScopeGuard(const Lambda& _l) : committed(false), rollbackLambda(_l) { }
+    ScopeGuard(const Lambda& _l) : rollbackLambda(_l) { }
 
     ScopeGuard(const ScopeGuard& _sc) : committed(false), rollbackLambda(_sc.rollbackLambda)
     {
         if (_sc.committed) { committed = true; }
-        else
-        {
-            _sc.commit();
-        }
+        else { _sc.commit(); }
     }
 
     ScopeGuard(ScopeGuard&& _sc) noexcept : committed(false), rollbackLambda(_sc.rollbackLambda)
     {
         if (_sc.committed) { committed = true; }
-        else
-        {
-            _sc.commit();
-        }
+        else { _sc.commit(); }
     }
 
     // WARNING: only safe if adquire lambda does not throw, otherwise release lambda is never invoked, because the scope

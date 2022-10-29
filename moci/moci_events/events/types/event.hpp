@@ -56,7 +56,8 @@ enum EventCategory
 class Event
 {
 public:
-    bool Handled = false;
+    virtual ~Event() = default;
+    bool Handled     = false;
 
     [[nodiscard]] virtual auto GetEventType() const -> EventType   = 0;
     [[nodiscard]] virtual auto GetName() const -> std::string_view = 0;

@@ -34,7 +34,7 @@ public:
     /**
      * @brief Virtual destructor.
      */
-    virtual ~Component() = default;
+    ~Component() override = default;
 
     /**
      * @brief Callback for drawing.

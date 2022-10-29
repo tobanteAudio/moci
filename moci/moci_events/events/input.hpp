@@ -13,8 +13,8 @@ namespace moci
 class Input
 {
 public:
-    Input()             = default;
-    Input(const Input&) = delete;
+    Input()                                = default;
+    Input(const Input&)                    = delete;
     auto operator=(const Input&) -> Input& = delete;
     virtual ~Input()                       = default;
 

@@ -14,28 +14,27 @@ public:
 
     void SetProjection(float left, float right, float bottom, float top);
 
-    const glm::vec3& GetPosition() const { return m_Position; }
+    [[nodiscard]] const glm::vec3& GetPosition() const { return m_Position; }
     void SetPosition(const glm::vec3& position)
     {
         m_Position = position;
         RecalculateViewMatrix();
     }
 
-    float GetRotation() const { return m_Rotation; }
+    [[nodiscard]] float GetRotation() const { return m_Rotation; }
     void SetRotation(float rotation)
     {
         m_Rotation = rotation;
         RecalculateViewMatrix();
     }
 
-    const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
-    const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
-    const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
+    [[nodiscard]] const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
+    [[nodiscard]] const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
+    [[nodiscard]] const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
 
 private:
     void RecalculateViewMatrix();
 
-private:
     glm::mat4 m_ProjectionMatrix;
     glm::mat4 m_ViewMatrix;
     glm::mat4 m_ViewProjectionMatrix {};
@@ -53,16 +52,15 @@ public:
     void OnEvent(Event& e);
 
     OrthographicCamera& GetCamera() { return m_Camera; }
-    const OrthographicCamera& GetCamera() const { return m_Camera; }
+    [[nodiscard]] const OrthographicCamera& GetCamera() const { return m_Camera; }
 
-    float GetZoomLevel() const { return m_ZoomLevel; }
+    [[nodiscard]] float GetZoomLevel() const { return m_ZoomLevel; }
     void SetZoomLevel(float level) { m_ZoomLevel = level; }
 
 private:
     bool OnMouseScrolled(MouseScrolledEvent& e);
     bool OnWindowResized(WindowResizeEvent& e);
 
-private:
     float m_AspectRatio;
     float m_ZoomLevel = 1.0f;
     OrthographicCamera m_Camera;

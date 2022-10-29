@@ -1,10 +1,12 @@
 #include "button.hpp"
 
+#include <utility>
+
 #include "moci_widget/style/style.hpp"
 
 namespace moci
 {
-Button::Button(std::string text, ButtonSpecs specs) : Component(text), text_(std::move(text)), color_({}), specs_(specs)
+Button::Button(std::string text, ButtonSpecs specs) : Component(text), text_(std::move(text)), specs_(std::move(specs))
 {
 }
 

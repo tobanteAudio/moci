@@ -141,10 +141,7 @@ private:
 class InstrumentationTimer
 {
 public:
-    InstrumentationTimer(const char* name) : name_(name), stopped_(false)
-    {
-        startTimepoint_ = std::chrono::steady_clock::now();
-    }
+    InstrumentationTimer(const char* name) : name_(name) { startTimepoint_ = std::chrono::steady_clock::now(); }
 
     ~InstrumentationTimer()
     {
@@ -167,7 +164,7 @@ public:
 private:
     const char* name_;
     std::chrono::time_point<std::chrono::steady_clock> startTimepoint_;
-    bool stopped_;
+    bool stopped_ {false};
 };
 }  // namespace moci
 

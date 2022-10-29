@@ -216,10 +216,7 @@ auto BatchRender2D::DrawQuad(Rectangle<float> rect, Color color, Texture2D::Opti
             data_.renderFrameStats.textureCount++;
         }
     }
-    else
-    {
-        texID = 0;
-    }
+    else { texID = 0; }
 
     MOCI_CORE_ASSERT(texID >= 0, "");
 

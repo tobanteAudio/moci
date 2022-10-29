@@ -49,16 +49,18 @@ public:
     {
         MOCI_PROFILE_FUNCTION();
         listener_.Bind("", 8080);
-        listener_.SetMessageCallback([](auto const& buffer, auto const size) {
-            moci::IgnoreUnused(size);
-            auto data = float {};
-            std::memcpy(&data, buffer.data(), sizeof(data));
-            Level.store((144.0f - std::abs(LinearToDecibel(data))) / 144.0f);
+        listener_.SetMessageCallback(
+            [](auto const& buffer, auto const size)
+            {
+                moci::IgnoreUnused(size);
+                auto data = float {};
+                std::memcpy(&data, buffer.data(), sizeof(data));
+                Level.store((144.0f - std::abs(LinearToDecibel(data))) / 144.0f);
 
-            // auto data = Data{};
-            // std::memcpy(&data, buffer.data(), sizeof(data));
-            // std::printf("Data: %u - %u, %f\n", data.type, data.id, data.value);
-        });
+                // auto data = Data{};
+                // std::memcpy(&data, buffer.data(), sizeof(data));
+                // std::printf("Data: %u - %u, %f\n", data.type, data.id, data.value);
+            });
 
         listener_.Listen();
 

@@ -23,7 +23,6 @@ public:
 private:
     void setLayout() const;
 
-private:
     Ref<VertexBuffer> m_VertexBuffer;
     Ref<IndexBuffer> m_IndexBuffer;
 };

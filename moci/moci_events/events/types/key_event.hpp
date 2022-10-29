@@ -9,6 +9,7 @@ namespace moci
 class KeyEvent : public Event
 {
 public:
+    virtual ~KeyEvent() = default;
     KeyEvent(Key keycode) : m_KeyCode(keycode) { }
     [[nodiscard]] inline auto GetKeyCode() const -> Key { return m_KeyCode; }
 
@@ -21,6 +22,7 @@ private:
 class KeyPressedEvent : public KeyEvent
 {
 public:
+    virtual ~KeyPressedEvent() = default;
     KeyPressedEvent(Key keycode, int repeatCount) : KeyEvent(keycode), m_RepeatCount(repeatCount) { }
 
     [[nodiscard]] inline auto GetRepeatCount() const -> int { return m_RepeatCount; }
@@ -38,6 +40,7 @@ private:
 class KeyReleasedEvent : public KeyEvent
 {
 public:
+    virtual ~KeyReleasedEvent() = default;
     KeyReleasedEvent(Key keycode) : KeyEvent(keycode) { }
 
     [[nodiscard]] auto ToString() const -> std::string override
@@ -51,6 +54,7 @@ public:
 class KeyTypedEvent : public KeyEvent
 {
 public:
+    virtual ~KeyTypedEvent() = default;
     KeyTypedEvent(Key keycode) : KeyEvent(keycode) { }
 
     [[nodiscard]] auto ToString() const -> std::string override

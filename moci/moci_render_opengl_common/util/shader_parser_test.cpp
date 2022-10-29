@@ -11,7 +11,7 @@ TEST_CASE("moci_render_opengl_common: ShaderParserSplitSource", "[opengl][common
     SECTION("Empty source")
     {
         auto const program = moci::ShaderParser::SplitSource("");
-        REQUIRE(program.shaders.size() == 0);
+        REQUIRE(program.shaders.empty());
     }
 
     SECTION("Inline source")

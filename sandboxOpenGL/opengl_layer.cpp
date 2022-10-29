@@ -17,9 +17,9 @@ void OpenGLLayer::OnAttach()
 
     auto const verticesSize = static_cast<std::uint32_t>(assets::QuadVertices.size() * sizeof(float));
     auto layout             = moci::BufferLayout {
-                    {moci::ShaderDataType::Float3, "position"},      //
-                    {moci::ShaderDataType::Float4, "color"},         //
-                    {moci::ShaderDataType::Float2, "textureCoord"},  //
+        {moci::ShaderDataType::Float3, "position"},      //
+        {moci::ShaderDataType::Float4, "color"},         //
+        {moci::ShaderDataType::Float2, "textureCoord"},  //
     };
     vbo_.reset(moci::RenderFactory::MakeVertexBuffer(assets::QuadVertices.data(), verticesSize));
     vbo_->SetLayout(layout);

@@ -10,22 +10,22 @@ TEST_CASE("moci_core: PropertyMapKeyTypes", "[core]")
 {
     {
         auto const tree = moci::PropertyMap<std::uint32_t>();
-        REQUIRE(tree.GetName() == "");
+        REQUIRE(tree.GetName().empty());
     }
     {
         auto const tree = moci::PropertyMap<std::uint64_t>();
-        REQUIRE(tree.GetName() == "");
+        REQUIRE(tree.GetName().empty());
     }
     {
         auto const tree = moci::PropertyMap<char>();
-        REQUIRE(tree.GetName() == "");
+        REQUIRE(tree.GetName().empty());
     }
 }
 
 TEST_CASE("moci_core: PropertyMapDefaultConstruct", "[core]")
 {
     auto const tree = moci::PropertyMap<std::uint32_t>();
-    REQUIRE(tree.GetName() == "");
+    REQUIRE(tree.GetName().empty());
 }
 
 TEST_CASE("moci_core: PropertyMapNamedConstruct", "[core]")
@@ -37,7 +37,7 @@ TEST_CASE("moci_core: PropertyMapNamedConstruct", "[core]")
 TEST_CASE("moci_core: PropertyMapSetName", "[core]")
 {
     auto tree = moci::PropertyMap<std::uint32_t>();
-    REQUIRE(tree.GetName() == "");
+    REQUIRE(tree.GetName().empty());
     tree.SetName("test");
     REQUIRE(tree.GetName() == "test");
 }

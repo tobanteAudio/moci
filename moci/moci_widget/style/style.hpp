@@ -15,7 +15,6 @@ public:
     Style()           = default;
     ~Style() override = default;
 
-public:
     void DrawButton(Painter& painter, Rectangle<int> bounds, Button const& button) override;
     void DrawLabel(Painter& painter, Rectangle<int> bounds, Label const& label) override;
     void DrawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider) override;

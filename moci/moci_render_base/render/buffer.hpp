@@ -53,13 +53,13 @@ struct BufferElement
     std::string Name;
     ShaderDataType Type;
     std::uint32_t Size;
-    size_t Offset;
+    size_t Offset {0};
     bool Normalized;
 
     // BufferElement() = default;
 
     BufferElement(ShaderDataType type, std::string name, bool normalized = false)
-        : Name(std::move(name)), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
+        : Name(std::move(name)), Type(type), Size(ShaderDataTypeSize(type)), Normalized(normalized)
     {
     }
 

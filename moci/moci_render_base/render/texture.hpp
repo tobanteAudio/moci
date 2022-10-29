@@ -24,7 +24,6 @@ public:
         RGBA,
     };
 
-public:
     virtual ~Texture() = default;
 
     [[nodiscard]] virtual auto GetWidth() const -> uint32_t  = 0;

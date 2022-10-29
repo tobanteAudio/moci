@@ -11,7 +11,6 @@ class DatagramSocket
 public:
     using Buffer = Vector<std::uint8_t>;
 
-public:
     DatagramSocket();
     ~DatagramSocket();
 

@@ -22,7 +22,6 @@ public:
      */
     using Property = std::variant<int, float, std::string>;
 
-public:
     /**
      * @brief Default constructor.
      */

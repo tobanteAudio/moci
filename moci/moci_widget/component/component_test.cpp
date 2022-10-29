@@ -12,7 +12,7 @@ TEST_CASE("moci_widget: ComponentDefaultConstruct", "[ui]")
     moci::Component c {};
     REQUIRE(c.GetWidth() == 0);
     REQUIRE(c.GetHeight() == 0);
-    REQUIRE(c.GetID() == "");
+    REQUIRE(c.GetID().empty());
     REQUIRE(c.GetParent() == nullptr);
     REQUIRE(c.GetChildren().empty());
 }
@@ -30,7 +30,7 @@ TEST_CASE("moci_widget: ComponentIDConstruct", "[ui]")
 TEST_CASE("moci_widget: ComponentSetID", "[ui]")
 {
     moci::Component c1 {};
-    REQUIRE(c1.GetID() == "");
+    REQUIRE(c1.GetID().empty());
     c1.SetID("test");
     REQUIRE(c1.GetID() == "test");
 }

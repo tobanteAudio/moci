@@ -37,9 +37,8 @@ public:
         glm::mat4 Transform;
     };
 
-public:
     Mesh(std::string filePath);
-    Span<Vertex const> GetVertices() const noexcept { return staticVertices_; }
+    [[nodiscard]] Span<Vertex const> GetVertices() const noexcept { return staticVertices_; }
 
 private:
     std::string filePath_ {};

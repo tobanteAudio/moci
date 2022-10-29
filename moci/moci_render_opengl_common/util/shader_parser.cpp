@@ -9,8 +9,8 @@ namespace
 {
 ShaderType ShaderTypeFromString(std::string_view type)
 {
-    if (type == "vertex") return ShaderType::Vertex;
-    if (type == "fragment" || type == "pixel") return ShaderType::Fragment;
+    if (type == "vertex") { return ShaderType::Vertex; }
+    if (type == "fragment" || type == "pixel") { return ShaderType::Fragment; }
 
     MOCI_CORE_ASSERT(false, "Unknown shader type!");
     return ShaderType::Unknown;

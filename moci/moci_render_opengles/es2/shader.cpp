@@ -54,9 +54,8 @@ OpenGLESShader::OpenGLESShader(std::string const& filepath)
 }
 
 OpenGLESShader::OpenGLESShader(std::string name, std::string const& vertexSrc, std::string const& fragmentSrc)
-    : m_Name(std::move(name))
+    : m_RendererID(createShader(vertexSrc.c_str(), fragmentSrc.c_str())), m_Name(std::move(name))
 {
-    m_RendererID = createShader(vertexSrc.c_str(), fragmentSrc.c_str());
 }
 
 OpenGLESShader::~OpenGLESShader() { GLCall(glDeleteProgram(m_RendererID)); }

@@ -80,27 +80,29 @@ bool DatagramSocket::Pimpl::Bind(std::string ip, int port)
 
 void DatagramSocket::Pimpl::Listen()
 {
-    listenerThread_ = std::thread([&]() {
-        SOCKADDR_IN remoteAddr;
-        int remoteAddrLen = sizeof(SOCKADDR_IN);
-        std::memset(&remoteAddr, 0, sizeof(remoteAddr));
-
-        auto const maxMsgSize = 1024;
-        buffer_.resize(1024);
-
-        MOCI_CORE_INFO("Start udp listen");
-        isRunning_.store(true);
-        while (isRunning_.load())
+    listenerThread_ = std::thread(
+        [&]()
         {
-            auto const rc = recvfrom(socketDescriptor_, reinterpret_cast<char*>(buffer_.data()),
-                                     static_cast<int>(buffer_.size()), 0, (SOCKADDR*)&remoteAddr, &remoteAddrLen);
-            if (rc == SOCKET_ERROR) { MOCI_CORE_ERROR("recvfrom, error code: {}", WSAGetLastError()); }
-            else
+            SOCKADDR_IN remoteAddr;
+            int remoteAddrLen = sizeof(SOCKADDR_IN);
+            std::memset(&remoteAddr, 0, sizeof(remoteAddr));
+
+            auto const maxMsgSize = 1024;
+            buffer_.resize(1024);
+
+            MOCI_CORE_INFO("Start udp listen");
+            isRunning_.store(true);
+            while (isRunning_.load())
             {
-                if (messageCallback_) { messageCallback_(buffer_, buffer_.size()); }
+                auto const rc = recvfrom(socketDescriptor_, reinterpret_cast<char*>(buffer_.data()),
+                                         static_cast<int>(buffer_.size()), 0, (SOCKADDR*)&remoteAddr, &remoteAddrLen);
+                if (rc == SOCKET_ERROR) { MOCI_CORE_ERROR("recvfrom, error code: {}", WSAGetLastError()); }
+                else
+                {
+                    if (messageCallback_) { messageCallback_(buffer_, buffer_.size()); }
+                }
             }
-        }
-    });
+        });
 }
 
 void DatagramSocket::Pimpl::Shutdown()

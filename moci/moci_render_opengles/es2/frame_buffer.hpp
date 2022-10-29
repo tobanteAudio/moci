@@ -17,8 +17,8 @@ public:
 
     void Resize(std::uint32_t width, std::uint32_t height) override;
 
-    std::uint32_t GetColorAttachmentRendererID() const override { return colorAttachment_; }
-    const FramebufferSpecs& GetSpecification() const override { return specs_; }
+    [[nodiscard]] std::uint32_t GetColorAttachmentRendererID() const override { return colorAttachment_; }
+    [[nodiscard]] const FramebufferSpecs& GetSpecification() const override { return specs_; }
 
 private:
     void invalidate();

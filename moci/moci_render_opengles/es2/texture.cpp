@@ -113,24 +113,19 @@ OpenGLESTextureCube::OpenGLESTextureCube(Vector<std::string> paths) : paths_(std
                 Vector<stbi_uc> outBuffer {};
                 outBuffer.resize(newSize * newSize * numChannels);
                 if (stbir_resize_uint8(data, width, height, 0, outBuffer.data(), newSize, newSize, 0, numChannels) == 0)
-                { MOCI_ERROR("    stbi resize error"); }
+                {
+                    MOCI_ERROR("    stbi resize error");
+                }
 
                 GLCall(glTexImage2D(pos, 0, GL_RGB, newSize, newSize, 0, GL_RGB, GL_UNSIGNED_BYTE, outBuffer.data()));
             }
-            else
-            {
-
-                GLCall(glTexImage2D(pos, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data));
-            }
+            else { GLCall(glTexImage2D(pos, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data)); }
 
 #else
             GLCall(glTexImage2D(pos, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data));
 #endif
         }
-        else
-        {
-            MOCI_CORE_ERROR("stbi error: {}", paths_[i]);
-        }
+        else { MOCI_CORE_ERROR("stbi error: {}", paths_[i]); }
 
         stbi_image_free(data);
     }

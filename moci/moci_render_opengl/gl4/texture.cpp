@@ -117,10 +117,7 @@ OpenGLTextureCube::OpenGLTextureCube(Vector<std::string> paths) : paths_(std::mo
             auto const position = GL_TEXTURE_CUBE_MAP_POSITIVE_X + i;
             glTexImage2D(position, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         }
-        else
-        {
-            MOCI_CORE_ERROR("stbi error: {}", paths_[i].c_str());
-        }
+        else { MOCI_CORE_ERROR("stbi error: {}", paths_[i].c_str()); }
 
         stbi_image_free(data);
     }
