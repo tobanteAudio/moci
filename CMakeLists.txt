@@ -78,23 +78,24 @@ endif()
 # other
 find_package(assimp REQUIRED)
 find_package(Freetype REQUIRED)
-find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(stb REQUIRED)
 
-if(WIN32)
-  find_package(SDL2 REQUIRED)
-endif()
-
-# Only include glew on desktop
-if (NOT ${MOCI_LINK_OPENGL_ES})
-    find_package(GLEW REQUIRED)
-endif()
-
 if(EMSCRIPTEN)
   add_subdirectory(playground/sdl_emscripten)
 else()
+  find_package(glfw3 REQUIRED)
+
+  if(WIN32)
+    find_package(SDL2 REQUIRED)
+  endif()
+
+  # Only include glew on desktop
+  if (NOT ${MOCI_LINK_OPENGL_ES})
+      find_package(GLEW REQUIRED)
+  endif()
+
   enable_testing()
   include(CTest)
   find_package(Catch2 REQUIRED)
