@@ -1,0 +1,30 @@
+name: macOS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  macos-11:
+    name: macOS 11
+    runs-on: macos-11
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install ninja
+        run: brew install ninja
+
+      - name: Install conan
+        run: |
+          pip3 install --upgrade conan
+          conan config init
+
+      - name: Build - Release
+        run: |
+          cmake -S. -Bbuild -G Ninja -D CMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
