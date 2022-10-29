@@ -33,7 +33,7 @@ jobs:
         run: >
           cmake -S.
           -B build
-          -G "Visual Studio 17 2022"
+          -G "Ninja"
           -D CMAKE_BUILD_TYPE=Release
           -D MOCI_API_OPENGL_MODERN=ON
           -D MOCI_API_OPENGL_LEGACY=OFF
