@@ -4,7 +4,7 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci_render_api/moci_render_api.hpp"
+#include "moci/events/layer/layer_stack.hpp"
 
 #include <iterator>
 #include <memory>
@@ -21,19 +21,19 @@ public:
 };
 }  // namespace
 
-TEST_CASE("moci_render_api: Layer", "[render]")
+TEST_CASE("events/layer: Layer", "[events][layer]")
 {
     moci::Scope<moci::Layer> layer(new TestLayer("test"));
     REQUIRE(layer->GetName() == "test");
 }
 
-TEST_CASE("moci_render_api: LayerStackConstructor", "[render]")
+TEST_CASE("events/layer: LayerStackConstructor", "[events][layer]")
 {
     auto stack = moci::LayerStack();
     REQUIRE(std::distance(stack.begin(), stack.end()) == 0);
 }
 
-TEST_CASE("moci_render_api: LayerStackPushLayer", "[render]")
+TEST_CASE("events/layer: LayerStackPushLayer", "[events][layer]")
 {
     auto stack = moci::LayerStack();
     REQUIRE(stack.begin() == stack.end());

@@ -1,10 +1,16 @@
 project(moci_events)
 
 set(moci_events_sources
+    layer/layer_stack.hpp
+    layer/layer_stack.cpp
+    layer/layer.hpp
+    layer/layer.cpp
+
     types/application_event.hpp
     types/event.hpp
     types/key_event.hpp
     types/mouse_event.hpp
+
     input.hpp
     input.cpp
     key_codes.hpp
@@ -25,6 +31,8 @@ target_link_libraries(moci_events_lib
 
 set (moci_events_test_src
     main_test.cpp
+
+    layer/layer_stack_test.cpp
 
     types/application_event_test.cpp
     types/key_event_test.cpp
