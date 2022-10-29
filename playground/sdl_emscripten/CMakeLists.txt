@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.21)
 project(sdl_emscripten)
 
-find_package(imgui CONFIG)
+find_package(imgui REQUIRED)
 
 add_executable(sdl_emscripten
     main.cpp
