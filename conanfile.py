@@ -12,16 +12,16 @@ class Moci(ConanFile):
         self.requires("assimp/5.2.2")
         self.requires("catch2/3.1.0")
         self.requires("freetype/2.12.1")
-        self.requires("glew/2.2.0")
-        self.requires("glfw/3.3.8")
         self.requires("glm/0.9.9.8")
         self.requires("spdlog/1.10.0")
         self.requires("stb/cci.20210910")
         self.requires("zlib/1.2.13", override=True)
 
+        if self.settings.os != "Emscripten":
+            self.requires("glew/2.2.0")
+            self.requires("glfw/3.3.8")
+
     def configure(self):
-        self.options["glfw"].shared = False
-        self.options["glew"].shared = False
         self.options["freetype"].shared = False
 
         self.options["assimp"].with_fbx = True
@@ -86,3 +86,7 @@ class Moci(ConanFile):
         self.options["assimp"].with_x3d = False
         self.options["assimp"].with_x3d_exporter = False
         self.options["assimp"].with_xgl = False
+
+        if self.settings.os != "Emscripten":
+            self.options["glfw"].shared = False
+            self.options["glew"].shared = False

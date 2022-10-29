@@ -11,8 +11,8 @@ option(MOCI_BUILD_SANDBOX        "Build sandbox applications"                   
 option(MOCI_BUILD_TOOLS          "Build tools"                                  OFF)
 option(MOCI_BUILD_PLAYGROUND     "Build playground examples"                    OFF)
 option(MOCI_API_VULKAN           "Use Vulkan API"                               ON)
-option(MOCI_API_OPENGL_LEGACY    "Use OpenGL Legacy implementation"             ON)
-option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"                OFF)
+option(MOCI_API_OPENGL_LEGACY    "Use OpenGL Legacy implementation"             OFF)
+option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"                ON)
 option(MOCI_LINK_OPENGL_ES       "Link against OpenGL ES 2.0"                   OFF)
 
 # Only do these if this is the main project,
