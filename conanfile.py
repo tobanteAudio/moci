@@ -1,4 +1,4 @@
-from conans import ConanFile
+from conans import ConanFile, CMake
 
 
 class Moci(ConanFile):
@@ -90,3 +90,9 @@ class Moci(ConanFile):
         if self.settings.os != "Emscripten":
             self.options["glfw"].shared = False
             self.options["glew"].shared = False
+
+    def build(self):
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
+
