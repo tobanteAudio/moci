@@ -1,6 +1,6 @@
 #include "window.hpp"
 
-#include "moci_core/moci_core.hpp"
+#include "moci/core/logging.hpp"
 #include "moci_events/moci_events.hpp"
 
 namespace moci

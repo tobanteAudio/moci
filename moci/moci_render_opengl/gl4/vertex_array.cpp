@@ -3,7 +3,7 @@
 #if defined(MOCI_API_OPENGL_MODERN)
 
 #include "gl4.hpp"
-#include "moci_core/moci_core.hpp"
+#include "moci/benchmark/profile.hpp"
 
 namespace moci
 {

@@ -1,6 +1,7 @@
 #include "moci_render_opengles/es2/shader.hpp"
 
-#include "moci_core/moci_core.hpp"
+#include "moci/core/strings.hpp"
+
 #include "moci_render_opengl_common/moci_render_opengl_common.hpp"
 
 #include <fstream>

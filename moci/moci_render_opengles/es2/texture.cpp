@@ -5,8 +5,8 @@
 #include "stb_image.h"
 #include "stb_image_resize.h"
 
-#include "moci_core/core/logging.hpp"
-#include "moci_core/core/preprocessor.hpp"
+#include "moci/core/logging.hpp"
+#include "moci/core/preprocessor.hpp"
 
 #include "moci_render_opengles/es2/es2.hpp"
 

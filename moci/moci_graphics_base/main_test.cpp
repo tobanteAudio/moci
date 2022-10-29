@@ -6,8 +6,7 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch2/catch_all.hpp>
 
-#include "moci_core/moci_core.hpp"
-#include "moci_graphics_base/moci_graphics_base.hpp"
+#include "moci/core/logging.hpp"
 
 auto main(int argc, char* argv[]) -> int
 {

@@ -2,7 +2,7 @@
 
 #include "moci_render_base/render/buffer.hpp"
 
-#include "moci_core/core/memory.hpp"
+#include "moci/core/memory.hpp"
 
 #include <memory>
 

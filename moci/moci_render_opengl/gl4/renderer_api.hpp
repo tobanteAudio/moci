@@ -2,7 +2,6 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "moci_core/moci_core.hpp"
 #include "moci_render_base/moci_render_base.hpp"
 
 namespace moci

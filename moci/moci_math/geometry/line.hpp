@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_core/core/logging.hpp"
+#include "moci/core/logging.hpp"
 #include "moci_math/geometry/point.hpp"
 
 // #include <cmath>

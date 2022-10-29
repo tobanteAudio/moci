@@ -3,7 +3,7 @@
 #include "moci_render_api/moci_render_api.hpp"
 #include "moci_render_base/moci_render_base.hpp"
 
-#include "moci_core/core/memory.hpp"
+#include "moci/core/memory.hpp"
 #include "moci_graphics_base/moci_graphics_base.hpp"
 #include "moci_math/geometry/rectangle.hpp"
 
@@ -12,7 +12,7 @@
 #include <cstddef>
 #include <cstdint>
 
-#include "moci_core/core/vector.hpp"
+#include "moci/core/vector.hpp"
 #include <map>
 
 namespace moci

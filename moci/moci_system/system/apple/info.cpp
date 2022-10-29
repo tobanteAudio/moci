@@ -2,7 +2,7 @@
 
 #if defined(MOCI_MAC)
 
-#include "moci_core/core/strings.hpp"
+#include "moci/core/strings.hpp"
 
 #include <algorithm>
 #include <fstream>

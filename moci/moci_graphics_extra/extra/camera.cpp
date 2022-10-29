@@ -1,6 +1,6 @@
 #include "camera.hpp"
 
-#include "moci_core/core/preprocessor.hpp"
+#include "moci/core/preprocessor.hpp"
 #include "moci_events/moci_events.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>

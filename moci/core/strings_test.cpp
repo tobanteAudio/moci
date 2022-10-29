@@ -4,9 +4,9 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci_core/core/strings.hpp"
+#include "moci/core/strings.hpp"
 
-TEST_CASE("moci_core: StringsLeftTrim", "[core]")
+TEST_CASE("core: StringsLeftTrim", "[core]")
 {
     auto s = std::string(" HELLO ");
     REQUIRE(s.size() == 7);
@@ -15,7 +15,7 @@ TEST_CASE("moci_core: StringsLeftTrim", "[core]")
     REQUIRE(s.size() == 6);
 }
 
-TEST_CASE("moci_core: StringsLeftTrimCopy", "[core]")
+TEST_CASE("core: StringsLeftTrimCopy", "[core]")
 {
     auto const s = std::string(" HELLO ");
     REQUIRE(s.size() == 7);
@@ -24,7 +24,7 @@ TEST_CASE("moci_core: StringsLeftTrimCopy", "[core]")
     REQUIRE(newS.size() == 6);
 }
 
-TEST_CASE("moci_core: StringsRightTrim", "[core]")
+TEST_CASE("core: StringsRightTrim", "[core]")
 {
     auto s = std::string(" HELLO ");
     REQUIRE(s.size() == 7);
@@ -33,7 +33,7 @@ TEST_CASE("moci_core: StringsRightTrim", "[core]")
     REQUIRE(s.size() == 6);
 }
 
-TEST_CASE("moci_core: StringsRightTrimCopy", "[core]")
+TEST_CASE("core: StringsRightTrimCopy", "[core]")
 {
     auto const s = std::string(" HELLO ");
     REQUIRE(s.size() == 7);
@@ -42,7 +42,7 @@ TEST_CASE("moci_core: StringsRightTrimCopy", "[core]")
     REQUIRE(newS.size() == 6);
 }
 
-TEST_CASE("moci_core: StringsTrim", "[core]")
+TEST_CASE("core: StringsTrim", "[core]")
 {
     auto s = std::string(" HELLO ");
     REQUIRE(s.size() == 7);
@@ -51,7 +51,7 @@ TEST_CASE("moci_core: StringsTrim", "[core]")
     REQUIRE(s.size() == 5);
 }
 
-TEST_CASE("moci_core: StringsTrimCopy", "[core]")
+TEST_CASE("core: StringsTrimCopy", "[core]")
 {
     auto const s = std::string(" HELLO ");
     REQUIRE(s.size() == 7);
@@ -60,7 +60,7 @@ TEST_CASE("moci_core: StringsTrimCopy", "[core]")
     REQUIRE(newS.size() == 5);
 }
 
-TEST_CASE("moci_core: StringsSplitSemicolon", "[core]")
+TEST_CASE("core: StringsSplitSemicolon", "[core]")
 {
     auto const s      = std::string("1;2;3");
     auto const splits = moci::Strings::Split(s, ';');
@@ -70,7 +70,7 @@ TEST_CASE("moci_core: StringsSplitSemicolon", "[core]")
     REQUIRE(splits.at(2) == "3");
 }
 
-TEST_CASE("moci_core: StringsSplitDash", "[core]")
+TEST_CASE("core: StringsSplitDash", "[core]")
 {
     auto const s      = std::string("test1-test2-test3-test4");
     auto const splits = moci::Strings::Split(s, '-');
@@ -81,7 +81,7 @@ TEST_CASE("moci_core: StringsSplitDash", "[core]")
     REQUIRE(splits.at(3) == "test4");
 }
 
-TEST_CASE("moci_core: StringsToInt", "[core]")
+TEST_CASE("core: StringsToInt", "[core]")
 {
     REQUIRE(moci::Strings::ToInt("1").value() == 1);
     REQUIRE(moci::Strings::ToInt("-1").value() == -1);
@@ -92,7 +92,7 @@ TEST_CASE("moci_core: StringsToInt", "[core]")
     REQUIRE(moci::Strings::ToInt("-143tyt").value() == -143);
 }
 
-TEST_CASE("moci_core: StringsToIntegerTemplate", "[core]")
+TEST_CASE("core: StringsToIntegerTemplate", "[core]")
 {
     REQUIRE(moci::Strings::ToInteger<std::uint8_t>("1").value() == 1);
     REQUIRE(moci::Strings::ToInteger<std::int8_t>("-1").value() == -1);

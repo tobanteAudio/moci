@@ -1,7 +1,6 @@
 #include "frame_buffer.hpp"
 
 #include "es2.hpp"
-#include "moci_core/moci_core.hpp"
 
 namespace moci
 {

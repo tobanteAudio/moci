@@ -1,6 +1,7 @@
 #pragma once
 
-#include "moci_core/moci_core.hpp"
+#include "moci/core/logging.hpp"
+
 #include "moci_graphics_base/moci_graphics_base.hpp"
 
 #include "glm/glm.hpp"

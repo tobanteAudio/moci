@@ -4,7 +4,7 @@
 
 #include <cstdint>
 
-#include "moci_core/core/vector.hpp"
+#include "moci/core/vector.hpp"
 #include <map>
 #include <string>
 #include <string_view>

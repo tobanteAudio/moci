@@ -4,7 +4,7 @@
 #include "moci_graphics_extra/moci_graphics_extra.hpp"
 #include "moci_math/moci_math.hpp"
 
-#include "moci_core/core/vector.hpp"
+#include "moci/core/vector.hpp"
 #include <memory>
 #include <string>
 #include <string_view>

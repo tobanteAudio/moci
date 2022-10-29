@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_core/moci_core.hpp"
+#include "moci/core/logging.hpp"
 
 #if defined(MOCI_WINDOWS)
 
@@ -8,7 +8,7 @@
 
 #include <cstdint>
 
-#include "moci_core/core/vector.hpp"
+#include "moci/core/vector.hpp"
 #include <atomic>
 #include <functional>
 #include <string>

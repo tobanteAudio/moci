@@ -2,7 +2,8 @@
 
 #include <utility>
 
-#include "moci_core/moci_core.hpp"
+#include "moci/core/logging.hpp"
+
 #if defined(MOCI_MAC) || defined(MOCI_LINUX)
 #include "moci_network/datagram/unix/datagram.hpp"
 #elif defined(MOCI_WINDOWS)

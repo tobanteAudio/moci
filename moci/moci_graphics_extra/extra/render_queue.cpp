@@ -7,7 +7,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include "moci_core/benchmark/profile.hpp"
+#include "moci/benchmark/profile.hpp"
 
 namespace moci
 {

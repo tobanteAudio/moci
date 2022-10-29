@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_core/moci_core.hpp"
+#include "moci/core/logging.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -46,12 +46,24 @@ enum EventCategory
 };
 
 #define EVENT_CLASS_TYPE(type)                                                                                         \
-    static EventType GetStaticType() { return EventType::type; }                                                       \
-    virtual EventType GetEventType() const override { return GetStaticType(); }                                        \
-    virtual std::string_view GetName() const override { return #type; }
+    static EventType GetStaticType()                                                                                   \
+    {                                                                                                                  \
+        return EventType::type;                                                                                        \
+    }                                                                                                                  \
+    virtual EventType GetEventType() const override                                                                    \
+    {                                                                                                                  \
+        return GetStaticType();                                                                                        \
+    }                                                                                                                  \
+    virtual std::string_view GetName() const override                                                                  \
+    {                                                                                                                  \
+        return #type;                                                                                                  \
+    }
 
 #define EVENT_CLASS_CATEGORY(category)                                                                                 \
-    virtual int GetCategoryFlags() const override { return category; }
+    virtual int GetCategoryFlags() const override                                                                      \
+    {                                                                                                                  \
+        return category;                                                                                               \
+    }
 
 class Event
 {

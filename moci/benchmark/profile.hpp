@@ -1,8 +1,8 @@
 #pragma once
 
-#include "moci_core/core/logging.hpp"
+#include "moci/core/logging.hpp"
 
-#include "moci_core/core/vector.hpp"
+#include "moci/core/vector.hpp"
 #include <algorithm>
 #include <chrono>
 #include <fstream>

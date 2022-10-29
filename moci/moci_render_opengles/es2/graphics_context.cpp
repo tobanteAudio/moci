@@ -2,7 +2,7 @@
 
 #include "moci_render_opengles/es2/es2.hpp"
 
-#include "moci_core/core/logging.hpp"
+#include "moci/core/logging.hpp"
 
 namespace moci
 {

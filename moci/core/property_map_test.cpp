@@ -4,9 +4,9 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci_core/core/property_map.hpp"
+#include "moci/core/property_map.hpp"
 
-TEST_CASE("moci_core: PropertyMapKeyTypes", "[core]")
+TEST_CASE("core: PropertyMapKeyTypes", "[core]")
 {
     {
         auto const tree = moci::PropertyMap<std::uint32_t>();
@@ -22,19 +22,19 @@ TEST_CASE("moci_core: PropertyMapKeyTypes", "[core]")
     }
 }
 
-TEST_CASE("moci_core: PropertyMapDefaultConstruct", "[core]")
+TEST_CASE("core: PropertyMapDefaultConstruct", "[core]")
 {
     auto const tree = moci::PropertyMap<std::uint32_t>();
     REQUIRE(tree.GetName().empty());
 }
 
-TEST_CASE("moci_core: PropertyMapNamedConstruct", "[core]")
+TEST_CASE("core: PropertyMapNamedConstruct", "[core]")
 {
     auto const tree = moci::PropertyMap<std::uint32_t>("test");
     REQUIRE(tree.GetName() == "test");
 }
 
-TEST_CASE("moci_core: PropertyMapSetName", "[core]")
+TEST_CASE("core: PropertyMapSetName", "[core]")
 {
     auto tree = moci::PropertyMap<std::uint32_t>();
     REQUIRE(tree.GetName().empty());
@@ -42,7 +42,7 @@ TEST_CASE("moci_core: PropertyMapSetName", "[core]")
     REQUIRE(tree.GetName() == "test");
 }
 
-TEST_CASE("moci_core: PropertyMapGetProperty", "[core]")
+TEST_CASE("core: PropertyMapGetProperty", "[core]")
 {
     auto tree = moci::PropertyMap<std::uint32_t>();
     tree.SetProperty(143, "test");
@@ -52,7 +52,7 @@ TEST_CASE("moci_core: PropertyMapGetProperty", "[core]")
     REQUIRE(empty.has_value() == false);
 }
 
-TEST_CASE("moci_core: PropertyMapSetProperty", "[core]")
+TEST_CASE("core: PropertyMapSetProperty", "[core]")
 {
     auto tree = moci::PropertyMap<std::uint32_t>();
     tree.SetProperty(143, "test");
@@ -60,7 +60,7 @@ TEST_CASE("moci_core: PropertyMapSetProperty", "[core]")
     REQUIRE(std::get<std::string>(p) == "test");
 }
 
-TEST_CASE("moci_core: PropertyMapDeleteProperty", "[core]")
+TEST_CASE("core: PropertyMapDeleteProperty", "[core]")
 {
     auto tree = moci::PropertyMap<std::uint32_t>();
 
@@ -72,7 +72,7 @@ TEST_CASE("moci_core: PropertyMapDeleteProperty", "[core]")
     REQUIRE(tree.HasKey(143) == false);
 }
 
-TEST_CASE("moci_core: PropertyMapHasProperty", "[core]")
+TEST_CASE("core: PropertyMapHasProperty", "[core]")
 {
     auto tree = moci::PropertyMap<std::uint32_t>();
     REQUIRE(tree.HasKey(143) == false);

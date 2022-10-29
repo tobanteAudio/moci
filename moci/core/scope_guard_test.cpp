@@ -4,17 +4,17 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci_core/core/scope_guard.hpp"
-#include "moci_core/core/vector.hpp"
+#include "moci/core/scope_guard.hpp"
+#include "moci/core/vector.hpp"
 
-TEST_CASE("moci_core: MakeScopeGuard", "[core]")
+TEST_CASE("core: MakeScopeGuard", "[core]")
 {
     auto i     = 0;
     auto guard = moci::MakeScopeGuard([&i]() { REQUIRE(i == 10); });
     i          = 10;
 }
 
-TEST_CASE("moci_core: MakeScopeGuardMultiple", "[core]")
+TEST_CASE("core: MakeScopeGuardMultiple", "[core]")
 {
     auto i  = 0;
     auto g1 = moci::MakeScopeGuard([&i]() { REQUIRE(i == 20); });
@@ -28,7 +28,7 @@ TEST_CASE("moci_core: MakeScopeGuardMultiple", "[core]")
     i = 10;
 }
 
-TEST_CASE("moci_core: MakeScopeGuardNoRolebackOnAquireThrowThrow", "[core]")
+TEST_CASE("core: MakeScopeGuardNoRolebackOnAquireThrowThrow", "[core]")
 {
     moci::Vector<int> vec1;
     moci::Vector<int> vec2;
@@ -65,7 +65,7 @@ TEST_CASE("moci_core: MakeScopeGuardNoRolebackOnAquireThrowThrow", "[core]")
     }
 }
 
-TEST_CASE("moci_core: MakeScopeGuardNoRolebackOnAquireThrowNoThrow", "[core]")
+TEST_CASE("core: MakeScopeGuardNoRolebackOnAquireThrowNoThrow", "[core]")
 {
     moci::Vector<int> vec1;
     moci::Vector<int> vec2;
@@ -94,7 +94,7 @@ TEST_CASE("moci_core: MakeScopeGuardNoRolebackOnAquireThrowNoThrow", "[core]")
     REQUIRE(vec2.size() == 1);
 }
 
-TEST_CASE("moci_core: MakeScopeGuardRolebackOnAquireThrow", "[core]")
+TEST_CASE("core: MakeScopeGuardRolebackOnAquireThrow", "[core]")
 {
     moci::Vector<int> vec1;
     moci::Vector<int> vec2;

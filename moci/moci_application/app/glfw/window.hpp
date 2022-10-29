@@ -4,7 +4,7 @@
 
 #include "moci_render_base/moci_render_base.hpp"
 
-#include "moci_core/moci_core.hpp"
+#include "moci/core/logging.hpp"
 
 #if MOCI_API_OPENGL_ES
 #define GLFW_INCLUDE_ES2

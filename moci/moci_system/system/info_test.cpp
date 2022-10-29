@@ -6,7 +6,7 @@
 
 #include "moci_system/system/info.hpp"
 
-#include "moci_core/core/preprocessor.hpp"
+#include "moci/core/preprocessor.hpp"
 
 #if defined(MOCI_LINUX)
 TEST_CASE("moci_system/system: SystemInfoOSName", "[system]") { REQUIRE(moci::SystemInfo::GetOSName() == "Linux"); }

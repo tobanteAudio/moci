@@ -1,5 +1,5 @@
 #pragma once
-#include "moci_core/core/preprocessor.hpp"
+#include "moci/core/preprocessor.hpp"
 
 #if defined(MOCI_LINUX)
 

@@ -2,7 +2,8 @@
 
 #include <cstdint>
 
-#include "moci_core/moci_core.hpp"
+#include "moci/core/logging.hpp"
+#include "moci/core/span.hpp"
 
 namespace moci
 {
