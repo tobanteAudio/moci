@@ -1,7 +1,7 @@
 #include "render_command.hpp"
 
-#include "moci_render_opengl/moci_render_opengl.hpp"
-#include "moci_render_opengles/moci_render_opengles.hpp"
+#include "moci/render/opengl/es2/renderer_api.hpp"
+#include "moci/render/opengl/gl4/renderer_api.hpp"
 
 namespace moci
 {

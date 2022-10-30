@@ -1,14 +1,13 @@
-#include "moci_render_opengles/es2/texture.hpp"
+#include "texture.hpp"
 
-#include <utility>
+#include "moci/core/logging.hpp"
+#include "moci/core/preprocessor.hpp"
+#include "moci/render/opengl/es2/es2.hpp"
 
 #include "stb_image.h"
 #include "stb_image_resize.h"
 
-#include "moci/core/logging.hpp"
-#include "moci/core/preprocessor.hpp"
-
-#include "moci_render_opengles/es2/es2.hpp"
+#include <utility>
 
 namespace moci
 {

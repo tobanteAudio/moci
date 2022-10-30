@@ -1,8 +1,7 @@
-#include "moci_render_opengles/es2/graphics_context.hpp"
-
-#include "moci_render_opengles/es2/es2.hpp"
+#include "graphics_context.hpp"
 
 #include "moci/core/logging.hpp"
+#include "moci/render/opengl/es2/es2.hpp"
 
 namespace moci
 {

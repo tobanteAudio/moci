@@ -2,8 +2,16 @@
 
 #include "renderer.hpp"
 
-#include "moci_render_opengl/moci_render_opengl.hpp"
-#include "moci_render_opengles/moci_render_opengles.hpp"
+#include "moci/render/opengl/es2/buffer.hpp"
+#include "moci/render/opengl/es2/frame_buffer.hpp"
+#include "moci/render/opengl/es2/shader.hpp"
+#include "moci/render/opengl/es2/texture.hpp"
+#include "moci/render/opengl/es2/vertex_array.hpp"
+#include "moci/render/opengl/gl4/buffer.hpp"
+#include "moci/render/opengl/gl4/frame_buffer.hpp"
+#include "moci/render/opengl/gl4/shader.hpp"
+#include "moci/render/opengl/gl4/texture.hpp"
+#include "moci/render/opengl/gl4/vertex_array.hpp"
 
 namespace moci
 {

@@ -1,5 +1,7 @@
 #include "demo_layer.hpp"
 
+#include <moci/render/opengl/es2/es2.hpp>
+
 #include "imgui.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
@@ -12,6 +14,8 @@
 #include "glm/gtx/transform.hpp"
 
 #include "glm/gtx/quaternion.hpp"
+
+#include <array>
 
 namespace
 {
