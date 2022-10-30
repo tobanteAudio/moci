@@ -15,3 +15,5 @@ add_subdirectory("moci/render")
 add_subdirectory("moci/application")
 add_subdirectory("moci/graphics_extra")
 add_subdirectory("moci/widgets")
+
+add_subdirectory("app")
