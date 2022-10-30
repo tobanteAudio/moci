@@ -37,7 +37,7 @@ void OpenGLLayer::onAttach()
     vao_->setIndexBuffer(ibo_);
     vao_->unbind();
 
-    texture_ = moci::RenderFactory::makeTexture2D("sandbox3D/assets/textures/skybox/back.jpg");
+    texture_ = moci::RenderFactory::makeTexture2D("src/app/sandbox3D/assets/textures/skybox/back.jpg");
 
     auto fbSpec   = moci::FramebufferSpecs {};
     fbSpec.width  = 1920;

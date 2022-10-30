@@ -82,7 +82,7 @@ void DemoLayer::onAttach()
     auto const numVertices = (mesh_.getVertices().size() * 5) + floor_.getVertices().size();
     vertices_.reserve(numVertices);
 
-    auto const path = fmt::format("sandbox3D/assets/shader/{}_general.glsl", shaderPrefix);
+    auto const path = fmt::format("src/app/sandbox3D/assets/shader/{}_general.glsl", shaderPrefix);
     shader_         = moci::RenderFactory::makeShader(path);
     shader_->bind();
 
@@ -120,7 +120,7 @@ void DemoLayer::onAttach()
         numVertices_ = vertices_.size();
     }
 
-    auto const skyBoxShaderPath = fmt::format("sandbox3D/assets/shader/{}_skybox.glsl", shaderPrefix);
+    auto const skyBoxShaderPath = fmt::format("src/app/sandbox3D/assets/shader/{}_skybox.glsl", shaderPrefix);
     skyboxShader_               = moci::RenderFactory::makeShader(skyBoxShaderPath);
     skyboxShader_->bind();
     skyboxShader_->setInt("u_Skybox", 0);
@@ -137,12 +137,12 @@ void DemoLayer::onAttach()
     skyboxVao_->setIndexBuffer(skyboxIbo_);
     skyboxVao_->unbind();
     moci::Vector<std::string> faces {
-        std::string("sandbox3D/assets/textures/skybox/right.jpg"),   //
-        std::string("sandbox3D/assets/textures/skybox/left.jpg"),    //
-        std::string("sandbox3D/assets/textures/skybox/top.jpg"),     //
-        std::string("sandbox3D/assets/textures/skybox/bottom.jpg"),  //
-        std::string("sandbox3D/assets/textures/skybox/front.jpg"),   //
-        std::string("sandbox3D/assets/textures/skybox/back.jpg")     //
+        std::string("src/app/sandbox3D/assets/textures/skybox/right.jpg"),   //
+        std::string("src/app/sandbox3D/assets/textures/skybox/left.jpg"),    //
+        std::string("src/app/sandbox3D/assets/textures/skybox/top.jpg"),     //
+        std::string("src/app/sandbox3D/assets/textures/skybox/bottom.jpg"),  //
+        std::string("src/app/sandbox3D/assets/textures/skybox/front.jpg"),   //
+        std::string("src/app/sandbox3D/assets/textures/skybox/back.jpg")     //
     };
 
     skyBoxTexture_ = moci::RenderFactory::makeTextureCube(faces);
@@ -168,9 +168,9 @@ void DemoLayer::onAttach()
     // light
     light = moci::makeScope<moci::Light>();
 
-    textureSolid_  = moci::RenderFactory::makeTexture2D("sandbox3D/assets/textures/white_10x10.png");
-    textureColors_ = moci::RenderFactory::makeTexture2D("sandbox3D/assets/textures/4color.png");
-    textureColors_ = moci::RenderFactory::makeTexture2D("sandbox3D/assets/textures/cerberus_A_4096x4096.png");
+    textureSolid_  = moci::RenderFactory::makeTexture2D("src/app/sandbox3D/assets/textures/white_10x10.png");
+    textureColors_ = moci::RenderFactory::makeTexture2D("src/app/sandbox3D/assets/textures/4color.png");
+    textureColors_ = moci::RenderFactory::makeTexture2D("src/app/sandbox3D/assets/textures/cerberus_A_4096x4096.png");
 
     auto fbSpec   = moci::FramebufferSpecs {};
     fbSpec.width  = 1920;

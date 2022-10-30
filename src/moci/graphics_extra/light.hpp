@@ -36,16 +36,16 @@ struct Light
     Ref<VertexBuffer> vbo = nullptr;
     Ref<IndexBuffer> ibo  = nullptr;
     Ref<VertexArray> vao  = nullptr;
-    Mesh lightMesh_ {"sandbox3D/assets/models/sphere.obj"};
+    Mesh lightMesh_ {"src/app/sandbox3D/assets/models/sphere.obj"};
     Vector<Light::Vertex> vertices = {};
 
 public:
     Light()
     {
 #if defined(MOCI_API_OPENGL_LEGACY)
-        shader = RenderFactory::makeShader("sandbox3D/assets/shader/es2_light_source.glsl");
+        shader = RenderFactory::makeShader("src/app/sandbox3D/assets/shader/es2_light_source.glsl");
 #else
-        shader = RenderFactory::makeShader("sandbox3D/assets/shader/gl4_light_source.glsl");
+        shader = RenderFactory::makeShader("src/app/sandbox3D/assets/shader/gl4_light_source.glsl");
 #endif
         shader->bind();
         BufferLayout lightLayout = {

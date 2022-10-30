@@ -117,9 +117,7 @@ public:
         auto const channelWidth = static_cast<int>(area.getWidth() / channels_.size());
 
         for (auto& channel : channels_) { channel->setBounds(area.removeFromLeft(channelWidth).reduced(5, 25)); }
-
         for (auto& slider : sliders_) { slider->setBounds(sliderArea.removeFromTop(sliderHeight).reduced(5, 25)); }
-
         for (auto& button : buttons_) { button->setBounds(buttonArea.removeFromTop(buttonHeight).reduced(5, 5)); }
     }
 

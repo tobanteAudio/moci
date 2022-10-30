@@ -7,7 +7,7 @@
 int main(int, char**)
 {
     moci::Log::Init();
-    auto const path = "sandbox3D/assets/textures/cerberus_A_4096x4096.png";
+    auto const path = "src/app/sandbox3D/assets/textures/cerberus_A_4096x4096.png";
 
     // Load
     stbi_uc* buffer = nullptr;

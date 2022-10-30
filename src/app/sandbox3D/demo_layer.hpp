@@ -60,8 +60,8 @@ private:
     moci::Ref<moci::VertexArray> vao_  = nullptr;
 
     std::size_t numVertices_ = {};
-    moci::Mesh mesh_ {"sandbox3D/assets/models/cerberus.fbx"};
-    moci::Mesh floor_ {"sandbox3D/assets/models/plane.obj"};
+    moci::Mesh mesh_ {"src/app/sandbox3D/assets/models/cerberus.fbx"};
+    moci::Mesh floor_ {"src/app/sandbox3D/assets/models/plane.obj"};
 
     moci::Ref<moci::Texture2D> textureSolid_  = {};
     moci::Ref<moci::Texture2D> textureColors_ = {};
