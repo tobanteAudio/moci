@@ -4,7 +4,7 @@ add_library(moci_include_path INTERFACE)
 add_library(Moci::IncludePath ALIAS moci_include_path)
 target_include_directories(moci_include_path INTERFACE ${PROJECT_SOURCE_DIR} ${CMAKE_SOURCE_DIR})
 
-add_subdirectory(moci_external)
+add_subdirectory("external")
 
 add_subdirectory("core")
 add_subdirectory("math")
