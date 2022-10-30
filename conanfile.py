@@ -100,6 +100,8 @@ class Moci(ConanFile):
         src = "res/bindings"
         dest = "bindings"
 
+        self.copy("imgui_impl_opengl2.h", dst=dest, src=src)
+        self.copy("imgui_impl_opengl2.cpp", dst=dest, src=src)
         self.copy("imgui_impl_opengl3.h", dst=dest, src=src)
         self.copy("imgui_impl_opengl3.cpp", dst=dest, src=src)
         self.copy("imgui_impl_opengl3_loader.h", dst=dest, src=src)

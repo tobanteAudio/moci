@@ -19,10 +19,10 @@
 
 #include "imgui.h"
 
-#include "backends/imgui_impl_glfw.h"
+#include "bindings/imgui_impl_glfw.h"
 
 #if defined(MOCI_MAC)
-#include "backends/imgui_impl_opengl2.h"
+#include "bindings/imgui_impl_opengl2.h"
 #else
-#include "backends/imgui_impl_opengl3.h"
+#include "bindings/imgui_impl_opengl3.h"
 #endif

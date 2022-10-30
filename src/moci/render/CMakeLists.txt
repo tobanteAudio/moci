@@ -1,6 +1,7 @@
 project(moci_render)
 
 find_package(glfw3 REQUIRED)
+find_package(imgui REQUIRED)
 
 set(moci_render_sources
     api.hpp
@@ -63,21 +64,26 @@ set(moci_render_api_sources
     renderer.hpp
     renderer.cpp
 
-    imgui/imgui_build.cpp
     imgui/imgui_layer.hpp
     imgui/imgui_layer.cpp
 
+    ${CMAKE_BINARY_DIR}/bindings/imgui_impl_glfw.h
+    ${CMAKE_BINARY_DIR}/bindings/imgui_impl_glfw.cpp
+
+    ${CMAKE_BINARY_DIR}/bindings/imgui_impl_opengl3.h
+    ${CMAKE_BINARY_DIR}/bindings/imgui_impl_opengl3.cpp
 )
 
 add_library(moci_render_api STATIC ${moci_render_api_sources})
 add_library(Moci::RenderApi ALIAS moci_render_api)
 # set_target_properties(moci_render_api PROPERTIES UNITY_BUILD OFF)
+target_include_directories(moci_render_api PUBLIC ${CMAKE_BINARY_DIR})
 target_link_libraries(moci_render_api
     PUBLIC
         Moci::RenderOpenGL
         Moci::RenderOpenGLES
         Moci::Events
-        Moci::ImGui
+        imgui::imgui
     PRIVATE
         Moci::CodeCoverage
 )
