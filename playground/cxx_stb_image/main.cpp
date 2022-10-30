@@ -1,4 +1,4 @@
-#include "moci/moci.hpp"
+#include "moci/core/logging.hpp"
 
 #include "stb_image.h"
 #include "stb_image_resize.h"
@@ -17,10 +17,7 @@ int main(int, char**)
 
     stbi_set_flip_vertically_on_load(1);
     buffer = stbi_load(path, &width, &height, &bpp, 0);
-    if (buffer == nullptr)
-    {
-        MOCI_ERROR("stbi load error");
-    }
+    if (buffer == nullptr) { MOCI_ERROR("stbi load error"); }
 
     MOCI_INFO("Width: {}", width);
     MOCI_INFO("Height: {}", height);
@@ -43,10 +40,7 @@ int main(int, char**)
     }
 
     // Cleanup
-    if (buffer != nullptr)
-    {
-        stbi_image_free(buffer);
-    }
+    if (buffer != nullptr) { stbi_image_free(buffer); }
 
     return EXIT_SUCCESS;
 }

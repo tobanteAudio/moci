@@ -16,5 +16,3 @@ add_subdirectory("render")
 add_subdirectory("application")
 add_subdirectory("graphics_extra")
 add_subdirectory("widgets")
-
-add_subdirectory(moci_header)

@@ -1,4 +1,5 @@
-#include "moci/moci.hpp"
+#include "moci/core/logging.hpp"
+#include "moci/core/span.hpp"
 
 #include "stb_image_write.h"
 
@@ -37,10 +38,7 @@ int main(int argc, char** argv)
 
     int max_dim   = (1 + (face->size->metrics.height >> 6)) * static_cast<int>(ceilf(sqrtf(NUM_GLYPHS)));
     int tex_width = 1;
-    while (tex_width < max_dim)
-    {
-        tex_width <<= 1;
-    }
+    while (tex_width < max_dim) { tex_width <<= 1; }
     int tex_height = tex_width;
 
     // render glyphs to atlas

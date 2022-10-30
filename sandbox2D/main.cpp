@@ -1,5 +1,3 @@
-#include "moci/moci.hpp"
-
 #include <moci/application/application.hpp>
 #include <moci/network/datagram/datagram.hpp>
 #include <moci/widgets/component/button.hpp>
