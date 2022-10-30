@@ -54,14 +54,14 @@ public:
     [[nodiscard]] auto getText() const noexcept -> std::string const&;
     [[nodiscard]] auto getTextView() const noexcept -> std::string_view;
 
-    void setTextColor(Color col) noexcept;
-    [[nodiscard]] auto getTextColor() const noexcept -> Color;
+    void setTextColor(ColorRGBA32 col) noexcept;
+    [[nodiscard]] auto getTextColor() const noexcept -> ColorRGBA32;
 
     auto mouseClicked(moci::MouseCallback::Click click) -> bool override;
 
 private:
     std::string _text  = {};
-    Color _color       = {};
+    ColorRGBA32 _color = {};
     ButtonSpecs _specs = {};
     ButtonState _state = ButtonState::Normal;
 };

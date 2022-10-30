@@ -33,8 +33,8 @@ auto Button::setText(std::string newText) -> void { _text = std::move(newText); 
 auto Button::getText() const noexcept -> std::string const& { return _text; }
 auto Button::getTextView() const noexcept -> std::string_view { return _text; }
 
-void Button::setTextColor(Color col) noexcept { _color = col; }
-auto Button::getTextColor() const noexcept -> Color { return _color; }
+void Button::setTextColor(ColorRGBA32 col) noexcept { _color = col; }
+auto Button::getTextColor() const noexcept -> ColorRGBA32 { return _color; }
 
 auto Button::mouseClicked(moci::MouseCallback::Click click) -> bool
 {

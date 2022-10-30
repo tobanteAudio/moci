@@ -25,7 +25,7 @@ public:
 class Slider : public Component
 {
 public:
-    explicit Slider(Color col, SliderCallbacks callbacks = SliderCallbacks {});
+    explicit Slider(ColorRGBA32 col, SliderCallbacks callbacks = SliderCallbacks {});
     ~Slider() override = default;
 
     auto onDraw(Painter& painter) -> void override;
@@ -33,8 +33,8 @@ public:
     auto setValue(float newValue) noexcept -> void;
     [[nodiscard]] auto getValue() const noexcept -> float;
 
-    void setColor(Color col) noexcept;
-    [[nodiscard]] auto getColor() const noexcept -> Color;
+    void setColor(ColorRGBA32 col) noexcept;
+    [[nodiscard]] auto getColor() const noexcept -> ColorRGBA32;
 
     auto mouseClicked(moci::MouseCallback::Click click) -> bool override;
     auto mouseScrolled(MouseScrolledEvent scroll) -> bool override;
@@ -42,6 +42,6 @@ public:
 private:
     float _value               = {};
     SliderCallbacks _callbacks = {};
-    Color _color               = {};
+    ColorRGBA32 _color         = {};
 };
 }  // namespace moci

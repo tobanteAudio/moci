@@ -24,7 +24,7 @@ public:
         sRendererApi->setViewport(viewport);
     }
 
-    inline static void setClearColor(Color const& color)
+    inline static void setClearColor(ColorRGBA32 const& color)
     {
         MOCI_PROFILE_FUNCTION();
         sRendererApi->setClearColor(color);

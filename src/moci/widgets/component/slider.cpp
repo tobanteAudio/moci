@@ -4,7 +4,7 @@
 
 namespace moci
 {
-Slider::Slider(Color col, SliderCallbacks callbacks)
+Slider::Slider(ColorRGBA32 col, SliderCallbacks callbacks)
     : Component("slider"), _callbacks(std::move(callbacks)), _color(col)
 {
 }
@@ -42,7 +42,7 @@ auto Slider::setValue(float newValue) noexcept -> void
     if (_callbacks.valueChanged) { _callbacks.valueChanged(newValue); }
 }
 
-auto Slider::getColor() const noexcept -> Color { return _color; }
-void Slider::setColor(Color col) noexcept { _color = col; }
+auto Slider::getColor() const noexcept -> ColorRGBA32 { return _color; }
+void Slider::setColor(ColorRGBA32 col) noexcept { _color = col; }
 
 }  // namespace moci

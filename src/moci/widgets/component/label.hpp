@@ -18,7 +18,7 @@ public:
 class Label : public Component
 {
 public:
-    Label(std::string text, Color col);
+    Label(std::string text, ColorRGBA32 col);
     ~Label() override = default;
 
     auto onDraw(Painter& painter) -> void override;
@@ -27,11 +27,11 @@ public:
     [[nodiscard]] auto getText() const noexcept -> std::string const& { return _text; }
     [[nodiscard]] auto getTextView() const noexcept -> std::string_view { return _text; }
 
-    void setTextColor(Color col) noexcept { _color = col; }
-    [[nodiscard]] auto getTextColor() const noexcept -> Color { return _color; }
+    void setTextColor(ColorRGBA32 col) noexcept { _color = col; }
+    [[nodiscard]] auto getTextColor() const noexcept -> ColorRGBA32 { return _color; }
 
 private:
     std::string _text {};
-    Color _color {};
+    ColorRGBA32 _color {};
 };
 }  // namespace moci

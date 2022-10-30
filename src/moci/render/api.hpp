@@ -35,7 +35,7 @@ public:
     virtual void init()    = 0;
 
     virtual void setViewport(Rectangle<uint32_t> viewport) = 0;
-    virtual void setClearColor(Color color)                = 0;
+    virtual void setClearColor(ColorRGBA32 color)          = 0;
     virtual void clear()                                   = 0;
 
     virtual void drawArrays(RenderDrawMode mode, uint32_t first, uint32_t count)       = 0;

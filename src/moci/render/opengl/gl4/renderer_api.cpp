@@ -102,7 +102,7 @@ void OpenGLRendererAPI::setViewport(Rectangle<uint32_t> viewport)
     glViewport(viewport.getX(), viewport.getY(), viewport.getWidth(), viewport.getHeight());
 }
 
-void OpenGLRendererAPI::setClearColor(Color color)
+void OpenGLRendererAPI::setClearColor(ColorRGBA32 color)
 {
     auto const red   = color.red();
     auto const green = color.green();

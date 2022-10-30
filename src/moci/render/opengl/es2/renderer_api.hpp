@@ -14,7 +14,7 @@ public:
     void init() override;
 
     void setViewport(Rectangle<uint32_t> viewport) override;
-    void setClearColor(Color color) override;
+    void setClearColor(ColorRGBA32 color) override;
     void clear() override;
 
     void drawArrays(RenderDrawMode mode, uint32_t first, uint32_t count) override;

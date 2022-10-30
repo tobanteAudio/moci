@@ -69,7 +69,7 @@ void OpenGLESRendererAPI::setViewport(Rectangle<uint32_t> viewport)
     glViewport(viewport.getX(), viewport.getY(), viewport.getWidth(), viewport.getHeight());
 }
 
-void OpenGLESRendererAPI::setClearColor(Color color)
+void OpenGLESRendererAPI::setClearColor(ColorRGBA32 color)
 {
     auto const red   = color.red();
     auto const green = color.green();

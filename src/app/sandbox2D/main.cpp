@@ -21,7 +21,7 @@ static std::atomic<float> level {0.5F};
 class LevelMeterView : public moci::Component
 {
 public:
-    LevelMeterView(moci::Color col, std::string id) : Component(std::move(id)), _color(col) { }
+    LevelMeterView(moci::ColorRGBA32 col, std::string id) : Component(std::move(id)), _color(col) { }
     ~LevelMeterView() override = default;
 
     auto onDraw(moci::Painter& painter) -> void override
@@ -40,7 +40,7 @@ public:
 private:
     constexpr static int numLEDs = 100;
 
-    moci::Color _color {};
+    moci::ColorRGBA32 _color {};
 };
 
 float linearToDecibel(float linear)
@@ -73,7 +73,7 @@ public:
 
         for (auto i = 0; i < 5; i++)
         {
-            auto col     = moci::Color {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F};
+            auto col     = moci::ColorRGBA32 {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F};
             auto channel = moci::makeScope<LevelMeterView>(col, fmt::format("{}", i));
             addChild(channel.get());
             _channels.push_back(std::move(channel));
@@ -81,7 +81,7 @@ public:
 
         for (auto i = 0; i < 10; i++)
         {
-            auto col    = moci::Color {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F};
+            auto col    = moci::ColorRGBA32 {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F};
             auto slider = moci::makeScope<moci::Slider>(col);
             slider->setValue(i / 10.0F);
             addChild(slider.get());
@@ -94,7 +94,7 @@ public:
             specs.callbacks.stateChanged = [](auto state) { moci::ignoreUnused(state); };
 
             auto button = moci::makeScope<moci::Button>(fmt::format("Test: {}", i), specs);
-            button->setTextColor(moci::Color {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F});
+            button->setTextColor(moci::ColorRGBA32 {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F});
 
             addChild(button.get());
             _buttons.push_back(std::move(button));

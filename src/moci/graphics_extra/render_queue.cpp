@@ -83,7 +83,7 @@ auto BatchRender2D::endFrame() -> void
     _data.shader->unbind();
 }
 
-auto BatchRender2D::drawText(const std::string& text, glm::vec2 position, float scale, Color color) -> void
+auto BatchRender2D::drawText(const std::string& text, glm::vec2 position, float scale, ColorRGBA32 color) -> void
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -194,7 +194,7 @@ auto BatchRender2D::flushIf(bool shouldFlush) -> void
         beginBatch();
     }
 }
-auto BatchRender2D::drawQuad(Rectangle<float> rect, Color color, Texture2D::Optional texture) -> void
+auto BatchRender2D::drawQuad(Rectangle<float> rect, ColorRGBA32 color, Texture2D::Optional texture) -> void
 {
     flushIf(_data.indices.size() + 6 >= maxIndexCount);
 
@@ -242,7 +242,7 @@ auto BatchRender2D::drawQuad(Rectangle<float> rect, Color color, Texture2D::Opti
     _data.renderFrameStats.quadCount += 1;
 }
 
-auto BatchRender2D::drawCircle(float x, float y, float radius, int numSides, Color color) -> void
+auto BatchRender2D::drawCircle(float x, float y, float radius, int numSides, ColorRGBA32 color) -> void
 {
     flushIf(_data.indices.size() + (static_cast<size_t>(3) * static_cast<size_t>(numSides)) >= maxIndexCount);
 

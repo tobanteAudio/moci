@@ -4,7 +4,7 @@
 
 namespace moci
 {
-Label::Label(std::string text, Color col) : Component("label"), _text(std::move(text)), _color(col) { }
+Label::Label(std::string text, ColorRGBA32 col) : Component("label"), _text(std::move(text)), _color(col) { }
 
 void Label::onDraw(Painter& painter)
 {

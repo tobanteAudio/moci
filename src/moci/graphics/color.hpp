@@ -6,12 +6,12 @@
 
 namespace moci
 {
-class Color
+class ColorRGBA32
 {
 public:
-    constexpr Color() noexcept = default;
-    constexpr Color(float r, float g, float b) noexcept : _data {r, g, b, 1.0F} { }
-    constexpr Color(float r, float g, float b, float alpha) noexcept : _data {r, g, b, alpha} { }
+    constexpr ColorRGBA32() noexcept = default;
+    constexpr ColorRGBA32(float r, float g, float b) noexcept : _data {r, g, b, 1.0F} { }
+    constexpr ColorRGBA32(float r, float g, float b, float alpha) noexcept : _data {r, g, b, alpha} { }
 
     [[nodiscard]] constexpr auto red() const noexcept -> float { return _data[0]; }
     [[nodiscard]] constexpr auto green() const noexcept -> float { return _data[1]; }
@@ -32,10 +32,10 @@ private:
 class Colors
 {
 public:
-    static constexpr Color black = {0.0F, 0.0F, 0.0F, 1.0F};
-    static constexpr Color white = {1.0F, 1.0F, 1.0F, 1.0F};
-    static constexpr Color red   = {1.0F, 0.0F, 0.0F, 1.0F};
-    static constexpr Color green = {0.0F, 1.0F, 0.0F, 1.0F};
-    static constexpr Color blue  = {0.0F, 0.0F, 1.0F, 1.0F};
+    static constexpr ColorRGBA32 black = {0.0F, 0.0F, 0.0F, 1.0F};
+    static constexpr ColorRGBA32 white = {1.0F, 1.0F, 1.0F, 1.0F};
+    static constexpr ColorRGBA32 red   = {1.0F, 0.0F, 0.0F, 1.0F};
+    static constexpr ColorRGBA32 green = {0.0F, 1.0F, 0.0F, 1.0F};
+    static constexpr ColorRGBA32 blue  = {0.0F, 0.0F, 1.0F, 1.0F};
 };
 }  // namespace moci

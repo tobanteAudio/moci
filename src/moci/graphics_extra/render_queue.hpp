@@ -40,9 +40,9 @@ public:
     auto startFrame(float width, float height) -> void;
     auto endFrame() -> void;
 
-    auto drawText(const std::string& text, glm::vec2 position, float scale, Color color) -> void;
-    auto drawQuad(Rectangle<float> rect, Color color, Texture2D::Optional texture = std::nullopt) -> void;
-    auto drawCircle(float x, float y, float radius, int numSides, Color color) -> void;
+    auto drawText(const std::string& text, glm::vec2 position, float scale, ColorRGBA32 color) -> void;
+    auto drawQuad(Rectangle<float> rect, ColorRGBA32 color, Texture2D::Optional texture = std::nullopt) -> void;
+    auto drawCircle(float x, float y, float radius, int numSides, ColorRGBA32 color) -> void;
 
     [[nodiscard]] auto getFrameStats() const -> FrameStats;
 
@@ -55,7 +55,7 @@ private:
     struct Vertex
     {
         glm::vec3 position        = {};
-        Color color               = {};
+        ColorRGBA32 color         = {};
         glm::vec2 texture         = {};
         float textureIndex        = 0.0F;
         float textureIsMonochrome = 0.0F;
