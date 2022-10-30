@@ -4,7 +4,7 @@ find_package(glm REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(Threads REQUIRED)
 
-add_library(moci_core STATIC ${moci_core_sources})
+add_library(moci_core)
 add_library(Moci::Core ALIAS moci_core)
 
 target_sources(moci_core
@@ -57,29 +57,28 @@ target_link_libraries(moci_core
         Moci::CodeCoverage
 )
 
+add_executable(moci_core_tests main_test.cpp)
+catch_discover_tests(moci_core_tests)
 
-set (moci_core_test_src
-    main_test.cpp
+target_sources(moci_core_tests
+    PRIVATE
+        property_map_test.cpp
+        scope_guard_test.cpp
+        strings_test.cpp
 
-    property_map_test.cpp
-    scope_guard_test.cpp
-    strings_test.cpp
+        geometry/line_test.cpp
+        geometry/rectangle_test.cpp
+        geometry/point_test.cpp
 
-    geometry/line_test.cpp
-    geometry/rectangle_test.cpp
-    geometry/point_test.cpp
+        network/datagram_test.cpp
 
-    network/datagram_test.cpp
-
-    system/info_test.cpp
+        system/info_test.cpp
 )
-add_executable(moci_core_tests ${moci_core_test_src})
+
 target_link_libraries(moci_core_tests
     PRIVATE
         Moci::Core
         Moci::CodeCoverage
         Catch2::Catch2
 )
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_core_test_src})
-catch_discover_tests(moci_core_tests)
 

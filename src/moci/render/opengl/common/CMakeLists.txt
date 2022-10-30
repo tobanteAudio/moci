@@ -6,7 +6,7 @@ set(moci_render_opengl_common_sources
 
 )
 
-add_library(moci_render_opengl_common_lib STATIC ${moci_render_opengl_common_sources})
+add_library(moci_render_opengl_common_lib ${moci_render_opengl_common_sources})
 add_library(Moci::RenderOpenGLCommon ALIAS moci_render_opengl_common_lib)
 target_link_libraries(moci_render_opengl_common_lib
     PUBLIC

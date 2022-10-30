@@ -1,48 +1,50 @@
 project(moci_events)
 
-set(moci_events_sources
-    layer/layer_stack.hpp
-    layer/layer_stack.cpp
-    layer/layer.hpp
-    layer/layer.cpp
+add_library(moci_events_lib)
+add_library(Moci::Events ALIAS moci_events_lib)
 
-    types/application_event.hpp
-    types/event.hpp
-    types/key_event.hpp
-    types/mouse_event.hpp
+target_sources(moci_events_lib
+    PRIVATE
+        layer/layer_stack.hpp
+        layer/layer_stack.cpp
+        layer/layer.hpp
+        layer/layer.cpp
 
-    input.hpp
-    input.cpp
-    key_codes.hpp
-    mouse_button_codes.hpp
-    timestep.hpp
+        types/application_event.hpp
+        types/event.hpp
+        types/key_event.hpp
+        types/mouse_event.hpp
+
+        input.hpp
+        input.cpp
+        key_codes.hpp
+        mouse_button_codes.hpp
+        timestep.hpp
 )
 
-add_library(moci_events_lib STATIC ${moci_events_sources})
-add_library(Moci::Events ALIAS moci_events_lib)
+
 target_link_libraries(moci_events_lib
     PUBLIC
         Moci::Core
-    PRIVATE
         Moci::CodeCoverage
 )
 
 
-set (moci_events_test_src
-    main_test.cpp
+add_executable(moci_events_tests main_test.cpp)
+catch_discover_tests(moci_events_tests)
 
-    layer/layer_stack_test.cpp
+target_sources(moci_events_tests
+    PRIVATE
+        layer/layer_stack_test.cpp
 
-    types/application_event_test.cpp
-    types/key_event_test.cpp
-    types/mouse_event_test.cpp
+        types/application_event_test.cpp
+        types/key_event_test.cpp
+        types/mouse_event_test.cpp
 )
-add_executable(moci_events_tests ${moci_events_test_src})
+
 target_link_libraries(moci_events_tests
     PRIVATE
         Moci::Events
         Moci::CodeCoverage
         Catch2::Catch2
 )
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_events_test_src})
-catch_discover_tests(moci_events_tests)

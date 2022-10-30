@@ -16,7 +16,7 @@ set(moci_render_sources
 
 )
 
-add_library(moci_render STATIC ${moci_render_sources})
+add_library(moci_render ${moci_render_sources})
 add_library(Moci::RenderApiBase ALIAS moci_render)
 
 target_link_libraries(moci_render
@@ -72,7 +72,7 @@ set(moci_render_api_sources
     ${CMAKE_BINARY_DIR}/bindings/imgui_impl_opengl3.cpp
 )
 
-add_library(moci_render_api STATIC ${moci_render_api_sources})
+add_library(moci_render_api ${moci_render_api_sources})
 add_library(Moci::RenderApi ALIAS moci_render_api)
 set_source_files_properties(${CMAKE_BINARY_DIR}/bindings/imgui_impl_glfw.cpp ${CMAKE_BINARY_DIR}/bindings/imgui_impl_opengl3.cpp PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 target_include_directories(moci_render_api PUBLIC ${CMAKE_BINARY_DIR})

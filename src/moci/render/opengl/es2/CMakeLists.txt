@@ -26,7 +26,7 @@ set(moci_render_opengles_sources
 
 )
 
-add_library(moci_render_opengles STATIC ${moci_render_opengles_sources})
+add_library(moci_render_opengles ${moci_render_opengles_sources})
 add_library(Moci::RenderOpenGLES ALIAS moci_render_opengles)
 target_link_libraries(moci_render_opengles PUBLIC Moci::RenderOpenGLCommon)
 target_include_directories(moci_render_opengles PUBLIC /opt/vc/include)

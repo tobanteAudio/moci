@@ -15,7 +15,7 @@ set(moci_graphics_extra_sources
 
 )
 
-add_library(moci_graphics_extra STATIC ${moci_graphics_extra_sources})
+add_library(moci_graphics_extra ${moci_graphics_extra_sources})
 add_library(Moci::GraphicsExtra ALIAS moci_graphics_extra)
 target_link_libraries(moci_graphics_extra
     PUBLIC

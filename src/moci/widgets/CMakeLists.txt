@@ -17,7 +17,7 @@ set(moci_widget_sources
     style/style.cpp
 )
 
-add_library(moci_widget_lib STATIC ${moci_widget_sources})
+add_library(moci_widget_lib ${moci_widget_sources})
 add_library(Moci::Widget ALIAS moci_widget_lib)
 target_link_libraries(moci_widget_lib
     PUBLIC
