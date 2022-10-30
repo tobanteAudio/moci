@@ -26,8 +26,8 @@ auto Typeface::getWidthForString(std::string const& text, float scale) -> std::u
     {
         auto const& ch = characters_[c];
 
-        // float const xpos = position.GetX() + ch.topLeft.GetX() * scale;
-        // float const ypos = position.GetY() - (ch.width - ch.topLeft.GetY()) * scale;
+        // float const xpos = position.getX() + ch.topLeft.getX() * scale;
+        // float const ypos = position.getY() - (ch.width - ch.topLeft.getY()) * scale;
         // float const w    = ch.width * scale;
         // float const h    = ch.height * scale;
 

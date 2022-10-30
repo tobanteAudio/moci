@@ -6,9 +6,9 @@
 
 namespace moci
 {
-std::string SystemInfo::Pimpl::GetOSName() { return "Windows"; }
+std::string SystemInfo::Pimpl::getOSName() { return "Windows"; }
 
-std::string SystemInfo::Pimpl::GetVendor()
+std::string SystemInfo::Pimpl::getVendor()
 {
     // auto const procInfo = SystemInfoLinuxReadProcInfo();
     // auto const vendorID = procInfo.find(std::string("vendor_id"));
@@ -19,7 +19,7 @@ std::string SystemInfo::Pimpl::GetVendor()
     return "";
 }
 
-std::string SystemInfo::Pimpl::GetCPUModel()
+std::string SystemInfo::Pimpl::getCpuModel()
 {
     // auto const procInfo = SystemInfoLinuxReadProcInfo();
     // auto const vendorID = procInfo.find(std::string("model name"));
@@ -30,7 +30,7 @@ std::string SystemInfo::Pimpl::GetCPUModel()
     return "";
 }
 
-int SystemInfo::Pimpl::GetCPUCoreCount()
+int SystemInfo::Pimpl::getCpuCoreCount()
 {
     SYSTEM_INFO sysinfo;
     GetSystemInfo(&sysinfo);
@@ -38,7 +38,7 @@ int SystemInfo::Pimpl::GetCPUCoreCount()
     return numCPU;
 }
 
-int SystemInfo::Pimpl::GetCPUThreadCount()
+int SystemInfo::Pimpl::getCpuThreadCount()
 {
     SYSTEM_INFO sysinfo;
     GetSystemInfo(&sysinfo);
@@ -46,7 +46,7 @@ int SystemInfo::Pimpl::GetCPUThreadCount()
     return numCPU;
 }
 
-std::string SystemInfo::Pimpl::GetCPUFeatures()
+std::string SystemInfo::Pimpl::getCpuFeatures()
 {
     // auto const procInfo = SystemInfoLinuxReadProcInfo();
     // auto const vendorID = procInfo.find(std::string("flags"));

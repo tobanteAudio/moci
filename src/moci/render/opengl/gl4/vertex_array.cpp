@@ -39,25 +39,25 @@ OpenGLVertexArray::OpenGLVertexArray()
 
 OpenGLVertexArray::~OpenGLVertexArray() { glDeleteVertexArrays(1, &m_RendererID); }
 
-void OpenGLVertexArray::Bind() const { glBindVertexArray(m_RendererID); }
+void OpenGLVertexArray::bind() const { glBindVertexArray(m_RendererID); }
 
-void OpenGLVertexArray::Unbind() const { glBindVertexArray(0); }
+void OpenGLVertexArray::unbind() const { glBindVertexArray(0); }
 
-void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
+void OpenGLVertexArray::addVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 {
 
-    MOCI_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
+    MOCI_CORE_ASSERT(vertexBuffer->getLayout().getElements().size(), "Vertex Buffer has no layout!");
 
     glBindVertexArray(m_RendererID);
-    vertexBuffer->Bind();
+    vertexBuffer->bind();
 
-    const auto& layout = vertexBuffer->GetLayout();
+    const auto& layout = vertexBuffer->getLayout();
     for (const auto& element : layout)
     {
         glEnableVertexAttribArray(m_VertexBufferIndex);
-        glVertexAttribPointer(m_VertexBufferIndex, element.GetComponentCount(),
+        glVertexAttribPointer(m_VertexBufferIndex, element.getComponentCount(),
                               ShaderDataTypeToOpenGLBaseType(element.Type), element.Normalized ? GL_TRUE : GL_FALSE,
-                              layout.GetStride(), (const void*)element.Offset);
+                              layout.getStride(), (const void*)element.Offset);
         m_VertexBufferIndex++;
     }
 
@@ -65,11 +65,11 @@ void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
     // m_VertexBuffers.push_back(vertexBuffer);
 }
 
-void OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
+void OpenGLVertexArray::setIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
 {
 
     glBindVertexArray(m_RendererID);
-    indexBuffer->Bind();
+    indexBuffer->bind();
 
     m_IndexBuffer = indexBuffer;
 }

@@ -22,7 +22,7 @@ void Renderer::onWindowResize(uint32_t width, uint32_t height)
 
 // void Renderer::BeginScene(OrthographicCamera& camera)
 // {
-//     s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+//     s_SceneData->ViewProjectionMatrix = camera.getViewProjectionMatrix();
 // }
 
 // void Renderer::EndScene() {}

@@ -22,26 +22,26 @@ namespace moci
 {
 DatagramSocket::Pimpl::~Pimpl() { }
 
-bool DatagramSocket::Pimpl::Write(std::string const& host, int port, Span<std::uint8_t> buffer)
+bool DatagramSocket::Pimpl::write(std::string const& host, int port, Span<std::uint8_t> buffer)
 {
-    return Write(host, port, buffer.data(), buffer.size());
+    return write(host, port, buffer.data(), buffer.size());
 }
 
-bool DatagramSocket::Pimpl::Write(std::string const& host, int port, DatagramSocket::Buffer const& buffer)
+bool DatagramSocket::Pimpl::write(std::string const& host, int port, DatagramSocket::Buffer const& buffer)
 {
-    return Write(host, port, buffer.data(), buffer.size());
+    return write(host, port, buffer.data(), buffer.size());
 }
 
-bool DatagramSocket::Pimpl::Write(std::string const& host, int port, std::uint8_t const* const buffer, size_t numBytes)
+bool DatagramSocket::Pimpl::write(std::string const& host, int port, std::uint8_t const* const buffer, size_t numBytes)
 {
-    IgnoreUnused(host);
-    IgnoreUnused(port);
-    IgnoreUnused(buffer);
-    IgnoreUnused(numBytes);
+    ignoreUnused(host);
+    ignoreUnused(port);
+    ignoreUnused(buffer);
+    ignoreUnused(numBytes);
     return false;
 }
 
-bool DatagramSocket::Pimpl::Bind(std::string ip, int port)
+bool DatagramSocket::Pimpl::bind(std::string ip, int port)
 {
     WSADATA wsa;
     auto rc = WSAStartup(MAKEWORD(2, 0), &wsa);
@@ -66,7 +66,7 @@ bool DatagramSocket::Pimpl::Bind(std::string ip, int port)
     addr.sin_port        = htons(static_cast<unsigned short>(port));
     addr.sin_addr.s_addr = ADDR_ANY;
 
-    rc = bind(socketDescriptor_, (SOCKADDR*)&addr, sizeof(SOCKADDR_IN));
+    rc = ::bind(socketDescriptor_, (SOCKADDR*)&addr, sizeof(SOCKADDR_IN));
     if (rc == SOCKET_ERROR)
     {
         MOCI_CORE_ERROR("Could not bind to port: {}", WSAGetLastError());
@@ -78,7 +78,7 @@ bool DatagramSocket::Pimpl::Bind(std::string ip, int port)
     return true;
 }
 
-void DatagramSocket::Pimpl::Listen()
+void DatagramSocket::Pimpl::listen()
 {
     listenerThread_ = std::thread(
         [&]()
@@ -104,7 +104,7 @@ void DatagramSocket::Pimpl::Listen()
         });
 }
 
-void DatagramSocket::Pimpl::Shutdown()
+void DatagramSocket::Pimpl::shutdown()
 {
     MOCI_CORE_INFO("Stop udp listen");
     isRunning_.store(false);

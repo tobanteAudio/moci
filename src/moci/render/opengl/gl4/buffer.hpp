@@ -13,12 +13,12 @@ public:
     OpenGLVertexBuffer(float* vertices, uint32_t size, bool dynamic = false);
     ~OpenGLVertexBuffer() override;
 
-    void Bind() const override;
-    void Unbind() const override;
+    void bind() const override;
+    void unbind() const override;
 
-    [[nodiscard]] auto GetLayout() const -> const BufferLayout& override { return m_Layout; }
-    void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
-    void UploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override;
+    [[nodiscard]] auto getLayout() const -> const BufferLayout& override { return m_Layout; }
+    void setLayout(const BufferLayout& layout) override { m_Layout = layout; }
+    void uploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override;
 
 private:
     uint32_t m_RendererID {};
@@ -31,11 +31,11 @@ public:
     explicit OpenGLIndexBuffer(IndexBufferSpecs specs);
     ~OpenGLIndexBuffer() override;
 
-    void Bind() const override;
-    void Unbind() const override;
+    void bind() const override;
+    void unbind() const override;
 
-    [[nodiscard]] auto GetCount() const -> uint32_t override { return specs_.count; }
-    void UploadData(std::uint32_t offset, Span<std::uint32_t> indices) const override;
+    [[nodiscard]] auto getCount() const -> uint32_t override { return specs_.count; }
+    void uploadData(std::uint32_t offset, Span<std::uint32_t> indices) const override;
 
 private:
     IndexBufferSpecs specs_;

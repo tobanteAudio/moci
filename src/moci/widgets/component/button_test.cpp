@@ -10,37 +10,37 @@
 TEST_CASE("widget: ButtonConstruct", "[ui]")
 {
     moci::Button const button {"test"};
-    REQUIRE(button.GetText() == "test");
-    REQUIRE(button.GetTextView() == "test");
+    REQUIRE(button.getText() == "test");
+    REQUIRE(button.getTextView() == "test");
 }
 
 TEST_CASE("widget: ButtonSetText", "[ui]")
 {
     moci::Button button {""};
-    REQUIRE(button.GetText().empty());
-    REQUIRE(button.GetTextView() == "");
+    REQUIRE(button.getText().empty());
+    REQUIRE(button.getTextView() == "");
     button.SetText("test143");
-    REQUIRE(button.GetText() == "test143");
-    REQUIRE(button.GetTextView() == "test143");
+    REQUIRE(button.getText() == "test143");
+    REQUIRE(button.getTextView() == "test143");
 }
 
 TEST_CASE("widget: ButtonSetTextColor", "[ui]")
 {
     moci::Button button {""};
 
-    auto c1 = button.GetTextColor();
-    REQUIRE(c1.GetRed() == 0.0f);
-    REQUIRE(c1.GetGreen() == 0.0f);
-    REQUIRE(c1.GetBlue() == 0.0f);
-    REQUIRE(c1.GetAlpha() == 0.0f);
+    auto c1 = button.getTextColor();
+    REQUIRE(c1.getRed() == 0.0f);
+    REQUIRE(c1.getGreen() == 0.0f);
+    REQUIRE(c1.getBlue() == 0.0f);
+    REQUIRE(c1.getAlpha() == 0.0f);
 
     button.SetTextColor(moci::Colors::Black);
 
-    auto c2 = button.GetTextColor();
-    REQUIRE(c2.GetRed() == 0.0f);
-    REQUIRE(c2.GetGreen() == 0.0f);
-    REQUIRE(c2.GetBlue() == 0.0f);
-    REQUIRE(c2.GetAlpha() == 1.0f);
+    auto c2 = button.getTextColor();
+    REQUIRE(c2.getRed() == 0.0f);
+    REQUIRE(c2.getGreen() == 0.0f);
+    REQUIRE(c2.getBlue() == 0.0f);
+    REQUIRE(c2.getAlpha() == 1.0f);
 }
 
 TEST_CASE("widget: ButtonSetSpecs", "[ui]")
@@ -48,7 +48,7 @@ TEST_CASE("widget: ButtonSetSpecs", "[ui]")
     moci::Button button {""};
 
     {
-        auto specs = button.GetSpecs();
+        auto specs = button.getSpecs();
         REQUIRE(specs.callbacks.clicked == nullptr);
         REQUIRE(specs.isToggle == false);
     }
@@ -59,7 +59,7 @@ TEST_CASE("widget: ButtonSetSpecs", "[ui]")
     button.SetSpecs(newSpecs);
 
     {
-        auto specs = button.GetSpecs();
+        auto specs = button.getSpecs();
         REQUIRE(specs.callbacks.clicked != nullptr);
         REQUIRE(specs.isToggle == true);
     }
@@ -68,10 +68,10 @@ TEST_CASE("widget: ButtonSetSpecs", "[ui]")
 TEST_CASE("widget: ButtonSetState", "[ui]")
 {
     moci::Button button {""};
-    REQUIRE(button.GetState() == moci::ButtonState::Normal);
+    REQUIRE(button.getState() == moci::ButtonState::Normal);
 
     button.SetState(moci::ButtonState::Down);
-    REQUIRE(button.GetState() == moci::ButtonState::Down);
+    REQUIRE(button.getState() == moci::ButtonState::Down);
 }
 
 TEST_CASE("widget: ButtonCallbackStateChanged", "[ui]")
@@ -85,9 +85,9 @@ TEST_CASE("widget: ButtonCallbackStateChanged", "[ui]")
     };
 
     auto slider = moci::Button {"test", specs};
-    REQUIRE(slider.GetState() == moci::ButtonState::Normal);
+    REQUIRE(slider.getState() == moci::ButtonState::Normal);
     slider.SetState(moci::ButtonState::Down);
-    REQUIRE(slider.GetState() == moci::ButtonState::Down);
+    REQUIRE(slider.getState() == moci::ButtonState::Down);
     REQUIRE(wasCalled == true);
 }
 
@@ -96,8 +96,8 @@ TEST_CASE("widget: ButtonCallbackStateChangedCallbackNotSet", "[ui]")
     auto wasCalled = false;
     auto specs     = moci::ButtonSpecs {};
     auto slider    = moci::Button {"test", specs};
-    REQUIRE(slider.GetState() == moci::ButtonState::Normal);
+    REQUIRE(slider.getState() == moci::ButtonState::Normal);
     slider.SetState(moci::ButtonState::Down);
-    REQUIRE(slider.GetState() == moci::ButtonState::Down);
+    REQUIRE(slider.getState() == moci::ButtonState::Down);
     REQUIRE(wasCalled == false);
 }

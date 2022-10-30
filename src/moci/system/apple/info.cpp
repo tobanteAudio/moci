@@ -14,14 +14,14 @@
 
 namespace moci
 {
-std::string SystemInfo::Pimpl::GetOSName()
+std::string SystemInfo::Pimpl::getOSName()
 {
     struct utsname uts;
     uname(&uts);
     return uts.sysname;
 }
 
-std::string SystemInfo::Pimpl::GetVendor()
+std::string SystemInfo::Pimpl::getVendor()
 {
     char buffer[512];
     size_t size = sizeof(buffer);
@@ -29,7 +29,7 @@ std::string SystemInfo::Pimpl::GetVendor()
     return std::string(buffer, size);
 }
 
-std::string SystemInfo::Pimpl::GetCPUModel()
+std::string SystemInfo::Pimpl::getCpuModel()
 {
     char buffer[512];
     size_t size = sizeof(buffer);
@@ -37,7 +37,7 @@ std::string SystemInfo::Pimpl::GetCPUModel()
     return std::string(buffer, size);
 }
 
-int SystemInfo::Pimpl::GetCPUCoreCount()
+int SystemInfo::Pimpl::getCpuCoreCount()
 {
     int buffer;
     size_t size = sizeof(buffer);
@@ -59,7 +59,7 @@ int SystemInfo::Pimpl::GetCPUCoreCount()
     return coreCount;
 }
 
-int SystemInfo::Pimpl::GetCPUThreadCount()
+int SystemInfo::Pimpl::getCpuThreadCount()
 {
     int buffer;
     size_t size = sizeof(buffer);
@@ -81,7 +81,7 @@ int SystemInfo::Pimpl::GetCPUThreadCount()
     return coreCount;
 }
 
-std::string SystemInfo::Pimpl::GetCPUFeatures()
+std::string SystemInfo::Pimpl::getCpuFeatures()
 {
     char buffer[512];
     size_t size = sizeof(buffer);

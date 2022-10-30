@@ -12,15 +12,15 @@ OpenGLFramebuffer::OpenGLFramebuffer(FramebufferSpecs spec) : specs_(spec) { inv
 
 OpenGLFramebuffer::~OpenGLFramebuffer() { deallocate(); }
 
-void OpenGLFramebuffer::Bind()
+void OpenGLFramebuffer::bind()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, renderID_);
     glViewport(0, 0, specs_.width, specs_.height);
 }
 
-void OpenGLFramebuffer::Unbind() { glBindFramebuffer(GL_FRAMEBUFFER, 0); }
+void OpenGLFramebuffer::unbind() { glBindFramebuffer(GL_FRAMEBUFFER, 0); }
 
-void OpenGLFramebuffer::Resize(std::uint32_t width, std::uint32_t height)
+void OpenGLFramebuffer::resize(std::uint32_t width, std::uint32_t height)
 {
     specs_.width  = width;
     specs_.height = height;

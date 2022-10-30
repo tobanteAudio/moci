@@ -50,7 +50,7 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path) : path_(std::move(path))
 
     createTexture();
     setFilters();
-    SetData(
+    setData(
         Span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), static_cast<size_t>(width_ * height_ * channels_)});
 
     stbi_image_free(data);
@@ -59,23 +59,23 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path) : path_(std::move(path))
 OpenGLTexture2D::OpenGLTexture2D(Texture::Format format, std::uint32_t width, std::uint32_t height, void* data)
     : width_(width), height_(height)
 {
-    IgnoreUnused(format);
+    ignoreUnused(format);
     createTexture();
     setFilters();
-    SetData(
+    setData(
         Span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), static_cast<size_t>(width_ * height_ * channels_)});
 }
 
 OpenGLTexture2D::~OpenGLTexture2D() { glDeleteTextures(1, &renderID_); }
 
-void OpenGLTexture2D::SetData(Span<std::uint8_t> data) const
+void OpenGLTexture2D::setData(Span<std::uint8_t> data) const
 {
     MOCI_CORE_ASSERT(data.size() == static_cast<unsigned long>(width_ * height_ * channels_),
                      "Data must be entire texture!");
     glTextureSubImage2D(renderID_, 0, 0, 0, width_, height_, dataFormat_, GL_UNSIGNED_BYTE, data.data());
 }
 
-void OpenGLTexture2D::Bind(uint32_t slot) const { glBindTextureUnit(slot, renderID_); }
+void OpenGLTexture2D::bind(uint32_t slot) const { glBindTextureUnit(slot, renderID_); }
 
 void OpenGLTexture2D::createTexture()
 {
@@ -98,7 +98,7 @@ OpenGLTextureCube::OpenGLTextureCube(Vector<std::string> paths) : paths_(std::mo
     // Generate a texture object
     glGenTextures(1, &renderID_);
 
-    // Bind the texture object
+    // bind the texture object
     glBindTexture(GL_TEXTURE_CUBE_MAP, renderID_);
 
     // Set the filtering mode1
@@ -129,13 +129,13 @@ OpenGLTextureCube::OpenGLTextureCube(Vector<std::string> paths) : paths_(std::mo
 
 OpenGLTextureCube::~OpenGLTextureCube() { glDeleteTextures(1, &renderID_); }
 
-void OpenGLTextureCube::Bind(uint32_t slot) const
+void OpenGLTextureCube::bind(uint32_t slot) const
 {
     glActiveTexture(GL_TEXTURE0 + slot);
     glBindTexture(GL_TEXTURE_CUBE_MAP, renderID_);
 }
 
-void OpenGLTextureCube::Unbind() const
+void OpenGLTextureCube::unbind() const
 {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);

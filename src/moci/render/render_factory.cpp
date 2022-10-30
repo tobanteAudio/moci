@@ -64,7 +64,7 @@ auto RenderFactory::makeFramebuffer(FramebufferSpecs spec) -> Ref<Framebuffer>
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return MakeRef<OpenGLFramebuffer>(spec);
+        case RendererAPI::API::OpenGL: return makeRef<OpenGLFramebuffer>(spec);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return makeRef<OpenGLESFramebuffer>(spec);
@@ -85,7 +85,7 @@ auto RenderFactory::makeShader(const std::string& filepath) -> Ref<Shader>
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return MakeRef<OpenGLShader>(filepath);
+        case RendererAPI::API::OpenGL: return makeRef<OpenGLShader>(filepath);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return makeRef<OpenGLESShader>(filepath);
@@ -106,7 +106,7 @@ auto RenderFactory::makeShader(std::string const& name, std::string const& verte
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return MakeRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
+        case RendererAPI::API::OpenGL: return makeRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return makeRef<OpenGLESShader>(name, vertexSrc, fragmentSrc);
@@ -126,7 +126,7 @@ auto RenderFactory::makeTexture2D(std::string const& path) -> Ref<Texture2D>
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return MakeRef<OpenGLTexture2D>(path);
+        case RendererAPI::API::OpenGL: return makeRef<OpenGLTexture2D>(path);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return makeRef<OpenGLESTexture2D>(path);
@@ -146,7 +146,7 @@ auto RenderFactory::makeTexture2D(Texture::Format format, uint32_t width, uint32
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return MakeRef<OpenGLTexture2D>(format, width, height, data);
+        case RendererAPI::API::OpenGL: return makeRef<OpenGLTexture2D>(format, width, height, data);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return makeRef<OpenGLESTexture2D>(format, width, height, data);
@@ -166,7 +166,7 @@ auto RenderFactory::makeTextureCube(const Vector<std::string>& paths) -> Ref<Tex
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return MakeRef<OpenGLTextureCube>(paths);
+        case RendererAPI::API::OpenGL: return makeRef<OpenGLTextureCube>(paths);
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return makeRef<OpenGLESTextureCube>(paths);
@@ -186,7 +186,7 @@ auto RenderFactory::makeVertexArray() -> Ref<VertexArray>
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL: return MakeRef<OpenGLVertexArray>();
+        case RendererAPI::API::OpenGL: return makeRef<OpenGLVertexArray>();
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES: return makeRef<OpenGLESVertexArray>();

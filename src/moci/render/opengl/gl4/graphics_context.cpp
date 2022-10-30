@@ -14,7 +14,7 @@ OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : m_WindowHandle(windowHa
     MOCI_CORE_ASSERT(windowHandle, "Window handle is null!")
 }
 
-void OpenGLContext::Init()
+void OpenGLContext::init()
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -36,7 +36,7 @@ void OpenGLContext::Init()
                      "Moci requires at least OpenGL version 4.5!");
 }
 
-void OpenGLContext::SwapBuffers()
+void OpenGLContext::swapBuffers()
 {
     MOCI_PROFILE_FUNCTION();
 

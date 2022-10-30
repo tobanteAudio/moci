@@ -38,7 +38,7 @@ auto systemInfoLinuxReadProcInfo() -> std::unordered_map<std::string, std::strin
     return result;
 }
 
-auto SystemInfo::Pimpl::getOsName() -> std::string
+auto SystemInfo::Pimpl::getOSName() -> std::string
 {
     utsname uts {};
     uname(&uts);

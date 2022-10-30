@@ -13,14 +13,14 @@ public:
     OpenGLVertexArray();
     ~OpenGLVertexArray() override;
 
-    void Bind() const override;
-    void Unbind() const override;
+    void bind() const override;
+    void unbind() const override;
 
-    void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
-    void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
+    void addVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
+    void setIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
-    [[nodiscard]] auto GetVertexBuffer() const -> const Ref<VertexBuffer>& override { return m_VertexBuffer; }
-    [[nodiscard]] auto GetIndexBuffer() const -> const Ref<IndexBuffer>& override { return m_IndexBuffer; }
+    [[nodiscard]] auto getVertexBuffer() const -> const Ref<VertexBuffer>& override { return m_VertexBuffer; }
+    [[nodiscard]] auto getIndexBuffer() const -> const Ref<IndexBuffer>& override { return m_IndexBuffer; }
 
 private:
     uint32_t m_RendererID {};

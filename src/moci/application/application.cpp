@@ -36,7 +36,7 @@ void Application::pushOverlay(Layer::Ptr&& layer) { m_LayerStack.pushOverlay(std
 
 void Application::onEvent(Event& e)
 {
-    if (e.GetEventType() == EventType::KeyPressed)
+    if (e.getEventType() == EventType::KeyPressed)
     {
         auto* keyEvent = dynamic_cast<KeyPressedEvent*>(&e);
         if (keyEvent->getKeyCode() == Key::Escape)

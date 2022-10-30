@@ -46,12 +46,24 @@ enum EventCategory
 };
 
 #define EVENT_CLASS_TYPE(type)                                                                                         \
-    static EventType GetStaticType() { return EventType::type; }                                                       \
-    virtual EventType GetEventType() const override { return GetStaticType(); }                                        \
-    virtual std::string_view GetName() const override { return #type; }
+    static EventType getStaticType()                                                                                   \
+    {                                                                                                                  \
+        return EventType::type;                                                                                        \
+    }                                                                                                                  \
+    virtual EventType getEventType() const override                                                                    \
+    {                                                                                                                  \
+        return getStaticType();                                                                                        \
+    }                                                                                                                  \
+    virtual std::string_view getName() const override                                                                  \
+    {                                                                                                                  \
+        return #type;                                                                                                  \
+    }
 
 #define EVENT_CLASS_CATEGORY(category)                                                                                 \
-    virtual int GetCategoryFlags() const override { return category; }
+    virtual int getCategoryFlags() const override                                                                      \
+    {                                                                                                                  \
+        return category;                                                                                               \
+    }
 
 class Event
 {
@@ -81,7 +93,7 @@ public:
     template<typename T, typename F>
     auto dispatch(const F& func) -> bool
     {
-        if (m_Event.getEventType() == T::GetStaticType())
+        if (m_Event.getEventType() == T::getStaticType())
         {
             m_Event.Handled = func(static_cast<T&>(m_Event));
             return true;

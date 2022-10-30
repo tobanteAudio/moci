@@ -15,7 +15,7 @@ auto systemInfoLinuxReadProcInfo() -> std::unordered_map<std::string, std::strin
 class SystemInfo::Pimpl
 {
 public:
-    static auto getOsName() -> std::string;
+    static auto getOSName() -> std::string;
     static auto getVendor() -> std::string;
     static auto getCpuModel() -> std::string;
     static auto getCpuCoreCount() -> int;

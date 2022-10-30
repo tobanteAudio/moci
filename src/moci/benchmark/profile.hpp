@@ -52,7 +52,7 @@ public:
             // Subsequent profiling output meant for the original session will end up in the
             // newly opened session instead.  That's better than having badly formatted
             // profiling output.
-            if (Log::GetCoreLogger())
+            if (Log::getCoreLogger())
             {  // Edge case: BeginSession() might be before Log::Init()
                 MOCI_CORE_ERROR("Instrumentor::BeginSession('{0}') when session '{1}' already open.", name,
                                 currentSession_->Name);
@@ -71,7 +71,7 @@ public:
         }
         else
         {
-            if (Log::GetCoreLogger())
+            if (Log::getCoreLogger())
             {  // Edge case: BeginSession() might be before Log::Init()
                 MOCI_CORE_ERROR("Instrumentor could not open results file '{0}'.", filepath);
             }
@@ -173,8 +173,8 @@ private:
 
 #define MOCI_PROFILE 1
 #if MOCI_PROFILE
-#define MOCI_PROFILE_BEGIN_SESSION(name, filepath) ::moci::Instrumentor::Get().BeginSession(name, filepath)
-#define MOCI_PROFILE_END_SESSION() ::moci::Instrumentor::Get().EndSession()
+#define MOCI_PROFILE_BEGIN_SESSION(name, filepath) ::moci::Instrumentor::get().beginSession(name, filepath)
+#define MOCI_PROFILE_END_SESSION() ::moci::Instrumentor::get().endSession()
 #define MOCI_PROFILE_SCOPE(name) ::moci::InstrumentationTimer MOCI_ANONYMOUS_VARIABLE(timer)(name);
 #define MOCI_PROFILE_FUNCTION() MOCI_PROFILE_SCOPE(MOCI_FUNC_SIG)
 #else

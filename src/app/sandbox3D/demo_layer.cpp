@@ -21,7 +21,7 @@
 namespace
 {
 #if defined(MOCI_API_OPENGL_LEGACY)
-constexpr auto ShaderPrefix = "es2";
+constexpr auto shaderPrefix = "es2";
 #else
 constexpr auto shaderPrefix = "gl4";
 #endif
@@ -82,7 +82,7 @@ void DemoLayer::onAttach()
     auto const numVertices = (mesh_.getVertices().size() * 5) + floor_.getVertices().size();
     vertices_.reserve(numVertices);
 
-    auto const path = fmt::format("sandbox3D/assets/shader/{}_general.glsl", ShaderPrefix);
+    auto const path = fmt::format("sandbox3D/assets/shader/{}_general.glsl", shaderPrefix);
     shader_         = moci::RenderFactory::makeShader(path);
     shader_->bind();
 
@@ -120,7 +120,7 @@ void DemoLayer::onAttach()
         numVertices_ = vertices_.size();
     }
 
-    auto const skyBoxShaderPath = fmt::format("sandbox3D/assets/shader/{}_skybox.glsl", ShaderPrefix);
+    auto const skyBoxShaderPath = fmt::format("sandbox3D/assets/shader/{}_skybox.glsl", shaderPrefix);
     skyboxShader_               = moci::RenderFactory::makeShader(skyBoxShaderPath);
     skyboxShader_->bind();
     skyboxShader_->setInt("u_Skybox", 0);
@@ -433,7 +433,7 @@ void DemoLayer::onImGuiRender()
             ImGui::TextUnformatted(vertices.c_str());
             ImGui::TextUnformatted(triangles.c_str());
             ImGui::TextUnformatted(megabyte.c_str());
-            // auto const lightStr = fmt::format("Light vertices: {}", lightMesh_.GetVertices().size());
+            // auto const lightStr = fmt::format("Light vertices: {}", lightMesh_.getVertices().size());
             // ImGui::TextUnformatted(lightStr.c_str());
             auto const size = static_cast<int>(fpsHistory_.size());
             ImGui::PlotLines("FPS", fpsHistory_.data(), size, 0, "", 50.0F, 75.0F, ImVec2(0, 80));

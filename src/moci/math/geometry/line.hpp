@@ -105,9 +105,9 @@ public:
      */
     void printFormular() const
     {
-        auto const a = end_.GetY() - start_.GetY();
-        auto const b = start_.GetX() - end_.GetX();
-        auto const c = a * (start_.GetX()) + b * (start_.GetY());
+        auto const a = end_.getY() - start_.getY();
+        auto const b = start_.getX() - end_.getX();
+        auto const c = a * (start_.getX()) + b * (start_.getY());
 
         if (b < 0) { fmt::print("The line passing through points P and Q is: {0}x {1}y = {2}\n", a, b, c); }
         else { fmt::print("The line passing through points P and Q is: {0}x + {1}y = {2}\n", a, b, c); }

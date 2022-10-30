@@ -8,6 +8,6 @@ namespace moci
 #if defined(MOCI_API_OPENGL_LEGACY)
 Scope<RendererAPI> RenderCommand::sRendererApi = makeScope<OpenGLESRendererAPI>();
 #else
-Scope<RendererAPI> RenderCommand::s_RendererAPI = MakeScope<OpenGLRendererAPI>();
+Scope<RendererAPI> RenderCommand::sRendererApi = makeScope<OpenGLRendererAPI>();
 #endif
 }  // namespace moci

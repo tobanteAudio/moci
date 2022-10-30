@@ -12,8 +12,8 @@
 TEST_CASE("events: KeyPressedEvent", "[key][events]")
 {
     auto const event = moci::KeyPressedEvent(moci::Key::Escape, 1);
-    REQUIRE(event.GetStaticType() == moci::EventType::KeyPressed);
-    REQUIRE(event.GetName() == std::string_view("KeyPressed"));
+    REQUIRE(event.getStaticType() == moci::EventType::KeyPressed);
+    REQUIRE(event.getName() == std::string_view("KeyPressed"));
     REQUIRE(event.getKeyCode() == moci::Key::Escape);
     REQUIRE(event.getRepeatCount() == 1);
     REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryInput) == true);
@@ -27,8 +27,8 @@ TEST_CASE("events: KeyPressedEvent", "[key][events]")
 TEST_CASE("events: KeyReleasedEvent", "[key][events]")
 {
     auto const event = moci::KeyReleasedEvent(moci::Key::A);
-    REQUIRE(event.GetStaticType() == moci::EventType::KeyReleased);
-    REQUIRE(event.GetName() == std::string_view("KeyReleased"));
+    REQUIRE(event.getStaticType() == moci::EventType::KeyReleased);
+    REQUIRE(event.getName() == std::string_view("KeyReleased"));
     REQUIRE(event.getKeyCode() == moci::Key::A);
     REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryInput) == true);
     REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryKeyboard) == true);
@@ -41,8 +41,8 @@ TEST_CASE("events: KeyReleasedEvent", "[key][events]")
 TEST_CASE("events: KeyTypedEvent", "[key][events]")
 {
     auto const event = moci::KeyTypedEvent(moci::Key::Y);
-    REQUIRE(event.GetStaticType() == moci::EventType::KeyTyped);
-    REQUIRE(event.GetName() == std::string_view("KeyTyped"));
+    REQUIRE(event.getStaticType() == moci::EventType::KeyTyped);
+    REQUIRE(event.getName() == std::string_view("KeyTyped"));
     REQUIRE(event.getKeyCode() == moci::Key::Y);
     REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryInput) == true);
     REQUIRE(event.isInCategory(moci::EventCategory::EventCategoryKeyboard) == true);

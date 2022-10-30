@@ -58,8 +58,8 @@ Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
     if ((scene == nullptr) || !scene->HasMeshes()) { MOCI_CORE_ERROR("Failed to load mesh file: {0}", filePath_); }
 
     isAnimated_ = scene->mAnimations != nullptr;
-    // m_MeshShader = isAnimated_ ? Renderer::GetShaderLibrary()->Get("HazelPBR_Anim")
-    //                             : Renderer::GetShaderLibrary()->Get("HazelPBR_Static");
+    // m_MeshShader = isAnimated_ ? Renderer::GetShaderLibrary()->get("HazelPBR_Anim")
+    //                             : Renderer::GetShaderLibrary()->get("HazelPBR_Static");
     // m_Material.reset(new moci::Material(m_MeshShader));
     inverseTransform_ = glm::inverse(aiMatrix4x4ToGlm(scene->mRootNode->mTransformation));
 
@@ -197,7 +197,7 @@ Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
     //         {ShaderDataType::Int4, "a_BoneIDs"},
     //         {ShaderDataType::Float4, "a_BoneWeights"},
     //     });
-    //     m_VertexArray->AddVertexBuffer(vb);
+    //     m_VertexArray->addVertexBuffer(vb);
     // }
     // else
     // {
@@ -209,7 +209,7 @@ Mesh::Mesh(std::string filePath) : filePath_(std::move(filePath))
     //         {ShaderDataType::Float3, "a_Binormal"},
     //         {ShaderDataType::Float2, "a_TexCoord"},
     //     });
-    //     m_VertexArray->AddVertexBuffer(vb);
+    //     m_VertexArray->addVertexBuffer(vb);
     // }
 
     // auto ib = RenderFactory::MakeIndexBuffer(indices_.data(), indices_.size() * sizeof(Index));

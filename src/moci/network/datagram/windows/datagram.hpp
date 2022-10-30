@@ -23,17 +23,17 @@ public:
     Pimpl() = default;
     ~Pimpl();
 
-    bool Bind(std::string ip, int port);
+    bool bind(std::string ip, int port);
 
-    bool Write(std::string const& host, int port, Span<std::uint8_t> buffer);
-    bool Write(std::string const& host, int port, DatagramSocket::Buffer const& buffer);
-    bool Write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes);
+    bool write(std::string const& host, int port, Span<std::uint8_t> buffer);
+    bool write(std::string const& host, int port, DatagramSocket::Buffer const& buffer);
+    bool write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes);
 
-    void Listen();
+    void listen();
 
-    void Shutdown();
+    void shutdown();
 
-    void SetMessageCallback(std::function<void(DatagramSocket::Buffer const&, size_t)> callback)
+    void setMessageCallback(std::function<void(DatagramSocket::Buffer const&, size_t)> callback)
     {
         messageCallback_ = callback;
     }

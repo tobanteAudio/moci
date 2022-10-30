@@ -47,8 +47,8 @@ public:
 
     bool OnWindowResized(moci::WindowResizeEvent& e)
     {
-        width_  = static_cast<float>(e.GetWidth());
-        height_ = static_cast<float>(e.GetHeight());
+        width_  = static_cast<float>(e.getWidth());
+        height_ = static_cast<float>(e.getHeight());
         return false;
     }
 
@@ -79,7 +79,7 @@ public:
                 ImGui::Checkbox("Sandbox3D", &imguiWindow_);
                 ImGui::Checkbox("Imgui Demo", &imguiDemo_);
                 ImGui::Checkbox("Fullscreen", &fullscreen_);
-                moci::Application::Get().GetWindow().SetFullscreen(fullscreen_);
+                moci::Application::Get().getWindow().SetFullscreen(fullscreen_);
 
                 ImGui::EndMenu();
             }
@@ -108,7 +108,7 @@ public:
                 // ImGui::TextUnformatted(vertices.c_str());
                 // ImGui::TextUnformatted(triangles.c_str());
                 // ImGui::TextUnformatted(megabyte.c_str());
-                // auto const lightStr = fmt::format("Light vertices: {}", lightMesh_.GetVertices().size());
+                // auto const lightStr = fmt::format("Light vertices: {}", lightMesh_.getVertices().size());
                 // ImGui::TextUnformatted(lightStr.c_str());
                 // auto const size = static_cast<int>(fpsHistory_.size());
                 // ImGui::PlotLines("FPS", fpsHistory_.data(), size, 0, "", 50.0f, 75.0f, ImVec2(0, 80));
@@ -155,7 +155,7 @@ public:
     MociModelViwerApp()
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-model-viewer", "moci-model-viewer.json");
-        PushLayer(moci::MakeScope<MociModelViwerLayer>());
+        PushLayer(moci::makeScope<MociModelViwerLayer>());
     }
 
     ~MociModelViwerApp() override { MOCI_PROFILE_END_SESSION(); }

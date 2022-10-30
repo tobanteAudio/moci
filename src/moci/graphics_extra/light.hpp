@@ -45,7 +45,7 @@ public:
 #if defined(MOCI_API_OPENGL_LEGACY)
         shader = RenderFactory::makeShader("sandbox3D/assets/shader/es2_light_source.glsl");
 #else
-        shader = RenderFactory::MakeShader("sandbox3D/assets/shader/gl4_light_source.glsl");
+        shader = RenderFactory::makeShader("sandbox3D/assets/shader/gl4_light_source.glsl");
 #endif
         shader->bind();
         BufferLayout lightLayout = {

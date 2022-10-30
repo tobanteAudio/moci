@@ -24,9 +24,9 @@
 #include <GLFW/glfw3.h>
 
 #define GLCall(x)                                                                                                      \
-    GLClearError();                                                                                                    \
+    glClearError();                                                                                                    \
     x;                                                                                                                 \
-    GLLogCall(#x, __FILE__, __LINE__)
+    glLogCall(#x, __FILE__, __LINE__)
 
 void glClearError();
 auto glLogCall(const char* function, const char* file, int line) -> bool;

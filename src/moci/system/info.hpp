@@ -18,7 +18,7 @@ public:
     /**
      * @brief Returns the operating system name.
      */
-    static auto getOsName() -> std::string;
+    static auto getOSName() -> std::string;
 
     /**
      * @brief Returns the cpu vendor.
