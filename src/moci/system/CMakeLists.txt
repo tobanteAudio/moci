@@ -1,6 +1,7 @@
 project(moci_system)
 
-# SYSTEM
+find_package(Threads REQUIRED)
+
 set(moci_system_sources
     info.hpp
     info.cpp
@@ -18,7 +19,7 @@ set_target_properties(moci_system_lib PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_system_lib
     PUBLIC
         Moci::Core
-        Moci::Threads
+        Threads::Threads
     PRIVATE
         Moci::CodeCoverage
 )

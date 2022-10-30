@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
-project(MociLibrary LANGUAGES CXX)
+project(moci-dev LANGUAGES CXX)
 
-option(MOCI_BUILD_NATIVE         "Build optimized for native platform"          OFF)
-option(MOCI_BUILD_LTO            "Build with link time optimization"            OFF)
 option(MOCI_BUILD_FRAMEPOINTER   "Build with frame pointer. For profiles"       OFF)
 option(MOCI_BUILD_COVERAGE       "Build with coverage enabled"                  OFF)
 option(MOCI_BUILD_TOOLS          "Build tools"                                  OFF)
@@ -10,7 +8,6 @@ option(MOCI_BUILD_PLAYGROUND     "Build playground examples"                    
 option(MOCI_API_OPENGL_LEGACY    "Use OpenGL Legacy implementation"             ON)
 option(MOCI_API_OPENGL_MODERN    "Use OpenGL 4.0 implementation"                OFF)
 option(MOCI_LINK_OPENGL_ES       "Link against OpenGL ES 2.0"                   OFF)
-
 
 find_program(CCACHE ccache)
 if(CCACHE)
@@ -30,21 +27,6 @@ endif()
 
 add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)
 
-if(MOCI_BUILD_NATIVE)
-  include(CheckCXXCompilerFlag)
-  check_cxx_compiler_flag("-march=native" COMPILER_OPT_ARCH_NATIVE_SUPPORTED)
-  if (COMPILER_OPT_ARCH_NATIVE_SUPPORTED)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
-  endif()
-
-  if(MSVC)
-    check_cxx_compiler_flag("/arch:AVX2" COMPILER_OPT_ARCH_AVX2_SUPPORTED)
-    if(COMPILER_OPT_ARCH_AVX2_SUPPORTED)
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX2")
-    endif()
-  endif()
-endif(MOCI_BUILD_NATIVE)
-
 if(MOCI_BUILD_FRAMEPOINTER)
   check_cxx_compiler_flag("-fno-omit-frame-pointer" COMPILER_NO_OMIT_FRAMEPOINTER_SUPPORTED)
   if (COMPILER_NO_OMIT_FRAMEPOINTER_SUPPORTED)
@@ -52,48 +34,20 @@ if(MOCI_BUILD_FRAMEPOINTER)
   endif()
 endif(MOCI_BUILD_FRAMEPOINTER)
 
-if(MOCI_BUILD_LTO)
-  include(CheckIPOSupported)
-  check_ipo_supported(RESULT MOCI_SUPPORTS_LTO)
-  if(MOCI_SUPPORTS_LTO)
-    message(STATUS "Moci: lto is supported & enable")
-    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
-  else()
-    message(STATUS "Moci: lto is NOT supported")
-  endif()
-endif(MOCI_BUILD_LTO)
-
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR})
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR})
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(MociCodeCoverage)
 include(MociCompilerOptions)
 include(MociCompilerWarnings)
-include(MociThreading)
-
-if(NOT EMSCRIPTEN)
-    include(MociConan)
-endif()
-
-# other
-find_package(assimp REQUIRED)
-find_package(Freetype REQUIRED)
-find_package(glm REQUIRED)
-find_package(spdlog REQUIRED)
-find_package(stb REQUIRED)
 
 if(EMSCRIPTEN)
   add_subdirectory(playground/sdl_emscripten)
 else()
-  find_package(glfw3 REQUIRED)
+  include(MociConan)
 
   if(WIN32)
     find_package(SDL2 REQUIRED)
-  endif()
-
-  # Only include glew on desktop
-  if (NOT ${MOCI_LINK_OPENGL_ES})
-      find_package(GLEW REQUIRED)
   endif()
 
   enable_testing()

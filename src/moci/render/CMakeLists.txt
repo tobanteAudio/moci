@@ -1,5 +1,7 @@
 project(moci_render)
 
+find_package(glfw3 REQUIRED)
+
 set(moci_render_sources
     api.hpp
     buffer.hpp

@@ -1,5 +1,7 @@
 project(mc_stb)
 
+find_package(stb REQUIRED)
+
 add_library(stbimage STATIC src/stb_image.cpp)
 add_library(Moci::StbImage ALIAS stbimage)
 target_link_libraries(stbimage PUBLIC stb::stb)

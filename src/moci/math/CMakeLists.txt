@@ -1,5 +1,7 @@
 project(moci_math)
 
+find_package(glm REQUIRED)
+
 # MATH
 set(moci_math_sources
     geometry/line.hpp

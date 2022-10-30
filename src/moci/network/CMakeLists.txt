@@ -1,5 +1,7 @@
 project(moci_network)
 
+find_package(Threads REQUIRED)
+
 set(moci_network_sources
     datagram/datagram.hpp
     datagram/datagram.cpp
@@ -17,7 +19,7 @@ set_target_properties(moci_network_lib PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_network_lib
     PUBLIC
         Moci::Core
-        Moci::Threads
+        Threads::Threads
     PRIVATE
         Moci::CodeCoverage
 )

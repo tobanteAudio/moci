@@ -1,5 +1,7 @@
 project(moci_core)
 
+find_package(spdlog REQUIRED)
+
 add_library(moci_core STATIC ${moci_core_sources})
 add_library(Moci::Core ALIAS moci_core)
 

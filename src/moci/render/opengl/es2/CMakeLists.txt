@@ -1,5 +1,11 @@
 project(moci_render_opengles)
 
+# Only include glew on desktop
+if (NOT ${MOCI_LINK_OPENGL_ES})
+    find_package(GLEW REQUIRED)
+endif()
+
+
 set(moci_render_opengles_sources
     buffer.hpp
     buffer.cpp

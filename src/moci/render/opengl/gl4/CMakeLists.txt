@@ -1,5 +1,11 @@
 project(moci_render_opengl)
 
+# Only include glew on desktop
+if (NOT ${MOCI_LINK_OPENGL_ES})
+    find_package(GLEW REQUIRED)
+endif()
+
+
 set(moci_render_opengl_sources
     buffer.hpp
     buffer.cpp

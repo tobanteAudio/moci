@@ -1,5 +1,7 @@
 project(moci_graphics_extra)
 
+find_package(assimp REQUIRED)
+
 set(moci_graphics_extra_sources
     camera.hpp
     camera.cpp

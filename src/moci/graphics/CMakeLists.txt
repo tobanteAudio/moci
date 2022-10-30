@@ -1,5 +1,7 @@
 project(moci_graphics)
 
+find_package(Freetype REQUIRED)
+
 set(moci_graphics_sources
     color.hpp
     color.cpp
