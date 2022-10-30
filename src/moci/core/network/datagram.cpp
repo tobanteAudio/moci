@@ -1,13 +1,13 @@
-#include "moci/network/datagram/datagram.hpp"
+#include "moci/core/network/datagram.hpp"
 
 #include <utility>
 
 #include "moci/core/logging.hpp"
 
 #if defined(MOCI_MAC) || defined(MOCI_LINUX)
-#include "moci/network/datagram/unix/datagram.hpp"
+#include "moci/core/network/unix/datagram.hpp"
 #elif defined(MOCI_WINDOWS)
-#include "moci/network/datagram/windows/datagram.hpp"
+#include "moci/core/network/windows/datagram.hpp"
 #endif
 
 namespace moci

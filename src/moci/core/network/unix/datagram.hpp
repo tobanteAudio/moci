@@ -2,9 +2,9 @@
 
 #include "moci/core/logging.hpp"
 
-#if defined(MOCI_WINDOWS)
+#if defined(MOCI_LINUX) || defined(MOCI_MAC)
 
-#include "moci/network/datagram/datagram.hpp"
+#include "moci/core/network/datagram.hpp"
 
 #include <cstdint>
 
@@ -23,24 +23,24 @@ public:
     Pimpl() = default;
     ~Pimpl();
 
-    bool bind(std::string ip, int port);
+    auto bind(const std::string& ip, int port) -> bool;
 
-    bool write(std::string const& host, int port, Span<std::uint8_t> buffer);
-    bool write(std::string const& host, int port, DatagramSocket::Buffer const& buffer);
-    bool write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes);
+    static auto write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool;
+    static auto write(std::string const& host, int port, DatagramSocket::Buffer const& buffer) -> bool;
+    static auto write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes) -> bool;
 
     void listen();
 
     void shutdown();
 
-    void setMessageCallback(std::function<void(DatagramSocket::Buffer const&, size_t)> callback)
+    void setMessageCallback(const std::function<void(DatagramSocket::Buffer const&, size_t)>& callback)
     {
         messageCallback_ = callback;
     }
 
 private:
     std::atomic<bool> isRunning_ {false};
-    unsigned long long socketDescriptor_ {};
+    int socketDescriptor_ {};
     DatagramSocket::Buffer buffer_ {};
     std::thread listenerThread_;
     std::function<void(DatagramSocket::Buffer, size_t)> messageCallback_ = nullptr;

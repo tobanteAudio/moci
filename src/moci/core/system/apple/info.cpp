@@ -1,4 +1,4 @@
-#include "moci/system/apple/info.hpp"
+#include "moci/core/system/apple/info.hpp"
 
 #if defined(MOCI_MAC)
 

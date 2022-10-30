@@ -1,4 +1,4 @@
-#include "moci/network/datagram/unix/datagram.hpp"
+#include "moci/core/network/unix/datagram.hpp"
 
 #if defined(MOCI_LINUX) || defined(MOCI_MAC)
 

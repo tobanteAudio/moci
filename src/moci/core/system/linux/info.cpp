@@ -1,4 +1,4 @@
-#include "moci/system/linux/info.hpp"
+#include "moci/core/system/linux/info.hpp"
 
 #if defined(MOCI_LINUX)
 

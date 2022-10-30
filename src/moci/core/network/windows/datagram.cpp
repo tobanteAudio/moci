@@ -1,4 +1,4 @@
-#include "moci/network/datagram/windows/datagram.hpp"
+#include "moci/core/network/windows/datagram.hpp"
 
 #if defined(MOCI_WINDOWS)
 

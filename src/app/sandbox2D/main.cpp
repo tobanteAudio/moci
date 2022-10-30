@@ -1,5 +1,5 @@
 #include <moci/application/application.hpp>
-#include <moci/network/datagram/datagram.hpp>
+#include <moci/core/network/datagram.hpp>
 #include <moci/widgets/component/button.hpp>
 #include <moci/widgets/component/label.hpp>
 #include <moci/widgets/component/slider.hpp>

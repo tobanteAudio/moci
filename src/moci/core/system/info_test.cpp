@@ -4,7 +4,7 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci/system/info.hpp"
+#include "moci/core/system/info.hpp"
 
 #include "moci/core/preprocessor.hpp"
 

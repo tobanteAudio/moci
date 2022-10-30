@@ -5,7 +5,7 @@
 #include <catch2/catch_approx.hpp>
 #include <catch2/catch_template_test_macros.hpp>
 
-#include "moci/math/geometry/rectangle.hpp"
+#include "moci/core/geometry/rectangle.hpp"
 
 TEST_CASE("math/geometry: RectangleConstructionEmpty", "[geometry]")
 {

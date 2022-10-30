@@ -22,8 +22,8 @@ add_library(moci_graphics STATIC ${moci_graphics_sources})
 add_library(Moci::Graphics ALIAS moci_graphics)
 target_link_libraries(moci_graphics
     PUBLIC
-        Moci::Math
         Freetype::Freetype
+        Moci::Core
         Moci::StbImage
         Moci::StbImageWrite
         Moci::StbImageResize

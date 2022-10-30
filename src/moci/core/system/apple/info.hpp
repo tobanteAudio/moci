@@ -1,16 +1,12 @@
 #pragma once
 #include "moci/core/preprocessor.hpp"
 
-#if defined(MOCI_WINDOWS)
+#if defined(MOCI_MAC)
 
-#include "moci/system/info.hpp"
-
-#include <string>
-#include <unordered_map>
+#include "moci/core/system/info.hpp"
 
 namespace moci
 {
-
 class SystemInfo::Pimpl
 {
 public:
