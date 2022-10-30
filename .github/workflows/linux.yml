@@ -7,39 +7,12 @@ on:
     branches: [main]
 
 jobs:
-  gcc:
-    name: GCC
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-
-      - name: Install build dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y ninja-build cmake mesa-utils freeglut3-dev
-
-      - name: Install conan
-        run: |
-          pip3 install conan
-          conan config init
-          conan profile update settings.compiler.libcxx=libstdc++11 default
-          conan profile update conf.tools.system.package_manager:mode=install default
-          conan profile update conf.tools.system.package_manager:sudo=True default
-
-      - name: Configure - Release
-        run: cmake -S. -Bbuild -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_UNITY_BUILD=ON
-
-      - name: Build - Release
-        run: cmake --build build --config Release
-
-      - name: Test - Release
-        run: ctest --test-dir build -C Release --output-on-failure
-
-  clang-14:
-    name: Clang-14
+  build:
+    strategy:
+      matrix:
+        compiler: ["gcc", "clang"]
+      fail-fast: false
+    name: ${{ matrix.compiler }}
     runs-on: ubuntu-22.04
     steps:
       - name: Check out code
@@ -53,6 +26,7 @@ jobs:
           sudo apt install -y ninja-build cmake mesa-utils freeglut3-dev
 
       - name: Install LLVM
+        if: matrix.compiler == 'clang'
         run: |
           wget https://apt.llvm.org/llvm.sh
           chmod +x llvm.sh
@@ -66,11 +40,60 @@ jobs:
           conan profile update conf.tools.system.package_manager:mode=install default
           conan profile update conf.tools.system.package_manager:sudo=True default
 
-      - name: Configure - Release
-        run: CC="clang-14" CXX="clang++-14" cmake -S. -Bbuild -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_UNITY_BUILD=ON
+      - name: Configure (modern) - Release
+        if: matrix.compiler == 'gcc'
+        run: >
+          cmake -S.
+          -B cmake-build-modern
+          -G Ninja
+          -D CMAKE_BUILD_TYPE=Release
+          -D CMAKE_UNITY_BUILD=ON
+          -D MOCI_API_OPENGL_MODERN=ON
+          -D MOCI_API_OPENGL_LEGACY=OFF
 
-      - name: Build - Release
-        run: cmake --build build --config Release
+      - name: Configure (modern) - Release
+        if: matrix.compiler == 'clang'
+        run: >
+          CC="clang-14" CXX="clang++-14"
+          cmake -S.
+          -B cmake-build-modern
+          -G Ninja
+          -D CMAKE_BUILD_TYPE=Release
+          -D CMAKE_UNITY_BUILD=ON
+          -D MOCI_API_OPENGL_MODERN=ON
+          -D MOCI_API_OPENGL_LEGACY=OFF
 
-      - name: Test - Release
-        run: ctest --test-dir build -C Release --output-on-failure
+      - name: Build (modern) - Release
+        run: cmake --build cmake-build-modern --config Release
+
+      - name: Test (modern) - Release
+        run: ctest --test-dir cmake-build-modern -C Release --output-on-failure
+
+      - name: Configure (legacy) - Release
+        if: matrix.compiler == 'gcc'
+        run: >
+          cmake -S.
+          -B cmake-build-legacy
+          -G Ninja
+          -D CMAKE_BUILD_TYPE=Release
+          -D CMAKE_UNITY_BUILD=ON
+          -D MOCI_API_OPENGL_MODERN=OFF
+          -D MOCI_API_OPENGL_LEGACY=ON
+
+      - name: Configure (legacy) - Release
+        if: matrix.compiler == 'clang'
+        run: >
+          CC="clang-14" CXX="clang++-14"
+          cmake -S.
+          -B cmake-build-legacy
+          -G Ninja
+          -D CMAKE_BUILD_TYPE=Release
+          -D CMAKE_UNITY_BUILD=ON
+          -D MOCI_API_OPENGL_MODERN=OFF
+          -D MOCI_API_OPENGL_LEGACY=ON
+
+      - name: Build (legacy) - Release
+        run: cmake --build cmake-build-legacy --config Release
+
+      - name: Test (legacy) - Release
+        run: ctest --test-dir cmake-build-legacy -C Release --output-on-failure

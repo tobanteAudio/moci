@@ -29,18 +29,34 @@ jobs:
         with:
           arch: x64
 
-      - name: Configure - Release
+      - name: Configure OpenGL (modern) - Release
         run: >
           cmake -S.
-          -B build
+          -B cmake-build-modern
           -G "Ninja"
           -D CMAKE_BUILD_TYPE=Release
           -D CMAKE_UNITY_BUILD=ON
           -D MOCI_API_OPENGL_MODERN=ON
           -D MOCI_API_OPENGL_LEGACY=OFF
 
-      - name: Build - Release
-        run: cmake --build build --config Release
+      - name: Build OpenGL (modern) - Release
+        run: cmake --build cmake-build-modern --config Release
 
-      - name: Test - Release
-        run: ctest --test-dir build -C Release --output-on-failure
+      - name: Test OpenGL (modern) - Release
+        run: ctest --test-dir cmake-build-modern -C Release --output-on-failure
+
+      - name: Configure OpenGL (legacy) - Release
+        run: >
+          cmake -S.
+          -B cmake-build-legacy
+          -G "Ninja"
+          -D CMAKE_BUILD_TYPE=Release
+          -D CMAKE_UNITY_BUILD=ON
+          -D MOCI_API_OPENGL_MODERN=OFF
+          -D MOCI_API_OPENGL_LEGACY=ON
+
+      - name: Build OpenGL (legacy) - Release
+        run: cmake --build cmake-build-legacy --config Release
+
+      - name: Test OpenGL (legacy) - Release
+        run: ctest --test-dir cmake-build-legacy -C Release --output-on-failure
