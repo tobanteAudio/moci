@@ -13,16 +13,16 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size, bool dyna
 {
     MOCI_PROFILE_FUNCTION();
 
-    glGenBuffers(1, &m_RendererID);
-    glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
+    glGenBuffers(1, &_rendererID);
+    glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
 
     if (dynamic) { glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW); }
     else { glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW); }
 }
 
-OpenGLVertexBuffer::~OpenGLVertexBuffer() { glDeleteBuffers(1, &m_RendererID); }
+OpenGLVertexBuffer::~OpenGLVertexBuffer() { glDeleteBuffers(1, &_rendererID); }
 
-void OpenGLVertexBuffer::bind() const { glBindBuffer(GL_ARRAY_BUFFER, m_RendererID); }
+void OpenGLVertexBuffer::bind() const { glBindBuffer(GL_ARRAY_BUFFER, _rendererID); }
 
 void OpenGLVertexBuffer::unbind() const { glBindBuffer(GL_ARRAY_BUFFER, 0); }
 
@@ -35,23 +35,23 @@ auto OpenGLVertexBuffer::uploadData(std::uint32_t offset, std::uint32_t size, co
 // IndexBuffer //////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-OpenGLIndexBuffer::OpenGLIndexBuffer(IndexBufferSpecs specs) : specs_(specs)
+OpenGLIndexBuffer::OpenGLIndexBuffer(IndexBufferSpecs specs) : _specs(specs)
 {
     MOCI_PROFILE_FUNCTION();
 
-    glGenBuffers(1, &m_RendererID);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
+    glGenBuffers(1, &_rendererID);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _rendererID);
 
-    auto const size = specs_.count * sizeof(uint32_t);
-    if (specs_.isDynamic) { glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW); }
-    else { glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, specs_.indices.data(), GL_STATIC_DRAW); }
+    auto const size = _specs.count * sizeof(uint32_t);
+    if (_specs.isDynamic) { glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW); }
+    else { glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, _specs.indices.data(), GL_STATIC_DRAW); }
 
     unbind();
 }
 
-OpenGLIndexBuffer::~OpenGLIndexBuffer() { glDeleteBuffers(1, &m_RendererID); }
+OpenGLIndexBuffer::~OpenGLIndexBuffer() { glDeleteBuffers(1, &_rendererID); }
 
-void OpenGLIndexBuffer::bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID); }
+void OpenGLIndexBuffer::bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _rendererID); }
 
 void OpenGLIndexBuffer::unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 

@@ -29,16 +29,16 @@ TEST_CASE("widget: LabelSetTextColor", "[ui]")
     moci::Label label {"", {}};
 
     auto c1 = label.getTextColor();
-    REQUIRE(c1.getRed() == 0.0F);
-    REQUIRE(c1.getGreen() == 0.0F);
-    REQUIRE(c1.getBlue() == 0.0F);
-    REQUIRE(c1.getAlpha() == 0.0F);
+    REQUIRE(c1.red() == 0.0F);
+    REQUIRE(c1.green() == 0.0F);
+    REQUIRE(c1.blue() == 0.0F);
+    REQUIRE(c1.alpha() == 0.0F);
 
     label.setTextColor(moci::Colors::black);
 
     auto c2 = label.getTextColor();
-    REQUIRE(c2.getRed() == 0.0F);
-    REQUIRE(c2.getGreen() == 0.0F);
-    REQUIRE(c2.getBlue() == 0.0F);
-    REQUIRE(c2.getAlpha() == 1.0F);
+    REQUIRE(c2.red() == 0.0F);
+    REQUIRE(c2.green() == 0.0F);
+    REQUIRE(c2.blue() == 0.0F);
+    REQUIRE(c2.alpha() == 1.0F);
 }

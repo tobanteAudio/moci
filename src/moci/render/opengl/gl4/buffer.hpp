@@ -16,13 +16,13 @@ public:
     void bind() const override;
     void unbind() const override;
 
-    [[nodiscard]] auto getLayout() const -> const BufferLayout& override { return m_Layout; }
-    void setLayout(const BufferLayout& layout) override { m_Layout = layout; }
+    [[nodiscard]] auto getLayout() const -> const BufferLayout& override { return _layout; }
+    void setLayout(const BufferLayout& layout) override { _layout = layout; }
     void uploadData(std::uint32_t offset, std::uint32_t size, const void* data) const override;
 
 private:
-    uint32_t m_RendererID {};
-    BufferLayout m_Layout;
+    uint32_t _rendererID {};
+    BufferLayout _layout;
 };
 
 class OpenGLIndexBuffer : public IndexBuffer
@@ -34,12 +34,12 @@ public:
     void bind() const override;
     void unbind() const override;
 
-    [[nodiscard]] auto getCount() const -> uint32_t override { return specs_.count; }
+    [[nodiscard]] auto getCount() const -> uint32_t override { return _specs.count; }
     void uploadData(std::uint32_t offset, Span<std::uint32_t> indices) const override;
 
 private:
-    IndexBufferSpecs specs_;
-    std::uint32_t m_RendererID {};
+    IndexBufferSpecs _specs;
+    std::uint32_t _rendererID {};
 };
 
 }  // namespace moci

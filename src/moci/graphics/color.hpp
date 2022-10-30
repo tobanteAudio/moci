@@ -2,29 +2,31 @@
 
 #include <glm/glm.hpp>
 
+#include <array>
+
 namespace moci
 {
 class Color
 {
 public:
-    constexpr Color() noexcept : _data({0.0F, 0.0F, 0.0F, 0.0F}) { }
-    constexpr Color(float r, float g, float b) noexcept : _data({r, g, b, 1.0F}) { }
-    constexpr Color(float r, float g, float b, float alpha) noexcept : _data({r, g, b, alpha}) { }
+    constexpr Color() noexcept = default;
+    constexpr Color(float r, float g, float b) noexcept : _data {r, g, b, 1.0F} { }
+    constexpr Color(float r, float g, float b, float alpha) noexcept : _data {r, g, b, alpha} { }
 
-    [[nodiscard]] constexpr auto getData() const noexcept -> glm::vec4 { return _data; }
+    [[nodiscard]] constexpr auto red() const noexcept -> float { return _data[0]; }
+    [[nodiscard]] constexpr auto green() const noexcept -> float { return _data[1]; }
+    [[nodiscard]] constexpr auto blue() const noexcept -> float { return _data[2]; }
+    [[nodiscard]] constexpr auto alpha() const noexcept -> float { return _data[3]; }
 
-    [[nodiscard]] constexpr auto getRed() const noexcept -> float { return _data.r; }
-    [[nodiscard]] constexpr auto getGreen() const noexcept -> float { return _data.g; }
-    [[nodiscard]] constexpr auto getBlue() const noexcept -> float { return _data.b; }
-    [[nodiscard]] constexpr auto getAlpha() const noexcept -> float { return _data.a; }
+    auto red(float r) noexcept -> void { _data[0] = r; }
+    auto green(float g) noexcept -> void { _data[1] = g; }
+    auto blue(float b) noexcept -> void { _data[2] = b; }
+    auto alpha(float a) noexcept -> void { _data[3] = a; }
 
-    auto setRed(float r) noexcept -> void { _data.r = r; }
-    auto setGreen(float g) noexcept -> void { _data.g = g; }
-    auto setBlue(float b) noexcept -> void { _data.b = b; }
-    auto setAlpha(float a) noexcept -> void { _data.a = a; }
+    explicit constexpr operator glm::vec4() const noexcept { return {_data[0], _data[1], _data[2], _data[3]}; }
 
 private:
-    glm::vec4 _data {};
+    std::array<float, 4> _data {0.0F, 0.0F, 0.0F, 0.0F};
 };
 
 class Colors

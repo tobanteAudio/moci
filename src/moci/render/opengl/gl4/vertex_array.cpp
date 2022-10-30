@@ -34,12 +34,12 @@ OpenGLVertexArray::OpenGLVertexArray()
 {
     MOCI_PROFILE_FUNCTION();
 
-    glCreateVertexArrays(1, &m_RendererID);
+    glCreateVertexArrays(1, &_rendererID);
 }
 
-OpenGLVertexArray::~OpenGLVertexArray() { glDeleteVertexArrays(1, &m_RendererID); }
+OpenGLVertexArray::~OpenGLVertexArray() { glDeleteVertexArrays(1, &_rendererID); }
 
-void OpenGLVertexArray::bind() const { glBindVertexArray(m_RendererID); }
+void OpenGLVertexArray::bind() const { glBindVertexArray(_rendererID); }
 
 void OpenGLVertexArray::unbind() const { glBindVertexArray(0); }
 
@@ -48,30 +48,30 @@ void OpenGLVertexArray::addVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 
     MOCI_CORE_ASSERT(vertexBuffer->getLayout().getElements().size(), "Vertex Buffer has no layout!");
 
-    glBindVertexArray(m_RendererID);
+    glBindVertexArray(_rendererID);
     vertexBuffer->bind();
 
     const auto& layout = vertexBuffer->getLayout();
     for (const auto& element : layout)
     {
-        glEnableVertexAttribArray(m_VertexBufferIndex);
-        glVertexAttribPointer(m_VertexBufferIndex, element.getComponentCount(),
+        glEnableVertexAttribArray(_vertexBufferIndex);
+        glVertexAttribPointer(_vertexBufferIndex, element.getComponentCount(),
                               ShaderDataTypeToOpenGLBaseType(element.Type), element.Normalized ? GL_TRUE : GL_FALSE,
                               layout.getStride(), (const void*)element.Offset);
-        m_VertexBufferIndex++;
+        _vertexBufferIndex++;
     }
 
-    m_VertexBuffer = vertexBuffer;
-    // m_VertexBuffers.push_back(vertexBuffer);
+    _vertexBuffer = vertexBuffer;
+    // _vertexBuffers.push_back(vertexBuffer);
 }
 
 void OpenGLVertexArray::setIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
 {
 
-    glBindVertexArray(m_RendererID);
+    glBindVertexArray(_rendererID);
     indexBuffer->bind();
 
-    m_IndexBuffer = indexBuffer;
+    _indexBuffer = indexBuffer;
 }
 
 }  // namespace moci

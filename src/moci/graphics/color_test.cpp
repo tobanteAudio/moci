@@ -9,36 +9,36 @@
 TEST_CASE("graphics: ColorDefaultConstructor", "[graphics]")
 {
     moci::Color color {};
-    REQUIRE(color.getRed() == 0.0F);
-    REQUIRE(color.getGreen() == 0.0F);
-    REQUIRE(color.getBlue() == 0.0F);
-    REQUIRE(color.getAlpha() == 0.0F);
+    REQUIRE(color.red() == 0.0F);
+    REQUIRE(color.green() == 0.0F);
+    REQUIRE(color.blue() == 0.0F);
+    REQUIRE(color.alpha() == 0.0F);
 }
 
 TEST_CASE("graphics: ColorRGBConstructor", "[graphics]")
 {
     moci::Color color {1.0F, 1.0F, 1.0F};
 
-    REQUIRE(color.getRed() == 1.0F);
-    REQUIRE(color.getGreen() == 1.0F);
-    REQUIRE(color.getBlue() == 1.0F);
-    REQUIRE(color.getAlpha() == 1.0F);
+    REQUIRE(color.red() == 1.0F);
+    REQUIRE(color.green() == 1.0F);
+    REQUIRE(color.blue() == 1.0F);
+    REQUIRE(color.alpha() == 1.0F);
 }
 
 TEST_CASE("graphics: ColorRGBAConstructor", "[graphics]")
 {
     moci::Color color {1.0F, 1.0F, 1.0F, 0.5F};
 
-    REQUIRE(color.getRed() == 1.0F);
-    REQUIRE(color.getGreen() == 1.0F);
-    REQUIRE(color.getBlue() == 1.0F);
-    REQUIRE(color.getAlpha() == 0.5F);
+    REQUIRE(color.red() == 1.0F);
+    REQUIRE(color.green() == 1.0F);
+    REQUIRE(color.blue() == 1.0F);
+    REQUIRE(color.alpha() == 0.5F);
 }
 
 TEST_CASE("graphics: ColorGetData", "[graphics]")
 {
     constexpr moci::Color color {};
-    auto const data = color.getData();
+    auto const data = static_cast<glm::vec4>(color);
 
     REQUIRE(data.r == 0.0F);
     REQUIRE(data.g == 0.0F);
@@ -49,13 +49,13 @@ TEST_CASE("graphics: ColorGetData", "[graphics]")
 TEST_CASE("graphics: ColorSetRGBA", "[graphics]")
 {
     moci::Color color {};
-    color.setRed(1.0F);
-    color.setGreen(1.0F);
-    color.setBlue(1.0F);
-    color.setAlpha(1.0F);
+    color.red(1.0F);
+    color.green(1.0F);
+    color.blue(1.0F);
+    color.alpha(1.0F);
 
-    REQUIRE(color.getRed() == 1.0F);
-    REQUIRE(color.getGreen() == 1.0F);
-    REQUIRE(color.getBlue() == 1.0F);
-    REQUIRE(color.getAlpha() == 1.0F);
+    REQUIRE(color.red() == 1.0F);
+    REQUIRE(color.green() == 1.0F);
+    REQUIRE(color.blue() == 1.0F);
+    REQUIRE(color.alpha() == 1.0F);
 }

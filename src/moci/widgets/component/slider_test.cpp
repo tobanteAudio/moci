@@ -27,18 +27,18 @@ TEST_CASE("widget: SliderSetColor", "[ui]")
     moci::Slider slider {{}};
 
     auto c1 = slider.getColor();
-    REQUIRE(c1.getRed() == 0.0F);
-    REQUIRE(c1.getGreen() == 0.0F);
-    REQUIRE(c1.getBlue() == 0.0F);
-    REQUIRE(c1.getAlpha() == 0.0F);
+    REQUIRE(c1.red() == 0.0F);
+    REQUIRE(c1.green() == 0.0F);
+    REQUIRE(c1.blue() == 0.0F);
+    REQUIRE(c1.alpha() == 0.0F);
 
     slider.setColor(moci::Colors::black);
 
     auto c2 = slider.getColor();
-    REQUIRE(c2.getRed() == 0.0F);
-    REQUIRE(c2.getGreen() == 0.0F);
-    REQUIRE(c2.getBlue() == 0.0F);
-    REQUIRE(c2.getAlpha() == 1.0F);
+    REQUIRE(c2.red() == 0.0F);
+    REQUIRE(c2.green() == 0.0F);
+    REQUIRE(c2.blue() == 0.0F);
+    REQUIRE(c2.alpha() == 1.0F);
 }
 
 TEST_CASE("widget: SliderCallbackValueChanged", "[ui]")

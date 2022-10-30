@@ -39,11 +39,11 @@ OpenGLShader::OpenGLShader(std::string const& filepath)
     lastSlash      = lastSlash == std::string::npos ? 0 : lastSlash + 1;
     auto lastDot   = filepath.rfind('.');
     auto count     = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
-    m_Name         = filepath.substr(lastSlash, count);
+    _name          = filepath.substr(lastSlash, count);
 }
 
 OpenGLShader::OpenGLShader(std::string name, std::string const& vertexSrc, std::string const& fragmentSrc)
-    : m_Name(std::move(name))
+    : _name(std::move(name))
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -57,7 +57,7 @@ OpenGLShader::~OpenGLShader()
 {
     MOCI_PROFILE_FUNCTION();
 
-    glDeleteProgram(m_RendererID);
+    glDeleteProgram(_rendererID);
 }
 
 auto OpenGLShader::ReadFile(std::string const& filepath) -> std::string
@@ -132,7 +132,7 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
         glShaderIDs[glShaderIDIndex++] = shader;
     }
 
-    m_RendererID = program;
+    _rendererID = program;
 
     // Link our program
     glLinkProgram(program);
@@ -169,7 +169,7 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
 void OpenGLShader::bind() const
 {
     MOCI_PROFILE_FUNCTION();
-    glUseProgram(m_RendererID);
+    glUseProgram(_rendererID);
 }
 
 void OpenGLShader::unbind() const
@@ -189,7 +189,7 @@ void OpenGLShader::setMat4(std::string const& name, const glm::mat4& value) { up
 
 auto OpenGLShader::getLocation(std::string const& name) const -> std::int32_t
 {
-    return glGetUniformLocation(m_RendererID, name.c_str());
+    return glGetUniformLocation(_rendererID, name.c_str());
 }
 
 void OpenGLShader::uploadUniformInt(std::string const& name, int value) { glUniform1i(getLocation(name), value); }

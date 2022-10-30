@@ -9,7 +9,7 @@
 namespace moci
 {
 
-OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : m_WindowHandle(windowHandle)
+OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : _windowHandle(windowHandle)
 {
     MOCI_CORE_ASSERT(windowHandle, "Window handle is null!")
 }
@@ -18,7 +18,7 @@ void OpenGLContext::init()
 {
     MOCI_PROFILE_FUNCTION();
 
-    glfwMakeContextCurrent(m_WindowHandle);
+    glfwMakeContextCurrent(_windowHandle);
     // Initialize OpenGL loader
     if (auto err = glewInit() != GLEW_OK; err) { MOCI_CORE_ASSERT(err, "Failed to initialize glew!"); }
 
@@ -40,7 +40,7 @@ void OpenGLContext::swapBuffers()
 {
     MOCI_PROFILE_FUNCTION();
 
-    glfwSwapBuffers(m_WindowHandle);
+    glfwSwapBuffers(_windowHandle);
 }
 
 }  // namespace moci

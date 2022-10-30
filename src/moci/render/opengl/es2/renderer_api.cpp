@@ -71,10 +71,10 @@ void OpenGLESRendererAPI::setViewport(Rectangle<uint32_t> viewport)
 
 void OpenGLESRendererAPI::setClearColor(Color color)
 {
-    auto const red   = color.getRed();
-    auto const green = color.getGreen();
-    auto const blue  = color.getBlue();
-    auto const alpha = color.getAlpha();
+    auto const red   = color.red();
+    auto const green = color.green();
+    auto const blue  = color.blue();
+    auto const alpha = color.alpha();
     glClearColor(red, green, blue, alpha);
 }
 

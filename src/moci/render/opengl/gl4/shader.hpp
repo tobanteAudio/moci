@@ -22,7 +22,7 @@ public:
     OpenGLShader(std::string name, std::string const& vertexSrc, std::string const& fragmentSrc);
     ~OpenGLShader() override;
 
-    [[nodiscard]] auto getName() const -> std::string const& override { return m_Name; }
+    [[nodiscard]] auto getName() const -> std::string const& override { return _name; }
 
     void bind() const override;
     void unbind() const override;
@@ -52,8 +52,8 @@ private:
     static auto PreProcess(std::string const& source) -> std::unordered_map<GLenum, std::string>;
     void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 
-    uint32_t m_RendererID {};
-    std::string m_Name;
+    uint32_t _rendererID {};
+    std::string _name;
 };
 
 }  // namespace moci
