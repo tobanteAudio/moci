@@ -18,7 +18,6 @@ set(moci_render_sources
 
 add_library(moci_render STATIC ${moci_render_sources})
 add_library(Moci::RenderApiBase ALIAS moci_render)
-set_target_properties(moci_render PROPERTIES UNITY_BUILD ON)
 
 target_link_libraries(moci_render
     PUBLIC
@@ -40,7 +39,6 @@ endif()
 
 set (moci_render_test_src main_test.cpp buffer_test.cpp)
 add_executable(moci_render_tests ${moci_render_test_src})
-set_target_properties(moci_render_tests PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_render_tests
     PRIVATE
         Moci::RenderApiBase
@@ -76,7 +74,7 @@ set(moci_render_api_sources
 
 add_library(moci_render_api STATIC ${moci_render_api_sources})
 add_library(Moci::RenderApi ALIAS moci_render_api)
-# set_target_properties(moci_render_api PROPERTIES UNITY_BUILD ON)
+set_source_files_properties(${CMAKE_BINARY_DIR}/bindings/imgui_impl_glfw.cpp ${CMAKE_BINARY_DIR}/bindings/imgui_impl_opengl3.cpp PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 target_include_directories(moci_render_api PUBLIC ${CMAKE_BINARY_DIR})
 target_link_libraries(moci_render_api
     PUBLIC

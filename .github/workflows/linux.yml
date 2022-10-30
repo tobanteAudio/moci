@@ -30,7 +30,7 @@ jobs:
           conan profile update conf.tools.system.package_manager:sudo=True default
 
       - name: Configure - Release
-        run: cmake -S. -Bbuild -G Ninja -D CMAKE_BUILD_TYPE=Release
+        run: cmake -S. -Bbuild -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_UNITY_BUILD=ON
 
       - name: Build - Release
         run: cmake --build build --config Release
@@ -67,7 +67,7 @@ jobs:
           conan profile update conf.tools.system.package_manager:sudo=True default
 
       - name: Configure - Release
-        run: CC="clang-14" CXX="clang++-14" cmake -S. -Bbuild -G Ninja -D CMAKE_BUILD_TYPE=Release
+        run: CC="clang-14" CXX="clang++-14" cmake -S. -Bbuild -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_UNITY_BUILD=ON
 
       - name: Build - Release
         run: cmake --build build --config Release

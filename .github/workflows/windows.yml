@@ -39,7 +39,7 @@ jobs:
           -D MOCI_API_OPENGL_LEGACY=OFF
 
       - name: Build - Release
-        run: cmake --build build --config Release
+        run: cmake --build build --config Release -D CMAKE_UNITY_BUILD=ON
 
       - name: Test - Release
         run: ctest --test-dir build -C Release --output-on-failure

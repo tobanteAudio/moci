@@ -15,7 +15,6 @@ set(moci_application_sources
 
 add_library(moci_application STATIC ${moci_application_sources})
 add_library(Moci::Application ALIAS moci_application)
-set_target_properties(moci_application PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_application
     PUBLIC
         Moci::RenderApi
