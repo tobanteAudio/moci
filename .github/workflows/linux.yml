@@ -35,6 +35,9 @@ jobs:
       - name: Build - Release
         run: cmake --build build --config Release
 
+      - name: Test - Release
+        run: ctest --test-dir build -C Release --output-on-failure
+
   clang-14:
     name: Clang-14
     runs-on: ubuntu-22.04
@@ -68,3 +71,6 @@ jobs:
 
       - name: Build - Release
         run: cmake --build build --config Release
+
+      - name: Test - Release
+        run: ctest --test-dir build -C Release --output-on-failure

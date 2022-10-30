@@ -28,3 +28,6 @@ jobs:
         run: |
           cmake -S. -Bbuild -G Ninja -D CMAKE_BUILD_TYPE=Release
           cmake --build build --config Release
+
+      - name: Test - Release
+        run: ctest --test-dir build -C Release --output-on-failure
