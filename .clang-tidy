@@ -15,11 +15,15 @@ Checks: >
 
   cppcoreguidelines-*,
   -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-macro-usage,
   -cppcoreguidelines-special-member-functions,
   -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
 
   hicpp-*,
   -hicpp-special-member-functions,
+  -hicpp-no-array-decay,
+  -hicpp-signed-bitwise,
 
   misc-*,
 
