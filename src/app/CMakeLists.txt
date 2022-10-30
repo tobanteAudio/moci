@@ -12,3 +12,5 @@ if(MOCI_BUILD_PLAYGROUND)
     add_subdirectory(playground/cxx_stb_image)
     add_subdirectory(playground/freetype_atlas)
 endif(MOCI_BUILD_PLAYGROUND)
+
+add_subdirectory(playground/gl_extensions)
