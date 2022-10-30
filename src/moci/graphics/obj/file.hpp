@@ -1,11 +1,12 @@
 #pragma once
 
-#include <string>
+#include "moci/core/logging.hpp"
+#include "moci/core/span.hpp"
+#include "moci/core/vector.hpp"
 
 #include "glm/glm.hpp"
 
-#include "moci/core/logging.hpp"
-#include "moci/core/span.hpp"
+#include <string>
 
 namespace moci
 {

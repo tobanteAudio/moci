@@ -4,6 +4,7 @@
 
 #include "moci/core/logging.hpp"
 #include "moci/core/span.hpp"
+#include "moci/core/vector.hpp"
 
 namespace moci
 {

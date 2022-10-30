@@ -2,9 +2,10 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "moci/render/texture.hpp"
-
 #include "gl4.hpp"
+
+#include "moci/core/span.hpp"
+#include "moci/render/texture.hpp"
 
 namespace moci
 {
