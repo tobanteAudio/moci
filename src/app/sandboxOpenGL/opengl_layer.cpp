@@ -11,7 +11,7 @@ glm::vec2 imGuiToGlmVec(ImVec2 const& input) { return {input.x, input.y}; }
 }  // namespace
 void OpenGLLayer::onAttach()
 {
-    auto const path = fmt::format("assets/shader/basic_{}.glsl", ShaderSuffix);
+    auto const path = fmt::format("assets/shader/basic_{}.glsl", shaderSuffix);
     auto samplers   = std::array {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     _shader         = moci::RenderFactory::makeShader(path);
     _shader->bind();
@@ -19,9 +19,9 @@ void OpenGLLayer::onAttach()
 
     auto const verticesSize = static_cast<std::uint32_t>(assets::quadVertices.size() * sizeof(float));
     auto layout             = moci::BufferLayout {
-        {moci::ShaderDataType::Float3, "position"},      //
-        {moci::ShaderDataType::Float4, "color"},         //
-        {moci::ShaderDataType::Float2, "textureCoord"},  //
+                    {moci::ShaderDataType::Float3, "position"},      //
+                    {moci::ShaderDataType::Float4, "color"},         //
+                    {moci::ShaderDataType::Float2, "textureCoord"},  //
     };
     _vbo.reset(moci::RenderFactory::makeVertexBuffer(assets::quadVertices.data(), verticesSize));
     _vbo->setLayout(layout);
