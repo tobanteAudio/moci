@@ -3,12 +3,12 @@
 #if defined(MOCI_API_OPENGL_MODERN)
 #include "gl4.hpp"
 #include "moci/benchmark/profile.hpp"
-#include "moci_render_opengl_common/moci_render_opengl_common.hpp"
+#include "moci/render/opengl/common/shader_parser.hpp"
+
+#include <glm/gtc/type_ptr.hpp>
 
 #include <array>
 #include <fstream>
-
-#include <glm/gtc/type_ptr.hpp>
 #include <utility>
 
 namespace moci

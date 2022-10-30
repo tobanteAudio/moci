@@ -1,11 +1,8 @@
 project(moci_render_opengl_common)
 
 set(moci_render_opengl_common_sources
-    moci_render_opengl_common.hpp
-    moci_render_opengl_common.cpp
-
-    util/shader_parser.hpp
-    util/shader_parser.cpp
+    shader_parser.hpp
+    shader_parser.cpp
 
 )
 
@@ -22,7 +19,7 @@ target_link_libraries(moci_render_opengl_common_lib
 
 set (moci_render_opengl_common_test_src
     main_test.cpp
-    util/shader_parser_test.cpp
+    shader_parser_test.cpp
 )
 add_executable(moci_render_opengl_common_tests ${moci_render_opengl_common_test_src})
 set_target_properties(moci_render_opengl_common_tests PROPERTIES UNITY_BUILD ON)

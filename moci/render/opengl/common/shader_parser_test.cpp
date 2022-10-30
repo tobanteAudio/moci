@@ -6,7 +6,7 @@
 
 #include "shader_parser.hpp"
 
-TEST_CASE("moci_render_opengl_common: ShaderParserSplitSource", "[opengl][common]")
+TEST_CASE("render/opengl/common: ShaderParserSplitSource", "[opengl][common]")
 {
     SECTION("Empty source")
     {

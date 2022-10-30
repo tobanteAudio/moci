@@ -1,13 +1,12 @@
-#include "moci_render_opengles/es2/shader.hpp"
+#include "shader.hpp"
 
 #include "moci/core/strings.hpp"
+#include "moci/render/opengl/common/shader_parser.hpp"
 
-#include "moci_render_opengl_common/moci_render_opengl_common.hpp"
+#include <glm/gtc/type_ptr.hpp>
 
 #include <fstream>
 #include <sstream>
-
-#include <glm/gtc/type_ptr.hpp>
 #include <utility>
 
 namespace moci
