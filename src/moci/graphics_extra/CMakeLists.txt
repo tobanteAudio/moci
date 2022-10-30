@@ -17,7 +17,7 @@ set(moci_graphics_extra_sources
 
 add_library(moci_graphics_extra STATIC ${moci_graphics_extra_sources})
 add_library(Moci::GraphicsExtra ALIAS moci_graphics_extra)
-set_target_properties(moci_graphics_extra PROPERTIES UNITY_BUILD OFF)
+set_target_properties(moci_graphics_extra PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_graphics_extra
     PUBLIC
         Moci::Application
@@ -32,7 +32,7 @@ set (moci_graphics_extra_test_src
     mesh_test.cpp
 )
 add_executable(moci_graphics_extra_tests ${moci_graphics_extra_test_src})
-set_target_properties(moci_graphics_extra_tests PROPERTIES UNITY_BUILD OFF)
+set_target_properties(moci_graphics_extra_tests PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_graphics_extra_tests
     PRIVATE
         Moci::GraphicsExtra

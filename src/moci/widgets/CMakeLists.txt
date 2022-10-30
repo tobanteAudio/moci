@@ -19,7 +19,7 @@ set(moci_widget_sources
 
 add_library(moci_widget_lib STATIC ${moci_widget_sources})
 add_library(Moci::Widget ALIAS moci_widget_lib)
-set_target_properties(moci_widget_lib PROPERTIES UNITY_BUILD OFF)
+set_target_properties(moci_widget_lib PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_widget_lib
     PUBLIC
         Moci::GraphicsExtra
@@ -35,7 +35,7 @@ set (moci_widget_test_src
     component/slider_test.cpp
 )
 add_executable(moci_widget_tests ${moci_widget_test_src})
-set_target_properties(moci_widget_tests PROPERTIES UNITY_BUILD OFF)
+set_target_properties(moci_widget_tests PROPERTIES UNITY_BUILD ON)
 target_link_libraries(moci_widget_tests
     PRIVATE
         Moci::Widget
