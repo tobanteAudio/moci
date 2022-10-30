@@ -15,7 +15,7 @@ set(moci_render_sources
 
 add_library(moci_render STATIC ${moci_render_sources})
 add_library(Moci::RenderApiBase ALIAS moci_render)
-set_target_properties(moci_render PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_render PROPERTIES UNITY_BUILD OFF)
 
 target_link_libraries(moci_render
     PUBLIC
@@ -37,7 +37,7 @@ endif()
 
 set (moci_render_test_src main_test.cpp buffer_test.cpp)
 add_executable(moci_render_tests ${moci_render_test_src})
-set_target_properties(moci_render_tests PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_render_tests PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_render_tests
     PRIVATE
         Moci::RenderApiBase
@@ -69,7 +69,7 @@ set(moci_render_api_sources
 
 add_library(moci_render_api STATIC ${moci_render_api_sources})
 add_library(Moci::RenderApi ALIAS moci_render_api)
-# set_target_properties(moci_render_api PROPERTIES UNITY_BUILD ON)
+# set_target_properties(moci_render_api PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_render_api
     PUBLIC
         Moci::RenderOpenGL

@@ -18,7 +18,7 @@ target_sources(moci_core
         vector.hpp
 )
 
-set_target_properties(moci_core PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_core PROPERTIES UNITY_BUILD OFF)
 target_compile_definitions(moci_core PUBLIC NDEBUG=1)
 target_link_libraries(moci_core
     PUBLIC
@@ -39,7 +39,7 @@ set (moci_core_test_src
     strings_test.cpp
 )
 add_executable(moci_core_tests ${moci_core_test_src})
-set_target_properties(moci_core_tests PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_core_tests PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_core_tests
     PRIVATE
         Moci::Core

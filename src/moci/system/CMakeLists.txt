@@ -14,7 +14,7 @@ set(moci_system_sources
 
 add_library(moci_system_lib STATIC ${moci_system_sources})
 add_library(Moci::System ALIAS moci_system_lib)
-set_target_properties(moci_system_lib PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_system_lib PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_system_lib
     PUBLIC
         Moci::Core
@@ -30,7 +30,7 @@ set (moci_system_test_src
     info_test.cpp
 )
 add_executable(moci_system_tests ${moci_system_test_src})
-set_target_properties(moci_system_tests PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_system_tests PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_system_tests
     PRIVATE
         Moci::System

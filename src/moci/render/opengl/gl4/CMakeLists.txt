@@ -22,7 +22,7 @@ set(moci_render_opengl_sources
 
 add_library(moci_render_opengl STATIC ${moci_render_opengl_sources})
 add_library(Moci::RenderOpenGL ALIAS moci_render_opengl)
-set_target_properties(moci_render_opengl PROPERTIES UNITY_BUILD ON)
+set_target_properties(moci_render_opengl PROPERTIES UNITY_BUILD OFF)
 target_link_libraries(moci_render_opengl PUBLIC Moci::RenderOpenGLCommon)
 
 if (NOT ${MOCI_LINK_OPENGL_ES})
