@@ -2,7 +2,7 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 #include "gl4.hpp"
-#include "moci/benchmark/profile.hpp"
+#include "moci/core/benchmark/profile.hpp"
 #include "moci/render/opengl/common/shader_parser.hpp"
 
 #include <glm/gtc/type_ptr.hpp>

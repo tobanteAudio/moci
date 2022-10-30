@@ -1,6 +1,6 @@
 #include "application.hpp"
 
-#include "moci/benchmark/profile.hpp"
+#include "moci/core/benchmark/profile.hpp"
 #include "moci/core/logging.hpp"
 #include "moci/events/types/event.hpp"
 #include "moci/render/imgui/imgui_layer.hpp"

@@ -1,7 +1,7 @@
 #include "imgui_layer.hpp"
 
 #include "moci/application/application.hpp"
-#include "moci/benchmark/profile.hpp"
+#include "moci/core/benchmark/profile.hpp"
 #include "moci/core/logging.hpp"
 #include "moci/render/imgui/imgui.hpp"
 

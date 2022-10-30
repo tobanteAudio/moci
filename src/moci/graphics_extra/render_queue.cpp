@@ -1,6 +1,6 @@
 #include "render_queue.hpp"
 
-#include "moci/benchmark/profile.hpp"
+#include "moci/core/benchmark/profile.hpp"
 #include "moci/render/buffer.hpp"
 #include "moci/render/render_factory.hpp"
 #include "moci/render/shader.hpp"
