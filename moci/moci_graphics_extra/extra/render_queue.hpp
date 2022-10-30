@@ -5,7 +5,9 @@
 #include "moci/graphics/color.hpp"
 #include "moci/math/geometry/rectangle.hpp"
 #include "moci/render/api.hpp"
-#include "moci_render_api/moci_render_api.hpp"
+#include "moci/render/renderer.hpp"
+#include "moci/render/shader.hpp"
+#include "moci/render/texture.hpp"
 
 #include <glm/glm.hpp>
 

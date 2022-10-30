@@ -46,3 +46,36 @@ target_link_libraries(moci_render_tests
 )
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${moci_render_test_src})
 catch_discover_tests(moci_render_tests)
+
+add_subdirectory("opengl/common")
+add_subdirectory("opengl/es2")
+add_subdirectory("opengl/gl4")
+
+
+set(moci_render_api_sources
+    render_command.hpp
+    render_command.cpp
+    render_factory.cpp
+    render_factory.cpp
+    renderer_api.cpp
+    renderer.hpp
+    renderer.cpp
+
+    imgui/imgui_build.cpp
+    imgui/imgui_layer.hpp
+    imgui/imgui_layer.cpp
+
+)
+
+add_library(moci_render_api STATIC ${moci_render_api_sources})
+add_library(Moci::RenderApi ALIAS moci_render_api)
+# set_target_properties(moci_render_api PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_render_api
+    PUBLIC
+        Moci::RenderOpenGL
+        Moci::RenderOpenGLES
+        Moci::Events
+        Moci::ImGui
+    PRIVATE
+        Moci::CodeCoverage
+)

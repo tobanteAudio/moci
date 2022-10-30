@@ -1,13 +1,18 @@
 #include "render_queue.hpp"
 
-#include <array>
-
-#include <glm/gtc/matrix_transform.hpp>
+#include "moci/benchmark/profile.hpp"
+#include "moci/render/buffer.hpp"
+#include "moci/render/render_factory.hpp"
+#include "moci/render/shader.hpp"
+#include "moci/render/texture.hpp"
+#include "moci/render/vertex_array.hpp"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include "moci/benchmark/profile.hpp"
+#include <glm/gtc/matrix_transform.hpp>
+
+#include <array>
 
 namespace moci
 {

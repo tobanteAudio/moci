@@ -1,10 +1,9 @@
-#include "moci_render_api/imgui/imgui_layer.hpp"
-#include "moci_render_api/imgui/imgui.hpp"
+#include "imgui_layer.hpp"
 
 #include "moci/benchmark/profile.hpp"
 #include "moci/core/logging.hpp"
+#include "moci/render/imgui/imgui.hpp"
 #include "moci_application/moci_application.hpp"
-
 
 namespace moci
 {

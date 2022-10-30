@@ -4,7 +4,7 @@
 #include "moci/events/types/application_event.hpp"
 #include "moci/events/types/key_event.hpp"
 #include "moci/events/types/mouse_event.hpp"
-#include "moci_render_api/moci_render_api.hpp"
+#include "moci/render/renderer.hpp"
 
 #include "window.hpp"
 
