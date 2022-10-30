@@ -8,7 +8,7 @@
 
 #include "glm/gtc/matrix_transform.hpp"
 
-TEST_CASE("moci_graphics_extra: OrthographicCamera", "[render]")
+TEST_CASE("graphics_extra: OrthographicCamera", "[render]")
 {
     moci::OrthographicCamera camera {0.0F, 100.0F, 100.0F, 0.0F};
     REQUIRE(camera.GetPosition() == glm::vec3 {});

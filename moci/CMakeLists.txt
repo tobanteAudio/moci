@@ -14,7 +14,7 @@ add_subdirectory("events")
 add_subdirectory("graphics")
 add_subdirectory("render")
 add_subdirectory("application")
+add_subdirectory("graphics_extra")
 
-add_subdirectory(moci_graphics_extra)
 add_subdirectory(moci_widget)
 add_subdirectory(moci_header)

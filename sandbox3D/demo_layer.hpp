@@ -1,6 +1,12 @@
 #pragma once
 
 #include "moci/moci.hpp"
+#include <moci/events/types/application_event.hpp>
+#include <moci/events/types/key_event.hpp>
+#include <moci/events/types/mouse_event.hpp>
+#include <moci/graphics_extra/light.hpp>
+#include <moci/render/frame_buffer.hpp>
+#include <moci/render/render_factory.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include "glm/glm.hpp"

@@ -6,7 +6,7 @@
 
 #include "mesh.hpp"
 
-TEST_CASE("moci_graphics_extra: MeshLoadFromFile", "[graphics]")
+TEST_CASE("graphics_extra: MeshLoadFromFile", "[graphics]")
 {
     SECTION("Cube")
     {

@@ -1,22 +1,22 @@
 project(moci_graphics_extra)
 
 set(moci_graphics_extra_sources
-    extra/camera.hpp
-    extra/camera.cpp
-    extra/light.hpp
-    extra/light.cpp
-    extra/mesh.hpp
-    extra/mesh.cpp
-    extra/painter.hpp
-    extra/render_queue.hpp
-    extra/render_queue.cpp
+    camera.hpp
+    camera.cpp
+    light.hpp
+    light.cpp
+    mesh.hpp
+    mesh.cpp
+    painter.hpp
+    render_queue.hpp
+    render_queue.cpp
 
 )
 
-add_library(moci_graphics_extra_lib STATIC ${moci_graphics_extra_sources})
-add_library(Moci::GraphicsExtra ALIAS moci_graphics_extra_lib)
-set_target_properties(moci_graphics_extra_lib PROPERTIES UNITY_BUILD ON)
-target_link_libraries(moci_graphics_extra_lib
+add_library(moci_graphics_extra STATIC ${moci_graphics_extra_sources})
+add_library(Moci::GraphicsExtra ALIAS moci_graphics_extra)
+set_target_properties(moci_graphics_extra PROPERTIES UNITY_BUILD ON)
+target_link_libraries(moci_graphics_extra
     PUBLIC
         Moci::Application
         assimp::assimp
@@ -26,8 +26,8 @@ target_link_libraries(moci_graphics_extra_lib
 
 set (moci_graphics_extra_test_src
     main_test.cpp
-    extra/camera_test.cpp
-    extra/mesh_test.cpp
+    camera_test.cpp
+    mesh_test.cpp
 )
 add_executable(moci_graphics_extra_tests ${moci_graphics_extra_test_src})
 set_target_properties(moci_graphics_extra_tests PROPERTIES UNITY_BUILD ON)
