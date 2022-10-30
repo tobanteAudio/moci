@@ -101,7 +101,7 @@ else()
   find_package(Catch2 REQUIRED)
   include(Catch)
 
-  add_subdirectory(moci)
+  add_subdirectory("src")
 
   add_subdirectory(sandbox2D)
   add_subdirectory(sandbox3D)
