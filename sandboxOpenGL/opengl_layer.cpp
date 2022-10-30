@@ -2,6 +2,8 @@
 
 #include "assets.hpp"
 
+#include "imgui.h"
+
 namespace
 {
 glm::vec2 ImGuiToGlmVec(ImVec2 const& input) { return {input.x, input.y}; }

@@ -5,16 +5,16 @@
 #include <catch2/catch_all.hpp>
 #include <catch2/catch_approx.hpp>
 
-#include "moci_widget/component/slider.hpp"
-#include "moci_widget/style/style.hpp"
+#include "moci/widgets/component/slider.hpp"
+#include "moci/widgets/style/style.hpp"
 
-TEST_CASE("moci_widget: SliderConstruct", "[ui]")
+TEST_CASE("widget: SliderConstruct", "[ui]")
 {
     moci::Slider const slider {moci::Colors::Black};
     REQUIRE(slider.GetValue() == 0.0F);
 }
 
-TEST_CASE("moci_widget: SliderSetValue", "[ui]")
+TEST_CASE("widget: SliderSetValue", "[ui]")
 {
     moci::Slider slider {moci::Colors::Black};
     REQUIRE(slider.GetValue() == 0.0F);
@@ -22,7 +22,7 @@ TEST_CASE("moci_widget: SliderSetValue", "[ui]")
     REQUIRE(slider.GetValue() == 143.0F);
 }
 
-TEST_CASE("moci_widget: SliderSetColor", "[ui]")
+TEST_CASE("widget: SliderSetColor", "[ui]")
 {
     moci::Slider slider {{}};
 
@@ -41,7 +41,7 @@ TEST_CASE("moci_widget: SliderSetColor", "[ui]")
     REQUIRE(c2.GetAlpha() == 1.0F);
 }
 
-TEST_CASE("moci_widget: SliderCallbackValueChanged", "[ui]")
+TEST_CASE("widget: SliderCallbackValueChanged", "[ui]")
 {
     auto wasCalled         = false;
     auto callbacks         = moci::SliderCallbacks {};
@@ -58,7 +58,7 @@ TEST_CASE("moci_widget: SliderCallbackValueChanged", "[ui]")
     REQUIRE(wasCalled == true);
 }
 
-TEST_CASE("moci_widget: SliderCallbackValueChangedCallbackNotSet", "[ui]")
+TEST_CASE("widget: SliderCallbackValueChangedCallbackNotSet", "[ui]")
 {
     auto wasCalled = false;
     auto callbacks = moci::SliderCallbacks {};
@@ -69,7 +69,7 @@ TEST_CASE("moci_widget: SliderCallbackValueChangedCallbackNotSet", "[ui]")
     REQUIRE(wasCalled == false);
 }
 
-TEST_CASE("moci_widget: SliderMouseScrolled", "[ui]")
+TEST_CASE("widget: SliderMouseScrolled", "[ui]")
 {
     auto callbacks = moci::SliderCallbacks {};
     auto slider    = moci::Slider {moci::Colors::Black, callbacks};

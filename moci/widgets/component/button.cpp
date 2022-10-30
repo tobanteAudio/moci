@@ -2,7 +2,7 @@
 
 #include <utility>
 
-#include "moci_widget/style/style.hpp"
+#include "moci/widgets/style/style.hpp"
 
 namespace moci
 {

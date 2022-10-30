@@ -4,17 +4,17 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci_widget/component/button.hpp"
-#include "moci_widget/style/style.hpp"
+#include "moci/widgets/component/button.hpp"
+#include "moci/widgets/style/style.hpp"
 
-TEST_CASE("moci_widget: ButtonConstruct", "[ui]")
+TEST_CASE("widget: ButtonConstruct", "[ui]")
 {
     moci::Button const button {"test"};
     REQUIRE(button.GetText() == "test");
     REQUIRE(button.GetTextView() == "test");
 }
 
-TEST_CASE("moci_widget: ButtonSetText", "[ui]")
+TEST_CASE("widget: ButtonSetText", "[ui]")
 {
     moci::Button button {""};
     REQUIRE(button.GetText().empty());
@@ -24,7 +24,7 @@ TEST_CASE("moci_widget: ButtonSetText", "[ui]")
     REQUIRE(button.GetTextView() == "test143");
 }
 
-TEST_CASE("moci_widget: ButtonSetTextColor", "[ui]")
+TEST_CASE("widget: ButtonSetTextColor", "[ui]")
 {
     moci::Button button {""};
 
@@ -43,7 +43,7 @@ TEST_CASE("moci_widget: ButtonSetTextColor", "[ui]")
     REQUIRE(c2.GetAlpha() == 1.0f);
 }
 
-TEST_CASE("moci_widget: ButtonSetSpecs", "[ui]")
+TEST_CASE("widget: ButtonSetSpecs", "[ui]")
 {
     moci::Button button {""};
 
@@ -65,7 +65,7 @@ TEST_CASE("moci_widget: ButtonSetSpecs", "[ui]")
     }
 }
 
-TEST_CASE("moci_widget: ButtonSetState", "[ui]")
+TEST_CASE("widget: ButtonSetState", "[ui]")
 {
     moci::Button button {""};
     REQUIRE(button.GetState() == moci::ButtonState::Normal);
@@ -74,7 +74,7 @@ TEST_CASE("moci_widget: ButtonSetState", "[ui]")
     REQUIRE(button.GetState() == moci::ButtonState::Down);
 }
 
-TEST_CASE("moci_widget: ButtonCallbackStateChanged", "[ui]")
+TEST_CASE("widget: ButtonCallbackStateChanged", "[ui]")
 {
     auto wasCalled               = false;
     auto specs                   = moci::ButtonSpecs {};
@@ -91,7 +91,7 @@ TEST_CASE("moci_widget: ButtonCallbackStateChanged", "[ui]")
     REQUIRE(wasCalled == true);
 }
 
-TEST_CASE("moci_widget: ButtonCallbackStateChangedCallbackNotSet", "[ui]")
+TEST_CASE("widget: ButtonCallbackStateChangedCallbackNotSet", "[ui]")
 {
     auto wasCalled = false;
     auto specs     = moci::ButtonSpecs {};

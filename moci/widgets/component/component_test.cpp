@@ -4,10 +4,10 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci_widget/component/component.hpp"
-#include "moci_widget/style/style.hpp"
+#include "moci/widgets/component/component.hpp"
+#include "moci/widgets/style/style.hpp"
 
-TEST_CASE("moci_widget: ComponentDefaultConstruct", "[ui]")
+TEST_CASE("widget: ComponentDefaultConstruct", "[ui]")
 {
     moci::Component c {};
     REQUIRE(c.GetWidth() == 0);
@@ -17,7 +17,7 @@ TEST_CASE("moci_widget: ComponentDefaultConstruct", "[ui]")
     REQUIRE(c.GetChildren().empty());
 }
 
-TEST_CASE("moci_widget: ComponentIDConstruct", "[ui]")
+TEST_CASE("widget: ComponentIDConstruct", "[ui]")
 {
     moci::Component c {"test"};
     REQUIRE(c.GetWidth() == 0);
@@ -27,7 +27,7 @@ TEST_CASE("moci_widget: ComponentIDConstruct", "[ui]")
     REQUIRE(c.GetChildren().empty());
 }
 
-TEST_CASE("moci_widget: ComponentSetID", "[ui]")
+TEST_CASE("widget: ComponentSetID", "[ui]")
 {
     moci::Component c1 {};
     REQUIRE(c1.GetID().empty());
@@ -35,7 +35,7 @@ TEST_CASE("moci_widget: ComponentSetID", "[ui]")
     REQUIRE(c1.GetID() == "test");
 }
 
-TEST_CASE("moci_widget: ComponentSetParent", "[ui]")
+TEST_CASE("widget: ComponentSetParent", "[ui]")
 {
     moci::Component c1 {};
     moci::Component c2 {};
@@ -45,7 +45,7 @@ TEST_CASE("moci_widget: ComponentSetParent", "[ui]")
     REQUIRE(c1.GetParent() == &c2);
 }
 
-TEST_CASE("moci_widget: ComponentGetRootComponent", "[ui]")
+TEST_CASE("widget: ComponentGetRootComponent", "[ui]")
 {
     moci::Component c1 {};
     moci::Component c2 {};
@@ -55,7 +55,7 @@ TEST_CASE("moci_widget: ComponentGetRootComponent", "[ui]")
     REQUIRE(c3.GetRootComponent() == &c1);
 }
 
-TEST_CASE("moci_widget: ComponentAddChild", "[ui]")
+TEST_CASE("widget: ComponentAddChild", "[ui]")
 {
     moci::Component c1 {};
     moci::Component c2 {};
@@ -65,7 +65,7 @@ TEST_CASE("moci_widget: ComponentAddChild", "[ui]")
     REQUIRE(c2.GetParent() == &c1);
 }
 
-TEST_CASE("moci_widget: ComponentSetSize", "[ui]")
+TEST_CASE("widget: ComponentSetSize", "[ui]")
 {
     moci::Component c {};
     c.SetSize(100, 50);
@@ -73,7 +73,7 @@ TEST_CASE("moci_widget: ComponentSetSize", "[ui]")
     REQUIRE(c.GetHeight() == 50);
 }
 
-TEST_CASE("moci_widget: ComponentSetPositionXY", "[ui]")
+TEST_CASE("widget: ComponentSetPositionXY", "[ui]")
 {
     moci::Component c {};
     c.SetPosition(100, 50);
@@ -81,7 +81,7 @@ TEST_CASE("moci_widget: ComponentSetPositionXY", "[ui]")
     REQUIRE(c.GetY() == 50);
 }
 
-TEST_CASE("moci_widget: ComponentSetPositionPoint", "[ui]")
+TEST_CASE("widget: ComponentSetPositionPoint", "[ui]")
 {
     moci::Component c {};
     c.SetPosition({100, 50});
@@ -89,7 +89,7 @@ TEST_CASE("moci_widget: ComponentSetPositionPoint", "[ui]")
     REQUIRE(c.GetY() == 50);
 }
 
-TEST_CASE("moci_widget: ComponentSetBounds", "[ui]")
+TEST_CASE("widget: ComponentSetBounds", "[ui]")
 {
     moci::Component c {};
     c.SetBounds({100, 50, 10, 20});
@@ -100,7 +100,7 @@ TEST_CASE("moci_widget: ComponentSetBounds", "[ui]")
     REQUIRE(bounds.GetHeight() == 20);
 }
 
-TEST_CASE("moci_widget: ComponentContains", "[ui]")
+TEST_CASE("widget: ComponentContains", "[ui]")
 {
     moci::Component c {};
     c.SetBounds({100, 50, 10, 20});
@@ -109,7 +109,7 @@ TEST_CASE("moci_widget: ComponentContains", "[ui]")
     REQUIRE(c.Contains({110, 50}) == true);
 }
 
-TEST_CASE("moci_widget: ComponentFindComponentAt", "[ui]")
+TEST_CASE("widget: ComponentFindComponentAt", "[ui]")
 {
     auto area   = moci::Rectangle<int> {0, 0, 100, 100};
     auto parent = moci::Component {};
@@ -132,7 +132,7 @@ TEST_CASE("moci_widget: ComponentFindComponentAt", "[ui]")
     REQUIRE(parent.FindComponentAt({0, 180}) == nullptr);
 }
 
-TEST_CASE("moci_widget: ComponentStyle", "[ui]")
+TEST_CASE("widget: ComponentStyle", "[ui]")
 {
     moci::Component c {};
 

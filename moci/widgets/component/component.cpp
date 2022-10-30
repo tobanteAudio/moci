@@ -1,4 +1,4 @@
-#include "moci_widget/component/component.hpp"
+#include "moci/widgets/component/component.hpp"
 
 #include "moci/core/preprocessor.hpp"
 

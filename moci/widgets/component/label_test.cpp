@@ -4,17 +4,17 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci_widget/component/label.hpp"
-#include "moci_widget/style/style.hpp"
+#include "moci/widgets/component/label.hpp"
+#include "moci/widgets/style/style.hpp"
 
-TEST_CASE("moci_widget: LabelConstruct", "[ui]")
+TEST_CASE("widget: LabelConstruct", "[ui]")
 {
     moci::Label const label {"test", {}};
     REQUIRE(label.GetText() == "test");
     REQUIRE(label.GetTextView() == "test");
 }
 
-TEST_CASE("moci_widget: LabelSetText", "[ui]")
+TEST_CASE("widget: LabelSetText", "[ui]")
 {
     moci::Label label {"", {}};
     REQUIRE(label.GetText().empty());
@@ -24,7 +24,7 @@ TEST_CASE("moci_widget: LabelSetText", "[ui]")
     REQUIRE(label.GetTextView() == "test143");
 }
 
-TEST_CASE("moci_widget: LabelSetTextColor", "[ui]")
+TEST_CASE("widget: LabelSetTextColor", "[ui]")
 {
     moci::Label label {"", {}};
 

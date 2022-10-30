@@ -2,6 +2,10 @@
 
 #include <moci/application/application.hpp>
 #include <moci/network/datagram/datagram.hpp>
+#include <moci/widgets/component/button.hpp>
+#include <moci/widgets/component/label.hpp>
+#include <moci/widgets/component/slider.hpp>
+#include <moci/widgets/layer/component_layer.hpp>
 
 #define MOCI_ENTRYPOINT
 #include <moci/application/entry_point.hpp>

@@ -6,8 +6,8 @@
 #include "moci/events/types/application_event.hpp"
 #include "moci/events/types/event.hpp"
 #include "moci/render/renderer.hpp"
-#include "moci_widget/component/component.hpp"
-#include "moci_widget/style/style.hpp"
+#include "moci/widgets/component/component.hpp"
+#include "moci/widgets/style/style.hpp"
 
 #include "imgui.h"
 
