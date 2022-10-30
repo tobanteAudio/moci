@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci_application/app/window.hpp"
+#include "moci/application/window.hpp"
 
 #include "moci/core/logging.hpp"
 #include "moci/render/api.hpp"

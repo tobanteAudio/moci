@@ -1,1 +1,0 @@
-#include "moci_application/moci_application.hpp"

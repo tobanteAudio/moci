@@ -1,5 +1,6 @@
 #include "demo_layer.hpp"
 
+#include <moci/application/application.hpp>
 #include <moci/render/opengl/es2/es2.hpp>
 
 #include "imgui.h"

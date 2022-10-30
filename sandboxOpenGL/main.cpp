@@ -1,6 +1,9 @@
 #define MOCI_ENTRYPOINT
 #include "moci/moci.hpp"
 
+#include <moci/application/application.hpp>
+#include <moci/application/entry_point.hpp>
+
 #include "opengl_layer.hpp"
 
 class Sandbox : public moci::Application
