@@ -57,11 +57,11 @@ test:
 
 .PHONY: tidy-check
 tidy-check:
-	${CLANG_TIDY_ARGS} -quiet -p $(BUILD_DIR) -header-filter $(shell realpath ./moci) $(shell realpath ./moci)
+	${CLANG_TIDY_ARGS} -quiet -p $(BUILD_DIR) -header-filter $(shell realpath ./src) $(shell realpath ./src)
 
 .PHONY: tidy-fix
 tidy-fix:
-	${CLANG_TIDY_ARGS} -fix -quiet -p $(BUILD_DIR) -header-filter $(shell realpath ./moci) $(shell realpath ./moci)
+	${CLANG_TIDY_ARGS} -fix -quiet -p $(BUILD_DIR) -header-filter $(shell realpath ./src) $(shell realpath ./src)
 
 .PHONY: coverage
 coverage:
@@ -101,7 +101,7 @@ stats:
 
 .PHONY: format
 format:
-	find moci -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
+	find src -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
 	find sandbox2D -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
 	find sandbox3D -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
 	find sandboxOpenGL -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
