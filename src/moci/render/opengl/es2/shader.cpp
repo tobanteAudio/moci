@@ -50,15 +50,15 @@ OpenGLESShader::OpenGLESShader(std::string const& filepath)
     auto const program  = parseShader(filepath);
     auto const vertex   = program.shaders[0];
     auto const fragment = program.shaders[1];
-    _m_RendererID       = createShader(vertex.source.c_str(), fragment.source.c_str());
+    _rendererID         = createShader(vertex.source.c_str(), fragment.source.c_str());
 }
 
 OpenGLESShader::OpenGLESShader(std::string name, std::string const& vertexSrc, std::string const& fragmentSrc)
-    : _m_RendererID(createShader(vertexSrc.c_str(), fragmentSrc.c_str())), _m_Name(std::move(name))
+    : _rendererID(createShader(vertexSrc.c_str(), fragmentSrc.c_str())), _name(std::move(name))
 {
 }
 
-OpenGLESShader::~OpenGLESShader() { GLCall(glDeleteProgram(_m_RendererID)); }
+OpenGLESShader::~OpenGLESShader() { GLCall(glDeleteProgram(_rendererID)); }
 
 auto OpenGLESShader::parseShader(std::string const& filepath) -> ShaderProgramSource
 {
@@ -131,7 +131,7 @@ auto OpenGLESShader::createShader(const char* vertexSource, const char* fragment
     return shaderProgram;
 }
 
-void OpenGLESShader::bind() const { GLCall(glUseProgram(_m_RendererID)); }
+void OpenGLESShader::bind() const { GLCall(glUseProgram(_rendererID)); }
 
 void OpenGLESShader::unbind() const { GLCall(glUseProgram(0)); }
 
@@ -157,7 +157,7 @@ void OpenGLESShader::setMat4(std::string const& name, const glm::mat4& value) { 
 
 auto OpenGLESShader::getLocation(std::string const& name) const -> std::int32_t
 {
-    return glGetUniformLocation(_m_RendererID, name.c_str());
+    return glGetUniformLocation(_rendererID, name.c_str());
 }
 
 void OpenGLESShader::uploadUniformInt(std::string const& name, int value) const

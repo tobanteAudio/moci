@@ -23,9 +23,9 @@ GlfwWindow::~GlfwWindow() { shutdown(); }
 
 void GlfwWindow::init(WindowSpecs props)
 {
-    _m_Data.Title  = props.Title;
-    _m_Data.Width  = props.Width;
-    _m_Data.Height = props.Height;
+    _data.Title  = props.Title;
+    _data.Width  = props.Width;
+    _data.Height = props.Height;
 
     if (sGlfwWindowCount == 0)
     {
@@ -47,20 +47,20 @@ void GlfwWindow::init(WindowSpecs props)
 #endif
 #endif
 
-    auto const width  = static_cast<int>(_m_Data.Width);
-    auto const height = static_cast<int>(_m_Data.Height);
-    _m_Window         = glfwCreateWindow(width, height, _m_Data.Title.c_str(), nullptr, nullptr);
+    auto const width  = static_cast<int>(_data.Width);
+    auto const height = static_cast<int>(_data.Height);
+    _window           = glfwCreateWindow(width, height, _data.Title.c_str(), nullptr, nullptr);
     ++sGlfwWindowCount;
     MOCI_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-    _m_Context = Scope<GraphicsContext>(GraphicsContext::create(_m_Window));
-    _m_Context->init();
+    _context = Scope<GraphicsContext>(GraphicsContext::create(_window));
+    _context->init();
 
-    glfwSetWindowUserPointer(_m_Window, &_m_Data);
+    glfwSetWindowUserPointer(_window, &_data);
     setVSync(true);
 
     // Set GLFW callbacks
-    glfwSetWindowSizeCallback(_m_Window,
+    glfwSetWindowSizeCallback(_window,
                               [](GLFWwindow* window, int width, int height)
                               {
                                   WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -71,7 +71,7 @@ void GlfwWindow::init(WindowSpecs props)
                                   data.EventCallback(event);
                               });
 
-    glfwSetWindowCloseCallback(_m_Window,
+    glfwSetWindowCloseCallback(_window,
                                [](GLFWwindow* window)
                                {
                                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -79,7 +79,7 @@ void GlfwWindow::init(WindowSpecs props)
                                    data.EventCallback(event);
                                });
 
-    glfwSetKeyCallback(_m_Window,
+    glfwSetKeyCallback(_window,
                        [](GLFWwindow* window, int glfwKey, int scancode, int action, int mods)
                        {
                            ignoreUnused(scancode);
@@ -110,7 +110,7 @@ void GlfwWindow::init(WindowSpecs props)
                            }
                        });
 
-    glfwSetCharCallback(_m_Window,
+    glfwSetCharCallback(_window,
                         [](GLFWwindow* window, unsigned int glfwKeyCode)
                         {
                             auto event = KeyTypedEvent {static_cast<Key>(glfwKeyCode)};
@@ -118,7 +118,7 @@ void GlfwWindow::init(WindowSpecs props)
                             data.EventCallback(event);
                         });
 
-    glfwSetMouseButtonCallback(_m_Window,
+    glfwSetMouseButtonCallback(_window,
                                [](GLFWwindow* window, int button, int action, int mods)
                                {
                                    ignoreUnused(mods);
@@ -141,7 +141,7 @@ void GlfwWindow::init(WindowSpecs props)
                                    }
                                });
 
-    glfwSetScrollCallback(_m_Window,
+    glfwSetScrollCallback(_window,
                           [](GLFWwindow* window, double xOffset, double yOffset)
                           {
                               WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -150,7 +150,7 @@ void GlfwWindow::init(WindowSpecs props)
                               data.EventCallback(event);
                           });
 
-    glfwSetCursorPosCallback(_m_Window,
+    glfwSetCursorPosCallback(_window,
                              [](GLFWwindow* window, double xPos, double yPos)
                              {
                                  WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -162,7 +162,7 @@ void GlfwWindow::init(WindowSpecs props)
 
 void GlfwWindow::shutdown()
 {
-    glfwDestroyWindow(_m_Window);
+    glfwDestroyWindow(_window);
 
     if (--sGlfwWindowCount == 0)
     {
@@ -175,7 +175,7 @@ void GlfwWindow::onUpdate()
 {
     _frameCounter++;
     glfwPollEvents();
-    _m_Context->swapBuffers();
+    _context->swapBuffers();
 }
 
 void GlfwWindow::setVSync(bool enabled)
@@ -183,10 +183,10 @@ void GlfwWindow::setVSync(bool enabled)
     if (enabled) { glfwSwapInterval(1); }
     else { glfwSwapInterval(0); }
 
-    _m_Data.VSync = enabled;
+    _data.VSync = enabled;
 }
 
-auto GlfwWindow::isVSync() const -> bool { return _m_Data.VSync; }
+auto GlfwWindow::isVSync() const -> bool { return _data.VSync; }
 
 void GlfwWindow::setFullscreen(bool enabled)
 {
@@ -198,28 +198,27 @@ void GlfwWindow::setFullscreen(bool enabled)
         // backup window position and window size
         auto x = 0;
         auto y = 0;
-        glfwGetWindowPos(_m_Window, (_m_Data.Position).data(), &_m_Data.Position[1]);
-        glfwGetWindowSize(_m_Window, &x, &y);
-        _m_Data.Width  = static_cast<unsigned>(x);
-        _m_Data.Height = static_cast<unsigned>(y);
+        glfwGetWindowPos(_window, (_data.Position).data(), &_data.Position[1]);
+        glfwGetWindowSize(_window, &x, &y);
+        _data.Width  = static_cast<unsigned>(x);
+        _data.Height = static_cast<unsigned>(y);
 
         // get resolution of monitor
         auto* monitor    = glfwGetPrimaryMonitor();
         auto const* mode = glfwGetVideoMode(monitor);
 
         // switch to full screen
-        glfwSetWindowMonitor(_m_Window, monitor, 0, 0, mode->width, mode->height, 0);
+        glfwSetWindowMonitor(_window, monitor, 0, 0, mode->width, mode->height, 0);
     }
     else
     {
         // restore last window size and position
-        glfwSetWindowMonitor(_m_Window, nullptr, _m_Data.Position[0], _m_Data.Position[1], _m_Data.Width,
-                             _m_Data.Height, 0);
+        glfwSetWindowMonitor(_window, nullptr, _data.Position[0], _data.Position[1], _data.Width, _data.Height, 0);
     }
 
-    _m_Data.Fullscreen = enabled;
+    _data.Fullscreen = enabled;
 }
 
-auto GlfwWindow::isFullscreen() const -> bool { return _m_Data.Fullscreen; }
+auto GlfwWindow::isFullscreen() const -> bool { return _data.Fullscreen; }
 
 }  // namespace moci

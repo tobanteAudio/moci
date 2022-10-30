@@ -11,14 +11,14 @@ auto GraphicsContext::create(void* win) -> GraphicsContext*
     return new OpenGLESContext(static_cast<GLFWwindow*>(win));
 }
 
-OpenGLESContext::OpenGLESContext(GLFWwindow* windowHandle) : _m_WindowHandle(windowHandle)
+OpenGLESContext::OpenGLESContext(GLFWwindow* windowHandle) : _windowHandle(windowHandle)
 {
     MOCI_CORE_ASSERT(windowHandle, "Window handle is null!")
 }
 
 void OpenGLESContext::init()
 {
-    glfwMakeContextCurrent(_m_WindowHandle);
+    glfwMakeContextCurrent(_windowHandle);
 
 #if defined(MOCI_API_OPENGL_ES) || defined(MOCI_MAC)
 #else
@@ -40,6 +40,6 @@ void OpenGLESContext::init()
     MOCI_CORE_INFO("  Version:    {0}", glGetString(GL_VERSION));
 }
 
-void OpenGLESContext::swapBuffers() { glfwSwapBuffers(_m_WindowHandle); }
+void OpenGLESContext::swapBuffers() { glfwSwapBuffers(_windowHandle); }
 
 }  // namespace moci

@@ -10,31 +10,31 @@ class KeyEvent : public Event
 {
 public:
     ~KeyEvent() override = default;
-    explicit KeyEvent(Key keycode) : _m_KeyCode(keycode) { }
-    [[nodiscard]] inline auto getKeyCode() const -> Key { return _m_KeyCode; }
+    explicit KeyEvent(Key keycode) : _keyCode(keycode) { }
+    [[nodiscard]] inline auto getKeyCode() const -> Key { return _keyCode; }
 
     EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 
 private:
-    Key _m_KeyCode;
+    Key _keyCode;
 };
 
 class KeyPressedEvent : public KeyEvent
 {
 public:
     ~KeyPressedEvent() override = default;
-    KeyPressedEvent(Key keycode, int repeatCount) : KeyEvent(keycode), _m_RepeatCount(repeatCount) { }
+    KeyPressedEvent(Key keycode, int repeatCount) : KeyEvent(keycode), _repeatCount(repeatCount) { }
 
-    [[nodiscard]] inline auto getRepeatCount() const -> int { return _m_RepeatCount; }
+    [[nodiscard]] inline auto getRepeatCount() const -> int { return _repeatCount; }
 
     [[nodiscard]] auto toString() const -> std::string override
     {
-        return fmt::format("KeyPressedEvent: {} ({} repeats)", getKeyCode(), _m_RepeatCount);
+        return fmt::format("KeyPressedEvent: {} ({} repeats)", getKeyCode(), _repeatCount);
     }
 
     EVENT_CLASS_TYPE(KeyPressed)
 private:
-    int _m_RepeatCount;
+    int _repeatCount;
 };
 
 class KeyReleasedEvent : public KeyEvent

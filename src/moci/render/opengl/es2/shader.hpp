@@ -33,7 +33,7 @@ public:
     void setMat3(std::string const& name, glm::mat3 const& value) override;
     void setMat4(std::string const& name, glm::mat4 const& value) override;
 
-    [[nodiscard]] auto getName() const -> std::string const& override { return _m_Name; }
+    [[nodiscard]] auto getName() const -> std::string const& override { return _name; }
 
 private:
     [[nodiscard]] auto getLocation(std::string const& name) const -> std::int32_t;
@@ -51,8 +51,8 @@ private:
     static auto createShader(const char* vertexSource, const char* fragmentSource) -> GLint;
     static auto parseShader(std::string const& filepath) -> ShaderProgramSource;
 
-    uint32_t _m_RendererID;
-    std::string _m_Name;
+    uint32_t _rendererID;
+    std::string _name;
 };
 
 }  // namespace moci

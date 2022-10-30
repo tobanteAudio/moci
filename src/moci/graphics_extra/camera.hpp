@@ -17,33 +17,33 @@ public:
 
     void setProjection(float left, float right, float bottom, float top);
 
-    [[nodiscard]] auto getPosition() const -> const glm::vec3& { return _m_Position; }
+    [[nodiscard]] auto getPosition() const -> const glm::vec3& { return _position; }
     void setPosition(const glm::vec3& position)
     {
-        _m_Position = position;
+        _position = position;
         recalculateViewMatrix();
     }
 
-    [[nodiscard]] auto getRotation() const -> float { return _m_Rotation; }
+    [[nodiscard]] auto getRotation() const -> float { return _rotation; }
     void setRotation(float rotation)
     {
-        _m_Rotation = rotation;
+        _rotation = rotation;
         recalculateViewMatrix();
     }
 
-    [[nodiscard]] auto getProjectionMatrix() const -> const glm::mat4& { return _m_ProjectionMatrix; }
-    [[nodiscard]] auto getViewMatrix() const -> const glm::mat4& { return _m_ViewMatrix; }
-    [[nodiscard]] auto getViewProjectionMatrix() const -> const glm::mat4& { return _m_ViewProjectionMatrix; }
+    [[nodiscard]] auto getProjectionMatrix() const -> const glm::mat4& { return _projectionMatrix; }
+    [[nodiscard]] auto getViewMatrix() const -> const glm::mat4& { return _viewMatrix; }
+    [[nodiscard]] auto getViewProjectionMatrix() const -> const glm::mat4& { return _viewProjectionMatrix; }
 
 private:
     void recalculateViewMatrix();
 
-    glm::mat4 _m_ProjectionMatrix;
-    glm::mat4 _m_ViewMatrix;
-    glm::mat4 _m_ViewProjectionMatrix {};
+    glm::mat4 _projectionMatrix;
+    glm::mat4 _viewMatrix;
+    glm::mat4 _viewProjectionMatrix {};
 
-    glm::vec3 _m_Position = {0.0F, 0.0F, 0.0F};
-    float _m_Rotation     = 0.0F;
+    glm::vec3 _position = {0.0F, 0.0F, 0.0F};
+    float _rotation     = 0.0F;
 };
 
 class OrthographicCameraController
@@ -54,24 +54,24 @@ public:
     void onUpdate(Timestep ts);
     void onEvent(Event& e);
 
-    auto getCamera() -> OrthographicCamera& { return _m_Camera; }
-    [[nodiscard]] auto getCamera() const -> const OrthographicCamera& { return _m_Camera; }
+    auto getCamera() -> OrthographicCamera& { return _camera; }
+    [[nodiscard]] auto getCamera() const -> const OrthographicCamera& { return _camera; }
 
-    [[nodiscard]] auto getZoomLevel() const -> float { return _m_ZoomLevel; }
-    void setZoomLevel(float level) { _m_ZoomLevel = level; }
+    [[nodiscard]] auto getZoomLevel() const -> float { return _zoomLevel; }
+    void setZoomLevel(float level) { _zoomLevel = level; }
 
 private:
     auto onMouseScrolled(MouseScrolledEvent& e) -> bool;
     auto onWindowResized(WindowResizeEvent& e) -> bool;
 
-    float _m_AspectRatio;
-    float _m_ZoomLevel = 1.0F;
-    OrthographicCamera _m_Camera;
+    float _aspectRatio;
+    float _zoomLevel = 1.0F;
+    OrthographicCamera _camera;
 
-    bool _m_Rotation;
+    bool _rotation;
 
-    glm::vec3 _m_CameraPosition     = {0.0F, 0.0F, 0.0F};
-    float _m_CameraRotation         = 0.0F;  // In degrees, in the anti-clockwise direction
-    float _m_CameraTranslationSpeed = 5.0F, _m_CameraRotationSpeed = 180.0F;
+    glm::vec3 _cameraPosition     = {0.0F, 0.0F, 0.0F};
+    float _cameraRotation         = 0.0F;  // In degrees, in the anti-clockwise direction
+    float _cameraTranslationSpeed = 5.0F, _cameraRotationSpeed = 180.0F;
 };
 }  // namespace moci

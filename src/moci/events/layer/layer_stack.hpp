@@ -18,12 +18,12 @@ public:
     // void PopLayer(Layer* layer);
     // void PopOverlay(Layer* overlay);
 
-    auto begin() -> Vector<Layer::Ptr>::iterator { return _m_Layers.begin(); }
-    auto end() -> Vector<Layer::Ptr>::iterator { return _m_Layers.end(); }
+    auto begin() -> Vector<Layer::Ptr>::iterator { return _layers.begin(); }
+    auto end() -> Vector<Layer::Ptr>::iterator { return _layers.end(); }
 
 private:
-    Vector<Layer::Ptr> _m_Layers;
-    unsigned int _m_LayerInsertIndex = 0;
+    Vector<Layer::Ptr> _layers;
+    unsigned int _layerInsertIndex = 0;
 };
 
 }  // namespace moci

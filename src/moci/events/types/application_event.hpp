@@ -11,22 +11,22 @@ class WindowResizeEvent : public Event
 {
 public:
     ~WindowResizeEvent() override = default;
-    WindowResizeEvent(unsigned int width, unsigned int height) : _m_Width(width), _m_Height(height) { }
+    WindowResizeEvent(unsigned int width, unsigned int height) : _width(width), _height(height) { }
 
-    [[nodiscard]] inline auto getWidth() const -> unsigned int { return _m_Width; }
-    [[nodiscard]] inline auto getHeight() const -> unsigned int { return _m_Height; }
+    [[nodiscard]] inline auto getWidth() const -> unsigned int { return _width; }
+    [[nodiscard]] inline auto getHeight() const -> unsigned int { return _height; }
 
     [[nodiscard]] auto toString() const -> std::string override
     {
         std::stringstream ss;
-        ss << "WindowResizeEvent: " << _m_Width << ", " << _m_Height;
+        ss << "WindowResizeEvent: " << _width << ", " << _height;
         return ss.str();
     }
 
     EVENT_CLASS_TYPE(WindowResize)
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
 private:
-    unsigned int _m_Width, _m_Height;
+    unsigned int _width, _height;
 };
 
 class WindowCloseEvent : public Event

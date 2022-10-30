@@ -19,14 +19,14 @@ public:
     void addVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
     void setIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
-    [[nodiscard]] auto getVertexBuffer() const -> const Ref<VertexBuffer>& override { return _m_VertexBuffer; }
-    [[nodiscard]] auto getIndexBuffer() const -> const Ref<IndexBuffer>& override { return _m_IndexBuffer; }
+    [[nodiscard]] auto getVertexBuffer() const -> const Ref<VertexBuffer>& override { return _vertexBuffer; }
+    [[nodiscard]] auto getIndexBuffer() const -> const Ref<IndexBuffer>& override { return _indexBuffer; }
 
 private:
     void setLayout() const;
 
-    Ref<VertexBuffer> _m_VertexBuffer;
-    Ref<IndexBuffer> _m_IndexBuffer;
+    Ref<VertexBuffer> _vertexBuffer;
+    Ref<IndexBuffer> _indexBuffer;
 };
 
 }  // namespace moci

@@ -11,16 +11,16 @@ namespace moci
 
 OpenGLESVertexBuffer::OpenGLESVertexBuffer(float* vertices, uint32_t size, bool dynamic)
 {
-    GLCall(glGenBuffers(1, &_m_RendererID));
-    GLCall(glBindBuffer(GL_ARRAY_BUFFER, _m_RendererID));
+    GLCall(glGenBuffers(1, &_rendererID));
+    GLCall(glBindBuffer(GL_ARRAY_BUFFER, _rendererID));
 
     if (dynamic) { GLCall(glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW)); }
     else { GLCall(glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW)); }
 }
 
-OpenGLESVertexBuffer::~OpenGLESVertexBuffer() { GLCall(glDeleteBuffers(1, &_m_RendererID)); }
+OpenGLESVertexBuffer::~OpenGLESVertexBuffer() { GLCall(glDeleteBuffers(1, &_rendererID)); }
 
-void OpenGLESVertexBuffer::bind() const { GLCall(glBindBuffer(GL_ARRAY_BUFFER, _m_RendererID)); }
+void OpenGLESVertexBuffer::bind() const { GLCall(glBindBuffer(GL_ARRAY_BUFFER, _rendererID)); }
 
 void OpenGLESVertexBuffer::unbind() const { GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0)); }
 
@@ -35,8 +35,8 @@ auto OpenGLESVertexBuffer::uploadData(std::uint32_t offset, std::uint32_t size, 
 OpenGLESIndexBuffer::OpenGLESIndexBuffer(IndexBufferSpecs specs) : _specs(specs)
 {
 
-    GLCall(glGenBuffers(1, &_m_RendererID));
-    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _m_RendererID));
+    GLCall(glGenBuffers(1, &_rendererID));
+    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _rendererID));
 
     auto const size = _specs.count * sizeof(std::uint16_t);
     if (_specs.isDynamic) { GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW)); }
@@ -50,9 +50,9 @@ OpenGLESIndexBuffer::OpenGLESIndexBuffer(IndexBufferSpecs specs) : _specs(specs)
     unbind();
 }
 
-OpenGLESIndexBuffer::~OpenGLESIndexBuffer() { GLCall(glDeleteBuffers(1, &_m_RendererID)); }
+OpenGLESIndexBuffer::~OpenGLESIndexBuffer() { GLCall(glDeleteBuffers(1, &_rendererID)); }
 
-void OpenGLESIndexBuffer::bind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _m_RendererID)); }
+void OpenGLESIndexBuffer::bind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _rendererID)); }
 
 void OpenGLESIndexBuffer::unbind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)); }
 

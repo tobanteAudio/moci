@@ -22,7 +22,7 @@ BatchRender2D::BatchRender2D()
 #if defined(MOCI_API_OPENGL_LEGACY)
     _data.shader = moci::RenderFactory::makeShader("assets/es2_batch_render.glsl");
 #else
-    data_.shader = moci::RenderFactory::makeShader("assets/gl4_batch_render.glsl");
+    _data.shader = moci::RenderFactory::makeShader("assets/gl4_batch_render.glsl");
 #endif
     _data.shader->bind();
 

@@ -31,21 +31,21 @@ OpenGLESVertexArray::~OpenGLESVertexArray() = default;
 
 void OpenGLESVertexArray::bind() const
 {
-    _m_VertexBuffer->bind();
+    _vertexBuffer->bind();
     setLayout();
-    _m_IndexBuffer->bind();
+    _indexBuffer->bind();
 }
 void OpenGLESVertexArray::unbind() const
 {
-    _m_IndexBuffer->unbind();
-    _m_VertexBuffer->unbind();
+    _indexBuffer->unbind();
+    _vertexBuffer->unbind();
 }
 
-void OpenGLESVertexArray::addVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) { _m_VertexBuffer = vertexBuffer; }
-void OpenGLESVertexArray::setIndexBuffer(const Ref<IndexBuffer>& indexBuffer) { _m_IndexBuffer = indexBuffer; }
+void OpenGLESVertexArray::addVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) { _vertexBuffer = vertexBuffer; }
+void OpenGLESVertexArray::setIndexBuffer(const Ref<IndexBuffer>& indexBuffer) { _indexBuffer = indexBuffer; }
 void OpenGLESVertexArray::setLayout() const
 {
-    const auto& elements = _m_VertexBuffer->getLayout().getElements();
+    const auto& elements = _vertexBuffer->getLayout().getElements();
     for (unsigned int i = 0; i < elements.size(); i++)
     {
         const auto& element = elements[i];
@@ -55,7 +55,7 @@ void OpenGLESVertexArray::setLayout() const
             element.getComponentCount(),                     //
             shaderDataTypeToOpenGlesBaseType(element.Type),  //
             element.Normalized ? GL_TRUE : GL_FALSE,         //
-            _m_VertexBuffer->getLayout().getStride(),        //
+            _vertexBuffer->getLayout().getStride(),          //
             (const void*)element.Offset                      //
         );
     }

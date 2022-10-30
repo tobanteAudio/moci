@@ -92,31 +92,31 @@ class BufferLayout
 {
 public:
     BufferLayout() = default;
-    BufferLayout(std::initializer_list<BufferElement> elements) : _m_Elements(elements) { calculateOffsetsAndStride(); }
+    BufferLayout(std::initializer_list<BufferElement> elements) : _elements(elements) { calculateOffsetsAndStride(); }
 
-    [[nodiscard]] inline auto getStride() const -> std::uint32_t { return _m_Stride; }
-    [[nodiscard]] inline auto getElements() const -> Vector<BufferElement> const& { return _m_Elements; }
+    [[nodiscard]] inline auto getStride() const -> std::uint32_t { return _stride; }
+    [[nodiscard]] inline auto getElements() const -> Vector<BufferElement> const& { return _elements; }
 
-    auto begin() -> Vector<BufferElement>::iterator { return _m_Elements.begin(); }
-    auto end() -> Vector<BufferElement>::iterator { return _m_Elements.end(); }
-    [[nodiscard]] auto begin() const -> Vector<BufferElement>::const_iterator { return _m_Elements.begin(); }
-    [[nodiscard]] auto end() const -> Vector<BufferElement>::const_iterator { return _m_Elements.end(); }
+    auto begin() -> Vector<BufferElement>::iterator { return _elements.begin(); }
+    auto end() -> Vector<BufferElement>::iterator { return _elements.end(); }
+    [[nodiscard]] auto begin() const -> Vector<BufferElement>::const_iterator { return _elements.begin(); }
+    [[nodiscard]] auto end() const -> Vector<BufferElement>::const_iterator { return _elements.end(); }
 
 private:
     void calculateOffsetsAndStride()
     {
         size_t offset = 0;
-        _m_Stride     = 0;
-        for (auto& element : _m_Elements)
+        _stride       = 0;
+        for (auto& element : _elements)
         {
             element.Offset = offset;
             offset += element.Size;
-            _m_Stride += element.Size;
+            _stride += element.Size;
         }
     }
 
-    Vector<BufferElement> _m_Elements;
-    uint32_t _m_Stride = 0;
+    Vector<BufferElement> _elements;
+    uint32_t _stride = 0;
 };
 
 class VertexBuffer
