@@ -65,20 +65,17 @@ tidy-fix:
 
 .PHONY: coverage
 coverage:
-	cmake -S. -G"Unix Makefiles" $(CMAKE_FLAGS) -B $(BUILD_DIR_BASE)_coverage -DMOCI_ENABLE_COVERAGE=ON
-	cd $(BUILD_DIR_BASE)_coverage && make -j3
-	cd $(BUILD_DIR_BASE)_coverage && lcov -c -i -d . --base-directory . -o base_cov.info
-	cd $(BUILD_DIR_BASE)_coverage && ctest
-	cd $(BUILD_DIR_BASE)_coverage && lcov -c -d . --base-directory . -o test_cov.info
-	cd $(BUILD_DIR_BASE)_coverage && lcov -a base_cov.info -a test_cov.info -o cov.info
-	cd $(BUILD_DIR_BASE)_coverage && lcov --remove cov.info "*3rd_party/*" -o cov.info
-	cd $(BUILD_DIR_BASE)_coverage && lcov --remove cov.info "*c++*" -o cov.info
-	cd $(BUILD_DIR_BASE)_coverage && lcov --remove cov.info "*v1*" -o cov.info
-	cd $(BUILD_DIR_BASE)_coverage && lcov --remove cov.info "*Xcode.app*" -o cov.info
+	cmake -S. -GNinja -Bcmake-build-coverage -DCMAKE_BUILD_TYPE=Debug -D MOCI_BUILD_COVERAGE=TRUE
+	cmake --build cmake-build-coverage
+	ctest --test-dir cmake-build-coverage -C Debug --output-on-failure
 
-.PHONY: report
-report:
-	cd $(BUILD_DIR_BASE)_coverage && genhtml cov.info --output-directory lcov
+.PHONY: coverage-html
+coverage-html: coverage
+	gcovr --html --html-details -e ".*test\.cpp" --exclude-unreachable-branches -r src -j ${shell nproc} -s cmake-build-coverage -o cmake-build-coverage/coverage.html
+
+.PHONY: coverage-xml
+coverage-xml: coverage
+	gcovr --xml-pretty -e ".*test\.cpp" --exclude-unreachable-branches -r src -j ${shell nproc} -s cmake-build-coverage -o cmake-build-coverage/coverage.xml
 
 .PHONY: docs
 docs:
