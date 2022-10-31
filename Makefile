@@ -65,7 +65,7 @@ tidy-fix:
 
 .PHONY: coverage
 coverage:
-	cmake -S. -GNinja -Bcmake-build-coverage -DCMAKE_BUILD_TYPE=Debug -D MOCI_BUILD_COVERAGE=TRUE
+	cmake -S. -GNinja -Bcmake-build-coverage -DCMAKE_BUILD_TYPE=Debug -D CMAKE_UNITY_BUILD=ON -D MOCI_BUILD_COVERAGE=TRUE
 	cmake --build cmake-build-coverage
 	ctest --test-dir cmake-build-coverage -C Debug --output-on-failure
 
