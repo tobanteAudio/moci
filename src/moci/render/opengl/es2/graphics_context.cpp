@@ -22,9 +22,7 @@ void OpenGLESContext::init()
 {
     glfwMakeContextCurrent(_windowHandle);
 
-#if defined(MOCI_API_OPENGL_ES) || defined(MOCI_MAC)
-#else
-    // Initialize OpenGL loader
+#if not defined(MOCI_API_OPENGL_ES)
     if (auto err = glewInit() != GLEW_OK; err) { MOCI_CORE_ASSERT(err, "Failed to initialize glew!"); }
 #endif
 

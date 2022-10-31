@@ -6,13 +6,8 @@
 #define IMGUI_IMPL_OPENGL_ES2
 #define IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #else
-#if defined(MOCI_MAC)
-#define GL_SILENCE_DEPRECATION
-#define IMGUI_IMPL_OPENGL_LOADER_CUSTOM
-#else
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #include <GL/glew.h>
-#endif
 #endif
 
 #include <GLFW/glfw3.h>
@@ -20,9 +15,4 @@
 #include "imgui.h"
 
 #include "bindings/imgui_impl_glfw.h"
-
-#if defined(MOCI_MAC)
-#include "bindings/imgui_impl_opengl2.h"
-#else
 #include "bindings/imgui_impl_opengl3.h"
-#endif

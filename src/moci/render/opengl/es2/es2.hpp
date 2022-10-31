@@ -11,14 +11,14 @@
 
 // macOS 10.14 deprecated warnings
 #if defined(MOCI_MAC)
+#if not defined(GL_SILENCE_DEPRECATION)
 #define GL_SILENCE_DEPRECATION
+#endif
 #endif
 
 // glew is not needed for opengl es 2.0 or on macOS
 #if not defined(MOCI_API_OPENGL_ES)
-#if not defined(MOCI_MAC)
 #include <GL/glew.h>
-#endif
 #endif
 
 #include <GLFW/glfw3.h>

@@ -32,20 +32,17 @@ void ImGuiLayer::onAttach()
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
 
-#if !defined(MOCI_MAC)
+#if defined(MOCI_MAC)
     ImGui_ImplOpenGL3_Init("#version 100");
 #else
-    ImGui_ImplOpenGL2_Init();
+    ImGui_ImplOpenGL3_Init("#version 150");
 #endif
 }
 
 void ImGuiLayer::onDetach()
 {
-#if !defined(MOCI_MAC)
+
     ImGui_ImplOpenGL3_Shutdown();
-#else
-    ImGui_ImplOpenGL2_Shutdown();
-#endif
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 }
@@ -56,11 +53,8 @@ void ImGuiLayer::begin()
 
     {
         MOCI_PROFILE_SCOPE("ImGuiLayer::Begin::NewFrame");
-#if !defined(MOCI_MAC)
+
         ImGui_ImplOpenGL3_NewFrame();
-#else
-        ImGui_ImplOpenGL2_NewFrame();
-#endif
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
     }
@@ -119,19 +113,11 @@ void ImGuiLayer::end()
     MOCI_PROFILE_FUNCTION();
     // Docking
     ImGui::End();
-
     ImGui::Render();
+
     {
         MOCI_PROFILE_SCOPE("ImGuiLayer::End::RenderDrawData");
-#if !defined(MOCI_MAC)
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-#else
-        GLint last_program;
-        glGetIntegerv(GL_CURRENT_PROGRAM, &last_program);
-        glUseProgram(0);
-        ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
-        glUseProgram(last_program);
-#endif
     }
 }
 

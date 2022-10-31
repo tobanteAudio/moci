@@ -22,9 +22,6 @@ class Moci(ConanFile):
             self.requires("glew/2.2.0")
             self.requires("glfw/3.3.8")
 
-        if self.settings.os == "Windows":
-            self.requires("sdl/2.24.0")
-
     def configure(self):
         self.options["freetype"].shared = False
         self.options["imgui"].shared = False
@@ -100,8 +97,6 @@ class Moci(ConanFile):
         src = "res/bindings"
         dest = "bindings"
 
-        self.copy("imgui_impl_opengl2.h", dst=dest, src=src)
-        self.copy("imgui_impl_opengl2.cpp", dst=dest, src=src)
         self.copy("imgui_impl_opengl3.h", dst=dest, src=src)
         self.copy("imgui_impl_opengl3.cpp", dst=dest, src=src)
         self.copy("imgui_impl_opengl3_loader.h", dst=dest, src=src)
