@@ -6,13 +6,18 @@ PROJECT_NUMBER         = 0.1.0
 USE_MDFILE_AS_MAINPAGE = README.md
 INPUT                  = ../README.md \
                         ../docs \
-                        ../moci 
+                        ../src/moci
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.hpp *.md
 RECURSIVE              = YES
 EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = NO     # document private members & functions
 EXTRACT_STATIC         = YES    # document static members & functions
+
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+PREDEFINED             = MOCI_API_OPENGL_LEGACY=1 MOCI_API_OPENGL_MODERN=1
 
 # Generate html output
 GENERATE_HTML          = YES
@@ -30,16 +35,16 @@ FORMULA_FONTSIZE       = 14
 CALL_GRAPH             = YES
 INTERACTIVE_SVG        = YES
 
-HAVE_DOT = YES
-DOT_IMAGE_FORMAT = svg
-DOT_TRANSPARENT = YES
+# HAVE_DOT = YES
+# DOT_IMAGE_FORMAT = svg
+# DOT_TRANSPARENT = YES
 
 # Set output directory
 OUTPUT_DIRECTORY       = documentation
 
 ENUM_VALUES_PER_LINE   = 1
 
-HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css
+#HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css
 
 #GENERATE_TREEVIEW      = YES # required!
 #HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css doxygen-awesome-css/doxygen-awesome-sidebar-only.css
