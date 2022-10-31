@@ -17,8 +17,8 @@ target_link_libraries(moci_render_opengl_common_lib
 )
 
 set (moci_render_opengl_common_test_src
-    main_test.cpp
-    shader_parser_test.cpp
+    main.test.cpp
+    shader_parser.test.cpp
 )
 add_executable(moci_render_opengl_common_tests ${moci_render_opengl_common_test_src})
 target_link_libraries(moci_render_opengl_common_tests

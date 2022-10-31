@@ -27,11 +27,11 @@ target_link_libraries(moci_widget_lib
 )
 
 set (moci_widget_test_src
-    main_test.cpp
-    # component/button_test.cpp
-    component/component_test.cpp
-    component/label_test.cpp
-    component/slider_test.cpp
+    main.test.cpp
+    # component/button.test.cpp
+    component/component.test.cpp
+    component/label.test.cpp
+    component/slider.test.cpp
 )
 add_executable(moci_widget_tests ${moci_widget_test_src})
 target_link_libraries(moci_widget_tests

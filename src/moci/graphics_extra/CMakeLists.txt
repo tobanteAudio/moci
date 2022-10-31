@@ -26,9 +26,9 @@ target_link_libraries(moci_graphics_extra
 )
 
 set (moci_graphics_extra_test_src
-    main_test.cpp
-    camera_test.cpp
-    mesh_test.cpp
+    main.test.cpp
+    camera.test.cpp
+    mesh.test.cpp
 )
 add_executable(moci_graphics_extra_tests ${moci_graphics_extra_test_src})
 target_link_libraries(moci_graphics_extra_tests

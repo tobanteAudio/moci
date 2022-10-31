@@ -1,5 +1,5 @@
 /**
- * @file scope_guard_test.cpp
+ * @file scope_guard.test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
 #include <catch2/catch_all.hpp>

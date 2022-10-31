@@ -1,5 +1,5 @@
 /**
- * @file key_event_test.cpp
+ * @file key_event.test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
 #include <catch2/catch_test_macros.hpp>

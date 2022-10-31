@@ -37,7 +37,7 @@ if (${MOCI_API_OPENGL_LEGACY})
 endif()
 
 
-set (moci_render_test_src main_test.cpp buffer_test.cpp)
+set (moci_render_test_src main.test.cpp buffer.test.cpp)
 add_executable(moci_render_tests ${moci_render_test_src})
 target_link_libraries(moci_render_tests
     PRIVATE

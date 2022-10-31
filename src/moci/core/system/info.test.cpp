@@ -1,5 +1,5 @@
 /**
- * @file info_test.cpp
+ * @file info.test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
 #include <catch2/catch_all.hpp>

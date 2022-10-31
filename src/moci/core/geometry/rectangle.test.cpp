@@ -1,5 +1,5 @@
 /**
- * @file rectangle_test.cpp
+ * @file rectangle.test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
 #include <catch2/catch_approx.hpp>

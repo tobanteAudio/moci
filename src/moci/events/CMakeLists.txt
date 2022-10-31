@@ -30,16 +30,16 @@ target_link_libraries(moci_events_lib
 )
 
 
-add_executable(moci_events_tests main_test.cpp)
+add_executable(moci_events_tests main.test.cpp)
 catch_discover_tests(moci_events_tests)
 
 target_sources(moci_events_tests
     PRIVATE
-        layer/layer_stack_test.cpp
+        layer/layer_stack.test.cpp
 
-        types/application_event_test.cpp
-        types/key_event_test.cpp
-        types/mouse_event_test.cpp
+        types/application_event.test.cpp
+        types/key_event.test.cpp
+        types/mouse_event.test.cpp
 )
 
 target_link_libraries(moci_events_tests

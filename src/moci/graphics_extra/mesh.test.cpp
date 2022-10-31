@@ -1,5 +1,5 @@
 /**
- * @file mesh_test.cpp
+ * @file mesh.test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
 #include <catch2/catch_all.hpp>

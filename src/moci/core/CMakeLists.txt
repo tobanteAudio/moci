@@ -57,22 +57,22 @@ target_link_libraries(moci_core
         Moci::CodeCoverage
 )
 
-add_executable(moci_core_tests main_test.cpp)
+add_executable(moci_core_tests main.test.cpp)
 catch_discover_tests(moci_core_tests)
 
 target_sources(moci_core_tests
     PRIVATE
-        property_map_test.cpp
-        scope_guard_test.cpp
-        strings_test.cpp
+        property_map.test.cpp
+        scope_guard.test.cpp
+        strings.test.cpp
 
-        geometry/line_test.cpp
-        geometry/rectangle_test.cpp
-        geometry/point_test.cpp
+        geometry/line.test.cpp
+        geometry/rectangle.test.cpp
+        geometry/point.test.cpp
 
-        network/datagram_test.cpp
+        network/datagram.test.cpp
 
-        system/info_test.cpp
+        system/info.test.cpp
 )
 
 target_link_libraries(moci_core_tests

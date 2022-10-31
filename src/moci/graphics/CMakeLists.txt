@@ -32,15 +32,15 @@ target_link_libraries(moci_graphics
 )
 
 set (moci_graphics_test_src
-    main_test.cpp
+    main.test.cpp
 
-    color_test.cpp
-    font_test.cpp
-    image_test.cpp
+    color.test.cpp
+    font.test.cpp
+    image.test.cpp
 
-    freetype/library_test.cpp
+    freetype/library.test.cpp
 
-    obj/file_test.cpp
+    obj/file.test.cpp
 )
 add_executable(moci_graphics_tests ${moci_graphics_test_src})
 target_link_libraries(moci_graphics_tests
