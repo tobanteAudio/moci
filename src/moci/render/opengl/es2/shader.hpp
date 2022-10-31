@@ -1,7 +1,7 @@
 #pragma once
 
-#include "moci/render/opengl/es2/es2.hpp"
-#include "moci/render/shader.hpp"
+#include <moci/render/opengl/es2/es2.hpp>
+#include <moci/render/shader.hpp>
 
 #include <glm/glm.hpp>
 

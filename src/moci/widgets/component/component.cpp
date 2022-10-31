@@ -1,6 +1,6 @@
-#include "moci/widgets/component/component.hpp"
+#include "component.hpp"
 
-#include "moci/core/preprocessor.hpp"
+#include <moci/core/preprocessor.hpp>
 
 namespace moci
 {

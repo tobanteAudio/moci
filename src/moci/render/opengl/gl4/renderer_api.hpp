@@ -2,7 +2,7 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "moci/render/api.hpp"
+#include <moci/render/api.hpp>
 
 namespace moci
 {

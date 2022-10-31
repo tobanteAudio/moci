@@ -2,7 +2,7 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "moci/render/graphics_context.hpp"
+#include <moci/render/graphics_context.hpp>
 
 struct GLFWwindow;
 

@@ -4,9 +4,9 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci/core/system/info.hpp"
+#include <moci/core/system/info.hpp>
 
-#include "moci/core/preprocessor.hpp"
+#include <moci/core/preprocessor.hpp>
 
 #if defined(MOCI_LINUX)
 TEST_CASE("system: SystemInfoOSName", "[system]") { REQUIRE(moci::SystemInfo::getOSName() == "Linux"); }

@@ -1,9 +1,9 @@
 #pragma once
-#include "moci/core/preprocessor.hpp"
+#include <moci/core/preprocessor.hpp>
 
 #if defined(MOCI_LINUX)
 
-#include "moci/core/system/info.hpp"
+#include <moci/core/system/info.hpp>
 
 #include <string>
 #include <unordered_map>

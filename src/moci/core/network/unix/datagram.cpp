@@ -1,8 +1,8 @@
-#include "moci/core/network/unix/datagram.hpp"
+#include "datagram.hpp"
 
 #if defined(MOCI_LINUX) || defined(MOCI_MAC)
 
-#include "moci/core/logging.hpp"
+#include <moci/core/logging.hpp>
 
 #include <cassert>
 #include <cstdio>

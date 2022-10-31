@@ -1,8 +1,8 @@
 #pragma once
 
-#include "moci/core/geometry/rectangle.hpp"
-#include "moci/graphics/color.hpp"
-#include "moci/render/vertex_array.hpp"
+#include <moci/core/geometry/rectangle.hpp>
+#include <moci/graphics/color.hpp>
+#include <moci/render/vertex_array.hpp>
 
 #include <any>
 

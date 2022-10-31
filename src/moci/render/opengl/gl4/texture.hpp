@@ -4,8 +4,8 @@
 
 #include "gl4.hpp"
 
-#include "moci/core/span.hpp"
-#include "moci/render/texture.hpp"
+#include <moci/core/span.hpp>
+#include <moci/render/texture.hpp>
 
 namespace moci
 {

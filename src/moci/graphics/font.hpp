@@ -1,7 +1,7 @@
 #pragma once
 
-#include "moci/core/geometry/point.hpp"
-#include "moci/core/vector.hpp"
+#include <moci/core/geometry/point.hpp>
+#include <moci/core/vector.hpp>
 
 #include <cstdint>
 #include <map>

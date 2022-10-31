@@ -1,9 +1,9 @@
 #pragma once
 
-#include "moci/core/logging.hpp"
-#include "moci/core/span.hpp"
-#include "moci/core/vector.hpp"
-#include "moci/graphics/color.hpp"
+#include <moci/core/logging.hpp>
+#include <moci/core/span.hpp>
+#include <moci/core/vector.hpp>
+#include <moci/graphics/color.hpp>
 
 #include "glm/glm.hpp"
 

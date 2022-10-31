@@ -1,7 +1,7 @@
 #pragma once
 
-#include "moci/core/memory.hpp"
-#include "moci/core/preprocessor.hpp"
+#include <moci/core/memory.hpp>
+#include <moci/core/preprocessor.hpp>
 
 #include "spdlog/fmt/ostr.h"
 #include "spdlog/spdlog.h"

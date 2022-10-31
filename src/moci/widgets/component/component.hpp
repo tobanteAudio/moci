@@ -1,10 +1,10 @@
 #pragma once
 
-#include "moci/core/geometry/rectangle.hpp"
-#include "moci/core/vector.hpp"
-#include "moci/events/types/event.hpp"
-#include "moci/events/types/mouse_event.hpp"
-#include "moci/graphics_extra/painter.hpp"
+#include <moci/core/geometry/rectangle.hpp>
+#include <moci/core/vector.hpp>
+#include <moci/events/types/event.hpp>
+#include <moci/events/types/mouse_event.hpp>
+#include <moci/graphics_extra/painter.hpp>
 
 #include <memory>
 #include <string>

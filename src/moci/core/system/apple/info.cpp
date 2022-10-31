@@ -1,8 +1,8 @@
-#include "moci/core/system/apple/info.hpp"
+#include "info.hpp"
 
 #if defined(MOCI_MAC)
 
-#include "moci/core/strings.hpp"
+#include <moci/core/strings.hpp>
 
 #include <algorithm>
 #include <fstream>

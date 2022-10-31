@@ -2,7 +2,7 @@
 
 #include "render_command.hpp"
 
-#include "moci/core/memory.hpp"
+#include <moci/core/memory.hpp>
 
 namespace moci
 {

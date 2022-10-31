@@ -1,16 +1,16 @@
 #pragma once
 
-#include "moci/core/logging.hpp"
+#include <moci/core/logging.hpp>
 
 #if defined(MOCI_WINDOWS)
 
-#include "moci/core/network/datagram.hpp"
+#include <moci/core/network/datagram.hpp>
 
 #include <cstdint>
 
-#include "moci/core/vector.hpp"
 #include <atomic>
 #include <functional>
+#include <moci/core/vector.hpp>
 #include <string>
 #include <thread>
 

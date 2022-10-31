@@ -4,7 +4,7 @@
 
 #include "gl4.hpp"
 
-#include "moci/core/benchmark/profile.hpp"
+#include <moci/core/benchmark/profile.hpp>
 
 namespace moci
 {

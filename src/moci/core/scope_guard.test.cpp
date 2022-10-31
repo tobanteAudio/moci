@@ -4,8 +4,8 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci/core/scope_guard.hpp"
-#include "moci/core/vector.hpp"
+#include <moci/core/scope_guard.hpp>
+#include <moci/core/vector.hpp>
 
 TEST_CASE("core: MakeScopeGuard", "[core]")
 {

@@ -2,9 +2,9 @@
  * @file layer_stack.test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
-#include <catch2/catch_all.hpp>
+#include "layer_stack.hpp"
 
-#include "moci/events/layer/layer_stack.hpp"
+#include <catch2/catch_all.hpp>
 
 #include <iterator>
 #include <memory>

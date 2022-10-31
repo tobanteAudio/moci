@@ -1,7 +1,7 @@
 #pragma once
 
-#include "moci/core/span.hpp"
-#include "moci/render/buffer.hpp"
+#include <moci/core/span.hpp>
+#include <moci/render/buffer.hpp>
 
 #include <cstddef>
 

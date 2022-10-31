@@ -1,7 +1,7 @@
 #pragma once
 
-#include "moci/core/memory.hpp"
-#include "moci/core/vector.hpp"
+#include <moci/core/memory.hpp>
+#include <moci/core/vector.hpp>
 
 #include <glm/glm.hpp>
 

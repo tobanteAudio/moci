@@ -5,10 +5,10 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_all.hpp>
 
-#include "moci/events/types/application_event.hpp"
-#include "moci/events/types/event.hpp"
-#include "moci/events/types/key_event.hpp"
-#include "moci/events/types/mouse_event.hpp"
+#include <moci/events/types/application_event.hpp>
+#include <moci/events/types/event.hpp>
+#include <moci/events/types/key_event.hpp>
+#include <moci/events/types/mouse_event.hpp>
 
 // using Catch::Matchers::Contains;
 

@@ -4,7 +4,7 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci/render/buffer.hpp"
+#include <moci/render/buffer.hpp>
 
 TEST_CASE("render/buffer: BufferElement", "[render]")
 {

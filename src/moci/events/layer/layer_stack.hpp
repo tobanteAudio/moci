@@ -2,7 +2,7 @@
 
 #include "layer.hpp"
 
-#include "moci/core/vector.hpp"
+#include <moci/core/vector.hpp>
 
 namespace moci
 {

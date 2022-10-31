@@ -1,11 +1,11 @@
 #include "render_queue.hpp"
 
-#include "moci/core/benchmark/profile.hpp"
-#include "moci/render/buffer.hpp"
-#include "moci/render/render_factory.hpp"
-#include "moci/render/shader.hpp"
-#include "moci/render/texture.hpp"
-#include "moci/render/vertex_array.hpp"
+#include <moci/core/benchmark/profile.hpp>
+#include <moci/render/buffer.hpp>
+#include <moci/render/render_factory.hpp>
+#include <moci/render/shader.hpp>
+#include <moci/render/texture.hpp>
+#include <moci/render/vertex_array.hpp>
 
 #include <ft2build.h>
 #include FT_FREETYPE_H

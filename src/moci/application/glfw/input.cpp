@@ -1,14 +1,14 @@
 #include "input.hpp"
 
-#include <cmath>
-
-#include "moci/application/application.hpp"
+#include <moci/application/application.hpp>
 
 #if not defined(MOCI_API_OPENGL_ES)
 #include <GL/glew.h>
 #endif
 
 #include <GLFW/glfw3.h>
+
+#include <cmath>
 
 namespace moci
 {

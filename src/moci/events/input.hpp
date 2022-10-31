@@ -1,11 +1,10 @@
 #pragma once
 
-#include "key_codes.hpp"
-#include "mouse_button_codes.hpp"
+#include <moci/core/logging.hpp>
+#include <moci/events/key_codes.hpp>
+#include <moci/events/mouse_button_codes.hpp>
 
-#include "moci/core/logging.hpp"
-
-#include <tuple>
+#include <utility>
 
 namespace moci
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci/render/graphics_context.hpp"
+#include <moci/render/graphics_context.hpp>
 
 struct GLFWwindow;
 namespace moci

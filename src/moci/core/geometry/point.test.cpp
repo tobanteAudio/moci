@@ -4,7 +4,7 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci/core/geometry/point.hpp"
+#include <moci/core/geometry/point.hpp>
 
 TEST_CASE("math/geometry: PointConstructionEmpty", "[geometry]")
 {

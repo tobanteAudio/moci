@@ -2,7 +2,7 @@
 
 #if MOCI_API_OPENGL_MODERN
 
-#include "moci/core/logging.hpp"
+#include <moci/core/logging.hpp>
 
 #if not defined(MOCI_API_OPENGL_ES)
 #include <GL/glew.h>

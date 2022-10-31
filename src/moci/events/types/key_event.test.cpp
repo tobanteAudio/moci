@@ -5,7 +5,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_all.hpp>
 
-#include "moci/events/types/key_event.hpp"
+#include <moci/events/types/key_event.hpp>
 
 // using Catch::Matchers::Contains;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci/render/texture.hpp"
+#include <moci/render/texture.hpp>
 
 namespace moci
 {

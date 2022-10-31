@@ -1,6 +1,3 @@
-.PHONY: all
-all: config build test
-
 BUILD_DIR_BASE = build
 CONFIG ?= Debug
 
@@ -23,37 +20,9 @@ CMAKE_GENERATOR ?= Ninja
 CMAKE_EXTRA_FLAGS ?=
 CMAKE_FLAGS = $(CMAKE_EXTRA_FLAGS)
 
-.PHONY: config
-config:
-	cmake -S. -G$(CMAKE_GENERATOR) $(CMAKE_FLAGS) -B$(BUILD_DIR_BASE)_$(CONFIG) -DCMAKE_BUILD_TYPE=$(CONFIG) -DMOCI_API_OPENGL_LEGACY=ON
-
 .PHONY: config-gles
 config-gles:
 	cmake -G$(CMAKE_GENERATOR) $(CMAKE_FLAGS) -B$(BUILD_DIR_BASE)_$(CONFIG) -DCMAKE_BUILD_TYPE=$(CONFIG) -DMOCI_API_OPENGL_LEGACY=ON -DMOCI_LINK_OPENGL_ES=ON .
-
-.PHONY: config-vs
-config-vs:
-	cmake $(CMAKE_FLAGS) -B$(BUILD_DIR_BASE)_$(CONFIG) -DCMAKE_BUILD_TYPE=$(CONFIG) -DMOCI_API_OPENGL_LEGACY=OFF -DMOCI_API_OPENGL_MODERN=ON .
-
-.PHONY: build
-build:
-	cmake --build $(BUILD_DIR_BASE)_$(CONFIG) --config $(CONFIG)
-
-
-.PHONY: sanitize
-sanitize:
-	cmake -G$(CMAKE_GENERATOR) $(CMAKE_FLAGS) -B$(BUILD_DIR_BASE)_sanitize \
-		-DCMAKE_BUILD_TYPE=$(CONFIG) \
-		-DMOCI_API_OPENGL_LEGACY=ON \
-		-DMOCI_BUILD_ASAN=ON \
-		-DMOCI_BUILD_UBSAN=ON \
-		.
-	cmake --build $(BUILD_DIR_BASE)_sanitize --config $(CONFIG)
-	cd $(BUILD_DIR_BASE)_sanitize && ctest -c
-
-.PHONY: test
-test:
-	cd $(BUILD_DIR_BASE)_$(CONFIG) && ctest -c
 
 .PHONY: tidy-check
 tidy-check:
@@ -81,26 +50,6 @@ coverage-xml: coverage
 docs:
 	cd docs && doxygen Doxyfile.in
 
-.PHONY: clean
-clean:
-	rm -rf $(BUILD_DIR_BASE)_$(CONFIG)
-
-.PHONY: stats
-stats:
-	cloc --exclude-dir=3rd_party\
-	,build_coverage\
-	,build_sanitize\
-	,build_Debug\
-	,build_Release\
-	,documentation\
-	,venv\
-	,playground .
-
 .PHONY: format
 format:
 	find src -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
-	find sandbox2D -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
-	find sandbox3D -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
-	find sandboxOpenGL -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
-	find tools -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' | xargs clang-format -i
-

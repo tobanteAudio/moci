@@ -1,7 +1,7 @@
 #include "shader.hpp"
 
-#include "moci/core/strings.hpp"
-#include "moci/render/opengl/common/shader_parser.hpp"
+#include <moci/core/strings.hpp>
+#include <moci/render/opengl/common/shader_parser.hpp>
 
 #include <glm/gtc/type_ptr.hpp>
 

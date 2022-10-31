@@ -1,6 +1,6 @@
 #include "shader_parser.hpp"
 
-#include "moci/core/logging.hpp"
+#include <moci/core/logging.hpp>
 
 #define GL_FRAGMENT_SHADER 0x8B30
 #define GL_VERTEX_SHADER 0x8B31

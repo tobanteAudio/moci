@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci/render/shader.hpp"
+#include <moci/render/shader.hpp>
 
 namespace moci
 {

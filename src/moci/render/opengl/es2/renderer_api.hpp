@@ -1,7 +1,7 @@
 #pragma once
 
-#include "moci/core/geometry/rectangle.hpp"
-#include "moci/render/api.hpp"
+#include <moci/core/geometry/rectangle.hpp>
+#include <moci/render/api.hpp>
 
 #include <glm/glm.hpp>
 

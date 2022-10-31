@@ -1,4 +1,4 @@
-#include "moci/core/system/windows/info.hpp"
+#include "info.hpp"
 
 #if defined(MOCI_WINDOWS)
 

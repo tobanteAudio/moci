@@ -1,10 +1,9 @@
 #pragma once
 
-#include "moci/core/benchmark/profile.hpp"
-#include "moci/core/logging.hpp"
-#include "moci/graphics/color.hpp"
-
-#include "moci/render/api.hpp"
+#include <moci/core/benchmark/profile.hpp>
+#include <moci/core/logging.hpp>
+#include <moci/graphics/color.hpp>
+#include <moci/render/api.hpp>
 
 namespace moci
 {

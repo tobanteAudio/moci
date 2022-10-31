@@ -4,7 +4,7 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci/core/strings.hpp"
+#include <moci/core/strings.hpp>
 
 TEST_CASE("core: StringsLeftTrim", "[core]")
 {

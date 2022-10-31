@@ -2,10 +2,9 @@
 
 #if defined(MOCI_WINDOWS) || defined(MOCI_MAC) || defined(MOCI_LINUX)
 
-#include "moci/core/preprocessor.hpp"
+#include <moci/core/preprocessor.hpp>
 
 #include <cstdlib>
-
 #include <memory>
 
 extern moci::Application* moci::createApplication();

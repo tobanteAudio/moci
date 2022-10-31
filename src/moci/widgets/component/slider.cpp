@@ -1,6 +1,6 @@
 #include "slider.hpp"
 
-#include "moci/widgets/style/style.hpp"
+#include <moci/widgets/style/style.hpp>
 
 namespace moci
 {

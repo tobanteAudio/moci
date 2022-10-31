@@ -1,9 +1,9 @@
 #include "shader.hpp"
 
 #if defined(MOCI_API_OPENGL_MODERN)
-#include "gl4.hpp"
-#include "moci/core/benchmark/profile.hpp"
-#include "moci/render/opengl/common/shader_parser.hpp"
+#include <moci/core/benchmark/profile.hpp>
+#include <moci/render/opengl/common/shader_parser.hpp>
+#include <moci/render/opengl/gl4/gl4.hpp>
 
 #include <glm/gtc/type_ptr.hpp>
 

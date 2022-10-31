@@ -1,8 +1,8 @@
 #pragma once
 
-#include "moci/widgets/component/button.hpp"
-#include "moci/widgets/component/label.hpp"
-#include "moci/widgets/component/slider.hpp"
+#include <moci/widgets/component/button.hpp>
+#include <moci/widgets/component/label.hpp>
+#include <moci/widgets/component/slider.hpp>
 
 namespace moci
 {

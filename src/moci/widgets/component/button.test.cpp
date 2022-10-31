@@ -4,8 +4,8 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci/widgets/component/button.hpp"
-#include "moci/widgets/style/style.hpp"
+#include <moci/widgets/component/button.hpp>
+#include <moci/widgets/style/style.hpp>
 
 TEST_CASE("widget: ButtonConstruct", "[ui]")
 {

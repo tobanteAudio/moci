@@ -1,8 +1,8 @@
 #pragma once
 
-#include "moci/core/memory.hpp"
-#include "moci/render/buffer.hpp"
-#include "moci/render/vertex_array.hpp"
+#include <moci/core/memory.hpp>
+#include <moci/render/buffer.hpp>
+#include <moci/render/vertex_array.hpp>
 
 namespace moci
 {

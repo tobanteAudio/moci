@@ -1,10 +1,9 @@
 #pragma once
 
-#include "moci/application/window.hpp"
-
-#include "moci/core/logging.hpp"
-#include "moci/render/api.hpp"
-#include "moci/render/graphics_context.hpp"
+#include <moci/application/window.hpp>
+#include <moci/core/logging.hpp>
+#include <moci/render/api.hpp>
+#include <moci/render/graphics_context.hpp>
 
 #if MOCI_API_OPENGL_ES
 #define GLFW_INCLUDE_ES2

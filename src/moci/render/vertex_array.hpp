@@ -1,7 +1,7 @@
 #pragma once
 
-#include "moci/core/memory.hpp"
-#include "moci/render/buffer.hpp"
+#include <moci/core/memory.hpp>
+#include <moci/render/buffer.hpp>
 
 namespace moci
 {

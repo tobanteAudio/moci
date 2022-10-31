@@ -1,8 +1,8 @@
 #pragma once
 
-#include "moci/core/memory.hpp"
-#include "moci/events/timestep.hpp"
-#include "moci/events/types/event.hpp"
+#include <moci/core/memory.hpp>
+#include <moci/events/timestep.hpp>
+#include <moci/events/types/event.hpp>
 
 #include <string>
 

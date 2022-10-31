@@ -4,7 +4,7 @@
  */
 #include <catch2/catch_all.hpp>
 
-#include "moci/core/property_map.hpp"
+#include <moci/core/property_map.hpp>
 
 TEST_CASE("core: PropertyMapKeyTypes", "[core]")
 {

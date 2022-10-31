@@ -2,11 +2,12 @@
  * @file slider.test.cpp
  * @copyright Copyright 2019-2020 tobanteAudio.
  */
+#include "slider.hpp"
+
 #include <catch2/catch_all.hpp>
 #include <catch2/catch_approx.hpp>
 
-#include "moci/widgets/component/slider.hpp"
-#include "moci/widgets/style/style.hpp"
+#include <moci/widgets/style/style.hpp>
 
 TEST_CASE("widget: SliderConstruct", "[ui]")
 {

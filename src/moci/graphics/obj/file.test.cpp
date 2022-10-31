@@ -6,7 +6,7 @@
 
 #include "file.hpp"
 
-#include "moci/core/preprocessor.hpp"
+#include <moci/core/preprocessor.hpp>
 
 #if !defined(MOCI_WINDOWS)
 TEST_CASE("graphics: OBJFileCube", "[graphics][obj]")

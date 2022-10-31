@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moci/widgets/component/component.hpp"
+#include <moci/widgets/component/component.hpp>
 
 #include <algorithm>
 #include <functional>

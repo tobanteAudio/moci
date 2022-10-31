@@ -1,7 +1,7 @@
 #pragma once
 
-#include "moci/core/geometry/point.hpp"
-#include "moci/core/logging.hpp"
+#include <moci/core/geometry/point.hpp>
+#include <moci/core/logging.hpp>
 
 // #include <cmath>
 
