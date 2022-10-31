@@ -6,10 +6,12 @@
 namespace moci
 {
 
+#if defined(MOCI_API_OPENGL_LEGACY)
 auto GraphicsContext::create(void* win) -> GraphicsContext*
 {
     return new OpenGLESContext(static_cast<GLFWwindow*>(win));
 }
+#endif
 
 OpenGLESContext::OpenGLESContext(GLFWwindow* windowHandle) : _windowHandle(windowHandle)
 {

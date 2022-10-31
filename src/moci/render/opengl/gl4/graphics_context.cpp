@@ -9,6 +9,8 @@
 namespace moci
 {
 
+auto GraphicsContext::create(void* win) -> GraphicsContext* { return new OpenGLContext(static_cast<GLFWwindow*>(win)); }
+
 OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : _windowHandle(windowHandle)
 {
     MOCI_CORE_ASSERT(windowHandle, "Window handle is null!")
