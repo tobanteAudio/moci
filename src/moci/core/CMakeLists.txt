@@ -78,4 +78,3 @@ target_link_libraries(moci_core_tests
         Moci::CodeCoverage
         Catch2::Catch2
 )
-

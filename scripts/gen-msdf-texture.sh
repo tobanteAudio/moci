@@ -19,4 +19,3 @@ done
 
 montage tmp/*.png -geometry +0+0 -tile 16x DejaVuSansMono.png
 convert DejaVuSansMono.png -define h:format=rgba -depth 8 DejaVuSansMono.h
-
