@@ -93,7 +93,7 @@ void GlfwWindow::init(WindowSpecs props)
         ignoreUnused(mods);
 
         WindowData const& data = *(WindowData*)glfwGetWindowUserPointer(window);
-        auto const key   = static_cast<Key>(glfwKey);
+        auto const key         = static_cast<Key>(glfwKey);
         switch (action) {
             case GLFW_PRESS: {
                 KeyPressedEvent event(key, 0);

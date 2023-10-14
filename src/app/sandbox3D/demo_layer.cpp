@@ -20,9 +20,9 @@
 
 namespace {
 #if defined(MOCI_API_OPENGL_LEGACY)
-constexpr auto shaderPrefix = "es2";
+constexpr auto ShaderPrefix = "es2";
 #else
-constexpr auto shaderPrefix = "gl4";
+constexpr auto ShaderPrefix = "gl4";
 #endif
 
 auto skyboxVertices = std::array{
@@ -82,7 +82,7 @@ void DemoLayer::onAttach()
     _vertices.reserve(numVertices);
 
     auto const path
-        = fmt::format("src/app/sandbox3D/assets/shader/{}_general.glsl", shaderPrefix);
+        = fmt::format("src/app/sandbox3D/assets/shader/{}_general.glsl", ShaderPrefix);
     _shader = moci::RenderFactory::makeShader(path);
     _shader->bind();
 
@@ -131,7 +131,7 @@ void DemoLayer::onAttach()
     }
 
     auto const skyBoxShaderPath
-        = fmt::format("src/app/sandbox3D/assets/shader/{}_skybox.glsl", shaderPrefix);
+        = fmt::format("src/app/sandbox3D/assets/shader/{}_skybox.glsl", ShaderPrefix);
     _skyboxShader = moci::RenderFactory::makeShader(skyBoxShaderPath);
     _skyboxShader->bind();
     _skyboxShader->setInt("u_Skybox", 0);

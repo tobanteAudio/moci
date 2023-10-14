@@ -4,9 +4,9 @@
 #include <cstdint>
 
 #if defined(MOCI_API_OPENGL_LEGACY)
-constexpr auto shaderSuffix = "es2";
+constexpr auto ShaderSuffix = "es2";
 #else
-constexpr auto shaderSuffix = "gl4";
+constexpr auto ShaderSuffix = "gl4";
 #endif
 
 namespace assets {

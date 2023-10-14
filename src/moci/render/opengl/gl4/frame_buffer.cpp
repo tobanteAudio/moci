@@ -7,42 +7,42 @@
 
 namespace moci {
 
-OpenGLFramebuffer::OpenGLFramebuffer(FramebufferSpecs spec) : specs_(spec) { invalidate(); }
+OpenGLFramebuffer::OpenGLFramebuffer(FramebufferSpecs spec) : _specs(spec) { invalidate(); }
 
 OpenGLFramebuffer::~OpenGLFramebuffer() { deallocate(); }
 
 void OpenGLFramebuffer::bind()
 {
-    glBindFramebuffer(GL_FRAMEBUFFER, renderID_);
-    glViewport(0, 0, specs_.width, specs_.height);
+    glBindFramebuffer(GL_FRAMEBUFFER, _renderID);
+    glViewport(0, 0, _specs.width, _specs.height);
 }
 
 void OpenGLFramebuffer::unbind() { glBindFramebuffer(GL_FRAMEBUFFER, 0); }
 
 void OpenGLFramebuffer::resize(std::uint32_t width, std::uint32_t height)
 {
-    specs_.width  = width;
-    specs_.height = height;
+    _specs.width  = width;
+    _specs.height = height;
     invalidate();
 }
 
 void OpenGLFramebuffer::invalidate()
 {
-    if (renderID_ != 0) {
+    if (_renderID != 0) {
         deallocate();
     }
 
-    glCreateFramebuffers(1, &renderID_);
-    glBindFramebuffer(GL_FRAMEBUFFER, renderID_);
+    glCreateFramebuffers(1, &_renderID);
+    glBindFramebuffer(GL_FRAMEBUFFER, _renderID);
 
-    glCreateTextures(GL_TEXTURE_2D, 1, &colorAttachment_);
-    glBindTexture(GL_TEXTURE_2D, colorAttachment_);
+    glCreateTextures(GL_TEXTURE_2D, 1, &_colorAttachment);
+    glBindTexture(GL_TEXTURE_2D, _colorAttachment);
     glTexImage2D(
         GL_TEXTURE_2D,
         0,
         GL_RGBA8,
-        specs_.width,
-        specs_.height,
+        _specs.width,
+        _specs.height,
         0,
         GL_RGBA,
         GL_UNSIGNED_BYTE,
@@ -55,18 +55,18 @@ void OpenGLFramebuffer::invalidate()
         GL_FRAMEBUFFER,
         GL_COLOR_ATTACHMENT0,
         GL_TEXTURE_2D,
-        colorAttachment_,
+        _colorAttachment,
         0
     );
 
-    glCreateTextures(GL_TEXTURE_2D, 1, &depthAttachment_);
-    glBindTexture(GL_TEXTURE_2D, depthAttachment_);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH24_STENCIL8, specs_.width, specs_.height);
+    glCreateTextures(GL_TEXTURE_2D, 1, &_depthAttachment);
+    glBindTexture(GL_TEXTURE_2D, _depthAttachment);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH24_STENCIL8, _specs.width, _specs.height);
     glFramebufferTexture2D(
         GL_FRAMEBUFFER,
         GL_DEPTH_STENCIL_ATTACHMENT,
         GL_TEXTURE_2D,
-        depthAttachment_,
+        _depthAttachment,
         0
     );
 
@@ -80,9 +80,9 @@ void OpenGLFramebuffer::invalidate()
 
 void OpenGLFramebuffer::deallocate()
 {
-    glDeleteFramebuffers(1, &renderID_);
-    glDeleteTextures(1, &colorAttachment_);
-    glDeleteTextures(1, &depthAttachment_);
+    glDeleteFramebuffers(1, &_renderID);
+    glDeleteTextures(1, &_colorAttachment);
+    glDeleteTextures(1, &_depthAttachment);
 }
 }  // namespace moci
 

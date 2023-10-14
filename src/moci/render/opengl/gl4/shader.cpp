@@ -14,7 +14,7 @@
 namespace moci {
 
 namespace {
-auto OpenGLShaderTypeFromShaderType(ShaderType type) -> GLenum
+auto openGlShaderTypeFromShaderType(ShaderType type) -> GLenum
 {
     if (type == ShaderType::Vertex) {
         return GL_VERTEX_SHADER;
@@ -33,9 +33,9 @@ OpenGLShader::OpenGLShader(std::string const& filepath)
 {
     MOCI_PROFILE_FUNCTION();
 
-    std::string const source = ReadFile(filepath);
-    auto shaderSources = PreProcess(source);
-    Compile(shaderSources);
+    std::string const source = readFile(filepath);
+    auto shaderSources       = preProcess(source);
+    compile(shaderSources);
 
     // Extract name from filepath
     auto lastSlash = filepath.find_last_of("/\\");
@@ -58,7 +58,7 @@ OpenGLShader::OpenGLShader(
     std::unordered_map<GLenum, std::string> sources;
     sources[GL_VERTEX_SHADER]   = vertexSrc;
     sources[GL_FRAGMENT_SHADER] = fragmentSrc;
-    Compile(sources);
+    compile(sources);
 }
 
 OpenGLShader::~OpenGLShader()
@@ -68,7 +68,7 @@ OpenGLShader::~OpenGLShader()
     glDeleteProgram(_rendererID);
 }
 
-auto OpenGLShader::ReadFile(std::string const& filepath) -> std::string
+auto OpenGLShader::readFile(std::string const& filepath) -> std::string
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -83,7 +83,7 @@ auto OpenGLShader::ReadFile(std::string const& filepath) -> std::string
     return {};
 }
 
-auto OpenGLShader::PreProcess(std::string const& source)
+auto OpenGLShader::preProcess(std::string const& source)
     -> std::unordered_map<GLenum, std::string>
 {
     MOCI_PROFILE_FUNCTION();
@@ -91,14 +91,14 @@ auto OpenGLShader::PreProcess(std::string const& source)
     auto shaderSources = std::unordered_map<GLenum, std::string>{};
     auto const program = ShaderParser::splitSource(source);
     for (auto const& shader : program.shaders) {
-        auto const type     = OpenGLShaderTypeFromShaderType(shader.type);
+        auto const type     = openGlShaderTypeFromShaderType(shader.type);
         shaderSources[type] = shader.source;
     }
 
     return shaderSources;
 }
 
-void OpenGLShader::Compile(std::unordered_map<GLenum, std::string> const& shaderSources)
+void OpenGLShader::compile(std::unordered_map<GLenum, std::string> const& shaderSources)
 {
     MOCI_PROFILE_FUNCTION();
 
@@ -107,7 +107,7 @@ void OpenGLShader::Compile(std::unordered_map<GLenum, std::string> const& shader
     std::array<GLenum, 2> glShaderIDs{};
     int glShaderIDIndex = 0;
     for (auto const& kv : shaderSources) {
-        GLenum const type               = kv.first;
+        GLenum const type         = kv.first;
         std::string const& source = kv.second;
 
         GLuint const shader = glCreateShader(type);

@@ -45,12 +45,12 @@ enum EventCategory
 };
 
 #define EVENT_CLASS_TYPE(type)                                                             \
-    static EventType getStaticType() { return EventType::type; }                           \
-    virtual EventType getEventType() const override { return getStaticType(); }            \
-    virtual std::string_view getName() const override { return #type; }
+    static auto getStaticType() -> EventType { return EventType::type; }                   \
+    virtual auto getEventType() const -> EventType override { return getStaticType(); }    \
+    virtual auto getName() const -> std::string_view override { return #type; }
 
 #define EVENT_CLASS_CATEGORY(category)                                                     \
-    virtual int getCategoryFlags() const override { return category; }
+    virtual auto getCategoryFlags() const -> int override { return category; }
 
 class Event
 {

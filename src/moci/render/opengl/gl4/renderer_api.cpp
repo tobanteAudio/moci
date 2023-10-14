@@ -9,7 +9,7 @@
 namespace moci {
 
 namespace {
-auto MociToOpenGLDrawMode(RenderDrawMode const mode) noexcept -> int
+auto mociToOpenGlDrawMode(RenderDrawMode const mode) noexcept -> int
 {
 
     switch (mode) {
@@ -47,7 +47,7 @@ auto MociToOpenGLDrawMode(RenderDrawMode const mode) noexcept -> int
 
 }  // namespace
 
-void OpenGLMessageCallback(
+void openGlMessageCallback(
     unsigned source,
     unsigned type,
     unsigned id,
@@ -120,7 +120,7 @@ void OpenGLRendererAPI::drawArrays(
     uint32_t count
 )
 {
-    auto const glDrawMode = MociToOpenGLDrawMode(mode);
+    auto const glDrawMode = mociToOpenGlDrawMode(mode);
     glDrawArrays(glDrawMode, first, count);
 }
 
@@ -130,7 +130,7 @@ void OpenGLRendererAPI::drawIndexed(
     void* indices
 )
 {
-    auto const glDrawMode = MociToOpenGLDrawMode(mode);
+    auto const glDrawMode = mociToOpenGlDrawMode(mode);
     glDrawElements(glDrawMode, count, GL_UNSIGNED_INT, indices);
 }
 
@@ -139,7 +139,7 @@ void OpenGLRendererAPI::drawIndexed(
     std::shared_ptr<VertexArray> const& vertexArray
 )
 {
-    auto const glDrawMode = MociToOpenGLDrawMode(mode);
+    auto const glDrawMode = mociToOpenGlDrawMode(mode);
     glDrawElements(
         glDrawMode,
         vertexArray->getIndexBuffer()->getCount(),

@@ -51,10 +51,10 @@ private:
     void uploadUniformMat3(std::string const& name, glm::mat3 const& matrix);
     void uploadUniformMat4(std::string const& name, glm::mat4 const& matrix);
 
-    static auto ReadFile(std::string const& filepath) -> std::string;
-    static auto PreProcess(std::string const& source)
+    static auto readFile(std::string const& filepath) -> std::string;
+    static auto preProcess(std::string const& source)
         -> std::unordered_map<GLenum, std::string>;
-    void Compile(std::unordered_map<GLenum, std::string> const& shaderSources);
+    void compile(std::unordered_map<GLenum, std::string> const& shaderSources);
 
     uint32_t _rendererID{};
     std::string _name;

@@ -7,7 +7,7 @@
 
 namespace moci {
 
-static auto ShaderDataTypeToOpenGLBaseType(ShaderDataType type) -> GLenum
+static auto shaderDataTypeToOpenGlBaseType(ShaderDataType type) -> GLenum
 {
     switch (type) {
         case ShaderDataType::Float: return GL_FLOAT;
@@ -58,7 +58,7 @@ void OpenGLVertexArray::addVertexBuffer(std::shared_ptr<VertexBuffer> const& ver
         glVertexAttribPointer(
             _vertexBufferIndex,
             element.getComponentCount(),
-            ShaderDataTypeToOpenGLBaseType(element.Type),
+            shaderDataTypeToOpenGlBaseType(element.Type),
             element.Normalized ? GL_TRUE : GL_FALSE,
             layout.getStride(),
             (void const*)element.Offset

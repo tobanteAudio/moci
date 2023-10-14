@@ -18,9 +18,12 @@ Checks: >
 
   cppcoreguidelines-*,
   -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-avoid-non-const-global-variables,
   -cppcoreguidelines-avoid-const-or-ref-data-members,
+  -cppcoreguidelines-macro-usage,
   -cppcoreguidelines-pro-bounds-constant-array-index,
   -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-type-union-access,
 
   hicpp-*,
 
@@ -31,7 +34,7 @@ Checks: >
   performance-*,
 
   readability-*,
-  -readability-identifier-naming,
+  readability-identifier-naming,
   -readability-const-return-type,
   -readability-identifier-length,
   -readability-magic-numbers,
@@ -55,6 +58,8 @@ CheckOptions:
     value: camelBack
   - key: readability-identifier-naming.PrivateMemberPrefix
     value: _
+  - key: readability-identifier-naming.PrivateMemberSuffix
+    value: ""
   - key: readability-identifier-naming.EnumCase
     value: CamelCase
   - key: readability-identifier-naming.FunctionCase

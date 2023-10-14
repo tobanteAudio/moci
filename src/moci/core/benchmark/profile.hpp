@@ -145,7 +145,7 @@ private:
 class InstrumentationTimer
 {
 public:
-    explicit InstrumentationTimer(char const* name) : _name(name)
+    explicit InstrumentationTimer(std::string_view name) : _name(name)
     {
         _startTimepoint = std::chrono::steady_clock::now();
     }
@@ -167,15 +167,18 @@ public:
             - std::chrono::time_point_cast<std::chrono::microseconds>(_startTimepoint)
                   .time_since_epoch();
 
-        Instrumentor::get().writeProfile(
-            {_name, highResStart, elapsedTime, std::this_thread::get_id()}
-        );
+        Instrumentor::get().writeProfile({
+            .Name        = std::string{_name},
+            .Start       = highResStart,
+            .ElapsedTime = elapsedTime,
+            .ThreadID    = std::this_thread::get_id(),
+        });
 
         _stopped = true;
     }
 
 private:
-    char const* _name;
+    std::string_view _name;
     std::chrono::time_point<std::chrono::steady_clock> _startTimepoint;
     bool _stopped{false};
 };

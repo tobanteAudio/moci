@@ -20,22 +20,22 @@ public:
 
     [[nodiscard]] auto getColorAttachmentRendererId() const -> std::uint32_t override
     {
-        return colorAttachment_;
+        return _colorAttachment;
     }
 
     [[nodiscard]] auto getSpecification() const -> FramebufferSpecs const& override
     {
-        return specs_;
+        return _specs;
     }
 
 private:
     void invalidate();
     void deallocate();
 
-    std::uint32_t renderID_        = 0;
-    std::uint32_t colorAttachment_ = 0;
-    std::uint32_t depthAttachment_ = 0;
-    FramebufferSpecs specs_        = {};
+    std::uint32_t _renderID        = 0;
+    std::uint32_t _colorAttachment = 0;
+    std::uint32_t _depthAttachment = 0;
+    FramebufferSpecs _specs        = {};
 };
 
 }  // namespace moci

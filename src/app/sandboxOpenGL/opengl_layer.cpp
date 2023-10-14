@@ -11,7 +11,7 @@ auto imGuiToGlmVec(ImVec2 const& input) -> glm::vec2 { return {input.x, input.y}
 
 void OpenGLLayer::onAttach()
 {
-    auto const path = fmt::format("assets/shader/basic_{}.glsl", shaderSuffix);
+    auto const path = fmt::format("assets/shader/basic_{}.glsl", ShaderSuffix);
     auto samplers   = std::array{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     _shader         = moci::RenderFactory::makeShader(path);
     _shader->bind();
