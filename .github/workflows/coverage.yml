@@ -28,7 +28,7 @@ jobs:
           conan profile update conf.tools.system.package_manager:sudo=True default
 
       - name: Run coverage build
-        run: make coverage-xml coverage-html
+        run: make coverage-xml
 
       - uses: codecov/codecov-action@v3
         with:
