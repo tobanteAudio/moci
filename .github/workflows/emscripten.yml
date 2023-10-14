@@ -23,7 +23,7 @@ jobs:
 
       - name: Install conan
         run: |
-          pip install conan
+          pip3 install --force-reinstall "conan==1.61.0"
           conan config init
           conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
