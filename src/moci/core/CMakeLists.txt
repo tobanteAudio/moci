@@ -11,7 +11,6 @@ target_sources(moci_core
     PRIVATE
         logging.hpp
         logging.cpp
-        memory.hpp
         preprocessor.hpp
         property_map.hpp
         property_map.cpp
@@ -19,7 +18,6 @@ target_sources(moci_core
         scope_guard.cpp
         span.hpp
         strings.hpp
-        vector.hpp
 
         geometry/line.hpp
         geometry/rectangle.hpp

@@ -2,12 +2,11 @@
 
 #include <moci/core/logging.hpp>
 #include <moci/core/span.hpp>
-#include <moci/core/vector.hpp>
 
 #include <cstdint>
-
 #include <initializer_list>
 #include <utility>
+#include <vector>
 
 namespace moci
 {
@@ -95,12 +94,12 @@ public:
     BufferLayout(std::initializer_list<BufferElement> elements) : _elements(elements) { calculateOffsetsAndStride(); }
 
     [[nodiscard]] inline auto getStride() const -> std::uint32_t { return _stride; }
-    [[nodiscard]] inline auto getElements() const -> Vector<BufferElement> const& { return _elements; }
+    [[nodiscard]] inline auto getElements() const -> std::vector<BufferElement> const& { return _elements; }
 
-    auto begin() -> Vector<BufferElement>::iterator { return _elements.begin(); }
-    auto end() -> Vector<BufferElement>::iterator { return _elements.end(); }
-    [[nodiscard]] auto begin() const -> Vector<BufferElement>::const_iterator { return _elements.begin(); }
-    [[nodiscard]] auto end() const -> Vector<BufferElement>::const_iterator { return _elements.end(); }
+    auto begin() -> std::vector<BufferElement>::iterator { return _elements.begin(); }
+    auto end() -> std::vector<BufferElement>::iterator { return _elements.end(); }
+    [[nodiscard]] auto begin() const -> std::vector<BufferElement>::const_iterator { return _elements.begin(); }
+    [[nodiscard]] auto end() const -> std::vector<BufferElement>::const_iterator { return _elements.end(); }
 
 private:
     void calculateOffsetsAndStride()
@@ -115,7 +114,7 @@ private:
         }
     }
 
-    Vector<BufferElement> _elements;
+    std::vector<BufferElement> _elements;
     uint32_t _stride = 0;
 };
 

@@ -6,8 +6,8 @@
 namespace moci
 {
 #if defined(MOCI_API_OPENGL_LEGACY)
-Scope<RendererAPI> RenderCommand::sRendererApi = makeScope<OpenGLESRendererAPI>();
+std::unique_ptr<RendererAPI> RenderCommand::sRendererApi = std::make_unique<OpenGLESRendererAPI>();
 #else
-Scope<RendererAPI> RenderCommand::sRendererApi = makeScope<OpenGLRendererAPI>();
+std::unique_ptr<RendererAPI> RenderCommand::sRendererApi = std::make_unique<OpenGLRendererAPI>();
 #endif
 }  // namespace moci

@@ -41,7 +41,7 @@ private:
 
     IndexBufferSpecs _specs                    = {};
     uint32_t _rendererID                       = {};
-    Scope<Vector<std::uint16_t>> _indicesShort = makeScope<Vector<std::uint16_t>>();
+    std::unique_ptr<std::vector<std::uint16_t>> _indicesShort = std::make_unique<std::vector<std::uint16_t>>();
 };
 
 }  // namespace moci

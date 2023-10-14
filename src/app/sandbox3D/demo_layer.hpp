@@ -35,7 +35,7 @@ private:
     float _lastTimestep = 0.0F;
     bool _fullscreen    = false;
 
-    moci::Ref<moci::Framebuffer> _framebuffer = nullptr;
+    std::shared_ptr<moci::Framebuffer> _framebuffer = nullptr;
     glm::vec2 _viewportSize                   = {};
 
     glm::vec3 _cameraPos   = {15.0F, 8.70F, 50.0F};
@@ -52,27 +52,27 @@ private:
     glm::vec3 _cameraLookAt         = {0.0F, 0.0F, 0.0F};
     float _ambientLight             = 0.1F;
     float _modelScale               = 0.15F;
-    moci::Scope<moci::Light> _light = {};
+    std::unique_ptr<moci::Light> _light = {};
 
-    moci::Ref<moci::Shader> _shader    = nullptr;
-    moci::Ref<moci::VertexBuffer> _vbo = nullptr;
-    moci::Ref<moci::IndexBuffer> _ibo  = nullptr;
-    moci::Ref<moci::VertexArray> _vao  = nullptr;
+    std::shared_ptr<moci::Shader> _shader    = nullptr;
+    std::shared_ptr<moci::VertexBuffer> _vbo = nullptr;
+    std::shared_ptr<moci::IndexBuffer> _ibo  = nullptr;
+    std::shared_ptr<moci::VertexArray> _vao  = nullptr;
 
     std::size_t _numVertices = {};
     moci::Mesh _mesh {"src/app/sandbox3D/assets/models/cerberus.fbx"};
     moci::Mesh _floor {"src/app/sandbox3D/assets/models/plane.obj"};
 
-    moci::Ref<moci::Texture2D> _textureSolid  = {};
-    moci::Ref<moci::Texture2D> _textureColors = {};
+    std::shared_ptr<moci::Texture2D> _textureSolid  = {};
+    std::shared_ptr<moci::Texture2D> _textureColors = {};
 
-    moci::Ref<moci::Shader> _skyboxShader       = nullptr;
-    moci::Ref<moci::VertexBuffer> _skyboxVbo    = nullptr;
-    moci::Ref<moci::IndexBuffer> _skyboxIbo     = nullptr;
-    moci::Ref<moci::VertexArray> _skyboxVao     = nullptr;
-    moci::Ref<moci::TextureCube> _skyBoxTexture = {};
+    std::shared_ptr<moci::Shader> _skyboxShader       = nullptr;
+    std::shared_ptr<moci::VertexBuffer> _skyboxVbo    = nullptr;
+    std::shared_ptr<moci::IndexBuffer> _skyboxIbo     = nullptr;
+    std::shared_ptr<moci::VertexArray> _skyboxVao     = nullptr;
+    std::shared_ptr<moci::TextureCube> _skyBoxTexture = {};
 
-    moci::Vector<moci::Mesh::Vertex> _vertices = {};
+    std::vector<moci::Mesh::Vertex> _vertices = {};
 
     // imgui
     struct DrawStats
@@ -83,7 +83,7 @@ private:
     };
 
     DrawStats _drawStats            = {};
-    moci::Vector<float> _fpsHistory = {};
+    std::vector<float> _fpsHistory = {};
     bool _imguiWindow               = true;
     bool _imguiDemo                 = false;
 };

@@ -23,7 +23,7 @@ auto Image::loadFromFile(std::string const& path) -> bool
 
     auto* start = reinterpret_cast<std::uint8_t*>(data);
     auto* end   = reinterpret_cast<std::uint8_t*>(data) + static_cast<ptrdiff_t>(_width * _height * _numChannels);
-    _data       = Vector<std::uint8_t>(start, end);
+    _data       = std::vector<std::uint8_t>(start, end);
 
     stbi_image_free(data);
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <moci/core/geometry/rectangle.hpp>
-#include <moci/core/vector.hpp>
 #include <moci/events/types/event.hpp>
 #include <moci/events/types/mouse_event.hpp>
 #include <moci/graphics_extra/painter.hpp>
@@ -10,6 +9,7 @@
 #include <string>
 #include <string_view>
 #include <utility>
+#include <vector>
 
 namespace moci
 {
@@ -92,7 +92,7 @@ public:
     /**
      * @brief Returns a vector of all children.
      */
-    [[nodiscard]] auto getChildren() const noexcept -> Vector<Component*> const&;
+    [[nodiscard]] auto getChildren() const noexcept -> std::vector<Component*> const&;
 
     /**
      * @brief Sets the bottom left as (x, y).
@@ -162,7 +162,7 @@ public:
 private:
     std::string _id {};
     Component* _parent {nullptr};
-    Vector<Component*> _children {};
+    std::vector<Component*> _children {};
     Rectangle<int> _bounds {};
     Style* _style {nullptr};
 };

@@ -12,7 +12,7 @@ public:
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox-3d", "moci-sandbox-3d.json");
         getWindow().setFullscreen(true);
         getWindow().setVSync(false);
-        pushLayer(moci::makeScope<DemoLayer>());
+        pushLayer(std::make_unique<DemoLayer>());
     }
 
     ~Sandbox() override { MOCI_PROFILE_END_SESSION(); }

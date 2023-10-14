@@ -126,10 +126,10 @@ public:
     float lastTimestep_ = 0.0f;
     bool fullscreen_    = false;
 
-    moci::Ref<moci::Shader> shader_    = nullptr;
-    moci::Ref<moci::VertexBuffer> vbo_ = nullptr;
-    moci::Ref<moci::IndexBuffer> ibo_  = nullptr;
-    moci::Ref<moci::VertexArray> vao_  = nullptr;
+    std::shared_ptr<moci::Shader> shader_    = nullptr;
+    std::shared_ptr<moci::VertexBuffer> vbo_ = nullptr;
+    std::shared_ptr<moci::IndexBuffer> ibo_  = nullptr;
+    std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 
     std::size_t numVertices_ {};
 
@@ -144,7 +144,7 @@ public:
 
     DrawStats drawStats_ {};
 
-    moci::Vector<float> fpsHistory_ = {};
+    std::vector<float> fpsHistory_ = {};
     bool imguiWindow_               = true;
     bool imguiDemo_                 = false;
 };
@@ -155,7 +155,7 @@ public:
     MociModelViwerApp()
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-model-viewer", "moci-model-viewer.json");
-        PushLayer(moci::makeScope<MociModelViwerLayer>());
+        PushLayer(std::make_unique<MociModelViwerLayer>());
     }
 
     ~MociModelViwerApp() override { MOCI_PROFILE_END_SESSION(); }

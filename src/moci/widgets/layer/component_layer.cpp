@@ -5,7 +5,7 @@ namespace moci
 void ComponentLayer::onAttach()
 {
     MOCI_PROFILE_FUNCTION();
-    _renderQueue = makeScope<BatchRender2D>();
+    _renderQueue = std::make_unique<BatchRender2D>();
     _rootComponent->setStyle(&_defaultStyle);
     _rootComponent->setSize(static_cast<int>(_width), static_cast<int>(_height));
 }

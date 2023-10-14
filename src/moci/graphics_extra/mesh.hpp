@@ -2,12 +2,13 @@
 
 #include <moci/core/logging.hpp>
 #include <moci/core/span.hpp>
-#include <moci/core/vector.hpp>
 #include <moci/graphics/color.hpp>
 
 #include "glm/glm.hpp"
 
 #include "assimp/Importer.hpp"
+
+#include <vector>
 
 namespace moci
 {
@@ -44,11 +45,12 @@ public:
 
 private:
     std::string _filePath {};
-    moci::Scope<Assimp::Importer> _importer {};
+    std::unique_ptr<Assimp::Importer> _importer {};
     glm::mat4 _inverseTransform {};
-    Vector<Submesh> _submeshes {};
-    Vector<Vertex> _staticVertices {};
+    std::vector<Submesh> _submeshes {};
+    std::vector<Vertex> _staticVertices {};
     bool _isAnimated = false;
-    Vector<Index> _indices {};
+    std::vector<Index> _indices {};
 };
+
 }  // namespace moci

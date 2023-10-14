@@ -77,7 +77,7 @@ auto RenderFactory::makeIndexBuffer(IndexBufferSpecs specs) -> IndexBuffer*
     return nullptr;
 }
 
-auto RenderFactory::makeFramebuffer(FramebufferSpecs spec) -> Ref<Framebuffer>
+auto RenderFactory::makeFramebuffer(FramebufferSpecs spec) -> std::shared_ptr<Framebuffer>
 {
     switch (Renderer::getApi())
     {
@@ -90,14 +90,14 @@ auto RenderFactory::makeFramebuffer(FramebufferSpecs spec) -> Ref<Framebuffer>
         case RendererAPI::API::OpenGL:
         {
             MOCI_CORE_INFO("Make OpenGL FrameBuffer");
-            return makeRef<OpenGLFramebuffer>(spec);
+            return std::make_shared<OpenGLFramebuffer>(spec);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES:
         {
             MOCI_CORE_INFO("Make OpenGLES FrameBuffer");
-            return makeRef<OpenGLESFramebuffer>(spec);
+            return std::make_shared<OpenGLESFramebuffer>(spec);
         }
 #endif
         default: break;
@@ -107,7 +107,7 @@ auto RenderFactory::makeFramebuffer(FramebufferSpecs spec) -> Ref<Framebuffer>
     return nullptr;
 }
 
-auto RenderFactory::makeShader(const std::string& filepath) -> Ref<Shader>
+auto RenderFactory::makeShader(const std::string& filepath) -> std::shared_ptr<Shader>
 {
     MOCI_CORE_INFO("Creating shader from: {}", filepath);
     switch (Renderer::getApi())
@@ -121,14 +121,14 @@ auto RenderFactory::makeShader(const std::string& filepath) -> Ref<Shader>
         case RendererAPI::API::OpenGL:
         {
             MOCI_CORE_INFO("Make OpenGL Shader: {:s}", filepath);
-            return makeRef<OpenGLShader>(filepath);
+            return std::make_shared<OpenGLShader>(filepath);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES:
         {
             MOCI_CORE_INFO("Make OpenGLES Shader: {:s}", filepath);
-            return makeRef<OpenGLESShader>(filepath);
+            return std::make_shared<OpenGLESShader>(filepath);
         }
 #endif
         default: break;
@@ -139,7 +139,7 @@ auto RenderFactory::makeShader(const std::string& filepath) -> Ref<Shader>
 }
 
 auto RenderFactory::makeShader(std::string const& name, std::string const& vertexSrc, std::string const& fragmentSrc)
-    -> Ref<Shader>
+    -> std::shared_ptr<Shader>
 {
     switch (Renderer::getApi())
     {
@@ -152,14 +152,14 @@ auto RenderFactory::makeShader(std::string const& name, std::string const& verte
         case RendererAPI::API::OpenGL:
         {
             MOCI_CORE_INFO("Make OpenGL Shader: {:s}", name);
-            return makeRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
+            return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES:
         {
             MOCI_CORE_INFO("Make OpenGLES Shader: {:s}", name);
-            return makeRef<OpenGLESShader>(name, vertexSrc, fragmentSrc);
+            return std::make_shared<OpenGLESShader>(name, vertexSrc, fragmentSrc);
         }
 #endif
         default: break;
@@ -169,7 +169,7 @@ auto RenderFactory::makeShader(std::string const& name, std::string const& verte
     return nullptr;
 }
 
-auto RenderFactory::makeTexture2D(std::string const& path) -> Ref<Texture2D>
+auto RenderFactory::makeTexture2D(std::string const& path) -> std::shared_ptr<Texture2D>
 {
     switch (Renderer::getApi())
     {
@@ -182,14 +182,14 @@ auto RenderFactory::makeTexture2D(std::string const& path) -> Ref<Texture2D>
         case RendererAPI::API::OpenGL:
         {
             MOCI_CORE_INFO("Make OpenGL Texture2D: {:s}", path);
-            return makeRef<OpenGLTexture2D>(path);
+            return std::make_shared<OpenGLTexture2D>(path);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES:
         {
             MOCI_CORE_INFO("Make OpenGLES Texture2D: {:s}", path);
-            return makeRef<OpenGLESTexture2D>(path);
+            return std::make_shared<OpenGLESTexture2D>(path);
         }
 #endif
         default: break;
@@ -199,7 +199,7 @@ auto RenderFactory::makeTexture2D(std::string const& path) -> Ref<Texture2D>
     return nullptr;
 }
 
-auto RenderFactory::makeTexture2D(Texture::Format format, uint32_t width, uint32_t height, void* data) -> Ref<Texture2D>
+auto RenderFactory::makeTexture2D(Texture::Format format, uint32_t width, uint32_t height, void* data) -> std::shared_ptr<Texture2D>
 {
     switch (Renderer::getApi())
     {
@@ -212,14 +212,14 @@ auto RenderFactory::makeTexture2D(Texture::Format format, uint32_t width, uint32
         case RendererAPI::API::OpenGL:
         {
             MOCI_CORE_INFO("Make OpenGL Texture2D from data");
-            return makeRef<OpenGLTexture2D>(format, width, height, data);
+            return std::make_shared<OpenGLTexture2D>(format, width, height, data);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES:
         {
             MOCI_CORE_INFO("Make OpenGLES Texture2D from data");
-            return makeRef<OpenGLESTexture2D>(format, width, height, data);
+            return std::make_shared<OpenGLESTexture2D>(format, width, height, data);
         }
 #endif
         default: break;
@@ -229,7 +229,7 @@ auto RenderFactory::makeTexture2D(Texture::Format format, uint32_t width, uint32
     return nullptr;
 }
 
-auto RenderFactory::makeTextureCube(const Vector<std::string>& paths) -> Ref<TextureCube>
+auto RenderFactory::makeTextureCube(const std::vector<std::string>& paths) -> std::shared_ptr<TextureCube>
 {
     switch (Renderer::getApi())
     {
@@ -242,14 +242,14 @@ auto RenderFactory::makeTextureCube(const Vector<std::string>& paths) -> Ref<Tex
         case RendererAPI::API::OpenGL:
         {
             MOCI_CORE_INFO("Make OpenGL TextureCube");
-            return makeRef<OpenGLTextureCube>(paths);
+            return std::make_shared<OpenGLTextureCube>(paths);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES:
         {
             MOCI_CORE_INFO("Make OpenGLES TextureCube");
-            return makeRef<OpenGLESTextureCube>(paths);
+            return std::make_shared<OpenGLESTextureCube>(paths);
         }
 #endif
         default: break;
@@ -259,7 +259,7 @@ auto RenderFactory::makeTextureCube(const Vector<std::string>& paths) -> Ref<Tex
     return nullptr;
 }
 
-auto RenderFactory::makeVertexArray() -> Ref<VertexArray>
+auto RenderFactory::makeVertexArray() -> std::shared_ptr<VertexArray>
 {
     switch (Renderer::getApi())
     {
@@ -272,14 +272,14 @@ auto RenderFactory::makeVertexArray() -> Ref<VertexArray>
         case RendererAPI::API::OpenGL:
         {
             MOCI_CORE_INFO("Make OpenGL VertexArray");
-            return makeRef<OpenGLVertexArray>();
+            return std::make_shared<OpenGLVertexArray>();
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
         case RendererAPI::API::OpenGLES:
         {
             MOCI_CORE_INFO("Make OpenGLES VertexArray");
-            return makeRef<OpenGLESVertexArray>();
+            return std::make_shared<OpenGLESVertexArray>();
         }
 #endif
         default: break;

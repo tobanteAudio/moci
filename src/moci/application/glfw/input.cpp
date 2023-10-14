@@ -13,7 +13,7 @@
 namespace moci
 {
 
-Scope<Input> Input::sInstance = makeScope<GlfwInput>();
+std::unique_ptr<Input> Input::sInstance = std::make_unique<GlfwInput>();
 
 auto GlfwInput::isKeyPressedImpl(Key keycode) -> bool
 {

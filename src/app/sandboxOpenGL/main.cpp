@@ -12,7 +12,7 @@ public:
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox-opengl", "moci-sandbox-opengl.json");
         // GetWindow().SetFullscreen(true);
         getWindow().setVSync(true);
-        pushLayer(moci::makeScope<OpenGLLayer>());
+        pushLayer(std::make_unique<OpenGLLayer>());
     }
 
     ~Sandbox() override { MOCI_PROFILE_END_SESSION(); }

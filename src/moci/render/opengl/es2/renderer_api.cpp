@@ -92,7 +92,7 @@ void OpenGLESRendererAPI::drawIndexed(RenderDrawMode const mode, uint32_t count,
     GLCall(glDrawElements(openGLMode, count, GL_UNSIGNED_SHORT, indices));
 }
 
-void OpenGLESRendererAPI::drawIndexed(RenderDrawMode const mode, Ref<VertexArray> const& vertexArray)
+void OpenGLESRendererAPI::drawIndexed(RenderDrawMode const mode, std::shared_ptr<VertexArray> const& vertexArray)
 {
     auto const openGLMode = mociToOpenGlDrawMode(mode);
     GLCall(glDrawElements(openGLMode, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_SHORT, nullptr));

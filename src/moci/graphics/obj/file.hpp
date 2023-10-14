@@ -2,11 +2,11 @@
 
 #include <moci/core/logging.hpp>
 #include <moci/core/span.hpp>
-#include <moci/core/vector.hpp>
 
 #include "glm/glm.hpp"
 
 #include <string>
+#include <vector>
 
 namespace moci
 {
@@ -53,9 +53,9 @@ private:
     void parseLineToFace(std::string& line);
 
     std::string _path;
-    Vector<glm::vec3> _vertices;
-    Vector<glm::vec3> _normals;
-    Vector<glm::vec2> _uvs;
-    Vector<VertexData> _model;
+    std::vector<glm::vec3> _vertices;
+    std::vector<glm::vec3> _normals;
+    std::vector<glm::vec2> _uvs;
+    std::vector<VertexData> _model;
 };
 }  // namespace moci

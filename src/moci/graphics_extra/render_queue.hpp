@@ -1,8 +1,6 @@
 #pragma once
 
 #include <moci/core/geometry/rectangle.hpp>
-#include <moci/core/memory.hpp>
-#include <moci/core/vector.hpp>
 #include <moci/graphics/color.hpp>
 #include <moci/render/api.hpp>
 #include <moci/render/renderer.hpp>
@@ -14,6 +12,8 @@
 #include <cstddef>
 #include <cstdint>
 #include <map>
+#include <memory>
+#include <vector>
 
 namespace moci
 {
@@ -63,15 +63,15 @@ private:
 
     struct RenderData
     {
-        Ref<VertexBuffer> vbo                      = nullptr;
-        Ref<IndexBuffer> ibo                       = nullptr;
-        Ref<VertexArray> vao                       = nullptr;
-        Ref<Shader> shader                         = nullptr;
-        Vector<Vertex> vertices                    = {};
-        Vector<uint32_t> indices                   = {};
+        std::shared_ptr<VertexBuffer> vbo                      = nullptr;
+        std::shared_ptr<IndexBuffer> ibo                       = nullptr;
+        std::shared_ptr<VertexArray> vao                       = nullptr;
+        std::shared_ptr<Shader> shader                         = nullptr;
+        std::vector<Vertex> vertices               = {};
+        std::vector<uint32_t> indices              = {};
         std::uint32_t indexOffset                  = 0;
         Texture2D::Ptr defaultTexture              = nullptr;
-        Vector<Texture2D::Ptr> textures            = {};
+        std::vector<Texture2D::Ptr> textures       = {};
         BatchRender2D::FrameStats renderFrameStats = {};
     };
 

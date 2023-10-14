@@ -20,10 +20,10 @@ struct ShaderAttribute
     std::string type;
 };
 
-auto getAttributeLayout(const std::string& src) -> Vector<ShaderAttribute>
+auto getAttributeLayout(const std::string& src) -> std::vector<ShaderAttribute>
 {
     std::istringstream f(src);
-    auto result = Vector<ShaderAttribute>();
+    auto result = std::vector<ShaderAttribute>();
     std::string line;
     while (std::getline(f, line))
     {

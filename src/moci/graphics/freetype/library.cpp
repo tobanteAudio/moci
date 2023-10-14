@@ -28,7 +28,7 @@ auto FreetypeLibrary::createTypefaceFromFont(const std::string& fontPath) -> std
         // Load character glyph
         if (FT_Load_Char(face, c, FT_LOAD_RENDER) != 0) { continue; }
 
-        auto buffer = Vector<std::uint8_t>(
+        auto buffer = std::vector<std::uint8_t>(
             face->glyph->bitmap.buffer,                                                                               //
             face->glyph->bitmap.buffer + (static_cast<size_t>(face->glyph->bitmap.width * face->glyph->bitmap.rows))  //
         );

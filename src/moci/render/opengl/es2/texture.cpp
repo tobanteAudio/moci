@@ -77,7 +77,7 @@ void OpenGLESTexture2D::setFilterModes()
     GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 }
 
-OpenGLESTextureCube::OpenGLESTextureCube(Vector<std::string> paths) : _paths(std::move(paths))
+OpenGLESTextureCube::OpenGLESTextureCube(std::vector<std::string> paths) : _paths(std::move(paths))
 {
 
     // Generate a texture object
@@ -109,7 +109,7 @@ OpenGLESTextureCube::OpenGLESTextureCube(Vector<std::string> paths) : _paths(std
             {
                 auto const newSize = 1024;
                 MOCI_CORE_INFO("    stbi resize: FROM: {}x{} TO: {}x{}", width, height, newSize, newSize);
-                Vector<stbi_uc> outBuffer {};
+                std::vector<stbi_uc> outBuffer {};
                 outBuffer.resize(newSize * newSize * numChannels);
                 if (stbir_resize_uint8(data, width, height, 0, outBuffer.data(), newSize, newSize, 0, numChannels) == 0)
                 {

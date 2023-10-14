@@ -47,7 +47,7 @@ public:
         sRendererApi->drawIndexed(mode, count, indices);
     }
 
-    inline static void drawIndexed(RenderDrawMode mode, Ref<VertexArray> const& vertexArray)
+    inline static void drawIndexed(RenderDrawMode mode, std::shared_ptr<VertexArray> const& vertexArray)
     {
         MOCI_PROFILE_FUNCTION();
         sRendererApi->drawIndexed(mode, vertexArray);
@@ -59,7 +59,7 @@ public:
     inline static auto maxUniformVectors() -> std::uint32_t { return sRendererApi->maxUniformVectors(); }
 
 private:
-    static Scope<RendererAPI> sRendererApi;
+    static std::unique_ptr<RendererAPI> sRendererApi;
 };
 
 }  // namespace moci

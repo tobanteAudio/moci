@@ -37,7 +37,7 @@ private:
 class OpenGLESTextureCube : public TextureCube
 {
 public:
-    explicit OpenGLESTextureCube(Vector<std::string> paths);
+    explicit OpenGLESTextureCube(std::vector<std::string> paths);
 
     OpenGLESTextureCube(const OpenGLESTextureCube&)                    = delete;
     auto operator=(const OpenGLESTextureCube&) -> OpenGLESTextureCube& = delete;
@@ -52,7 +52,7 @@ public:
     void unbind() const override;
 
 private:
-    Vector<std::string> _paths;
+    std::vector<std::string> _paths;
     std::uint32_t _renderID {};
 };
 }  // namespace moci

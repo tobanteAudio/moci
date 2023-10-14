@@ -33,10 +33,10 @@ private:
     bool _framebufferNeedsResize = false;
     glm::vec2 _viewportSize      = {};
 
-    moci::Ref<moci::Shader> _shader           = nullptr;
-    moci::Ref<moci::VertexBuffer> _vbo        = nullptr;
-    moci::Ref<moci::IndexBuffer> _ibo         = nullptr;
-    moci::Ref<moci::VertexArray> _vao         = nullptr;
-    moci::Ref<moci::Texture2D> _texture       = nullptr;
-    moci::Ref<moci::Framebuffer> _framebuffer = nullptr;
+    std::shared_ptr<moci::Shader> _shader           = nullptr;
+    std::shared_ptr<moci::VertexBuffer> _vbo        = nullptr;
+    std::shared_ptr<moci::IndexBuffer> _ibo         = nullptr;
+    std::shared_ptr<moci::VertexArray> _vao         = nullptr;
+    std::shared_ptr<moci::Texture2D> _texture       = nullptr;
+    std::shared_ptr<moci::Framebuffer> _framebuffer = nullptr;
 };

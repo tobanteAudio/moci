@@ -74,7 +74,7 @@ public:
         for (auto i = 0; i < 5; i++)
         {
             auto col     = moci::ColorRGBA32 {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F};
-            auto channel = moci::makeScope<LevelMeterView>(col, fmt::format("{}", i));
+            auto channel = std::make_unique<LevelMeterView>(col, fmt::format("{}", i));
             addChild(channel.get());
             _channels.push_back(std::move(channel));
         }
@@ -82,7 +82,7 @@ public:
         for (auto i = 0; i < 10; i++)
         {
             auto col    = moci::ColorRGBA32 {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F};
-            auto slider = moci::makeScope<moci::Slider>(col);
+            auto slider = std::make_unique<moci::Slider>(col);
             slider->setValue(i / 10.0F);
             addChild(slider.get());
             _sliders.push_back(std::move(slider));
@@ -93,7 +93,7 @@ public:
             auto specs                   = moci::ButtonSpecs {};
             specs.callbacks.stateChanged = [](auto state) { moci::ignoreUnused(state); };
 
-            auto button = moci::makeScope<moci::Button>(fmt::format("Test: {}", i), specs);
+            auto button = std::make_unique<moci::Button>(fmt::format("Test: {}", i), specs);
             button->setTextColor(moci::ColorRGBA32 {0.2F * static_cast<float>(i), 0.8F, 0.2F, 1.0F});
 
             addChild(button.get());
@@ -123,9 +123,9 @@ public:
 
 private:
     moci::DatagramSocket _listener {};
-    moci::Vector<moci::Scope<LevelMeterView>> _channels;
-    moci::Vector<moci::Scope<moci::Slider>> _sliders;
-    moci::Vector<moci::Scope<moci::Button>> _buttons;
+    std::vector<std::unique_ptr<LevelMeterView>> _channels;
+    std::vector<std::unique_ptr<moci::Slider>> _sliders;
+    std::vector<std::unique_ptr<moci::Button>> _buttons;
 };
 
 class Sandbox : public moci::Application
@@ -135,7 +135,7 @@ public:
     {
         MOCI_PROFILE_BEGIN_SESSION("moci-sandbox", "moci-sandbox.json");
         getWindow().setFullscreen(true);
-        pushLayer(moci::makeScope<moci::ComponentLayer>(moci::makeScope<MultiChannel>()));
+        pushLayer(std::make_unique<moci::ComponentLayer>(std::make_unique<MultiChannel>()));
     }
 
     ~Sandbox() override { MOCI_PROFILE_END_SESSION(); }

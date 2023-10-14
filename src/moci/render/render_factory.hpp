@@ -12,14 +12,14 @@ struct RenderFactory
 {
     static auto makeVertexBuffer(float* vertices, std::uint32_t size, bool dynamic = false) -> VertexBuffer*;
     static auto makeIndexBuffer(IndexBufferSpecs specs) -> IndexBuffer*;
-    static auto makeFramebuffer(FramebufferSpecs spec) -> Ref<Framebuffer>;
-    static auto makeShader(const std::string& filepath) -> Ref<Shader>;
+    static auto makeFramebuffer(FramebufferSpecs spec) -> std::shared_ptr<Framebuffer>;
+    static auto makeShader(const std::string& filepath) -> std::shared_ptr<Shader>;
     static auto makeShader(std::string const& name, std::string const& vertexSrc, std::string const& fragmentSrc)
-        -> Ref<Shader>;
-    static auto makeTexture2D(std::string const& path) -> Ref<Texture2D>;
-    static auto makeTexture2D(Texture::Format format, uint32_t width, uint32_t height, void* data) -> Ref<Texture2D>;
-    static auto makeTextureCube(const Vector<std::string>& paths) -> Ref<TextureCube>;
-    static auto makeVertexArray() -> Ref<VertexArray>;
+        -> std::shared_ptr<Shader>;
+    static auto makeTexture2D(std::string const& path) -> std::shared_ptr<Texture2D>;
+    static auto makeTexture2D(Texture::Format format, uint32_t width, uint32_t height, void* data) -> std::shared_ptr<Texture2D>;
+    static auto makeTextureCube(const std::vector<std::string>& paths) -> std::shared_ptr<TextureCube>;
+    static auto makeVertexArray() -> std::shared_ptr<VertexArray>;
 };
 
 }  // namespace moci

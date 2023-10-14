@@ -32,12 +32,12 @@ struct Light
     glm::vec4 color    = {1.0F, 1.0F, 1.0F, 1.0F};
     float scale        = 0.5F;
 
-    Ref<Shader> shader    = nullptr;
-    Ref<VertexBuffer> vbo = nullptr;
-    Ref<IndexBuffer> ibo  = nullptr;
-    Ref<VertexArray> vao  = nullptr;
+    std::shared_ptr<Shader> shader    = nullptr;
+    std::shared_ptr<VertexBuffer> vbo = nullptr;
+    std::shared_ptr<IndexBuffer> ibo  = nullptr;
+    std::shared_ptr<VertexArray> vao  = nullptr;
     Mesh lightMesh_ {"src/app/sandbox3D/assets/models/sphere.obj"};
-    Vector<Light::Vertex> vertices = {};
+    std::vector<Light::Vertex> vertices = {};
 
 public:
     Light()

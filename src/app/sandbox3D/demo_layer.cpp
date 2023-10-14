@@ -136,7 +136,7 @@ void DemoLayer::onAttach()
     _skyboxVao->addVertexBuffer(_skyboxVbo);
     _skyboxVao->setIndexBuffer(_skyboxIbo);
     _skyboxVao->unbind();
-    moci::Vector<std::string> faces {
+    std::vector<std::string> faces {
         std::string("src/app/sandbox3D/assets/textures/skybox/right.jpg"),   //
         std::string("src/app/sandbox3D/assets/textures/skybox/left.jpg"),    //
         std::string("src/app/sandbox3D/assets/textures/skybox/top.jpg"),     //
@@ -166,7 +166,7 @@ void DemoLayer::onAttach()
     _vao->unbind();
 
     // light
-    _light = moci::makeScope<moci::Light>();
+    _light = std::make_unique<moci::Light>();
 
     _textureSolid  = moci::RenderFactory::makeTexture2D("src/app/sandbox3D/assets/textures/white_10x10.png");
     _textureColors = moci::RenderFactory::makeTexture2D("src/app/sandbox3D/assets/textures/4color.png");

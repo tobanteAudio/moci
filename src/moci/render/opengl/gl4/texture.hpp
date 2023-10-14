@@ -44,7 +44,7 @@ private:
 class OpenGLTextureCube : public TextureCube
 {
 public:
-    explicit OpenGLTextureCube(Vector<std::string> paths);
+    explicit OpenGLTextureCube(std::vector<std::string> paths);
 
     OpenGLTextureCube(const OpenGLTextureCube&)                    = delete;
     auto operator=(const OpenGLTextureCube&) -> OpenGLTextureCube& = delete;
@@ -59,7 +59,7 @@ public:
     void unbind() const override;
 
 private:
-    Vector<std::string> paths_;
+    std::vector<std::string> paths_;
     std::uint32_t renderID_ {};
 };
 

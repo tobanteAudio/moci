@@ -125,7 +125,7 @@ void OpenGLRendererAPI::drawIndexed(RenderDrawMode const mode, uint32_t count, v
     glDrawElements(glDrawMode, count, GL_UNSIGNED_INT, indices);
 }
 
-void OpenGLRendererAPI::drawIndexed(RenderDrawMode const mode, Ref<VertexArray> const& vertexArray)
+void OpenGLRendererAPI::drawIndexed(RenderDrawMode const mode, std::shared_ptr<VertexArray> const& vertexArray)
 {
     auto const glDrawMode = MociToOpenGLDrawMode(mode);
     glDrawElements(glDrawMode, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);

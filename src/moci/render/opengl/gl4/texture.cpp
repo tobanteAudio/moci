@@ -92,7 +92,7 @@ void OpenGLTexture2D::setFilters() const
     glTextureParameteri(renderID_, GL_TEXTURE_WRAP_T, GL_REPEAT);
 }
 
-OpenGLTextureCube::OpenGLTextureCube(Vector<std::string> paths) : paths_(std::move(paths))
+OpenGLTextureCube::OpenGLTextureCube(std::vector<std::string> paths) : paths_(std::move(paths))
 {
 
     // Generate a texture object

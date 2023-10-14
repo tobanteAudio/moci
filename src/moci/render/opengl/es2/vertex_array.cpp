@@ -41,8 +41,8 @@ void OpenGLESVertexArray::unbind() const
     _vertexBuffer->unbind();
 }
 
-void OpenGLESVertexArray::addVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) { _vertexBuffer = vertexBuffer; }
-void OpenGLESVertexArray::setIndexBuffer(const Ref<IndexBuffer>& indexBuffer) { _indexBuffer = indexBuffer; }
+void OpenGLESVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) { _vertexBuffer = vertexBuffer; }
+void OpenGLESVertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) { _indexBuffer = indexBuffer; }
 void OpenGLESVertexArray::setLayout() const
 {
     const auto& elements = _vertexBuffer->getLayout().getElements();

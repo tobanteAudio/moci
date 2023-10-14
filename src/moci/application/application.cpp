@@ -18,7 +18,7 @@ Application::Application(WindowSpecs windowSpecs)
     sInstance = this;
     MOCI_CORE_INFO("Initializing App...");
 
-    _window = Scope<Window>(Window::create(std::move(windowSpecs)));
+    _window = std::unique_ptr<Window>(Window::create(std::move(windowSpecs)));
     _window->setEventCallback(MOCI_EVENT_METHOD(onEvent));
 
     Renderer::init();
@@ -27,7 +27,7 @@ Application::Application(WindowSpecs windowSpecs)
     MOCI_CORE_INFO("Max texture units: {}", RenderCommand::maxTextureUnits());
     MOCI_CORE_INFO("Max uniform vectors: {}", RenderCommand::maxUniformVectors());
 
-    pushOverlay(makeScope<ImGuiLayer>());
+    pushOverlay(std::make_unique<ImGuiLayer>());
 }
 
 void Application::pushLayer(Layer::Ptr&& layer) { _layerStack.pushLayer(std::move(layer)); }

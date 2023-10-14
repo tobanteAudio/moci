@@ -2,7 +2,7 @@
 
 #include "render_command.hpp"
 
-#include <moci/core/memory.hpp>
+#include <memory>
 
 namespace moci
 {
@@ -16,7 +16,7 @@ public:
     // static void BeginScene(OrthographicCamera& camera);
     // static void EndScene();
 
-    // static void Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray,
+    // static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray,
     //                    const glm::mat4& transform = glm::mat4(1.0f));
 
     inline static auto getApi() -> RendererAPI::API { return RendererAPI::getApi(); }
@@ -27,6 +27,6 @@ private:
     //     glm::mat4 ViewProjectionMatrix;
     // };
 
-    // static Scope<SceneData> s_SceneData;
+    // static std::unique_ptr<SceneData> s_SceneData;
 };
 }  // namespace moci

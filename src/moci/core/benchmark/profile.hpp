@@ -7,11 +7,11 @@
 #include <fstream>
 #include <iomanip>
 #include <memory>
-#include <moci/core/vector.hpp>
 #include <mutex>
 #include <sstream>
 #include <string>
 #include <thread>
+#include <vector>
 
 namespace moci
 {
@@ -36,9 +36,9 @@ class Instrumentor
 {
 private:
     std::mutex _mutex;
-    Scope<InstrumentationSession> _currentSession {nullptr};
+    std::unique_ptr<InstrumentationSession> _currentSession {nullptr};
     std::ofstream _outputStream;
-    Vector<std::string> _buffer;
+    std::vector<std::string> _buffer;
 
 public:
     Instrumentor() = default;
@@ -65,7 +65,7 @@ public:
         _outputStream.open(filepath);
         if (_outputStream.is_open())
         {
-            _currentSession       = makeScope<InstrumentationSession>();
+            _currentSession       = std::make_unique<InstrumentationSession>();
             _currentSession->Name = name;
             writeHeader();
         }

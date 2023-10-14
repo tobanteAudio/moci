@@ -43,7 +43,7 @@ void OpenGLVertexArray::bind() const { glBindVertexArray(_rendererID); }
 
 void OpenGLVertexArray::unbind() const { glBindVertexArray(0); }
 
-void OpenGLVertexArray::addVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
+void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 {
 
     MOCI_CORE_ASSERT(vertexBuffer->getLayout().getElements().size(), "Vertex Buffer has no layout!");
@@ -65,7 +65,7 @@ void OpenGLVertexArray::addVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
     // _vertexBuffers.push_back(vertexBuffer);
 }
 
-void OpenGLVertexArray::setIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
+void OpenGLVertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
 {
 
     glBindVertexArray(_rendererID);

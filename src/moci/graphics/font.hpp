@@ -1,12 +1,12 @@
 #pragma once
 
 #include <moci/core/geometry/point.hpp>
-#include <moci/core/vector.hpp>
 
 #include <cstdint>
 #include <map>
 #include <string>
 #include <string_view>
+#include <vector>
 
 namespace moci
 {
@@ -14,7 +14,7 @@ namespace moci
 class Typeface
 {
 public:
-    using Buffer = Vector<std::uint8_t>;
+    using Buffer = std::vector<std::uint8_t>;
 
     struct Character
     {

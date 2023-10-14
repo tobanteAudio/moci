@@ -52,7 +52,7 @@ Mesh::Mesh(std::string filePath) : _filePath(std::move(filePath))
 
     MOCI_CORE_INFO("Loading mesh: {0}", _filePath.c_str());
 
-    _importer = moci::makeScope<Assimp::Importer>();
+    _importer = std::make_unique<Assimp::Importer>();
 
     const aiScene* scene = _importer->ReadFile(_filePath, SMeshImportFlags);
     if ((scene == nullptr) || !scene->HasMeshes()) { MOCI_CORE_ERROR("Failed to load mesh file: {0}", _filePath); }

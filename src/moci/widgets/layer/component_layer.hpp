@@ -17,7 +17,7 @@ namespace moci
 class ComponentLayer : public Layer
 {
 public:
-    explicit ComponentLayer(Scope<Component>&& root) : Layer("component-layer"), _rootComponent(std::move(root)) { }
+    explicit ComponentLayer(std::unique_ptr<Component>&& root) : Layer("component-layer"), _rootComponent(std::move(root)) { }
     ~ComponentLayer() override = default;
 
     void onAttach() override;
@@ -57,8 +57,8 @@ private:
     float _width  = 1280.0F;
     float _height = 1024.0F;
 
-    Scope<BatchRender2D> _renderQueue {};
+    std::unique_ptr<BatchRender2D> _renderQueue {};
     Style _defaultStyle {};
-    Scope<Component> _rootComponent;
+    std::unique_ptr<Component> _rootComponent;
 };
 }  // namespace moci

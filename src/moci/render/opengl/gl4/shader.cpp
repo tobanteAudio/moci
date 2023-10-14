@@ -118,7 +118,7 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
             GLint maxLength = 0;
             glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
 
-            Vector<GLchar> infoLog(maxLength);
+            std::vector<GLchar> infoLog(maxLength);
             glGetShaderInfoLog(shader, maxLength, &maxLength, infoLog.data());
 
             glDeleteShader(shader);
@@ -146,7 +146,7 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
         glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
 
         // The maxLength includes the NULL character
-        Vector<GLchar> infoLog(maxLength);
+        std::vector<GLchar> infoLog(maxLength);
         glGetProgramInfoLog(program, maxLength, &maxLength, infoLog.data());
 
         // We don't need the program anymore.

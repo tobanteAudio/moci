@@ -1,12 +1,11 @@
 #pragma once
 
 #include <moci/core/logging.hpp>
-#include <moci/core/memory.hpp>
 
 #include <memory>
-#include <moci/core/vector.hpp>
 #include <optional>
 #include <string>
+#include <vector>
 
 namespace moci
 {
@@ -37,7 +36,7 @@ public:
 class Texture2D : public Texture
 {
 public:
-    using Ptr      = Ref<Texture2D>;
+    using Ptr      = std::shared_ptr<Texture2D>;
     using Optional = std::optional<Ptr>;
 };
 

@@ -34,6 +34,6 @@ private:
     virtual auto getMouseXImpl() -> float                           = 0;
     virtual auto getMouseYImpl() -> float                           = 0;
 
-    static Scope<Input> sInstance;
+    static std::unique_ptr<Input> sInstance;
 };
 }  // namespace moci

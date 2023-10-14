@@ -50,7 +50,7 @@ private:
     virtual void shutdown();
 
     GLFWwindow* _window {};
-    Scope<GraphicsContext> _context;
+    std::unique_ptr<GraphicsContext> _context;
 
     struct WindowData
     {

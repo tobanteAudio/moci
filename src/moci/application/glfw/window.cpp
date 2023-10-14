@@ -58,7 +58,7 @@ void GlfwWindow::init(WindowSpecs props)
     ++sGlfwWindowCount;
     MOCI_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-    _context = Scope<GraphicsContext>(GraphicsContext::create(_window));
+    _context = std::unique_ptr<GraphicsContext>(GraphicsContext::create(_window));
     _context->init();
 
     glfwSetWindowUserPointer(_window, &_data);

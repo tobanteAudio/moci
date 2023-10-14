@@ -4,14 +4,15 @@
 
 #include <moci/core/logging.hpp>
 #include <moci/core/span.hpp>
-#include <moci/core/vector.hpp>
+
+#include <vector>
 
 namespace moci
 {
 class DatagramSocket
 {
 public:
-    using Buffer = Vector<std::uint8_t>;
+    using Buffer = std::vector<std::uint8_t>;
 
     DatagramSocket();
     ~DatagramSocket();
@@ -30,7 +31,7 @@ public:
 
 private:
     class Pimpl;
-    Scope<Pimpl> _pimpl;
+    std::unique_ptr<Pimpl> _pimpl;
 };
 
 }  // namespace moci

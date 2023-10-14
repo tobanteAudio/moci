@@ -17,7 +17,7 @@ int main(int argc, char** argv)
     moci::Log::init();
     MOCI_CORE_INFO("Initialized Log!");
 
-    auto app = moci::Scope<moci::Application>(moci::createApplication());
+    auto app = std::unique_ptr<moci::Application>(moci::createApplication());
     app->run();
 
     return EXIT_SUCCESS;

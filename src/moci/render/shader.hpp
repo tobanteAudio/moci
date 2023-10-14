@@ -1,11 +1,10 @@
 #pragma once
 
-#include <moci/core/memory.hpp>
-#include <moci/core/vector.hpp>
-
 #include <glm/glm.hpp>
 
+#include <memory>
 #include <string>
+#include <vector>
 
 namespace moci
 {
@@ -26,7 +25,7 @@ struct ShaderStageSource
 
 struct ShaderProgramSource
 {
-    Vector<ShaderStageSource> shaders = {};
+    std::vector<ShaderStageSource> shaders = {};
 };
 
 class Shader

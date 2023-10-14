@@ -1,9 +1,9 @@
 #pragma once
 
-#include <moci/core/memory.hpp>
 #include <moci/events/timestep.hpp>
 #include <moci/events/types/event.hpp>
 
+#include <memory>
 #include <string>
 
 namespace moci
@@ -12,7 +12,7 @@ namespace moci
 class Layer
 {
 public:
-    using Ptr = Scope<Layer>;
+    using Ptr = std::unique_ptr<Layer>;
 
     explicit Layer(std::string name = "Layer");
     virtual ~Layer() = default;
