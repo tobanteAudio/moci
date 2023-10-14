@@ -9,7 +9,7 @@
 
 TEST_CASE("math/geometry: RectangleConstructionEmpty", "[geometry]")
 {
-    moci::Rectangle<float> r {};
+    moci::Rectangle<float> r{};
     REQUIRE(r.isEmpty() == true);
     REQUIRE(r.getX() == 0.0F);
     REQUIRE(r.getY() == 0.0F);
@@ -47,7 +47,7 @@ TEST_CASE("math/geometry: RectangleCopyAssignment", "[geometry]")
 
 TEST_CASE("math/geometry: RectangleSetPositionXY", "[geometry]")
 {
-    auto r = moci::Rectangle<int> {};
+    auto r = moci::Rectangle<int>{};
     r.setPosition(20, 10);
     REQUIRE(r.getX() == 20);
     REQUIRE(r.getY() == 10);
@@ -55,7 +55,7 @@ TEST_CASE("math/geometry: RectangleSetPositionXY", "[geometry]")
 
 TEST_CASE("math/geometry: RectangleSetPositionPoint", "[geometry]")
 {
-    auto r = moci::Rectangle<int> {};
+    auto r = moci::Rectangle<int>{};
     r.setPosition(moci::Point<int>(10, 5));
     REQUIRE(r.getX() == 10);
     REQUIRE(r.getY() == 5);
@@ -63,7 +63,7 @@ TEST_CASE("math/geometry: RectangleSetPositionPoint", "[geometry]")
 
 TEST_CASE("math/geometry: RectangleSetWidth", "[geometry]")
 {
-    auto r = moci::Rectangle<double> {};
+    auto r = moci::Rectangle<double>{};
     REQUIRE(r.isEmpty() == true);
     r.setWidth(20.0);
     REQUIRE(r.isEmpty() == false);
@@ -72,7 +72,7 @@ TEST_CASE("math/geometry: RectangleSetWidth", "[geometry]")
 
 TEST_CASE("math/geometry: RectangleSetHeight", "[geometry]")
 {
-    auto r = moci::Rectangle<double> {};
+    auto r = moci::Rectangle<double>{};
     REQUIRE(r.isEmpty() == true);
     r.setHeight(20.0);
     REQUIRE(r.isEmpty() == false);
@@ -92,31 +92,31 @@ TEST_CASE("math/geometry: RectangleSetXY", "[geometry]")
 
 TEST_CASE("math/geometry: RectangleGetRight", "[geometry]")
 {
-    auto empty = moci::Rectangle<int> {};
+    auto empty = moci::Rectangle<int>{};
     REQUIRE(empty.getRight() == 0);
 
-    auto square = moci::Rectangle<int> {0, 0, 100, 100};
+    auto square = moci::Rectangle<int>{0, 0, 100, 100};
     REQUIRE(square.getRight() == 100);
 }
 
 TEST_CASE("math/geometry: RectangleGetBottom", "[geometry]")
 {
-    auto empty = moci::Rectangle<int> {};
+    auto empty = moci::Rectangle<int>{};
     REQUIRE(empty.getBottom() == 0);
 
-    auto square = moci::Rectangle<int> {0, 0, 100, 100};
+    auto square = moci::Rectangle<int>{0, 0, 100, 100};
     REQUIRE(square.getBottom() == 100);
 }
 
 TEST_CASE("math/geometry: RectangleGetAspectRatio", "[geometry]")
 {
-    auto empty = moci::Rectangle<int> {};
+    auto empty = moci::Rectangle<int>{};
     REQUIRE(empty.getAspectRatio() == 0);
 
-    auto square = moci::Rectangle<int> {0, 0, 100, 100};
+    auto square = moci::Rectangle<int>{0, 0, 100, 100};
     REQUIRE(square.getAspectRatio() == 1);
 
-    auto display = moci::Rectangle<float> {0.0F, 0.0F, 1920.0F, 1080.0F};
+    auto display = moci::Rectangle<float>{0.0F, 0.0F, 1920.0F, 1080.0F};
     REQUIRE(display.getAspectRatio() == Catch::Approx(16.0F / 9.0F));
 }
 
@@ -244,12 +244,12 @@ TEST_CASE("math/geometry: RectangleToFloat", "[geometry]")
 TEST_CASE("math/geometry: RectangleOperatorEqual", "[geometry]")
 {
     {
-        constexpr auto r1 = moci::Rectangle<int> {};
-        constexpr auto r2 = moci::Rectangle<int> {};
+        constexpr auto r1 = moci::Rectangle<int>{};
+        constexpr auto r2 = moci::Rectangle<int>{};
         REQUIRE(r1 == r2);
     }
     {
-        constexpr auto r1 = moci::Rectangle<int> {};
+        constexpr auto r1 = moci::Rectangle<int>{};
         constexpr auto r2 = moci::Rectangle<int>({1, 2}, 1, 1);
         REQUIRE((r1 == r2) == false);
     }
@@ -258,12 +258,12 @@ TEST_CASE("math/geometry: RectangleOperatorEqual", "[geometry]")
 TEST_CASE("math/geometry: RectangleOperatorNotEqual", "[geometry]")
 {
     {
-        constexpr auto r1 = moci::Rectangle<int> {};
-        constexpr auto r2 = moci::Rectangle<int> {};
+        constexpr auto r1 = moci::Rectangle<int>{};
+        constexpr auto r2 = moci::Rectangle<int>{};
         REQUIRE((r1 != r2) == false);
     }
     {
-        constexpr auto r1 = moci::Rectangle<int> {};
+        constexpr auto r1 = moci::Rectangle<int>{};
         constexpr auto r2 = moci::Rectangle<int>({1, 2}, 1, 1);
         REQUIRE(r1 != r2);
     }

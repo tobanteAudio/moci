@@ -5,10 +5,10 @@
 #include <algorithm>
 #include <functional>
 
-namespace moci
-{
+namespace moci {
 
 class Slider;
+
 struct SliderCallbacks
 {
     std::function<void(float)> valueChanged = {};
@@ -19,13 +19,14 @@ class SliderStyleMethods
 public:
     virtual ~SliderStyleMethods() = default;
 
-    virtual void drawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider) = 0;
+    virtual void drawSlider(Painter& painter, Rectangle<int> bounds, Slider const& slider)
+        = 0;
 };
 
 class Slider : public Component
 {
 public:
-    explicit Slider(ColorRGBA32 col, SliderCallbacks callbacks = SliderCallbacks {});
+    explicit Slider(ColorRGBA32 col, SliderCallbacks callbacks = SliderCallbacks{});
     ~Slider() override = default;
 
     auto onDraw(Painter& painter) -> void override;

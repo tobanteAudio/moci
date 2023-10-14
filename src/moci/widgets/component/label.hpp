@@ -4,9 +4,9 @@
 
 #include <algorithm>
 
-namespace moci
-{
+namespace moci {
 class Label;
+
 class LabelStyleMethods
 {
 public:
@@ -24,14 +24,17 @@ public:
     auto onDraw(Painter& painter) -> void override;
 
     auto setText(std::string newText) -> void { _text = std::move(newText); }
+
     [[nodiscard]] auto getText() const noexcept -> std::string const& { return _text; }
+
     [[nodiscard]] auto getTextView() const noexcept -> std::string_view { return _text; }
 
     void setTextColor(ColorRGBA32 col) noexcept { _color = col; }
+
     [[nodiscard]] auto getTextColor() const noexcept -> ColorRGBA32 { return _color; }
 
 private:
-    std::string _text {};
-    ColorRGBA32 _color {};
+    std::string _text{};
+    ColorRGBA32 _color{};
 };
 }  // namespace moci

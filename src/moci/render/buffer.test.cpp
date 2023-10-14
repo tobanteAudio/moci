@@ -8,7 +8,7 @@
 
 TEST_CASE("render/buffer: BufferElement", "[render]")
 {
-    moci::BufferElement element {moci::ShaderDataType::Float3, "test"};
+    moci::BufferElement element{moci::ShaderDataType::Float3, "test"};
 
     REQUIRE(element.Name == "test");
     REQUIRE(element.Size == sizeof(float) * 3);
@@ -19,8 +19,8 @@ TEST_CASE("render/buffer: BufferElement", "[render]")
 TEST_CASE("render/buffer: BufferLayout", "[render]")
 {
     moci::BufferLayout layout = {
-        {moci::ShaderDataType::Float3, "position"},  //
-        {moci::ShaderDataType::Float4, "color"},     //
+        {moci::ShaderDataType::Float3, "position"}, //
+        {moci::ShaderDataType::Float4, "color"   }, //
     };
 
     REQUIRE(layout.getStride() == sizeof(float) * 7);

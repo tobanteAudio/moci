@@ -4,8 +4,7 @@
 
 #include <vector>
 
-namespace moci
-{
+namespace moci {
 
 class LayerStack
 {
@@ -15,10 +14,12 @@ public:
 
     void pushLayer(Layer::Ptr&& layer);
     void pushOverlay(Layer::Ptr&& overlay);
+
     // void PopLayer(Layer* layer);
     // void PopOverlay(Layer* overlay);
 
     auto begin() -> std::vector<Layer::Ptr>::iterator { return _layers.begin(); }
+
     auto end() -> std::vector<Layer::Ptr>::iterator { return _layers.end(); }
 
 private:

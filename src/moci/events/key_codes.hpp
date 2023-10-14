@@ -4,8 +4,7 @@
 #include <cstdint>
 #include <iostream>
 
-namespace moci
-{
+namespace moci {
 // From glfw3.h
 enum class KeyCode : uint16_t
 {

@@ -5,8 +5,7 @@
 #include <algorithm>
 #include <string_view>
 
-namespace moci
-{
+namespace moci {
 class Button;
 
 enum class ButtonState
@@ -21,7 +20,8 @@ class ButtonStyleMethods
 public:
     virtual ~ButtonStyleMethods() = default;
 
-    virtual void drawButton(Painter& painter, Rectangle<int> bounds, Button const& button) = 0;
+    virtual void drawButton(Painter& painter, Rectangle<int> bounds, Button const& button)
+        = 0;
 };
 
 struct ButtonCallbacks
@@ -39,7 +39,7 @@ struct ButtonSpecs
 class Button : public Component
 {
 public:
-    explicit Button(std::string text, ButtonSpecs specs = ButtonSpecs {});
+    explicit Button(std::string text, ButtonSpecs specs = ButtonSpecs{});
     ~Button() override = default;
 
     auto onDraw(Painter& painter) -> void override;

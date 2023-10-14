@@ -3,8 +3,8 @@
 #include <moci/render/graphics_context.hpp>
 
 struct GLFWwindow;
-namespace moci
-{
+
+namespace moci {
 
 class OpenGLESContext : public GraphicsContext
 {

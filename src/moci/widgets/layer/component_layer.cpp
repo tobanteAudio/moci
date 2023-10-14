@@ -1,7 +1,6 @@
 #include "component_layer.hpp"
 
-namespace moci
-{
+namespace moci {
 void ComponentLayer::onAttach()
 {
     MOCI_PROFILE_FUNCTION();
@@ -41,11 +40,13 @@ void ComponentLayer::onImGuiRender()
 void ComponentLayer::onEvent(Event& e)
 {
     MOCI_PROFILE_FUNCTION();
-    auto dispatcher = EventDispatcher {e};
+    auto dispatcher = EventDispatcher{e};
     dispatcher.dispatch<WindowResizeEvent>([this](auto& e) { return onWindowResized(e); });
     dispatcher.dispatch<MouseMovedEvent>([this](auto& e) { return onMouseMoved(e); });
     dispatcher.dispatch<MouseScrolledEvent>([this](auto& e) { return onMouseScrolled(e); });
-    dispatcher.dispatch<MouseButtonPressedEvent>([this](auto& e) { return onMousePressed(e); });
+    dispatcher.dispatch<MouseButtonPressedEvent>([this](auto& e) {
+        return onMousePressed(e);
+    });
 }
 
 auto ComponentLayer::onWindowResized(WindowResizeEvent& e) -> bool
@@ -75,7 +76,9 @@ auto ComponentLayer::onMousePressed(MouseButtonPressedEvent& e) -> bool
     ignoreUnused(e);
     auto const x = static_cast<int>(Input::getMouseX());
     auto const y = static_cast<int>(Input::getMouseY());
-    return handleEvent([&](auto* comp) { return comp->mouseClicked(MouseCallback::Click {x, y}); });
+    return handleEvent([&](auto* comp) {
+        return comp->mouseClicked(MouseCallback::Click{x, y});
+    });
 }
 
 }  // namespace moci

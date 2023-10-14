@@ -3,13 +3,12 @@
 
 #if defined(MOCI_WINDOWS)
 
-#include <moci/core/system/info.hpp>
+    #include <moci/core/system/info.hpp>
 
-#include <string>
-#include <unordered_map>
+    #include <string>
+    #include <unordered_map>
 
-namespace moci
-{
+namespace moci {
 
 class SystemInfo::Pimpl
 {

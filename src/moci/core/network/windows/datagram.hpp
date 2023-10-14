@@ -4,18 +4,17 @@
 
 #if defined(MOCI_WINDOWS)
 
-#include <moci/core/network/datagram.hpp>
+    #include <moci/core/network/datagram.hpp>
 
-#include <cstdint>
+    #include <cstdint>
 
-#include <atomic>
-#include <functional>
-#include <vector>
-#include <string>
-#include <thread>
+    #include <atomic>
+    #include <functional>
+    #include <string>
+    #include <thread>
+    #include <vector>
 
-namespace moci
-{
+namespace moci {
 class DatagramSocket::Pimpl
 {
 
@@ -27,21 +26,23 @@ public:
 
     bool write(std::string const& host, int port, std::span<std::uint8_t> buffer);
     bool write(std::string const& host, int port, DatagramSocket::Buffer const& buffer);
-    bool write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes);
+    bool
+    write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes);
 
     void listen();
 
     void shutdown();
 
-    void setMessageCallback(std::function<void(DatagramSocket::Buffer const&, size_t)> callback)
+    void
+    setMessageCallback(std::function<void(DatagramSocket::Buffer const&, size_t)> callback)
     {
         messageCallback_ = callback;
     }
 
 private:
-    std::atomic<bool> isRunning_ {false};
-    unsigned long long socketDescriptor_ {};
-    DatagramSocket::Buffer buffer_ {};
+    std::atomic<bool> isRunning_{false};
+    unsigned long long socketDescriptor_{};
+    DatagramSocket::Buffer buffer_{};
     std::thread listenerThread_;
     std::function<void(DatagramSocket::Buffer, size_t)> messageCallback_ = nullptr;
 };

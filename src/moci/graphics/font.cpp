@@ -4,12 +4,17 @@
 
 #include <utility>
 
-namespace moci
-{
-Typeface::Typeface(std::string name) : _name(std::move(name)) { }
+namespace moci {
+Typeface::Typeface(std::string name) : _name(std::move(name)) {}
 
-void Typeface::addCharacter(char c, std::uint32_t height, std::uint32_t width, Point<std::uint32_t> topLeft,
-                            std::uint32_t advance, Buffer buffer)
+void Typeface::addCharacter(
+    char c,
+    std::uint32_t height,
+    std::uint32_t width,
+    Point<std::uint32_t> topLeft,
+    std::uint32_t advance,
+    Buffer buffer
+)
 {
     addCharacter(c, {height, width, topLeft, advance, std::move(buffer)});
 }
@@ -21,9 +26,8 @@ void Typeface::addCharacter(char c, Character const& character)
 
 auto Typeface::getWidthForString(std::string const& text, float scale) -> std::uint32_t
 {
-    auto position = Point<float> {};
-    for (auto const c : text)
-    {
+    auto position = Point<float>{};
+    for (auto const c : text) {
         auto const& ch = _characters[c];
 
         // float const xpos = position.getX() + ch.topLeft.getX() * scale;

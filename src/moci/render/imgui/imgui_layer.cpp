@@ -5,12 +5,11 @@
 #include <moci/core/logging.hpp>
 #include <moci/render/imgui/imgui.hpp>
 
-namespace moci
-{
+namespace moci {
 
 ImGuiLayer::ImGuiLayer() = default;
 
-ImGuiLayer::ImGuiLayer(std::string const& /*unused*/) { }
+ImGuiLayer::ImGuiLayer(std::string const& /*unused*/) {}
 
 ImGuiLayer::~ImGuiLayer() = default;
 
@@ -59,50 +58,52 @@ void ImGuiLayer::begin()
         ImGui::NewFrame();
     }
     // Docking
-    ImGuiWindowFlags windowFlags {};
+    ImGuiWindowFlags windowFlags{};
     static bool optFullscreenPersistant      = true;
     bool optFullscreen                       = optFullscreenPersistant;
     static ImGuiDockNodeFlags dockspaceFlags = ImGuiDockNodeFlags_PassthruCentralNode;
 
-    // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
-    // because it would be confusing to have two docking targets within each others.
+    // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not
+    // dockable into, because it would be confusing to have two docking targets within each
+    // others.
     windowFlags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-    if (optFullscreen)
-    {
+    if (optFullscreen) {
         ImGuiViewport* viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(viewport->WorkPos);
         ImGui::SetNextWindowSize(viewport->WorkSize);
         ImGui::SetNextWindowViewport(viewport->ID);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0F);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0F);
-        windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize
-                       | ImGuiWindowFlags_NoMove;
+        windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse
+                     | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
         windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
     }
 
-    // When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our background
-    // and handle the pass-thru hole, so we ask Begin() to not render a background.
-    if ((dockspaceFlags & ImGuiDockNodeFlags_PassthruCentralNode) != 0)
-    {
+    // When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our
+    // background and handle the pass-thru hole, so we ask Begin() to not render a
+    // background.
+    if ((dockspaceFlags & ImGuiDockNodeFlags_PassthruCentralNode) != 0) {
         windowFlags |= ImGuiWindowFlags_NoBackground;
     }
 
-    // Important: note that we proceed even if Begin() returns false (aka window is collapsed).
-    // This is because we want to keep our DockSpace() active. If a DockSpace() is inactive,
-    // all active windows docked into it will lose their parent and become undocked.
-    // We cannot preserve the docking relationship between an active window and an inactive docking, otherwise
-    // any change of dockspace/settings would lead to windows being stuck in limbo and never being visible.
+    // Important: note that we proceed even if Begin() returns false (aka window is
+    // collapsed). This is because we want to keep our DockSpace() active. If a DockSpace()
+    // is inactive, all active windows docked into it will lose their parent and become
+    // undocked. We cannot preserve the docking relationship between an active window and an
+    // inactive docking, otherwise any change of dockspace/settings would lead to windows
+    // being stuck in limbo and never being visible.
     static auto pOpen = true;
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0F, 0.0F));
     ImGui::Begin("DockSpace Demo", &pOpen, windowFlags);
     ImGui::PopStyleVar();
 
-    if (optFullscreen) { ImGui::PopStyleVar(2); }
+    if (optFullscreen) {
+        ImGui::PopStyleVar(2);
+    }
 
     // DockSpace
     ImGuiIO& io = ImGui::GetIO();
-    if ((io.ConfigFlags & ImGuiConfigFlags_DockingEnable) != 0)
-    {
+    if ((io.ConfigFlags & ImGuiConfigFlags_DockingEnable) != 0) {
         ImGuiID dockspaceId = ImGui::GetID("dock_space");
         ImGui::DockSpace(dockspaceId, ImVec2(0.0F, 0.0F), dockspaceFlags);
     }
@@ -121,5 +122,5 @@ void ImGuiLayer::end()
     }
 }
 
-void ImGuiLayer::onImGuiRender() { }
+void ImGuiLayer::onImGuiRender() {}
 }  // namespace moci

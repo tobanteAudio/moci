@@ -2,14 +2,16 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "gl4.hpp"
-#include <moci/core/benchmark/profile.hpp>
-#include <moci/core/logging.hpp>
+    #include "gl4.hpp"
+    #include <moci/core/benchmark/profile.hpp>
+    #include <moci/core/logging.hpp>
 
-namespace moci
+namespace moci {
+
+auto GraphicsContext::create(void* win) -> GraphicsContext*
 {
-
-auto GraphicsContext::create(void* win) -> GraphicsContext* { return new OpenGLContext(static_cast<GLFWwindow*>(win)); }
+    return new OpenGLContext(static_cast<GLFWwindow*>(win));
+}
 
 OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : _windowHandle(windowHandle)
 {
@@ -22,20 +24,33 @@ void OpenGLContext::init()
 
     glfwMakeContextCurrent(_windowHandle);
     // Initialize OpenGL loader
-    if (auto err = glewInit() != GLEW_OK; err) { MOCI_CORE_ASSERT(err, "Failed to initialize glew!"); }
+    if (auto err = glewInit() != GLEW_OK; err) {
+        MOCI_CORE_ASSERT(err, "Failed to initialize glew!");
+    }
 
     MOCI_CORE_INFO("OpenGL Info:");
-    MOCI_CORE_INFO("  Vendor: {0}", std::string_view {reinterpret_cast<char const*>(glGetString(GL_VENDOR))});
-    MOCI_CORE_INFO("  Renderer: {0}", std::string_view {reinterpret_cast<char const*>(glGetString(GL_RENDERER))});
-    MOCI_CORE_INFO("  Version: {0}", std::string_view {reinterpret_cast<char const*>(glGetString(GL_VERSION))});
+    MOCI_CORE_INFO(
+        "  Vendor: {0}",
+        std::string_view{reinterpret_cast<char const*>(glGetString(GL_VENDOR))}
+    );
+    MOCI_CORE_INFO(
+        "  Renderer: {0}",
+        std::string_view{reinterpret_cast<char const*>(glGetString(GL_RENDERER))}
+    );
+    MOCI_CORE_INFO(
+        "  Version: {0}",
+        std::string_view{reinterpret_cast<char const*>(glGetString(GL_VERSION))}
+    );
 
     int versionMajor = 0;
     int versionMinor = 0;
     glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
     glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
 
-    MOCI_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5),
-                     "Moci requires at least OpenGL version 4.5!");
+    MOCI_CORE_ASSERT(
+        versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5),
+        "Moci requires at least OpenGL version 4.5!"
+    );
 }
 
 void OpenGLContext::swapBuffers()

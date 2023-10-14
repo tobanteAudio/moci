@@ -3,14 +3,15 @@
 #include <moci/events/key_codes.hpp>
 #include <moci/events/types/event.hpp>
 
-namespace moci
-{
+namespace moci {
 
 class KeyEvent : public Event
 {
 public:
     ~KeyEvent() override = default;
-    explicit KeyEvent(Key keycode) : _keyCode(keycode) { }
+
+    explicit KeyEvent(Key keycode) : _keyCode(keycode) {}
+
     [[nodiscard]] inline auto getKeyCode() const -> Key { return _keyCode; }
 
     EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
@@ -23,13 +24,21 @@ class KeyPressedEvent : public KeyEvent
 {
 public:
     ~KeyPressedEvent() override = default;
-    KeyPressedEvent(Key keycode, int repeatCount) : KeyEvent(keycode), _repeatCount(repeatCount) { }
+
+    KeyPressedEvent(Key keycode, int repeatCount)
+        : KeyEvent(keycode)
+        , _repeatCount(repeatCount)
+    {}
 
     [[nodiscard]] inline auto getRepeatCount() const -> int { return _repeatCount; }
 
     [[nodiscard]] auto toString() const -> std::string override
     {
-        return fmt::format("KeyPressedEvent: {} ({} repeats)", fmt::streamed(getKeyCode()), _repeatCount);
+        return fmt::format(
+            "KeyPressedEvent: {} ({} repeats)",
+            fmt::streamed(getKeyCode()),
+            _repeatCount
+        );
     }
 
     EVENT_CLASS_TYPE(KeyPressed)
@@ -41,7 +50,8 @@ class KeyReleasedEvent : public KeyEvent
 {
 public:
     ~KeyReleasedEvent() override = default;
-    explicit KeyReleasedEvent(Key keycode) : KeyEvent(keycode) { }
+
+    explicit KeyReleasedEvent(Key keycode) : KeyEvent(keycode) {}
 
     [[nodiscard]] auto toString() const -> std::string override
     {
@@ -55,7 +65,8 @@ class KeyTypedEvent : public KeyEvent
 {
 public:
     ~KeyTypedEvent() override = default;
-    explicit KeyTypedEvent(Key keycode) : KeyEvent(keycode) { }
+
+    explicit KeyTypedEvent(Key keycode) : KeyEvent(keycode) {}
 
     [[nodiscard]] auto toString() const -> std::string override
     {

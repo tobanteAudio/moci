@@ -2,10 +2,9 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include <moci/render/api.hpp>
+    #include <moci/render/api.hpp>
 
-namespace moci
-{
+namespace moci {
 
 class OpenGLRendererAPI : public RendererAPI
 {
@@ -18,7 +17,8 @@ public:
 
     void drawArrays(RenderDrawMode mode, uint32_t first, uint32_t count) override;
     void drawIndexed(RenderDrawMode mode, uint32_t count, void* indices) override;
-    void drawIndexed(RenderDrawMode mode, std::shared_ptr<VertexArray> const& vertexArray) override;
+    void drawIndexed(RenderDrawMode mode, std::shared_ptr<VertexArray> const& vertexArray)
+        override;
     auto maxTextureSize() -> std::uint32_t override;
     auto maxTextureUnits() -> std::uint32_t override;
     auto maxVertexAttributes() -> std::uint32_t override;

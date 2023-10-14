@@ -9,13 +9,13 @@
 
 TEST_CASE("graphics: TypefaceConstruct", "[font][graphics]")
 {
-    moci::Typeface face {"comic-sans"};
+    moci::Typeface face{"comic-sans"};
     REQUIRE(face.getName() == "comic-sans");
 }
 
 TEST_CASE("graphics: TypefaceGetWidthForString", "[font][graphics]")
 {
-    const auto* const path = "moci_test_data/OpenSans-Bold.ttf";
+    auto const* const path = "moci_test_data/OpenSans-Bold.ttf";
     auto const opt         = moci::FreetypeLibrary::createTypefaceFromFont(path);
     REQUIRE(opt.has_value() == true);
 

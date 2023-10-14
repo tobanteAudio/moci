@@ -17,7 +17,9 @@ int main(int, char**)
 
     stbi_set_flip_vertically_on_load(1);
     buffer = stbi_load(path, &width, &height, &bpp, 0);
-    if (buffer == nullptr) { MOCI_ERROR("stbi load error"); }
+    if (buffer == nullptr) {
+        MOCI_ERROR("stbi load error");
+    }
 
     MOCI_INFO("Width: {}", width);
     MOCI_INFO("Height: {}", height);
@@ -25,22 +27,34 @@ int main(int, char**)
 
     // Resize
     auto const newSize = 512;
-    std::vector<stbi_uc> outBuffer {};
+    std::vector<stbi_uc> outBuffer{};
     outBuffer.resize(newSize * newSize * bpp);
-    if (stbir_resize_uint8(buffer, width, height, 0, outBuffer.data(), newSize, newSize, 0, bpp) == 0)
-    {
+    if (stbir_resize_uint8(
+            buffer,
+            width,
+            height,
+            0,
+            outBuffer.data(),
+            newSize,
+            newSize,
+            0,
+            bpp
+        )
+        == 0) {
         MOCI_ERROR("stbi resize error");
     }
 
     // Write
     auto const outPath = "test.png";
-    if (stbi_write_png(outPath, newSize, newSize, bpp, outBuffer.data(), newSize * bpp) == 0)
-    {
+    if (stbi_write_png(outPath, newSize, newSize, bpp, outBuffer.data(), newSize * bpp)
+        == 0) {
         MOCI_ERROR("stbi write error");
     }
 
     // Cleanup
-    if (buffer != nullptr) { stbi_image_free(buffer); }
+    if (buffer != nullptr) {
+        stbi_image_free(buffer);
+    }
 
     return EXIT_SUCCESS;
 }

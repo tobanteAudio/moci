@@ -8,7 +8,7 @@
 
 TEST_CASE("graphics/freetype: FreetypeCreateTypeface", "[graphics][font]")
 {
-    const auto* const path = "moci_test_data/OpenSans-Bold.ttf";
+    auto const* const path = "moci_test_data/OpenSans-Bold.ttf";
     auto const typeface    = moci::FreetypeLibrary::createTypefaceFromFont(path);
     REQUIRE(typeface.has_value() == true);
     REQUIRE(typeface.value().getNumCharacters() == 128);

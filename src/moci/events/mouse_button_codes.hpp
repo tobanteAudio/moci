@@ -3,8 +3,7 @@
 #include <cstdint>
 #include <iostream>
 
-namespace moci
-{
+namespace moci {
 // From glfw3.h
 enum class MouseCode : uint16_t
 {

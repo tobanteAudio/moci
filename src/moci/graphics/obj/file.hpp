@@ -8,8 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace moci
-{
+namespace moci {
 /**
  * @brief Simple Wavefront OBJ file loader.
  */

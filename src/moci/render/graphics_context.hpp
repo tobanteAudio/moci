@@ -1,6 +1,6 @@
 #pragma once
-namespace moci
-{
+
+namespace moci {
 
 class GraphicsContext
 {

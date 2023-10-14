@@ -6,8 +6,7 @@
 
 #include <moci/events/types/event.hpp>
 
-namespace moci
-{
+namespace moci {
 
 struct WindowSpecs
 {
@@ -15,10 +14,15 @@ struct WindowSpecs
     unsigned int Width;
     unsigned int Height;
 
-    explicit WindowSpecs(std::string title = "moci engine", unsigned int width = 1280, unsigned int height = 1024)
-        : Title(std::move(title)), Width(width), Height(height)
-    {
-    }
+    explicit WindowSpecs(
+        std::string title   = "moci engine",
+        unsigned int width  = 1280,
+        unsigned int height = 1024
+    )
+        : Title(std::move(title))
+        , Width(width)
+        , Height(height)
+    {}
 };
 
 // Interface representing a desktop system based Window
@@ -37,7 +41,7 @@ public:
     [[nodiscard]] virtual auto getHeight() const -> unsigned int = 0;
 
     // Window attributes
-    virtual void setEventCallback(const EventCallbackFn& callback) = 0;
+    virtual void setEventCallback(EventCallbackFn const& callback) = 0;
 
     virtual void setVSync(bool enabled)                = 0;
     [[nodiscard]] virtual auto isVSync() const -> bool = 0;

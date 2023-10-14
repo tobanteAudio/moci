@@ -6,8 +6,7 @@
 #include <span>
 #include <vector>
 
-namespace moci
-{
+namespace moci {
 class Image
 {
 public:
@@ -19,7 +18,9 @@ public:
     [[nodiscard]] auto empty() const noexcept -> bool { return _data.empty(); }
 
     [[nodiscard]] auto getWidth() const noexcept -> int { return _width; }
+
     [[nodiscard]] auto getHeight() const noexcept -> int { return _height; }
+
     [[nodiscard]] auto getNumChannels() const noexcept -> int { return _numChannels; }
 
     [[nodiscard]] auto data() noexcept -> std::span<std::uint8_t> { return _data; }

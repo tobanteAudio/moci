@@ -2,17 +2,20 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "gl4.hpp"
+    #include "gl4.hpp"
 
-#include <stb_image.h>
+    #include <stb_image.h>
 
-#include <cstddef>
+    #include <cstddef>
 
-namespace moci
-{
+namespace moci {
 
 OpenGLTexture2D::OpenGLTexture2D(std::uint32_t width, std::uint32_t height)
-    : width_ {width}, height_ {height}, channels_ {4}, internalFormat_ {GL_RGBA8}, dataFormat_ {GL_RGBA}
+    : width_{width}
+    , height_{height}
+    , channels_{4}
+    , internalFormat_{GL_RGBA8}
+    , dataFormat_{GL_RGBA}
 {
     createTexture();
     setFilters();
@@ -50,29 +53,51 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path) : path_(std::move(path))
 
     createTexture();
     setFilters();
-    setData(
-        std::span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), static_cast<size_t>(width_ * height_ * channels_)});
+    setData(std::span<std::uint8_t>{
+        reinterpret_cast<std::uint8_t*>(data),
+        static_cast<size_t>(width_ * height_ * channels_)
+    });
 
     stbi_image_free(data);
 }
 
-OpenGLTexture2D::OpenGLTexture2D(Texture::Format format, std::uint32_t width, std::uint32_t height, void* data)
-    : width_(width), height_(height)
+OpenGLTexture2D::OpenGLTexture2D(
+    Texture::Format format,
+    std::uint32_t width,
+    std::uint32_t height,
+    void* data
+)
+    : width_(width)
+    , height_(height)
 {
     ignoreUnused(format);
     createTexture();
     setFilters();
-    setData(
-        std::span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), static_cast<size_t>(width_ * height_ * channels_)});
+    setData(std::span<std::uint8_t>{
+        reinterpret_cast<std::uint8_t*>(data),
+        static_cast<size_t>(width_ * height_ * channels_)
+    });
 }
 
 OpenGLTexture2D::~OpenGLTexture2D() { glDeleteTextures(1, &renderID_); }
 
 void OpenGLTexture2D::setData(std::span<std::uint8_t> data) const
 {
-    MOCI_CORE_ASSERT(data.size() == static_cast<unsigned long>(width_ * height_ * channels_),
-                     "Data must be entire texture!");
-    glTextureSubImage2D(renderID_, 0, 0, 0, width_, height_, dataFormat_, GL_UNSIGNED_BYTE, data.data());
+    MOCI_CORE_ASSERT(
+        data.size() == static_cast<unsigned long>(width_ * height_ * channels_),
+        "Data must be entire texture!"
+    );
+    glTextureSubImage2D(
+        renderID_,
+        0,
+        0,
+        0,
+        width_,
+        height_,
+        dataFormat_,
+        GL_UNSIGNED_BYTE,
+        data.data()
+    );
 }
 
 void OpenGLTexture2D::bind(uint32_t slot) const { glBindTextureUnit(slot, renderID_); }
@@ -92,7 +117,8 @@ void OpenGLTexture2D::setFilters() const
     glTextureParameteri(renderID_, GL_TEXTURE_WRAP_T, GL_REPEAT);
 }
 
-OpenGLTextureCube::OpenGLTextureCube(std::vector<std::string> paths) : paths_(std::move(paths))
+OpenGLTextureCube::OpenGLTextureCube(std::vector<std::string> paths)
+    : paths_(std::move(paths))
 {
 
     // Generate a texture object
@@ -109,19 +135,28 @@ OpenGLTextureCube::OpenGLTextureCube(std::vector<std::string> paths) : paths_(st
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
     // stbi_set_flip_vertically_on_load(1);
-    for (GLuint i = 0; i < paths_.size(); i++)
-    {
+    for (GLuint i = 0; i < paths_.size(); i++) {
         int width      = 0;
         int height     = 0;
         int nrChannels = 0;
         auto* data     = stbi_load(paths_[i].c_str(), &width, &height, &nrChannels, 0);
-        if (data != nullptr)
-        {
+        if (data != nullptr) {
             MOCI_CORE_INFO("stbi loaded: {} {}x{}", paths_[i].c_str(), width, height);
             auto const position = GL_TEXTURE_CUBE_MAP_POSITIVE_X + i;
-            glTexImage2D(position, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            glTexImage2D(
+                position,
+                0,
+                GL_RGB,
+                width,
+                height,
+                0,
+                GL_RGB,
+                GL_UNSIGNED_BYTE,
+                data
+            );
+        } else {
+            MOCI_CORE_ERROR("stbi error: {}", paths_[i].c_str());
         }
-        else { MOCI_CORE_ERROR("stbi error: {}", paths_[i].c_str()); }
 
         stbi_image_free(data);
     }

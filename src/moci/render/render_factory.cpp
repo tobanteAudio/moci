@@ -14,28 +14,24 @@
 #include <moci/render/opengl/gl4/texture.hpp>
 #include <moci/render/opengl/gl4/vertex_array.hpp>
 
-namespace moci
-{
+namespace moci {
 
-auto RenderFactory::makeVertexBuffer(float* vertices, uint32_t size, bool dynamic) -> VertexBuffer*
+auto RenderFactory::makeVertexBuffer(float* vertices, uint32_t size, bool dynamic)
+    -> VertexBuffer*
 {
-    switch (Renderer::getApi())
-    {
-        case RendererAPI::API::None:
-        {
+    switch (Renderer::getApi()) {
+        case RendererAPI::API::None: {
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
         }
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL:
-        {
+        case RendererAPI::API::OpenGL: {
             MOCI_CORE_INFO("Make OpenGL Vertex Buffer");
             return new OpenGLVertexBuffer(vertices, size, dynamic);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES:
-        {
+        case RendererAPI::API::OpenGLES: {
             MOCI_CORE_INFO("Make OpenGLES Vertex Buffer");
             return new OpenGLESVertexBuffer(vertices, size, dynamic);
         }
@@ -49,23 +45,19 @@ auto RenderFactory::makeVertexBuffer(float* vertices, uint32_t size, bool dynami
 
 auto RenderFactory::makeIndexBuffer(IndexBufferSpecs specs) -> IndexBuffer*
 {
-    switch (Renderer::getApi())
-    {
-        case RendererAPI::API::None:
-        {
+    switch (Renderer::getApi()) {
+        case RendererAPI::API::None: {
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
         }
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL:
-        {
+        case RendererAPI::API::OpenGL: {
             MOCI_CORE_INFO("Make OpenGL Index Buffer");
             return new OpenGLIndexBuffer(specs);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES:
-        {
+        case RendererAPI::API::OpenGLES: {
             MOCI_CORE_INFO("Make OpenGLES Index Buffer");
             return new OpenGLESIndexBuffer(specs);
         }
@@ -79,23 +71,19 @@ auto RenderFactory::makeIndexBuffer(IndexBufferSpecs specs) -> IndexBuffer*
 
 auto RenderFactory::makeFramebuffer(FramebufferSpecs spec) -> std::shared_ptr<Framebuffer>
 {
-    switch (Renderer::getApi())
-    {
-        case RendererAPI::API::None:
-        {
+    switch (Renderer::getApi()) {
+        case RendererAPI::API::None: {
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
         }
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL:
-        {
+        case RendererAPI::API::OpenGL: {
             MOCI_CORE_INFO("Make OpenGL FrameBuffer");
             return std::make_shared<OpenGLFramebuffer>(spec);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES:
-        {
+        case RendererAPI::API::OpenGLES: {
             MOCI_CORE_INFO("Make OpenGLES FrameBuffer");
             return std::make_shared<OpenGLESFramebuffer>(spec);
         }
@@ -107,26 +95,22 @@ auto RenderFactory::makeFramebuffer(FramebufferSpecs spec) -> std::shared_ptr<Fr
     return nullptr;
 }
 
-auto RenderFactory::makeShader(const std::string& filepath) -> std::shared_ptr<Shader>
+auto RenderFactory::makeShader(std::string const& filepath) -> std::shared_ptr<Shader>
 {
     MOCI_CORE_INFO("Creating shader from: {}", filepath);
-    switch (Renderer::getApi())
-    {
-        case RendererAPI::API::None:
-        {
+    switch (Renderer::getApi()) {
+        case RendererAPI::API::None: {
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
         }
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL:
-        {
+        case RendererAPI::API::OpenGL: {
             MOCI_CORE_INFO("Make OpenGL Shader: {:s}", filepath);
             return std::make_shared<OpenGLShader>(filepath);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES:
-        {
+        case RendererAPI::API::OpenGLES: {
             MOCI_CORE_INFO("Make OpenGLES Shader: {:s}", filepath);
             return std::make_shared<OpenGLESShader>(filepath);
         }
@@ -138,26 +122,25 @@ auto RenderFactory::makeShader(const std::string& filepath) -> std::shared_ptr<S
     return nullptr;
 }
 
-auto RenderFactory::makeShader(std::string const& name, std::string const& vertexSrc, std::string const& fragmentSrc)
-    -> std::shared_ptr<Shader>
+auto RenderFactory::makeShader(
+    std::string const& name,
+    std::string const& vertexSrc,
+    std::string const& fragmentSrc
+) -> std::shared_ptr<Shader>
 {
-    switch (Renderer::getApi())
-    {
-        case RendererAPI::API::None:
-        {
+    switch (Renderer::getApi()) {
+        case RendererAPI::API::None: {
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
         }
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL:
-        {
+        case RendererAPI::API::OpenGL: {
             MOCI_CORE_INFO("Make OpenGL Shader: {:s}", name);
             return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES:
-        {
+        case RendererAPI::API::OpenGLES: {
             MOCI_CORE_INFO("Make OpenGLES Shader: {:s}", name);
             return std::make_shared<OpenGLESShader>(name, vertexSrc, fragmentSrc);
         }
@@ -171,23 +154,19 @@ auto RenderFactory::makeShader(std::string const& name, std::string const& verte
 
 auto RenderFactory::makeTexture2D(std::string const& path) -> std::shared_ptr<Texture2D>
 {
-    switch (Renderer::getApi())
-    {
-        case RendererAPI::API::None:
-        {
+    switch (Renderer::getApi()) {
+        case RendererAPI::API::None: {
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
         }
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL:
-        {
+        case RendererAPI::API::OpenGL: {
             MOCI_CORE_INFO("Make OpenGL Texture2D: {:s}", path);
             return std::make_shared<OpenGLTexture2D>(path);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES:
-        {
+        case RendererAPI::API::OpenGLES: {
             MOCI_CORE_INFO("Make OpenGLES Texture2D: {:s}", path);
             return std::make_shared<OpenGLESTexture2D>(path);
         }
@@ -199,25 +178,26 @@ auto RenderFactory::makeTexture2D(std::string const& path) -> std::shared_ptr<Te
     return nullptr;
 }
 
-auto RenderFactory::makeTexture2D(Texture::Format format, uint32_t width, uint32_t height, void* data) -> std::shared_ptr<Texture2D>
+auto RenderFactory::makeTexture2D(
+    Texture::Format format,
+    uint32_t width,
+    uint32_t height,
+    void* data
+) -> std::shared_ptr<Texture2D>
 {
-    switch (Renderer::getApi())
-    {
-        case RendererAPI::API::None:
-        {
+    switch (Renderer::getApi()) {
+        case RendererAPI::API::None: {
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
         }
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL:
-        {
+        case RendererAPI::API::OpenGL: {
             MOCI_CORE_INFO("Make OpenGL Texture2D from data");
             return std::make_shared<OpenGLTexture2D>(format, width, height, data);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES:
-        {
+        case RendererAPI::API::OpenGLES: {
             MOCI_CORE_INFO("Make OpenGLES Texture2D from data");
             return std::make_shared<OpenGLESTexture2D>(format, width, height, data);
         }
@@ -229,25 +209,22 @@ auto RenderFactory::makeTexture2D(Texture::Format format, uint32_t width, uint32
     return nullptr;
 }
 
-auto RenderFactory::makeTextureCube(const std::vector<std::string>& paths) -> std::shared_ptr<TextureCube>
+auto RenderFactory::makeTextureCube(std::vector<std::string> const& paths)
+    -> std::shared_ptr<TextureCube>
 {
-    switch (Renderer::getApi())
-    {
-        case RendererAPI::API::None:
-        {
+    switch (Renderer::getApi()) {
+        case RendererAPI::API::None: {
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
         }
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL:
-        {
+        case RendererAPI::API::OpenGL: {
             MOCI_CORE_INFO("Make OpenGL TextureCube");
             return std::make_shared<OpenGLTextureCube>(paths);
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES:
-        {
+        case RendererAPI::API::OpenGLES: {
             MOCI_CORE_INFO("Make OpenGLES TextureCube");
             return std::make_shared<OpenGLESTextureCube>(paths);
         }
@@ -261,23 +238,19 @@ auto RenderFactory::makeTextureCube(const std::vector<std::string>& paths) -> st
 
 auto RenderFactory::makeVertexArray() -> std::shared_ptr<VertexArray>
 {
-    switch (Renderer::getApi())
-    {
-        case RendererAPI::API::None:
-        {
+    switch (Renderer::getApi()) {
+        case RendererAPI::API::None: {
             MOCI_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
         }
 #if defined(MOCI_API_OPENGL_MODERN)
-        case RendererAPI::API::OpenGL:
-        {
+        case RendererAPI::API::OpenGL: {
             MOCI_CORE_INFO("Make OpenGL VertexArray");
             return std::make_shared<OpenGLVertexArray>();
         }
 #endif
 #if defined(MOCI_API_OPENGL_LEGACY)
-        case RendererAPI::API::OpenGLES:
-        {
+        case RendererAPI::API::OpenGLES: {
             MOCI_CORE_INFO("Make OpenGLES VertexArray");
             return std::make_shared<OpenGLESVertexArray>();
         }

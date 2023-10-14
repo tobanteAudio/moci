@@ -11,13 +11,16 @@
 
 #include "imgui.h"
 
-namespace moci
-{
+namespace moci {
 
 class ComponentLayer : public Layer
 {
 public:
-    explicit ComponentLayer(std::unique_ptr<Component>&& root) : Layer("component-layer"), _rootComponent(std::move(root)) { }
+    explicit ComponentLayer(std::unique_ptr<Component>&& root)
+        : Layer("component-layer")
+        , _rootComponent(std::move(root))
+    {}
+
     ~ComponentLayer() override = default;
 
     void onAttach() override;
@@ -45,10 +48,11 @@ private:
         }
 
         MOCI_CORE_ASSERT(comp, "Should never be null");
-        while (!handler(comp))
-        {
+        while (!handler(comp)) {
             comp = comp->getParent();
-            if (comp == nullptr) { return false; }
+            if (comp == nullptr) {
+                return false;
+            }
         }
 
         return true;
@@ -57,8 +61,8 @@ private:
     float _width  = 1280.0F;
     float _height = 1024.0F;
 
-    std::unique_ptr<BatchRender2D> _renderQueue {};
-    Style _defaultStyle {};
+    std::unique_ptr<BatchRender2D> _renderQueue{};
+    Style _defaultStyle{};
     std::unique_ptr<Component> _rootComponent;
 };
 }  // namespace moci

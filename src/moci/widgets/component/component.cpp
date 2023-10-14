@@ -2,25 +2,28 @@
 
 #include <moci/core/preprocessor.hpp>
 
-namespace moci
-{
+namespace moci {
 
-Component::Component(std::string id) : _id(std::move(id)) { }
+Component::Component(std::string id) : _id(std::move(id)) {}
 
 void Component::onDraw(Painter& painter) { ignoreUnused(painter); }
 
-void Component::onResize() { }
+void Component::onResize() {}
 
 void Component::draw(Painter& painter)
 {
     onDraw(painter);
-    for (auto* child : _children) { child->draw(painter); }
+    for (auto* child : _children) {
+        child->draw(painter);
+    }
 }
 
 void Component::resize()
 {
     onResize();
-    for (auto* child : _children) { child->onResize(); }
+    for (auto* child : _children) {
+        child->onResize();
+    }
 }
 
 void Component::setId(std::string id) { _id = std::move(id); }
@@ -33,7 +36,9 @@ auto Component::getParent() -> Component* { return _parent; }
 
 auto Component::getRootComponent() -> Component*
 {
-    if (_parent != nullptr) { return _parent->getRootComponent(); }
+    if (_parent != nullptr) {
+        return _parent->getRootComponent();
+    }
     return this;
 }
 
@@ -43,7 +48,10 @@ void Component::addChild(Component* child)
     child->setParent(this);
 }
 
-auto Component::getChildren() const noexcept -> std::vector<Component*> const& { return _children; }
+auto Component::getChildren() const noexcept -> std::vector<Component*> const&
+{
+    return _children;
+}
 
 void Component::setPosition(int x, int y) noexcept
 {
@@ -82,9 +90,10 @@ auto Component::getBounds() const noexcept -> Rectangle<int> { return _bounds; }
 
 auto Component::contains(Point<int> position) const noexcept -> bool
 {
-    if (position.getX() >= getX() && position.getX() <= getX() + getWidth())
-    {
-        if (position.getY() >= getY() && position.getY() <= getY() + getHeight()) { return true; }
+    if (position.getX() >= getX() && position.getX() <= getX() + getWidth()) {
+        if (position.getY() >= getY() && position.getY() <= getY() + getHeight()) {
+            return true;
+        }
     }
 
     return false;
@@ -92,13 +101,15 @@ auto Component::contains(Point<int> position) const noexcept -> bool
 
 auto Component::findComponentAt(Point<int> position) noexcept -> Component*
 {
-    if (!contains(position)) { return nullptr; }
+    if (!contains(position)) {
+        return nullptr;
+    }
 
-    for (auto* comp : getChildren())
-    {
-        if (comp->contains(position))
-        {
-            if (comp->getChildren().empty()) { return comp; }
+    for (auto* comp : getChildren()) {
+        if (comp->contains(position)) {
+            if (comp->getChildren().empty()) {
+                return comp;
+            }
 
             return comp->findComponentAt(position);
         }
@@ -112,12 +123,15 @@ void Component::setStyle(Style* newStyle) noexcept { _style = newStyle; }
 auto Component::getStyle() const noexcept -> Style*
 {
     // If style is set local
-    if (_style != nullptr) { return _style; }
+    if (_style != nullptr) {
+        return _style;
+    }
 
     // Style set on any parent
-    if (_parent != nullptr)
-    {
-        if (auto* parentStyle = _parent->getStyle(); parentStyle != nullptr) { return parentStyle; }
+    if (_parent != nullptr) {
+        if (auto* parentStyle = _parent->getStyle(); parentStyle != nullptr) {
+            return parentStyle;
+        }
     }
 
     // No style set

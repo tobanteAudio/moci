@@ -11,7 +11,7 @@
 
 TEST_CASE("network: UDPBindToPort", "[network]")
 {
-    moci::DatagramSocket udp {};
+    moci::DatagramSocket udp{};
     REQUIRE(udp.bind("", 0) == true);
 }
 

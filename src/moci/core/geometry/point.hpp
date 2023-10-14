@@ -1,13 +1,13 @@
 #pragma once
 
-namespace moci
-{
+namespace moci {
 template<typename Type>
 class Point
 {
 public:
-    explicit constexpr Point() noexcept : _x(Type(0)), _y(Type(0)) { }
-    constexpr Point(Type x, Type y) noexcept : _x(x), _y(y) { }
+    explicit constexpr Point() noexcept : _x(Type(0)), _y(Type(0)) {}
+
+    constexpr Point(Type x, Type y) noexcept : _x(x), _y(y) {}
 
     ~Point() = default;
 
@@ -17,12 +17,17 @@ public:
     Point(Point&&) noexcept                    = default;
     auto operator=(Point&&) noexcept -> Point& = default;
 
-    [[nodiscard]] constexpr auto isOrigin() const noexcept -> bool { return _x == Type(0) && _y == Type(0); }
+    [[nodiscard]] constexpr auto isOrigin() const noexcept -> bool
+    {
+        return _x == Type(0) && _y == Type(0);
+    }
 
     [[nodiscard]] constexpr auto getX() const noexcept -> Type { return _x; }
+
     [[nodiscard]] constexpr auto getY() const noexcept -> Type { return _y; }
 
     auto setX(Type x) noexcept -> void { _x = x; }
+
     auto setY(Type y) noexcept -> void { _y = y; }
 
 private:

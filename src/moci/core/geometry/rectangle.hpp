@@ -2,8 +2,7 @@
 
 #include <moci/core/geometry/point.hpp>
 
-namespace moci
-{
+namespace moci {
 template<typename Type>
 class Rectangle
 {
@@ -11,23 +10,29 @@ public:
     /**
      * @brief Default construct. Top left at (0,0), no size.
      */
-    explicit constexpr Rectangle() noexcept : _position(Type(0), Type(0)), _width(Type(0)), _height(Type(0)) { }
+    explicit constexpr Rectangle() noexcept
+        : _position(Type(0), Type(0))
+        , _width(Type(0))
+        , _height(Type(0))
+    {}
 
     /**
      * @brief Construct at (x, y), with width & height.
      */
     constexpr Rectangle(Type x, Type y, Type width, Type height) noexcept
-        : _position(x, y), _width(width), _height(height)
-    {
-    }
+        : _position(x, y)
+        , _width(width)
+        , _height(height)
+    {}
 
     /**
      * @brief Construct at position, with width & height.
      */
     constexpr Rectangle(Point<Type> position, Type width, Type height) noexcept
-        : _position(position), _width(width), _height(height)
-    {
-    }
+        : _position(position)
+        , _width(width)
+        , _height(height)
+    {}
 
     /**
      * @brief Default copy construct.
@@ -42,7 +47,10 @@ public:
     /**
      * @brief Returns true if the rectangle has no width & no height.
      */
-    [[nodiscard]] constexpr auto isEmpty() const noexcept -> bool { return _width <= Type(0) && _height <= Type(0); }
+    [[nodiscard]] constexpr auto isEmpty() const noexcept -> bool
+    {
+        return _width <= Type(0) && _height <= Type(0);
+    }
 
     /**
      * @brief Set Top left to (x, y).
@@ -97,21 +105,29 @@ public:
     /**
      * @brief Returns the x coordinate of the rectangle's right-side.
      */
-    [[nodiscard]] constexpr auto getRight() const noexcept -> Type { return _position.getX() + _width; }
+    [[nodiscard]] constexpr auto getRight() const noexcept -> Type
+    {
+        return _position.getX() + _width;
+    }
 
     /**
      * @brief Returns the y coordinate of the rectangle's bottom edge.
      */
-    [[nodiscard]] constexpr auto getBottom() const noexcept -> Type { return _position.getY() + _height; }
+    [[nodiscard]] constexpr auto getBottom() const noexcept -> Type
+    {
+        return _position.getY() + _height;
+    }
 
     /**
      * @brief Returns the aspect ratio width / height.
      */
     [[nodiscard]] constexpr auto getAspectRatio() const noexcept -> Type
     {
-        if (getWidth() != Type {}) { return getWidth() / getHeight(); }
+        if (getWidth() != Type{}) {
+            return getWidth() / getHeight();
+        }
 
-        return Type {};
+        return Type{};
     }
 
     /**
@@ -122,7 +138,7 @@ public:
         auto const oldY = getY();
         setY(oldY + amount);
         setHeight(getHeight() - amount);
-        return Rectangle<Type> {getX(), oldY, getWidth(), amount};
+        return Rectangle<Type>{getX(), oldY, getWidth(), amount};
     }
 
     /**
@@ -133,7 +149,7 @@ public:
         auto const oldHeight = getHeight();
         auto const newY      = getY() + oldHeight - amount;
         setHeight(oldHeight - amount);
-        return Rectangle<Type> {getX(), newY, getWidth(), amount};
+        return Rectangle<Type>{getX(), newY, getWidth(), amount};
     }
 
     /**
@@ -144,7 +160,7 @@ public:
         auto const oldX = getX();
         setWidth(getWidth() - amount);
         setX(oldX + amount);
-        return Rectangle<Type> {oldX, getY(), amount, getHeight()};
+        return Rectangle<Type>{oldX, getY(), amount, getHeight()};
     }
 
     /**
@@ -154,7 +170,7 @@ public:
     {
         auto const oldWidth = getWidth();
         setWidth(oldWidth - amount);
-        return Rectangle<Type> {getX() + oldWidth - amount, getY(), amount, getHeight()};
+        return Rectangle<Type>{getX() + oldWidth - amount, getY(), amount, getHeight()};
     }
 
     /**
@@ -164,7 +180,7 @@ public:
      */
     [[nodiscard]] auto reduced(Type deltaX, Type deltaY) const noexcept -> Rectangle<Type>
     {
-        return Rectangle<Type> {
+        return Rectangle<Type>{
             getX() + deltaX,          //
             getY() + deltaY,          //
             getWidth() - deltaX * 2,  //
@@ -177,7 +193,10 @@ public:
      * Effectively, the rectangle returned is:
      * (x + delta, y + delta, w - delta * 2, h - delta * 2).
      */
-    [[nodiscard]] auto reduced(Type delta) const noexcept -> Rectangle<Type> { return reduced(delta, delta); }
+    [[nodiscard]] auto reduced(Type delta) const noexcept -> Rectangle<Type>
+    {
+        return reduced(delta, delta);
+    }
 
     /**
      * @brief Converts the rectangle to a rectangle based on the given type.

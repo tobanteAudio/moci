@@ -7,8 +7,7 @@
 
 #include "glm/glm.hpp"
 
-namespace moci
-{
+namespace moci {
 
 class OrthographicCamera
 {
@@ -17,30 +16,40 @@ public:
 
     void setProjection(float left, float right, float bottom, float top);
 
-    [[nodiscard]] auto getPosition() const -> const glm::vec3& { return _position; }
-    void setPosition(const glm::vec3& position)
+    [[nodiscard]] auto getPosition() const -> glm::vec3 const& { return _position; }
+
+    void setPosition(glm::vec3 const& position)
     {
         _position = position;
         recalculateViewMatrix();
     }
 
     [[nodiscard]] auto getRotation() const -> float { return _rotation; }
+
     void setRotation(float rotation)
     {
         _rotation = rotation;
         recalculateViewMatrix();
     }
 
-    [[nodiscard]] auto getProjectionMatrix() const -> const glm::mat4& { return _projectionMatrix; }
-    [[nodiscard]] auto getViewMatrix() const -> const glm::mat4& { return _viewMatrix; }
-    [[nodiscard]] auto getViewProjectionMatrix() const -> const glm::mat4& { return _viewProjectionMatrix; }
+    [[nodiscard]] auto getProjectionMatrix() const -> glm::mat4 const&
+    {
+        return _projectionMatrix;
+    }
+
+    [[nodiscard]] auto getViewMatrix() const -> glm::mat4 const& { return _viewMatrix; }
+
+    [[nodiscard]] auto getViewProjectionMatrix() const -> glm::mat4 const&
+    {
+        return _viewProjectionMatrix;
+    }
 
 private:
     void recalculateViewMatrix();
 
     glm::mat4 _projectionMatrix;
     glm::mat4 _viewMatrix;
-    glm::mat4 _viewProjectionMatrix {};
+    glm::mat4 _viewProjectionMatrix{};
 
     glm::vec3 _position = {0.0F, 0.0F, 0.0F};
     float _rotation     = 0.0F;
@@ -55,9 +64,11 @@ public:
     void onEvent(Event& e);
 
     auto getCamera() -> OrthographicCamera& { return _camera; }
-    [[nodiscard]] auto getCamera() const -> const OrthographicCamera& { return _camera; }
+
+    [[nodiscard]] auto getCamera() const -> OrthographicCamera const& { return _camera; }
 
     [[nodiscard]] auto getZoomLevel() const -> float { return _zoomLevel; }
+
     void setZoomLevel(float level) { _zoomLevel = level; }
 
 private:

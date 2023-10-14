@@ -11,12 +11,12 @@
 #include <string>
 #include <utility>
 
-namespace
-{
+namespace {
 class TestLayer : public moci::Layer
 {
 public:
-    explicit TestLayer(std::string n) : moci::Layer(std::move(n)) { }
+    explicit TestLayer(std::string n) : moci::Layer(std::move(n)) {}
+
     ~TestLayer() override = default;
 };
 }  // namespace

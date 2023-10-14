@@ -4,8 +4,7 @@
 
 #include <string>
 
-namespace moci
-{
+namespace moci {
 
 class ImGuiLayer : public Layer
 {

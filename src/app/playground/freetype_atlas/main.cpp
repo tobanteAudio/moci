@@ -21,8 +21,7 @@ struct glyph_info
 int main(int argc, char** argv)
 {
     auto const arguments = std::span<char*>(argv, argc);
-    if (argc < 3)
-    {
+    if (argc < 3) {
         printf("usage: %s <font> <size>\n", arguments[0]);
         return 1;
     }
@@ -36,9 +35,12 @@ int main(int argc, char** argv)
 
     // quick and dirty max texture size estimate
 
-    int max_dim   = (1 + (face->size->metrics.height >> 6)) * static_cast<int>(ceilf(sqrtf(NUM_GLYPHS)));
+    int max_dim = (1 + (face->size->metrics.height >> 6))
+                * static_cast<int>(ceilf(sqrtf(NUM_GLYPHS)));
     int tex_width = 1;
-    while (tex_width < max_dim) { tex_width <<= 1; }
+    while (tex_width < max_dim) {
+        tex_width <<= 1;
+    }
     int tex_height = tex_width;
 
     // render glyphs to atlas
@@ -47,26 +49,26 @@ int main(int argc, char** argv)
     int pen_x    = 0;
     int pen_y    = 0;
 
-    std::array<glyph_info, NUM_GLYPHS> info {};
+    std::array<glyph_info, NUM_GLYPHS> info{};
 
     auto index = 0;
-    for (auto& glyph : info)
-    {
-        FT_Load_Char(face, index, FT_LOAD_RENDER | FT_LOAD_FORCE_AUTOHINT | FT_LOAD_TARGET_LIGHT);
+    for (auto& glyph : info) {
+        FT_Load_Char(
+            face,
+            index,
+            FT_LOAD_RENDER | FT_LOAD_FORCE_AUTOHINT | FT_LOAD_TARGET_LIGHT
+        );
         index++;
 
         FT_Bitmap* bmp = &face->glyph->bitmap;
 
-        if (pen_x + static_cast<int>(bmp->width) >= tex_width)
-        {
+        if (pen_x + static_cast<int>(bmp->width) >= tex_width) {
             pen_x = 0;
             pen_y += ((face->size->metrics.height >> 6) + 1);
         }
 
-        for (int row = 0; row < static_cast<int>(bmp->rows); ++row)
-        {
-            for (int col = 0; col < static_cast<int>(bmp->width); ++col)
-            {
+        for (int row = 0; row < static_cast<int>(bmp->rows); ++row) {
+            for (int col = 0; col < static_cast<int>(bmp->width); ++col) {
                 int x                     = pen_x + col;
                 int y                     = pen_y + row;
                 pixels[y * tex_width + x] = bmp->buffer[row * bmp->pitch + col];
@@ -92,8 +94,7 @@ int main(int argc, char** argv)
     // write png
 
     char* png_data = (char*)calloc(tex_width * tex_height * 4, 1);
-    for (int i = 0; i < (tex_width * tex_height); ++i)
-    {
+    for (int i = 0; i < (tex_width * tex_height); ++i) {
         png_data[i * 4 + 0] |= pixels[i];
         png_data[i * 4 + 1] |= pixels[i];
         png_data[i * 4 + 2] |= pixels[i];

@@ -11,14 +11,17 @@
 // TODO: REMOVE!
 using GLenum = unsigned int;
 
-namespace moci
-{
+namespace moci {
 
 class OpenGLESShader : public Shader
 {
 public:
     explicit OpenGLESShader(std::string const& filepath);
-    OpenGLESShader(std::string name, std::string const& vertexSrc, std::string const& fragmentSrc);
+    OpenGLESShader(
+        std::string name,
+        std::string const& vertexSrc,
+        std::string const& fragmentSrc
+    );
     ~OpenGLESShader() override;
 
     void bind() const override;
@@ -41,14 +44,14 @@ private:
     void uploadUniformInt(std::string const& name, int value) const;
     void uploadUniformInts(std::string const& name, int count, int* values) const;
     void uploadUniformFloat(std::string const& name, float value) const;
-    void uploadUniformFloat2(std::string const& name, const glm::vec2& value) const;
-    void uploadUniformFloat3(std::string const& name, const glm::vec3& value) const;
+    void uploadUniformFloat2(std::string const& name, glm::vec2 const& value) const;
+    void uploadUniformFloat3(std::string const& name, glm::vec3 const& value) const;
     void uploadUniformFloat4(std::string const& name, glm::vec4 const& value) const;
 
     void uploadUniformMat3(std::string const& name, glm::mat3 const& matrix) const;
     void uploadUniformMat4(std::string const& name, glm::mat4 const& matrix) const;
 
-    static auto createShader(const char* vertexSource, const char* fragmentSource) -> GLint;
+    static auto createShader(char const* vertexSource, char const* fragmentSource) -> GLint;
     static auto parseShader(std::string const& filepath) -> ShaderProgramSource;
 
     uint32_t _rendererID;

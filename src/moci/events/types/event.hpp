@@ -7,8 +7,7 @@
 #include <string>
 #include <string_view>
 
-namespace moci
-{
+namespace moci {
 
 // Events in moci are currently blocking, meaning when an event occurs it
 // immediately gets dispatched and must be dealt with right then an there.
@@ -45,25 +44,13 @@ enum EventCategory
     EventCategoryMouseButton = BIT(4)
 };
 
-#define EVENT_CLASS_TYPE(type)                                                                                         \
-    static EventType getStaticType()                                                                                   \
-    {                                                                                                                  \
-        return EventType::type;                                                                                        \
-    }                                                                                                                  \
-    virtual EventType getEventType() const override                                                                    \
-    {                                                                                                                  \
-        return getStaticType();                                                                                        \
-    }                                                                                                                  \
-    virtual std::string_view getName() const override                                                                  \
-    {                                                                                                                  \
-        return #type;                                                                                                  \
-    }
+#define EVENT_CLASS_TYPE(type)                                                             \
+    static EventType getStaticType() { return EventType::type; }                           \
+    virtual EventType getEventType() const override { return getStaticType(); }            \
+    virtual std::string_view getName() const override { return #type; }
 
-#define EVENT_CLASS_CATEGORY(category)                                                                                 \
-    virtual int getCategoryFlags() const override                                                                      \
-    {                                                                                                                  \
-        return category;                                                                                               \
-    }
+#define EVENT_CLASS_CATEGORY(category)                                                     \
+    virtual int getCategoryFlags() const override { return category; }
 
 class Event
 {
@@ -74,7 +61,11 @@ public:
     [[nodiscard]] virtual auto getEventType() const -> EventType   = 0;
     [[nodiscard]] virtual auto getName() const -> std::string_view = 0;
     [[nodiscard]] virtual auto getCategoryFlags() const -> int     = 0;
-    [[nodiscard]] virtual auto toString() const -> std::string { return std::string(getName()); }
+
+    [[nodiscard]] virtual auto toString() const -> std::string
+    {
+        return std::string(getName());
+    }
 
     [[nodiscard]] inline auto isInCategory(EventCategory category) const noexcept -> bool
     {
@@ -87,14 +78,13 @@ public:
 class EventDispatcher
 {
 public:
-    explicit EventDispatcher(Event& event) : _event(event) { }
+    explicit EventDispatcher(Event& event) : _event(event) {}
 
     // F will be deduced by the compiler
     template<typename T, typename F>
-    auto dispatch(const F& func) -> bool
+    auto dispatch(F const& func) -> bool
     {
-        if (_event.getEventType() == T::getStaticType())
-        {
+        if (_event.getEventType() == T::getStaticType()) {
             _event.Handled = func(static_cast<T&>(_event));
             return true;
         }
@@ -105,6 +95,9 @@ private:
     Event& _event;
 };
 
-inline auto operator<<(std::ostream& out, const Event& e) -> std::ostream& { return out << e.toString(); }
+inline auto operator<<(std::ostream& out, Event const& e) -> std::ostream&
+{
+    return out << e.toString();
+}
 
 }  // namespace moci

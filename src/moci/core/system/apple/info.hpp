@@ -3,10 +3,9 @@
 
 #if defined(MOCI_MAC)
 
-#include <moci/core/system/info.hpp>
+    #include <moci/core/system/info.hpp>
 
-namespace moci
-{
+namespace moci {
 class SystemInfo::Pimpl
 {
 public:

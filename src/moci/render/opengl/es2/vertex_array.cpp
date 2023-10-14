@@ -2,12 +2,10 @@
 
 #include <moci/render/opengl/es2/es2.hpp>
 
-namespace moci
-{
+namespace moci {
 static auto shaderDataTypeToOpenGlesBaseType(ShaderDataType type) -> GLenum
 {
-    switch (type)
-    {
+    switch (type) {
         case moci::ShaderDataType::Float: return GL_FLOAT;
         case moci::ShaderDataType::Float2: return GL_FLOAT;
         case moci::ShaderDataType::Float3: return GL_FLOAT;
@@ -19,7 +17,9 @@ static auto shaderDataTypeToOpenGlesBaseType(ShaderDataType type) -> GLenum
         case moci::ShaderDataType::Int3: return GL_INT;
         case moci::ShaderDataType::Int4: return GL_INT;
         case moci::ShaderDataType::Bool: return GL_BOOL;
-        case moci::ShaderDataType::None: MOCI_CORE_ASSERT(false, "Unknown ShaderDataType!"); return 0;
+        case moci::ShaderDataType::None:
+            MOCI_CORE_ASSERT(false, "Unknown ShaderDataType!");
+            return 0;
     }
 
     MOCI_CORE_ASSERT(false, "Unknown ShaderDataType!");
@@ -35,20 +35,28 @@ void OpenGLESVertexArray::bind() const
     setLayout();
     _indexBuffer->bind();
 }
+
 void OpenGLESVertexArray::unbind() const
 {
     _indexBuffer->unbind();
     _vertexBuffer->unbind();
 }
 
-void OpenGLESVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) { _vertexBuffer = vertexBuffer; }
-void OpenGLESVertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) { _indexBuffer = indexBuffer; }
+void OpenGLESVertexArray::addVertexBuffer(std::shared_ptr<VertexBuffer> const& vertexBuffer)
+{
+    _vertexBuffer = vertexBuffer;
+}
+
+void OpenGLESVertexArray::setIndexBuffer(std::shared_ptr<IndexBuffer> const& indexBuffer)
+{
+    _indexBuffer = indexBuffer;
+}
+
 void OpenGLESVertexArray::setLayout() const
 {
-    const auto& elements = _vertexBuffer->getLayout().getElements();
-    for (unsigned int i = 0; i < elements.size(); i++)
-    {
-        const auto& element = elements[i];
+    auto const& elements = _vertexBuffer->getLayout().getElements();
+    for (unsigned int i = 0; i < elements.size(); i++) {
+        auto const& element = elements[i];
         glEnableVertexAttribArray(i);
         glVertexAttribPointer(                               //
             i,                                               //
@@ -56,7 +64,7 @@ void OpenGLESVertexArray::setLayout() const
             shaderDataTypeToOpenGlesBaseType(element.Type),  //
             element.Normalized ? GL_TRUE : GL_FALSE,         //
             _vertexBuffer->getLayout().getStride(),          //
-            (const void*)element.Offset                      //
+            (void const*)element.Offset                      //
         );
     }
 }

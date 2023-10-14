@@ -15,8 +15,7 @@
 #include <memory>
 #include <vector>
 
-namespace moci
-{
+namespace moci {
 
 class BatchRender2D
 {
@@ -34,15 +33,22 @@ public:
     ~BatchRender2D();
 
     // BatchRender2D is not copyable.
-    BatchRender2D(const BatchRender2D&)                    = delete;
-    auto operator=(const BatchRender2D&) -> BatchRender2D& = delete;
+    BatchRender2D(BatchRender2D const&)                    = delete;
+    auto operator=(BatchRender2D const&) -> BatchRender2D& = delete;
 
     auto startFrame(float width, float height) -> void;
     auto endFrame() -> void;
 
-    auto drawText(const std::string& text, glm::vec2 position, float scale, ColorRGBA32 color) -> void;
-    auto drawQuad(Rectangle<float> rect, ColorRGBA32 color, Texture2D::Optional texture = std::nullopt) -> void;
-    auto drawCircle(float x, float y, float radius, int numSides, ColorRGBA32 color) -> void;
+    auto
+    drawText(std::string const& text, glm::vec2 position, float scale, ColorRGBA32 color)
+        -> void;
+    auto drawQuad(
+        Rectangle<float> rect,
+        ColorRGBA32 color,
+        Texture2D::Optional texture = std::nullopt
+    ) -> void;
+    auto drawCircle(float x, float y, float radius, int numSides, ColorRGBA32 color)
+        -> void;
 
     [[nodiscard]] auto getFrameStats() const -> FrameStats;
 
@@ -63,10 +69,10 @@ private:
 
     struct RenderData
     {
-        std::shared_ptr<VertexBuffer> vbo                      = nullptr;
-        std::shared_ptr<IndexBuffer> ibo                       = nullptr;
-        std::shared_ptr<VertexArray> vao                       = nullptr;
-        std::shared_ptr<Shader> shader                         = nullptr;
+        std::shared_ptr<VertexBuffer> vbo          = nullptr;
+        std::shared_ptr<IndexBuffer> ibo           = nullptr;
+        std::shared_ptr<VertexArray> vao           = nullptr;
+        std::shared_ptr<Shader> shader             = nullptr;
         std::vector<Vertex> vertices               = {};
         std::vector<uint32_t> indices              = {};
         std::uint32_t indexOffset                  = 0;
@@ -90,7 +96,7 @@ private:
     auto endBatch() -> void;
     auto resetFrameStats() -> void;
 
-    RenderData _data {};
+    RenderData _data{};
     std::map<char, Character> _characters;
 };
 

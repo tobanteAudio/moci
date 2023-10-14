@@ -2,16 +2,14 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "gl4.hpp"
-#include <moci/core/benchmark/profile.hpp>
+    #include "gl4.hpp"
+    #include <moci/core/benchmark/profile.hpp>
 
-namespace moci
-{
+namespace moci {
 
 static auto ShaderDataTypeToOpenGLBaseType(ShaderDataType type) -> GLenum
 {
-    switch (type)
-    {
+    switch (type) {
         case ShaderDataType::Float: return GL_FLOAT;
         case ShaderDataType::Float2: return GL_FLOAT;
         case ShaderDataType::Float3: return GL_FLOAT;
@@ -43,21 +41,28 @@ void OpenGLVertexArray::bind() const { glBindVertexArray(_rendererID); }
 
 void OpenGLVertexArray::unbind() const { glBindVertexArray(0); }
 
-void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
+void OpenGLVertexArray::addVertexBuffer(std::shared_ptr<VertexBuffer> const& vertexBuffer)
 {
 
-    MOCI_CORE_ASSERT(vertexBuffer->getLayout().getElements().size(), "Vertex Buffer has no layout!");
+    MOCI_CORE_ASSERT(
+        vertexBuffer->getLayout().getElements().size(),
+        "Vertex Buffer has no layout!"
+    );
 
     glBindVertexArray(_rendererID);
     vertexBuffer->bind();
 
-    const auto& layout = vertexBuffer->getLayout();
-    for (const auto& element : layout)
-    {
+    auto const& layout = vertexBuffer->getLayout();
+    for (auto const& element : layout) {
         glEnableVertexAttribArray(_vertexBufferIndex);
-        glVertexAttribPointer(_vertexBufferIndex, element.getComponentCount(),
-                              ShaderDataTypeToOpenGLBaseType(element.Type), element.Normalized ? GL_TRUE : GL_FALSE,
-                              layout.getStride(), (const void*)element.Offset);
+        glVertexAttribPointer(
+            _vertexBufferIndex,
+            element.getComponentCount(),
+            ShaderDataTypeToOpenGLBaseType(element.Type),
+            element.Normalized ? GL_TRUE : GL_FALSE,
+            layout.getStride(),
+            (void const*)element.Offset
+        );
         _vertexBufferIndex++;
     }
 
@@ -65,7 +70,7 @@ void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& ver
     // _vertexBuffers.push_back(vertexBuffer);
 }
 
-void OpenGLVertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
+void OpenGLVertexArray::setIndexBuffer(std::shared_ptr<IndexBuffer> const& indexBuffer)
 {
 
     glBindVertexArray(_rendererID);

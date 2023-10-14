@@ -2,8 +2,7 @@
 
 #include <string>
 
-namespace moci
-{
+namespace moci {
 /**
  * @brief Query system & machine information.
  */

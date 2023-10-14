@@ -13,8 +13,7 @@
 
 auto main(int argc, char** argv) -> int;
 
-namespace moci
-{
+namespace moci {
 
 class Application
 {
@@ -39,7 +38,7 @@ private:
     auto onWindowClose(WindowCloseEvent& e) -> bool;
     auto onWindowResize(WindowResizeEvent& e) -> bool;
 
-    std::unique_ptr<Window> _window                                                  = nullptr;
+    std::unique_ptr<Window> _window                                        = nullptr;
     bool _running                                                          = true;
     bool _minimized                                                        = false;
     LayerStack _layerStack                                                 = {};

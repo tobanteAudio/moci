@@ -5,8 +5,7 @@
 #include <moci/graphics/color.hpp>
 #include <moci/render/api.hpp>
 
-namespace moci
-{
+namespace moci {
 
 class RenderCommand
 {
@@ -47,16 +46,32 @@ public:
         sRendererApi->drawIndexed(mode, count, indices);
     }
 
-    inline static void drawIndexed(RenderDrawMode mode, std::shared_ptr<VertexArray> const& vertexArray)
+    inline static void
+    drawIndexed(RenderDrawMode mode, std::shared_ptr<VertexArray> const& vertexArray)
     {
         MOCI_PROFILE_FUNCTION();
         sRendererApi->drawIndexed(mode, vertexArray);
     }
 
-    inline static auto maxTextureSize() -> std::uint32_t { return sRendererApi->maxTextureSize(); }
-    inline static auto maxTextureUnits() -> std::uint32_t { return sRendererApi->maxTextureUnits(); }
-    inline static auto maxVertexAttributes() -> std::uint32_t { return sRendererApi->maxVertexAttributes(); }
-    inline static auto maxUniformVectors() -> std::uint32_t { return sRendererApi->maxUniformVectors(); }
+    inline static auto maxTextureSize() -> std::uint32_t
+    {
+        return sRendererApi->maxTextureSize();
+    }
+
+    inline static auto maxTextureUnits() -> std::uint32_t
+    {
+        return sRendererApi->maxTextureUnits();
+    }
+
+    inline static auto maxVertexAttributes() -> std::uint32_t
+    {
+        return sRendererApi->maxVertexAttributes();
+    }
+
+    inline static auto maxUniformVectors() -> std::uint32_t
+    {
+        return sRendererApi->maxUniformVectors();
+    }
 
 private:
     static std::unique_ptr<RendererAPI> sRendererApi;

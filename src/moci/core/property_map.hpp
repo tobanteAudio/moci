@@ -7,8 +7,7 @@
 #include <utility>
 #include <variant>
 
-namespace moci
-{
+namespace moci {
 
 /**
  * @brief Container that maps keys to property objects.
@@ -30,7 +29,7 @@ public:
     /**
      * @brief Constructor. Sets the name.
      */
-    explicit PropertyMap(std::string name) : _name(std::move(name)) { }
+    explicit PropertyMap(std::string name) : _name(std::move(name)) {}
 
     /**
      * @brief Sets the name.
@@ -40,20 +39,29 @@ public:
     /**
      * @brief Returns the name.
      */
-    [[nodiscard]] auto getName() const noexcept -> std::string_view { return std::string_view(_name); }
+    [[nodiscard]] auto getName() const noexcept -> std::string_view
+    {
+        return std::string_view(_name);
+    }
 
     /**
      * @brief Sets or updates the property at key.
      */
-    auto setProperty(KeyType const& key, Property&& p) -> void { _data.insert_or_assign(key, p); }
+    auto setProperty(KeyType const& key, Property&& p) -> void
+    {
+        _data.insert_or_assign(key, p);
+    }
 
     /**
      * @brief Returns the property at key.
      */
-    [[nodiscard]] auto getProperty(KeyType const& key) const noexcept -> std::optional<Property>
+    [[nodiscard]] auto getProperty(KeyType const& key) const noexcept
+        -> std::optional<Property>
     {
         auto const search = _data.find(key);
-        if (search != _data.end()) { return search->second; }
+        if (search != _data.end()) {
+            return search->second;
+        }
 
         return std::nullopt;
     }
@@ -74,7 +82,7 @@ public:
     }
 
 private:
-    std::string _name {};
-    std::unordered_map<KeyType, Property> _data {};
+    std::string _name{};
+    std::unordered_map<KeyType, Property> _data{};
 };
 }  // namespace moci

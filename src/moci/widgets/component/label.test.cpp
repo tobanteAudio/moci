@@ -10,14 +10,14 @@
 
 TEST_CASE("widget: LabelConstruct", "[ui]")
 {
-    moci::Label const label {"test", {}};
+    moci::Label const label{"test", {}};
     REQUIRE(label.getText() == "test");
     REQUIRE(label.getTextView() == "test");
 }
 
 TEST_CASE("widget: LabelSetText", "[ui]")
 {
-    moci::Label label {"", {}};
+    moci::Label label{"", {}};
     REQUIRE(label.getText().empty());
     REQUIRE(label.getTextView().empty());
     label.setText("test143");
@@ -27,7 +27,7 @@ TEST_CASE("widget: LabelSetText", "[ui]")
 
 TEST_CASE("widget: LabelSetTextColor", "[ui]")
 {
-    moci::Label label {"", {}};
+    moci::Label label{"", {}};
 
     auto c1 = label.getTextColor();
     REQUIRE(c1.red() == 0.0F);

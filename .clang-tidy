@@ -1,11 +1,14 @@
 Checks: >
   *-,
+
   boost-*,
 
   bugprone-*,
   -bugprone-macro-parentheses,
 
+
   cert-*,
+  -cert-err58-cpp,
   -cert-oop54-cpp,
 
   clang-analyzer-*,
@@ -15,39 +18,35 @@ Checks: >
 
   cppcoreguidelines-*,
   -cppcoreguidelines-avoid-magic-numbers,
-  -cppcoreguidelines-macro-usage,
-  -cppcoreguidelines-special-member-functions,
+  -cppcoreguidelines-avoid-const-or-ref-data-members,
+  -cppcoreguidelines-pro-bounds-constant-array-index,
   -cppcoreguidelines-pro-bounds-pointer-arithmetic,
-  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
 
   hicpp-*,
-  -hicpp-special-member-functions,
-  -hicpp-no-array-decay,
-  -hicpp-signed-bitwise,
 
   misc-*,
 
   modernize-*,
-  -modernize-avoid-bind,
-  -modernize-use-trailing-return-type,
 
   performance-*,
 
   readability-*,
+  -readability-identifier-naming,
   -readability-const-return-type,
   -readability-identifier-length,
   -readability-magic-numbers,
-  readability-identifier-naming,
-  -readability-uppercase-literal-suffix,
 
-  -*non-private-member-variables-in-classes,
-  -*-avoid-c-arrays
+  -*-named-parameter,
+  -*-non-private-member-variables-in-classes,
+  -*-special-member-functions,
 
 WarningsAsErrors: "*"
 FormatStyle: none
 CheckOptions:
   - key: bugprone-easily-swappable-parameters.MinimumLength
     value: 4
+  - key: cppcoreguidelines-avoid-do-while.IgnoreMacros
+    value: true
   - key: readability-identifier-naming.ClassCase
     value: CamelCase
   - key: readability-identifier-naming.ClassMemberCase
@@ -60,6 +59,8 @@ CheckOptions:
     value: CamelCase
   - key: readability-identifier-naming.FunctionCase
     value: camelBack
+  - key: readability-identifier-naming.FunctionIgnoredRegexp
+    value: "^tag_invoke$"
   - key: readability-identifier-naming.GlobalConstantCase
     value: CamelCase
   - key: readability-identifier-naming.IgnoreMainLikeFunctions

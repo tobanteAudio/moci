@@ -3,14 +3,15 @@
 #include <algorithm>
 #include <utility>
 
-namespace moci
-{
+namespace moci {
 
 LayerStack::LayerStack() = default;
 
 LayerStack::~LayerStack()
 {
-    for (Layer::Ptr& layer : _layers) { layer->onDetach(); }
+    for (Layer::Ptr& layer : _layers) {
+        layer->onDetach();
+    }
 }
 
 void LayerStack::pushLayer(Layer::Ptr&& layer)

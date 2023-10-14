@@ -3,11 +3,12 @@
 #include <moci/render/opengl/es2/renderer_api.hpp>
 #include <moci/render/opengl/gl4/renderer_api.hpp>
 
-namespace moci
-{
+namespace moci {
 #if defined(MOCI_API_OPENGL_LEGACY)
-std::unique_ptr<RendererAPI> RenderCommand::sRendererApi = std::make_unique<OpenGLESRendererAPI>();
+std::unique_ptr<RendererAPI> RenderCommand::sRendererApi
+    = std::make_unique<OpenGLESRendererAPI>();
 #else
-std::unique_ptr<RendererAPI> RenderCommand::sRendererApi = std::make_unique<OpenGLRendererAPI>();
+std::unique_ptr<RendererAPI> RenderCommand::sRendererApi
+    = std::make_unique<OpenGLRendererAPI>();
 #endif
 }  // namespace moci

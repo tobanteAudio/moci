@@ -8,8 +8,7 @@
 #include <utility>
 #include <vector>
 
-namespace moci
-{
+namespace moci {
 
 enum class ShaderDataType
 {
@@ -29,8 +28,7 @@ enum class ShaderDataType
 
 static auto shaderDataTypeSize(ShaderDataType type) -> std::uint32_t
 {
-    switch (type)
-    {
+    switch (type) {
         case ShaderDataType::Float: return 4;
         case ShaderDataType::Float2: return 4 * 2;
         case ShaderDataType::Float3: return 4 * 3;
@@ -42,7 +40,9 @@ static auto shaderDataTypeSize(ShaderDataType type) -> std::uint32_t
         case ShaderDataType::Int3: return 4 * 3;
         case ShaderDataType::Int4: return 4 * 4;
         case ShaderDataType::Bool: return 1;
-        case ShaderDataType::None: MOCI_CORE_ASSERT(false, "Unknown ShaderDataType!"); return 0;
+        case ShaderDataType::None:
+            MOCI_CORE_ASSERT(false, "Unknown ShaderDataType!");
+            return 0;
     }
 
     MOCI_CORE_ASSERT(false, "Unknown ShaderDataType!");
@@ -54,20 +54,21 @@ struct BufferElement
     std::string Name;
     ShaderDataType Type;
     std::uint32_t Size;
-    size_t Offset {0};
+    size_t Offset{0};
     bool Normalized;
 
     // BufferElement() = default;
 
     BufferElement(ShaderDataType type, std::string name, bool normalized = false)
-        : Name(std::move(name)), Type(type), Size(shaderDataTypeSize(type)), Normalized(normalized)
-    {
-    }
+        : Name(std::move(name))
+        , Type(type)
+        , Size(shaderDataTypeSize(type))
+        , Normalized(normalized)
+    {}
 
     [[nodiscard]] auto getComponentCount() const -> std::uint32_t
     {
-        switch (Type)
-        {
+        switch (Type) {
             case ShaderDataType::Float: return 1;
             case ShaderDataType::Float2: return 2;
             case ShaderDataType::Float3: return 3;
@@ -79,7 +80,9 @@ struct BufferElement
             case ShaderDataType::Int3: return 3;
             case ShaderDataType::Int4: return 4;
             case ShaderDataType::Bool: return 1;
-            case ShaderDataType::None: MOCI_CORE_ASSERT(false, "Unknown ShaderDataType!"); return 0;
+            case ShaderDataType::None:
+                MOCI_CORE_ASSERT(false, "Unknown ShaderDataType!");
+                return 0;
         }
 
         MOCI_CORE_ASSERT(false, "Unknown ShaderDataType!");
@@ -91,23 +94,39 @@ class BufferLayout
 {
 public:
     BufferLayout() = default;
-    BufferLayout(std::initializer_list<BufferElement> elements) : _elements(elements) { calculateOffsetsAndStride(); }
+
+    BufferLayout(std::initializer_list<BufferElement> elements) : _elements(elements)
+    {
+        calculateOffsetsAndStride();
+    }
 
     [[nodiscard]] inline auto getStride() const -> std::uint32_t { return _stride; }
-    [[nodiscard]] inline auto getElements() const -> std::vector<BufferElement> const& { return _elements; }
+
+    [[nodiscard]] inline auto getElements() const -> std::vector<BufferElement> const&
+    {
+        return _elements;
+    }
 
     auto begin() -> std::vector<BufferElement>::iterator { return _elements.begin(); }
+
     auto end() -> std::vector<BufferElement>::iterator { return _elements.end(); }
-    [[nodiscard]] auto begin() const -> std::vector<BufferElement>::const_iterator { return _elements.begin(); }
-    [[nodiscard]] auto end() const -> std::vector<BufferElement>::const_iterator { return _elements.end(); }
+
+    [[nodiscard]] auto begin() const -> std::vector<BufferElement>::const_iterator
+    {
+        return _elements.begin();
+    }
+
+    [[nodiscard]] auto end() const -> std::vector<BufferElement>::const_iterator
+    {
+        return _elements.end();
+    }
 
 private:
     void calculateOffsetsAndStride()
     {
         size_t offset = 0;
         _stride       = 0;
-        for (auto& element : _elements)
-        {
+        for (auto& element : _elements) {
             element.Offset = offset;
             offset += element.Size;
             _stride += element.Size;
@@ -123,11 +142,13 @@ class VertexBuffer
 public:
     virtual ~VertexBuffer() = default;
 
-    virtual auto bind() const -> void                                                                 = 0;
-    virtual auto unbind() const -> void                                                               = 0;
-    [[nodiscard]] virtual auto getLayout() const -> BufferLayout const&                               = 0;
-    virtual auto setLayout(BufferLayout const& layout) -> void                                        = 0;
-    virtual auto uploadData(std::uint32_t offset, std::uint32_t size, const void* data) const -> void = 0;
+    virtual auto bind() const -> void                                   = 0;
+    virtual auto unbind() const -> void                                 = 0;
+    [[nodiscard]] virtual auto getLayout() const -> BufferLayout const& = 0;
+    virtual auto setLayout(BufferLayout const& layout) -> void          = 0;
+    virtual auto
+    uploadData(std::uint32_t offset, std::uint32_t size, void const* data) const -> void
+        = 0;
 };
 
 struct IndexBufferSpecs
@@ -142,10 +163,12 @@ class IndexBuffer
 public:
     virtual ~IndexBuffer() = default;
 
-    virtual void bind() const                                                                  = 0;
-    virtual void unbind() const                                                                = 0;
-    [[nodiscard]] virtual auto getCount() const -> std::uint32_t                               = 0;
-    virtual auto uploadData(std::uint32_t offset, std::span<std::uint32_t> data) const -> void = 0;
+    virtual void bind() const                                    = 0;
+    virtual void unbind() const                                  = 0;
+    [[nodiscard]] virtual auto getCount() const -> std::uint32_t = 0;
+    virtual auto uploadData(std::uint32_t offset, std::span<std::uint32_t> data) const
+        -> void
+        = 0;
 };
 
 }  // namespace moci

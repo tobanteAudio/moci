@@ -36,7 +36,7 @@ private:
     bool _fullscreen    = false;
 
     std::shared_ptr<moci::Framebuffer> _framebuffer = nullptr;
-    glm::vec2 _viewportSize                   = {};
+    glm::vec2 _viewportSize                         = {};
 
     glm::vec3 _cameraPos   = {15.0F, 8.70F, 50.0F};
     glm::vec3 _cameraFront = {0.0F, 0.0F, -1.0F};
@@ -49,9 +49,9 @@ private:
     float _cameraLastY     = {_height / 2.0F};
     bool _isMouseDragging  = false;
 
-    glm::vec3 _cameraLookAt         = {0.0F, 0.0F, 0.0F};
-    float _ambientLight             = 0.1F;
-    float _modelScale               = 0.15F;
+    glm::vec3 _cameraLookAt             = {0.0F, 0.0F, 0.0F};
+    float _ambientLight                 = 0.1F;
+    float _modelScale                   = 0.15F;
     std::unique_ptr<moci::Light> _light = {};
 
     std::shared_ptr<moci::Shader> _shader    = nullptr;
@@ -60,8 +60,8 @@ private:
     std::shared_ptr<moci::VertexArray> _vao  = nullptr;
 
     std::size_t _numVertices = {};
-    moci::Mesh _mesh {"src/app/sandbox3D/assets/models/cerberus.fbx"};
-    moci::Mesh _floor {"src/app/sandbox3D/assets/models/plane.obj"};
+    moci::Mesh _mesh{"src/app/sandbox3D/assets/models/cerberus.fbx"};
+    moci::Mesh _floor{"src/app/sandbox3D/assets/models/plane.obj"};
 
     std::shared_ptr<moci::Texture2D> _textureSolid  = {};
     std::shared_ptr<moci::Texture2D> _textureColors = {};
@@ -77,13 +77,13 @@ private:
     // imgui
     struct DrawStats
     {
-        std::uint32_t numVertices {};
+        std::uint32_t numVertices{};
         float minFPS = 9999.0F;
         float maxFPS = 0.0F;
     };
 
-    DrawStats _drawStats            = {};
+    DrawStats _drawStats           = {};
     std::vector<float> _fpsHistory = {};
-    bool _imguiWindow               = true;
-    bool _imguiDemo                 = false;
+    bool _imguiWindow              = true;
+    bool _imguiDemo                = false;
 };

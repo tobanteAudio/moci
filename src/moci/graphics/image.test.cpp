@@ -8,7 +8,7 @@
 
 TEST_CASE("graphics: ImageDefaultConstructor", "[graphics]")
 {
-    moci::Image img {};
+    moci::Image img{};
     REQUIRE(img.getWidth() == 0);
     REQUIRE(img.getHeight() == 0);
     REQUIRE(img.empty() == true);
@@ -17,7 +17,7 @@ TEST_CASE("graphics: ImageDefaultConstructor", "[graphics]")
 
 TEST_CASE("graphics: ImagePathConstructor", "[graphics]")
 {
-    moci::Image img {"moci_test_data/colors.png"};
+    moci::Image img{"moci_test_data/colors.png"};
     REQUIRE(img.getWidth() == 256);
     REQUIRE(img.getHeight() == 256);
     REQUIRE(img.getNumChannels() == 3);
@@ -27,7 +27,7 @@ TEST_CASE("graphics: ImagePathConstructor", "[graphics]")
 
 TEST_CASE("graphics: ImageLoadFromFileSuccess", "[graphics]")
 {
-    moci::Image img {};
+    moci::Image img{};
     REQUIRE(img.loadFromFile("moci_test_data/colors.png") == true);
     REQUIRE(img.getWidth() == 256);
     REQUIRE(img.getHeight() == 256);
@@ -38,7 +38,7 @@ TEST_CASE("graphics: ImageLoadFromFileSuccess", "[graphics]")
 
 TEST_CASE("graphics: ImageLoadFromFileFail", "[graphics]")
 {
-    moci::Image img {};
+    moci::Image img{};
     REQUIRE(img.loadFromFile("noexist.png") == false);
     REQUIRE(img.getWidth() == 0);
     REQUIRE(img.getHeight() == 0);

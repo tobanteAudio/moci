@@ -20,7 +20,7 @@ public:
     MociModelViwerLayer()           = default;
     ~MociModelViwerLayer() override = default;
 
-    void OnAttach() override { }
+    void OnAttach() override {}
 
     void OnUpdate(moci::Timestep ts) override
     {
@@ -30,19 +30,24 @@ public:
         moci::RenderCommand::Clear();
 
         // // Camera matrix
-        // glm::mat4 const projection = glm::perspective(glm::radians(cameraFOV_), width_ / height_, 0.1f, 100.0f);
-        // glm::mat4 const view       = glm::lookAt(  //
+        // glm::mat4 const projection = glm::perspective(glm::radians(cameraFOV_), width_ /
+        // height_, 0.1f, 100.0f); glm::mat4 const view       = glm::lookAt(  //
         //     cameraPos_,                      // Camera is at (x,y,z), in World Space
         //     cameraLookAt_,                   // and looks at the origin
-        //     glm::vec3(0, 1, 0)               // Head is up (set to 0,-1,0 to look upside-down)
+        //     glm::vec3(0, 1, 0)               // Head is up (set to 0,-1,0 to look
+        //     upside-down)
         // );
     }
 
     void OnEvent(moci::Event& e) override
     {
         moci::EventDispatcher dispatcher(e);
-        dispatcher.Dispatch<moci::WindowResizeEvent>(MOCI_EVENT_METHOD(MociModelViwerLayer::OnWindowResized));
-        dispatcher.Dispatch<moci::KeyPressedEvent>(MOCI_EVENT_METHOD(MociModelViwerLayer::OnKeyPressed));
+        dispatcher.Dispatch<moci::WindowResizeEvent>(
+            MOCI_EVENT_METHOD(MociModelViwerLayer::OnWindowResized)
+        );
+        dispatcher.Dispatch<moci::KeyPressedEvent>(
+            MOCI_EVENT_METHOD(MociModelViwerLayer::OnKeyPressed)
+        );
     }
 
     bool OnWindowResized(moci::WindowResizeEvent& e)
@@ -61,10 +66,13 @@ public:
     void OnImGuiRender() override
     {
         auto const fps = ImGui::GetIO().Framerate;
-        if (drawStats_.frameCounter++ >= 100)
-        {
-            if (fps < drawStats_.minFPS) { drawStats_.minFPS = fps; }
-            if (fps > drawStats_.maxFPS) { drawStats_.maxFPS = fps; }
+        if (drawStats_.frameCounter++ >= 100) {
+            if (fps < drawStats_.minFPS) {
+                drawStats_.minFPS = fps;
+            }
+            if (fps > drawStats_.maxFPS) {
+                drawStats_.maxFPS = fps;
+            }
         }
 
         auto const fpsStr    = fmt::format("FPS: {0:0.1f}", fps);
@@ -72,10 +80,8 @@ public:
         auto const maxFPSStr = fmt::format("Max: {0:0.1f}", drawStats_.maxFPS);
         auto const ts        = fmt::format("Timestep: {0:0.1f}", lastTimestep_);
 
-        if (ImGui::BeginMenuBar())
-        {
-            if (ImGui::BeginMenu("Debug"))
-            {
+        if (ImGui::BeginMenuBar()) {
+            if (ImGui::BeginMenu("Debug")) {
                 ImGui::Checkbox("Sandbox3D", &imguiWindow_);
                 ImGui::Checkbox("Imgui Demo", &imguiDemo_);
                 ImGui::Checkbox("Fullscreen", &fullscreen_);
@@ -90,17 +96,16 @@ public:
             ImGui::TextUnformatted(ts.c_str());
             ImGui::EndMenuBar();
         }
-        if (imguiWindow_)
-        {
+        if (imguiWindow_) {
             ImGui::Begin("Model Viewer", &imguiWindow_);
-            if (ImGui::CollapsingHeader("Stats"))
-            {
+            if (ImGui::CollapsingHeader("Stats")) {
                 // fpsHistory_.push_back(fps);
                 auto const frameCount = fmt::format("{} Frames", drawStats_.frameCounter);
-                // auto const vertices   = fmt::format("{} Vertices", drawStats_.numVertices);
-                // auto const triangles  = fmt::format("{} Triangles", drawStats_.numVertices / 3);
-                // auto const mb         = drawStats_.numVertices * sizeof(Vertex) / 1'000'000.0f;
-                // auto const megabyte   = fmt::format("{0:0.1f} Mbytes", mb);
+                // auto const vertices   = fmt::format("{} Vertices",
+                // drawStats_.numVertices); auto const triangles  = fmt::format("{}
+                // Triangles", drawStats_.numVertices / 3); auto const mb         =
+                // drawStats_.numVertices * sizeof(Vertex) / 1'000'000.0f; auto const
+                // megabyte   = fmt::format("{0:0.1f} Mbytes", mb);
                 ImGui::TextUnformatted(frameCount.c_str());
                 // ImGui::TextUnformatted(fpsStr.c_str());
                 // ImGui::TextUnformatted(minFPSStr.c_str());
@@ -108,16 +113,19 @@ public:
                 // ImGui::TextUnformatted(vertices.c_str());
                 // ImGui::TextUnformatted(triangles.c_str());
                 // ImGui::TextUnformatted(megabyte.c_str());
-                // auto const lightStr = fmt::format("Light vertices: {}", lightMesh_.getVertices().size());
-                // ImGui::TextUnformatted(lightStr.c_str());
-                // auto const size = static_cast<int>(fpsHistory_.size());
-                // ImGui::PlotLines("FPS", fpsHistory_.data(), size, 0, "", 50.0f, 75.0f, ImVec2(0, 80));
+                // auto const lightStr = fmt::format("Light vertices: {}",
+                // lightMesh_.getVertices().size());
+                // ImGui::TextUnformatted(lightStr.c_str()); auto const size =
+                // static_cast<int>(fpsHistory_.size()); ImGui::PlotLines("FPS",
+                // fpsHistory_.data(), size, 0, "", 50.0f, 75.0f, ImVec2(0, 80));
             }
             ImGui::End();
         }
 
         // ImGui Demo
-        if (imguiDemo_) { ImGui::ShowDemoWindow(&imguiDemo_); }
+        if (imguiDemo_) {
+            ImGui::ShowDemoWindow(&imguiDemo_);
+        }
     }
 
 public:
@@ -131,22 +139,22 @@ public:
     std::shared_ptr<moci::IndexBuffer> ibo_  = nullptr;
     std::shared_ptr<moci::VertexArray> vao_  = nullptr;
 
-    std::size_t numVertices_ {};
+    std::size_t numVertices_{};
 
     // imgui
     struct DrawStats
     {
-        std::uint32_t frameCounter {};
-        std::uint32_t numVertices {};
+        std::uint32_t frameCounter{};
+        std::uint32_t numVertices{};
         float minFPS = 9999.0f;
         float maxFPS = 0.0f;
     };
 
-    DrawStats drawStats_ {};
+    DrawStats drawStats_{};
 
     std::vector<float> fpsHistory_ = {};
-    bool imguiWindow_               = true;
-    bool imguiDemo_                 = false;
+    bool imguiWindow_              = true;
+    bool imguiDemo_                = false;
 };
 
 class MociModelViwerApp : public moci::Application

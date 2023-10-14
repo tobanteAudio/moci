@@ -5,34 +5,38 @@
 #include "assimp/postprocess.h"
 #include "assimp/scene.h"
 
-namespace moci
-{
+namespace moci {
 
-namespace
-{
-constexpr uint32_t SMeshImportFlags = aiProcess_CalcTangentSpace |      // Create binormals/tangents just in case
-                                      aiProcess_Triangulate |           // Make sure we're triangles
-                                      aiProcess_SortByPType |           // Split meshes by primitive type
-                                      aiProcess_GenNormals |            // Make sure we have legit normals
-                                      aiProcess_GenUVCoords |           // Convert UVs if required
-                                      aiProcess_OptimizeMeshes |        // Batch draws where possible
-                                      aiProcess_ValidateDataStructure;  // Validation
+namespace {
+constexpr uint32_t SMeshImportFlags
+    = aiProcess_CalcTangentSpace |      // Create binormals/tangents just in case
+      aiProcess_Triangulate |           // Make sure we're triangles
+      aiProcess_SortByPType |           // Split meshes by primitive type
+      aiProcess_GenNormals |            // Make sure we have legit normals
+      aiProcess_GenUVCoords |           // Convert UVs if required
+      aiProcess_OptimizeMeshes |        // Batch draws where possible
+      aiProcess_ValidateDataStructure;  // Validation
 
 struct LogStream : public Assimp::LogStream
 {
     static void initialize()
     {
-        if (Assimp::DefaultLogger::isNullLogger())
-        {
+        if (Assimp::DefaultLogger::isNullLogger()) {
             Assimp::DefaultLogger::create("", Assimp::Logger::VERBOSE);
-            Assimp::DefaultLogger::get()->attachStream(new LogStream, Assimp::Logger::Err | Assimp::Logger::Warn);
+            Assimp::DefaultLogger::get()->attachStream(
+                new LogStream,
+                Assimp::Logger::Err | Assimp::Logger::Warn
+            );
         }
     }
 
-    void write(const char* message) override { MOCI_CORE_ERROR("Assimp error: {0}", message); }
+    void write(char const* message) override
+    {
+        MOCI_CORE_ERROR("Assimp error: {0}", message);
+    }
 };
 
-auto aiMatrix4x4ToGlm(const aiMatrix4x4& from) -> glm::mat4
+auto aiMatrix4x4ToGlm(aiMatrix4x4 const& from) -> glm::mat4
 {
     glm::mat4 to;
     // the a,b,c,d in assimp is the row ; the 1,2,3,4 is the column
@@ -54,8 +58,10 @@ Mesh::Mesh(std::string filePath) : _filePath(std::move(filePath))
 
     _importer = std::make_unique<Assimp::Importer>();
 
-    const aiScene* scene = _importer->ReadFile(_filePath, SMeshImportFlags);
-    if ((scene == nullptr) || !scene->HasMeshes()) { MOCI_CORE_ERROR("Failed to load mesh file: {0}", _filePath); }
+    aiScene const* scene = _importer->ReadFile(_filePath, SMeshImportFlags);
+    if ((scene == nullptr) || !scene->HasMeshes()) {
+        MOCI_CORE_ERROR("Failed to load mesh file: {0}", _filePath);
+    }
 
     _isAnimated       = scene->mAnimations != nullptr;
     _inverseTransform = glm::inverse(aiMatrix4x4ToGlm(scene->mRootNode->mTransformation));
@@ -64,11 +70,10 @@ Mesh::Mesh(std::string filePath) : _filePath(std::move(filePath))
     uint32_t indexCount  = 0;
 
     _submeshes.reserve(scene->mNumMeshes);
-    for (size_t m = 0; m < scene->mNumMeshes; m++)
-    {
+    for (size_t m = 0; m < scene->mNumMeshes; m++) {
         aiMesh* mesh = scene->mMeshes[m];
 
-        Submesh submesh {};
+        Submesh submesh{};
         submesh.BaseVertex    = vertexCount;
         submesh.BaseIndex     = indexCount;
         submesh.MaterialIndex = mesh->mMaterialIndex;
@@ -82,18 +87,18 @@ Mesh::Mesh(std::string filePath) : _filePath(std::move(filePath))
         MOCI_CORE_ASSERT(mesh->HasNormals(), "Meshes require normals.");
 
         // Vertices
-        if (not _isAnimated)
-        {
-            for (size_t i = 0; i < mesh->mNumVertices; i++)
-            {
+        if (not _isAnimated) {
+            for (size_t i = 0; i < mesh->mNumVertices; i++) {
                 Vertex vertex;
-                vertex.position = {mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z};
-                vertex.normal   = {mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z};
-                vertex.color    = static_cast<glm::vec4>(moci::Colors::blue);
+                vertex.position
+                    = {mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z};
+                vertex.normal
+                    = {mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z};
+                vertex.color = static_cast<glm::vec4>(moci::Colors::blue);
 
-                if (mesh->HasTextureCoords(0))
-                {
-                    vertex.texCoord = {mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y};
+                if (mesh->HasTextureCoords(0)) {
+                    vertex.texCoord
+                        = {mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y};
                 }
 
                 _staticVertices.push_back(vertex);
@@ -101,10 +106,13 @@ Mesh::Mesh(std::string filePath) : _filePath(std::move(filePath))
         }
 
         // Indices
-        for (size_t i = 0; i < mesh->mNumFaces; i++)
-        {
+        for (size_t i = 0; i < mesh->mNumFaces; i++) {
             MOCI_CORE_ASSERT(mesh->mFaces[i].mNumIndices == 3, "Must have 3 indices.");
-            _indices.push_back({mesh->mFaces[i].mIndices[0], mesh->mFaces[i].mIndices[1], mesh->mFaces[i].mIndices[2]});
+            _indices.push_back(
+                {mesh->mFaces[i].mIndices[0],
+                 mesh->mFaces[i].mIndices[1],
+                 mesh->mFaces[i].mIndices[2]}
+            );
         }
     }
 }

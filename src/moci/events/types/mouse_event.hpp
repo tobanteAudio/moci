@@ -4,16 +4,17 @@
 #include <moci/events/mouse_button_codes.hpp>
 #include <moci/events/types/event.hpp>
 
-namespace moci
-{
+namespace moci {
 
 class MouseMovedEvent : public Event
 {
 public:
     ~MouseMovedEvent() override = default;
-    MouseMovedEvent(float x, float y) : _mouseX(x), _mouseY(y) { }
+
+    MouseMovedEvent(float x, float y) : _mouseX(x), _mouseY(y) {}
 
     [[nodiscard]] inline auto getX() const -> float { return _mouseX; }
+
     [[nodiscard]] inline auto getY() const -> float { return _mouseY; }
 
     [[nodiscard]] auto toString() const -> std::string override
@@ -31,9 +32,12 @@ class MouseScrolledEvent : public Event
 {
 public:
     ~MouseScrolledEvent() override = default;
-    MouseScrolledEvent(float xOffset, float yOffset) : _xOffset(xOffset), _yOffset(yOffset) { }
+
+    MouseScrolledEvent(float xOffset, float yOffset) : _xOffset(xOffset), _yOffset(yOffset)
+    {}
 
     [[nodiscard]] inline auto getXOffset() const -> float { return _xOffset; }
+
     [[nodiscard]] inline auto getYOffset() const -> float { return _yOffset; }
 
     [[nodiscard]] auto toString() const -> std::string override
@@ -51,7 +55,9 @@ class MouseButtonEvent : public Event
 {
 public:
     ~MouseButtonEvent() override = default;
-    explicit MouseButtonEvent(MouseCode button) : _button(button) { }
+
+    explicit MouseButtonEvent(MouseCode button) : _button(button) {}
+
     [[nodiscard]] inline auto getMouseButton() const -> MouseCode { return _button; }
 
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
@@ -63,11 +69,15 @@ class MouseButtonPressedEvent : public MouseButtonEvent
 {
 public:
     ~MouseButtonPressedEvent() override = default;
-    explicit MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) { }
+
+    explicit MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) {}
 
     [[nodiscard]] auto toString() const -> std::string override
     {
-        return fmt::format("MouseButtonPressedEvent: {}", static_cast<int>(getMouseButton()));
+        return fmt::format(
+            "MouseButtonPressedEvent: {}",
+            static_cast<int>(getMouseButton())
+        );
     }
 
     EVENT_CLASS_TYPE(MouseButtonPressed)
@@ -77,11 +87,15 @@ class MouseButtonReleasedEvent : public MouseButtonEvent
 {
 public:
     ~MouseButtonReleasedEvent() override = default;
-    explicit MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) { }
+
+    explicit MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) {}
 
     [[nodiscard]] auto toString() const -> std::string override
     {
-        return fmt::format("MouseButtonReleasedEvent: {}", static_cast<int>(getMouseButton()));
+        return fmt::format(
+            "MouseButtonReleasedEvent: {}",
+            static_cast<int>(getMouseButton())
+        );
     }
 
     EVENT_CLASS_TYPE(MouseButtonReleased)

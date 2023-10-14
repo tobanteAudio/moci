@@ -2,55 +2,43 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-#include "gl4.hpp"
+    #include "gl4.hpp"
 
-#include <moci/core/benchmark/profile.hpp>
+    #include <moci/core/benchmark/profile.hpp>
 
-namespace moci
-{
+namespace moci {
 
-namespace
-{
+namespace {
 auto MociToOpenGLDrawMode(RenderDrawMode const mode) noexcept -> int
 {
 
-    switch (mode)
-    {
-        case RenderDrawMode::None:
-        {
+    switch (mode) {
+        case RenderDrawMode::None: {
             MOCI_CORE_ERROR("draw mode 'None' not supported");
             break;
         }
-        case RenderDrawMode::Points:
-        {
+        case RenderDrawMode::Points: {
             return GL_POINTS;
         }
-        case RenderDrawMode::LineStrip:
-        {
+        case RenderDrawMode::LineStrip: {
             return GL_LINE_STRIP;
         }
-        case RenderDrawMode::LineLoop:
-        {
+        case RenderDrawMode::LineLoop: {
             return GL_LINE_LOOP;
         }
-        case RenderDrawMode::Lines:
-        {
+        case RenderDrawMode::Lines: {
             return GL_LINES;
         }
-        case RenderDrawMode::TriangleStrips:
-        {
+        case RenderDrawMode::TriangleStrips: {
             return GL_TRIANGLE_STRIP;
         }
-        case RenderDrawMode::TriangleFan:
-        {
+        case RenderDrawMode::TriangleFan: {
             return GL_TRIANGLE_FAN;
         }
-        case RenderDrawMode::Triangles:
-        {
+        case RenderDrawMode::Triangles: {
             return GL_TRIANGLES;
         }
-        default:
-        {
+        default: {
             break;
         }
     }
@@ -59,8 +47,15 @@ auto MociToOpenGLDrawMode(RenderDrawMode const mode) noexcept -> int
 
 }  // namespace
 
-void OpenGLMessageCallback(unsigned source, unsigned type, unsigned id, unsigned severity, int length,
-                           const char* message, const void* userParam)
+void OpenGLMessageCallback(
+    unsigned source,
+    unsigned type,
+    unsigned id,
+    unsigned severity,
+    int length,
+    char const* message,
+    void const* userParam
+)
 {
     ignoreUnused(source);
     ignoreUnused(type);
@@ -68,8 +63,7 @@ void OpenGLMessageCallback(unsigned source, unsigned type, unsigned id, unsigned
     ignoreUnused(length);
     ignoreUnused(userParam);
 
-    switch (severity)
-    {
+    switch (severity) {
         case GL_DEBUG_SEVERITY_HIGH: MOCI_CORE_CRITICAL(message); return;
         case GL_DEBUG_SEVERITY_MEDIUM: MOCI_CORE_ERROR(message); return;
         case GL_DEBUG_SEVERITY_LOW: MOCI_CORE_WARN(message); return;
@@ -83,13 +77,20 @@ void OpenGLRendererAPI::init()
 {
     MOCI_PROFILE_FUNCTION();
 
-#ifdef MOCI_DEBUG
+    #ifdef MOCI_DEBUG
     glEnable(GL_DEBUG_OUTPUT);
     glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
     glDebugMessageCallback(OpenGLMessageCallback, nullptr);
 
-    glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, NULL, GL_FALSE);
-#endif
+    glDebugMessageControl(
+        GL_DONT_CARE,
+        GL_DONT_CARE,
+        GL_DEBUG_SEVERITY_NOTIFICATION,
+        0,
+        NULL,
+        GL_FALSE
+    );
+    #endif
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -113,22 +114,38 @@ void OpenGLRendererAPI::setClearColor(ColorRGBA32 color)
 
 void OpenGLRendererAPI::clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 
-void OpenGLRendererAPI::drawArrays(RenderDrawMode const mode, uint32_t first, uint32_t count)
+void OpenGLRendererAPI::drawArrays(
+    RenderDrawMode const mode,
+    uint32_t first,
+    uint32_t count
+)
 {
     auto const glDrawMode = MociToOpenGLDrawMode(mode);
     glDrawArrays(glDrawMode, first, count);
 }
 
-void OpenGLRendererAPI::drawIndexed(RenderDrawMode const mode, uint32_t count, void* indices)
+void OpenGLRendererAPI::drawIndexed(
+    RenderDrawMode const mode,
+    uint32_t count,
+    void* indices
+)
 {
     auto const glDrawMode = MociToOpenGLDrawMode(mode);
     glDrawElements(glDrawMode, count, GL_UNSIGNED_INT, indices);
 }
 
-void OpenGLRendererAPI::drawIndexed(RenderDrawMode const mode, std::shared_ptr<VertexArray> const& vertexArray)
+void OpenGLRendererAPI::drawIndexed(
+    RenderDrawMode const mode,
+    std::shared_ptr<VertexArray> const& vertexArray
+)
 {
     auto const glDrawMode = MociToOpenGLDrawMode(mode);
-    glDrawElements(glDrawMode, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
+    glDrawElements(
+        glDrawMode,
+        vertexArray->getIndexBuffer()->getCount(),
+        GL_UNSIGNED_INT,
+        nullptr
+    );
 }
 
 auto OpenGLRendererAPI::maxTextureSize() -> std::uint32_t
@@ -137,12 +154,14 @@ auto OpenGLRendererAPI::maxTextureSize() -> std::uint32_t
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
     return static_cast<std::uint32_t>(maxTextureSize);
 }
+
 auto OpenGLRendererAPI::maxTextureUnits() -> std::uint32_t
 {
     GLint maxTextureUnits = 0;
     glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, &maxTextureUnits);
     return static_cast<std::uint32_t>(maxTextureUnits);
 }
+
 auto OpenGLRendererAPI::maxVertexAttributes() -> std::uint32_t
 {
     GLint maxAttributes = 0;

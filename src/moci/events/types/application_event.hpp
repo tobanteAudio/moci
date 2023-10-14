@@ -4,16 +4,20 @@
 
 #include <sstream>
 
-namespace moci
-{
+namespace moci {
 
 class WindowResizeEvent : public Event
 {
 public:
     ~WindowResizeEvent() override = default;
-    WindowResizeEvent(unsigned int width, unsigned int height) : _width(width), _height(height) { }
+
+    WindowResizeEvent(unsigned int width, unsigned int height)
+        : _width(width)
+        , _height(height)
+    {}
 
     [[nodiscard]] inline auto getWidth() const -> unsigned int { return _width; }
+
     [[nodiscard]] inline auto getHeight() const -> unsigned int { return _height; }
 
     [[nodiscard]] auto toString() const -> std::string override

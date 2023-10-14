@@ -5,8 +5,7 @@
 
 #include <glm/glm.hpp>
 
-namespace moci
-{
+namespace moci {
 class OpenGLESRendererAPI : public RendererAPI
 {
 public:
@@ -19,7 +18,8 @@ public:
 
     void drawArrays(RenderDrawMode mode, uint32_t first, uint32_t count) override;
     void drawIndexed(RenderDrawMode mode, uint32_t count, void* indices) override;
-    void drawIndexed(RenderDrawMode mode, std::shared_ptr<VertexArray> const& vertexArray) override;
+    void drawIndexed(RenderDrawMode mode, std::shared_ptr<VertexArray> const& vertexArray)
+        override;
 
     auto maxTextureSize() -> std::uint32_t override;
     auto maxTextureUnits() -> std::uint32_t override;

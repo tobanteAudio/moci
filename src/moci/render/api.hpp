@@ -6,8 +6,7 @@
 
 #include <any>
 
-namespace moci
-{
+namespace moci {
 
 enum class RenderDrawMode
 {
@@ -38,9 +37,11 @@ public:
     virtual void setClearColor(ColorRGBA32 color)          = 0;
     virtual void clear()                                   = 0;
 
-    virtual void drawArrays(RenderDrawMode mode, uint32_t first, uint32_t count)       = 0;
-    virtual void drawIndexed(RenderDrawMode mode, uint32_t count, void* indices)       = 0;
-    virtual void drawIndexed(RenderDrawMode mode, std::shared_ptr<VertexArray> const& vertexArray) = 0;
+    virtual void drawArrays(RenderDrawMode mode, uint32_t first, uint32_t count) = 0;
+    virtual void drawIndexed(RenderDrawMode mode, uint32_t count, void* indices) = 0;
+    virtual void
+    drawIndexed(RenderDrawMode mode, std::shared_ptr<VertexArray> const& vertexArray)
+        = 0;
 
     virtual auto maxTextureSize() -> std::uint32_t      = 0;
     virtual auto maxTextureUnits() -> std::uint32_t     = 0;

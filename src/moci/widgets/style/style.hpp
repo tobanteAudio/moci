@@ -4,8 +4,7 @@
 #include <moci/widgets/component/label.hpp>
 #include <moci/widgets/component/slider.hpp>
 
-namespace moci
-{
+namespace moci {
 class Style
     : public ButtonStyleMethods
     , public LabelStyleMethods

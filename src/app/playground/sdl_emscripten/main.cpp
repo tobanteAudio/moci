@@ -25,8 +25,7 @@ static auto mainLoop(void*) -> void;
 
 int main(int, char**)
 {
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
-    {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0) {
         std::fprintf(stderr, "Error: %s\n", SDL_GetError());
         return -1;
     }
@@ -50,13 +49,18 @@ int main(int, char**)
     SDL_GetCurrentDisplayMode(0, &current);
     auto flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI;
 
-    auto app = Application {};
-    app.window
-        = SDL_CreateWindow("Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, (SDL_WindowFlags)flags);
+    auto app   = Application{};
+    app.window = SDL_CreateWindow(
+        "Title",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        1280,
+        720,
+        (SDL_WindowFlags)flags
+    );
 
     app.graphicsContext = SDL_GL_CreateContext(app.window);
-    if (!app.graphicsContext)
-    {
+    if (!app.graphicsContext) {
         std::fprintf(stderr, "Failed to initialize WebGL context!\n");
         return 1;
     }
@@ -83,21 +87,27 @@ static auto mainLoop(void* arg) -> void
     auto* app   = static_cast<Application*>(arg);
     auto& color = app->color;
 
-    auto event = SDL_Event {};
-    while (SDL_PollEvent(&event)) { ImGui_ImplSDL2_ProcessEvent(&event); }
+    auto event = SDL_Event{};
+    while (SDL_PollEvent(&event)) {
+        ImGui_ImplSDL2_ProcessEvent(&event);
+    }
 
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
 
-    if (app->showDemoWindow) { ImGui::ShowDemoWindow(&app->showDemoWindow); }
+    if (app->showDemoWindow) {
+        ImGui::ShowDemoWindow(&app->showDemoWindow);
+    }
 
     ImGui::Begin("Hello, world!");
     ImGui::Text("This is some useful text.");
     ImGui::Checkbox("Demo Window", &app->showDemoWindow);
     ImGui::ColorEdit3("clear color", (float*)&color);
 
-    if (ImGui::Button("Button")) { app->counter++; }
+    if (ImGui::Button("Button")) {
+        app->counter++;
+    }
     ImGui::SameLine();
     ImGui::Text("counter = %d", app->counter);
 

@@ -6,8 +6,7 @@
 
 auto main() -> int
 {
-    if (auto success = glfwInit(); success == GLFW_FALSE)
-    {
+    if (auto success = glfwInit(); success == GLFW_FALSE) {
         std::fprintf(stderr, "Failed to initialize glfw\n");
         return EXIT_FAILURE;
     }
@@ -16,10 +15,13 @@ auto main() -> int
     glfwHideWindow(window);
     glfwMakeContextCurrent(window);
 
-    if (auto err = glewInit() != GLEW_OK; err)
-    {
+    if (auto err = glewInit() != GLEW_OK; err) {
         auto const* msg = glewGetErrorString(err);
-        std::fprintf(stderr, "Failed to initialize glew: %s\n", reinterpret_cast<char const*>(msg));
+        std::fprintf(
+            stderr,
+            "Failed to initialize glew: %s\n",
+            reinterpret_cast<char const*>(msg)
+        );
         return EXIT_FAILURE;
     }
 
@@ -27,9 +29,8 @@ auto main() -> int
     glGetIntegerv(GL_NUM_EXTENSIONS, &n);
     std::printf("num: %d\n", n);
 
-    for (GLint i = 0; i < n; i++)
-    {
-        const char* extension = (const char*)glGetStringi(GL_EXTENSIONS, i);
+    for (GLint i = 0; i < n; i++) {
+        char const* extension = (char const*)glGetStringi(GL_EXTENSIONS, i);
         printf("Ext %d: %s\n", i, extension);
     }
 

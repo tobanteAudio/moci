@@ -2,10 +2,9 @@
 
 #if defined(MOCI_WINDOWS)
 
-#include <windows.h>
+    #include <windows.h>
 
-namespace moci
-{
+namespace moci {
 std::string SystemInfo::Pimpl::getOSName() { return "Windows"; }
 
 std::string SystemInfo::Pimpl::getVendor()

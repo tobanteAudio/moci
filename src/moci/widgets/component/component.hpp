@@ -11,8 +11,7 @@
 #include <utility>
 #include <vector>
 
-namespace moci
-{
+namespace moci {
 
 class Style;
 
@@ -160,11 +159,11 @@ public:
     [[nodiscard]] auto getStyle() const noexcept -> Style*;
 
 private:
-    std::string _id {};
-    Component* _parent {nullptr};
-    std::vector<Component*> _children {};
-    Rectangle<int> _bounds {};
-    Style* _style {nullptr};
+    std::string _id{};
+    Component* _parent{nullptr};
+    std::vector<Component*> _children{};
+    Rectangle<int> _bounds{};
+    Style* _style{nullptr};
 };
 
 }  // namespace moci

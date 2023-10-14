@@ -9,7 +9,7 @@
 
 TEST_CASE("widget: ComponentDefaultConstruct", "[ui]")
 {
-    moci::Component c {};
+    moci::Component c{};
     REQUIRE(c.getWidth() == 0);
     REQUIRE(c.getHeight() == 0);
     REQUIRE(c.getId().empty());
@@ -19,7 +19,7 @@ TEST_CASE("widget: ComponentDefaultConstruct", "[ui]")
 
 TEST_CASE("widget: ComponentIDConstruct", "[ui]")
 {
-    moci::Component c {"test"};
+    moci::Component c{"test"};
     REQUIRE(c.getWidth() == 0);
     REQUIRE(c.getHeight() == 0);
     REQUIRE(c.getId() == "test");
@@ -29,7 +29,7 @@ TEST_CASE("widget: ComponentIDConstruct", "[ui]")
 
 TEST_CASE("widget: ComponentSetID", "[ui]")
 {
-    moci::Component c1 {};
+    moci::Component c1{};
     REQUIRE(c1.getId().empty());
     c1.setId("test");
     REQUIRE(c1.getId() == "test");
@@ -37,8 +37,8 @@ TEST_CASE("widget: ComponentSetID", "[ui]")
 
 TEST_CASE("widget: ComponentSetParent", "[ui]")
 {
-    moci::Component c1 {};
-    moci::Component c2 {};
+    moci::Component c1{};
+    moci::Component c2{};
     REQUIRE(c1.getParent() == nullptr);
     REQUIRE(c2.getParent() == nullptr);
     c1.setParent(&c2);
@@ -47,9 +47,9 @@ TEST_CASE("widget: ComponentSetParent", "[ui]")
 
 TEST_CASE("widget: ComponentGetRootComponent", "[ui]")
 {
-    moci::Component c1 {};
-    moci::Component c2 {};
-    moci::Component c3 {};
+    moci::Component c1{};
+    moci::Component c2{};
+    moci::Component c3{};
     c2.setParent(&c1);
     c3.setParent(&c2);
     REQUIRE(c3.getRootComponent() == &c1);
@@ -57,8 +57,8 @@ TEST_CASE("widget: ComponentGetRootComponent", "[ui]")
 
 TEST_CASE("widget: ComponentAddChild", "[ui]")
 {
-    moci::Component c1 {};
-    moci::Component c2 {};
+    moci::Component c1{};
+    moci::Component c2{};
     REQUIRE(c1.getChildren().empty());
     c1.addChild(&c2);
     REQUIRE(c1.getChildren().size() == 1);
@@ -67,7 +67,7 @@ TEST_CASE("widget: ComponentAddChild", "[ui]")
 
 TEST_CASE("widget: ComponentSetSize", "[ui]")
 {
-    moci::Component c {};
+    moci::Component c{};
     c.setSize(100, 50);
     REQUIRE(c.getWidth() == 100);
     REQUIRE(c.getHeight() == 50);
@@ -75,7 +75,7 @@ TEST_CASE("widget: ComponentSetSize", "[ui]")
 
 TEST_CASE("widget: ComponentSetPositionXY", "[ui]")
 {
-    moci::Component c {};
+    moci::Component c{};
     c.setPosition(100, 50);
     REQUIRE(c.getX() == 100);
     REQUIRE(c.getY() == 50);
@@ -83,7 +83,7 @@ TEST_CASE("widget: ComponentSetPositionXY", "[ui]")
 
 TEST_CASE("widget: ComponentSetPositionPoint", "[ui]")
 {
-    moci::Component c {};
+    moci::Component c{};
     c.setPosition({100, 50});
     REQUIRE(c.getX() == 100);
     REQUIRE(c.getY() == 50);
@@ -91,7 +91,7 @@ TEST_CASE("widget: ComponentSetPositionPoint", "[ui]")
 
 TEST_CASE("widget: ComponentSetBounds", "[ui]")
 {
-    moci::Component c {};
+    moci::Component c{};
     c.setBounds({100, 50, 10, 20});
     auto bounds = c.getBounds();
     REQUIRE(bounds.getX() == 100);
@@ -102,7 +102,7 @@ TEST_CASE("widget: ComponentSetBounds", "[ui]")
 
 TEST_CASE("widget: ComponentContains", "[ui]")
 {
-    moci::Component c {};
+    moci::Component c{};
     c.setBounds({100, 50, 10, 20});
     REQUIRE(c.contains({0, 0}) == false);
     REQUIRE(c.contains({110, 49}) == false);
@@ -111,11 +111,11 @@ TEST_CASE("widget: ComponentContains", "[ui]")
 
 TEST_CASE("widget: ComponentFindComponentAt", "[ui]")
 {
-    auto area   = moci::Rectangle<int> {0, 0, 100, 100};
-    auto parent = moci::Component {};
-    auto c1     = moci::Component {};
-    auto c2     = moci::Component {};
-    auto c3     = moci::Component {};
+    auto area   = moci::Rectangle<int>{0, 0, 100, 100};
+    auto parent = moci::Component{};
+    auto c1     = moci::Component{};
+    auto c2     = moci::Component{};
+    auto c3     = moci::Component{};
 
     parent.setBounds(area);
     parent.addChild(&c1);
@@ -134,17 +134,17 @@ TEST_CASE("widget: ComponentFindComponentAt", "[ui]")
 
 TEST_CASE("widget: ComponentStyle", "[ui]")
 {
-    moci::Component c {};
+    moci::Component c{};
 
     REQUIRE(c.getStyle() == nullptr);
     c.setStyle(nullptr);
     REQUIRE(c.getStyle() == nullptr);
 
-    moci::Style style {};
+    moci::Style style{};
     c.setStyle(&style);
     REQUIRE(c.getStyle() == &style);
 
-    moci::Component child {};
+    moci::Component child{};
     c.addChild(&child);
     REQUIRE(child.getStyle() == &style);
 }

@@ -2,66 +2,97 @@
 
 #if defined(MOCI_LINUX) || defined(MOCI_MAC)
 
-#include <moci/core/logging.hpp>
+    #include <moci/core/logging.hpp>
 
-#include <cassert>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
+    #include <cassert>
+    #include <cstdio>
+    #include <cstdlib>
+    #include <cstring>
 
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <unistd.h>
+    #include <arpa/inet.h>
+    #include <netinet/in.h>
+    #include <sys/socket.h>
+    #include <sys/types.h>
+    #include <unistd.h>
 
-namespace moci
-{
+namespace moci {
 DatagramSocket::Pimpl::~Pimpl()
 {
     shutdown();
     close(_socketDescriptor);
 }
 
-auto DatagramSocket::Pimpl::write(std::string const& host, int port, std::span<std::uint8_t> buffer) -> bool
+auto DatagramSocket::Pimpl::write(
+    std::string const& host,
+    int port,
+    std::span<std::uint8_t> buffer
+) -> bool
 {
     return write(host, port, buffer.data(), buffer.size());
 }
 
-auto DatagramSocket::Pimpl::write(std::string const& host, int port, DatagramSocket::Buffer const& buffer) -> bool
+auto DatagramSocket::Pimpl::write(
+    std::string const& host,
+    int port,
+    DatagramSocket::Buffer const& buffer
+) -> bool
 {
-    return write(host, port, static_cast<std::uint8_t const*>(buffer.data()), buffer.size());
+    return write(
+        host,
+        port,
+        static_cast<std::uint8_t const*>(buffer.data()),
+        buffer.size()
+    );
 }
 
-auto DatagramSocket::Pimpl::write(std::string const& host, int port, std::uint8_t const* const buffer, size_t numBytes)
-    -> bool
+auto DatagramSocket::Pimpl::write(
+    std::string const& host,
+    int port,
+    std::uint8_t const* const buffer,
+    size_t numBytes
+) -> bool
 {
     // Creating socket file descriptor
     int sockDescriptor = 0;
-    if ((sockDescriptor = socket(AF_INET, SOCK_DGRAM, 0)) < 0) { return false; }
+    if ((sockDescriptor = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
+        return false;
+    }
 
     // Client
-    sockaddr_in client {};
+    sockaddr_in client{};
     memset(&client, 0, sizeof(client));
     client.sin_family = AF_INET;
     client.sin_port   = htons(static_cast<std::uint16_t>(port));
-    if (inet_aton(host.c_str(), &client.sin_addr) == 0) { return false; }
+    if (inet_aton(host.c_str(), &client.sin_addr) == 0) {
+        return false;
+    }
 
-    auto const bytesSend
-        = sendto(sockDescriptor, buffer, numBytes, 0, reinterpret_cast<sockaddr*>(&client), sizeof(client));
+    auto const bytesSend = sendto(
+        sockDescriptor,
+        buffer,
+        numBytes,
+        0,
+        reinterpret_cast<sockaddr*>(&client),
+        sizeof(client)
+    );
 
-    if (bytesSend == -1) { return false; }
+    if (bytesSend == -1) {
+        return false;
+    }
     close(sockDescriptor);
 
     return true;
 }
-auto DatagramSocket::Pimpl::bind(const std::string& ip, int port) -> bool
+
+auto DatagramSocket::Pimpl::bind(std::string const& ip, int port) -> bool
 {
     moci::ignoreUnused(ip);
     // Creating socket file descriptor
-    if ((_socketDescriptor = socket(AF_INET, SOCK_DGRAM, 0)) < 0) { return false; }
+    if ((_socketDescriptor = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
+        return false;
+    }
 
-    sockaddr_in servaddr {};
+    sockaddr_in servaddr{};
     std::memset(&servaddr, 0, sizeof(servaddr));
 
     // Filling server information
@@ -69,47 +100,58 @@ auto DatagramSocket::Pimpl::bind(const std::string& ip, int port) -> bool
     servaddr.sin_addr.s_addr = INADDR_ANY;
     servaddr.sin_port        = htons(port);
 
-    timeval tv {};
+    timeval tv{};
     tv.tv_sec  = 0;
     tv.tv_usec = 20'000;
-    setsockopt(_socketDescriptor, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
+    setsockopt(_socketDescriptor, SOL_SOCKET, SO_RCVTIMEO, (char const*)&tv, sizeof tv);
 
     // Bind the socket with the server address
-    return ::bind(_socketDescriptor, reinterpret_cast<sockaddr const*>(&servaddr), sizeof(servaddr)) >= 0;
+    return ::bind(
+               _socketDescriptor,
+               reinterpret_cast<sockaddr const*>(&servaddr),
+               sizeof(servaddr)
+           )
+        >= 0;
 }
 
 void DatagramSocket::Pimpl::listen()
 {
-    _listenerThread = std::thread(
-        [&]()
-        {
-            sockaddr_in cliaddr {};
-            std::memset(&cliaddr, 0, sizeof(cliaddr));
+    _listenerThread = std::thread([&]() {
+        sockaddr_in cliaddr{};
+        std::memset(&cliaddr, 0, sizeof(cliaddr));
 
-            auto const maxMsgSize = 1024;
-            _buffer.resize(1024);
+        auto const maxMsgSize = 1024;
+        _buffer.resize(1024);
 
-            MOCI_CORE_INFO("Start udp listen");
-            _isRunning.store(true);
-            while (_isRunning.load())
-            {
-                unsigned int len        = 0;
-                auto const numBytesRecv = recvfrom(_socketDescriptor, _buffer.data(), maxMsgSize, MSG_WAITALL,
-                                                   reinterpret_cast<sockaddr*>(&cliaddr), &len);
+        MOCI_CORE_INFO("Start udp listen");
+        _isRunning.store(true);
+        while (_isRunning.load()) {
+            unsigned int len        = 0;
+            auto const numBytesRecv = recvfrom(
+                _socketDescriptor,
+                _buffer.data(),
+                maxMsgSize,
+                MSG_WAITALL,
+                reinterpret_cast<sockaddr*>(&cliaddr),
+                &len
+            );
 
-                if (numBytesRecv > 0)
-                {
-                    if (_messageCallback) { _messageCallback(_buffer, _buffer.size()); }
+            if (numBytesRecv > 0) {
+                if (_messageCallback) {
+                    _messageCallback(_buffer, _buffer.size());
                 }
             }
-        });
+        }
+    });
 }
 
 void DatagramSocket::Pimpl::shutdown()
 {
     MOCI_CORE_INFO("Stop udp listen");
     _isRunning.store(false);
-    if (_listenerThread.joinable()) { _listenerThread.join(); }
+    if (_listenerThread.joinable()) {
+        _listenerThread.join();
+    }
 }
 
 }  // namespace moci
@@ -131,7 +173,8 @@ void DatagramSocket::Pimpl::shutdown()
 //  * \param[in] max_size  The size of the \p msg buffer in bytes.
 //  * \param[in] max_wait_ms  The maximum number of milliseconds to wait for a message.
 //  *
-//  * \return -1 if an error occurs or the function timed out, the number of bytes received otherwise.
+//  * \return -1 if an error occurs or the function timed out, the number of bytes received
+//  otherwise.
 //  */
 // int udp_server::timed_recv(char *msg, size_t max_size, int max_wait_ms)
 // {
@@ -153,9 +196,9 @@ void DatagramSocket::Pimpl::shutdown()
 //         return ::recv(f_socket, msg, max_size, 0);
 //     }
 
-//     // our socket has no data
-//     errno = EAGAIN;
-//     return -1;
+// // our socket has no data
+// errno = EAGAIN;
+// return -1;
 // }
 
 #endif

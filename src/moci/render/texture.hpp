@@ -7,8 +7,7 @@
 #include <string>
 #include <vector>
 
-namespace moci
-{
+namespace moci {
 
 class Texture
 {

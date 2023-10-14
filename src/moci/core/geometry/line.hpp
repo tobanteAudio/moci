@@ -7,8 +7,7 @@
 
 #include <optional>
 
-namespace moci
-{
+namespace moci {
 template<typename Type>
 /**
  * @todo Write summary for class.
@@ -19,12 +18,13 @@ public:
     /**
      * @brief Construct empty line. Start and end at (0,0)
      */
-    explicit constexpr Line() noexcept : _start({0, 0}), _end({0, 0}) { }
+    explicit constexpr Line() noexcept : _start({0, 0}), _end({0, 0}) {}
 
     /**
      * @brief Construct line from two points.
      */
-    constexpr Line(Point<Type> start, Point<Type> end) noexcept : _start(start), _end(end) { }
+    constexpr Line(Point<Type> start, Point<Type> end) noexcept : _start(start), _end(end)
+    {}
 
     /**
      * @brief Returns true if start & end are equal.
@@ -49,11 +49,12 @@ public:
      */
     [[nodiscard]] constexpr auto getSlope() const noexcept -> std::optional<Type>
     {
-        if (!isEmpty())
-        {
+        if (!isEmpty()) {
             auto const x = _end.getX() - _start.getX();
             auto const y = _end.getY() - _start.getY();
-            if (x == Type(0)) { return std::nullopt; }
+            if (x == Type(0)) {
+                return std::nullopt;
+            }
             return (y / x);
         }
         return std::nullopt;
@@ -68,7 +69,7 @@ public:
     {
         auto const x = (_start.getX() + _end.getX()) / 2.0F;
         auto const y = (_start.getY() + _end.getY()) / 2.0F;
-        return Point<Type> {x, y};
+        return Point<Type>{x, y};
     }
 
     /**
@@ -76,7 +77,8 @@ public:
      */
     [[nodiscard]] auto getAngleRadians() const noexcept -> Type
     {
-        auto const angle = std::atan2(_end.getY() - _start.getY(), _end.getX() - _start.getX());
+        auto const angle
+            = std::atan2(_end.getY() - _start.getY(), _end.getX() - _start.getX());
         return static_cast<Type>(angle);
     }
 
@@ -91,7 +93,8 @@ public:
     /**
      * @brief Returns the length of the line.
      *
-     * @details The distance between \f$(x_1,y_1)\f$ and \f$(x_2,y_2)\f$ is \f$\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\f$.
+     * @details The distance between \f$(x_1,y_1)\f$ and \f$(x_2,y_2)\f$ is
+     * \f$\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\f$.
      */
     [[nodiscard]] auto getLength() const noexcept -> Type
     {
@@ -109,13 +112,26 @@ public:
         auto const b = _start.getX() - _end.getX();
         auto const c = a * (_start.getX()) + b * (_start.getY());
 
-        if (b < 0) { fmt::print("The line passing through points P and Q is: {0}x {1}y = {2}\n", a, b, c); }
-        else { fmt::print("The line passing through points P and Q is: {0}x + {1}y = {2}\n", a, b, c); }
+        if (b < 0) {
+            fmt::print(
+                "The line passing through points P and Q is: {0}x {1}y = {2}\n",
+                a,
+                b,
+                c
+            );
+        } else {
+            fmt::print(
+                "The line passing through points P and Q is: {0}x + {1}y = {2}\n",
+                a,
+                b,
+                c
+            );
+        }
     }
 
 private:
-    Point<Type> _start {};
-    Point<Type> _end {};
+    Point<Type> _start{};
+    Point<Type> _end{};
 };
 
 template<typename Type>

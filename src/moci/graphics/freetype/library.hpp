@@ -4,8 +4,7 @@
 
 #include <optional>
 
-namespace moci
-{
+namespace moci {
 
 /**
  * @brief Wrapper around freetype.
@@ -21,7 +20,8 @@ public:
     /**
      * @brief Create a new typeface from a font file.
      */
-    static auto createTypefaceFromFont(const std::string& fontPath) -> std::optional<Typeface>;
+    static auto createTypefaceFromFont(std::string const& fontPath)
+        -> std::optional<Typeface>;
 
 private:
 };

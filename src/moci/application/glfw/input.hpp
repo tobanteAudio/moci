@@ -5,8 +5,7 @@
 
 #include <tuple>
 
-namespace moci
-{
+namespace moci {
 
 class GlfwInput : public Input
 {

@@ -10,18 +10,17 @@
 #include <span>
 #include <vector>
 
-namespace moci
-{
+namespace moci {
 
 class Mesh
 {
 public:
     struct Vertex
     {
-        glm::vec3 position {};
-        glm::vec3 normal {};
-        glm::vec4 color {};
-        glm::vec2 texCoord {};
+        glm::vec3 position{};
+        glm::vec3 normal{};
+        glm::vec4 color{};
+        glm::vec2 texCoord{};
     };
 
     struct Index
@@ -41,16 +40,20 @@ public:
     };
 
     explicit Mesh(std::string filePath);
-    [[nodiscard]] auto getVertices() const noexcept -> std::span<Vertex const> { return _staticVertices; }
+
+    [[nodiscard]] auto getVertices() const noexcept -> std::span<Vertex const>
+    {
+        return _staticVertices;
+    }
 
 private:
-    std::string _filePath {};
-    std::unique_ptr<Assimp::Importer> _importer {};
-    glm::mat4 _inverseTransform {};
-    std::vector<Submesh> _submeshes {};
-    std::vector<Vertex> _staticVertices {};
+    std::string _filePath{};
+    std::unique_ptr<Assimp::Importer> _importer{};
+    glm::mat4 _inverseTransform{};
+    std::vector<Submesh> _submeshes{};
+    std::vector<Vertex> _staticVertices{};
     bool _isAnimated = false;
-    std::vector<Index> _indices {};
+    std::vector<Index> _indices{};
 };
 
 }  // namespace moci

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <cstdint>
-namespace moci
-{
+
+namespace moci {
 
 struct FramebufferSpecs
 {

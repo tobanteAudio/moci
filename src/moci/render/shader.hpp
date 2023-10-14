@@ -6,8 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace moci
-{
+namespace moci {
 enum class ShaderType
 {
     Unknown = 0,

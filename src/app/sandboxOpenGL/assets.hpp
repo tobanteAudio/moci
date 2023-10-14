@@ -9,20 +9,19 @@ constexpr auto shaderSuffix = "es2";
 constexpr auto shaderSuffix = "gl4";
 #endif
 
-namespace assets
-{
-inline auto quadVertices = std::array {
+namespace assets {
+inline auto quadVertices = std::array{
     -0.75F, -0.75F, 0.0F, 1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F,  //
     0.75F,  -0.75F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F,  //
     0.75F,  0.75F,  0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F,  //
     -0.75F, 0.75F,  0.0F, 0.0F, 1.0F, 1.0F, 1.0F, 0.0F, 1.0F,  //
 };
-inline auto quadIndices = std::array {
-    std::uint32_t {0},  //
-    std::uint32_t {1},  //
-    std::uint32_t {2},  //
-    std::uint32_t {0},  //
-    std::uint32_t {2},  //
-    std::uint32_t {3},  //
+inline auto quadIndices = std::array{
+    std::uint32_t{0},  //
+    std::uint32_t{1},  //
+    std::uint32_t{2},  //
+    std::uint32_t{0},  //
+    std::uint32_t{2},  //
+    std::uint32_t{3},  //
 };
 }  // namespace assets

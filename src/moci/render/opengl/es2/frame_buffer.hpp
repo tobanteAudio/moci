@@ -3,8 +3,7 @@
 
 #include <moci/render/frame_buffer.hpp>
 
-namespace moci
-{
+namespace moci {
 
 class OpenGLESFramebuffer : public Framebuffer
 {
@@ -17,8 +16,15 @@ public:
 
     void resize(std::uint32_t width, std::uint32_t height) override;
 
-    [[nodiscard]] auto getColorAttachmentRendererId() const -> std::uint32_t override { return _colorAttachment; }
-    [[nodiscard]] auto getSpecification() const -> const FramebufferSpecs& override { return _specs; }
+    [[nodiscard]] auto getColorAttachmentRendererId() const -> std::uint32_t override
+    {
+        return _colorAttachment;
+    }
+
+    [[nodiscard]] auto getSpecification() const -> FramebufferSpecs const& override
+    {
+        return _specs;
+    }
 
 private:
     void invalidate();

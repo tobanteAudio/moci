@@ -9,14 +9,14 @@
 
 TEST_CASE("widget: ButtonConstruct", "[ui]")
 {
-    moci::Button const button {"test"};
+    moci::Button const button{"test"};
     REQUIRE(button.getText() == "test");
     REQUIRE(button.getTextView() == "test");
 }
 
 TEST_CASE("widget: ButtonSetText", "[ui]")
 {
-    moci::Button button {""};
+    moci::Button button{""};
     REQUIRE(button.getText().empty());
     REQUIRE(button.getTextView() == "");
     button.SetText("test143");
@@ -26,7 +26,7 @@ TEST_CASE("widget: ButtonSetText", "[ui]")
 
 TEST_CASE("widget: ButtonSetTextColor", "[ui]")
 {
-    moci::Button button {""};
+    moci::Button button{""};
 
     auto c1 = button.getTextColor();
     REQUIRE(c1.red() == 0.0f);
@@ -45,7 +45,7 @@ TEST_CASE("widget: ButtonSetTextColor", "[ui]")
 
 TEST_CASE("widget: ButtonSetSpecs", "[ui]")
 {
-    moci::Button button {""};
+    moci::Button button{""};
 
     {
         auto specs = button.getSpecs();
@@ -53,7 +53,7 @@ TEST_CASE("widget: ButtonSetSpecs", "[ui]")
         REQUIRE(specs.isToggle == false);
     }
 
-    auto newSpecs              = moci::ButtonSpecs {};
+    auto newSpecs              = moci::ButtonSpecs{};
     newSpecs.callbacks.clicked = [](auto state) { moci::IgnoreUnused(state); };
     newSpecs.isToggle          = true;
     button.SetSpecs(newSpecs);
@@ -67,7 +67,7 @@ TEST_CASE("widget: ButtonSetSpecs", "[ui]")
 
 TEST_CASE("widget: ButtonSetState", "[ui]")
 {
-    moci::Button button {""};
+    moci::Button button{""};
     REQUIRE(button.getState() == moci::ButtonState::Normal);
 
     button.SetState(moci::ButtonState::Down);
@@ -77,14 +77,13 @@ TEST_CASE("widget: ButtonSetState", "[ui]")
 TEST_CASE("widget: ButtonCallbackStateChanged", "[ui]")
 {
     auto wasCalled               = false;
-    auto specs                   = moci::ButtonSpecs {};
-    specs.callbacks.stateChanged = [&](auto state)
-    {
+    auto specs                   = moci::ButtonSpecs{};
+    specs.callbacks.stateChanged = [&](auto state) {
         REQUIRE(state == moci::ButtonState::Down);
         wasCalled = true;
     };
 
-    auto slider = moci::Button {"test", specs};
+    auto slider = moci::Button{"test", specs};
     REQUIRE(slider.getState() == moci::ButtonState::Normal);
     slider.SetState(moci::ButtonState::Down);
     REQUIRE(slider.getState() == moci::ButtonState::Down);
@@ -94,8 +93,8 @@ TEST_CASE("widget: ButtonCallbackStateChanged", "[ui]")
 TEST_CASE("widget: ButtonCallbackStateChangedCallbackNotSet", "[ui]")
 {
     auto wasCalled = false;
-    auto specs     = moci::ButtonSpecs {};
-    auto slider    = moci::Button {"test", specs};
+    auto specs     = moci::ButtonSpecs{};
+    auto slider    = moci::Button{"test", specs};
     REQUIRE(slider.getState() == moci::ButtonState::Normal);
     slider.SetState(moci::ButtonState::Down);
     REQUIRE(slider.getState() == moci::ButtonState::Down);

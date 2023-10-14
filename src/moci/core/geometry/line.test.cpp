@@ -74,52 +74,73 @@ TEST_CASE("math/geometry: LineGetSlope", "[geometry]")
 
 TEST_CASE("math/geometry: LineGetAngleRadians", "[geometry]")
 {
-    constexpr auto l1 = moci::Line<int> {};
+    constexpr auto l1 = moci::Line<int>{};
     REQUIRE(l1.getAngleRadians() == 0);
 
-    constexpr auto l2 = moci::Line<float> {{0.0F, 0.0F}, {1.0F, 1.0F}};
+    constexpr auto l2 = moci::Line<float>{
+        {0.0F, 0.0F},
+        {1.0F, 1.0F}
+    };
     REQUIRE(l2.getAngleRadians() == Catch::Approx(0.7854F));
 
-    constexpr auto l3 = moci::Line<float> {{0.0F, 0.0F}, {1.0F, -1.0F}};
+    constexpr auto l3 = moci::Line<float>{
+        {0.0F, 0.0F },
+        {1.0F, -1.0F}
+    };
     REQUIRE(l3.getAngleRadians() == Catch::Approx(-0.7854F));
 }
 
 TEST_CASE("math/geometry: LineGetAngleDegrees", "[geometry]")
 {
-    constexpr auto l1 = moci::Line<int> {};
+    constexpr auto l1 = moci::Line<int>{};
     REQUIRE(l1.getAngleDegrees() == 0);
 
-    constexpr auto l2 = moci::Line<float> {{0.0F, 0.0F}, {1.0F, 1.0F}};
+    constexpr auto l2 = moci::Line<float>{
+        {0.0F, 0.0F},
+        {1.0F, 1.0F}
+    };
     REQUIRE(l2.getAngleDegrees() == Catch::Approx(45.0F));
 
-    constexpr auto l3 = moci::Line<float> {{0.0F, 0.0F}, {1.0F, -1.0F}};
+    constexpr auto l3 = moci::Line<float>{
+        {0.0F, 0.0F },
+        {1.0F, -1.0F}
+    };
     REQUIRE(l3.getAngleDegrees() == Catch::Approx(-45.0F));
 }
 
 TEST_CASE("math/geometry: LineGetLength", "[geometry]")
 {
-    constexpr auto l1 = moci::Line<int> {};
+    constexpr auto l1 = moci::Line<int>{};
     REQUIRE(l1.getLength() == 0);
 
-    constexpr auto l2 = moci::Line<float> {{0.0F, 0.0F}, {1.0F, 0.0F}};
+    constexpr auto l2 = moci::Line<float>{
+        {0.0F, 0.0F},
+        {1.0F, 0.0F}
+    };
     REQUIRE(l2.getLength() == Catch::Approx(1.0F));
 
-    constexpr auto l3 = moci::Line<float> {{0.0F, 0.0F}, {0.0F, -1.0F}};
+    constexpr auto l3 = moci::Line<float>{
+        {0.0F, 0.0F },
+        {0.0F, -1.0F}
+    };
     REQUIRE(l3.getLength() == Catch::Approx(1.0F));
 
-    constexpr auto l4 = moci::Line<float> {{0.0F, 0.0F}, {10.0F, 0.0F}};
+    constexpr auto l4 = moci::Line<float>{
+        {0.0F,  0.0F},
+        {10.0F, 0.0F}
+    };
     REQUIRE(l4.getLength() == Catch::Approx(10.0F));
 }
 
 TEST_CASE("math/geometry: LineOperatorEqual", "[geometry]")
 {
     {
-        constexpr auto l1 = moci::Line<int> {};
-        constexpr auto l2 = moci::Line<int> {};
+        constexpr auto l1 = moci::Line<int>{};
+        constexpr auto l2 = moci::Line<int>{};
         REQUIRE(l1 == l2);
     }
     {
-        constexpr auto l1 = moci::Line<int> {};
+        constexpr auto l1 = moci::Line<int>{};
         constexpr auto l2 = moci::Line<int>({1, 2}, {1, 1});
         REQUIRE((l1 == l2) == false);
     }
@@ -128,12 +149,12 @@ TEST_CASE("math/geometry: LineOperatorEqual", "[geometry]")
 TEST_CASE("math/geometry: LineOperatorNotEqual", "[geometry]")
 {
     {
-        constexpr auto l1 = moci::Line<int> {};
-        constexpr auto l2 = moci::Line<int> {};
+        constexpr auto l1 = moci::Line<int>{};
+        constexpr auto l2 = moci::Line<int>{};
         REQUIRE((l1 != l2) == false);
     }
     {
-        constexpr auto l1 = moci::Line<int> {};
+        constexpr auto l1 = moci::Line<int>{};
         constexpr auto l2 = moci::Line<int>({1, 2}, {1, 1});
         REQUIRE(l1 != l2);
     }

@@ -9,15 +9,24 @@
 #include <moci/core/preprocessor.hpp>
 
 #if defined(MOCI_LINUX)
-TEST_CASE("system: SystemInfoOSName", "[system]") { REQUIRE(moci::SystemInfo::getOSName() == "Linux"); }
+TEST_CASE("system: SystemInfoOSName", "[system]")
+{
+    REQUIRE(moci::SystemInfo::getOSName() == "Linux");
+}
 #endif
 
 #if defined(MOCI_MAC)
-TEST_CASE("system: SystemInfoOSName", "[system]") { REQUIRE(moci::SystemInfo::getOSName() == "Darwin"); }
+TEST_CASE("system: SystemInfoOSName", "[system]")
+{
+    REQUIRE(moci::SystemInfo::getOSName() == "Darwin");
+}
 #endif
 
 #if defined(MOCI_WINDOWS)
-TEST_CASE("system: SystemInfoOSName", "[system]") { REQUIRE(moci::SystemInfo::getOSName() == "Windows"); }
+TEST_CASE("system: SystemInfoOSName", "[system]")
+{
+    REQUIRE(moci::SystemInfo::getOSName() == "Windows");
+}
 #endif
 
 TEST_CASE("system: SystemInfoDummyChecks", "[system]")

@@ -6,25 +6,33 @@
 
 #include <utility>
 
-namespace moci
-{
+namespace moci {
 
 class Input
 {
 public:
     Input()                                = default;
-    Input(const Input&)                    = delete;
-    auto operator=(const Input&) -> Input& = delete;
+    Input(Input const&)                    = delete;
+    auto operator=(Input const&) -> Input& = delete;
     virtual ~Input()                       = default;
 
-    inline static auto isKeyPressed(Key keycode) -> bool { return sInstance->isKeyPressedImpl(keycode); }
+    inline static auto isKeyPressed(Key keycode) -> bool
+    {
+        return sInstance->isKeyPressedImpl(keycode);
+    }
 
     inline static auto isMouseButtonPressed(MouseCode button) -> bool
     {
         return sInstance->isMouseButtonPressedImpl(button);
     }
-    inline static auto getMousePosition() -> std::pair<float, float> { return sInstance->getMousePositionImpl(); }
+
+    inline static auto getMousePosition() -> std::pair<float, float>
+    {
+        return sInstance->getMousePositionImpl();
+    }
+
     inline static auto getMouseX() -> float { return sInstance->getMouseXImpl(); }
+
     inline static auto getMouseY() -> float { return sInstance->getMouseYImpl(); }
 
 private:

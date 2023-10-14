@@ -8,7 +8,7 @@
 
 TEST_CASE("graphics: ColorDefaultConstructor", "[graphics]")
 {
-    moci::ColorRGBA32 color {};
+    moci::ColorRGBA32 color{};
     REQUIRE(color.red() == 0.0F);
     REQUIRE(color.green() == 0.0F);
     REQUIRE(color.blue() == 0.0F);
@@ -17,7 +17,7 @@ TEST_CASE("graphics: ColorDefaultConstructor", "[graphics]")
 
 TEST_CASE("graphics: ColorRGBConstructor", "[graphics]")
 {
-    moci::ColorRGBA32 color {1.0F, 1.0F, 1.0F};
+    moci::ColorRGBA32 color{1.0F, 1.0F, 1.0F};
 
     REQUIRE(color.red() == 1.0F);
     REQUIRE(color.green() == 1.0F);
@@ -27,7 +27,7 @@ TEST_CASE("graphics: ColorRGBConstructor", "[graphics]")
 
 TEST_CASE("graphics: ColorRGBAConstructor", "[graphics]")
 {
-    moci::ColorRGBA32 color {1.0F, 1.0F, 1.0F, 0.5F};
+    moci::ColorRGBA32 color{1.0F, 1.0F, 1.0F, 0.5F};
 
     REQUIRE(color.red() == 1.0F);
     REQUIRE(color.green() == 1.0F);
@@ -37,7 +37,7 @@ TEST_CASE("graphics: ColorRGBAConstructor", "[graphics]")
 
 TEST_CASE("graphics: ColorGetData", "[graphics]")
 {
-    constexpr moci::ColorRGBA32 color {};
+    constexpr moci::ColorRGBA32 color{};
     auto const data = static_cast<glm::vec4>(color);
 
     REQUIRE(data.r == 0.0F);
@@ -48,7 +48,7 @@ TEST_CASE("graphics: ColorGetData", "[graphics]")
 
 TEST_CASE("graphics: ColorSetRGBA", "[graphics]")
 {
-    moci::ColorRGBA32 color {};
+    moci::ColorRGBA32 color{};
     color.red(1.0F);
     color.green(1.0F);
     color.blue(1.0F);

@@ -2,8 +2,7 @@
 
 #include <moci/render/shader.hpp>
 
-namespace moci
-{
+namespace moci {
 class ShaderParser
 {
 

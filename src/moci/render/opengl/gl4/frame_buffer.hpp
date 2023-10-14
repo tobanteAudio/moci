@@ -5,8 +5,7 @@
 
 #if defined(MOCI_API_OPENGL_MODERN)
 
-namespace moci
-{
+namespace moci {
 
 class OpenGLFramebuffer : public Framebuffer
 {
@@ -19,8 +18,15 @@ public:
 
     void resize(std::uint32_t width, std::uint32_t height) override;
 
-    [[nodiscard]] auto getColorAttachmentRendererId() const -> std::uint32_t override { return colorAttachment_; }
-    [[nodiscard]] auto getSpecification() const -> const FramebufferSpecs& override { return specs_; }
+    [[nodiscard]] auto getColorAttachmentRendererId() const -> std::uint32_t override
+    {
+        return colorAttachment_;
+    }
+
+    [[nodiscard]] auto getSpecification() const -> FramebufferSpecs const& override
+    {
+        return specs_;
+    }
 
 private:
     void invalidate();

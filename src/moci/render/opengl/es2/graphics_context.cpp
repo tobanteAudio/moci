@@ -3,8 +3,7 @@
 #include <moci/core/logging.hpp>
 #include <moci/render/opengl/es2/es2.hpp>
 
-namespace moci
-{
+namespace moci {
 
 #if defined(MOCI_API_OPENGL_LEGACY)
 auto GraphicsContext::create(void* win) -> GraphicsContext*
@@ -23,7 +22,9 @@ void OpenGLESContext::init()
     glfwMakeContextCurrent(_windowHandle);
 
 #if not defined(MOCI_API_OPENGL_ES)
-    if (auto err = glewInit() != GLEW_OK; err) { MOCI_CORE_ASSERT(err, "Failed to initialize glew!"); }
+    if (auto err = glewInit() != GLEW_OK; err) {
+        MOCI_CORE_ASSERT(err, "Failed to initialize glew!");
+    }
 #endif
 
     // msaa
@@ -35,9 +36,18 @@ void OpenGLESContext::init()
     // Enable depth test
 
     MOCI_CORE_INFO("OpenGL Info:");
-    MOCI_CORE_INFO("  Vendor:     {0}", std::string_view {reinterpret_cast<char const*>(glGetString(GL_VENDOR))});
-    MOCI_CORE_INFO("  Renderer:   {0}", std::string_view {reinterpret_cast<char const*>(glGetString(GL_RENDERER))});
-    MOCI_CORE_INFO("  Version:    {0}", std::string_view {reinterpret_cast<char const*>(glGetString(GL_VERSION))});
+    MOCI_CORE_INFO(
+        "  Vendor:     {0}",
+        std::string_view{reinterpret_cast<char const*>(glGetString(GL_VENDOR))}
+    );
+    MOCI_CORE_INFO(
+        "  Renderer:   {0}",
+        std::string_view{reinterpret_cast<char const*>(glGetString(GL_RENDERER))}
+    );
+    MOCI_CORE_INFO(
+        "  Version:    {0}",
+        std::string_view{reinterpret_cast<char const*>(glGetString(GL_VERSION))}
+    );
 }
 
 void OpenGLESContext::swapBuffers() { glfwSwapBuffers(_windowHandle); }
