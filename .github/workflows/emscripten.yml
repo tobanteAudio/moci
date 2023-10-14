@@ -38,5 +38,5 @@ jobs:
           -s build_type=Release
           .
 
-      # - name: Build & Test
-      #   run: conan build -bf build .
+      - name: Build & Test
+        run: conan build -bf build .

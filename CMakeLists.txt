@@ -32,7 +32,7 @@ include(MociCompilerOptions)
 include(MociCompilerWarnings)
 
 if(EMSCRIPTEN)
-  add_subdirectory(playground/sdl_emscripten)
+  add_subdirectory(src/app/playground/sdl_emscripten)
 else()
   include(MociConan)
 

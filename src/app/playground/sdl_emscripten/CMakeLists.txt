@@ -12,6 +12,7 @@ add_executable(sdl_emscripten
     ${CMAKE_BINARY_DIR}/bindings/imgui_impl_opengl3.cpp
 )
 
+set_target_properties(sdl_emscripten PROPERTIES SUFFIX ".html")
 target_include_directories(sdl_emscripten PRIVATE ${CMAKE_BINARY_DIR})
 target_compile_definitions(sdl_emscripten PRIVATE IMGUI_DISABLE_OBSOLETE_FUNCTIONS)
 target_link_libraries(sdl_emscripten PRIVATE imgui::imgui)
