@@ -10,7 +10,7 @@
 
 TEST_CASE("graphics_extra: OrthographicCamera", "[render]")
 {
-    moci::OrthographicCamera camera{0.0F, 100.0F, 100.0F, 0.0F};
+    moci::OrthographicCamera const camera{0.0F, 100.0F, 100.0F, 0.0F};
     REQUIRE(camera.getPosition() == glm::vec3{});
     REQUIRE(camera.getRotation() == 0.0F);
     REQUIRE(camera.getViewMatrix() == glm::mat4{1.0F});

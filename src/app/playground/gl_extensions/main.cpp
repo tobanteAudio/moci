@@ -11,12 +11,12 @@ auto main() -> int
         return EXIT_FAILURE;
     }
 
-    auto window = glfwCreateWindow(1280, 720, "Window", nullptr, nullptr);
+    auto *window = glfwCreateWindow(1280, 720, "Window", nullptr, nullptr);
     glfwHideWindow(window);
     glfwMakeContextCurrent(window);
 
     if (auto err = glewInit() != GLEW_OK; err) {
-        auto const* msg = glewGetErrorString(err);
+        auto const* msg = glewGetErrorString(static_cast<GLenum>(err));
         std::fprintf(
             stderr,
             "Failed to initialize glew: %s\n",

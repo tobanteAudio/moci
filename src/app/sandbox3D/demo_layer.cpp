@@ -70,7 +70,7 @@ auto skyboxVertices = std::array{
     1.0F,  -1.0F, 1.0F    //
 };
 
-glm::vec2 imGuiToGlmVec(ImVec2 const& input) { return {input.x, input.y}; }
+auto imGuiToGlmVec(ImVec2 const& input) -> glm::vec2 { return {input.x, input.y}; }
 
 }  // namespace
 
@@ -135,7 +135,7 @@ void DemoLayer::onAttach()
     _skyboxShader = moci::RenderFactory::makeShader(skyBoxShaderPath);
     _skyboxShader->bind();
     _skyboxShader->setInt("u_Skybox", 0);
-    moci::BufferLayout skyBoxLayout = {
+    moci::BufferLayout const skyBoxLayout = {
         {moci::ShaderDataType::Float3, "a_Position"}
     };
     auto* skyBoxData = reinterpret_cast<float*>(skyboxVertices.data());
@@ -150,7 +150,7 @@ void DemoLayer::onAttach()
     _skyboxVao->addVertexBuffer(_skyboxVbo);
     _skyboxVao->setIndexBuffer(_skyboxIbo);
     _skyboxVao->unbind();
-    std::vector<std::string> faces{
+    std::vector<std::string> const faces{
         std::string("src/app/sandbox3D/assets/textures/skybox/right.jpg"),   //
         std::string("src/app/sandbox3D/assets/textures/skybox/left.jpg"),    //
         std::string("src/app/sandbox3D/assets/textures/skybox/top.jpg"),     //
@@ -161,7 +161,7 @@ void DemoLayer::onAttach()
 
     _skyBoxTexture = moci::RenderFactory::makeTextureCube(faces);
 
-    moci::BufferLayout layout = {
+    moci::BufferLayout const layout = {
         {moci::ShaderDataType::Float3, "a_Position" }, //
         {moci::ShaderDataType::Float3, "a_Normal"   }, //
         {moci::ShaderDataType::Float4, "a_Color"    }, //
@@ -287,14 +287,14 @@ void DemoLayer::onEvent(moci::Event& e)
     );
 }
 
-bool DemoLayer::onWindowResized(moci::WindowResizeEvent& e)
+auto DemoLayer::onWindowResized(moci::WindowResizeEvent& e) -> bool
 {
     _width  = static_cast<float>(e.getWidth());
     _height = static_cast<float>(e.getHeight());
     return false;
 }
 
-bool DemoLayer::onKeyPressed(moci::KeyPressedEvent& e)
+auto DemoLayer::onKeyPressed(moci::KeyPressedEvent& e) -> bool
 {
     auto const cameraSpeed = 0.15F * _lastTimestep;
     if (e.getKeyCode() == moci::Key::Up) {
@@ -313,7 +313,7 @@ bool DemoLayer::onKeyPressed(moci::KeyPressedEvent& e)
     return true;
 }
 
-bool DemoLayer::onMouseScrolled(moci::MouseScrolledEvent& e)
+auto DemoLayer::onMouseScrolled(moci::MouseScrolledEvent& e) -> bool
 {
     _cameraFOV -= e.getYOffset();
     constexpr auto minFOV = 1.0F;
@@ -327,7 +327,7 @@ bool DemoLayer::onMouseScrolled(moci::MouseScrolledEvent& e)
     return true;
 }
 
-bool DemoLayer::onMousePressed(moci::MouseButtonPressedEvent& e)
+auto DemoLayer::onMousePressed(moci::MouseButtonPressedEvent& e) -> bool
 {
     if (e.getMouseButton() == moci::MouseCode::ButtonMiddle) {
         _isMouseDragging = true;
@@ -337,7 +337,7 @@ bool DemoLayer::onMousePressed(moci::MouseButtonPressedEvent& e)
     return false;
 }
 
-bool DemoLayer::onMouseReleased(moci::MouseButtonReleasedEvent& e)
+auto DemoLayer::onMouseReleased(moci::MouseButtonReleasedEvent& e) -> bool
 {
     if (e.getMouseButton() == moci::MouseCode::ButtonMiddle) {
         _isMouseDragging = false;
@@ -348,7 +348,7 @@ bool DemoLayer::onMouseReleased(moci::MouseButtonReleasedEvent& e)
     return false;
 }
 
-bool DemoLayer::onMouseMoved(moci::MouseMovedEvent& e)
+auto DemoLayer::onMouseMoved(moci::MouseMovedEvent& e) -> bool
 {
     if (_isMouseDragging) {
         if (_firstMouse) {

@@ -18,7 +18,7 @@ TEST_CASE("render/buffer: BufferElement", "[render]")
 
 TEST_CASE("render/buffer: BufferLayout", "[render]")
 {
-    moci::BufferLayout layout = {
+    moci::BufferLayout const layout = {
         {moci::ShaderDataType::Float3, "position"}, //
         {moci::ShaderDataType::Float4, "color"   }, //
     };

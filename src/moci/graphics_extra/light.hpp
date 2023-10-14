@@ -51,7 +51,7 @@ public:
         );
 #endif
         shader->bind();
-        BufferLayout lightLayout = {
+        BufferLayout const lightLayout = {
             {ShaderDataType::Float3, "a_Position"}, //
             {ShaderDataType::Float4, "a_Color"   }, //
         };

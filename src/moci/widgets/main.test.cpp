@@ -14,7 +14,7 @@ auto main(int argc, char* argv[]) -> int
     moci::Log::init();
 
     // tests ...
-    int result = Catch::Session().run(argc, argv);
+    int const result = Catch::Session().run(argc, argv);
 
     // global clean-up...
     return result;

@@ -31,7 +31,7 @@ BatchRender2D::BatchRender2D()
 
     _data.defaultTexture = moci::RenderFactory::makeTexture2D("assets/white_10x10.png");
 
-    moci::BufferLayout layout = {
+    moci::BufferLayout const layout = {
         {moci::ShaderDataType::Float3, "position"           }, //
         {moci::ShaderDataType::Float4, "color"              }, //
         {moci::ShaderDataType::Float2, "texture"            }, //
@@ -140,7 +140,7 @@ auto BatchRender2D::fontInit(std::string const& fontPath) -> void
             face->glyph->bitmap.buffer                //
         );
 
-        Character character = {
+        Character const character = {
             texture,                                                          //
             glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),  //
             glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),    //

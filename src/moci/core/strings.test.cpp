@@ -20,7 +20,7 @@ TEST_CASE("core: StringsLeftTrimCopy", "[core]")
     auto const s = std::string(" HELLO ");
     REQUIRE(s.size() == 7);
 
-    std::string newS(moci::Strings::leftTrimCopy(s));
+    std::string const newS(moci::Strings::leftTrimCopy(s));
     REQUIRE(newS.size() == 6);
 }
 
@@ -38,7 +38,7 @@ TEST_CASE("core: StringsRightTrimCopy", "[core]")
     auto const s = std::string(" HELLO ");
     REQUIRE(s.size() == 7);
 
-    std::string newS(moci::Strings::rightTrimCopy(s));
+    std::string const newS(moci::Strings::rightTrimCopy(s));
     REQUIRE(newS.size() == 6);
 }
 
@@ -56,7 +56,7 @@ TEST_CASE("core: StringsTrimCopy", "[core]")
     auto const s = std::string(" HELLO ");
     REQUIRE(s.size() == 7);
 
-    std::string newS(moci::Strings::trimCopy(s));
+    std::string const newS(moci::Strings::trimCopy(s));
     REQUIRE(newS.size() == 5);
 }
 

@@ -23,4 +23,4 @@ public:
 private:
 };
 
-moci::Application* moci::createApplication() { return new Sandbox(); }
+auto moci::createApplication() -> moci::Application* { return new Sandbox(); }

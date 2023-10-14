@@ -46,7 +46,7 @@ private:
     moci::ColorRGBA32 _color{};
 };
 
-float linearToDecibel(float linear)
+auto linearToDecibel(float linear) -> float
 {
     if (linear != 0.0F) {
         return 20.0F * log10f(linear);

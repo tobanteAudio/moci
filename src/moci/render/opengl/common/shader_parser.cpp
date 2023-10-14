@@ -2,8 +2,10 @@
 
 #include <moci/core/logging.hpp>
 
-#define GL_FRAGMENT_SHADER 0x8B30
-#define GL_VERTEX_SHADER   0x8B31
+enum {
+GL_FRAGMENT_SHADER = 0x8B30,
+GL_VERTEX_SHADER =   0x8B31
+};
 
 namespace moci {
 namespace {
@@ -37,7 +39,7 @@ auto ShaderParser::splitSource(std::string const& sources) -> ShaderProgramSourc
 
         // Start of shader type name (after "#type " keyword)
         auto const begin = pos + typeTokenLength + 1;
-        std::string type = sources.substr(begin, eol - begin);
+        std::string const type = sources.substr(begin, eol - begin);
         MOCI_CORE_ASSERT(
             shaderTypeFromString(type) != ShaderType::Unknown,
             "Invalid shader type specified"

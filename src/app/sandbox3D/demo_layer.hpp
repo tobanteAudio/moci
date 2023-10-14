@@ -23,12 +23,12 @@ public:
     void onEvent(moci::Event& e) override;
 
 private:
-    bool onWindowResized(moci::WindowResizeEvent& e);
-    bool onKeyPressed(moci::KeyPressedEvent& e);
-    bool onMouseScrolled(moci::MouseScrolledEvent& e);
-    bool onMouseMoved(moci::MouseMovedEvent& e);
-    bool onMousePressed(moci::MouseButtonPressedEvent& e);
-    bool onMouseReleased(moci::MouseButtonReleasedEvent& e);
+    auto onWindowResized(moci::WindowResizeEvent& e) -> bool;
+    auto onKeyPressed(moci::KeyPressedEvent& e) -> bool;
+    auto onMouseScrolled(moci::MouseScrolledEvent& e) -> bool;
+    auto onMouseMoved(moci::MouseMovedEvent& e) -> bool;
+    auto onMousePressed(moci::MouseButtonPressedEvent& e) -> bool;
+    auto onMouseReleased(moci::MouseButtonReleasedEvent& e) -> bool;
 
     float _width        = 1280.0F;
     float _height       = 1024.0F;

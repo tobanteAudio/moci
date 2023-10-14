@@ -125,7 +125,7 @@ auto OpenGLESRendererAPI::maxVertexAttributes() -> std::uint32_t
 
 auto OpenGLESRendererAPI::maxUniformVectors() -> std::uint32_t
 {
-    GLint maxUniformVectors = 0;
+    GLint const maxUniformVectors = 0;
     // GLCall(glGetIntegerv(GL_MAX_FRAGMENT_UNIFORM_VECTORS, &maxUniformVectors));
     return static_cast<std::uint32_t>(maxUniformVectors);
 }

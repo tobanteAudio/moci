@@ -8,7 +8,7 @@
 
 TEST_CASE("graphics: ColorDefaultConstructor", "[graphics]")
 {
-    moci::ColorRGBA32 color{};
+    moci::ColorRGBA32 const color{};
     REQUIRE(color.red() == 0.0F);
     REQUIRE(color.green() == 0.0F);
     REQUIRE(color.blue() == 0.0F);
@@ -17,7 +17,7 @@ TEST_CASE("graphics: ColorDefaultConstructor", "[graphics]")
 
 TEST_CASE("graphics: ColorRGBConstructor", "[graphics]")
 {
-    moci::ColorRGBA32 color{1.0F, 1.0F, 1.0F};
+    moci::ColorRGBA32 const color{1.0F, 1.0F, 1.0F};
 
     REQUIRE(color.red() == 1.0F);
     REQUIRE(color.green() == 1.0F);
@@ -27,7 +27,7 @@ TEST_CASE("graphics: ColorRGBConstructor", "[graphics]")
 
 TEST_CASE("graphics: ColorRGBAConstructor", "[graphics]")
 {
-    moci::ColorRGBA32 color{1.0F, 1.0F, 1.0F, 0.5F};
+    moci::ColorRGBA32 const color{1.0F, 1.0F, 1.0F, 0.5F};
 
     REQUIRE(color.red() == 1.0F);
     REQUIRE(color.green() == 1.0F);

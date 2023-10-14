@@ -7,9 +7,9 @@
     #include <cstdlib>
     #include <memory>
 
-extern moci::Application* moci::createApplication();
+extern auto moci::createApplication() -> moci::Application*;
 
-int main(int argc, char** argv)
+auto main(int argc, char** argv) -> int
 {
     moci::ignoreUnused(argc);
     moci::ignoreUnused(argv);

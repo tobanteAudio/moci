@@ -5,7 +5,7 @@
 #include "imgui.h"
 
 namespace {
-glm::vec2 imGuiToGlmVec(ImVec2 const& input) { return {input.x, input.y}; }
+auto imGuiToGlmVec(ImVec2 const& input) -> glm::vec2 { return {input.x, input.y}; }
 
 }  // namespace
 
@@ -117,38 +117,38 @@ void OpenGLLayer::onEvent(moci::Event& e)
     );
 }
 
-bool OpenGLLayer::handleWindowResized(moci::WindowResizeEvent& e)
+auto OpenGLLayer::handleWindowResized(moci::WindowResizeEvent& e) -> bool
 {
     _width  = static_cast<float>(e.getWidth());
     _height = static_cast<float>(e.getHeight());
     return false;
 }
 
-bool OpenGLLayer::handleKeyPressed(moci::KeyPressedEvent& e)
+auto OpenGLLayer::handleKeyPressed(moci::KeyPressedEvent& e) -> bool
 {
     moci::ignoreUnused(e);
     return true;
 }
 
-bool OpenGLLayer::handleMouseScrolled(moci::MouseScrolledEvent& e)
+auto OpenGLLayer::handleMouseScrolled(moci::MouseScrolledEvent& e) -> bool
 {
     moci::ignoreUnused(e);
     return true;
 }
 
-bool OpenGLLayer::handleMousePressed(moci::MouseButtonPressedEvent& e)
+auto OpenGLLayer::handleMousePressed(moci::MouseButtonPressedEvent& e) -> bool
 {
     moci::ignoreUnused(e);
     return true;
 }
 
-bool OpenGLLayer::handleMouseReleased(moci::MouseButtonReleasedEvent& e)
+auto OpenGLLayer::handleMouseReleased(moci::MouseButtonReleasedEvent& e) -> bool
 {
     moci::ignoreUnused(e);
     return true;
 }
 
-bool OpenGLLayer::handleMouseMoved(moci::MouseMovedEvent& e)
+auto OpenGLLayer::handleMouseMoved(moci::MouseMovedEvent& e) -> bool
 {
     moci::ignoreUnused(e);
     return true;

@@ -9,7 +9,7 @@
 
 TEST_CASE("math/geometry: RectangleConstructionEmpty", "[geometry]")
 {
-    moci::Rectangle<float> r{};
+    moci::Rectangle<float> const r{};
     REQUIRE(r.isEmpty() == true);
     REQUIRE(r.getX() == 0.0F);
     REQUIRE(r.getY() == 0.0F);

@@ -33,7 +33,7 @@ OpenGLShader::OpenGLShader(std::string const& filepath)
 {
     MOCI_PROFILE_FUNCTION();
 
-    std::string source = ReadFile(filepath);
+    std::string const source = ReadFile(filepath);
     auto shaderSources = PreProcess(source);
     Compile(shaderSources);
 
@@ -72,8 +72,8 @@ auto OpenGLShader::ReadFile(std::string const& filepath) -> std::string
 {
     MOCI_PROFILE_FUNCTION();
 
-    std::string result;
-    std::ifstream file(filepath, std::ios::in | std::ios::binary);
+    std::string const result;
+    std::ifstream const file(filepath, std::ios::in | std::ios::binary);
     if (file) {
         auto ss = std::ostringstream{};
         ss << file.rdbuf();
@@ -102,15 +102,15 @@ void OpenGLShader::Compile(std::unordered_map<GLenum, std::string> const& shader
 {
     MOCI_PROFILE_FUNCTION();
 
-    GLuint program = glCreateProgram();
+    GLuint const program = glCreateProgram();
     MOCI_CORE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now");
     std::array<GLenum, 2> glShaderIDs{};
     int glShaderIDIndex = 0;
     for (auto const& kv : shaderSources) {
-        GLenum type               = kv.first;
+        GLenum const type               = kv.first;
         std::string const& source = kv.second;
 
-        GLuint shader = glCreateShader(type);
+        GLuint const shader = glCreateShader(type);
 
         GLchar const* sourceCStr = source.c_str();
         glShaderSource(shader, 1, &sourceCStr, nullptr);

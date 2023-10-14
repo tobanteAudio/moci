@@ -9,7 +9,7 @@
 
 TEST_CASE("graphics: TypefaceConstruct", "[font][graphics]")
 {
-    moci::Typeface face{"comic-sans"};
+    moci::Typeface const face{"comic-sans"};
     REQUIRE(face.getName() == "comic-sans");
 }
 

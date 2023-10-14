@@ -59,9 +59,9 @@ void ImGuiLayer::begin()
     }
     // Docking
     ImGuiWindowFlags windowFlags{};
-    static bool optFullscreenPersistant      = true;
-    bool optFullscreen                       = optFullscreenPersistant;
-    static ImGuiDockNodeFlags dockspaceFlags = ImGuiDockNodeFlags_PassthruCentralNode;
+    static bool const optFullscreenPersistant      = true;
+    bool const optFullscreen                       = optFullscreenPersistant;
+    static ImGuiDockNodeFlags const dockspaceFlags = ImGuiDockNodeFlags_PassthruCentralNode;
 
     // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not
     // dockable into, because it would be confusing to have two docking targets within each
@@ -102,9 +102,9 @@ void ImGuiLayer::begin()
     }
 
     // DockSpace
-    ImGuiIO& io = ImGui::GetIO();
+    ImGuiIO const& io = ImGui::GetIO();
     if ((io.ConfigFlags & ImGuiConfigFlags_DockingEnable) != 0) {
-        ImGuiID dockspaceId = ImGui::GetID("dock_space");
+        ImGuiID const dockspaceId = ImGui::GetID("dock_space");
         ImGui::DockSpace(dockspaceId, ImVec2(0.0F, 0.0F), dockspaceFlags);
     }
 }  // namespace moci

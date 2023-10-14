@@ -64,7 +64,7 @@ OpenGLESShader::~OpenGLESShader() { GLCall(glDeleteProgram(_rendererID)); }
 
 auto OpenGLESShader::parseShader(std::string const& filepath) -> ShaderProgramSource
 {
-    std::ifstream file(filepath);
+    std::ifstream const file(filepath);
     if (file) {
         auto ss = std::ostringstream{};
         ss << file.rdbuf();

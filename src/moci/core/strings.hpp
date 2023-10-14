@@ -128,7 +128,7 @@ public:
     static auto toInteger(std::string const& input) -> std::optional<IntType>
     {
         try {
-            int output = std::stoi(input);
+            int const output = std::stoi(input);
             return static_cast<IntType>(output);
         } catch (...) {
             return std::nullopt;

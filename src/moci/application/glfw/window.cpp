@@ -31,7 +31,7 @@ void GlfwWindow::init(WindowSpecs props)
 
     if (sGlfwWindowCount == 0) {
         MOCI_CORE_INFO("Initializing GLFW");
-        int success = glfwInit();
+        int const success = glfwInit();
         MOCI_CORE_ASSERT(success, "Could not intialize GLFW!");
         glfwSetErrorCallback(glfwErrorCallback);
     }
@@ -81,7 +81,7 @@ void GlfwWindow::init(WindowSpecs props)
     });
 
     glfwSetWindowCloseCallback(_window, [](GLFWwindow* window) {
-        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        WindowData const& data = *(WindowData*)glfwGetWindowUserPointer(window);
         WindowCloseEvent event;
         data.EventCallback(event);
     });
@@ -92,7 +92,7 @@ void GlfwWindow::init(WindowSpecs props)
         ignoreUnused(scancode);
         ignoreUnused(mods);
 
-        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        WindowData const& data = *(WindowData*)glfwGetWindowUserPointer(window);
         auto const key   = static_cast<Key>(glfwKey);
         switch (action) {
             case GLFW_PRESS: {
@@ -142,14 +142,14 @@ void GlfwWindow::init(WindowSpecs props)
     );
 
     glfwSetScrollCallback(_window, [](GLFWwindow* window, double xOffset, double yOffset) {
-        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        WindowData const& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
         MouseScrolledEvent event((float)xOffset, (float)yOffset);
         data.EventCallback(event);
     });
 
     glfwSetCursorPosCallback(_window, [](GLFWwindow* window, double xPos, double yPos) {
-        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        WindowData const& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
         MouseMovedEvent event((float)xPos, (float)yPos);
         data.EventCallback(event);
