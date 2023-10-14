@@ -93,7 +93,7 @@ public:
             R"(,{{"cat":"function","dur": {0},"name": "{1}","ph":"X","pid":0,"tid": "{2}","ts": {3}}})",  //
             result.ElapsedTime.count(),                                                                   //
             name,                                                                                         //
-            result.ThreadID,                                                                              //
+            fmt::streamed(result.ThreadID),                                                               //
             result.Start.count()                                                                          //
         );
 

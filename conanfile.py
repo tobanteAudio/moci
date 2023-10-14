@@ -6,17 +6,16 @@ class Moci(ConanFile):
     url = "https://github.com/tobanteAudio/moci"
 
     settings = "os", "compiler", "build_type", "arch"
-    generators = "cmake_find_package", "markdown"
+    generators = "cmake_find_package"
 
     def requirements(self):
         self.requires("assimp/5.2.2")
-        self.requires("catch2/3.1.0")
-        self.requires("freetype/2.12.1")
-        self.requires("glm/0.9.9.8")
-        self.requires("imgui/cci.20220621+1.88.docking")
-        self.requires("spdlog/1.10.0")
-        self.requires("stb/cci.20210910")
-        self.requires("zlib/1.2.13", override=True)
+        self.requires("catch2/3.4.0")
+        self.requires("freetype/2.13.0")
+        self.requires("glm/cci.20230113")
+        self.requires("imgui/cci.20230105+1.89.2.docking")
+        self.requires("spdlog/1.12.0")
+        self.requires("stb/cci.20220909")
 
         if self.settings.os != "Emscripten":
             self.requires("glew/2.2.0")
@@ -94,6 +93,8 @@ class Moci(ConanFile):
             self.options["glew"].shared = False
 
     def imports(self):
+        self.copy("license*", dst="licenses", folder=True, ignore_case=True)
+
         src = "res/bindings"
         dest = "bindings"
 

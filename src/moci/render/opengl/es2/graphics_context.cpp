@@ -35,9 +35,9 @@ void OpenGLESContext::init()
     // Enable depth test
 
     MOCI_CORE_INFO("OpenGL Info:");
-    MOCI_CORE_INFO("  Vendor:     {0}", glGetString(GL_VENDOR));
-    MOCI_CORE_INFO("  Renderer:   {0}", glGetString(GL_RENDERER));
-    MOCI_CORE_INFO("  Version:    {0}", glGetString(GL_VERSION));
+    MOCI_CORE_INFO("  Vendor:     {0}", std::string_view {reinterpret_cast<char const*>(glGetString(GL_VENDOR))});
+    MOCI_CORE_INFO("  Renderer:   {0}", std::string_view {reinterpret_cast<char const*>(glGetString(GL_RENDERER))});
+    MOCI_CORE_INFO("  Version:    {0}", std::string_view {reinterpret_cast<char const*>(glGetString(GL_VERSION))});
 }
 
 void OpenGLESContext::swapBuffers() { glfwSwapBuffers(_windowHandle); }

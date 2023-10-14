@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.23)
 project(moci-dev LANGUAGES CXX)
 
 option(MOCI_BUILD_COVERAGE       "Build with coverage enabled"                  OFF)
