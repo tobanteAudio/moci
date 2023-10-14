@@ -1,10 +1,10 @@
 #pragma once
 
 #include <moci/core/logging.hpp>
-#include <moci/core/span.hpp>
 
 #include "glm/glm.hpp"
 
+#include <span>
 #include <string>
 #include <vector>
 
@@ -36,17 +36,17 @@ public:
     /**
      * @brief Returns a span of the vertex positions.
      */
-    [[nodiscard]] auto getVertices() -> Span<glm::vec3> { return _vertices; }
+    [[nodiscard]] auto getVertices() -> std::span<glm::vec3> { return _vertices; }
 
     /**
      * @brief Returns a span of the vertex normals.
      */
-    [[nodiscard]] auto getNormals() -> Span<glm::vec3> { return _normals; }
+    [[nodiscard]] auto getNormals() -> std::span<glm::vec3> { return _normals; }
 
     /**
      * @brief Returns a span of the faces.
      */
-    [[nodiscard]] auto getVertexData() -> Span<VertexData> { return _model; }
+    [[nodiscard]] auto getVertexData() -> std::span<VertexData> { return _model; }
 
 private:
     static auto parseLineToVec3(std::string& line) -> glm::vec3;

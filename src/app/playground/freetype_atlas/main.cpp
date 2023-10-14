@@ -1,5 +1,4 @@
 #include <moci/core/logging.hpp>
-#include <moci/core/span.hpp>
 
 #include "stb_image_write.h"
 
@@ -8,6 +7,7 @@
 
 #include <cmath>
 #include <cstdio>
+#include <span>
 
 constexpr auto NUM_GLYPHS = 128;
 
@@ -20,7 +20,7 @@ struct glyph_info
 
 int main(int argc, char** argv)
 {
-    auto const arguments = moci::Span<char*>(argv, argc);
+    auto const arguments = std::span<char*>(argv, argc);
     if (argc < 3)
     {
         printf("usage: %s <font> <size>\n", arguments[0]);

@@ -4,9 +4,9 @@
 
 #include "gl4.hpp"
 
-#include <moci/core/span.hpp>
 #include <moci/render/texture.hpp>
 
+#include <span>
 namespace moci
 {
 
@@ -23,7 +23,7 @@ public:
     [[nodiscard]] auto getHeight() const -> std::uint32_t override { return height_; }
     [[nodiscard]] auto getId() const -> std::uint32_t override { return renderID_; }
 
-    void setData(Span<std::uint8_t> data) const;
+    void setData(std::span<std::uint8_t> data) const;
 
     void bind(std::uint32_t slot = 0) const override;
     void unbind() const override { }

@@ -16,7 +16,6 @@ target_sources(moci_core
         property_map.cpp
         scope_guard.hpp
         scope_guard.cpp
-        span.hpp
         strings.hpp
 
         geometry/line.hpp

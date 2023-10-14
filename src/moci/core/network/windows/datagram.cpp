@@ -22,7 +22,7 @@ namespace moci
 {
 DatagramSocket::Pimpl::~Pimpl() { }
 
-bool DatagramSocket::Pimpl::write(std::string const& host, int port, Span<std::uint8_t> buffer)
+bool DatagramSocket::Pimpl::write(std::string const& host, int port, std::span<std::uint8_t> buffer)
 {
     return write(host, port, buffer.data(), buffer.size());
 }

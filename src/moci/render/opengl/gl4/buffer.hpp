@@ -35,7 +35,7 @@ public:
     void unbind() const override;
 
     [[nodiscard]] auto getCount() const -> uint32_t override { return _specs.count; }
-    void uploadData(std::uint32_t offset, Span<std::uint32_t> indices) const override;
+    void uploadData(std::uint32_t offset, std::span<std::uint32_t> indices) const override;
 
 private:
     IndexBufferSpecs _specs;

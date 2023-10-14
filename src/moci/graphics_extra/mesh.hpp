@@ -1,13 +1,13 @@
 #pragma once
 
 #include <moci/core/logging.hpp>
-#include <moci/core/span.hpp>
 #include <moci/graphics/color.hpp>
 
 #include "glm/glm.hpp"
 
 #include "assimp/Importer.hpp"
 
+#include <span>
 #include <vector>
 
 namespace moci
@@ -41,7 +41,7 @@ public:
     };
 
     explicit Mesh(std::string filePath);
-    [[nodiscard]] auto getVertices() const noexcept -> Span<Vertex const> { return _staticVertices; }
+    [[nodiscard]] auto getVertices() const noexcept -> std::span<Vertex const> { return _staticVertices; }
 
 private:
     std::string _filePath {};

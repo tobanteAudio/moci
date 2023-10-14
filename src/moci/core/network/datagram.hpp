@@ -1,10 +1,9 @@
 #pragma once
 
-#include <cstddef>
-
 #include <moci/core/logging.hpp>
-#include <moci/core/span.hpp>
 
+#include <cstddef>
+#include <span>
 #include <vector>
 
 namespace moci
@@ -19,7 +18,7 @@ public:
 
     auto bind(const std::string& ip, int port) -> bool;
 
-    auto write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool;
+    auto write(std::string const& host, int port, std::span<std::uint8_t> buffer) -> bool;
     auto write(std::string const& host, int port, Buffer const& buffer) -> bool;
     auto write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes) -> bool;
 

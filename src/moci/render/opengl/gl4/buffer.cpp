@@ -55,7 +55,7 @@ void OpenGLIndexBuffer::bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _re
 
 void OpenGLIndexBuffer::unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
-auto OpenGLIndexBuffer::uploadData(std::uint32_t offset, Span<std::uint32_t> indices) const -> void
+auto OpenGLIndexBuffer::uploadData(std::uint32_t offset, std::span<std::uint32_t> indices) const -> void
 {
     auto const size = indices.size() * sizeof(std::uint32_t);
     auto* data      = indices.data();

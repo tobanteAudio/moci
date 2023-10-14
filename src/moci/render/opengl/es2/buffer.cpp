@@ -56,14 +56,14 @@ void OpenGLESIndexBuffer::bind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BU
 
 void OpenGLESIndexBuffer::unbind() const { GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)); }
 
-auto OpenGLESIndexBuffer::uploadData(std::uint32_t offset, Span<std::uint32_t> indices) const -> void
+auto OpenGLESIndexBuffer::uploadData(std::uint32_t offset, std::span<std::uint32_t> indices) const -> void
 {
     auto indicesShort = convertToUnsignedShorts(indices);
     auto const size   = indicesShort.size() * sizeof(std::uint16_t);
     GLCall(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, indicesShort.data()));
 }
 
-auto OpenGLESIndexBuffer::convertToUnsignedShorts(Span<std::uint32_t> indices) const -> Span<std::uint16_t>
+auto OpenGLESIndexBuffer::convertToUnsignedShorts(std::span<std::uint32_t> indices) const -> std::span<std::uint16_t>
 {
     _indicesShort->clear();
     _indicesShort->reserve(indices.size());

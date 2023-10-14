@@ -1,10 +1,10 @@
 #pragma once
 
 #include <moci/core/logging.hpp>
-#include <moci/core/span.hpp>
 
 #include <cstdint>
 #include <initializer_list>
+#include <span>
 #include <utility>
 #include <vector>
 
@@ -132,9 +132,9 @@ public:
 
 struct IndexBufferSpecs
 {
-    Span<std::uint32_t> indices = {};
-    std::uint32_t count         = 0;
-    bool isDynamic              = false;
+    std::span<std::uint32_t> indices = {};
+    std::uint32_t count              = 0;
+    bool isDynamic                   = false;
 };
 
 class IndexBuffer
@@ -142,10 +142,10 @@ class IndexBuffer
 public:
     virtual ~IndexBuffer() = default;
 
-    virtual void bind() const                                                             = 0;
-    virtual void unbind() const                                                           = 0;
-    [[nodiscard]] virtual auto getCount() const -> std::uint32_t                          = 0;
-    virtual auto uploadData(std::uint32_t offset, Span<std::uint32_t> data) const -> void = 0;
+    virtual void bind() const                                                                  = 0;
+    virtual void unbind() const                                                                = 0;
+    [[nodiscard]] virtual auto getCount() const -> std::uint32_t                               = 0;
+    virtual auto uploadData(std::uint32_t offset, std::span<std::uint32_t> data) const -> void = 0;
 };
 
 }  // namespace moci

@@ -26,7 +26,7 @@ void OpenGLLayer::onAttach()
     _vbo.reset(moci::RenderFactory::makeVertexBuffer(assets::quadVertices.data(), verticesSize));
     _vbo->setLayout(layout);
     _vbo->unbind();
-    auto indices  = moci::Span<std::uint32_t> {assets::quadIndices.data(), assets::quadIndices.size()};
+    auto indices  = std::span<std::uint32_t> {assets::quadIndices.data(), assets::quadIndices.size()};
     auto specs    = moci::IndexBufferSpecs {};
     specs.indices = indices;
     specs.count   = static_cast<std::uint32_t>(indices.size());

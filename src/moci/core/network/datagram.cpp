@@ -18,7 +18,7 @@ DatagramSocket::~DatagramSocket() { _pimpl.reset(nullptr); }
 
 auto DatagramSocket::bind(const std::string& ip, int port) -> bool { return _pimpl->bind(ip, port); }
 
-auto DatagramSocket::write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool
+auto DatagramSocket::write(std::string const& host, int port, std::span<std::uint8_t> buffer) -> bool
 {
     return _pimpl->write(host, port, buffer);
 }

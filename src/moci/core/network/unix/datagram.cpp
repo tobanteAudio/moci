@@ -23,7 +23,7 @@ DatagramSocket::Pimpl::~Pimpl()
     close(_socketDescriptor);
 }
 
-auto DatagramSocket::Pimpl::write(std::string const& host, int port, Span<std::uint8_t> buffer) -> bool
+auto DatagramSocket::Pimpl::write(std::string const& host, int port, std::span<std::uint8_t> buffer) -> bool
 {
     return write(host, port, buffer.data(), buffer.size());
 }

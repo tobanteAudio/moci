@@ -25,7 +25,7 @@ public:
 
     bool bind(std::string ip, int port);
 
-    bool write(std::string const& host, int port, Span<std::uint8_t> buffer);
+    bool write(std::string const& host, int port, std::span<std::uint8_t> buffer);
     bool write(std::string const& host, int port, DatagramSocket::Buffer const& buffer);
     bool write(std::string const& host, int port, std::uint8_t const* buffer, size_t numBytes);
 

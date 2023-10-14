@@ -1,9 +1,9 @@
 #pragma once
 
-#include <moci/core/span.hpp>
 #include <moci/render/buffer.hpp>
 
 #include <cstddef>
+#include <span>
 
 namespace moci
 {
@@ -33,14 +33,14 @@ public:
 
     void bind() const override;
     void unbind() const override;
-    auto uploadData(std::uint32_t offset, Span<std::uint32_t> indices) const -> void override;
+    auto uploadData(std::uint32_t offset, std::span<std::uint32_t> indices) const -> void override;
     [[nodiscard]] auto getCount() const -> uint32_t override { return _specs.count; }
 
 private:
-    [[nodiscard]] auto convertToUnsignedShorts(Span<std::uint32_t> indices) const -> Span<std::uint16_t>;
+    [[nodiscard]] auto convertToUnsignedShorts(std::span<std::uint32_t> indices) const -> std::span<std::uint16_t>;
 
-    IndexBufferSpecs _specs                    = {};
-    uint32_t _rendererID                       = {};
+    IndexBufferSpecs _specs                                   = {};
+    uint32_t _rendererID                                      = {};
     std::unique_ptr<std::vector<std::uint16_t>> _indicesShort = std::make_unique<std::vector<std::uint16_t>>();
 };
 

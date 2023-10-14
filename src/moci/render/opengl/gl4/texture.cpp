@@ -51,7 +51,7 @@ OpenGLTexture2D::OpenGLTexture2D(std::string path) : path_(std::move(path))
     createTexture();
     setFilters();
     setData(
-        Span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), static_cast<size_t>(width_ * height_ * channels_)});
+        std::span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), static_cast<size_t>(width_ * height_ * channels_)});
 
     stbi_image_free(data);
 }
@@ -63,12 +63,12 @@ OpenGLTexture2D::OpenGLTexture2D(Texture::Format format, std::uint32_t width, st
     createTexture();
     setFilters();
     setData(
-        Span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), static_cast<size_t>(width_ * height_ * channels_)});
+        std::span<std::uint8_t> {reinterpret_cast<std::uint8_t*>(data), static_cast<size_t>(width_ * height_ * channels_)});
 }
 
 OpenGLTexture2D::~OpenGLTexture2D() { glDeleteTextures(1, &renderID_); }
 
-void OpenGLTexture2D::setData(Span<std::uint8_t> data) const
+void OpenGLTexture2D::setData(std::span<std::uint8_t> data) const
 {
     MOCI_CORE_ASSERT(data.size() == static_cast<unsigned long>(width_ * height_ * channels_),
                      "Data must be entire texture!");
