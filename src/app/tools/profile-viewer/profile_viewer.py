@@ -142,7 +142,7 @@ def main():
     grouped = group_by_event(profile)
     # show_range(grouped['virtual void DemoLayer::OnUpdate(moci::Timestep)'])
     deviation = standard_deviation(grouped['virtual void DemoLayer::OnUpdate(moci::Timestep)'])
-    print(f"Standard deviation: {int(deviation)} micro seconds") 
+    print(f"Standard deviation: {int(deviation)} micro seconds")
 
     # averages = average_for_each_event(grouped)
     # show_averages(averages)

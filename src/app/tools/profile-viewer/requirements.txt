@@ -1,8 +1,8 @@
-pylint
 autopep8
-
-numpy
+coverage
 matplotlib
 
+numpy
+pylint
+
 pytest
-coverage
